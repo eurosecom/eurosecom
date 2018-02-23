@@ -1,7 +1,7 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
-//celkovy zaciatok dokumentu ZAV101 2016
+//celkovy zaciatok
 do
 {
 $sys = 'UCT';
@@ -18,16 +18,8 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   endif;
   mysql_select_db($mysqldb);
 
-//ramcek fpdf 1=zap,0=vyp
-$rmc=0;
-$rmc1=0;
-
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
-
-//.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/roc_zav101/roc_zav101_v16";
-$jpg_popis="tlaËivo RoËn˝ z·vodn˝ v˝kaz produkËn˝ch odvetvÌ RoË Zav 1-01 ".$kli_vrok;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -41,12 +33,14 @@ $vyb_ump="1.".$kli_vrok; $vyb_umk=$kli_vmes.".".$kli_vrok;
 $copern = 1*strip_tags($_REQUEST['copern']);
 $modul = 1*$_REQUEST['modul'];
 
-
 $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 AND $copern == 11 ) $strana=9999;
 if ( $strana == 0 ) $strana=1;
-
 if ( $copern == 1 ) { $copern=102; };
+
+//.jpg source
+$jpg_source="../dokumenty/statistika2016/roc_zav101/roc_zav101_v16";
+$jpg_title="tlaËivo RoËn˝ z·vodn˝ v˝kaz produkËn˝ch odvetvÌ RoË Zav 1-01 pre rok $kli_vrok $strana.strana";
 
 //vsetky moduly z obratovky
 $citajvsetkymoduly=0;
@@ -3630,8 +3624,24 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_zav101s2 ADD m110r999 DECIMAL(10,1) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
-
-
+//zmeny2017
+$sql = "SELECT m590r215 FROM F$kli_vxcf"."_statistika_zav101s2 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_zav101s2 ADD new2017 DECIMAL(2,0) DEFAULT 0 AFTER ico";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_zav101s2 ADD m590r211 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_zav101s2 ADD m590r212 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_zav101s2 ADD m590r213 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_zav101s2 ADD m590r214 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_zav101s2 ADD m590r215 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+}
 //koniec vytvor tabulku v databaze
 
 //nacitaj mzdy modul 304
@@ -5233,10 +5243,15 @@ $m590r202 = strip_tags($_REQUEST['m590r202']);
 $m590r203 = strip_tags($_REQUEST['m590r203']);
 $m590r204 = strip_tags($_REQUEST['m590r204']);
 $m590r205 = strip_tags($_REQUEST['m590r205']);
-$m590r992 = strip_tags($_REQUEST['m590r992']);
-$m590r993 = strip_tags($_REQUEST['m590r993']);
-$m590r994 = strip_tags($_REQUEST['m590r994']);
-$m590r995 = strip_tags($_REQUEST['m590r995']);
+$m590r211 = strip_tags($_REQUEST['m590r211']);
+$m590r212 = strip_tags($_REQUEST['m590r212']);
+$m590r213 = strip_tags($_REQUEST['m590r213']);
+$m590r214 = strip_tags($_REQUEST['m590r214']);
+$m590r215 = strip_tags($_REQUEST['m590r215']);
+// $m590r992 = strip_tags($_REQUEST['m590r992']);
+// $m590r993 = strip_tags($_REQUEST['m590r993']);
+// $m590r994 = strip_tags($_REQUEST['m590r994']);
+// $m590r995 = strip_tags($_REQUEST['m590r995']);
 //11.strana
 $m304r1 = strip_tags($_REQUEST['m304r1']);
 $m304r2 = strip_tags($_REQUEST['m304r2']);
@@ -5825,7 +5840,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_zav101s2 SET ".
   m590r181='$m590r181', m590r182='$m590r182', m590r183='$m590r183', m590r184='$m590r184', m590r185='$m590r185',
   m590r191='$m590r191', m590r192='$m590r192', m590r193='$m590r193', m590r194='$m590r194', m590r195='$m590r195',
   m590r201='$m590r201', m590r202='$m590r202', m590r203='$m590r203', m590r204='$m590r204', m590r205='$m590r205',
-  m590r992='$m590r992', m590r993='$m590r993', m590r994='$m590r994', m590r995='$m590r995' ".
+  m590r211='$m590r211', m590r212='$m590r212', m590r213='$m590r213', m590r214='$m590r214', m590r215='$m590r215' ".
 " WHERE ico >= 0 ";
                      }
 
@@ -7431,10 +7446,11 @@ $m590r202 = $fir_riadok->m590r202;
 $m590r203 = $fir_riadok->m590r203;
 $m590r204 = $fir_riadok->m590r204;
 $m590r205 = $fir_riadok->m590r205;
-$m590r992 = $fir_riadok->m590r992;
-$m590r993 = $fir_riadok->m590r993;
-$m590r994 = $fir_riadok->m590r994;
-$m590r995 = $fir_riadok->m590r995;
+$m590r211 = $fir_riadok->m590r211;
+$m590r212 = $fir_riadok->m590r212;
+$m590r213 = $fir_riadok->m590r213;
+$m590r214 = $fir_riadok->m590r214;
+$m590r215 = $fir_riadok->m590r215;
 //11.strana
 $m304r1 = $fir_riadok->m304r1;
 $m304r2 = $fir_riadok->m304r2;
@@ -7734,12 +7750,15 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_treximafir ");
 
 //6-miestne ico
 $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
+
+//2-miestny rok
+$kli_vrokx = substr($kli_vrok,2,2);
 ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link rel="stylesheet" href="../css/reset.css">
- <link rel="stylesheet" href="../css/tlaciva.css">
-<title>EuroSecom - v˝kaz RoË ZAV 1-01</title>
+<head>
+<meta charset="cp1250">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>v˝kaz RoË ZAV 1-01 | EuroSecom</title>
 <style type="text/css">
 img.btn-row-tool {
   width: 20px;
@@ -7755,7 +7774,5192 @@ form input[type=text] {
 }
 </style>
 
+
+</head>
+<body onload="ObnovUI();">
+<?php
+//uprav udaje
+if ( $copern == 102 )
+     {
+?>
+<div id="wrap-heading">
+ <table id="heading">
+ <tr>
+  <td class="ilogin">EuroSecom</td>
+  <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
+ </tr>
+ <tr>
+  <td class="header">RoËn˝ z·vodn˝ v˝kaz vo veæk˝ch podnikoch ZAV 1-01</td>
+  <td>
+   <div class="bar-btn-form-tool">
+    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp2();" title="»ÌselnÌk CPA - prÌloha Ë.2" class="btn-form-tool">
+    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp1();" title="»ÌselnÌk CPA - prÌloha Ë.1" class="btn-form-tool">
+    <img src="../obr/ikony/info_blue_icon.png" onclick="FormMetod();" title="MetodickÈ vysvetlivky k obsahu v˝kazu" class="btn-form-tool">
+    <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(9999);" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
+   </div>
+  </td>
+ </tr>
+ </table>
+</div>
+<div id="content">
+<form name="formv1" method="post" action="statistika_zav101.php?copern=103&strana=<?php echo $strana; ?>">
+<?php
+$clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive";
+$clas5="noactive"; $clas6="noactive"; $clas7="noactive"; $clas8="noactive";
+$clas9="noactive"; $clas10="noactive"; $clas11="noactive"; $clas12="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+if ( $strana == 3 ) $clas3="active"; if ( $strana == 4 ) $clas4="active";
+if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
+if ( $strana == 7 ) $clas7="active"; if ( $strana == 8 ) $clas8="active";
+if ( $strana == 9 ) $clas9="active"; if ( $strana == 10 ) $clas10="active";
+if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
+//$source="statistika_zav101.php?";
+?>
+<div class="navbar">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="<?php echo $clas4; ?> toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="<?php echo $clas5; ?> toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="<?php echo $clas6; ?> toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="<?php echo $clas7; ?> toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="<?php echo $clas8; ?> toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="<?php echo $clas9; ?> toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
+
+  <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
+  <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
+  <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
+  <a href="#" onclick="FormPDF(9);" class="<?php echo $clas9; ?> toright">9</a>
+  <a href="#" onclick="FormPDF(8);" class="<?php echo $clas8; ?> toright">8</a>
+  <a href="#" onclick="FormPDF(7);" class="<?php echo $clas7; ?> toright">7</a>
+  <a href="#" onclick="FormPDF(6);" class="<?php echo $clas6; ?> toright">6</a>
+  <a href="#" onclick="FormPDF(5);" class="<?php echo $clas5; ?> toright">5</a>
+  <a href="#" onclick="FormPDF(4);" class="<?php echo $clas4; ?> toright">4</a>
+  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">3</a>
+  <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
+  <h6 class="toright">TlaËiù:</h6>
+<!-- hidden-->
+  <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+</div>
+
+<?php if ( $strana == 1 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:240px; left:480px; font-size:24px; letter-spacing:0.02em;"><?php echo $kli_vrok; ?></span>
+<span class="text-echo" style="top:380px; left:332px; font-size:18px; letter-spacing:24px;"><?php echo $kli_vrokx; ?></span>
+<span class="text-echo" style="top:380px; left:467px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
+
+<!-- ORGANIZACIA -->
+<span class="text-echo" style="top:923px; left:55px; line-height: 20px;"><?php echo "$fir_fnaz<br>$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:940px; left:806px;"><?php echo $okres; ?></span>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:937px; left:839px;">
+
+<!-- Vyplnil -->
+<span class="text-echo" style="top:1022px; left:55px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="width:499px; top:1038px; left:390px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="width:499px; top:1087px; left:55px;"><?php echo $fir_fem1; ?></span>
+<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1085px; left:390px;"/>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 2 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str2.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 592 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(592);" style="top:157px; left:670px;" class="btn-row-tool">
+<input type="text" name="m592r11" id="m592r11" style="width:91px; top:358px; left:98px;"/>
+<input type="text" name="m592r12" id="m592r12" style="width:131px; top:358px; left:202px;"/>
+<input type="text" name="m592r13" id="m592r13" style="width:112px; top:358px; left:345px;"/>
+<input type="text" name="m592r14" id="m592r14" style="width:135px; top:358px; left:470px;"/>
+<input type="text" name="m592r15" id="m592r15" style="width:135px; top:358px; left:617px;"/>
+<input type="text" name="m592r16" id="m592r16" style="width:123px; top:358px; left:764px;"/>
+<input type="text" name="m592r21" id="m592r21" style="width:91px; top:390px; left:98px;"/>
+<input type="text" name="m592r22" id="m592r22" style="width:131px; top:390px; left:202px;"/>
+<input type="text" name="m592r23" id="m592r23" style="width:112px; top:390px; left:345px;"/>
+<input type="text" name="m592r24" id="m592r24" style="width:135px; top:390px; left:470px;"/>
+<input type="text" name="m592r25" id="m592r25" style="width:135px; top:390px; left:617px;"/>
+<input type="text" name="m592r26" id="m592r26" style="width:123px; top:390px; left:764px;"/>
+<input type="text" name="m592r31" id="m592r31" style="width:91px; top:422px; left:98px;"/>
+<input type="text" name="m592r32" id="m592r32" style="width:131px; top:422px; left:202px;"/>
+<input type="text" name="m592r33" id="m592r33" style="width:112px; top:422px; left:345px;"/>
+<input type="text" name="m592r34" id="m592r34" style="width:135px; top:422px; left:470px;"/>
+<input type="text" name="m592r35" id="m592r35" style="width:135px; top:422px; left:617px;"/>
+<input type="text" name="m592r36" id="m592r36" style="width:123px; top:422px; left:764px;"/>
+<input type="text" name="m592r41" id="m592r41" style="width:91px; top:454px; left:98px;"/>
+<input type="text" name="m592r42" id="m592r42" style="width:131px; top:454px; left:202px;"/>
+<input type="text" name="m592r43" id="m592r43" style="width:112px; top:454px; left:345px;"/>
+<input type="text" name="m592r44" id="m592r44" style="width:135px; top:454px; left:470px;"/>
+<input type="text" name="m592r45" id="m592r45" style="width:135px; top:454px; left:617px;"/>
+<input type="text" name="m592r46" id="m592r46" style="width:123px; top:454px; left:764px;"/>
+<input type="text" name="m592r51" id="m592r51" style="width:91px; top:486px; left:98px;"/>
+<input type="text" name="m592r52" id="m592r52" style="width:131px; top:486px; left:202px;"/>
+<input type="text" name="m592r53" id="m592r53" style="width:112px; top:486px; left:345px;"/>
+<input type="text" name="m592r54" id="m592r54" style="width:135px; top:486px; left:470px;"/>
+<input type="text" name="m592r55" id="m592r55" style="width:135px; top:486px; left:617px;"/>
+<input type="text" name="m592r56" id="m592r56" style="width:123px; top:486px; left:764px;"/>
+<input type="text" name="m592r61" id="m592r61" style="width:91px; top:517px; left:98px;"/>
+<input type="text" name="m592r62" id="m592r62" style="width:131px; top:517px; left:202px;"/>
+<input type="text" name="m592r63" id="m592r63" style="width:112px; top:517px; left:345px;"/>
+<input type="text" name="m592r64" id="m592r64" style="width:135px; top:517px; left:470px;"/>
+<input type="text" name="m592r65" id="m592r65" style="width:135px; top:517px; left:617px;"/>
+<input type="text" name="m592r66" id="m592r66" style="width:123px; top:517px; left:764px;"/>
+<input type="text" name="m592r71" id="m592r71" style="width:91px; top:549px; left:98px;"/>
+<input type="text" name="m592r72" id="m592r72" style="width:131px; top:549px; left:202px;"/>
+<input type="text" name="m592r73" id="m592r73" style="width:112px; top:549px; left:345px;"/>
+<input type="text" name="m592r74" id="m592r74" style="width:135px; top:549px; left:470px;"/>
+<input type="text" name="m592r75" id="m592r75" style="width:135px; top:549px; left:617px;"/>
+<input type="text" name="m592r76" id="m592r76" style="width:123px; top:549px; left:764px;"/>
+<input type="text" name="m592r81" id="m592r81" style="width:91px; top:581px; left:98px;"/>
+<input type="text" name="m592r82" id="m592r82" style="width:131px; top:581px; left:202px;"/>
+<input type="text" name="m592r83" id="m592r83" style="width:112px; top:581px; left:345px;"/>
+<input type="text" name="m592r84" id="m592r84" style="width:135px; top:581px; left:470px;"/>
+<input type="text" name="m592r85" id="m592r85" style="width:135px; top:581px; left:617px;"/>
+<input type="text" name="m592r86" id="m592r86" style="width:123px; top:581px; left:764px;"/>
+<input type="text" name="m592r91" id="m592r91" style="width:91px; top:613px; left:98px;"/>
+<input type="text" name="m592r92" id="m592r92" style="width:131px; top:613px; left:202px;"/>
+<input type="text" name="m592r93" id="m592r93" style="width:112px; top:613px; left:345px;"/>
+<input type="text" name="m592r94" id="m592r94" style="width:135px; top:613px; left:470px;"/>
+<input type="text" name="m592r95" id="m592r95" style="width:135px; top:613px; left:617px;"/>
+<input type="text" name="m592r96" id="m592r96" style="width:123px; top:613px; left:764px;"/>
+<input type="text" name="m592r101" id="m592r101" style="width:91px; top:644px; left:98px;"/>
+<input type="text" name="m592r102" id="m592r102" style="width:131px; top:644px; left:202px;"/>
+<input type="text" name="m592r103" id="m592r103" style="width:112px; top:644px; left:345px;"/>
+<input type="text" name="m592r104" id="m592r104" style="width:135px; top:644px; left:470px;"/>
+<input type="text" name="m592r105" id="m592r105" style="width:135px; top:644px; left:617px;"/>
+<input type="text" name="m592r106" id="m592r106" style="width:123px; top:644px; left:764px;"/>
+<input type="text" name="m592r111" id="m592r111" style="width:91px; top:677px; left:98px;"/>
+<input type="text" name="m592r112" id="m592r112" style="width:131px; top:677px; left:202px;"/>
+<input type="text" name="m592r113" id="m592r113" style="width:112px; top:677px; left:345px;"/>
+<input type="text" name="m592r114" id="m592r114" style="width:135px; top:677px; left:470px;"/>
+<input type="text" name="m592r115" id="m592r115" style="width:135px; top:677px; left:617px;"/>
+<input type="text" name="m592r116" id="m592r116" style="width:123px; top:677px; left:764px;"/>
+<input type="text" name="m592r121" id="m592r121" style="width:91px; top:708px; left:98px;"/>
+<input type="text" name="m592r122" id="m592r122" style="width:131px; top:708px; left:202px;"/>
+<input type="text" name="m592r123" id="m592r123" style="width:112px; top:708px; left:345px;"/>
+<input type="text" name="m592r124" id="m592r124" style="width:135px; top:708px; left:470px;"/>
+<input type="text" name="m592r125" id="m592r125" style="width:135px; top:708px; left:617px;"/>
+<input type="text" name="m592r126" id="m592r126" style="width:123px; top:708px; left:764px;"/>
+<input type="text" name="m592r131" id="m592r131" style="width:91px; top:740px; left:98px;"/>
+<input type="text" name="m592r132" id="m592r132" style="width:131px; top:740px; left:202px;"/>
+<input type="text" name="m592r133" id="m592r133" style="width:112px; top:740px; left:345px;"/>
+<input type="text" name="m592r134" id="m592r134" style="width:135px; top:740px; left:470px;"/>
+<input type="text" name="m592r135" id="m592r135" style="width:135px; top:740px; left:617px;"/>
+<input type="text" name="m592r136" id="m592r136" style="width:123px; top:740px; left:764px;"/>
+<input type="text" name="m592r141" id="m592r141" style="width:91px; top:772px; left:98px;"/>
+<input type="text" name="m592r142" id="m592r142" style="width:131px; top:772px; left:202px;"/>
+<input type="text" name="m592r143" id="m592r143" style="width:112px; top:772px; left:345px;"/>
+<input type="text" name="m592r144" id="m592r144" style="width:135px; top:772px; left:470px;"/>
+<input type="text" name="m592r145" id="m592r145" style="width:135px; top:772px; left:617px;"/>
+<input type="text" name="m592r146" id="m592r146" style="width:123px; top:772px; left:764px;"/>
+<input type="text" name="m592r151" id="m592r151" style="width:91px; top:804px; left:98px;"/>
+<input type="text" name="m592r152" id="m592r152" style="width:131px; top:804px; left:202px;"/>
+<input type="text" name="m592r153" id="m592r153" style="width:112px; top:804px; left:345px;"/>
+<input type="text" name="m592r154" id="m592r154" style="width:135px; top:804px; left:470px;"/>
+<input type="text" name="m592r155" id="m592r155" style="width:135px; top:804px; left:617px;"/>
+<input type="text" name="m592r156" id="m592r156" style="width:123px; top:804px; left:764px;"/>
+<input type="text" name="m592r161" id="m592r161" style="width:91px; top:836px; left:98px;"/>
+<input type="text" name="m592r162" id="m592r162" style="width:131px; top:836px; left:202px;"/>
+<input type="text" name="m592r163" id="m592r163" style="width:112px; top:836px; left:345px;"/>
+<input type="text" name="m592r164" id="m592r164" style="width:135px; top:836px; left:470px;"/>
+<input type="text" name="m592r165" id="m592r165" style="width:135px; top:836px; left:617px;"/>
+<input type="text" name="m592r166" id="m592r166" style="width:123px; top:836px; left:764px;"/>
+<input type="text" name="m592r171" id="m592r171" style="width:91px; top:867px; left:98px;"/>
+<input type="text" name="m592r172" id="m592r172" style="width:131px; top:867px; left:202px;"/>
+<input type="text" name="m592r173" id="m592r173" style="width:112px; top:867px; left:345px;"/>
+<input type="text" name="m592r174" id="m592r174" style="width:135px; top:867px; left:470px;"/>
+<input type="text" name="m592r175" id="m592r175" style="width:135px; top:867px; left:617px;"/>
+<input type="text" name="m592r176" id="m592r176" style="width:123px; top:867px; left:764px;"/>
+<input type="text" name="m592r181" id="m592r181" style="width:91px; top:899px; left:98px;"/>
+<input type="text" name="m592r182" id="m592r182" style="width:131px; top:899px; left:202px;"/>
+<input type="text" name="m592r183" id="m592r183" style="width:112px; top:899px; left:345px;"/>
+<input type="text" name="m592r184" id="m592r184" style="width:135px; top:899px; left:470px;"/>
+<input type="text" name="m592r185" id="m592r185" style="width:135px; top:899px; left:617px;"/>
+<input type="text" name="m592r186" id="m592r186" style="width:123px; top:899px; left:764px;"/>
+<input type="text" name="m592r191" id="m592r191" style="width:91px; top:931px; left:98px;"/>
+<input type="text" name="m592r192" id="m592r192" style="width:131px; top:931px; left:202px;"/>
+<input type="text" name="m592r193" id="m592r193" style="width:112px; top:931px; left:345px;"/>
+<input type="text" name="m592r194" id="m592r194" style="width:135px; top:931px; left:470px;"/>
+<input type="text" name="m592r195" id="m592r195" style="width:135px; top:931px; left:617px;"/>
+<input type="text" name="m592r196" id="m592r196" style="width:123px; top:931px; left:764px;"/>
+<input type="text" name="m592r201" id="m592r201" style="width:91px; top:963px; left:98px;"/>
+<input type="text" name="m592r202" id="m592r202" style="width:131px; top:963px; left:202px;"/>
+<input type="text" name="m592r203" id="m592r203" style="width:112px; top:963px; left:345px;"/>
+<input type="text" name="m592r204" id="m592r204" style="width:135px; top:963px; left:470px;"/>
+<input type="text" name="m592r205" id="m592r205" style="width:135px; top:963px; left:617px;"/>
+<input type="text" name="m592r206" id="m592r206" style="width:123px; top:963px; left:764px;"/>
+<input type="text" name="m592r211" id="m592r211" style="width:91px; top:994px; left:98px;"/>
+<input type="text" name="m592r212" id="m592r212" style="width:131px; top:994px; left:202px;"/>
+<input type="text" name="m592r213" id="m592r213" style="width:112px; top:994px; left:345px;"/>
+<input type="text" name="m592r214" id="m592r214" style="width:135px; top:994px; left:470px;"/>
+<input type="text" name="m592r215" id="m592r215" style="width:135px; top:994px; left:617px;"/>
+<input type="text" name="m592r216" id="m592r216" style="width:123px; top:994px; left:764px;"/>
+<input type="text" name="m592r221" id="m592r221" style="width:91px; top:1026px; left:98px;"/>
+<input type="text" name="m592r222" id="m592r222" style="width:131px; top:1026px; left:202px;"/>
+<input type="text" name="m592r223" id="m592r223" style="width:112px; top:1026px; left:345px;"/>
+<input type="text" name="m592r224" id="m592r224" style="width:135px; top:1026px; left:470px;"/>
+<input type="text" name="m592r225" id="m592r225" style="width:135px; top:1026px; left:617px;"/>
+<input type="text" name="m592r226" id="m592r226" style="width:123px; top:1026px; left:764px;"/>
+<input type="text" name="m592r231" id="m592r231" style="width:91px; top:1058px; left:98px;"/>
+<input type="text" name="m592r232" id="m592r232" style="width:131px; top:1058px; left:202px;"/>
+<input type="text" name="m592r233" id="m592r233" style="width:112px; top:1058px; left:345px;"/>
+<input type="text" name="m592r234" id="m592r234" style="width:135px; top:1058px; left:470px;"/>
+<input type="text" name="m592r235" id="m592r235" style="width:135px; top:1058px; left:617px;"/>
+<input type="text" name="m592r236" id="m592r236" style="width:123px; top:1058px; left:764px;"/>
+<input type="text" name="m592r241" id="m592r241" style="width:91px; top:1090px; left:98px;"/>
+<input type="text" name="m592r242" id="m592r242" style="width:131px; top:1090px; left:202px;"/>
+<input type="text" name="m592r243" id="m592r243" style="width:112px; top:1090px; left:345px;"/>
+<input type="text" name="m592r244" id="m592r244" style="width:135px; top:1090px; left:470px;"/>
+<input type="text" name="m592r245" id="m592r245" style="width:135px; top:1090px; left:617px;"/>
+<input type="text" name="m592r246" id="m592r246" style="width:123px; top:1090px; left:764px;"/>
+<input type="text" name="m592r251" id="m592r251" style="width:91px; top:1122px; left:98px;"/>
+<input type="text" name="m592r252" id="m592r252" style="width:131px; top:1122px; left:202px;"/>
+<input type="text" name="m592r253" id="m592r253" style="width:112px; top:1122px; left:345px;"/>
+<input type="text" name="m592r254" id="m592r254" style="width:135px; top:1122px; left:470px;"/>
+<input type="text" name="m592r255" id="m592r255" style="width:135px; top:1122px; left:617px;"/>
+<input type="text" name="m592r256" id="m592r256" style="width:123px; top:1122px; left:764px;"/>
+<span class="text-echo" style="top:1160px; right:615px;"><?php echo $m592r992; ?></span>
+<span class="text-echo" style="top:1160px; right:490px;"><?php echo $m592r993; ?></span>
+<span class="text-echo" style="top:1160px; right:344px;"><?php echo $m592r994; ?></span>
+<span class="text-echo" style="top:1160px; right:196px;"><?php echo $m592r995; ?></span>
+<span class="text-echo" style="top:1160px; right:60px;"><?php echo $m592r996; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 3 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 177 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(177);" style="top:103px; left:315px;" class="btn-row-tool">
+<input type="text" name="m177r1" id="m177r1" style="width:100px; top:196px; left:735px;"/>
+<input type="text" name="m177r2" id="m177r2" style="width:100px; top:227px; left:735px;"/>
+<input type="text" name="m177r3" id="m177r3" style="width:100px; top:257px; left:735px;"/>
+<input type="text" name="m177r4" id="m177r4" style="width:100px; top:282px; left:735px;"/>
+<input type="text" name="m177r5" id="m177r5" style="width:100px; top:307px; left:735px;"/>
+<input type="text" name="m177r6" id="m177r6" style="width:100px; top:331px; left:735px;"/>
+<input type="text" name="m177r7" id="m177r7" style="width:100px; top:356px; left:735px;"/>
+<input type="text" name="m177r8" id="m177r8" style="width:100px; top:381px; left:735px;"/>
+<input type="text" name="m177r9" id="m177r9" style="width:100px; top:406px; left:735px;"/>
+<input type="text" name="m177r10" id="m177r10" style="width:100px; top:431px; left:735px;"/>
+<span class="text-echo" style="top:460px; right:110px;"><?php echo $m177r99; ?></span>
+
+<!-- modul 178 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(178);" style="top:557px; left:531px;" class="btn-row-tool">
+<input type="text" name="m178r1" id="m178r1" style="width:100px; top:652px; left:680px;"/>
+<input type="text" name="m178r2" id="m178r2" style="width:100px; top:677px; left:680px;"/>
+<input type="text" name="m178r3" id="m178r3" style="width:100px; top:717px; left:680px;"/>
+<input type="text" name="m178r4" id="m178r4" style="width:100px; top:756px; left:680px;"/>
+<input type="text" name="m178r5" id="m178r5" style="width:100px; top:782px; left:680px;"/>
+<input type="text" name="m178r6" id="m178r6" style="width:100px; top:807px; left:680px;"/>
+<input type="text" name="m178r7" id="m178r7" style="width:100px; top:832px; left:680px;"/>
+<input type="text" name="m178r8" id="m178r8" style="width:100px; top:863px; left:680px;"/>
+<input type="text" name="m178r9" id="m178r9" style="width:100px; top:894px; left:680px;"/>
+<input type="text" name="m178r10" id="m178r10" style="width:100px; top:920px; left:680px;"/>
+<input type="text" name="m178r11" id="m178r11" style="width:100px; top:945px; left:680px;"/>
+<input type="text" name="m178r12" id="m178r12" style="width:100px; top:970px; left:680px;"/>
+<input type="text" name="m178r13" id="m178r13" style="width:100px; top:995px; left:680px;"/>
+<input type="text" name="m178r14" id="m178r14" style="width:100px; top:1020px; left:680px;"/>
+<input type="text" name="m178r15" id="m178r15" style="width:100px; top:1046px; left:680px;"/>
+<input type="text" name="m178r16" id="m178r16" style="width:100px; top:1071px; left:680px;"/>
+<input type="text" name="m178r17" id="m178r17" style="width:100px; top:1096px; left:680px;"/>
+<input type="text" name="m178r18" id="m178r18" style="width:100px; top:1121px; left:680px;"/>
+<input type="text" name="m178r19" id="m178r19" style="width:100px; top:1147px; left:680px;"/>
+<span class="text-echo" style="top:1176px; right:165px;"><?php echo $m178r99; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 4 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:95px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 179 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(179);" style="top:155px; left:432px;" class="btn-row-tool">
+<input type="text" name="m179r1" id="m179r1" style="width:100px; top:267px; left:675px;"/>
+<input type="text" name="m179r2" id="m179r2" style="width:100px; top:304px; left:675px;"/>
+<input type="text" name="m179r3" id="m179r3" style="width:100px; top:340px; left:675px;"/>
+<input type="text" name="m179r4" id="m179r4" style="width:100px; top:375px; left:675px;"/>
+<input type="text" name="m179r5" id="m179r5" style="width:100px; top:406px; left:675px;"/>
+<input type="text" name="m179r6" id="m179r6" style="width:100px; top:438px; left:675px;"/>
+<input type="text" name="m179r7" id="m179r7" style="width:100px; top:470px; left:675px;"/>
+<input type="text" name="m179r8" id="m179r8" style="width:100px; top:502px; left:675px;"/>
+<input type="text" name="m179r9" id="m179r9" style="width:100px; top:533px; left:675px;"/>
+<span class="text-echo" style="top:570px; right:170px;"><?php echo $m179r99; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 5 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:75px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<!-- legenda stl.5 -->
+<div style="position:absolute; top:162px; left:570px; width:110px; height:105px; line-height:1.3; font-size:15px; font-family:arial; background-color:white; text-align:center; padding-top: 12px; box-sizing: border-box;">
+<?php
+if ( $kli_vrok == 2016 ) { echo "Trûby<br>z predaja<br>na v˝voz<br>(zo stÂ. 2)"; }
+if ( $kli_vrok > 2016 ) { echo "Trûby<br>z predaja<br>do zahraniËia<br>(zo stÂ. 2)"; }
+?>
+</div>
+<!-- modul 182 -->
+<input type="text" name="m182r11" id="m182r11" style="width:101px; top:297px; left:91px;"/>
+<input type="text" name="m182r12" id="m182r12" style="width:101px; top:297px; left:204px;"/>
+<input type="text" name="m182r13" id="m182r13" style="width:102px; top:297px; left:317px;"/>
+<input type="text" name="m182r14" id="m182r14" style="width:129px; top:297px; left:430px;"/>
+<input type="text" name="m182r15" id="m182r15" style="width:101px; top:297px; left:572px;"/>
+<input type="text" name="m182r16" id="m182r16" style="width:101px; top:297px; left:685px;"/>
+<input type="text" name="m182r17" id="m182r17" style="width:101px; top:297px; left:798px;"/>
+<input type="text" name="m182r21" id="m182r21" style="width:101px; top:324px; left:91px;"/>
+<input type="text" name="m182r22" id="m182r22" style="width:101px; top:324px; left:204px;"/>
+<input type="text" name="m182r23" id="m182r23" style="width:102px; top:324px; left:317px;"/>
+<input type="text" name="m182r24" id="m182r24" style="width:129px; top:324px; left:430px;"/>
+<input type="text" name="m182r25" id="m182r25" style="width:101px; top:324px; left:572px;"/>
+<input type="text" name="m182r26" id="m182r26" style="width:101px; top:324px; left:685px;"/>
+<input type="text" name="m182r27" id="m182r27" style="width:101px; top:324px; left:798px;"/>
+<input type="text" name="m182r31" id="m182r31" style="width:101px; top:351px; left:91px;"/>
+<input type="text" name="m182r32" id="m182r32" style="width:101px; top:351px; left:204px;"/>
+<input type="text" name="m182r33" id="m182r33" style="width:102px; top:351px; left:317px;"/>
+<input type="text" name="m182r34" id="m182r34" style="width:129px; top:351px; left:430px;"/>
+<input type="text" name="m182r35" id="m182r35" style="width:101px; top:351px; left:572px;"/>
+<input type="text" name="m182r36" id="m182r36" style="width:101px; top:351px; left:685px;"/>
+<input type="text" name="m182r37" id="m182r37" style="width:101px; top:351px; left:798px;"/>
+<input type="text" name="m182r41" id="m182r41" style="width:101px; top:377px; left:91px;"/>
+<input type="text" name="m182r42" id="m182r42" style="width:101px; top:377px; left:204px;"/>
+<input type="text" name="m182r43" id="m182r43" style="width:102px; top:377px; left:317px;"/>
+<input type="text" name="m182r44" id="m182r44" style="width:129px; top:377px; left:430px;"/>
+<input type="text" name="m182r45" id="m182r45" style="width:101px; top:377px; left:572px;"/>
+<input type="text" name="m182r46" id="m182r46" style="width:101px; top:377px; left:685px;"/>
+<input type="text" name="m182r47" id="m182r47" style="width:101px; top:377px; left:798px;"/>
+<input type="text" name="m182r51" id="m182r51" style="width:101px; top:404px; left:91px;"/>
+<input type="text" name="m182r52" id="m182r52" style="width:101px; top:404px; left:204px;"/>
+<input type="text" name="m182r53" id="m182r53" style="width:102px; top:404px; left:317px;"/>
+<input type="text" name="m182r54" id="m182r54" style="width:129px; top:404px; left:430px;"/>
+<input type="text" name="m182r55" id="m182r55" style="width:101px; top:404px; left:572px;"/>
+<input type="text" name="m182r56" id="m182r56" style="width:101px; top:404px; left:685px;"/>
+<input type="text" name="m182r57" id="m182r57" style="width:101px; top:404px; left:798px;"/>
+<input type="text" name="m182r61" id="m182r61" style="width:101px; top:430px; left:91px;"/>
+<input type="text" name="m182r62" id="m182r62" style="width:101px; top:430px; left:204px;"/>
+<input type="text" name="m182r63" id="m182r63" style="width:102px; top:430px; left:317px;"/>
+<input type="text" name="m182r64" id="m182r64" style="width:129px; top:430px; left:430px;"/>
+<input type="text" name="m182r65" id="m182r65" style="width:101px; top:430px; left:572px;"/>
+<input type="text" name="m182r66" id="m182r66" style="width:101px; top:430px; left:685px;"/>
+<input type="text" name="m182r67" id="m182r67" style="width:101px; top:430px; left:798px;"/>
+<input type="text" name="m182r71" id="m182r71" style="width:101px; top:457px; left:91px;"/>
+<input type="text" name="m182r72" id="m182r72" style="width:101px; top:457px; left:204px;"/>
+<input type="text" name="m182r73" id="m182r73" style="width:102px; top:457px; left:317px;"/>
+<input type="text" name="m182r74" id="m182r74" style="width:129px; top:457px; left:430px;"/>
+<input type="text" name="m182r75" id="m182r75" style="width:101px; top:457px; left:572px;"/>
+<input type="text" name="m182r76" id="m182r76" style="width:101px; top:457px; left:685px;"/>
+<input type="text" name="m182r77" id="m182r77" style="width:101px; top:457px; left:798px;"/>
+<input type="text" name="m182r81" id="m182r81" style="width:101px; top:484px; left:91px;"/>
+<input type="text" name="m182r82" id="m182r82" style="width:101px; top:484px; left:204px;"/>
+<input type="text" name="m182r83" id="m182r83" style="width:102px; top:484px; left:317px;"/>
+<input type="text" name="m182r84" id="m182r84" style="width:129px; top:484px; left:430px;"/>
+<input type="text" name="m182r85" id="m182r85" style="width:101px; top:484px; left:572px;"/>
+<input type="text" name="m182r86" id="m182r86" style="width:101px; top:484px; left:685px;"/>
+<input type="text" name="m182r87" id="m182r87" style="width:101px; top:484px; left:798px;"/>
+<input type="text" name="m182r91" id="m182r91" style="width:101px; top:510px; left:91px;"/>
+<input type="text" name="m182r92" id="m182r92" style="width:101px; top:510px; left:204px;"/>
+<input type="text" name="m182r93" id="m182r93" style="width:102px; top:510px; left:317px;"/>
+<input type="text" name="m182r94" id="m182r94" style="width:129px; top:510px; left:430px;"/>
+<input type="text" name="m182r95" id="m182r95" style="width:101px; top:510px; left:572px;"/>
+<input type="text" name="m182r96" id="m182r96" style="width:101px; top:510px; left:685px;"/>
+<input type="text" name="m182r97" id="m182r97" style="width:101px; top:510px; left:798px;"/>
+<input type="text" name="m182r101" id="m182r101" style="width:101px; top:537px; left:91px;"/>
+<input type="text" name="m182r102" id="m182r102" style="width:101px; top:537px; left:204px;"/>
+<input type="text" name="m182r103" id="m182r103" style="width:102px; top:537px; left:317px;"/>
+<input type="text" name="m182r104" id="m182r104" style="width:129px; top:537px; left:430px;"/>
+<input type="text" name="m182r105" id="m182r105" style="width:101px; top:537px; left:572px;"/>
+<input type="text" name="m182r106" id="m182r106" style="width:101px; top:537px; left:685px;"/>
+<input type="text" name="m182r107" id="m182r107" style="width:101px; top:537px; left:798px;"/>
+<input type="text" name="m182r111" id="m182r111" style="width:101px; top:563px; left:91px;"/>
+<input type="text" name="m182r112" id="m182r112" style="width:101px; top:563px; left:204px;"/>
+<input type="text" name="m182r113" id="m182r113" style="width:102px; top:563px; left:317px;"/>
+<input type="text" name="m182r114" id="m182r114" style="width:129px; top:563px; left:430px;"/>
+<input type="text" name="m182r115" id="m182r115" style="width:101px; top:563px; left:572px;"/>
+<input type="text" name="m182r116" id="m182r116" style="width:101px; top:563px; left:685px;"/>
+<input type="text" name="m182r117" id="m182r117" style="width:101px; top:563px; left:798px;"/>
+<input type="text" name="m182r121" id="m182r121" style="width:101px; top:590px; left:91px;"/>
+<input type="text" name="m182r122" id="m182r122" style="width:101px; top:590px; left:204px;"/>
+<input type="text" name="m182r123" id="m182r123" style="width:102px; top:590px; left:317px;"/>
+<input type="text" name="m182r124" id="m182r124" style="width:129px; top:590px; left:430px;"/>
+<input type="text" name="m182r125" id="m182r125" style="width:101px; top:590px; left:572px;"/>
+<input type="text" name="m182r126" id="m182r126" style="width:101px; top:590px; left:685px;"/>
+<input type="text" name="m182r127" id="m182r127" style="width:101px; top:590px; left:798px;"/>
+<input type="text" name="m182r131" id="m182r131" style="width:101px; top:617px; left:91px;"/>
+<input type="text" name="m182r132" id="m182r132" style="width:101px; top:617px; left:204px;"/>
+<input type="text" name="m182r133" id="m182r133" style="width:102px; top:617px; left:317px;"/>
+<input type="text" name="m182r134" id="m182r134" style="width:129px; top:617px; left:430px;"/>
+<input type="text" name="m182r135" id="m182r135" style="width:101px; top:617px; left:572px;"/>
+<input type="text" name="m182r136" id="m182r136" style="width:101px; top:617px; left:685px;"/>
+<input type="text" name="m182r137" id="m182r137" style="width:101px; top:617px; left:798px;"/>
+<input type="text" name="m182r141" id="m182r141" style="width:101px; top:643px; left:91px;"/>
+<input type="text" name="m182r142" id="m182r142" style="width:101px; top:643px; left:204px;"/>
+<input type="text" name="m182r143" id="m182r143" style="width:102px; top:643px; left:317px;"/>
+<input type="text" name="m182r144" id="m182r144" style="width:129px; top:643px; left:430px;"/>
+<input type="text" name="m182r145" id="m182r145" style="width:101px; top:643px; left:572px;"/>
+<input type="text" name="m182r146" id="m182r146" style="width:101px; top:643px; left:685px;"/>
+<input type="text" name="m182r147" id="m182r147" style="width:101px; top:643px; left:798px;"/>
+<input type="text" name="m182r151" id="m182r151" style="width:101px; top:670px; left:91px;"/>
+<input type="text" name="m182r152" id="m182r152" style="width:101px; top:670px; left:204px;"/>
+<input type="text" name="m182r153" id="m182r153" style="width:102px; top:670px; left:317px;"/>
+<input type="text" name="m182r154" id="m182r154" style="width:129px; top:670px; left:430px;"/>
+<input type="text" name="m182r155" id="m182r155" style="width:101px; top:670px; left:572px;"/>
+<input type="text" name="m182r156" id="m182r156" style="width:101px; top:670px; left:685px;"/>
+<input type="text" name="m182r157" id="m182r157" style="width:101px; top:670px; left:798px;"/>
+<input type="text" name="m182r161" id="m182r161" style="width:101px; top:696px; left:91px;"/>
+<input type="text" name="m182r162" id="m182r162" style="width:101px; top:696px; left:204px;"/>
+<input type="text" name="m182r163" id="m182r163" style="width:102px; top:696px; left:317px;"/>
+<input type="text" name="m182r164" id="m182r164" style="width:129px; top:696px; left:430px;"/>
+<input type="text" name="m182r165" id="m182r165" style="width:101px; top:696px; left:572px;"/>
+<input type="text" name="m182r166" id="m182r166" style="width:101px; top:696px; left:685px;"/>
+<input type="text" name="m182r167" id="m182r167" style="width:101px; top:696px; left:798px;"/>
+<input type="text" name="m182r171" id="m182r171" style="width:101px; top:723px; left:91px;"/>
+<input type="text" name="m182r172" id="m182r172" style="width:101px; top:723px; left:204px;"/>
+<input type="text" name="m182r173" id="m182r173" style="width:102px; top:723px; left:317px;"/>
+<input type="text" name="m182r174" id="m182r174" style="width:129px; top:723px; left:430px;"/>
+<input type="text" name="m182r175" id="m182r175" style="width:101px; top:723px; left:572px;"/>
+<input type="text" name="m182r176" id="m182r176" style="width:101px; top:723px; left:685px;"/>
+<input type="text" name="m182r177" id="m182r177" style="width:101px; top:723px; left:798px;"/>
+<input type="text" name="m182r181" id="m182r181" style="width:101px; top:749px; left:91px;"/>
+<input type="text" name="m182r182" id="m182r182" style="width:101px; top:749px; left:204px;"/>
+<input type="text" name="m182r183" id="m182r183" style="width:102px; top:749px; left:317px;"/>
+<input type="text" name="m182r184" id="m182r184" style="width:129px; top:749px; left:430px;"/>
+<input type="text" name="m182r185" id="m182r185" style="width:101px; top:749px; left:572px;"/>
+<input type="text" name="m182r186" id="m182r186" style="width:101px; top:749px; left:685px;"/>
+<input type="text" name="m182r187" id="m182r187" style="width:101px; top:749px; left:798px;"/>
+<input type="text" name="m182r191" id="m182r191" style="width:101px; top:776px; left:91px;"/>
+<input type="text" name="m182r192" id="m182r192" style="width:101px; top:776px; left:204px;"/>
+<input type="text" name="m182r193" id="m182r193" style="width:102px; top:776px; left:317px;"/>
+<input type="text" name="m182r194" id="m182r194" style="width:129px; top:776px; left:430px;"/>
+<input type="text" name="m182r195" id="m182r195" style="width:101px; top:776px; left:572px;"/>
+<input type="text" name="m182r196" id="m182r196" style="width:101px; top:776px; left:685px;"/>
+<input type="text" name="m182r197" id="m182r197" style="width:101px; top:776px; left:798px;"/>
+<input type="text" name="m182r201" id="m182r201" style="width:101px; top:802px; left:91px;"/>
+<input type="text" name="m182r202" id="m182r202" style="width:101px; top:802px; left:204px;"/>
+<input type="text" name="m182r203" id="m182r203" style="width:102px; top:802px; left:317px;"/>
+<input type="text" name="m182r204" id="m182r204" style="width:129px; top:802px; left:430px;"/>
+<input type="text" name="m182r205" id="m182r205" style="width:101px; top:802px; left:572px;"/>
+<input type="text" name="m182r206" id="m182r206" style="width:101px; top:802px; left:685px;"/>
+<input type="text" name="m182r207" id="m182r207" style="width:101px; top:802px; left:798px;"/>
+<input type="text" name="m182r211" id="m182r211" style="width:101px; top:829px; left:91px;"/>
+<input type="text" name="m182r212" id="m182r212" style="width:101px; top:829px; left:204px;"/>
+<input type="text" name="m182r213" id="m182r213" style="width:102px; top:829px; left:317px;"/>
+<input type="text" name="m182r214" id="m182r214" style="width:129px; top:829px; left:430px;"/>
+<input type="text" name="m182r215" id="m182r215" style="width:101px; top:829px; left:572px;"/>
+<input type="text" name="m182r216" id="m182r216" style="width:101px; top:829px; left:685px;"/>
+<input type="text" name="m182r217" id="m182r217" style="width:101px; top:829px; left:798px;"/>
+<input type="text" name="m182r221" id="m182r221" style="width:101px; top:855px; left:91px;"/>
+<input type="text" name="m182r222" id="m182r222" style="width:101px; top:855px; left:204px;"/>
+<input type="text" name="m182r223" id="m182r223" style="width:102px; top:855px; left:317px;"/>
+<input type="text" name="m182r224" id="m182r224" style="width:129px; top:855px; left:430px;"/>
+<input type="text" name="m182r225" id="m182r225" style="width:101px; top:855px; left:572px;"/>
+<input type="text" name="m182r226" id="m182r226" style="width:101px; top:855px; left:685px;"/>
+<input type="text" name="m182r227" id="m182r227" style="width:101px; top:855px; left:798px;"/>
+<input type="text" name="m182r231" id="m182r231" style="width:101px; top:882px; left:91px;"/>
+<input type="text" name="m182r232" id="m182r232" style="width:101px; top:882px; left:204px;"/>
+<input type="text" name="m182r233" id="m182r233" style="width:102px; top:882px; left:317px;"/>
+<input type="text" name="m182r234" id="m182r234" style="width:129px; top:882px; left:430px;"/>
+<input type="text" name="m182r235" id="m182r235" style="width:101px; top:882px; left:572px;"/>
+<input type="text" name="m182r236" id="m182r236" style="width:101px; top:882px; left:685px;"/>
+<input type="text" name="m182r237" id="m182r237" style="width:101px; top:882px; left:798px;"/>
+<input type="text" name="m182r241" id="m182r241" style="width:101px; top:909px; left:91px;"/>
+<input type="text" name="m182r242" id="m182r242" style="width:101px; top:909px; left:204px;"/>
+<input type="text" name="m182r243" id="m182r243" style="width:102px; top:909px; left:317px;"/>
+<input type="text" name="m182r244" id="m182r244" style="width:129px; top:909px; left:430px;"/>
+<input type="text" name="m182r245" id="m182r245" style="width:101px; top:909px; left:572px;"/>
+<input type="text" name="m182r246" id="m182r246" style="width:101px; top:909px; left:685px;"/>
+<input type="text" name="m182r247" id="m182r247" style="width:101px; top:909px; left:798px;"/>
+<input type="text" name="m182r251" id="m182r251" style="width:101px; top:935px; left:91px;"/>
+<input type="text" name="m182r252" id="m182r252" style="width:101px; top:935px; left:204px;"/>
+<input type="text" name="m182r253" id="m182r253" style="width:102px; top:935px; left:317px;"/>
+<input type="text" name="m182r254" id="m182r254" style="width:129px; top:935px; left:430px;"/>
+<input type="text" name="m182r255" id="m182r255" style="width:101px; top:935px; left:572px;"/>
+<input type="text" name="m182r256" id="m182r256" style="width:101px; top:935px; left:685px;"/>
+<input type="text" name="m182r257" id="m182r257" style="width:101px; top:935px; left:798px;"/>
+<input type="text" name="m182r261" id="m182r261" style="width:101px; top:962px; left:91px;"/>
+<input type="text" name="m182r262" id="m182r262" style="width:101px; top:962px; left:204px;"/>
+<input type="text" name="m182r263" id="m182r263" style="width:102px; top:962px; left:317px;"/>
+<input type="text" name="m182r264" id="m182r264" style="width:129px; top:962px; left:430px;"/>
+<input type="text" name="m182r265" id="m182r265" style="width:101px; top:962px; left:572px;"/>
+<input type="text" name="m182r266" id="m182r266" style="width:101px; top:962px; left:685px;"/>
+<input type="text" name="m182r267" id="m182r267" style="width:101px; top:962px; left:798px;"/>
+<input type="text" name="m182r271" id="m182r271" style="width:101px; top:988px; left:91px;"/>
+<input type="text" name="m182r272" id="m182r272" style="width:101px; top:988px; left:204px;"/>
+<input type="text" name="m182r273" id="m182r273" style="width:102px; top:988px; left:317px;"/>
+<input type="text" name="m182r274" id="m182r274" style="width:129px; top:988px; left:430px;"/>
+<input type="text" name="m182r275" id="m182r275" style="width:101px; top:988px; left:572px;"/>
+<input type="text" name="m182r276" id="m182r276" style="width:101px; top:988px; left:685px;"/>
+<input type="text" name="m182r277" id="m182r277" style="width:101px; top:988px; left:798px;"/>
+<input type="text" name="m182r281" id="m182r281" style="width:101px; top:1015px; left:91px;"/>
+<input type="text" name="m182r282" id="m182r282" style="width:101px; top:1015px; left:204px;"/>
+<input type="text" name="m182r283" id="m182r283" style="width:102px; top:1015px; left:317px;"/>
+<input type="text" name="m182r284" id="m182r284" style="width:129px; top:1015px; left:430px;"/>
+<input type="text" name="m182r285" id="m182r285" style="width:101px; top:1015px; left:572px;"/>
+<input type="text" name="m182r286" id="m182r286" style="width:101px; top:1015px; left:685px;"/>
+<input type="text" name="m182r287" id="m182r287" style="width:101px; top:1015px; left:798px;"/>
+<input type="text" name="m182r291" id="m182r291" style="width:101px; top:1041px; left:91px;"/>
+<input type="text" name="m182r292" id="m182r292" style="width:101px; top:1041px; left:204px;"/>
+<input type="text" name="m182r293" id="m182r293" style="width:102px; top:1041px; left:317px;"/>
+<input type="text" name="m182r294" id="m182r294" style="width:129px; top:1041px; left:430px;"/>
+<input type="text" name="m182r295" id="m182r295" style="width:101px; top:1041px; left:572px;"/>
+<input type="text" name="m182r296" id="m182r296" style="width:101px; top:1041px; left:685px;"/>
+<input type="text" name="m182r297" id="m182r297" style="width:101px; top:1041px; left:798px;"/>
+<input type="text" name="m182r301" id="m182r301" style="width:101px; top:1068px; left:91px;"/>
+<input type="text" name="m182r302" id="m182r302" style="width:101px; top:1068px; left:204px;"/>
+<input type="text" name="m182r303" id="m182r303" style="width:102px; top:1068px; left:317px;"/>
+<input type="text" name="m182r304" id="m182r304" style="width:129px; top:1068px; left:430px;"/>
+<input type="text" name="m182r305" id="m182r305" style="width:101px; top:1068px; left:572px;"/>
+<input type="text" name="m182r306" id="m182r306" style="width:101px; top:1068px; left:685px;"/>
+<input type="text" name="m182r307" id="m182r307" style="width:101px; top:1068px; left:798px;"/>
+<input type="text" name="m182r311" id="m182r311" style="width:101px; top:1094px; left:91px;"/>
+<input type="text" name="m182r312" id="m182r312" style="width:101px; top:1094px; left:204px;"/>
+<input type="text" name="m182r313" id="m182r313" style="width:102px; top:1094px; left:317px;"/>
+<input type="text" name="m182r314" id="m182r314" style="width:129px; top:1094px; left:430px;"/>
+<input type="text" name="m182r315" id="m182r315" style="width:101px; top:1094px; left:572px;"/>
+<input type="text" name="m182r316" id="m182r316" style="width:101px; top:1094px; left:685px;"/>
+<input type="text" name="m182r317" id="m182r317" style="width:101px; top:1094px; left:798px;"/>
+<input type="text" name="m182r321" id="m182r321" style="width:101px; top:1121px; left:91px;"/>
+<input type="text" name="m182r322" id="m182r322" style="width:101px; top:1121px; left:204px;"/>
+<input type="text" name="m182r323" id="m182r323" style="width:102px; top:1121px; left:317px;"/>
+<input type="text" name="m182r324" id="m182r324" style="width:129px; top:1121px; left:430px;"/>
+<input type="text" name="m182r325" id="m182r325" style="width:101px; top:1121px; left:572px;"/>
+<input type="text" name="m182r326" id="m182r326" style="width:101px; top:1121px; left:685px;"/>
+<input type="text" name="m182r327" id="m182r327" style="width:101px; top:1121px; left:798px;"/>
+<input type="text" name="m182r331" id="m182r331" style="width:101px; top:1148px; left:91px;"/>
+<input type="text" name="m182r332" id="m182r332" style="width:101px; top:1148px; left:204px;"/>
+<input type="text" name="m182r333" id="m182r333" style="width:102px; top:1148px; left:317px;"/>
+<input type="text" name="m182r334" id="m182r334" style="width:129px; top:1148px; left:430px;"/>
+<input type="text" name="m182r335" id="m182r335" style="width:101px; top:1148px; left:572px;"/>
+<input type="text" name="m182r336" id="m182r336" style="width:101px; top:1148px; left:685px;"/>
+<input type="text" name="m182r337" id="m182r337" style="width:101px; top:1148px; left:798px;"/>
+<span class="text-echo" style="top:1178px; right:642px;"><?php echo $m182r992; ?></span>
+<span class="text-echo" style="top:1178px; right:529px;"><?php echo $m182r993; ?></span>
+<span class="text-echo" style="top:1178px; right:387px;"><?php echo $m182r994; ?></span>
+<span class="text-echo" style="top:1178px; right:274px;"><?php echo $m182r995; ?></span>
+<span class="text-echo" style="top:1178px; right:160px;"><?php echo $m182r996; ?></span>
+<span class="text-echo" style="top:1178px; right:48px;"><?php echo $m182r997; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 6 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:95px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 183 -->
+<input type="text" name="m183r11" id="m183r11" style="width:138px; top:319px; left:91px;"/>
+<input type="text" name="m183r12" id="m183r12" style="width:138px; top:319px; left:240px;"/>
+<input type="text" name="m183r13" id="m183r13" style="width:138px; top:319px; left:389px;"/>
+<input type="text" name="m183r14" id="m183r14" style="width:349px; top:319px; left:539px;"/>
+<input type="text" name="m183r21" id="m183r21" style="width:138px; top:347px; left:91px;"/>
+<input type="text" name="m183r22" id="m183r22" style="width:138px; top:347px; left:240px;"/>
+<input type="text" name="m183r23" id="m183r23" style="width:138px; top:347px; left:389px;"/>
+<input type="text" name="m183r24" id="m183r24" style="width:349px; top:347px; left:539px;"/>
+<input type="text" name="m183r31" id="m183r31" style="width:138px; top:374px; left:91px;"/>
+<input type="text" name="m183r32" id="m183r32" style="width:138px; top:374px; left:240px;"/>
+<input type="text" name="m183r33" id="m183r33" style="width:138px; top:374px; left:389px;"/>
+<input type="text" name="m183r34" id="m183r34" style="width:349px; top:374px; left:539px;"/>
+<input type="text" name="m183r41" id="m183r41" style="width:138px; top:401px; left:91px;"/>
+<input type="text" name="m183r42" id="m183r42" style="width:138px; top:401px; left:240px;"/>
+<input type="text" name="m183r43" id="m183r43" style="width:138px; top:401px; left:389px;"/>
+<input type="text" name="m183r44" id="m183r44" style="width:349px; top:401px; left:539px;"/>
+<input type="text" name="m183r51" id="m183r51" style="width:138px; top:429px; left:91px;"/>
+<input type="text" name="m183r52" id="m183r52" style="width:138px; top:429px; left:240px;"/>
+<input type="text" name="m183r53" id="m183r53" style="width:138px; top:429px; left:389px;"/>
+<input type="text" name="m183r54" id="m183r54" style="width:349px; top:429px; left:539px;"/>
+<input type="text" name="m183r61" id="m183r61" style="width:138px; top:456px; left:91px;"/>
+<input type="text" name="m183r62" id="m183r62" style="width:138px; top:456px; left:240px;"/>
+<input type="text" name="m183r63" id="m183r63" style="width:138px; top:456px; left:389px;"/>
+<input type="text" name="m183r64" id="m183r64" style="width:349px; top:456px; left:539px;"/>
+<input type="text" name="m183r71" id="m183r71" style="width:138px; top:483px; left:91px;"/>
+<input type="text" name="m183r72" id="m183r72" style="width:138px; top:483px; left:240px;"/>
+<input type="text" name="m183r73" id="m183r73" style="width:138px; top:483px; left:389px;"/>
+<input type="text" name="m183r74" id="m183r74" style="width:349px; top:483px; left:539px;"/>
+<input type="text" name="m183r81" id="m183r81" style="width:138px; top:511px; left:91px;"/>
+<input type="text" name="m183r82" id="m183r82" style="width:138px; top:511px; left:240px;"/>
+<input type="text" name="m183r83" id="m183r83" style="width:138px; top:511px; left:389px;"/>
+<input type="text" name="m183r84" id="m183r84" style="width:349px; top:511px; left:539px;"/>
+<input type="text" name="m183r91" id="m183r91" style="width:138px; top:539px; left:91px;"/>
+<input type="text" name="m183r92" id="m183r92" style="width:138px; top:539px; left:240px;"/>
+<input type="text" name="m183r93" id="m183r93" style="width:138px; top:539px; left:389px;"/>
+<input type="text" name="m183r94" id="m183r94" style="width:349px; top:539px; left:539px;"/>
+<input type="text" name="m183r101" id="m183r101" style="width:138px; top:566px; left:91px;"/>
+<input type="text" name="m183r102" id="m183r102" style="width:138px; top:566px; left:240px;"/>
+<input type="text" name="m183r103" id="m183r103" style="width:138px; top:566px; left:389px;"/>
+<input type="text" name="m183r104" id="m183r104" style="width:349px; top:566px; left:539px;"/>
+<input type="text" name="m183r111" id="m183r111" style="width:138px; top:593px; left:91px;"/>
+<input type="text" name="m183r112" id="m183r112" style="width:138px; top:593px; left:240px;"/>
+<input type="text" name="m183r113" id="m183r113" style="width:138px; top:593px; left:389px;"/>
+<input type="text" name="m183r114" id="m183r114" style="width:349px; top:593px; left:539px;"/>
+<input type="text" name="m183r121" id="m183r121" style="width:138px; top:621px; left:91px;"/>
+<input type="text" name="m183r122" id="m183r122" style="width:138px; top:621px; left:240px;"/>
+<input type="text" name="m183r123" id="m183r123" style="width:138px; top:621px; left:389px;"/>
+<input type="text" name="m183r124" id="m183r124" style="width:349px; top:621px; left:539px;"/>
+<input type="text" name="m183r131" id="m183r131" style="width:138px; top:648px; left:91px;"/>
+<input type="text" name="m183r132" id="m183r132" style="width:138px; top:648px; left:240px;"/>
+<input type="text" name="m183r133" id="m183r133" style="width:138px; top:648px; left:389px;"/>
+<input type="text" name="m183r134" id="m183r134" style="width:349px; top:648px; left:539px;"/>
+<input type="text" name="m183r141" id="m183r141" style="width:138px; top:676px; left:91px;"/>
+<input type="text" name="m183r142" id="m183r142" style="width:138px; top:676px; left:240px;"/>
+<input type="text" name="m183r143" id="m183r143" style="width:138px; top:676px; left:389px;"/>
+<input type="text" name="m183r144" id="m183r144" style="width:349px; top:676px; left:539px;"/>
+<input type="text" name="m183r151" id="m183r151" style="width:138px; top:703px; left:91px;"/>
+<input type="text" name="m183r152" id="m183r152" style="width:138px; top:703px; left:240px;"/>
+<input type="text" name="m183r153" id="m183r153" style="width:138px; top:703px; left:389px;"/>
+<input type="text" name="m183r154" id="m183r154" style="width:349px; top:703px; left:539px;"/>
+<input type="text" name="m183r161" id="m183r161" style="width:138px; top:730px; left:91px;"/>
+<input type="text" name="m183r162" id="m183r162" style="width:138px; top:730px; left:240px;"/>
+<input type="text" name="m183r163" id="m183r163" style="width:138px; top:730px; left:389px;"/>
+<input type="text" name="m183r164" id="m183r164" style="width:349px; top:730px; left:539px;"/>
+<input type="text" name="m183r171" id="m183r171" style="width:138px; top:758px; left:91px;"/>
+<input type="text" name="m183r172" id="m183r172" style="width:138px; top:758px; left:240px;"/>
+<input type="text" name="m183r173" id="m183r173" style="width:138px; top:758px; left:389px;"/>
+<input type="text" name="m183r174" id="m183r174" style="width:349px; top:758px; left:539px;"/>
+<input type="text" name="m183r181" id="m183r181" style="width:138px; top:785px; left:91px;"/>
+<input type="text" name="m183r182" id="m183r182" style="width:138px; top:785px; left:240px;"/>
+<input type="text" name="m183r183" id="m183r183" style="width:138px; top:785px; left:389px;"/>
+<input type="text" name="m183r184" id="m183r184" style="width:349px; top:785px; left:539px;"/>
+<input type="text" name="m183r191" id="m183r191" style="width:138px; top:813px; left:91px;"/>
+<input type="text" name="m183r192" id="m183r192" style="width:138px; top:813px; left:240px;"/>
+<input type="text" name="m183r193" id="m183r193" style="width:138px; top:813px; left:389px;"/>
+<input type="text" name="m183r194" id="m183r194" style="width:349px; top:813px; left:539px;"/>
+<input type="text" name="m183r201" id="m183r201" style="width:138px; top:840px; left:91px;"/>
+<input type="text" name="m183r202" id="m183r202" style="width:138px; top:840px; left:240px;"/>
+<input type="text" name="m183r203" id="m183r203" style="width:138px; top:840px; left:389px;"/>
+<input type="text" name="m183r204" id="m183r204" style="width:349px; top:840px; left:539px;"/>
+<input type="text" name="m183r211" id="m183r211" style="width:138px; top:867px; left:91px;"/>
+<input type="text" name="m183r212" id="m183r212" style="width:138px; top:867px; left:240px;"/>
+<input type="text" name="m183r213" id="m183r213" style="width:138px; top:867px; left:389px;"/>
+<input type="text" name="m183r214" id="m183r214" style="width:349px; top:867px; left:539px;"/>
+<input type="text" name="m183r221" id="m183r221" style="width:138px; top:895px; left:91px;"/>
+<input type="text" name="m183r222" id="m183r222" style="width:138px; top:895px; left:240px;"/>
+<input type="text" name="m183r223" id="m183r223" style="width:138px; top:895px; left:389px;"/>
+<input type="text" name="m183r224" id="m183r224" style="width:349px; top:895px; left:539px;"/>
+<input type="text" name="m183r231" id="m183r231" style="width:138px; top:922px; left:91px;"/>
+<input type="text" name="m183r232" id="m183r232" style="width:138px; top:922px; left:240px;"/>
+<input type="text" name="m183r233" id="m183r233" style="width:138px; top:922px; left:389px;"/>
+<input type="text" name="m183r234" id="m183r234" style="width:349px; top:922px; left:539px;"/>
+<input type="text" name="m183r241" id="m183r241" style="width:138px; top:950px; left:91px;"/>
+<input type="text" name="m183r242" id="m183r242" style="width:138px; top:950px; left:240px;"/>
+<input type="text" name="m183r243" id="m183r243" style="width:138px; top:950px; left:389px;"/>
+<input type="text" name="m183r244" id="m183r244" style="width:349px; top:950px; left:539px;"/>
+<input type="text" name="m183r251" id="m183r251" style="width:138px; top:977px; left:91px;"/>
+<input type="text" name="m183r252" id="m183r252" style="width:138px; top:977px; left:240px;"/>
+<input type="text" name="m183r253" id="m183r253" style="width:138px; top:977px; left:389px;"/>
+<input type="text" name="m183r254" id="m183r254" style="width:349px; top:977px; left:539px;"/>
+<input type="text" name="m183r261" id="m183r261" style="width:138px; top:1005px; left:91px;"/>
+<input type="text" name="m183r262" id="m183r262" style="width:138px; top:1005px; left:240px;"/>
+<input type="text" name="m183r263" id="m183r263" style="width:138px; top:1005px; left:389px;"/>
+<input type="text" name="m183r264" id="m183r264" style="width:349px; top:1005px; left:539px;"/>
+<input type="text" name="m183r271" id="m183r271" style="width:138px; top:1032px; left:91px;"/>
+<input type="text" name="m183r272" id="m183r272" style="width:138px; top:1032px; left:240px;"/>
+<input type="text" name="m183r273" id="m183r273" style="width:138px; top:1032px; left:389px;"/>
+<input type="text" name="m183r274" id="m183r274" style="width:349px; top:1032px; left:539px;"/>
+<input type="text" name="m183r281" id="m183r281" style="width:138px; top:1059px; left:91px;"/>
+<input type="text" name="m183r282" id="m183r282" style="width:138px; top:1059px; left:240px;"/>
+<input type="text" name="m183r283" id="m183r283" style="width:138px; top:1059px; left:389px;"/>
+<input type="text" name="m183r284" id="m183r284" style="width:349px; top:1059px; left:539px;"/>
+<input type="text" name="m183r291" id="m183r291" style="width:138px; top:1087px; left:91px;"/>
+<input type="text" name="m183r292" id="m183r292" style="width:138px; top:1087px; left:240px;"/>
+<input type="text" name="m183r293" id="m183r293" style="width:138px; top:1087px; left:389px;"/>
+<input type="text" name="m183r294" id="m183r294" style="width:349px; top:1087px; left:539px;"/>
+<input type="text" name="m183r301" id="m183r301" style="width:138px; top:1114px; left:91px;"/>
+<input type="text" name="m183r302" id="m183r302" style="width:138px; top:1114px; left:240px;"/>
+<input type="text" name="m183r303" id="m183r303" style="width:138px; top:1114px; left:389px;"/>
+<input type="text" name="m183r304" id="m183r304" style="width:349px; top:1114px; left:539px;"/>
+<span class="text-echo" style="top:1146px; right:572px;"><?php echo $m183r992; ?></span>
+<span class="text-echo" style="top:1146px; right:422px;"><?php echo $m183r993; ?></span>
+<span class="text-echo" style="top:1146px; right:61px;"><?php echo $m183r994; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 7 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str7.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:97px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 184 -->
+<input type="text" name="m184r11" id="m184r11" style="width:92px; top:299px; left:98px;"/>
+<input type="text" name="m184r12" id="m184r12" style="width:99px; top:299px; left:201px;"/>
+<input type="text" name="m184r13" id="m184r13" style="width:102px; top:299px; left:311px;"/>
+<input type="text" name="m184r14" id="m184r14" style="width:227px; top:299px; left:424px;"/>
+<input type="text" name="m184r15" id="m184r15" style="width:113px; top:299px; left:662px;"/>
+<input type="text" name="m184r16" id="m184r16" style="width:102px; top:299px; left:786px;"/>
+<input type="text" name="m184r21" id="m184r21" style="width:92px; top:325px; left:98px;"/>
+<input type="text" name="m184r22" id="m184r22" style="width:99px; top:325px; left:201px;"/>
+<input type="text" name="m184r23" id="m184r23" style="width:102px; top:325px; left:311px;"/>
+<input type="text" name="m184r24" id="m184r24" style="width:227px; top:325px; left:424px;"/>
+<input type="text" name="m184r25" id="m184r25" style="width:113px; top:325px; left:662px;"/>
+<input type="text" name="m184r26" id="m184r26" style="width:102px; top:325px; left:786px;"/>
+<input type="text" name="m184r31" id="m184r31" style="width:92px; top:352px; left:98px;"/>
+<input type="text" name="m184r32" id="m184r32" style="width:99px; top:352px; left:201px;"/>
+<input type="text" name="m184r33" id="m184r33" style="width:102px; top:352px; left:311px;"/>
+<input type="text" name="m184r34" id="m184r34" style="width:227px; top:352px; left:424px;"/>
+<input type="text" name="m184r35" id="m184r35" style="width:113px; top:352px; left:662px;"/>
+<input type="text" name="m184r36" id="m184r36" style="width:102px; top:352px; left:786px;"/>
+<input type="text" name="m184r41" id="m184r41" style="width:92px; top:377px; left:98px;"/>
+<input type="text" name="m184r42" id="m184r42" style="width:99px; top:377px; left:201px;"/>
+<input type="text" name="m184r43" id="m184r43" style="width:102px; top:377px; left:311px;"/>
+<input type="text" name="m184r44" id="m184r44" style="width:227px; top:377px; left:424px;"/>
+<input type="text" name="m184r45" id="m184r45" style="width:113px; top:377px; left:662px;"/>
+<input type="text" name="m184r46" id="m184r46" style="width:102px; top:377px; left:786px;"/>
+<input type="text" name="m184r51" id="m184r51" style="width:92px; top:404px; left:98px;"/>
+<input type="text" name="m184r52" id="m184r52" style="width:99px; top:404px; left:201px;"/>
+<input type="text" name="m184r53" id="m184r53" style="width:102px; top:404px; left:311px;"/>
+<input type="text" name="m184r54" id="m184r54" style="width:227px; top:404px; left:424px;"/>
+<input type="text" name="m184r55" id="m184r55" style="width:113px; top:404px; left:662px;"/>
+<input type="text" name="m184r56" id="m184r56" style="width:102px; top:404px; left:786px;"/>
+<input type="text" name="m184r61" id="m184r61" style="width:92px; top:430px; left:98px;"/>
+<input type="text" name="m184r62" id="m184r62" style="width:99px; top:430px; left:201px;"/>
+<input type="text" name="m184r63" id="m184r63" style="width:102px; top:430px; left:311px;"/>
+<input type="text" name="m184r64" id="m184r64" style="width:227px; top:430px; left:424px;"/>
+<input type="text" name="m184r65" id="m184r65" style="width:113px; top:430px; left:662px;"/>
+<input type="text" name="m184r66" id="m184r66" style="width:102px; top:430px; left:786px;"/>
+<input type="text" name="m184r71" id="m184r71" style="width:92px; top:456px; left:98px;"/>
+<input type="text" name="m184r72" id="m184r72" style="width:99px; top:456px; left:201px;"/>
+<input type="text" name="m184r73" id="m184r73" style="width:102px; top:456px; left:311px;"/>
+<input type="text" name="m184r74" id="m184r74" style="width:227px; top:456px; left:424px;"/>
+<input type="text" name="m184r75" id="m184r75" style="width:113px; top:456px; left:662px;"/>
+<input type="text" name="m184r76" id="m184r76" style="width:102px; top:456px; left:786px;"/>
+<input type="text" name="m184r81" id="m184r81" style="width:92px; top:482px; left:98px;"/>
+<input type="text" name="m184r82" id="m184r82" style="width:99px; top:482px; left:201px;"/>
+<input type="text" name="m184r83" id="m184r83" style="width:102px; top:482px; left:311px;"/>
+<input type="text" name="m184r84" id="m184r84" style="width:227px; top:482px; left:424px;"/>
+<input type="text" name="m184r85" id="m184r85" style="width:113px; top:482px; left:662px;"/>
+<input type="text" name="m184r86" id="m184r86" style="width:102px; top:482px; left:786px;"/>
+<input type="text" name="m184r91" id="m184r91" style="width:92px; top:508px; left:98px;"/>
+<input type="text" name="m184r92" id="m184r92" style="width:99px; top:508px; left:201px;"/>
+<input type="text" name="m184r93" id="m184r93" style="width:102px; top:508px; left:311px;"/>
+<input type="text" name="m184r94" id="m184r94" style="width:227px; top:508px; left:424px;"/>
+<input type="text" name="m184r95" id="m184r95" style="width:113px; top:508px; left:662px;"/>
+<input type="text" name="m184r96" id="m184r96" style="width:102px; top:508px; left:786px;"/>
+<input type="text" name="m184r101" id="m184r101" style="width:92px; top:534px; left:98px;"/>
+<input type="text" name="m184r102" id="m184r102" style="width:99px; top:534px; left:201px;"/>
+<input type="text" name="m184r103" id="m184r103" style="width:102px; top:534px; left:311px;"/>
+<input type="text" name="m184r104" id="m184r104" style="width:227px; top:534px; left:424px;"/>
+<input type="text" name="m184r105" id="m184r105" style="width:113px; top:534px; left:662px;"/>
+<input type="text" name="m184r106" id="m184r106" style="width:102px; top:534px; left:786px;"/>
+<input type="text" name="m184r111" id="m184r111" style="width:92px; top:560px; left:98px;"/>
+<input type="text" name="m184r112" id="m184r112" style="width:99px; top:560px; left:201px;"/>
+<input type="text" name="m184r113" id="m184r113" style="width:102px; top:560px; left:311px;"/>
+<input type="text" name="m184r114" id="m184r114" style="width:227px; top:560px; left:424px;"/>
+<input type="text" name="m184r115" id="m184r115" style="width:113px; top:560px; left:662px;"/>
+<input type="text" name="m184r116" id="m184r116" style="width:102px; top:560px; left:786px;"/>
+<input type="text" name="m184r121" id="m184r121" style="width:92px; top:586px; left:98px;"/>
+<input type="text" name="m184r122" id="m184r122" style="width:99px; top:586px; left:201px;"/>
+<input type="text" name="m184r123" id="m184r123" style="width:102px; top:586px; left:311px;"/>
+<input type="text" name="m184r124" id="m184r124" style="width:227px; top:586px; left:424px;"/>
+<input type="text" name="m184r125" id="m184r125" style="width:113px; top:586px; left:662px;"/>
+<input type="text" name="m184r126" id="m184r126" style="width:102px; top:586px; left:786px;"/>
+<input type="text" name="m184r131" id="m184r131" style="width:92px; top:612px; left:98px;"/>
+<input type="text" name="m184r132" id="m184r132" style="width:99px; top:612px; left:201px;"/>
+<input type="text" name="m184r133" id="m184r133" style="width:102px; top:612px; left:311px;"/>
+<input type="text" name="m184r134" id="m184r134" style="width:227px; top:612px; left:424px;"/>
+<input type="text" name="m184r135" id="m184r135" style="width:113px; top:612px; left:662px;"/>
+<input type="text" name="m184r136" id="m184r136" style="width:102px; top:612px; left:786px;"/>
+<input type="text" name="m184r141" id="m184r141" style="width:92px; top:638px; left:98px;"/>
+<input type="text" name="m184r142" id="m184r142" style="width:99px; top:638px; left:201px;"/>
+<input type="text" name="m184r143" id="m184r143" style="width:102px; top:638px; left:311px;"/>
+<input type="text" name="m184r144" id="m184r144" style="width:227px; top:638px; left:424px;"/>
+<input type="text" name="m184r145" id="m184r145" style="width:113px; top:638px; left:662px;"/>
+<input type="text" name="m184r146" id="m184r146" style="width:102px; top:638px; left:786px;"/>
+<input type="text" name="m184r151" id="m184r151" style="width:92px; top:665px; left:98px;"/>
+<input type="text" name="m184r152" id="m184r152" style="width:99px; top:665px; left:201px;"/>
+<input type="text" name="m184r153" id="m184r153" style="width:102px; top:665px; left:311px;"/>
+<input type="text" name="m184r154" id="m184r154" style="width:227px; top:665px; left:424px;"/>
+<input type="text" name="m184r155" id="m184r155" style="width:113px; top:665px; left:662px;"/>
+<input type="text" name="m184r156" id="m184r156" style="width:102px; top:665px; left:786px;"/>
+<input type="text" name="m184r161" id="m184r161" style="width:92px; top:691px; left:98px;"/>
+<input type="text" name="m184r162" id="m184r162" style="width:99px; top:691px; left:201px;"/>
+<input type="text" name="m184r163" id="m184r163" style="width:102px; top:691px; left:311px;"/>
+<input type="text" name="m184r164" id="m184r164" style="width:227px; top:691px; left:424px;"/>
+<input type="text" name="m184r165" id="m184r165" style="width:113px; top:691px; left:662px;"/>
+<input type="text" name="m184r166" id="m184r166" style="width:102px; top:691px; left:786px;"/>
+<input type="text" name="m184r171" id="m184r171" style="width:92px; top:717px; left:98px;"/>
+<input type="text" name="m184r172" id="m184r172" style="width:99px; top:717px; left:201px;"/>
+<input type="text" name="m184r173" id="m184r173" style="width:102px; top:717px; left:311px;"/>
+<input type="text" name="m184r174" id="m184r174" style="width:227px; top:717px; left:424px;"/>
+<input type="text" name="m184r175" id="m184r175" style="width:113px; top:717px; left:662px;"/>
+<input type="text" name="m184r176" id="m184r176" style="width:102px; top:717px; left:786px;"/>
+<input type="text" name="m184r181" id="m184r181" style="width:92px; top:743px; left:98px;"/>
+<input type="text" name="m184r182" id="m184r182" style="width:99px; top:743px; left:201px;"/>
+<input type="text" name="m184r183" id="m184r183" style="width:102px; top:743px; left:311px;"/>
+<input type="text" name="m184r184" id="m184r184" style="width:227px; top:743px; left:424px;"/>
+<input type="text" name="m184r185" id="m184r185" style="width:113px; top:743px; left:662px;"/>
+<input type="text" name="m184r186" id="m184r186" style="width:102px; top:743px; left:786px;"/>
+<input type="text" name="m184r191" id="m184r191" style="width:92px; top:769px; left:98px;"/>
+<input type="text" name="m184r192" id="m184r192" style="width:99px; top:769px; left:201px;"/>
+<input type="text" name="m184r193" id="m184r193" style="width:102px; top:769px; left:311px;"/>
+<input type="text" name="m184r194" id="m184r194" style="width:227px; top:769px; left:424px;"/>
+<input type="text" name="m184r195" id="m184r195" style="width:113px; top:769px; left:662px;"/>
+<input type="text" name="m184r196" id="m184r196" style="width:102px; top:769px; left:786px;"/>
+<input type="text" name="m184r201" id="m184r201" style="width:92px; top:795px; left:98px;"/>
+<input type="text" name="m184r202" id="m184r202" style="width:99px; top:795px; left:201px;"/>
+<input type="text" name="m184r203" id="m184r203" style="width:102px; top:795px; left:311px;"/>
+<input type="text" name="m184r204" id="m184r204" style="width:227px; top:795px; left:424px;"/>
+<input type="text" name="m184r205" id="m184r205" style="width:113px; top:795px; left:662px;"/>
+<input type="text" name="m184r206" id="m184r206" style="width:102px; top:795px; left:786px;"/>
+<input type="text" name="m184r211" id="m184r211" style="width:92px; top:821px; left:98px;"/>
+<input type="text" name="m184r212" id="m184r212" style="width:99px; top:821px; left:201px;"/>
+<input type="text" name="m184r213" id="m184r213" style="width:102px; top:821px; left:311px;"/>
+<input type="text" name="m184r214" id="m184r214" style="width:227px; top:821px; left:424px;"/>
+<input type="text" name="m184r215" id="m184r215" style="width:113px; top:821px; left:662px;"/>
+<input type="text" name="m184r216" id="m184r216" style="width:102px; top:821px; left:786px;"/>
+<input type="text" name="m184r221" id="m184r221" style="width:92px; top:847px; left:98px;"/>
+<input type="text" name="m184r222" id="m184r222" style="width:99px; top:847px; left:201px;"/>
+<input type="text" name="m184r223" id="m184r223" style="width:102px; top:847px; left:311px;"/>
+<input type="text" name="m184r224" id="m184r224" style="width:227px; top:847px; left:424px;"/>
+<input type="text" name="m184r225" id="m184r225" style="width:113px; top:847px; left:662px;"/>
+<input type="text" name="m184r226" id="m184r226" style="width:102px; top:847px; left:786px;"/>
+<input type="text" name="m184r231" id="m184r231" style="width:92px; top:873px; left:98px;"/>
+<input type="text" name="m184r232" id="m184r232" style="width:99px; top:873px; left:201px;"/>
+<input type="text" name="m184r233" id="m184r233" style="width:102px; top:873px; left:311px;"/>
+<input type="text" name="m184r234" id="m184r234" style="width:227px; top:873px; left:424px;"/>
+<input type="text" name="m184r235" id="m184r235" style="width:113px; top:873px; left:662px;"/>
+<input type="text" name="m184r236" id="m184r236" style="width:102px; top:873px; left:786px;"/>
+<input type="text" name="m184r241" id="m184r241" style="width:92px; top:899px; left:98px;"/>
+<input type="text" name="m184r242" id="m184r242" style="width:99px; top:899px; left:201px;"/>
+<input type="text" name="m184r243" id="m184r243" style="width:102px; top:899px; left:311px;"/>
+<input type="text" name="m184r244" id="m184r244" style="width:227px; top:899px; left:424px;"/>
+<input type="text" name="m184r245" id="m184r245" style="width:113px; top:899px; left:662px;"/>
+<input type="text" name="m184r246" id="m184r246" style="width:102px; top:899px; left:786px;"/>
+<input type="text" name="m184r251" id="m184r251" style="width:92px; top:926px; left:98px;"/>
+<input type="text" name="m184r252" id="m184r252" style="width:99px; top:926px; left:201px;"/>
+<input type="text" name="m184r253" id="m184r253" style="width:102px; top:926px; left:311px;"/>
+<input type="text" name="m184r254" id="m184r254" style="width:227px; top:926px; left:424px;"/>
+<input type="text" name="m184r255" id="m184r255" style="width:113px; top:926px; left:662px;"/>
+<input type="text" name="m184r256" id="m184r256" style="width:102px; top:926px; left:786px;"/>
+<input type="text" name="m184r261" id="m184r261" style="width:92px; top:951px; left:98px;"/>
+<input type="text" name="m184r262" id="m184r262" style="width:99px; top:951px; left:201px;"/>
+<input type="text" name="m184r263" id="m184r263" style="width:102px; top:951px; left:311px;"/>
+<input type="text" name="m184r264" id="m184r264" style="width:227px; top:951px; left:424px;"/>
+<input type="text" name="m184r265" id="m184r265" style="width:113px; top:951px; left:662px;"/>
+<input type="text" name="m184r266" id="m184r266" style="width:102px; top:951px; left:786px;"/>
+<input type="text" name="m184r271" id="m184r271" style="width:92px; top:978px; left:98px;"/>
+<input type="text" name="m184r272" id="m184r272" style="width:99px; top:978px; left:201px;"/>
+<input type="text" name="m184r273" id="m184r273" style="width:102px; top:978px; left:311px;"/>
+<input type="text" name="m184r274" id="m184r274" style="width:227px; top:978px; left:424px;"/>
+<input type="text" name="m184r275" id="m184r275" style="width:113px; top:978px; left:662px;"/>
+<input type="text" name="m184r276" id="m184r276" style="width:102px; top:978px; left:786px;"/>
+<input type="text" name="m184r281" id="m184r281" style="width:92px; top:1004px; left:98px;"/>
+<input type="text" name="m184r282" id="m184r282" style="width:99px; top:1004px; left:201px;"/>
+<input type="text" name="m184r283" id="m184r283" style="width:102px; top:1004px; left:311px;"/>
+<input type="text" name="m184r284" id="m184r284" style="width:227px; top:1004px; left:424px;"/>
+<input type="text" name="m184r285" id="m184r285" style="width:113px; top:1004px; left:662px;"/>
+<input type="text" name="m184r286" id="m184r286" style="width:102px; top:1004px; left:786px;"/>
+<input type="text" name="m184r291" id="m184r291" style="width:92px; top:1030px; left:98px;"/>
+<input type="text" name="m184r292" id="m184r292" style="width:99px; top:1030px; left:201px;"/>
+<input type="text" name="m184r293" id="m184r293" style="width:102px; top:1030px; left:311px;"/>
+<input type="text" name="m184r294" id="m184r294" style="width:227px; top:1030px; left:424px;"/>
+<input type="text" name="m184r295" id="m184r295" style="width:113px; top:1030px; left:662px;"/>
+<input type="text" name="m184r296" id="m184r296" style="width:102px; top:1030px; left:786px;"/>
+<input type="text" name="m184r301" id="m184r301" style="width:92px; top:1056px; left:98px;"/>
+<input type="text" name="m184r302" id="m184r302" style="width:99px; top:1056px; left:201px;"/>
+<input type="text" name="m184r303" id="m184r303" style="width:102px; top:1056px; left:311px;"/>
+<input type="text" name="m184r304" id="m184r304" style="width:227px; top:1056px; left:424px;"/>
+<input type="text" name="m184r305" id="m184r305" style="width:113px; top:1056px; left:662px;"/>
+<input type="text" name="m184r306" id="m184r306" style="width:102px; top:1056px; left:786px;"/>
+<input type="text" name="m184r311" id="m184r311" style="width:92px; top:1082px; left:98px;"/>
+<input type="text" name="m184r312" id="m184r312" style="width:99px; top:1082px; left:201px;"/>
+<input type="text" name="m184r313" id="m184r313" style="width:102px; top:1082px; left:311px;"/>
+<input type="text" name="m184r314" id="m184r314" style="width:227px; top:1082px; left:424px;"/>
+<input type="text" name="m184r315" id="m184r315" style="width:113px; top:1082px; left:662px;"/>
+<input type="text" name="m184r316" id="m184r316" style="width:102px; top:1082px; left:786px;"/>
+<input type="text" name="m184r321" id="m184r321" style="width:92px; top:1108px; left:98px;"/>
+<input type="text" name="m184r322" id="m184r322" style="width:99px; top:1108px; left:201px;"/>
+<input type="text" name="m184r323" id="m184r323" style="width:102px; top:1108px; left:311px;"/>
+<input type="text" name="m184r324" id="m184r324" style="width:227px; top:1108px; left:424px;"/>
+<input type="text" name="m184r325" id="m184r325" style="width:113px; top:1108px; left:662px;"/>
+<input type="text" name="m184r326" id="m184r326" style="width:102px; top:1108px; left:786px;"/>
+<span class="text-echo" style="top:1139px; right:649px;"><?php echo $m184r992; ?></span>
+<span class="text-echo" style="top:1139px; right:536px;"><?php echo $m184r993; ?></span>
+<span class="text-echo" style="top:1139px; right:299px;"><?php echo $m184r994; ?></span>
+<span class="text-echo" style="top:1139px; right:175px;"><?php echo $m184r995; ?></span>
+<span class="text-echo" style="top:1139px; right:62px;"><?php echo $m184r996; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 8 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:78px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<!-- legenda stl.4 -->
+<div style="position:absolute; top:181px; left:423px; width:121px; height:77px; line-height:1.2; font-size:15px; font-family:arial; background-color:white; text-align:center; padding-top: 2px; box-sizing: border-box;">
+<?php
+if ( $kli_vrok == 2016 ) { echo "Trûby<br>za v˝voz<br>tovaru<br>(zo stÂ. 2)"; }
+if ( $kli_vrok > 2016 ) { echo "Trûby<br>z predaja<br>do zahraniËia<br>(zo stÂ. 2)"; }
+?>
+</div>
+<!-- modul 185 -->
+<input type="text" name="m185r11" id="m185r11" style="width:87px; top:289px; left:100px;"/>
+<input type="text" name="m185r12" id="m185r12" style="width:103px; top:289px; left:197px;"/>
+<input type="text" name="m185r13" id="m185r13" style="width:102px; top:289px; left:311px;"/>
+<input type="text" name="m185r14" id="m185r14" style="width:113px; top:289px; left:424px;"/>
+<input type="text" name="m185r15" id="m185r15" style="width:113px; top:289px; left:549px;"/>
+<input type="text" name="m185r16" id="m185r16" style="width:102px; top:289px; left:673px;"/>
+<input type="text" name="m185r17" id="m185r17" style="width:101px; top:289px; left:787px;"/>
+<input type="text" name="m185r21" id="m185r21" style="width:87px; top:317px; left:100px;"/>
+<input type="text" name="m185r22" id="m185r22" style="width:103px; top:317px; left:197px;"/>
+<input type="text" name="m185r23" id="m185r23" style="width:102px; top:317px; left:311px;"/>
+<input type="text" name="m185r24" id="m185r24" style="width:113px; top:317px; left:424px;"/>
+<input type="text" name="m185r25" id="m185r25" style="width:113px; top:317px; left:549px;"/>
+<input type="text" name="m185r26" id="m185r26" style="width:102px; top:317px; left:673px;"/>
+<input type="text" name="m185r27" id="m185r27" style="width:101px; top:317px; left:787px;"/>
+<input type="text" name="m185r31" id="m185r31" style="width:87px; top:344px; left:100px;"/>
+<input type="text" name="m185r32" id="m185r32" style="width:103px; top:344px; left:197px;"/>
+<input type="text" name="m185r33" id="m185r33" style="width:102px; top:344px; left:311px;"/>
+<input type="text" name="m185r34" id="m185r34" style="width:113px; top:344px; left:424px;"/>
+<input type="text" name="m185r35" id="m185r35" style="width:113px; top:344px; left:549px;"/>
+<input type="text" name="m185r36" id="m185r36" style="width:102px; top:344px; left:673px;"/>
+<input type="text" name="m185r37" id="m185r37" style="width:101px; top:344px; left:787px;"/>
+<input type="text" name="m185r41" id="m185r41" style="width:87px; top:371px; left:100px;"/>
+<input type="text" name="m185r42" id="m185r42" style="width:103px; top:371px; left:197px;"/>
+<input type="text" name="m185r43" id="m185r43" style="width:102px; top:371px; left:311px;"/>
+<input type="text" name="m185r44" id="m185r44" style="width:113px; top:371px; left:424px;"/>
+<input type="text" name="m185r45" id="m185r45" style="width:113px; top:371px; left:549px;"/>
+<input type="text" name="m185r46" id="m185r46" style="width:102px; top:371px; left:673px;"/>
+<input type="text" name="m185r47" id="m185r47" style="width:101px; top:371px; left:787px;"/>
+<input type="text" name="m185r51" id="m185r51" style="width:87px; top:399px; left:100px;"/>
+<input type="text" name="m185r52" id="m185r52" style="width:103px; top:399px; left:197px;"/>
+<input type="text" name="m185r53" id="m185r53" style="width:102px; top:399px; left:311px;"/>
+<input type="text" name="m185r54" id="m185r54" style="width:113px; top:399px; left:424px;"/>
+<input type="text" name="m185r55" id="m185r55" style="width:113px; top:399px; left:549px;"/>
+<input type="text" name="m185r56" id="m185r56" style="width:102px; top:399px; left:673px;"/>
+<input type="text" name="m185r57" id="m185r57" style="width:101px; top:399px; left:787px;"/>
+<input type="text" name="m185r61" id="m185r61" style="width:87px; top:426px; left:100px;"/>
+<input type="text" name="m185r62" id="m185r62" style="width:103px; top:426px; left:197px;"/>
+<input type="text" name="m185r63" id="m185r63" style="width:102px; top:426px; left:311px;"/>
+<input type="text" name="m185r64" id="m185r64" style="width:113px; top:426px; left:424px;"/>
+<input type="text" name="m185r65" id="m185r65" style="width:113px; top:426px; left:549px;"/>
+<input type="text" name="m185r66" id="m185r66" style="width:102px; top:426px; left:673px;"/>
+<input type="text" name="m185r67" id="m185r67" style="width:101px; top:426px; left:787px;"/>
+<input type="text" name="m185r71" id="m185r71" style="width:87px; top:454px; left:100px;"/>
+<input type="text" name="m185r72" id="m185r72" style="width:103px; top:454px; left:197px;"/>
+<input type="text" name="m185r73" id="m185r73" style="width:102px; top:454px; left:311px;"/>
+<input type="text" name="m185r74" id="m185r74" style="width:113px; top:454px; left:424px;"/>
+<input type="text" name="m185r75" id="m185r75" style="width:113px; top:454px; left:549px;"/>
+<input type="text" name="m185r76" id="m185r76" style="width:102px; top:454px; left:673px;"/>
+<input type="text" name="m185r77" id="m185r77" style="width:101px; top:454px; left:787px;"/>
+<input type="text" name="m185r81" id="m185r81" style="width:87px; top:481px; left:100px;"/>
+<input type="text" name="m185r82" id="m185r82" style="width:103px; top:481px; left:197px;"/>
+<input type="text" name="m185r83" id="m185r83" style="width:102px; top:481px; left:311px;"/>
+<input type="text" name="m185r84" id="m185r84" style="width:113px; top:481px; left:424px;"/>
+<input type="text" name="m185r85" id="m185r85" style="width:113px; top:481px; left:549px;"/>
+<input type="text" name="m185r86" id="m185r86" style="width:102px; top:481px; left:673px;"/>
+<input type="text" name="m185r87" id="m185r87" style="width:101px; top:481px; left:787px;"/>
+<input type="text" name="m185r91" id="m185r91" style="width:87px; top:508px; left:100px;"/>
+<input type="text" name="m185r92" id="m185r92" style="width:103px; top:508px; left:197px;"/>
+<input type="text" name="m185r93" id="m185r93" style="width:102px; top:508px; left:311px;"/>
+<input type="text" name="m185r94" id="m185r94" style="width:113px; top:508px; left:424px;"/>
+<input type="text" name="m185r95" id="m185r95" style="width:113px; top:508px; left:549px;"/>
+<input type="text" name="m185r96" id="m185r96" style="width:102px; top:508px; left:673px;"/>
+<input type="text" name="m185r97" id="m185r97" style="width:101px; top:508px; left:787px;"/>
+<input type="text" name="m185r101" id="m185r101" style="width:87px; top:535px; left:100px;"/>
+<input type="text" name="m185r102" id="m185r102" style="width:103px; top:535px; left:197px;"/>
+<input type="text" name="m185r103" id="m185r103" style="width:102px; top:535px; left:311px;"/>
+<input type="text" name="m185r104" id="m185r104" style="width:113px; top:535px; left:424px;"/>
+<input type="text" name="m185r105" id="m185r105" style="width:113px; top:535px; left:549px;"/>
+<input type="text" name="m185r106" id="m185r106" style="width:102px; top:535px; left:673px;"/>
+<input type="text" name="m185r107" id="m185r107" style="width:101px; top:535px; left:787px;"/>
+<input type="text" name="m185r111" id="m185r111" style="width:87px; top:563px; left:100px;"/>
+<input type="text" name="m185r112" id="m185r112" style="width:103px; top:563px; left:197px;"/>
+<input type="text" name="m185r113" id="m185r113" style="width:102px; top:563px; left:311px;"/>
+<input type="text" name="m185r114" id="m185r114" style="width:113px; top:563px; left:424px;"/>
+<input type="text" name="m185r115" id="m185r115" style="width:113px; top:563px; left:549px;"/>
+<input type="text" name="m185r116" id="m185r116" style="width:102px; top:563px; left:673px;"/>
+<input type="text" name="m185r117" id="m185r117" style="width:101px; top:563px; left:787px;"/>
+<input type="text" name="m185r121" id="m185r121" style="width:87px; top:590px; left:100px;"/>
+<input type="text" name="m185r122" id="m185r122" style="width:103px; top:590px; left:197px;"/>
+<input type="text" name="m185r123" id="m185r123" style="width:102px; top:590px; left:311px;"/>
+<input type="text" name="m185r124" id="m185r124" style="width:113px; top:590px; left:424px;"/>
+<input type="text" name="m185r125" id="m185r125" style="width:113px; top:590px; left:549px;"/>
+<input type="text" name="m185r126" id="m185r126" style="width:102px; top:590px; left:673px;"/>
+<input type="text" name="m185r127" id="m185r127" style="width:101px; top:590px; left:787px;"/>
+<input type="text" name="m185r131" id="m185r131" style="width:87px; top:618px; left:100px;"/>
+<input type="text" name="m185r132" id="m185r132" style="width:103px; top:618px; left:197px;"/>
+<input type="text" name="m185r133" id="m185r133" style="width:102px; top:618px; left:311px;"/>
+<input type="text" name="m185r134" id="m185r134" style="width:113px; top:618px; left:424px;"/>
+<input type="text" name="m185r135" id="m185r135" style="width:113px; top:618px; left:549px;"/>
+<input type="text" name="m185r136" id="m185r136" style="width:102px; top:618px; left:673px;"/>
+<input type="text" name="m185r137" id="m185r137" style="width:101px; top:618px; left:787px;"/>
+<input type="text" name="m185r141" id="m185r141" style="width:87px; top:646px; left:100px;"/>
+<input type="text" name="m185r142" id="m185r142" style="width:103px; top:646px; left:197px;"/>
+<input type="text" name="m185r143" id="m185r143" style="width:102px; top:646px; left:311px;"/>
+<input type="text" name="m185r144" id="m185r144" style="width:113px; top:646px; left:424px;"/>
+<input type="text" name="m185r145" id="m185r145" style="width:113px; top:646px; left:549px;"/>
+<input type="text" name="m185r146" id="m185r146" style="width:102px; top:646px; left:673px;"/>
+<input type="text" name="m185r147" id="m185r147" style="width:101px; top:646px; left:787px;"/>
+<input type="text" name="m185r151" id="m185r151" style="width:87px; top:673px; left:100px;"/>
+<input type="text" name="m185r152" id="m185r152" style="width:103px; top:673px; left:197px;"/>
+<input type="text" name="m185r153" id="m185r153" style="width:102px; top:673px; left:311px;"/>
+<input type="text" name="m185r154" id="m185r154" style="width:113px; top:673px; left:424px;"/>
+<input type="text" name="m185r155" id="m185r155" style="width:113px; top:673px; left:549px;"/>
+<input type="text" name="m185r156" id="m185r156" style="width:102px; top:673px; left:673px;"/>
+<input type="text" name="m185r157" id="m185r157" style="width:101px; top:673px; left:787px;"/>
+<input type="text" name="m185r161" id="m185r161" style="width:87px; top:700px; left:100px;"/>
+<input type="text" name="m185r162" id="m185r162" style="width:103px; top:700px; left:197px;"/>
+<input type="text" name="m185r163" id="m185r163" style="width:102px; top:700px; left:311px;"/>
+<input type="text" name="m185r164" id="m185r164" style="width:113px; top:700px; left:424px;"/>
+<input type="text" name="m185r165" id="m185r165" style="width:113px; top:700px; left:549px;"/>
+<input type="text" name="m185r166" id="m185r166" style="width:102px; top:700px; left:673px;"/>
+<input type="text" name="m185r167" id="m185r167" style="width:101px; top:700px; left:787px;"/>
+<input type="text" name="m185r171" id="m185r171" style="width:87px; top:727px; left:100px;"/>
+<input type="text" name="m185r172" id="m185r172" style="width:103px; top:727px; left:197px;"/>
+<input type="text" name="m185r173" id="m185r173" style="width:102px; top:727px; left:311px;"/>
+<input type="text" name="m185r174" id="m185r174" style="width:113px; top:727px; left:424px;"/>
+<input type="text" name="m185r175" id="m185r175" style="width:113px; top:727px; left:549px;"/>
+<input type="text" name="m185r176" id="m185r176" style="width:102px; top:727px; left:673px;"/>
+<input type="text" name="m185r177" id="m185r177" style="width:101px; top:727px; left:787px;"/>
+<input type="text" name="m185r181" id="m185r181" style="width:87px; top:755px; left:100px;"/>
+<input type="text" name="m185r182" id="m185r182" style="width:103px; top:755px; left:197px;"/>
+<input type="text" name="m185r183" id="m185r183" style="width:102px; top:755px; left:311px;"/>
+<input type="text" name="m185r184" id="m185r184" style="width:113px; top:755px; left:424px;"/>
+<input type="text" name="m185r185" id="m185r185" style="width:113px; top:755px; left:549px;"/>
+<input type="text" name="m185r186" id="m185r186" style="width:102px; top:755px; left:673px;"/>
+<input type="text" name="m185r187" id="m185r187" style="width:101px; top:755px; left:787px;"/>
+<input type="text" name="m185r191" id="m185r191" style="width:87px; top:782px; left:100px;"/>
+<input type="text" name="m185r192" id="m185r192" style="width:103px; top:782px; left:197px;"/>
+<input type="text" name="m185r193" id="m185r193" style="width:102px; top:782px; left:311px;"/>
+<input type="text" name="m185r194" id="m185r194" style="width:113px; top:782px; left:424px;"/>
+<input type="text" name="m185r195" id="m185r195" style="width:113px; top:782px; left:549px;"/>
+<input type="text" name="m185r196" id="m185r196" style="width:102px; top:782px; left:673px;"/>
+<input type="text" name="m185r197" id="m185r197" style="width:101px; top:782px; left:787px;"/>
+<input type="text" name="m185r201" id="m185r201" style="width:87px; top:810px; left:100px;"/>
+<input type="text" name="m185r202" id="m185r202" style="width:103px; top:810px; left:197px;"/>
+<input type="text" name="m185r203" id="m185r203" style="width:102px; top:810px; left:311px;"/>
+<input type="text" name="m185r204" id="m185r204" style="width:113px; top:810px; left:424px;"/>
+<input type="text" name="m185r205" id="m185r205" style="width:113px; top:810px; left:549px;"/>
+<input type="text" name="m185r206" id="m185r206" style="width:102px; top:810px; left:673px;"/>
+<input type="text" name="m185r207" id="m185r207" style="width:101px; top:810px; left:787px;"/>
+<input type="text" name="m185r211" id="m185r211" style="width:87px; top:837px; left:100px;"/>
+<input type="text" name="m185r212" id="m185r212" style="width:103px; top:837px; left:197px;"/>
+<input type="text" name="m185r213" id="m185r213" style="width:102px; top:837px; left:311px;"/>
+<input type="text" name="m185r214" id="m185r214" style="width:113px; top:837px; left:424px;"/>
+<input type="text" name="m185r215" id="m185r215" style="width:113px; top:837px; left:549px;"/>
+<input type="text" name="m185r216" id="m185r216" style="width:102px; top:837px; left:673px;"/>
+<input type="text" name="m185r217" id="m185r217" style="width:101px; top:837px; left:787px;"/>
+<input type="text" name="m185r221" id="m185r221" style="width:87px; top:865px; left:100px;"/>
+<input type="text" name="m185r222" id="m185r222" style="width:103px; top:865px; left:197px;"/>
+<input type="text" name="m185r223" id="m185r223" style="width:102px; top:865px; left:311px;"/>
+<input type="text" name="m185r224" id="m185r224" style="width:113px; top:865px; left:424px;"/>
+<input type="text" name="m185r225" id="m185r225" style="width:113px; top:865px; left:549px;"/>
+<input type="text" name="m185r226" id="m185r226" style="width:102px; top:865px; left:673px;"/>
+<input type="text" name="m185r227" id="m185r227" style="width:101px; top:865px; left:787px;"/>
+<input type="text" name="m185r231" id="m185r231" style="width:87px; top:892px; left:100px;"/>
+<input type="text" name="m185r232" id="m185r232" style="width:103px; top:892px; left:197px;"/>
+<input type="text" name="m185r233" id="m185r233" style="width:102px; top:892px; left:311px;"/>
+<input type="text" name="m185r234" id="m185r234" style="width:113px; top:892px; left:424px;"/>
+<input type="text" name="m185r235" id="m185r235" style="width:113px; top:892px; left:549px;"/>
+<input type="text" name="m185r236" id="m185r236" style="width:102px; top:892px; left:673px;"/>
+<input type="text" name="m185r237" id="m185r237" style="width:101px; top:892px; left:787px;"/>
+<input type="text" name="m185r241" id="m185r241" style="width:87px; top:919px; left:100px;"/>
+<input type="text" name="m185r242" id="m185r242" style="width:103px; top:919px; left:197px;"/>
+<input type="text" name="m185r243" id="m185r243" style="width:102px; top:919px; left:311px;"/>
+<input type="text" name="m185r244" id="m185r244" style="width:113px; top:919px; left:424px;"/>
+<input type="text" name="m185r245" id="m185r245" style="width:113px; top:919px; left:549px;"/>
+<input type="text" name="m185r246" id="m185r246" style="width:102px; top:919px; left:673px;"/>
+<input type="text" name="m185r247" id="m185r247" style="width:101px; top:919px; left:787px;"/>
+<input type="text" name="m185r251" id="m185r251" style="width:87px; top:947px; left:100px;"/>
+<input type="text" name="m185r252" id="m185r252" style="width:103px; top:947px; left:197px;"/>
+<input type="text" name="m185r253" id="m185r253" style="width:102px; top:947px; left:311px;"/>
+<input type="text" name="m185r254" id="m185r254" style="width:113px; top:947px; left:424px;"/>
+<input type="text" name="m185r255" id="m185r255" style="width:113px; top:947px; left:549px;"/>
+<input type="text" name="m185r256" id="m185r256" style="width:102px; top:947px; left:673px;"/>
+<input type="text" name="m185r257" id="m185r257" style="width:101px; top:947px; left:787px;"/>
+<input type="text" name="m185r261" id="m185r261" style="width:87px; top:974px; left:100px;"/>
+<input type="text" name="m185r262" id="m185r262" style="width:103px; top:974px; left:197px;"/>
+<input type="text" name="m185r263" id="m185r263" style="width:102px; top:974px; left:311px;"/>
+<input type="text" name="m185r264" id="m185r264" style="width:113px; top:974px; left:424px;"/>
+<input type="text" name="m185r265" id="m185r265" style="width:113px; top:974px; left:549px;"/>
+<input type="text" name="m185r266" id="m185r266" style="width:102px; top:974px; left:673px;"/>
+<input type="text" name="m185r267" id="m185r267" style="width:101px; top:974px; left:787px;"/>
+<input type="text" name="m185r271" id="m185r271" style="width:87px; top:1002px; left:100px;"/>
+<input type="text" name="m185r272" id="m185r272" style="width:103px; top:1002px; left:197px;"/>
+<input type="text" name="m185r273" id="m185r273" style="width:102px; top:1002px; left:311px;"/>
+<input type="text" name="m185r274" id="m185r274" style="width:113px; top:1002px; left:424px;"/>
+<input type="text" name="m185r275" id="m185r275" style="width:113px; top:1002px; left:549px;"/>
+<input type="text" name="m185r276" id="m185r276" style="width:102px; top:1002px; left:673px;"/>
+<input type="text" name="m185r277" id="m185r277" style="width:101px; top:1002px; left:787px;"/>
+<input type="text" name="m185r281" id="m185r281" style="width:87px; top:1029px; left:100px;"/>
+<input type="text" name="m185r282" id="m185r282" style="width:103px; top:1029px; left:197px;"/>
+<input type="text" name="m185r283" id="m185r283" style="width:102px; top:1029px; left:311px;"/>
+<input type="text" name="m185r284" id="m185r284" style="width:113px; top:1029px; left:424px;"/>
+<input type="text" name="m185r285" id="m185r285" style="width:113px; top:1029px; left:549px;"/>
+<input type="text" name="m185r286" id="m185r286" style="width:102px; top:1029px; left:673px;"/>
+<input type="text" name="m185r287" id="m185r287" style="width:101px; top:1029px; left:787px;"/>
+<input type="text" name="m185r291" id="m185r291" style="width:87px; top:1057px; left:100px;"/>
+<input type="text" name="m185r292" id="m185r292" style="width:103px; top:1057px; left:197px;"/>
+<input type="text" name="m185r293" id="m185r293" style="width:102px; top:1057px; left:311px;"/>
+<input type="text" name="m185r294" id="m185r294" style="width:113px; top:1057px; left:424px;"/>
+<input type="text" name="m185r295" id="m185r295" style="width:113px; top:1057px; left:549px;"/>
+<input type="text" name="m185r296" id="m185r296" style="width:102px; top:1057px; left:673px;"/>
+<input type="text" name="m185r297" id="m185r297" style="width:101px; top:1057px; left:787px;"/>
+<input type="text" name="m185r301" id="m185r301" style="width:87px; top:1084px; left:100px;"/>
+<input type="text" name="m185r302" id="m185r302" style="width:103px; top:1084px; left:197px;"/>
+<input type="text" name="m185r303" id="m185r303" style="width:102px; top:1084px; left:311px;"/>
+<input type="text" name="m185r304" id="m185r304" style="width:113px; top:1084px; left:424px;"/>
+<input type="text" name="m185r305" id="m185r305" style="width:113px; top:1084px; left:549px;"/>
+<input type="text" name="m185r306" id="m185r306" style="width:102px; top:1084px; left:673px;"/>
+<input type="text" name="m185r307" id="m185r307" style="width:101px; top:1084px; left:787px;"/>
+<span class="text-echo" style="top:1116px; right:648px;"><?php echo $m185r992; ?></span>
+<span class="text-echo" style="top:1116px; right:535px;"><?php echo $m185r993; ?></span>
+<span class="text-echo" style="top:1116px; right:410px;"><?php echo $m185r994; ?></span>
+<span class="text-echo" style="top:1116px; right:285px;"><?php echo $m185r995; ?></span>
+<span class="text-echo" style="top:1116px; right:173px;"><?php echo $m185r996; ?></span>
+<span class="text-echo" style="top:1116px; right:60px;"><?php echo $m185r997; ?></span>
+<?php                                        } ?>
+
+<?php if ( $strana == 9 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:97px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<!-- legenda stl.4 -->
+<div style="position:absolute; top:181px; left:423px; width:121px; height:77px; line-height:1.2; font-size:15px; font-family:arial; background-color:white; text-align:center; padding-top: 2px; box-sizing: border-box;">
+<?php
+if ( $kli_vrok == 2016 ) { echo "Trûby<br>za v˝voz<br>tovaru<br>(zo stÂ. 2)"; }
+if ( $kli_vrok > 2016 ) { echo "Trûby<br>z predaja<br>do zahraniËia<br>(zo stÂ. 2)"; }
+?>
+</div>
+<!-- modul 186 -->
+<input type="text" name="m186r11" id="m186r11" style="width:87px; top:289px; left:100px;"/>
+<input type="text" name="m186r12" id="m186r12" style="width:103px; top:289px; left:197px;"/>
+<input type="text" name="m186r13" id="m186r13" style="width:102px; top:289px; left:311px;"/>
+<input type="text" name="m186r14" id="m186r14" style="width:114px; top:289px; left:424px;"/>
+<input type="text" name="m186r15" id="m186r15" style="width:115px; top:289px; left:548px;"/>
+<input type="text" name="m186r16" id="m186r16" style="width:102px; top:289px; left:673px;"/>
+<input type="text" name="m186r17" id="m186r17" style="width:101px; top:289px; left:787px;"/>
+<input type="text" name="m186r21" id="m186r21" style="width:87px; top:316px; left:100px;"/>
+<input type="text" name="m186r22" id="m186r22" style="width:103px; top:316px; left:197px;"/>
+<input type="text" name="m186r23" id="m186r23" style="width:102px; top:316px; left:311px;"/>
+<input type="text" name="m186r24" id="m186r24" style="width:114px; top:316px; left:424px;"/>
+<input type="text" name="m186r25" id="m186r25" style="width:115px; top:316px; left:548px;"/>
+<input type="text" name="m186r26" id="m186r26" style="width:102px; top:316px; left:673px;"/>
+<input type="text" name="m186r27" id="m186r27" style="width:101px; top:316px; left:787px;"/>
+<input type="text" name="m186r31" id="m186r31" style="width:87px; top:344px; left:100px;"/>
+<input type="text" name="m186r32" id="m186r32" style="width:103px; top:344px; left:197px;"/>
+<input type="text" name="m186r33" id="m186r33" style="width:102px; top:344px; left:311px;"/>
+<input type="text" name="m186r34" id="m186r34" style="width:114px; top:344px; left:424px;"/>
+<input type="text" name="m186r35" id="m186r35" style="width:115px; top:344px; left:548px;"/>
+<input type="text" name="m186r36" id="m186r36" style="width:102px; top:344px; left:673px;"/>
+<input type="text" name="m186r37" id="m186r37" style="width:101px; top:344px; left:787px;"/>
+<input type="text" name="m186r41" id="m186r41" style="width:87px; top:371px; left:100px;"/>
+<input type="text" name="m186r42" id="m186r42" style="width:103px; top:371px; left:197px;"/>
+<input type="text" name="m186r43" id="m186r43" style="width:102px; top:371px; left:311px;"/>
+<input type="text" name="m186r44" id="m186r44" style="width:114px; top:371px; left:424px;"/>
+<input type="text" name="m186r45" id="m186r45" style="width:115px; top:371px; left:548px;"/>
+<input type="text" name="m186r46" id="m186r46" style="width:102px; top:371px; left:673px;"/>
+<input type="text" name="m186r47" id="m186r47" style="width:101px; top:371px; left:787px;"/>
+<input type="text" name="m186r51" id="m186r51" style="width:87px; top:399px; left:100px;"/>
+<input type="text" name="m186r52" id="m186r52" style="width:103px; top:399px; left:197px;"/>
+<input type="text" name="m186r53" id="m186r53" style="width:102px; top:399px; left:311px;"/>
+<input type="text" name="m186r54" id="m186r54" style="width:114px; top:399px; left:424px;"/>
+<input type="text" name="m186r55" id="m186r55" style="width:115px; top:399px; left:548px;"/>
+<input type="text" name="m186r56" id="m186r56" style="width:102px; top:399px; left:673px;"/>
+<input type="text" name="m186r57" id="m186r57" style="width:101px; top:399px; left:787px;"/>
+<input type="text" name="m186r61" id="m186r61" style="width:87px; top:426px; left:100px;"/>
+<input type="text" name="m186r62" id="m186r62" style="width:103px; top:426px; left:197px;"/>
+<input type="text" name="m186r63" id="m186r63" style="width:102px; top:426px; left:311px;"/>
+<input type="text" name="m186r64" id="m186r64" style="width:114px; top:426px; left:424px;"/>
+<input type="text" name="m186r65" id="m186r65" style="width:115px; top:426px; left:548px;"/>
+<input type="text" name="m186r66" id="m186r66" style="width:102px; top:426px; left:673px;"/>
+<input type="text" name="m186r67" id="m186r67" style="width:101px; top:426px; left:787px;"/>
+<input type="text" name="m186r71" id="m186r71" style="width:87px; top:454px; left:100px;"/>
+<input type="text" name="m186r72" id="m186r72" style="width:103px; top:454px; left:197px;"/>
+<input type="text" name="m186r73" id="m186r73" style="width:102px; top:454px; left:311px;"/>
+<input type="text" name="m186r74" id="m186r74" style="width:114px; top:454px; left:424px;"/>
+<input type="text" name="m186r75" id="m186r75" style="width:115px; top:454px; left:548px;"/>
+<input type="text" name="m186r76" id="m186r76" style="width:102px; top:454px; left:673px;"/>
+<input type="text" name="m186r77" id="m186r77" style="width:101px; top:454px; left:787px;"/>
+<input type="text" name="m186r81" id="m186r81" style="width:87px; top:481px; left:100px;"/>
+<input type="text" name="m186r82" id="m186r82" style="width:103px; top:481px; left:197px;"/>
+<input type="text" name="m186r83" id="m186r83" style="width:102px; top:481px; left:311px;"/>
+<input type="text" name="m186r84" id="m186r84" style="width:114px; top:481px; left:424px;"/>
+<input type="text" name="m186r85" id="m186r85" style="width:115px; top:481px; left:548px;"/>
+<input type="text" name="m186r86" id="m186r86" style="width:102px; top:481px; left:673px;"/>
+<input type="text" name="m186r87" id="m186r87" style="width:101px; top:481px; left:787px;"/>
+<input type="text" name="m186r91" id="m186r91" style="width:87px; top:508px; left:100px;"/>
+<input type="text" name="m186r92" id="m186r92" style="width:103px; top:508px; left:197px;"/>
+<input type="text" name="m186r93" id="m186r93" style="width:102px; top:508px; left:311px;"/>
+<input type="text" name="m186r94" id="m186r94" style="width:114px; top:508px; left:424px;"/>
+<input type="text" name="m186r95" id="m186r95" style="width:115px; top:508px; left:548px;"/>
+<input type="text" name="m186r96" id="m186r96" style="width:102px; top:508px; left:673px;"/>
+<input type="text" name="m186r97" id="m186r97" style="width:101px; top:508px; left:787px;"/>
+<input type="text" name="m186r101" id="m186r101" style="width:87px; top:536px; left:100px;"/>
+<input type="text" name="m186r102" id="m186r102" style="width:103px; top:536px; left:197px;"/>
+<input type="text" name="m186r103" id="m186r103" style="width:102px; top:536px; left:311px;"/>
+<input type="text" name="m186r104" id="m186r104" style="width:114px; top:536px; left:424px;"/>
+<input type="text" name="m186r105" id="m186r105" style="width:115px; top:536px; left:548px;"/>
+<input type="text" name="m186r106" id="m186r106" style="width:102px; top:536px; left:673px;"/>
+<input type="text" name="m186r107" id="m186r107" style="width:101px; top:536px; left:787px;"/>
+<input type="text" name="m186r111" id="m186r111" style="width:87px; top:563px; left:100px;"/>
+<input type="text" name="m186r112" id="m186r112" style="width:103px; top:563px; left:197px;"/>
+<input type="text" name="m186r113" id="m186r113" style="width:102px; top:563px; left:311px;"/>
+<input type="text" name="m186r114" id="m186r114" style="width:114px; top:563px; left:424px;"/>
+<input type="text" name="m186r115" id="m186r115" style="width:115px; top:563px; left:548px;"/>
+<input type="text" name="m186r116" id="m186r116" style="width:102px; top:563px; left:673px;"/>
+<input type="text" name="m186r117" id="m186r117" style="width:101px; top:563px; left:787px;"/>
+<input type="text" name="m186r121" id="m186r121" style="width:87px; top:591px; left:100px;"/>
+<input type="text" name="m186r122" id="m186r122" style="width:103px; top:591px; left:197px;"/>
+<input type="text" name="m186r123" id="m186r123" style="width:102px; top:591px; left:311px;"/>
+<input type="text" name="m186r124" id="m186r124" style="width:114px; top:591px; left:424px;"/>
+<input type="text" name="m186r125" id="m186r125" style="width:115px; top:591px; left:548px;"/>
+<input type="text" name="m186r126" id="m186r126" style="width:102px; top:591px; left:673px;"/>
+<input type="text" name="m186r127" id="m186r127" style="width:101px; top:591px; left:787px;"/>
+<input type="text" name="m186r131" id="m186r131" style="width:87px; top:618px; left:100px;"/>
+<input type="text" name="m186r132" id="m186r132" style="width:103px; top:618px; left:197px;"/>
+<input type="text" name="m186r133" id="m186r133" style="width:102px; top:618px; left:311px;"/>
+<input type="text" name="m186r134" id="m186r134" style="width:114px; top:618px; left:424px;"/>
+<input type="text" name="m186r135" id="m186r135" style="width:115px; top:618px; left:548px;"/>
+<input type="text" name="m186r136" id="m186r136" style="width:102px; top:618px; left:673px;"/>
+<input type="text" name="m186r137" id="m186r137" style="width:101px; top:618px; left:787px;"/>
+<input type="text" name="m186r141" id="m186r141" style="width:87px; top:645px; left:100px;"/>
+<input type="text" name="m186r142" id="m186r142" style="width:103px; top:645px; left:197px;"/>
+<input type="text" name="m186r143" id="m186r143" style="width:102px; top:645px; left:311px;"/>
+<input type="text" name="m186r144" id="m186r144" style="width:114px; top:645px; left:424px;"/>
+<input type="text" name="m186r145" id="m186r145" style="width:115px; top:645px; left:548px;"/>
+<input type="text" name="m186r146" id="m186r146" style="width:102px; top:645px; left:673px;"/>
+<input type="text" name="m186r147" id="m186r147" style="width:101px; top:645px; left:787px;"/>
+<input type="text" name="m186r151" id="m186r151" style="width:87px; top:673px; left:100px;"/>
+<input type="text" name="m186r152" id="m186r152" style="width:103px; top:673px; left:197px;"/>
+<input type="text" name="m186r153" id="m186r153" style="width:102px; top:673px; left:311px;"/>
+<input type="text" name="m186r154" id="m186r154" style="width:114px; top:673px; left:424px;"/>
+<input type="text" name="m186r155" id="m186r155" style="width:115px; top:673px; left:548px;"/>
+<input type="text" name="m186r156" id="m186r156" style="width:102px; top:673px; left:673px;"/>
+<input type="text" name="m186r157" id="m186r157" style="width:101px; top:673px; left:787px;"/>
+<input type="text" name="m186r161" id="m186r161" style="width:87px; top:700px; left:100px;"/>
+<input type="text" name="m186r162" id="m186r162" style="width:103px; top:700px; left:197px;"/>
+<input type="text" name="m186r163" id="m186r163" style="width:102px; top:700px; left:311px;"/>
+<input type="text" name="m186r164" id="m186r164" style="width:114px; top:700px; left:424px;"/>
+<input type="text" name="m186r165" id="m186r165" style="width:115px; top:700px; left:548px;"/>
+<input type="text" name="m186r166" id="m186r166" style="width:102px; top:700px; left:673px;"/>
+<input type="text" name="m186r167" id="m186r167" style="width:101px; top:700px; left:787px;"/>
+<input type="text" name="m186r171" id="m186r171" style="width:87px; top:728px; left:100px;"/>
+<input type="text" name="m186r172" id="m186r172" style="width:103px; top:728px; left:197px;"/>
+<input type="text" name="m186r173" id="m186r173" style="width:102px; top:728px; left:311px;"/>
+<input type="text" name="m186r174" id="m186r174" style="width:114px; top:728px; left:424px;"/>
+<input type="text" name="m186r175" id="m186r175" style="width:115px; top:728px; left:548px;"/>
+<input type="text" name="m186r176" id="m186r176" style="width:102px; top:728px; left:673px;"/>
+<input type="text" name="m186r177" id="m186r177" style="width:101px; top:728px; left:787px;"/>
+<input type="text" name="m186r181" id="m186r181" style="width:87px; top:755px; left:100px;"/>
+<input type="text" name="m186r182" id="m186r182" style="width:103px; top:755px; left:197px;"/>
+<input type="text" name="m186r183" id="m186r183" style="width:102px; top:755px; left:311px;"/>
+<input type="text" name="m186r184" id="m186r184" style="width:114px; top:755px; left:424px;"/>
+<input type="text" name="m186r185" id="m186r185" style="width:115px; top:755px; left:548px;"/>
+<input type="text" name="m186r186" id="m186r186" style="width:102px; top:755px; left:673px;"/>
+<input type="text" name="m186r187" id="m186r187" style="width:101px; top:755px; left:787px;"/>
+<input type="text" name="m186r191" id="m186r191" style="width:87px; top:782px; left:100px;"/>
+<input type="text" name="m186r192" id="m186r192" style="width:103px; top:782px; left:197px;"/>
+<input type="text" name="m186r193" id="m186r193" style="width:102px; top:782px; left:311px;"/>
+<input type="text" name="m186r194" id="m186r194" style="width:114px; top:782px; left:424px;"/>
+<input type="text" name="m186r195" id="m186r195" style="width:115px; top:782px; left:548px;"/>
+<input type="text" name="m186r196" id="m186r196" style="width:102px; top:782px; left:673px;"/>
+<input type="text" name="m186r197" id="m186r197" style="width:101px; top:782px; left:787px;"/>
+<input type="text" name="m186r201" id="m186r201" style="width:87px; top:810px; left:100px;"/>
+<input type="text" name="m186r202" id="m186r202" style="width:103px; top:810px; left:197px;"/>
+<input type="text" name="m186r203" id="m186r203" style="width:102px; top:810px; left:311px;"/>
+<input type="text" name="m186r204" id="m186r204" style="width:114px; top:810px; left:424px;"/>
+<input type="text" name="m186r205" id="m186r205" style="width:115px; top:810px; left:548px;"/>
+<input type="text" name="m186r206" id="m186r206" style="width:102px; top:810px; left:673px;"/>
+<input type="text" name="m186r207" id="m186r207" style="width:101px; top:810px; left:787px;"/>
+<input type="text" name="m186r211" id="m186r211" style="width:87px; top:837px; left:100px;"/>
+<input type="text" name="m186r212" id="m186r212" style="width:103px; top:837px; left:197px;"/>
+<input type="text" name="m186r213" id="m186r213" style="width:102px; top:837px; left:311px;"/>
+<input type="text" name="m186r214" id="m186r214" style="width:114px; top:837px; left:424px;"/>
+<input type="text" name="m186r215" id="m186r215" style="width:115px; top:837px; left:548px;"/>
+<input type="text" name="m186r216" id="m186r216" style="width:102px; top:837px; left:673px;"/>
+<input type="text" name="m186r217" id="m186r217" style="width:101px; top:837px; left:787px;"/>
+<input type="text" name="m186r221" id="m186r221" style="width:87px; top:865px; left:100px;"/>
+<input type="text" name="m186r222" id="m186r222" style="width:103px; top:865px; left:197px;"/>
+<input type="text" name="m186r223" id="m186r223" style="width:102px; top:865px; left:311px;"/>
+<input type="text" name="m186r224" id="m186r224" style="width:114px; top:865px; left:424px;"/>
+<input type="text" name="m186r225" id="m186r225" style="width:115px; top:865px; left:548px;"/>
+<input type="text" name="m186r226" id="m186r226" style="width:102px; top:865px; left:673px;"/>
+<input type="text" name="m186r227" id="m186r227" style="width:101px; top:865px; left:787px;"/>
+<input type="text" name="m186r231" id="m186r231" style="width:87px; top:892px; left:100px;"/>
+<input type="text" name="m186r232" id="m186r232" style="width:103px; top:892px; left:197px;"/>
+<input type="text" name="m186r233" id="m186r233" style="width:102px; top:892px; left:311px;"/>
+<input type="text" name="m186r234" id="m186r234" style="width:114px; top:892px; left:424px;"/>
+<input type="text" name="m186r235" id="m186r235" style="width:115px; top:892px; left:548px;"/>
+<input type="text" name="m186r236" id="m186r236" style="width:102px; top:892px; left:673px;"/>
+<input type="text" name="m186r237" id="m186r237" style="width:101px; top:892px; left:787px;"/>
+<input type="text" name="m186r241" id="m186r241" style="width:87px; top:920px; left:100px;"/>
+<input type="text" name="m186r242" id="m186r242" style="width:103px; top:920px; left:197px;"/>
+<input type="text" name="m186r243" id="m186r243" style="width:102px; top:920px; left:311px;"/>
+<input type="text" name="m186r244" id="m186r244" style="width:114px; top:920px; left:424px;"/>
+<input type="text" name="m186r245" id="m186r245" style="width:115px; top:920px; left:548px;"/>
+<input type="text" name="m186r246" id="m186r246" style="width:102px; top:920px; left:673px;"/>
+<input type="text" name="m186r247" id="m186r247" style="width:101px; top:920px; left:787px;"/>
+<input type="text" name="m186r251" id="m186r251" style="width:87px; top:947px; left:100px;"/>
+<input type="text" name="m186r252" id="m186r252" style="width:103px; top:947px; left:197px;"/>
+<input type="text" name="m186r253" id="m186r253" style="width:102px; top:947px; left:311px;"/>
+<input type="text" name="m186r254" id="m186r254" style="width:114px; top:947px; left:424px;"/>
+<input type="text" name="m186r255" id="m186r255" style="width:115px; top:947px; left:548px;"/>
+<input type="text" name="m186r256" id="m186r256" style="width:102px; top:947px; left:673px;"/>
+<input type="text" name="m186r257" id="m186r257" style="width:101px; top:947px; left:787px;"/>
+<input type="text" name="m186r261" id="m186r261" style="width:87px; top:974px; left:100px;"/>
+<input type="text" name="m186r262" id="m186r262" style="width:103px; top:974px; left:197px;"/>
+<input type="text" name="m186r263" id="m186r263" style="width:102px; top:974px; left:311px;"/>
+<input type="text" name="m186r264" id="m186r264" style="width:114px; top:974px; left:424px;"/>
+<input type="text" name="m186r265" id="m186r265" style="width:115px; top:974px; left:548px;"/>
+<input type="text" name="m186r266" id="m186r266" style="width:102px; top:974px; left:673px;"/>
+<input type="text" name="m186r267" id="m186r267" style="width:101px; top:974px; left:787px;"/>
+<input type="text" name="m186r271" id="m186r271" style="width:87px; top:1002px; left:100px;"/>
+<input type="text" name="m186r272" id="m186r272" style="width:103px; top:1002px; left:197px;"/>
+<input type="text" name="m186r273" id="m186r273" style="width:102px; top:1002px; left:311px;"/>
+<input type="text" name="m186r274" id="m186r274" style="width:114px; top:1002px; left:424px;"/>
+<input type="text" name="m186r275" id="m186r275" style="width:115px; top:1002px; left:548px;"/>
+<input type="text" name="m186r276" id="m186r276" style="width:102px; top:1002px; left:673px;"/>
+<input type="text" name="m186r277" id="m186r277" style="width:101px; top:1002px; left:787px;"/>
+<input type="text" name="m186r281" id="m186r281" style="width:87px; top:1029px; left:100px;"/>
+<input type="text" name="m186r282" id="m186r282" style="width:103px; top:1029px; left:197px;"/>
+<input type="text" name="m186r283" id="m186r283" style="width:102px; top:1029px; left:311px;"/>
+<input type="text" name="m186r284" id="m186r284" style="width:114px; top:1029px; left:424px;"/>
+<input type="text" name="m186r285" id="m186r285" style="width:115px; top:1029px; left:548px;"/>
+<input type="text" name="m186r286" id="m186r286" style="width:102px; top:1029px; left:673px;"/>
+<input type="text" name="m186r287" id="m186r287" style="width:101px; top:1029px; left:787px;"/>
+<input type="text" name="m186r291" id="m186r291" style="width:87px; top:1056px; left:100px;"/>
+<input type="text" name="m186r292" id="m186r292" style="width:103px; top:1056px; left:197px;"/>
+<input type="text" name="m186r293" id="m186r293" style="width:102px; top:1056px; left:311px;"/>
+<input type="text" name="m186r294" id="m186r294" style="width:114px; top:1056px; left:424px;"/>
+<input type="text" name="m186r295" id="m186r295" style="width:115px; top:1056px; left:548px;"/>
+<input type="text" name="m186r296" id="m186r296" style="width:102px; top:1056px; left:673px;"/>
+<input type="text" name="m186r297" id="m186r297" style="width:101px; top:1056px; left:787px;"/>
+<input type="text" name="m186r301" id="m186r301" style="width:87px; top:1084px; left:100px;"/>
+<input type="text" name="m186r302" id="m186r302" style="width:103px; top:1084px; left:197px;"/>
+<input type="text" name="m186r303" id="m186r303" style="width:102px; top:1084px; left:311px;"/>
+<input type="text" name="m186r304" id="m186r304" style="width:114px; top:1084px; left:424px;"/>
+<input type="text" name="m186r305" id="m186r305" style="width:115px; top:1084px; left:548px;"/>
+<input type="text" name="m186r306" id="m186r306" style="width:102px; top:1084px; left:673px;"/>
+<input type="text" name="m186r307" id="m186r307" style="width:101px; top:1084px; left:787px;"/>
+<span class="text-echo" style="top:1116px; right:648px;"><?php echo $m186r992; ?></span>
+<span class="text-echo" style="top:1116px; right:536px;"><?php echo $m186r993; ?></span>
+<span class="text-echo" style="top:1116px; right:411px;"><?php echo $m186r994; ?></span>
+<span class="text-echo" style="top:1116px; right:285px;"><?php echo $m186r995; ?></span>
+<span class="text-echo" style="top:1116px; right:173px;"><?php echo $m186r996; ?></span>
+<span class="text-echo" style="top:1116px; right:60px;"><?php echo $m186r997; ?></span>
+<?php                                        } ?>
+
+<?php if ( $strana == 10 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str10.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 187 -->
+<input type="text" name="m187r1" id="m187r1" style="width:100px; top:208px; left:675px;"/>
+
+<!-- modul 100101 -->
+<input type="checkbox" name="m1590r1a" value="1" onclick="klikm1590r1ano();" style="top:322px; left:839px;"/>
+<input type="checkbox" name="m1590r1b" value="1" onclick="klikm1590r1nie();" style="top:342px; left:839px;"/>
+
+<!-- modul 100102 -->
+<input type="checkbox" name="m1590r2a" value="1" onclick="klikm1590r2ano();" style="top:469px; left:839px;"/>
+<input type="checkbox" name="m1590r2b" value="1" onclick="klikm1590r2nie();" style="top:490px; left:839px;"/>
+
+<!-- modul 590 -->
+<input type="text" name="m590r11" id="m590r11" style="width:124px; top:707px; left:100px;"/>
+<input type="text" name="m590r12" id="m590r12" style="width:178px; top:707px; left:235px;"/>
+<input type="text" name="m590r13" id="m590r13" style="width:159px; top:707px; left:424px;"/>
+<input type="text" name="m590r14" id="m590r14" style="width:147px; top:707px; left:594px;"/>
+<input type="text" name="m590r15" id="m590r15" style="width:136px; top:707px; left:752px;"/>
+<input type="text" name="m590r21" id="m590r21" style="width:124px; top:732px; left:100px;"/>
+<input type="text" name="m590r22" id="m590r22" style="width:178px; top:732px; left:235px;"/>
+<input type="text" name="m590r23" id="m590r23" style="width:159px; top:732px; left:424px;"/>
+<input type="text" name="m590r24" id="m590r24" style="width:147px; top:732px; left:594px;"/>
+<input type="text" name="m590r25" id="m590r25" style="width:136px; top:732px; left:752px;"/>
+<input type="text" name="m590r31" id="m590r31" style="width:124px; top:758px; left:100px;"/>
+<input type="text" name="m590r32" id="m590r32" style="width:178px; top:758px; left:235px;"/>
+<input type="text" name="m590r33" id="m590r33" style="width:159px; top:758px; left:424px;"/>
+<input type="text" name="m590r34" id="m590r34" style="width:147px; top:758px; left:594px;"/>
+<input type="text" name="m590r35" id="m590r35" style="width:136px; top:758px; left:752px;"/>
+<input type="text" name="m590r41" id="m590r41" style="width:124px; top:783px; left:100px;"/>
+<input type="text" name="m590r42" id="m590r42" style="width:178px; top:783px; left:235px;"/>
+<input type="text" name="m590r43" id="m590r43" style="width:159px; top:783px; left:424px;"/>
+<input type="text" name="m590r44" id="m590r44" style="width:147px; top:783px; left:594px;"/>
+<input type="text" name="m590r45" id="m590r45" style="width:136px; top:783px; left:752px;"/>
+<input type="text" name="m590r51" id="m590r51" style="width:124px; top:808px; left:100px;"/>
+<input type="text" name="m590r52" id="m590r52" style="width:178px; top:808px; left:235px;"/>
+<input type="text" name="m590r53" id="m590r53" style="width:159px; top:808px; left:424px;"/>
+<input type="text" name="m590r54" id="m590r54" style="width:147px; top:808px; left:594px;"/>
+<input type="text" name="m590r55" id="m590r55" style="width:136px; top:808px; left:752px;"/>
+<input type="text" name="m590r61" id="m590r61" style="width:124px; top:833px; left:100px;"/>
+<input type="text" name="m590r62" id="m590r62" style="width:178px; top:833px; left:235px;"/>
+<input type="text" name="m590r63" id="m590r63" style="width:159px; top:833px; left:424px;"/>
+<input type="text" name="m590r64" id="m590r64" style="width:147px; top:833px; left:594px;"/>
+<input type="text" name="m590r65" id="m590r65" style="width:136px; top:833px; left:752px;"/>
+<input type="text" name="m590r71" id="m590r71" style="width:124px; top:859px; left:100px;"/>
+<input type="text" name="m590r72" id="m590r72" style="width:178px; top:859px; left:235px;"/>
+<input type="text" name="m590r73" id="m590r73" style="width:159px; top:859px; left:424px;"/>
+<input type="text" name="m590r74" id="m590r74" style="width:147px; top:859px; left:594px;"/>
+<input type="text" name="m590r75" id="m590r75" style="width:136px; top:859px; left:752px;"/>
+<input type="text" name="m590r81" id="m590r81" style="width:124px; top:884px; left:100px;"/>
+<input type="text" name="m590r82" id="m590r82" style="width:178px; top:884px; left:235px;"/>
+<input type="text" name="m590r83" id="m590r83" style="width:159px; top:884px; left:424px;"/>
+<input type="text" name="m590r84" id="m590r84" style="width:147px; top:884px; left:594px;"/>
+<input type="text" name="m590r85" id="m590r85" style="width:136px; top:884px; left:752px;"/>
+<input type="text" name="m590r91" id="m590r91" style="width:124px; top:909px; left:100px;"/>
+<input type="text" name="m590r92" id="m590r92" style="width:178px; top:909px; left:235px;"/>
+<input type="text" name="m590r93" id="m590r93" style="width:159px; top:909px; left:424px;"/>
+<input type="text" name="m590r94" id="m590r94" style="width:147px; top:909px; left:594px;"/>
+<input type="text" name="m590r95" id="m590r95" style="width:136px; top:909px; left:752px;"/>
+<input type="text" name="m590r101" id="m590r101" style="width:124px; top:934px; left:100px;"/>
+<input type="text" name="m590r102" id="m590r102" style="width:178px; top:934px; left:235px;"/>
+<input type="text" name="m590r103" id="m590r103" style="width:159px; top:934px; left:424px;"/>
+<input type="text" name="m590r104" id="m590r104" style="width:147px; top:934px; left:594px;"/>
+<input type="text" name="m590r105" id="m590r105" style="width:136px; top:934px; left:752px;"/>
+<input type="text" name="m590r111" id="m590r111" style="width:124px; top:960px; left:100px;"/>
+<input type="text" name="m590r112" id="m590r112" style="width:178px; top:960px; left:235px;"/>
+<input type="text" name="m590r113" id="m590r113" style="width:159px; top:960px; left:424px;"/>
+<input type="text" name="m590r114" id="m590r114" style="width:147px; top:960px; left:594px;"/>
+<input type="text" name="m590r115" id="m590r115" style="width:136px; top:960px; left:752px;"/>
+<input type="text" name="m590r121" id="m590r121" style="width:124px; top:985px; left:100px;"/>
+<input type="text" name="m590r122" id="m590r122" style="width:178px; top:985px; left:235px;"/>
+<input type="text" name="m590r123" id="m590r123" style="width:159px; top:985px; left:424px;"/>
+<input type="text" name="m590r124" id="m590r124" style="width:147px; top:985px; left:594px;"/>
+<input type="text" name="m590r125" id="m590r125" style="width:136px; top:985px; left:752px;"/>
+<input type="text" name="m590r131" id="m590r131" style="width:124px; top:1010px; left:100px;"/>
+<input type="text" name="m590r132" id="m590r132" style="width:178px; top:1010px; left:235px;"/>
+<input type="text" name="m590r133" id="m590r133" style="width:159px; top:1010px; left:424px;"/>
+<input type="text" name="m590r134" id="m590r134" style="width:147px; top:1010px; left:594px;"/>
+<input type="text" name="m590r135" id="m590r135" style="width:136px; top:1010px; left:752px;"/>
+<input type="text" name="m590r141" id="m590r141" style="width:124px; top:1035px; left:100px;"/>
+<input type="text" name="m590r142" id="m590r142" style="width:178px; top:1035px; left:235px;"/>
+<input type="text" name="m590r143" id="m590r143" style="width:159px; top:1035px; left:424px;"/>
+<input type="text" name="m590r144" id="m590r144" style="width:147px; top:1035px; left:594px;"/>
+<input type="text" name="m590r145" id="m590r145" style="width:136px; top:1035px; left:752px;"/>
+<input type="text" name="m590r151" id="m590r151" style="width:124px; top:1061px; left:100px;"/>
+<input type="text" name="m590r152" id="m590r152" style="width:178px; top:1061px; left:235px;"/>
+<input type="text" name="m590r153" id="m590r153" style="width:159px; top:1061px; left:424px;"/>
+<input type="text" name="m590r154" id="m590r154" style="width:147px; top:1061px; left:594px;"/>
+<input type="text" name="m590r155" id="m590r155" style="width:136px; top:1061px; left:752px;"/>
+<input type="text" name="m590r161" id="m590r161" style="width:124px; top:1086px; left:100px;"/>
+<input type="text" name="m590r162" id="m590r162" style="width:178px; top:1086px; left:235px;"/>
+<input type="text" name="m590r163" id="m590r163" style="width:159px; top:1086px; left:424px;"/>
+<input type="text" name="m590r164" id="m590r164" style="width:147px; top:1086px; left:594px;"/>
+<input type="text" name="m590r165" id="m590r165" style="width:136px; top:1086px; left:752px;"/>
+<input type="text" name="m590r171" id="m590r171" style="width:124px; top:1111px; left:100px;"/>
+<input type="text" name="m590r172" id="m590r172" style="width:178px; top:1111px; left:235px;"/>
+<input type="text" name="m590r173" id="m590r173" style="width:159px; top:1111px; left:424px;"/>
+<input type="text" name="m590r174" id="m590r174" style="width:147px; top:1111px; left:594px;"/>
+<input type="text" name="m590r175" id="m590r175" style="width:136px; top:1111px; left:752px;"/>
+<input type="text" name="m590r181" id="m590r181" style="width:124px; top:1136px; left:100px;"/>
+<input type="text" name="m590r182" id="m590r182" style="width:178px; top:1136px; left:235px;"/>
+<input type="text" name="m590r183" id="m590r183" style="width:159px; top:1136px; left:424px;"/>
+<input type="text" name="m590r184" id="m590r184" style="width:147px; top:1136px; left:594px;"/>
+<input type="text" name="m590r185" id="m590r185" style="width:136px; top:1136px; left:752px;"/>
+<input type="text" name="m590r191" id="m590r191" style="width:124px; top:1162px; left:100px;"/>
+<input type="text" name="m590r192" id="m590r192" style="width:178px; top:1162px; left:235px;"/>
+<input type="text" name="m590r193" id="m590r193" style="width:159px; top:1162px; left:424px;"/>
+<input type="text" name="m590r194" id="m590r194" style="width:147px; top:1162px; left:594px;"/>
+<input type="text" name="m590r195" id="m590r195" style="width:136px; top:1162px; left:752px;"/>
+<input type="text" name="m590r201" id="m590r201" style="width:124px; top:1187px; left:100px;"/>
+<input type="text" name="m590r202" id="m590r202" style="width:178px; top:1187px; left:235px;"/>
+<input type="text" name="m590r203" id="m590r203" style="width:159px; top:1187px; left:424px;"/>
+<input type="text" name="m590r204" id="m590r204" style="width:147px; top:1187px; left:594px;"/>
+<input type="text" name="m590r205" id="m590r205" style="width:136px; top:1187px; left:752px;"/>
+<input type="text" name="m590r211" id="m590r211" style="width:124px; top:1212px; left:100px;"/>
+<input type="text" name="m590r212" id="m590r212" style="width:178px; top:1212px; left:235px;"/>
+<input type="text" name="m590r213" id="m590r213" style="width:159px; top:1212px; left:424px;"/>
+<input type="text" name="m590r214" id="m590r214" style="width:147px; top:1212px; left:594px;"/>
+<input type="text" name="m590r215" id="m590r215" style="width:136px; top:1212px; left:752px;"/>
+<script>
+  function klikm1590r1ano()
+  {
+   document.formv1.m1590r1b.checked = false;
+  }
+  function klikm1590r1nie()
+  {
+   document.formv1.m1590r1a.checked = false;
+  }
+  function klikm1590r2ano()
+  {
+   document.formv1.m1590r2b.checked = false;
+  }
+  function klikm1590r2nie()
+  {
+   document.formv1.m1590r2a.checked = false;
+  }
+</script>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 11 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 304 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z miezd" onclick="NacitajMzdy();" style="top:158px; left:378px;" class="btn-row-tool">
+<input type="text" name="m304r1" id="m304r1" style="width:100px; top:282px; left:755px;"/>
+<input type="text" name="m304r2" id="m304r2" style="width:100px; top:314px; left:755px;"/>
+<input type="text" name="m304r3" id="m304r3" style="width:100px; top:346px; left:755px;"/>
+<input type="text" name="m304r4" id="m304r4" style="width:100px; top:378px; left:755px;"/>
+<input type="text" name="m304r5" id="m304r5" style="width:100px; top:410px; left:755px;"/>
+<input type="text" name="m304r6" id="m304r6" style="width:100px; top:442px; left:755px;"/>
+<input type="text" name="m304r7" id="m304r7" style="width:100px; top:476px; left:755px;"/>
+<input type="text" name="m304r8" id="m304r8" style="width:100px; top:512px; left:755px;"/>
+<input type="text" name="m304r9" id="m304r9" style="width:100px; top:547px; left:755px;"/>
+<input type="text" name="m304r10" id="m304r10" style="width:100px; top:579px; left:755px;"/>
+<input type="text" name="m304r11" id="m304r11" style="width:100px; top:610px; left:755px;"/>
+<input type="text" name="m304r12" id="m304r12" style="width:100px; top:642px; left:755px;"/>
+<input type="text" name="m304r13" id="m304r13" style="width:100px; top:674px; left:755px;"/>
+<input type="text" name="m304r14" id="m304r14" style="width:100px; top:706px; left:755px;"/>
+<input type="text" name="m304r15" id="m304r15" style="width:100px; top:737px; left:755px;"/>
+<input type="text" name="m304r16" id="m304r16" style="width:100px; top:769px; left:755px;"/>
+<span class="text-echo" style="top:805px; right:95px;"><?php echo $m304r99; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 12 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:77px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 110 -->
+<input type="text" name="m110r12" id="m110r12" style="width:58px; top:297px; left:344px;"/>
+<input type="text" name="m110r13" id="m110r13" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:297px; left:413px;"/>
+<input type="text" name="m110r14" id="m110r14" style="width:68px; top:297px; left:481px;"/>
+<input type="text" name="m110r15" id="m110r15" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:297px; left:560px;"/>
+<input type="text" name="m110r16" id="m110r16" style="width:57px; top:297px; left:628px;"/>
+<input type="text" name="m110r17" id="m110r17" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:297px; left:696px;"/>
+<input type="text" name="m110r18" id="m110r18" style="width:68px; top:297px; left:775px;"/>
+<input type="text" name="m110r19" id="m110r19" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:297px; left:854px;"/>
+<input type="text" name="m110r22" id="m110r22" style="width:58px; top:320px; left:344px;"/>
+<input type="text" name="m110r23" id="m110r23" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:320px; left:413px;"/>
+<input type="text" name="m110r24" id="m110r24" style="width:68px; top:320px; left:481px;"/>
+<input type="text" name="m110r25" id="m110r25" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:320px; left:560px;"/>
+<input type="text" name="m110r26" id="m110r26" style="width:57px; top:320px; left:628px;"/>
+<input type="text" name="m110r27" id="m110r27" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:320px; left:696px;"/>
+<input type="text" name="m110r28" id="m110r28" style="width:68px; top:320px; left:775px;"/>
+<input type="text" name="m110r29" id="m110r29" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:320px; left:854px;"/>
+<input type="text" name="m110r32" id="m110r32" style="width:58px; top:343px; left:344px;"/>
+<input type="text" name="m110r33" id="m110r33" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:343px; left:413px;"/>
+<input type="text" name="m110r34" id="m110r34" style="width:68px; top:343px; left:481px;"/>
+<input type="text" name="m110r35" id="m110r35" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:343px; left:560px;"/>
+<input type="text" name="m110r36" id="m110r36" style="width:57px; top:343px; left:628px;"/>
+<input type="text" name="m110r37" id="m110r37" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:343px; left:696px;"/>
+<input type="text" name="m110r38" id="m110r38" style="width:68px; top:343px; left:775px;"/>
+<input type="text" name="m110r39" id="m110r39" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:343px; left:854px;"/>
+<input type="text" name="m110r42" id="m110r42" style="width:58px; top:366px; left:344px;"/>
+<input type="text" name="m110r43" id="m110r43" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:366px; left:413px;"/>
+<input type="text" name="m110r44" id="m110r44" style="width:68px; top:366px; left:481px;"/>
+<input type="text" name="m110r45" id="m110r45" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:366px; left:560px;"/>
+<input type="text" name="m110r46" id="m110r46" style="width:57px; top:366px; left:628px;"/>
+<input type="text" name="m110r47" id="m110r47" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:366px; left:696px;"/>
+<input type="text" name="m110r48" id="m110r48" style="width:68px; top:366px; left:775px;"/>
+<input type="text" name="m110r49" id="m110r49" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:366px; left:854px;"/>
+<input type="text" name="m110r52" id="m110r52" style="width:58px; top:389px; left:344px;"/>
+<input type="text" name="m110r53" id="m110r53" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:389px; left:413px;"/>
+<input type="text" name="m110r54" id="m110r54" style="width:68px; top:389px; left:481px;"/>
+<input type="text" name="m110r55" id="m110r55" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:389px; left:560px;"/>
+<input type="text" name="m110r56" id="m110r56" style="width:57px; top:389px; left:628px;"/>
+<input type="text" name="m110r57" id="m110r57" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:389px; left:696px;"/>
+<input type="text" name="m110r58" id="m110r58" style="width:68px; top:389px; left:775px;"/>
+<input type="text" name="m110r59" id="m110r59" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:389px; left:854px;"/>
+<input type="text" name="m110r62" id="m110r62" style="width:58px; top:412px; left:344px;"/>
+<input type="text" name="m110r63" id="m110r63" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:412px; left:413px;"/>
+<input type="text" name="m110r64" id="m110r64" style="width:68px; top:412px; left:481px;"/>
+<input type="text" name="m110r65" id="m110r65" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:412px; left:560px;"/>
+<input type="text" name="m110r66" id="m110r66" style="width:57px; top:412px; left:628px;"/>
+<input type="text" name="m110r67" id="m110r67" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:412px; left:696px;"/>
+<input type="text" name="m110r68" id="m110r68" style="width:68px; top:412px; left:775px;"/>
+<input type="text" name="m110r69" id="m110r69" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:412px; left:854px;"/>
+<input type="text" name="m110r72" id="m110r72" style="width:58px; top:435px; left:344px;"/>
+<input type="text" name="m110r73" id="m110r73" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:435px; left:413px;"/>
+<input type="text" name="m110r74" id="m110r74" style="width:68px; top:435px; left:481px;"/>
+<input type="text" name="m110r75" id="m110r75" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:435px; left:560px;"/>
+<input type="text" name="m110r76" id="m110r76" style="width:57px; top:435px; left:628px;"/>
+<input type="text" name="m110r77" id="m110r77" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:435px; left:696px;"/>
+<input type="text" name="m110r78" id="m110r78" style="width:68px; top:435px; left:775px;"/>
+<input type="text" name="m110r79" id="m110r79" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:435px; left:854px;"/>
+<input type="text" name="m110r82" id="m110r82" style="width:58px; top:458px; left:344px;"/>
+<input type="text" name="m110r83" id="m110r83" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:458px; left:413px;"/>
+<input type="text" name="m110r84" id="m110r84" style="width:68px; top:458px; left:481px;"/>
+<input type="text" name="m110r85" id="m110r85" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:458px; left:560px;"/>
+<input type="text" name="m110r86" id="m110r86" style="width:57px; top:458px; left:628px;"/>
+<input type="text" name="m110r87" id="m110r87" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:458px; left:696px;"/>
+<input type="text" name="m110r88" id="m110r88" style="width:68px; top:458px; left:775px;"/>
+<input type="text" name="m110r89" id="m110r89" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:458px; left:854px;"/>
+<input type="text" name="m110r92" id="m110r92" style="width:58px; top:481px; left:344px;"/>
+<input type="text" name="m110r93" id="m110r93" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:481px; left:413px;"/>
+<input type="text" name="m110r94" id="m110r94" style="width:68px; top:481px; left:481px;"/>
+<input type="text" name="m110r95" id="m110r95" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:481px; left:560px;"/>
+<input type="text" name="m110r96" id="m110r96" style="width:57px; top:481px; left:628px;"/>
+<input type="text" name="m110r97" id="m110r97" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:481px; left:696px;"/>
+<input type="text" name="m110r98" id="m110r98" style="width:68px; top:481px; left:775px;"/>
+<input type="text" name="m110r99" id="m110r99" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:481px; left:854px;"/>
+<input type="text" name="m110r102" id="m110r102" style="width:58px; top:509px; left:344px;"/>
+<input type="text" name="m110r103" id="m110r103" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:509px; left:413px;"/>
+<input type="text" name="m110r104" id="m110r104" style="width:68px; top:509px; left:481px;"/>
+<input type="text" name="m110r105" id="m110r105" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:509px; left:560px;"/>
+<input type="text" name="m110r106" id="m110r106" style="width:57px; top:509px; left:628px;"/>
+<input type="text" name="m110r107" id="m110r107" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:509px; left:696px;"/>
+<input type="text" name="m110r108" id="m110r108" style="width:68px; top:509px; left:775px;"/>
+<input type="text" name="m110r109" id="m110r109" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:509px; left:854px;"/>
+<input type="text" name="m110r112" id="m110r112" style="width:58px; top:536px; left:344px;"/>
+<input type="text" name="m110r113" id="m110r113" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:536px; left:413px;"/>
+<input type="text" name="m110r114" id="m110r114" style="width:68px; top:536px; left:481px;"/>
+<input type="text" name="m110r115" id="m110r115" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:536px; left:560px;"/>
+<input type="text" name="m110r116" id="m110r116" style="width:57px; top:536px; left:628px;"/>
+<input type="text" name="m110r117" id="m110r117" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:536px; left:696px;"/>
+<input type="text" name="m110r118" id="m110r118" style="width:68px; top:536px; left:775px;"/>
+<input type="text" name="m110r119" id="m110r119" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:536px; left:854px;"/>
+<input type="text" name="m110r122" id="m110r122" style="width:58px; top:560px; left:344px;"/>
+<input type="text" name="m110r123" id="m110r123" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:560px; left:413px;"/>
+<input type="text" name="m110r124" id="m110r124" style="width:68px; top:560px; left:481px;"/>
+<input type="text" name="m110r125" id="m110r125" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:560px; left:560px;"/>
+<input type="text" name="m110r126" id="m110r126" style="width:57px; top:560px; left:628px;"/>
+<input type="text" name="m110r127" id="m110r127" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:560px; left:696px;"/>
+<input type="text" name="m110r128" id="m110r128" style="width:68px; top:560px; left:775px;"/>
+<input type="text" name="m110r129" id="m110r129" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:560px; left:854px;"/>
+<input type="text" name="m110r132" id="m110r132" style="width:58px; top:583px; left:344px;"/>
+<input type="text" name="m110r133" id="m110r133" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:583px; left:413px;"/>
+<input type="text" name="m110r134" id="m110r134" style="width:68px; top:583px; left:481px;"/>
+<input type="text" name="m110r135" id="m110r135" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:583px; left:560px;"/>
+<input type="text" name="m110r136" id="m110r136" style="width:57px; top:583px; left:628px;"/>
+<input type="text" name="m110r137" id="m110r137" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:583px; left:696px;"/>
+<input type="text" name="m110r138" id="m110r138" style="width:68px; top:583px; left:775px;"/>
+<input type="text" name="m110r139" id="m110r139" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:583px; left:854px;"/>
+<input type="text" name="m110r142" id="m110r142" style="width:58px; top:611px; left:344px;"/>
+<input type="text" name="m110r143" id="m110r143" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:611px; left:413px;"/>
+<input type="text" name="m110r144" id="m110r144" style="width:68px; top:611px; left:481px;"/>
+<input type="text" name="m110r145" id="m110r145" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:611px; left:560px;"/>
+<input type="text" name="m110r146" id="m110r146" style="width:57px; top:611px; left:628px;"/>
+<input type="text" name="m110r147" id="m110r147" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:611px; left:696px;"/>
+<input type="text" name="m110r148" id="m110r148" style="width:68px; top:611px; left:775px;"/>
+<input type="text" name="m110r149" id="m110r149" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:611px; left:854px;"/>
+<input type="text" name="m110r152" id="m110r152" style="width:58px; top:639px; left:344px;"/>
+<input type="text" name="m110r153" id="m110r153" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:639px; left:413px;"/>
+<input type="text" name="m110r154" id="m110r154" style="width:68px; top:639px; left:481px;"/>
+<input type="text" name="m110r155" id="m110r155" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:639px; left:560px;"/>
+<input type="text" name="m110r156" id="m110r156" style="width:57px; top:639px; left:628px;"/>
+<input type="text" name="m110r157" id="m110r157" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:639px; left:696px;"/>
+<input type="text" name="m110r158" id="m110r158" style="width:68px; top:639px; left:775px;"/>
+<input type="text" name="m110r159" id="m110r159" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:639px; left:854px;"/>
+<input type="text" name="m110r162" id="m110r162" style="width:58px; top:662px; left:344px;"/>
+<input type="text" name="m110r163" id="m110r163" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:662px; left:413px;"/>
+<input type="text" name="m110r164" id="m110r164" style="width:68px; top:662px; left:481px;"/>
+<input type="text" name="m110r165" id="m110r165" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:662px; left:560px;"/>
+<input type="text" name="m110r166" id="m110r166" style="width:57px; top:662px; left:628px;"/>
+<input type="text" name="m110r167" id="m110r167" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:662px; left:696px;"/>
+<input type="text" name="m110r168" id="m110r168" style="width:68px; top:662px; left:775px;"/>
+<input type="text" name="m110r169" id="m110r169" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:662px; left:854px;"/>
+<input type="text" name="m110r172" id="m110r172" style="width:58px; top:685px; left:344px;"/>
+<input type="text" name="m110r173" id="m110r173" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:685px; left:413px;"/>
+<input type="text" name="m110r174" id="m110r174" style="width:68px; top:685px; left:481px;"/>
+<input type="text" name="m110r175" id="m110r175" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:685px; left:560px;"/>
+<input type="text" name="m110r176" id="m110r176" style="width:57px; top:685px; left:628px;"/>
+<input type="text" name="m110r177" id="m110r177" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:685px; left:696px;"/>
+<input type="text" name="m110r178" id="m110r178" style="width:68px; top:685px; left:775px;"/>
+<input type="text" name="m110r179" id="m110r179" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:685px; left:854px;"/>
+<input type="text" name="m110r182" id="m110r182" style="width:58px; top:708px; left:344px;"/>
+<input type="text" name="m110r183" id="m110r183" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:708px; left:413px;"/>
+<input type="text" name="m110r184" id="m110r184" style="width:68px; top:708px; left:481px;"/>
+<input type="text" name="m110r185" id="m110r185" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:708px; left:560px;"/>
+<input type="text" name="m110r186" id="m110r186" style="width:57px; top:708px; left:628px;"/>
+<input type="text" name="m110r187" id="m110r187" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:708px; left:696px;"/>
+<input type="text" name="m110r188" id="m110r188" style="width:68px; top:708px; left:775px;"/>
+<input type="text" name="m110r189" id="m110r189" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:708px; left:854px;"/>
+<input type="text" name="m110r192" id="m110r192" style="width:58px; top:731px; left:344px;"/>
+<input type="text" name="m110r193" id="m110r193" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:731px; left:413px;"/>
+<input type="text" name="m110r194" id="m110r194" style="width:68px; top:731px; left:481px;"/>
+<input type="text" name="m110r195" id="m110r195" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:731px; left:560px;"/>
+<input type="text" name="m110r196" id="m110r196" style="width:57px; top:731px; left:628px;"/>
+<input type="text" name="m110r197" id="m110r197" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:731px; left:696px;"/>
+<input type="text" name="m110r198" id="m110r198" style="width:68px; top:731px; left:775px;"/>
+<input type="text" name="m110r199" id="m110r199" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:731px; left:854px;"/>
+<input type="text" name="m110r202" id="m110r202" style="width:58px; top:754px; left:344px;"/>
+<input type="text" name="m110r203" id="m110r203" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:754px; left:413px;"/>
+<input type="text" name="m110r204" id="m110r204" style="width:68px; top:754px; left:481px;"/>
+<input type="text" name="m110r205" id="m110r205" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:754px; left:560px;"/>
+<input type="text" name="m110r206" id="m110r206" style="width:57px; top:754px; left:628px;"/>
+<input type="text" name="m110r207" id="m110r207" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:754px; left:696px;"/>
+<input type="text" name="m110r208" id="m110r208" style="width:68px; top:754px; left:775px;"/>
+<input type="text" name="m110r209" id="m110r209" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:754px; left:854px;"/>
+<input type="text" name="m110r212" id="m110r212" style="width:58px; top:777px; left:344px;"/>
+<input type="text" name="m110r213" id="m110r213" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:777px; left:413px;"/>
+<input type="text" name="m110r214" id="m110r214" style="width:68px; top:777px; left:481px;"/>
+<input type="text" name="m110r215" id="m110r215" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:777px; left:560px;"/>
+<input type="text" name="m110r216" id="m110r216" style="width:57px; top:777px; left:628px;"/>
+<input type="text" name="m110r217" id="m110r217" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:777px; left:696px;"/>
+<input type="text" name="m110r218" id="m110r218" style="width:68px; top:777px; left:775px;"/>
+<input type="text" name="m110r219" id="m110r219" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:777px; left:854px;"/>
+<input type="text" name="m110r222" id="m110r222" style="width:58px; top:800px; left:344px;"/>
+<input type="text" name="m110r224" id="m110r224" style="width:68px; top:800px; left:481px;"/>
+<input type="text" name="m110r226" id="m110r226" style="width:57px; top:800px; left:628px;"/>
+<input type="text" name="m110r228" id="m110r228" style="width:68px; top:800px; left:775px;"/>
+<input type="text" name="m110r232" id="m110r232" style="width:58px; top:823px; left:344px;"/>
+<input type="text" name="m110r234" id="m110r234" style="width:68px; top:823px; left:481px;"/>
+<input type="text" name="m110r236" id="m110r236" style="width:57px; top:823px; left:628px;"/>
+<input type="text" name="m110r238" id="m110r238" style="width:68px; top:823px; left:775px;"/>
+<input type="text" name="m110r242" id="m110r242" style="width:58px; top:846px; left:344px;"/>
+<input type="text" name="m110r243" id="m110r243" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:846px; left:413px;"/>
+<input type="text" name="m110r244" id="m110r244" style="width:68px; top:846px; left:481px;"/>
+<input type="text" name="m110r245" id="m110r245" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:846px; left:560px;"/>
+<input type="text" name="m110r246" id="m110r246" style="width:57px; top:846px; left:628px;"/>
+<input type="text" name="m110r247" id="m110r247" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:846px; left:696px;"/>
+<input type="text" name="m110r248" id="m110r248" style="width:68px; top:846px; left:775px;"/>
+<input type="text" name="m110r249" id="m110r249" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:846px; left:854px;"/>
+<input type="text" name="m110r252" id="m110r252" style="width:58px; top:869px; left:344px;"/>
+<input type="text" name="m110r253" id="m110r253" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:869px; left:413px;"/>
+<input type="text" name="m110r254" id="m110r254" style="width:68px; top:869px; left:481px;"/>
+<input type="text" name="m110r255" id="m110r255" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:869px; left:560px;"/>
+<input type="text" name="m110r256" id="m110r256" style="width:57px; top:869px; left:628px;"/>
+<input type="text" name="m110r257" id="m110r257" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:869px; left:696px;"/>
+<input type="text" name="m110r258" id="m110r258" style="width:68px; top:869px; left:775px;"/>
+<input type="text" name="m110r259" id="m110r259" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:869px; left:854px;"/>
+<input type="text" name="m110r262" id="m110r262" style="width:58px; top:892px; left:344px;"/>
+<input type="text" name="m110r263" id="m110r263" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:892px; left:413px;"/>
+<input type="text" name="m110r264" id="m110r264" style="width:68px; top:892px; left:481px;"/>
+<input type="text" name="m110r265" id="m110r265" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:892px; left:560px;"/>
+<input type="text" name="m110r266" id="m110r266" style="width:57px; top:892px; left:628px;"/>
+<input type="text" name="m110r267" id="m110r267" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:892px; left:696px;"/>
+<input type="text" name="m110r268" id="m110r268" style="width:68px; top:892px; left:775px;"/>
+<input type="text" name="m110r269" id="m110r269" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:892px; left:854px;"/>
+<input type="text" name="m110r272" id="m110r272" style="width:58px; top:915px; left:344px;"/>
+<input type="text" name="m110r273" id="m110r273" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:915px; left:413px;"/>
+<input type="text" name="m110r274" id="m110r274" style="width:68px; top:915px; left:481px;"/>
+<input type="text" name="m110r275" id="m110r275" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:915px; left:560px;"/>
+<input type="text" name="m110r276" id="m110r276" style="width:57px; top:915px; left:628px;"/>
+<input type="text" name="m110r277" id="m110r277" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:915px; left:696px;"/>
+<input type="text" name="m110r278" id="m110r278" style="width:68px; top:915px; left:775px;"/>
+<input type="text" name="m110r279" id="m110r279" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:915px; left:854px;"/>
+<input type="text" name="m110r282" id="m110r282" style="width:58px; top:938px; left:344px;"/>
+<input type="text" name="m110r283" id="m110r283" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:938px; left:413px;"/>
+<input type="text" name="m110r284" id="m110r284" style="width:68px; top:938px; left:481px;"/>
+<input type="text" name="m110r285" id="m110r285" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:938px; left:560px;"/>
+<input type="text" name="m110r286" id="m110r286" style="width:57px; top:938px; left:628px;"/>
+<input type="text" name="m110r287" id="m110r287" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:938px; left:696px;"/>
+<input type="text" name="m110r288" id="m110r288" style="width:68px; top:938px; left:775px;"/>
+<input type="text" name="m110r289" id="m110r289" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:938px; left:854px;"/>
+<input type="text" name="m110r292" id="m110r292" style="width:58px; top:961px; left:344px;"/>
+<input type="text" name="m110r293" id="m110r293" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:961px; left:413px;"/>
+<input type="text" name="m110r294" id="m110r294" style="width:68px; top:961px; left:481px;"/>
+<input type="text" name="m110r295" id="m110r295" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:961px; left:560px;"/>
+<input type="text" name="m110r296" id="m110r296" style="width:57px; top:961px; left:628px;"/>
+<input type="text" name="m110r297" id="m110r297" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:961px; left:696px;"/>
+<input type="text" name="m110r298" id="m110r298" style="width:68px; top:961px; left:775px;"/>
+<input type="text" name="m110r299" id="m110r299" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:961px; left:854px;"/>
+<input type="text" name="m110r302" id="m110r302" style="width:58px; top:984px; left:344px;"/>
+<input type="text" name="m110r303" id="m110r303" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:984px; left:413px;"/>
+<input type="text" name="m110r304" id="m110r304" style="width:68px; top:984px; left:481px;"/>
+<input type="text" name="m110r305" id="m110r305" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:984px; left:560px;"/>
+<input type="text" name="m110r306" id="m110r306" style="width:57px; top:984px; left:628px;"/>
+<input type="text" name="m110r307" id="m110r307" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:984px; left:696px;"/>
+<input type="text" name="m110r308" id="m110r308" style="width:68px; top:984px; left:775px;"/>
+<input type="text" name="m110r309" id="m110r309" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:984px; left:854px;"/>
+<input type="text" name="m110r312" id="m110r312" style="width:58px; top:1007px; left:344px;"/>
+<input type="text" name="m110r313" id="m110r313" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:1007px; left:413px;"/>
+<input type="text" name="m110r314" id="m110r314" style="width:68px; top:1007px; left:481px;"/>
+<input type="text" name="m110r315" id="m110r315" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1007px; left:560px;"/>
+<input type="text" name="m110r316" id="m110r316" style="width:57px; top:1007px; left:628px;"/>
+<input type="text" name="m110r317" id="m110r317" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:1007px; left:696px;"/>
+<input type="text" name="m110r318" id="m110r318" style="width:68px; top:1007px; left:775px;"/>
+<input type="text" name="m110r319" id="m110r319" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1007px; left:854px;"/>
+<input type="text" name="m110r322" id="m110r322" style="width:58px; top:1030px; left:344px;"/>
+<input type="text" name="m110r323" id="m110r323" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:1030px; left:413px;"/>
+<input type="text" name="m110r324" id="m110r324" style="width:68px; top:1030px; left:481px;"/>
+<input type="text" name="m110r325" id="m110r325" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1030px; left:560px;"/>
+<input type="text" name="m110r326" id="m110r326" style="width:57px; top:1030px; left:628px;"/>
+<input type="text" name="m110r327" id="m110r327" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:1030px; left:696px;"/>
+<input type="text" name="m110r328" id="m110r328" style="width:68px; top:1030px; left:775px;"/>
+<input type="text" name="m110r329" id="m110r329" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1030px; left:854px;"/>
+<input type="text" name="m110r332" id="m110r332" style="width:58px; top:1053px; left:344px;"/>
+<input type="text" name="m110r334" id="m110r334" style="width:68px; top:1053px; left:481px;"/>
+<input type="text" name="m110r336" id="m110r336" style="width:57px; top:1053px; left:628px;"/>
+<input type="text" name="m110r338" id="m110r338" style="width:68px; top:1053px; left:775px;"/>
+<input type="text" name="m110r342" id="m110r342" style="width:58px; top:1076px; left:344px;"/>
+<input type="text" name="m110r344" id="m110r344" style="width:68px; top:1076px; left:481px;"/>
+<input type="text" name="m110r346" id="m110r346" style="width:57px; top:1076px; left:628px;"/>
+<input type="text" name="m110r348" id="m110r348" style="width:68px; top:1076px; left:775px;"/>
+<span class="text-echo" style="top:1103px; right:544px;"><?php echo $m110r992; ?></span>
+<span class="text-echo" style="top:1103px; right:475px;"><?php echo $m110r993; ?></span>
+<span class="text-echo" style="top:1103px; right:395px;"><?php echo $m110r994; ?></span>
+<span class="text-echo" style="top:1103px; right:327px;"><?php echo $m110r995; ?></span>
+<span class="text-echo" style="top:1103px; right:260px;"><?php echo $m110r996; ?></span>
+<span class="text-echo" style="top:1103px; right:181px;"><?php echo $m110r997; ?></span>
+<span class="text-echo" style="top:1103px; right:102px;"><?php echo $m110r998; ?></span>
+<span class="text-echo" style="top:1103px; right:35px;"><?php echo $m110r999; ?></span>
+<?php                                        } ?>
+<div class="navbar">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="<?php echo $clas4; ?> toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="<?php echo $clas5; ?> toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="<?php echo $clas6; ?> toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="<?php echo $clas7; ?> toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="<?php echo $clas8; ?> toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="<?php echo $clas9; ?> toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
+ <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+</div>
+</form>
+</div><!-- #content -->
+<?php
+     }
+//koniec uprav
+?>
+<?php
+//pdf
+if ( $copern == 11 )
+{
+if ( File_Exists("../tmp/statistika.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/statistika.$kli_uzid.pdf"); }
+     define('FPDF_FONTPATH','../fpdf/font/');
+     require('../fpdf/fpdf.php');
+
+$sirka_vyska="210,320";
+$velkost_strany = explode(",", $sirka_vyska);
+$pdf=new FPDF("P","mm", $velkost_strany );
+$pdf->Open();
+$pdf->AddFont('arial','','arial.php');
+
+//ramcek fpdf 1=zap,0=vyp
+$rmc=0;
+$rmc1=0;
+
+//vytlac
+$sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_zav101 WHERE ico >= 0 "."";
+//echo $sqltt;
+//exit;
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+if ( $strana == 1 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str1.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str1.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//za rok
+$pdf->SetFont('arial','',16);
+$pdf->Cell(190,38.5," ","$rmc1",1,"L");
+$pdf->Cell(95,6," ","$rmc1",0,"L");$pdf->Cell(16,7,"$kli_vrok","$rmc",1,"C");
+$pdf->SetFont('arial','',12);
+
+//rok
+$text=$kli_vrokx;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$pdf->Cell(190,24.5," ","$rmc1",1,"L");
+$pdf->Cell(61,6," ","$rmc1",0,"L");$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
+//ico
+$text=$fir_ficox;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
+$pdf->Cell(15,7," ","$rmc1",0,"L");
+$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
+$pdf->Cell(7,8,"$C","$rmc",0,"C");$pdf->Cell(8,8,"$D","$rmc",0,"C");
+$pdf->Cell(7,8,"$E","$rmc",0,"C");$pdf->Cell(8,8,"$F","$rmc",0,"C");
+$pdf->Cell(7,8,"$G","$rmc",0,"C");$pdf->Cell(8,8,"$H","$rmc",0,"C");
+//p.c.zav.jednotky
+$pc_zj="001";
+$A=substr($pc_zj,0,1);
+$B=substr($pc_zj,1,1);
+$C=substr($pc_zj,2,1);
+$pdf->Cell(10,8,"$A","$rmc",0,"C");$pdf->Cell(10,8,"$B","$rmc",0,"C");
+$pdf->Cell(10,8,"$C","$rmc",1,"C");
+
+//ORGANIZACIA
+$pdf->Cell(190,118," ","$rmc1",1,"L");
+$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,4,"$fir_fnaz","$rmc",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(153,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(34,4,"$okres","$rmc",1,"C");
+
+//VYPLNIL
+$pdf->Cell(195,14," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,5,"$fir_mzdt05","$rmc",0,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(43,11,"$fir_mzdt04","$rmc",1,"L");
+$pdf->Cell(195,3," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,6,"$fir_fem1","$rmc",0,"L");
+//odoslane
+$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(43,6,"$odoslane_sk","$rmc",1,"L");
+                                       }
+
+if ( $strana == 2 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str2.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 592
+$m592r11=$hlavicka->m592r11; if ( $m592r11 == 0 ) $m592r11="";
+$m592r12=$hlavicka->m592r12; if ( $m592r12 == 0 ) $m592r12="";
+$m592r13=$hlavicka->m592r13; if ( $m592r13 == 0 ) $m592r13="";
+$m592r14=$hlavicka->m592r14; if ( $m592r14 == 0 ) $m592r14="";
+$m592r15=$hlavicka->m592r15; if ( $m592r15 == 0 ) $m592r15="";
+$m592r16=$hlavicka->m592r16; if ( $m592r16 == 0 ) $m592r16="";
+$m592r21=$hlavicka->m592r21; if ( $m592r21 == 0 ) $m592r21="";
+$m592r22=$hlavicka->m592r22; if ( $m592r22 == 0 ) $m592r22="";
+$m592r23=$hlavicka->m592r23; if ( $m592r23 == 0 ) $m592r23="";
+$m592r24=$hlavicka->m592r24; if ( $m592r24 == 0 ) $m592r24="";
+$m592r25=$hlavicka->m592r25; if ( $m592r25 == 0 ) $m592r25="";
+$m592r26=$hlavicka->m592r26; if ( $m592r26 == 0 ) $m592r26="";
+$m592r31=$hlavicka->m592r31; if ( $m592r31 == 0 ) $m592r31="";
+$m592r32=$hlavicka->m592r32; if ( $m592r32 == 0 ) $m592r32="";
+$m592r33=$hlavicka->m592r33; if ( $m592r33 == 0 ) $m592r33="";
+$m592r34=$hlavicka->m592r34; if ( $m592r34 == 0 ) $m592r34="";
+$m592r35=$hlavicka->m592r35; if ( $m592r35 == 0 ) $m592r35="";
+$m592r36=$hlavicka->m592r36; if ( $m592r36 == 0 ) $m592r36="";
+$m592r41=$hlavicka->m592r41; if ( $m592r41 == 0 ) $m592r41="";
+$m592r42=$hlavicka->m592r42; if ( $m592r42 == 0 ) $m592r42="";
+$m592r43=$hlavicka->m592r43; if ( $m592r43 == 0 ) $m592r43="";
+$m592r44=$hlavicka->m592r44; if ( $m592r44 == 0 ) $m592r44="";
+$m592r45=$hlavicka->m592r45; if ( $m592r45 == 0 ) $m592r45="";
+$m592r46=$hlavicka->m592r46; if ( $m592r46 == 0 ) $m592r46="";
+$m592r51=$hlavicka->m592r51; if ( $m592r51 == 0 ) $m592r51="";
+$m592r52=$hlavicka->m592r52; if ( $m592r52 == 0 ) $m592r52="";
+$m592r53=$hlavicka->m592r53; if ( $m592r53 == 0 ) $m592r53="";
+$m592r54=$hlavicka->m592r54; if ( $m592r54 == 0 ) $m592r54="";
+$m592r55=$hlavicka->m592r55; if ( $m592r55 == 0 ) $m592r55="";
+$m592r56=$hlavicka->m592r56; if ( $m592r56 == 0 ) $m592r56="";
+$m592r61=$hlavicka->m592r61; if ( $m592r61 == 0 ) $m592r61="";
+$m592r62=$hlavicka->m592r62; if ( $m592r62 == 0 ) $m592r62="";
+$m592r63=$hlavicka->m592r63; if ( $m592r63 == 0 ) $m592r63="";
+$m592r64=$hlavicka->m592r64; if ( $m592r64 == 0 ) $m592r64="";
+$m592r65=$hlavicka->m592r65; if ( $m592r65 == 0 ) $m592r65="";
+$m592r66=$hlavicka->m592r66; if ( $m592r66 == 0 ) $m592r66="";
+$m592r71=$hlavicka->m592r71; if ( $m592r71 == 0 ) $m592r71="";
+$m592r72=$hlavicka->m592r72; if ( $m592r72 == 0 ) $m592r72="";
+$m592r73=$hlavicka->m592r73; if ( $m592r73 == 0 ) $m592r73="";
+$m592r74=$hlavicka->m592r74; if ( $m592r74 == 0 ) $m592r74="";
+$m592r75=$hlavicka->m592r75; if ( $m592r75 == 0 ) $m592r75="";
+$m592r76=$hlavicka->m592r76; if ( $m592r76 == 0 ) $m592r76="";
+$m592r81=$hlavicka->m592r81; if ( $m592r81 == 0 ) $m592r81="";
+$m592r82=$hlavicka->m592r82; if ( $m592r82 == 0 ) $m592r82="";
+$m592r83=$hlavicka->m592r83; if ( $m592r83 == 0 ) $m592r83="";
+$m592r84=$hlavicka->m592r84; if ( $m592r84 == 0 ) $m592r84="";
+$m592r85=$hlavicka->m592r85; if ( $m592r85 == 0 ) $m592r85="";
+$m592r86=$hlavicka->m592r86; if ( $m592r86 == 0 ) $m592r86="";
+$m592r91=$hlavicka->m592r91; if ( $m592r91 == 0 ) $m592r91="";
+$m592r92=$hlavicka->m592r92; if ( $m592r92 == 0 ) $m592r92="";
+$m592r93=$hlavicka->m592r93; if ( $m592r93 == 0 ) $m592r93="";
+$m592r94=$hlavicka->m592r94; if ( $m592r94 == 0 ) $m592r94="";
+$m592r95=$hlavicka->m592r95; if ( $m592r95 == 0 ) $m592r95="";
+$m592r96=$hlavicka->m592r96; if ( $m592r96 == 0 ) $m592r96="";
+$m592r101=$hlavicka->m592r101; if ( $m592r101 == 0 ) $m592r101="";
+$m592r102=$hlavicka->m592r102; if ( $m592r102 == 0 ) $m592r102="";
+$m592r103=$hlavicka->m592r103; if ( $m592r103 == 0 ) $m592r103="";
+$m592r104=$hlavicka->m592r104; if ( $m592r104 == 0 ) $m592r104="";
+$m592r105=$hlavicka->m592r105; if ( $m592r105 == 0 ) $m592r105="";
+$m592r106=$hlavicka->m592r106; if ( $m592r106 == 0 ) $m592r106="";
+$m592r111=$hlavicka->m592r111; if ( $m592r111 == 0 ) $m592r111="";
+$m592r112=$hlavicka->m592r112; if ( $m592r112 == 0 ) $m592r112="";
+$m592r113=$hlavicka->m592r113; if ( $m592r113 == 0 ) $m592r113="";
+$m592r114=$hlavicka->m592r114; if ( $m592r114 == 0 ) $m592r114="";
+$m592r115=$hlavicka->m592r115; if ( $m592r115 == 0 ) $m592r115="";
+$m592r116=$hlavicka->m592r116; if ( $m592r116 == 0 ) $m592r116="";
+$m592r121=$hlavicka->m592r121; if ( $m592r121 == 0 ) $m592r121="";
+$m592r122=$hlavicka->m592r122; if ( $m592r122 == 0 ) $m592r122="";
+$m592r123=$hlavicka->m592r123; if ( $m592r123 == 0 ) $m592r123="";
+$m592r124=$hlavicka->m592r124; if ( $m592r124 == 0 ) $m592r124="";
+$m592r125=$hlavicka->m592r125; if ( $m592r125 == 0 ) $m592r125="";
+$m592r126=$hlavicka->m592r126; if ( $m592r126 == 0 ) $m592r126="";
+$m592r131=$hlavicka->m592r131; if ( $m592r131 == 0 ) $m592r131="";
+$m592r132=$hlavicka->m592r132; if ( $m592r132 == 0 ) $m592r132="";
+$m592r133=$hlavicka->m592r133; if ( $m592r133 == 0 ) $m592r133="";
+$m592r134=$hlavicka->m592r134; if ( $m592r134 == 0 ) $m592r134="";
+$m592r135=$hlavicka->m592r135; if ( $m592r135 == 0 ) $m592r135="";
+$m592r136=$hlavicka->m592r136; if ( $m592r136 == 0 ) $m592r136="";
+$m592r141=$hlavicka->m592r141; if ( $m592r141 == 0 ) $m592r141="";
+$m592r142=$hlavicka->m592r142; if ( $m592r142 == 0 ) $m592r142="";
+$m592r143=$hlavicka->m592r143; if ( $m592r143 == 0 ) $m592r143="";
+$m592r144=$hlavicka->m592r144; if ( $m592r144 == 0 ) $m592r144="";
+$m592r145=$hlavicka->m592r145; if ( $m592r145 == 0 ) $m592r145="";
+$m592r146=$hlavicka->m592r146; if ( $m592r146 == 0 ) $m592r146="";
+$m592r151=$hlavicka->m592r151; if ( $m592r151 == 0 ) $m592r151="";
+$m592r152=$hlavicka->m592r152; if ( $m592r152 == 0 ) $m592r152="";
+$m592r153=$hlavicka->m592r153; if ( $m592r153 == 0 ) $m592r153="";
+$m592r154=$hlavicka->m592r154; if ( $m592r154 == 0 ) $m592r154="";
+$m592r155=$hlavicka->m592r155; if ( $m592r155 == 0 ) $m592r155="";
+$m592r156=$hlavicka->m592r156; if ( $m592r156 == 0 ) $m592r156="";
+$m592r161=$hlavicka->m592r161; if ( $m592r161 == 0 ) $m592r161="";
+$m592r162=$hlavicka->m592r162; if ( $m592r162 == 0 ) $m592r162="";
+$m592r163=$hlavicka->m592r163; if ( $m592r163 == 0 ) $m592r163="";
+$m592r164=$hlavicka->m592r164; if ( $m592r164 == 0 ) $m592r164="";
+$m592r165=$hlavicka->m592r165; if ( $m592r165 == 0 ) $m592r165="";
+$m592r166=$hlavicka->m592r166; if ( $m592r166 == 0 ) $m592r166="";
+$m592r171=$hlavicka->m592r171; if ( $m592r171 == 0 ) $m592r171="";
+$m592r172=$hlavicka->m592r172; if ( $m592r172 == 0 ) $m592r172="";
+$m592r173=$hlavicka->m592r173; if ( $m592r173 == 0 ) $m592r173="";
+$m592r174=$hlavicka->m592r174; if ( $m592r174 == 0 ) $m592r174="";
+$m592r175=$hlavicka->m592r175; if ( $m592r175 == 0 ) $m592r175="";
+$m592r176=$hlavicka->m592r176; if ( $m592r176 == 0 ) $m592r176="";
+$m592r181=$hlavicka->m592r181; if ( $m592r181 == 0 ) $m592r181="";
+$m592r182=$hlavicka->m592r182; if ( $m592r182 == 0 ) $m592r182="";
+$m592r183=$hlavicka->m592r183; if ( $m592r183 == 0 ) $m592r183="";
+$m592r184=$hlavicka->m592r184; if ( $m592r184 == 0 ) $m592r184="";
+$m592r185=$hlavicka->m592r185; if ( $m592r185 == 0 ) $m592r185="";
+$m592r186=$hlavicka->m592r186; if ( $m592r186 == 0 ) $m592r186="";
+$m592r191=$hlavicka->m592r191; if ( $m592r191 == 0 ) $m592r191="";
+$m592r192=$hlavicka->m592r192; if ( $m592r192 == 0 ) $m592r192="";
+$m592r193=$hlavicka->m592r193; if ( $m592r193 == 0 ) $m592r193="";
+$m592r194=$hlavicka->m592r194; if ( $m592r194 == 0 ) $m592r194="";
+$m592r195=$hlavicka->m592r195; if ( $m592r195 == 0 ) $m592r195="";
+$m592r196=$hlavicka->m592r196; if ( $m592r196 == 0 ) $m592r196="";
+$m592r201=$hlavicka->m592r201; if ( $m592r201 == 0 ) $m592r201="";
+$m592r202=$hlavicka->m592r202; if ( $m592r202 == 0 ) $m592r202="";
+$m592r203=$hlavicka->m592r203; if ( $m592r203 == 0 ) $m592r203="";
+$m592r204=$hlavicka->m592r204; if ( $m592r204 == 0 ) $m592r204="";
+$m592r205=$hlavicka->m592r205; if ( $m592r205 == 0 ) $m592r205="";
+$m592r206=$hlavicka->m592r206; if ( $m592r206 == 0 ) $m592r206="";
+$m592r211=$hlavicka->m592r211; if ( $m592r211 == 0 ) $m592r211="";
+$m592r212=$hlavicka->m592r212; if ( $m592r212 == 0 ) $m592r212="";
+$m592r213=$hlavicka->m592r213; if ( $m592r213 == 0 ) $m592r213="";
+$m592r214=$hlavicka->m592r214; if ( $m592r214 == 0 ) $m592r214="";
+$m592r215=$hlavicka->m592r215; if ( $m592r215 == 0 ) $m592r215="";
+$m592r216=$hlavicka->m592r216; if ( $m592r216 == 0 ) $m592r216="";
+$m592r221=$hlavicka->m592r221; if ( $m592r221 == 0 ) $m592r221="";
+$m592r222=$hlavicka->m592r222; if ( $m592r222 == 0 ) $m592r222="";
+$m592r223=$hlavicka->m592r223; if ( $m592r223 == 0 ) $m592r223="";
+$m592r224=$hlavicka->m592r224; if ( $m592r224 == 0 ) $m592r224="";
+$m592r225=$hlavicka->m592r225; if ( $m592r225 == 0 ) $m592r225="";
+$m592r226=$hlavicka->m592r226; if ( $m592r226 == 0 ) $m592r226="";
+$m592r231=$hlavicka->m592r231; if ( $m592r231 == 0 ) $m592r231="";
+$m592r232=$hlavicka->m592r232; if ( $m592r232 == 0 ) $m592r232="";
+$m592r233=$hlavicka->m592r233; if ( $m592r233 == 0 ) $m592r233="";
+$m592r234=$hlavicka->m592r234; if ( $m592r234 == 0 ) $m592r234="";
+$m592r235=$hlavicka->m592r235; if ( $m592r235 == 0 ) $m592r235="";
+$m592r236=$hlavicka->m592r236; if ( $m592r236 == 0 ) $m592r236="";
+$m592r241=$hlavicka->m592r241; if ( $m592r241 == 0 ) $m592r241="";
+$m592r242=$hlavicka->m592r242; if ( $m592r242 == 0 ) $m592r242="";
+$m592r243=$hlavicka->m592r243; if ( $m592r243 == 0 ) $m592r243="";
+$m592r244=$hlavicka->m592r244; if ( $m592r244 == 0 ) $m592r244="";
+$m592r245=$hlavicka->m592r245; if ( $m592r245 == 0 ) $m592r245="";
+$m592r246=$hlavicka->m592r246; if ( $m592r246 == 0 ) $m592r246="";
+$m592r251=$hlavicka->m592r251; if ( $m592r251 == 0 ) $m592r251="";
+$m592r252=$hlavicka->m592r252; if ( $m592r252 == 0 ) $m592r252="";
+$m592r253=$hlavicka->m592r253; if ( $m592r253 == 0 ) $m592r253="";
+$m592r254=$hlavicka->m592r254; if ( $m592r254 == 0 ) $m592r254="";
+$m592r255=$hlavicka->m592r255; if ( $m592r255 == 0 ) $m592r255="";
+$m592r256=$hlavicka->m592r256; if ( $m592r256 == 0 ) $m592r256="";
+$m592r992=$hlavicka->m592r992;
+//if ( $m592r992 == 0 ) $m592r992="";
+$m592r993=$hlavicka->m592r993;
+//if ( $m592r993 == 0 ) $m592r993="";
+$m592r994=$hlavicka->m592r994;
+//if ( $m592r994 == 0 ) $m592r994="";
+$m592r995=$hlavicka->m592r995;
+//if ( $m592r995 == 0 ) $m592r995="";
+$m592r996=$hlavicka->m592r996;
+//if ( $m592r996 == 0 ) $m592r996="";
+$pdf->Cell(195,58," ","$rmc1",1,"L");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,8,"$m592r11","$rmc",0,"R");$pdf->Cell(32,8,"$m592r12","$rmc",0,"R");
+$pdf->Cell(27,8,"$m592r13","$rmc",0,"R");$pdf->Cell(33,8,"$m592r14","$rmc",0,"R");
+$pdf->Cell(32,8,"$m592r15","$rmc",0,"R");$pdf->Cell(30,8,"$m592r16","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r21","$rmc",0,"R");$pdf->Cell(32,7,"$m592r22","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r23","$rmc",0,"R");$pdf->Cell(33,7,"$m592r24","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r25","$rmc",0,"R");$pdf->Cell(30,7,"$m592r26","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r31","$rmc",0,"R");$pdf->Cell(32,7,"$m592r32","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r33","$rmc",0,"R");$pdf->Cell(33,7,"$m592r34","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r35","$rmc",0,"R");$pdf->Cell(30,7,"$m592r36","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,8,"$m592r41","$rmc",0,"R");$pdf->Cell(32,8,"$m592r42","$rmc",0,"R");
+$pdf->Cell(27,8,"$m592r43","$rmc",0,"R");$pdf->Cell(33,8,"$m592r44","$rmc",0,"R");
+$pdf->Cell(32,8,"$m592r45","$rmc",0,"R");$pdf->Cell(30,8,"$m592r46","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r51","$rmc",0,"R");$pdf->Cell(32,7,"$m592r52","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r53","$rmc",0,"R");$pdf->Cell(33,7,"$m592r54","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r55","$rmc",0,"R");$pdf->Cell(30,7,"$m592r56","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r61","$rmc",0,"R");$pdf->Cell(32,7,"$m592r62","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r63","$rmc",0,"R");$pdf->Cell(33,7,"$m592r64","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r65","$rmc",0,"R");$pdf->Cell(30,7,"$m592r66","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r71","$rmc",0,"R");$pdf->Cell(32,7,"$m592r72","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r73","$rmc",0,"R");$pdf->Cell(33,7,"$m592r74","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r75","$rmc",0,"R");$pdf->Cell(30,7,"$m592r76","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,8,"$m592r81","$rmc",0,"R");$pdf->Cell(32,8,"$m592r82","$rmc",0,"R");
+$pdf->Cell(27,8,"$m592r83","$rmc",0,"R");$pdf->Cell(33,8,"$m592r84","$rmc",0,"R");
+$pdf->Cell(32,8,"$m592r85","$rmc",0,"R");$pdf->Cell(30,8,"$m592r86","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r91","$rmc",0,"R");$pdf->Cell(32,7,"$m592r92","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r93","$rmc",0,"R");$pdf->Cell(33,7,"$m592r94","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r95","$rmc",0,"R");$pdf->Cell(30,7,"$m592r96","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r101","$rmc",0,"R");$pdf->Cell(32,7,"$m592r102","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r103","$rmc",0,"R");$pdf->Cell(33,7,"$m592r104","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r105","$rmc",0,"R");$pdf->Cell(30,7,"$m592r106","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r111","$rmc",0,"R");$pdf->Cell(32,7,"$m592r112","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r113","$rmc",0,"R");$pdf->Cell(33,7,"$m592r114","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r115","$rmc",0,"R");$pdf->Cell(30,7,"$m592r116","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,8,"$m592r121","$rmc",0,"R");$pdf->Cell(32,8,"$m592r122","$rmc",0,"R");
+$pdf->Cell(27,8,"$m592r123","$rmc",0,"R");$pdf->Cell(33,8,"$m592r124","$rmc",0,"R");
+$pdf->Cell(32,8,"$m592r125","$rmc",0,"R");$pdf->Cell(30,8,"$m592r126","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r131","$rmc",0,"R");$pdf->Cell(32,7,"$m592r132","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r133","$rmc",0,"R");$pdf->Cell(33,7,"$m592r134","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r135","$rmc",0,"R");$pdf->Cell(30,7,"$m592r136","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r141","$rmc",0,"R");$pdf->Cell(32,7,"$m592r142","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r143","$rmc",0,"R");$pdf->Cell(33,7,"$m592r144","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r145","$rmc",0,"R");$pdf->Cell(30,7,"$m592r146","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,8,"$m592r151","$rmc",0,"R");$pdf->Cell(32,8,"$m592r152","$rmc",0,"R");
+$pdf->Cell(27,8,"$m592r153","$rmc",0,"R");$pdf->Cell(33,8,"$m592r154","$rmc",0,"R");
+$pdf->Cell(32,8,"$m592r155","$rmc",0,"R");$pdf->Cell(30,8,"$m592r156","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r161","$rmc",0,"R");$pdf->Cell(32,7,"$m592r162","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r163","$rmc",0,"R");$pdf->Cell(33,7,"$m592r164","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r165","$rmc",0,"R");$pdf->Cell(30,7,"$m592r166","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r171","$rmc",0,"R");$pdf->Cell(32,7,"$m592r172","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r173","$rmc",0,"R");$pdf->Cell(33,7,"$m592r174","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r175","$rmc",0,"R");$pdf->Cell(30,7,"$m592r176","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r181","$rmc",0,"R");$pdf->Cell(32,7,"$m592r182","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r183","$rmc",0,"R");$pdf->Cell(33,7,"$m592r184","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r185","$rmc",0,"R");$pdf->Cell(30,7,"$m592r186","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,8,"$m592r191","$rmc",0,"R");$pdf->Cell(32,8,"$m592r192","$rmc",0,"R");
+$pdf->Cell(27,8,"$m592r193","$rmc",0,"R");$pdf->Cell(33,8,"$m592r194","$rmc",0,"R");
+$pdf->Cell(32,8,"$m592r195","$rmc",0,"R");$pdf->Cell(30,8,"$m592r196","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r201","$rmc",0,"R");$pdf->Cell(32,7,"$m592r202","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r203","$rmc",0,"R");$pdf->Cell(33,7,"$m592r204","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r205","$rmc",0,"R");$pdf->Cell(30,7,"$m592r206","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r211","$rmc",0,"R");$pdf->Cell(32,7,"$m592r212","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r213","$rmc",0,"R");$pdf->Cell(33,7,"$m592r214","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r215","$rmc",0,"R");$pdf->Cell(30,7,"$m592r216","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r221","$rmc",0,"R");$pdf->Cell(32,7,"$m592r222","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r223","$rmc",0,"R");$pdf->Cell(33,7,"$m592r224","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r225","$rmc",0,"R");$pdf->Cell(30,7,"$m592r226","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,8,"$m592r231","$rmc",0,"R");$pdf->Cell(32,8,"$m592r232","$rmc",0,"R");
+$pdf->Cell(27,8,"$m592r233","$rmc",0,"R");$pdf->Cell(33,8,"$m592r234","$rmc",0,"R");
+$pdf->Cell(32,8,"$m592r235","$rmc",0,"R");$pdf->Cell(30,8,"$m592r236","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r241","$rmc",0,"R");$pdf->Cell(32,7,"$m592r242","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r243","$rmc",0,"R");$pdf->Cell(33,7,"$m592r244","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r245","$rmc",0,"R");$pdf->Cell(30,7,"$m592r246","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m592r251","$rmc",0,"R");$pdf->Cell(32,7,"$m592r252","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r253","$rmc",0,"R");$pdf->Cell(33,7,"$m592r254","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r255","$rmc",0,"R");$pdf->Cell(30,7,"$m592r256","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"","$rmc",0,"R");$pdf->Cell(32,7,"$m592r992","$rmc",0,"R");
+$pdf->Cell(27,7,"$m592r993","$rmc",0,"R");$pdf->Cell(33,7,"$m592r994","$rmc",0,"R");
+$pdf->Cell(32,7,"$m592r995","$rmc",0,"R");$pdf->Cell(30,7,"$m592r996","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"2/12","$rmc",1,"R");
+                                       }
+
+if ( $strana == 3 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str3.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str3.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 177
+$m177r1=$hlavicka->m177r1; if ( $m177r1 == 0 ) $m177r1="";
+$m177r2=$hlavicka->m177r2; if ( $m177r2 == 0 ) $m177r2="";
+$m177r3=$hlavicka->m177r3; if ( $m177r3 == 0 ) $m177r3="";
+$m177r4=$hlavicka->m177r4; if ( $m177r4 == 0 ) $m177r4="";
+$m177r5=$hlavicka->m177r5; if ( $m177r5 == 0 ) $m177r5="";
+$m177r6=$hlavicka->m177r6; if ( $m177r6 == 0 ) $m177r6="";
+$m177r7=$hlavicka->m177r7; if ( $m177r7 == 0 ) $m177r7="";
+$m177r8=$hlavicka->m177r8; if ( $m177r8 == 0 ) $m177r8="";
+$m177r9=$hlavicka->m177r9; if ( $m177r9 == 0 ) $m177r9="";
+$m177r10=$hlavicka->m177r10; if ( $m177r10 == 0 ) $m177r10="";
+$m177r99=$hlavicka->m177r99;
+//if ( $m177r99 == 0 ) $m177r99="";
+$pdf->Cell(195,22," ","$rmc1",1,"L");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r1","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,8,"$m177r2","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r3","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m177r4","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r5","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r6","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r7","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m177r8","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r9","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r10","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r99","$rmc",1,"R");
+
+//modul 178
+$m178r1=$hlavicka->m178r1; if ( $m178r1 == 0 ) $m178r1="";
+$m178r2=$hlavicka->m178r2; if ( $m178r2 == 0 ) $m178r2="";
+$m178r3=$hlavicka->m178r3; if ( $m178r3 == 0 ) $m178r3="";
+$m178r4=$hlavicka->m178r4; if ( $m178r4 == 0 ) $m178r4="";
+$m178r5=$hlavicka->m178r5; if ( $m178r5 == 0 ) $m178r5="";
+$m178r6=$hlavicka->m178r6; if ( $m178r6 == 0 ) $m178r6="";
+$m178r7=$hlavicka->m178r7; if ( $m178r7 == 0 ) $m178r7="";
+$m178r8=$hlavicka->m178r8; if ( $m178r8 == 0 ) $m178r8="";
+$m178r9=$hlavicka->m178r9; if ( $m178r9 == 0 ) $m178r9="";
+$m178r10=$hlavicka->m178r10; if ( $m178r10 == 0 ) $m178r10="";
+$m178r11=$hlavicka->m178r11; if ( $m178r11 == 0 ) $m178r11="";
+$m178r12=$hlavicka->m178r12; if ( $m178r12 == 0 ) $m178r12="";
+$m178r13=$hlavicka->m178r13; if ( $m178r13 == 0 ) $m178r13="";
+$m178r14=$hlavicka->m178r14; if ( $m178r14 == 0 ) $m178r14="";
+$m178r15=$hlavicka->m178r15; if ( $m178r15 == 0 ) $m178r15="";
+$m178r16=$hlavicka->m178r16; if ( $m178r16 == 0 ) $m178r16="";
+$m178r17=$hlavicka->m178r17; if ( $m178r17 == 0 ) $m178r17="";
+$m178r18=$hlavicka->m178r18; if ( $m178r18 == 0 ) $m178r18="";
+$m178r19=$hlavicka->m178r19; if ( $m178r19 == 0 ) $m178r19="";
+$m178r99=$hlavicka->m178r99;
+//if ( $m178r99 == 0 ) $m178r99="";
+$pdf->Cell(195,38," ","$rmc1",1,"L");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r1","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r2","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,12,"$m178r3","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r4","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r5","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r6","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r7","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,8,"$m178r8","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r9","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m178r10","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r11","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r12","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r13","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m178r14","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r15","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r16","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r17","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r18","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m178r19","$rmc",1,"R");
+$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"3/12","$rmc",1,"R");
+                                       }
+
+if ( $strana == 4 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str4.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str4.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,5," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 179
+$m179r1=$hlavicka->m179r1; if ( $m179r1 == 0 ) $m179r1="";
+$m179r2=$hlavicka->m179r2; if ( $m179r2 == 0 ) $m179r2="";
+$m179r3=$hlavicka->m179r3; if ( $m179r3 == 0 ) $m179r3="";
+$m179r4=$hlavicka->m179r4; if ( $m179r4 == 0 ) $m179r4="";
+$m179r5=$hlavicka->m179r5; if ( $m179r5 == 0 ) $m179r5="";
+$m179r6=$hlavicka->m179r6; if ( $m179r6 == 0 ) $m179r6="";
+$m179r7=$hlavicka->m179r7; if ( $m179r7 == 0 ) $m179r7="";
+$m179r8=$hlavicka->m179r8; if ( $m179r8 == 0 ) $m179r8="";
+$m179r9=$hlavicka->m179r9; if ( $m179r9 == 0 ) $m179r9="";
+$m179r99=$hlavicka->m179r99;
+//if ( $m179r99 == 0 ) $m179r99="";
+$pdf->Cell(195,33," ","$rmc1",1,"L");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,9,"$m179r1","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,8,"$m179r2","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,8,"$m179r3","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r4","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,8,"$m179r5","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r6","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r7","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r8","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,8,"$m179r9","$rmc",1,"R");
+$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"4/12","$rmc",1,"R");
+                                       }
+
+if ( $strana == 5 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str5.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str5.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(94,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 182
+$pdf->Cell(190,16.5," ","$rmc1",1,"L");
+$pdf->Cell(116,5," ","$rmc1",0,"L");
+if ( $kli_vrok == 2016 ) { $text="Trûby \n z predaja \n na v˝voz \n (zo stÂ. 2)"; }
+if ( $kli_vrok > 2016 ) { $text="Trûby \n z predaja \n do zahraniËia \n (zo stÂ. 2)"; }
+$pdf->MultiCell(25,5,"$text","$rmc","C");
+$pdf->Cell(195,8.5," ","$rmc1",1,"L");
+$m182r11=$hlavicka->m182r11; if ( $m182r11 == 0 ) $m182r11="";
+$m182r12=$hlavicka->m182r12; if ( $m182r12 == 0 ) $m182r12="";
+$m182r13=$hlavicka->m182r13; if ( $m182r13 == 0 ) $m182r13="";
+$m182r14=$hlavicka->m182r14; if ( $m182r14 == 0 ) $m182r14="";
+$m182r15=$hlavicka->m182r15; if ( $m182r15 == 0 ) $m182r15="";
+$m182r16=$hlavicka->m182r16; if ( $m182r16 == 0 ) $m182r16="";
+$m182r17=$hlavicka->m182r17; if ( $m182r17 == 0 ) $m182r17="";
+$m182r21=$hlavicka->m182r21; if ( $m182r21 == 0 ) $m182r21="";
+$m182r22=$hlavicka->m182r22; if ( $m182r22 == 0 ) $m182r22="";
+$m182r23=$hlavicka->m182r23; if ( $m182r23 == 0 ) $m182r23="";
+$m182r24=$hlavicka->m182r24; if ( $m182r24 == 0 ) $m182r24="";
+$m182r25=$hlavicka->m182r25; if ( $m182r25 == 0 ) $m182r25="";
+$m182r26=$hlavicka->m182r26; if ( $m182r26 == 0 ) $m182r26="";
+$m182r27=$hlavicka->m182r27; if ( $m182r27 == 0 ) $m182r27="";
+$m182r31=$hlavicka->m182r31; if ( $m182r31 == 0 ) $m182r31="";
+$m182r32=$hlavicka->m182r32; if ( $m182r32 == 0 ) $m182r32="";
+$m182r33=$hlavicka->m182r33; if ( $m182r33 == 0 ) $m182r33="";
+$m182r34=$hlavicka->m182r34; if ( $m182r34 == 0 ) $m182r34="";
+$m182r35=$hlavicka->m182r35; if ( $m182r35 == 0 ) $m182r35="";
+$m182r36=$hlavicka->m182r36; if ( $m182r36 == 0 ) $m182r36="";
+$m182r37=$hlavicka->m182r37; if ( $m182r37 == 0 ) $m182r37="";
+$m182r41=$hlavicka->m182r41; if ( $m182r41 == 0 ) $m182r41="";
+$m182r42=$hlavicka->m182r42; if ( $m182r42 == 0 ) $m182r42="";
+$m182r43=$hlavicka->m182r43; if ( $m182r43 == 0 ) $m182r43="";
+$m182r44=$hlavicka->m182r44; if ( $m182r44 == 0 ) $m182r44="";
+$m182r45=$hlavicka->m182r45; if ( $m182r45 == 0 ) $m182r45="";
+$m182r46=$hlavicka->m182r46; if ( $m182r46 == 0 ) $m182r46="";
+$m182r47=$hlavicka->m182r47; if ( $m182r47 == 0 ) $m182r47="";
+$m182r51=$hlavicka->m182r51; if ( $m182r51 == 0 ) $m182r51="";
+$m182r52=$hlavicka->m182r52; if ( $m182r52 == 0 ) $m182r52="";
+$m182r53=$hlavicka->m182r53; if ( $m182r53 == 0 ) $m182r53="";
+$m182r54=$hlavicka->m182r54; if ( $m182r54 == 0 ) $m182r54="";
+$m182r55=$hlavicka->m182r55; if ( $m182r55 == 0 ) $m182r55="";
+$m182r56=$hlavicka->m182r56; if ( $m182r56 == 0 ) $m182r56="";
+$m182r57=$hlavicka->m182r57; if ( $m182r57 == 0 ) $m182r57="";
+$m182r61=$hlavicka->m182r61; if ( $m182r61 == 0 ) $m182r61="";
+$m182r62=$hlavicka->m182r62; if ( $m182r62 == 0 ) $m182r62="";
+$m182r63=$hlavicka->m182r63; if ( $m182r63 == 0 ) $m182r63="";
+$m182r64=$hlavicka->m182r64; if ( $m182r64 == 0 ) $m182r64="";
+$m182r65=$hlavicka->m182r65; if ( $m182r65 == 0 ) $m182r65="";
+$m182r66=$hlavicka->m182r66; if ( $m182r66 == 0 ) $m182r66="";
+$m182r67=$hlavicka->m182r67; if ( $m182r67 == 0 ) $m182r67="";
+$m182r71=$hlavicka->m182r71; if ( $m182r71 == 0 ) $m182r71="";
+$m182r72=$hlavicka->m182r72; if ( $m182r72 == 0 ) $m182r72="";
+$m182r73=$hlavicka->m182r73; if ( $m182r73 == 0 ) $m182r73="";
+$m182r74=$hlavicka->m182r74; if ( $m182r74 == 0 ) $m182r74="";
+$m182r75=$hlavicka->m182r75; if ( $m182r75 == 0 ) $m182r75="";
+$m182r76=$hlavicka->m182r76; if ( $m182r76 == 0 ) $m182r76="";
+$m182r77=$hlavicka->m182r77; if ( $m182r77 == 0 ) $m182r77="";
+$m182r81=$hlavicka->m182r81; if ( $m182r81 == 0 ) $m182r81="";
+$m182r82=$hlavicka->m182r82; if ( $m182r82 == 0 ) $m182r82="";
+$m182r83=$hlavicka->m182r83; if ( $m182r83 == 0 ) $m182r83="";
+$m182r84=$hlavicka->m182r84; if ( $m182r84 == 0 ) $m182r84="";
+$m182r85=$hlavicka->m182r85; if ( $m182r85 == 0 ) $m182r85="";
+$m182r86=$hlavicka->m182r86; if ( $m182r86 == 0 ) $m182r86="";
+$m182r87=$hlavicka->m182r87; if ( $m182r87 == 0 ) $m182r87="";
+$m182r91=$hlavicka->m182r91; if ( $m182r91 == 0 ) $m182r91="";
+$m182r92=$hlavicka->m182r92; if ( $m182r92 == 0 ) $m182r92="";
+$m182r93=$hlavicka->m182r93; if ( $m182r93 == 0 ) $m182r93="";
+$m182r94=$hlavicka->m182r94; if ( $m182r94 == 0 ) $m182r94="";
+$m182r95=$hlavicka->m182r95; if ( $m182r95 == 0 ) $m182r95="";
+$m182r96=$hlavicka->m182r96; if ( $m182r96 == 0 ) $m182r96="";
+$m182r97=$hlavicka->m182r97; if ( $m182r97 == 0 ) $m182r97="";
+$m182r101=$hlavicka->m182r101; if ( $m182r101 == 0 ) $m182r101="";
+$m182r102=$hlavicka->m182r102; if ( $m182r102 == 0 ) $m182r102="";
+$m182r103=$hlavicka->m182r103; if ( $m182r103 == 0 ) $m182r103="";
+$m182r104=$hlavicka->m182r104; if ( $m182r104 == 0 ) $m182r104="";
+$m182r105=$hlavicka->m182r105; if ( $m182r105 == 0 ) $m182r105="";
+$m182r106=$hlavicka->m182r106; if ( $m182r106 == 0 ) $m182r106="";
+$m182r107=$hlavicka->m182r107; if ( $m182r107 == 0 ) $m182r107="";
+$m182r111=$hlavicka->m182r111; if ( $m182r111 == 0 ) $m182r111="";
+$m182r112=$hlavicka->m182r112; if ( $m182r112 == 0 ) $m182r112="";
+$m182r113=$hlavicka->m182r113; if ( $m182r113 == 0 ) $m182r113="";
+$m182r114=$hlavicka->m182r114; if ( $m182r114 == 0 ) $m182r114="";
+$m182r115=$hlavicka->m182r115; if ( $m182r115 == 0 ) $m182r115="";
+$m182r116=$hlavicka->m182r116; if ( $m182r116 == 0 ) $m182r116="";
+$m182r117=$hlavicka->m182r117; if ( $m182r117 == 0 ) $m182r117="";
+$m182r121=$hlavicka->m182r121; if ( $m182r121 == 0 ) $m182r121="";
+$m182r122=$hlavicka->m182r122; if ( $m182r122 == 0 ) $m182r122="";
+$m182r123=$hlavicka->m182r123; if ( $m182r123 == 0 ) $m182r123="";
+$m182r124=$hlavicka->m182r124; if ( $m182r124 == 0 ) $m182r124="";
+$m182r125=$hlavicka->m182r125; if ( $m182r125 == 0 ) $m182r125="";
+$m182r126=$hlavicka->m182r126; if ( $m182r126 == 0 ) $m182r126="";
+$m182r127=$hlavicka->m182r127; if ( $m182r127 == 0 ) $m182r127="";
+$m182r131=$hlavicka->m182r131; if ( $m182r131 == 0 ) $m182r131="";
+$m182r132=$hlavicka->m182r132; if ( $m182r132 == 0 ) $m182r132="";
+$m182r133=$hlavicka->m182r133; if ( $m182r133 == 0 ) $m182r133="";
+$m182r134=$hlavicka->m182r134; if ( $m182r134 == 0 ) $m182r134="";
+$m182r135=$hlavicka->m182r135; if ( $m182r135 == 0 ) $m182r135="";
+$m182r136=$hlavicka->m182r136; if ( $m182r136 == 0 ) $m182r136="";
+$m182r137=$hlavicka->m182r137; if ( $m182r137 == 0 ) $m182r137="";
+$m182r141=$hlavicka->m182r141; if ( $m182r141 == 0 ) $m182r141="";
+$m182r142=$hlavicka->m182r142; if ( $m182r142 == 0 ) $m182r142="";
+$m182r143=$hlavicka->m182r143; if ( $m182r143 == 0 ) $m182r143="";
+$m182r144=$hlavicka->m182r144; if ( $m182r144 == 0 ) $m182r144="";
+$m182r145=$hlavicka->m182r145; if ( $m182r145 == 0 ) $m182r145="";
+$m182r146=$hlavicka->m182r146; if ( $m182r146 == 0 ) $m182r146="";
+$m182r147=$hlavicka->m182r147; if ( $m182r147 == 0 ) $m182r147="";
+$m182r151=$hlavicka->m182r151; if ( $m182r151 == 0 ) $m182r151="";
+$m182r152=$hlavicka->m182r152; if ( $m182r152 == 0 ) $m182r152="";
+$m182r153=$hlavicka->m182r153; if ( $m182r153 == 0 ) $m182r153="";
+$m182r154=$hlavicka->m182r154; if ( $m182r154 == 0 ) $m182r154="";
+$m182r155=$hlavicka->m182r155; if ( $m182r155 == 0 ) $m182r155="";
+$m182r156=$hlavicka->m182r156; if ( $m182r156 == 0 ) $m182r156="";
+$m182r157=$hlavicka->m182r157; if ( $m182r157 == 0 ) $m182r157="";
+$m182r161=$hlavicka->m182r161; if ( $m182r161 == 0 ) $m182r161="";
+$m182r162=$hlavicka->m182r162; if ( $m182r162 == 0 ) $m182r162="";
+$m182r163=$hlavicka->m182r163; if ( $m182r163 == 0 ) $m182r163="";
+$m182r164=$hlavicka->m182r164; if ( $m182r164 == 0 ) $m182r164="";
+$m182r165=$hlavicka->m182r165; if ( $m182r165 == 0 ) $m182r165="";
+$m182r166=$hlavicka->m182r166; if ( $m182r166 == 0 ) $m182r166="";
+$m182r167=$hlavicka->m182r167; if ( $m182r167 == 0 ) $m182r167="";
+$m182r171=$hlavicka->m182r171; if ( $m182r171 == 0 ) $m182r171="";
+$m182r172=$hlavicka->m182r172; if ( $m182r172 == 0 ) $m182r172="";
+$m182r173=$hlavicka->m182r173; if ( $m182r173 == 0 ) $m182r173="";
+$m182r174=$hlavicka->m182r174; if ( $m182r174 == 0 ) $m182r174="";
+$m182r175=$hlavicka->m182r175; if ( $m182r175 == 0 ) $m182r175="";
+$m182r176=$hlavicka->m182r176; if ( $m182r176 == 0 ) $m182r176="";
+$m182r177=$hlavicka->m182r177; if ( $m182r177 == 0 ) $m182r177="";
+$m182r181=$hlavicka->m182r181; if ( $m182r181 == 0 ) $m182r181="";
+$m182r182=$hlavicka->m182r182; if ( $m182r182 == 0 ) $m182r182="";
+$m182r183=$hlavicka->m182r183; if ( $m182r183 == 0 ) $m182r183="";
+$m182r184=$hlavicka->m182r184; if ( $m182r184 == 0 ) $m182r184="";
+$m182r185=$hlavicka->m182r185; if ( $m182r185 == 0 ) $m182r185="";
+$m182r186=$hlavicka->m182r186; if ( $m182r186 == 0 ) $m182r186="";
+$m182r187=$hlavicka->m182r187; if ( $m182r187 == 0 ) $m182r187="";
+$m182r191=$hlavicka->m182r191; if ( $m182r191 == 0 ) $m182r191="";
+$m182r192=$hlavicka->m182r192; if ( $m182r192 == 0 ) $m182r192="";
+$m182r193=$hlavicka->m182r193; if ( $m182r193 == 0 ) $m182r193="";
+$m182r194=$hlavicka->m182r194; if ( $m182r194 == 0 ) $m182r194="";
+$m182r195=$hlavicka->m182r195; if ( $m182r195 == 0 ) $m182r195="";
+$m182r196=$hlavicka->m182r196; if ( $m182r196 == 0 ) $m182r196="";
+$m182r197=$hlavicka->m182r197; if ( $m182r197 == 0 ) $m182r197="";
+$m182r201=$hlavicka->m182r201; if ( $m182r201 == 0 ) $m182r201="";
+$m182r202=$hlavicka->m182r202; if ( $m182r202 == 0 ) $m182r202="";
+$m182r203=$hlavicka->m182r203; if ( $m182r203 == 0 ) $m182r203="";
+$m182r204=$hlavicka->m182r204; if ( $m182r204 == 0 ) $m182r204="";
+$m182r205=$hlavicka->m182r205; if ( $m182r205 == 0 ) $m182r205="";
+$m182r206=$hlavicka->m182r206; if ( $m182r206 == 0 ) $m182r206="";
+$m182r207=$hlavicka->m182r207; if ( $m182r207 == 0 ) $m182r207="";
+$m182r211=$hlavicka->m182r211; if ( $m182r211 == 0 ) $m182r211="";
+$m182r212=$hlavicka->m182r212; if ( $m182r212 == 0 ) $m182r212="";
+$m182r213=$hlavicka->m182r213; if ( $m182r213 == 0 ) $m182r213="";
+$m182r214=$hlavicka->m182r214; if ( $m182r214 == 0 ) $m182r214="";
+$m182r215=$hlavicka->m182r215; if ( $m182r215 == 0 ) $m182r215="";
+$m182r216=$hlavicka->m182r216; if ( $m182r216 == 0 ) $m182r216="";
+$m182r217=$hlavicka->m182r217; if ( $m182r217 == 0 ) $m182r217="";
+$m182r221=$hlavicka->m182r221; if ( $m182r221 == 0 ) $m182r221="";
+$m182r222=$hlavicka->m182r222; if ( $m182r222 == 0 ) $m182r222="";
+$m182r223=$hlavicka->m182r223; if ( $m182r223 == 0 ) $m182r223="";
+$m182r224=$hlavicka->m182r224; if ( $m182r224 == 0 ) $m182r224="";
+$m182r225=$hlavicka->m182r225; if ( $m182r225 == 0 ) $m182r225="";
+$m182r226=$hlavicka->m182r226; if ( $m182r226 == 0 ) $m182r226="";
+$m182r227=$hlavicka->m182r227; if ( $m182r227 == 0 ) $m182r227="";
+$m182r231=$hlavicka->m182r231; if ( $m182r231 == 0 ) $m182r231="";
+$m182r232=$hlavicka->m182r232; if ( $m182r232 == 0 ) $m182r232="";
+$m182r233=$hlavicka->m182r233; if ( $m182r233 == 0 ) $m182r233="";
+$m182r234=$hlavicka->m182r234; if ( $m182r234 == 0 ) $m182r234="";
+$m182r235=$hlavicka->m182r235; if ( $m182r235 == 0 ) $m182r235="";
+$m182r236=$hlavicka->m182r236; if ( $m182r236 == 0 ) $m182r236="";
+$m182r237=$hlavicka->m182r237; if ( $m182r237 == 0 ) $m182r237="";
+$m182r241=$hlavicka->m182r241; if ( $m182r241 == 0 ) $m182r241="";
+$m182r242=$hlavicka->m182r242; if ( $m182r242 == 0 ) $m182r242="";
+$m182r243=$hlavicka->m182r243; if ( $m182r243 == 0 ) $m182r243="";
+$m182r244=$hlavicka->m182r244; if ( $m182r244 == 0 ) $m182r244="";
+$m182r245=$hlavicka->m182r245; if ( $m182r245 == 0 ) $m182r245="";
+$m182r246=$hlavicka->m182r246; if ( $m182r246 == 0 ) $m182r246="";
+$m182r247=$hlavicka->m182r247; if ( $m182r247 == 0 ) $m182r247="";
+$m182r251=$hlavicka->m182r251; if ( $m182r251 == 0 ) $m182r251="";
+$m182r252=$hlavicka->m182r252; if ( $m182r252 == 0 ) $m182r252="";
+$m182r253=$hlavicka->m182r253; if ( $m182r253 == 0 ) $m182r253="";
+$m182r254=$hlavicka->m182r254; if ( $m182r254 == 0 ) $m182r254="";
+$m182r255=$hlavicka->m182r255; if ( $m182r255 == 0 ) $m182r255="";
+$m182r256=$hlavicka->m182r256; if ( $m182r256 == 0 ) $m182r256="";
+$m182r257=$hlavicka->m182r257; if ( $m182r257 == 0 ) $m182r257="";
+$m182r261=$hlavicka->m182r261; if ( $m182r261 == 0 ) $m182r261="";
+$m182r262=$hlavicka->m182r262; if ( $m182r262 == 0 ) $m182r262="";
+$m182r263=$hlavicka->m182r263; if ( $m182r263 == 0 ) $m182r263="";
+$m182r264=$hlavicka->m182r264; if ( $m182r264 == 0 ) $m182r264="";
+$m182r265=$hlavicka->m182r265; if ( $m182r265 == 0 ) $m182r265="";
+$m182r266=$hlavicka->m182r266; if ( $m182r266 == 0 ) $m182r266="";
+$m182r267=$hlavicka->m182r267; if ( $m182r267 == 0 ) $m182r267="";
+$m182r271=$hlavicka->m182r271; if ( $m182r271 == 0 ) $m182r271="";
+$m182r272=$hlavicka->m182r272; if ( $m182r272 == 0 ) $m182r272="";
+$m182r273=$hlavicka->m182r273; if ( $m182r273 == 0 ) $m182r273="";
+$m182r274=$hlavicka->m182r274; if ( $m182r274 == 0 ) $m182r274="";
+$m182r275=$hlavicka->m182r275; if ( $m182r275 == 0 ) $m182r275="";
+$m182r276=$hlavicka->m182r276; if ( $m182r276 == 0 ) $m182r276="";
+$m182r277=$hlavicka->m182r277; if ( $m182r277 == 0 ) $m182r277="";
+$m182r281=$hlavicka->m182r281; if ( $m182r281 == 0 ) $m182r281="";
+$m182r282=$hlavicka->m182r282; if ( $m182r282 == 0 ) $m182r282="";
+$m182r283=$hlavicka->m182r283; if ( $m182r283 == 0 ) $m182r283="";
+$m182r284=$hlavicka->m182r284; if ( $m182r284 == 0 ) $m182r284="";
+$m182r285=$hlavicka->m182r285; if ( $m182r285 == 0 ) $m182r285="";
+$m182r286=$hlavicka->m182r286; if ( $m182r286 == 0 ) $m182r286="";
+$m182r287=$hlavicka->m182r287; if ( $m182r287 == 0 ) $m182r287="";
+$m182r291=$hlavicka->m182r291; if ( $m182r291 == 0 ) $m182r291="";
+$m182r292=$hlavicka->m182r292; if ( $m182r292 == 0 ) $m182r292="";
+$m182r293=$hlavicka->m182r293; if ( $m182r293 == 0 ) $m182r293="";
+$m182r294=$hlavicka->m182r294; if ( $m182r294 == 0 ) $m182r294="";
+$m182r295=$hlavicka->m182r295; if ( $m182r295 == 0 ) $m182r295="";
+$m182r296=$hlavicka->m182r296; if ( $m182r296 == 0 ) $m182r296="";
+$m182r297=$hlavicka->m182r297; if ( $m182r297 == 0 ) $m182r297="";
+$m182r301=$hlavicka->m182r301; if ( $m182r301 == 0 ) $m182r301="";
+$m182r302=$hlavicka->m182r302; if ( $m182r302 == 0 ) $m182r302="";
+$m182r303=$hlavicka->m182r303; if ( $m182r303 == 0 ) $m182r303="";
+$m182r304=$hlavicka->m182r304; if ( $m182r304 == 0 ) $m182r304="";
+$m182r305=$hlavicka->m182r305; if ( $m182r305 == 0 ) $m182r305="";
+$m182r306=$hlavicka->m182r306; if ( $m182r306 == 0 ) $m182r306="";
+$m182r307=$hlavicka->m182r307; if ( $m182r307 == 0 ) $m182r307="";
+$m182r311=$hlavicka->m182r311; if ( $m182r311 == 0 ) $m182r311="";
+$m182r312=$hlavicka->m182r312; if ( $m182r312 == 0 ) $m182r312="";
+$m182r313=$hlavicka->m182r313; if ( $m182r313 == 0 ) $m182r313="";
+$m182r314=$hlavicka->m182r314; if ( $m182r314 == 0 ) $m182r314="";
+$m182r315=$hlavicka->m182r315; if ( $m182r315 == 0 ) $m182r315="";
+$m182r316=$hlavicka->m182r316; if ( $m182r316 == 0 ) $m182r316="";
+$m182r317=$hlavicka->m182r317; if ( $m182r317 == 0 ) $m182r317="";
+$m182r321=$hlavicka->m182r321; if ( $m182r321 == 0 ) $m182r321="";
+$m182r322=$hlavicka->m182r322; if ( $m182r322 == 0 ) $m182r322="";
+$m182r323=$hlavicka->m182r323; if ( $m182r323 == 0 ) $m182r323="";
+$m182r324=$hlavicka->m182r324; if ( $m182r324 == 0 ) $m182r324="";
+$m182r325=$hlavicka->m182r325; if ( $m182r325 == 0 ) $m182r325="";
+$m182r326=$hlavicka->m182r326; if ( $m182r326 == 0 ) $m182r326="";
+$m182r327=$hlavicka->m182r327; if ( $m182r327 == 0 ) $m182r327="";
+$m182r331=$hlavicka->m182r331; if ( $m182r331 == 0 ) $m182r331="";
+$m182r332=$hlavicka->m182r332; if ( $m182r332 == 0 ) $m182r332="";
+$m182r333=$hlavicka->m182r333; if ( $m182r333 == 0 ) $m182r333="";
+$m182r334=$hlavicka->m182r334; if ( $m182r334 == 0 ) $m182r334="";
+$m182r335=$hlavicka->m182r335; if ( $m182r335 == 0 ) $m182r335="";
+$m182r336=$hlavicka->m182r336; if ( $m182r336 == 0 ) $m182r336="";
+$m182r337=$hlavicka->m182r337; if ( $m182r337 == 0 ) $m182r337="";
+$m182r992=$hlavicka->m182r992;
+//if ( $m182r992 == 0 ) $m182r992="";
+$m182r993=$hlavicka->m182r993;
+//if ( $m182r993 == 0 ) $m182r993="";
+$m182r994=$hlavicka->m182r994;
+//if ( $m182r994 == 0 ) $m182r994="";
+$m182r995=$hlavicka->m182r995;
+//if ( $m182r995 == 0 ) $m182r995="";
+$m182r996=$hlavicka->m182r996;
+//if ( $m182r996 == 0 ) $m182r996="";
+$m182r997=$hlavicka->m182r997;
+//if ( $m182r997 == 0 ) $m182r997="";
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r11","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r12","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r13","$rmc",0,"R");$pdf->Cell(31,6,"$m182r14","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r15","$rmc",0,"R");$pdf->Cell(25,6,"$m182r16","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r17","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r21","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r22","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r23","$rmc",0,"R");$pdf->Cell(31,6,"$m182r24","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r25","$rmc",0,"R");$pdf->Cell(25,6,"$m182r26","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r27","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r31","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r32","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r33","$rmc",0,"R");$pdf->Cell(31,6,"$m182r34","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r35","$rmc",0,"R");$pdf->Cell(25,6,"$m182r36","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r37","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,7,"$m182r41","$rmc",0,"R");$pdf->Cell(25.5,7,"$m182r42","$rmc",0,"R");
+$pdf->Cell(25,7,"$m182r43","$rmc",0,"R");$pdf->Cell(31,7,"$m182r44","$rmc",0,"R");
+$pdf->Cell(25,7,"$m182r45","$rmc",0,"R");$pdf->Cell(25,7,"$m182r46","$rmc",0,"R");
+$pdf->Cell(25,7,"$m182r47","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r51","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r52","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r53","$rmc",0,"R");$pdf->Cell(31,6,"$m182r54","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r55","$rmc",0,"R");$pdf->Cell(25,6,"$m182r56","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r57","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r61","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r62","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r63","$rmc",0,"R");$pdf->Cell(31,6,"$m182r64","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r65","$rmc",0,"R");$pdf->Cell(25,6,"$m182r66","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r67","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r71","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r72","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r73","$rmc",0,"R");$pdf->Cell(31,6,"$m182r74","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r75","$rmc",0,"R");$pdf->Cell(25,6,"$m182r76","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r77","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r81","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r82","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r83","$rmc",0,"R");$pdf->Cell(31,6,"$m182r84","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r85","$rmc",0,"R");$pdf->Cell(25,6,"$m182r86","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r87","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r91","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r92","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r93","$rmc",0,"R");$pdf->Cell(31,6,"$m182r94","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r95","$rmc",0,"R");$pdf->Cell(25,6,"$m182r96","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r97","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r101","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r102","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r103","$rmc",0,"R");$pdf->Cell(31,6,"$m182r104","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r105","$rmc",0,"R");$pdf->Cell(25,6,"$m182r106","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r107","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r111","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r112","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r113","$rmc",0,"R");$pdf->Cell(31,6,"$m182r114","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r115","$rmc",0,"R");$pdf->Cell(25,6,"$m182r116","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r117","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r121","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r122","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r123","$rmc",0,"R");$pdf->Cell(31,6,"$m182r124","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r125","$rmc",0,"R");$pdf->Cell(25,6,"$m182r126","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r127","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r131","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r132","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r133","$rmc",0,"R");$pdf->Cell(31,6,"$m182r134","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r135","$rmc",0,"R");$pdf->Cell(25,6,"$m182r136","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r137","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r141","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r142","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r143","$rmc",0,"R");$pdf->Cell(31,6,"$m182r144","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r145","$rmc",0,"R");$pdf->Cell(25,6,"$m182r146","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r147","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r151","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r152","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r153","$rmc",0,"R");$pdf->Cell(31,6,"$m182r154","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r155","$rmc",0,"R");$pdf->Cell(25,6,"$m182r156","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r157","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r161","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r162","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r163","$rmc",0,"R");$pdf->Cell(31,6,"$m182r164","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r165","$rmc",0,"R");$pdf->Cell(25,6,"$m182r166","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r167","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r171","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r172","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r173","$rmc",0,"R");$pdf->Cell(31,6,"$m182r174","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r175","$rmc",0,"R");$pdf->Cell(25,6,"$m182r176","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r177","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,7,"$m182r181","$rmc",0,"R");$pdf->Cell(25.5,7,"$m182r182","$rmc",0,"R");
+$pdf->Cell(25,7,"$m182r183","$rmc",0,"R");$pdf->Cell(31,7,"$m182r184","$rmc",0,"R");
+$pdf->Cell(25,7,"$m182r185","$rmc",0,"R");$pdf->Cell(25,7,"$m182r186","$rmc",0,"R");
+$pdf->Cell(25,7,"$m182r187","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r191","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r192","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r193","$rmc",0,"R");$pdf->Cell(31,6,"$m182r194","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r195","$rmc",0,"R");$pdf->Cell(25,6,"$m182r196","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r197","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r201","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r202","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r203","$rmc",0,"R");$pdf->Cell(31,6,"$m182r204","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r205","$rmc",0,"R");$pdf->Cell(25,6,"$m182r206","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r207","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r211","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r212","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r213","$rmc",0,"R");$pdf->Cell(31,6,"$m182r214","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r215","$rmc",0,"R");$pdf->Cell(25,6,"$m182r216","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r217","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r221","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r222","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r223","$rmc",0,"R");$pdf->Cell(31,6,"$m182r224","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r225","$rmc",0,"R");$pdf->Cell(25,6,"$m182r226","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r227","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r231","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r232","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r233","$rmc",0,"R");$pdf->Cell(31,6,"$m182r234","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r235","$rmc",0,"R");$pdf->Cell(25,6,"$m182r236","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r237","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r241","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r242","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r243","$rmc",0,"R");$pdf->Cell(31,6,"$m182r244","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r245","$rmc",0,"R");$pdf->Cell(25,6,"$m182r246","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r247","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r251","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r252","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r253","$rmc",0,"R");$pdf->Cell(31,6,"$m182r254","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r255","$rmc",0,"R");$pdf->Cell(25,6,"$m182r256","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r257","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r261","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r262","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r263","$rmc",0,"R");$pdf->Cell(31,6,"$m182r264","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r265","$rmc",0,"R");$pdf->Cell(25,6,"$m182r266","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r267","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r271","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r272","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r273","$rmc",0,"R");$pdf->Cell(31,6,"$m182r274","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r275","$rmc",0,"R");$pdf->Cell(25,6,"$m182r276","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r277","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r281","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r282","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r283","$rmc",0,"R");$pdf->Cell(31,6,"$m182r284","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r285","$rmc",0,"R");$pdf->Cell(25,6,"$m182r286","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r287","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r291","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r292","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r293","$rmc",0,"R");$pdf->Cell(31,6,"$m182r294","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r295","$rmc",0,"R");$pdf->Cell(25,6,"$m182r296","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r297","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r301","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r302","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r303","$rmc",0,"R");$pdf->Cell(31,6,"$m182r304","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r305","$rmc",0,"R");$pdf->Cell(25,6,"$m182r306","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r307","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r311","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r312","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r313","$rmc",0,"R");$pdf->Cell(31,6,"$m182r314","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r315","$rmc",0,"R");$pdf->Cell(25,6,"$m182r316","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r317","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r321","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r322","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r323","$rmc",0,"R");$pdf->Cell(31,6,"$m182r324","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r325","$rmc",0,"R");$pdf->Cell(25,6,"$m182r326","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r327","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6,"$m182r331","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r332","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r333","$rmc",0,"R");$pdf->Cell(31,6,"$m182r334","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r335","$rmc",0,"R");$pdf->Cell(25,6,"$m182r336","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r337","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(25,6," ","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r992","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r993","$rmc",0,"R");$pdf->Cell(31,6,"$m182r994","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r995","$rmc",0,"R");$pdf->Cell(25,6,"$m182r996","$rmc",0,"R");
+$pdf->Cell(25,6,"$m182r997","$rmc",1,"R");
+$pdf->SetFont('arial','',12);
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"5/12","$rmc",1,"R");
+                                       }
+
+if ( $strana == 6 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str6.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str6.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,5," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+
+//modul 183
+$m183r11=$hlavicka->m183r11; if ( $m183r11 == 0 ) $m183r11="";
+$m183r12=$hlavicka->m183r12; if ( $m183r12 == 0 ) $m183r12="";
+$m183r13=$hlavicka->m183r13; if ( $m183r13 == 0 ) $m183r13="";
+$m183r14=$hlavicka->m183r14; if ( $m183r14 == 0 ) $m183r14="";
+$m183r21=$hlavicka->m183r21; if ( $m183r21 == 0 ) $m183r21="";
+$m183r22=$hlavicka->m183r22; if ( $m183r22 == 0 ) $m183r22="";
+$m183r23=$hlavicka->m183r23; if ( $m183r23 == 0 ) $m183r23="";
+$m183r24=$hlavicka->m183r24; if ( $m183r24 == 0 ) $m183r24="";
+$m183r31=$hlavicka->m183r31; if ( $m183r31 == 0 ) $m183r31="";
+$m183r32=$hlavicka->m183r32; if ( $m183r32 == 0 ) $m183r32="";
+$m183r33=$hlavicka->m183r33; if ( $m183r33 == 0 ) $m183r33="";
+$m183r34=$hlavicka->m183r34; if ( $m183r34 == 0 ) $m183r34="";
+$m183r41=$hlavicka->m183r41; if ( $m183r41 == 0 ) $m183r41="";
+$m183r42=$hlavicka->m183r42; if ( $m183r42 == 0 ) $m183r42="";
+$m183r43=$hlavicka->m183r43; if ( $m183r43 == 0 ) $m183r43="";
+$m183r44=$hlavicka->m183r44; if ( $m183r44 == 0 ) $m183r44="";
+$m183r51=$hlavicka->m183r51; if ( $m183r51 == 0 ) $m183r51="";
+$m183r52=$hlavicka->m183r52; if ( $m183r52 == 0 ) $m183r52="";
+$m183r53=$hlavicka->m183r53; if ( $m183r53 == 0 ) $m183r53="";
+$m183r54=$hlavicka->m183r54; if ( $m183r54 == 0 ) $m183r54="";
+$m183r61=$hlavicka->m183r61; if ( $m183r61 == 0 ) $m183r61="";
+$m183r62=$hlavicka->m183r62; if ( $m183r62 == 0 ) $m183r62="";
+$m183r63=$hlavicka->m183r63; if ( $m183r63 == 0 ) $m183r63="";
+$m183r64=$hlavicka->m183r64; if ( $m183r64 == 0 ) $m183r64="";
+$m183r71=$hlavicka->m183r71; if ( $m183r71 == 0 ) $m183r71="";
+$m183r72=$hlavicka->m183r72; if ( $m183r72 == 0 ) $m183r72="";
+$m183r73=$hlavicka->m183r73; if ( $m183r73 == 0 ) $m183r73="";
+$m183r74=$hlavicka->m183r74; if ( $m183r74 == 0 ) $m183r74="";
+$m183r81=$hlavicka->m183r81; if ( $m183r81 == 0 ) $m183r81="";
+$m183r82=$hlavicka->m183r82; if ( $m183r82 == 0 ) $m183r82="";
+$m183r83=$hlavicka->m183r83; if ( $m183r83 == 0 ) $m183r83="";
+$m183r84=$hlavicka->m183r84; if ( $m183r84 == 0 ) $m183r84="";
+$m183r91=$hlavicka->m183r91; if ( $m183r91 == 0 ) $m183r91="";
+$m183r92=$hlavicka->m183r92; if ( $m183r92 == 0 ) $m183r92="";
+$m183r93=$hlavicka->m183r93; if ( $m183r93 == 0 ) $m183r93="";
+$m183r94=$hlavicka->m183r94; if ( $m183r94 == 0 ) $m183r94="";
+$m183r101=$hlavicka->m183r101; if ( $m183r101 == 0 ) $m183r101="";
+$m183r102=$hlavicka->m183r102; if ( $m183r102 == 0 ) $m183r102="";
+$m183r103=$hlavicka->m183r103; if ( $m183r103 == 0 ) $m183r103="";
+$m183r104=$hlavicka->m183r104; if ( $m183r104 == 0 ) $m183r104="";
+$m183r111=$hlavicka->m183r111; if ( $m183r111 == 0 ) $m183r111="";
+$m183r112=$hlavicka->m183r112; if ( $m183r112 == 0 ) $m183r112="";
+$m183r113=$hlavicka->m183r113; if ( $m183r113 == 0 ) $m183r113="";
+$m183r114=$hlavicka->m183r114; if ( $m183r114 == 0 ) $m183r114="";
+$m183r121=$hlavicka->m183r121; if ( $m183r121 == 0 ) $m183r121="";
+$m183r122=$hlavicka->m183r122; if ( $m183r122 == 0 ) $m183r122="";
+$m183r123=$hlavicka->m183r123; if ( $m183r123 == 0 ) $m183r123="";
+$m183r124=$hlavicka->m183r124; if ( $m183r124 == 0 ) $m183r124="";
+$m183r131=$hlavicka->m183r131; if ( $m183r131 == 0 ) $m183r131="";
+$m183r132=$hlavicka->m183r132; if ( $m183r132 == 0 ) $m183r132="";
+$m183r133=$hlavicka->m183r133; if ( $m183r133 == 0 ) $m183r133="";
+$m183r134=$hlavicka->m183r134; if ( $m183r134 == 0 ) $m183r134="";
+$m183r141=$hlavicka->m183r141; if ( $m183r141 == 0 ) $m183r141="";
+$m183r142=$hlavicka->m183r142; if ( $m183r142 == 0 ) $m183r142="";
+$m183r143=$hlavicka->m183r143; if ( $m183r143 == 0 ) $m183r143="";
+$m183r144=$hlavicka->m183r144; if ( $m183r144 == 0 ) $m183r144="";
+$m183r151=$hlavicka->m183r151; if ( $m183r151 == 0 ) $m183r151="";
+$m183r152=$hlavicka->m183r152; if ( $m183r152 == 0 ) $m183r152="";
+$m183r153=$hlavicka->m183r153; if ( $m183r153 == 0 ) $m183r153="";
+$m183r154=$hlavicka->m183r154; if ( $m183r154 == 0 ) $m183r154="";
+$m183r161=$hlavicka->m183r161; if ( $m183r161 == 0 ) $m183r161="";
+$m183r162=$hlavicka->m183r162; if ( $m183r162 == 0 ) $m183r162="";
+$m183r163=$hlavicka->m183r163; if ( $m183r163 == 0 ) $m183r163="";
+$m183r164=$hlavicka->m183r164; if ( $m183r164 == 0 ) $m183r164="";
+$m183r171=$hlavicka->m183r171; if ( $m183r171 == 0 ) $m183r171="";
+$m183r172=$hlavicka->m183r172; if ( $m183r172 == 0 ) $m183r172="";
+$m183r173=$hlavicka->m183r173; if ( $m183r173 == 0 ) $m183r173="";
+$m183r174=$hlavicka->m183r174; if ( $m183r174 == 0 ) $m183r174="";
+$m183r181=$hlavicka->m183r181; if ( $m183r181 == 0 ) $m183r181="";
+$m183r182=$hlavicka->m183r182; if ( $m183r182 == 0 ) $m183r182="";
+$m183r183=$hlavicka->m183r183; if ( $m183r183 == 0 ) $m183r183="";
+$m183r184=$hlavicka->m183r184; if ( $m183r184 == 0 ) $m183r184="";
+$m183r191=$hlavicka->m183r191; if ( $m183r191 == 0 ) $m183r191="";
+$m183r192=$hlavicka->m183r192; if ( $m183r192 == 0 ) $m183r192="";
+$m183r193=$hlavicka->m183r193; if ( $m183r193 == 0 ) $m183r193="";
+$m183r194=$hlavicka->m183r194; if ( $m183r194 == 0 ) $m183r194="";
+$m183r201=$hlavicka->m183r201; if ( $m183r201 == 0 ) $m183r201="";
+$m183r202=$hlavicka->m183r202; if ( $m183r202 == 0 ) $m183r202="";
+$m183r203=$hlavicka->m183r203; if ( $m183r203 == 0 ) $m183r203="";
+$m183r204=$hlavicka->m183r204; if ( $m183r204 == 0 ) $m183r204="";
+$m183r211=$hlavicka->m183r211; if ( $m183r211 == 0 ) $m183r211="";
+$m183r212=$hlavicka->m183r212; if ( $m183r212 == 0 ) $m183r212="";
+$m183r213=$hlavicka->m183r213; if ( $m183r213 == 0 ) $m183r213="";
+$m183r214=$hlavicka->m183r214; if ( $m183r214 == 0 ) $m183r214="";
+$m183r221=$hlavicka->m183r221; if ( $m183r221 == 0 ) $m183r221="";
+$m183r222=$hlavicka->m183r222; if ( $m183r222 == 0 ) $m183r222="";
+$m183r223=$hlavicka->m183r223; if ( $m183r223 == 0 ) $m183r223="";
+$m183r224=$hlavicka->m183r224; if ( $m183r224 == 0 ) $m183r224="";
+$m183r231=$hlavicka->m183r231; if ( $m183r231 == 0 ) $m183r231="";
+$m183r232=$hlavicka->m183r232; if ( $m183r232 == 0 ) $m183r232="";
+$m183r233=$hlavicka->m183r233; if ( $m183r233 == 0 ) $m183r233="";
+$m183r234=$hlavicka->m183r234; if ( $m183r234 == 0 ) $m183r234="";
+$m183r241=$hlavicka->m183r241; if ( $m183r241 == 0 ) $m183r241="";
+$m183r242=$hlavicka->m183r242; if ( $m183r242 == 0 ) $m183r242="";
+$m183r243=$hlavicka->m183r243; if ( $m183r243 == 0 ) $m183r243="";
+$m183r244=$hlavicka->m183r244; if ( $m183r244 == 0 ) $m183r244="";
+$m183r251=$hlavicka->m183r251; if ( $m183r251 == 0 ) $m183r251="";
+$m183r252=$hlavicka->m183r252; if ( $m183r252 == 0 ) $m183r252="";
+$m183r253=$hlavicka->m183r253; if ( $m183r253 == 0 ) $m183r253="";
+$m183r254=$hlavicka->m183r254; if ( $m183r254 == 0 ) $m183r254="";
+$m183r261=$hlavicka->m183r261; if ( $m183r261 == 0 ) $m183r261="";
+$m183r262=$hlavicka->m183r262; if ( $m183r262 == 0 ) $m183r262="";
+$m183r263=$hlavicka->m183r263; if ( $m183r263 == 0 ) $m183r263="";
+$m183r264=$hlavicka->m183r264; if ( $m183r264 == 0 ) $m183r264="";
+$m183r271=$hlavicka->m183r271; if ( $m183r271 == 0 ) $m183r271="";
+$m183r272=$hlavicka->m183r272; if ( $m183r272 == 0 ) $m183r272="";
+$m183r273=$hlavicka->m183r273; if ( $m183r273 == 0 ) $m183r273="";
+$m183r274=$hlavicka->m183r274; if ( $m183r274 == 0 ) $m183r274="";
+$m183r281=$hlavicka->m183r281; if ( $m183r281 == 0 ) $m183r281="";
+$m183r282=$hlavicka->m183r282; if ( $m183r282 == 0 ) $m183r282="";
+$m183r283=$hlavicka->m183r283; if ( $m183r283 == 0 ) $m183r283="";
+$m183r284=$hlavicka->m183r284; if ( $m183r284 == 0 ) $m183r284="";
+$m183r291=$hlavicka->m183r291; if ( $m183r291 == 0 ) $m183r291="";
+$m183r292=$hlavicka->m183r292; if ( $m183r292 == 0 ) $m183r292="";
+$m183r293=$hlavicka->m183r293; if ( $m183r293 == 0 ) $m183r293="";
+$m183r294=$hlavicka->m183r294; if ( $m183r294 == 0 ) $m183r294="";
+$m183r301=$hlavicka->m183r301; if ( $m183r301 == 0 ) $m183r301="";
+$m183r302=$hlavicka->m183r302; if ( $m183r302 == 0 ) $m183r302="";
+$m183r303=$hlavicka->m183r303; if ( $m183r303 == 0 ) $m183r303="";
+$m183r304=$hlavicka->m183r304; if ( $m183r304 == 0 ) $m183r304="";
+$m183r992=$hlavicka->m183r992;
+//if ( $m183r992 == 0 ) $m183r992="";
+$m183r993=$hlavicka->m183r993;
+//if ( $m183r993 == 0 ) $m183r993="";
+$m183r994=$hlavicka->m183r994;
+//if ( $m183r994 == 0 ) $m183r994="";
+$pdf->Cell(195,45.5," ","$rmc1",1,"L");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"$m183r11","$rmc",0,"R");$pdf->Cell(33,7,"$m183r12","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r13","$rmc",0,"R");$pdf->Cell(80,7,"$m183r14","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r21","$rmc",0,"R");$pdf->Cell(33,6,"$m183r22","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r23","$rmc",0,"R");$pdf->Cell(80,6,"$m183r24","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r31","$rmc",0,"R");$pdf->Cell(33,6,"$m183r32","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r33","$rmc",0,"R");$pdf->Cell(80,6,"$m183r34","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"$m183r41","$rmc",0,"R");$pdf->Cell(33,7,"$m183r42","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r43","$rmc",0,"R");$pdf->Cell(80,7,"$m183r44","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r51","$rmc",0,"R");$pdf->Cell(33,6,"$m183r52","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r53","$rmc",0,"R");$pdf->Cell(80,6,"$m183r54","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"$m183r61","$rmc",0,"R");$pdf->Cell(33,7,"$m183r62","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r63","$rmc",0,"R");$pdf->Cell(80,7,"$m183r64","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r71","$rmc",0,"R");$pdf->Cell(33,6,"$m183r72","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r73","$rmc",0,"R");$pdf->Cell(80,6,"$m183r74","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r81","$rmc",0,"R");$pdf->Cell(33,6,"$m183r82","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r83","$rmc",0,"R");$pdf->Cell(80,6,"$m183r84","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r91","$rmc",0,"R");$pdf->Cell(33,6,"$m183r92","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r93","$rmc",0,"R");$pdf->Cell(80,6,"$m183r94","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r101","$rmc",0,"R");$pdf->Cell(33,6,"$m183r102","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r103","$rmc",0,"R");$pdf->Cell(80,6,"$m183r104","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r111","$rmc",0,"R");$pdf->Cell(33,6,"$m183r112","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r113","$rmc",0,"R");$pdf->Cell(80,6,"$m183r114","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"$m183r121","$rmc",0,"R");$pdf->Cell(33,7,"$m183r122","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r123","$rmc",0,"R");$pdf->Cell(80,7,"$m183r124","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r131","$rmc",0,"R");$pdf->Cell(33,6,"$m183r132","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r133","$rmc",0,"R");$pdf->Cell(80,6,"$m183r134","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r141","$rmc",0,"R");$pdf->Cell(33,6,"$m183r142","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r143","$rmc",0,"R");$pdf->Cell(80,6,"$m183r144","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"$m183r151","$rmc",0,"R");$pdf->Cell(33,7,"$m183r152","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r153","$rmc",0,"R");$pdf->Cell(80,7,"$m183r154","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r161","$rmc",0,"R");$pdf->Cell(33,6,"$m183r162","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r163","$rmc",0,"R");$pdf->Cell(80,6,"$m183r164","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r171","$rmc",0,"R");$pdf->Cell(33,6,"$m183r172","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r173","$rmc",0,"R");$pdf->Cell(80,6,"$m183r174","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r181","$rmc",0,"R");$pdf->Cell(33,6,"$m183r182","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r183","$rmc",0,"R");$pdf->Cell(80,6,"$m183r184","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"$m183r191","$rmc",0,"R");$pdf->Cell(33,7,"$m183r192","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r193","$rmc",0,"R");$pdf->Cell(80,7,"$m183r194","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r201","$rmc",0,"R");$pdf->Cell(33,6,"$m183r202","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r203","$rmc",0,"R");$pdf->Cell(80,6,"$m183r204","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r211","$rmc",0,"R");$pdf->Cell(33,6,"$m183r212","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r213","$rmc",0,"R");$pdf->Cell(80,6,"$m183r214","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r221","$rmc",0,"R");$pdf->Cell(33,6,"$m183r222","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r223","$rmc",0,"R");$pdf->Cell(80,6,"$m183r224","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"$m183r231","$rmc",0,"R");$pdf->Cell(33,7,"$m183r232","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r233","$rmc",0,"R");$pdf->Cell(80,7,"$m183r234","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r241","$rmc",0,"R");$pdf->Cell(33,6,"$m183r242","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r243","$rmc",0,"R");$pdf->Cell(80,6,"$m183r244","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r251","$rmc",0,"R");$pdf->Cell(33,6,"$m183r252","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r253","$rmc",0,"R");$pdf->Cell(80,6,"$m183r254","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r261","$rmc",0,"R");$pdf->Cell(33,6,"$m183r262","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r263","$rmc",0,"R");$pdf->Cell(80,6,"$m183r264","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"$m183r271","$rmc",0,"R");$pdf->Cell(33,7,"$m183r272","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r273","$rmc",0,"R");$pdf->Cell(80,7,"$m183r274","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r281","$rmc",0,"R");$pdf->Cell(33,6,"$m183r282","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r283","$rmc",0,"R");$pdf->Cell(80,6,"$m183r284","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r291","$rmc",0,"R");$pdf->Cell(33,6,"$m183r292","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r293","$rmc",0,"R");$pdf->Cell(80,6,"$m183r294","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,6,"$m183r301","$rmc",0,"R");$pdf->Cell(33,6,"$m183r302","$rmc",0,"R");
+$pdf->Cell(33,6,"$m183r303","$rmc",0,"R");$pdf->Cell(80,6,"$m183r304","$rmc",1,"R");
+$pdf->Cell(9,4," ","$rmc1",0,"L");
+$pdf->Cell(33,7,"","$rmc",0,"R");$pdf->Cell(33,7,"$m183r992","$rmc",0,"R");
+$pdf->Cell(33,7,"$m183r993","$rmc",0,"R");$pdf->Cell(80,7,"$m183r994","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"6/12","$rmc",1,"R");
+                                       }
+
+if ( $strana == 7 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str7.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str7.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,5," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 184
+$m184r11=$hlavicka->m184r11; if ( $m184r11 == 0 ) $m184r11="";
+$m184r12=$hlavicka->m184r12; if ( $m184r12 == 0 ) $m184r12="";
+$m184r13=$hlavicka->m184r13; if ( $m184r13 == 0 ) $m184r13="";
+$m184r14=$hlavicka->m184r14; if ( $m184r14 == 0 ) $m184r14="";
+$m184r15=$hlavicka->m184r15; if ( $m184r15 == 0 ) $m184r15="";
+$m184r16=$hlavicka->m184r16; if ( $m184r16 == 0 ) $m184r16="";
+$m184r21=$hlavicka->m184r21; if ( $m184r21 == 0 ) $m184r21="";
+$m184r22=$hlavicka->m184r22; if ( $m184r22 == 0 ) $m184r22="";
+$m184r23=$hlavicka->m184r23; if ( $m184r23 == 0 ) $m184r23="";
+$m184r24=$hlavicka->m184r24; if ( $m184r24 == 0 ) $m184r24="";
+$m184r25=$hlavicka->m184r25; if ( $m184r25 == 0 ) $m184r25="";
+$m184r26=$hlavicka->m184r26; if ( $m184r26 == 0 ) $m184r26="";
+$m184r31=$hlavicka->m184r31; if ( $m184r31 == 0 ) $m184r31="";
+$m184r32=$hlavicka->m184r32; if ( $m184r32 == 0 ) $m184r32="";
+$m184r33=$hlavicka->m184r33; if ( $m184r33 == 0 ) $m184r33="";
+$m184r34=$hlavicka->m184r34; if ( $m184r34 == 0 ) $m184r34="";
+$m184r35=$hlavicka->m184r35; if ( $m184r35 == 0 ) $m184r35="";
+$m184r36=$hlavicka->m184r36; if ( $m184r36 == 0 ) $m184r36="";
+$m184r41=$hlavicka->m184r41; if ( $m184r41 == 0 ) $m184r41="";
+$m184r42=$hlavicka->m184r42; if ( $m184r42 == 0 ) $m184r42="";
+$m184r43=$hlavicka->m184r43; if ( $m184r43 == 0 ) $m184r43="";
+$m184r44=$hlavicka->m184r44; if ( $m184r44 == 0 ) $m184r44="";
+$m184r45=$hlavicka->m184r45; if ( $m184r45 == 0 ) $m184r45="";
+$m184r46=$hlavicka->m184r46; if ( $m184r46 == 0 ) $m184r46="";
+$m184r51=$hlavicka->m184r51; if ( $m184r51 == 0 ) $m184r51="";
+$m184r52=$hlavicka->m184r52; if ( $m184r52 == 0 ) $m184r52="";
+$m184r53=$hlavicka->m184r53; if ( $m184r53 == 0 ) $m184r53="";
+$m184r54=$hlavicka->m184r54; if ( $m184r54 == 0 ) $m184r54="";
+$m184r55=$hlavicka->m184r55; if ( $m184r55 == 0 ) $m184r55="";
+$m184r56=$hlavicka->m184r56; if ( $m184r56 == 0 ) $m184r56="";
+$m184r61=$hlavicka->m184r61; if ( $m184r61 == 0 ) $m184r61="";
+$m184r62=$hlavicka->m184r62; if ( $m184r62 == 0 ) $m184r62="";
+$m184r63=$hlavicka->m184r63; if ( $m184r63 == 0 ) $m184r63="";
+$m184r64=$hlavicka->m184r64; if ( $m184r64 == 0 ) $m184r64="";
+$m184r65=$hlavicka->m184r65; if ( $m184r65 == 0 ) $m184r65="";
+$m184r66=$hlavicka->m184r66; if ( $m184r66 == 0 ) $m184r66="";
+$m184r71=$hlavicka->m184r71; if ( $m184r71 == 0 ) $m184r71="";
+$m184r72=$hlavicka->m184r72; if ( $m184r72 == 0 ) $m184r72="";
+$m184r73=$hlavicka->m184r73; if ( $m184r73 == 0 ) $m184r73="";
+$m184r74=$hlavicka->m184r74; if ( $m184r74 == 0 ) $m184r74="";
+$m184r75=$hlavicka->m184r75; if ( $m184r75 == 0 ) $m184r75="";
+$m184r76=$hlavicka->m184r76; if ( $m184r76 == 0 ) $m184r76="";
+$m184r81=$hlavicka->m184r81; if ( $m184r81 == 0 ) $m184r81="";
+$m184r82=$hlavicka->m184r82; if ( $m184r82 == 0 ) $m184r82="";
+$m184r83=$hlavicka->m184r83; if ( $m184r83 == 0 ) $m184r83="";
+$m184r84=$hlavicka->m184r84; if ( $m184r84 == 0 ) $m184r84="";
+$m184r85=$hlavicka->m184r85; if ( $m184r85 == 0 ) $m184r85="";
+$m184r86=$hlavicka->m184r86; if ( $m184r86 == 0 ) $m184r86="";
+$m184r91=$hlavicka->m184r91; if ( $m184r91 == 0 ) $m184r91="";
+$m184r92=$hlavicka->m184r92; if ( $m184r92 == 0 ) $m184r92="";
+$m184r93=$hlavicka->m184r93; if ( $m184r93 == 0 ) $m184r93="";
+$m184r94=$hlavicka->m184r94; if ( $m184r94 == 0 ) $m184r94="";
+$m184r95=$hlavicka->m184r95; if ( $m184r95 == 0 ) $m184r95="";
+$m184r96=$hlavicka->m184r96; if ( $m184r96 == 0 ) $m184r96="";
+$m184r101=$hlavicka->m184r101; if ( $m184r101 == 0 ) $m184r101="";
+$m184r102=$hlavicka->m184r102; if ( $m184r102 == 0 ) $m184r102="";
+$m184r103=$hlavicka->m184r103; if ( $m184r103 == 0 ) $m184r103="";
+$m184r104=$hlavicka->m184r104; if ( $m184r104 == 0 ) $m184r104="";
+$m184r105=$hlavicka->m184r105; if ( $m184r105 == 0 ) $m184r105="";
+$m184r106=$hlavicka->m184r106; if ( $m184r106 == 0 ) $m184r106="";
+$m184r111=$hlavicka->m184r111; if ( $m184r111 == 0 ) $m184r111="";
+$m184r112=$hlavicka->m184r112; if ( $m184r112 == 0 ) $m184r112="";
+$m184r113=$hlavicka->m184r113; if ( $m184r113 == 0 ) $m184r113="";
+$m184r114=$hlavicka->m184r114; if ( $m184r114 == 0 ) $m184r114="";
+$m184r115=$hlavicka->m184r115; if ( $m184r115 == 0 ) $m184r115="";
+$m184r116=$hlavicka->m184r116; if ( $m184r116 == 0 ) $m184r116="";
+$m184r121=$hlavicka->m184r121; if ( $m184r121 == 0 ) $m184r121="";
+$m184r122=$hlavicka->m184r122; if ( $m184r122 == 0 ) $m184r122="";
+$m184r123=$hlavicka->m184r123; if ( $m184r123 == 0 ) $m184r123="";
+$m184r124=$hlavicka->m184r124; if ( $m184r124 == 0 ) $m184r124="";
+$m184r125=$hlavicka->m184r125; if ( $m184r125 == 0 ) $m184r125="";
+$m184r126=$hlavicka->m184r126; if ( $m184r126 == 0 ) $m184r126="";
+$m184r131=$hlavicka->m184r131; if ( $m184r131 == 0 ) $m184r131="";
+$m184r132=$hlavicka->m184r132; if ( $m184r132 == 0 ) $m184r132="";
+$m184r133=$hlavicka->m184r133; if ( $m184r133 == 0 ) $m184r133="";
+$m184r134=$hlavicka->m184r134; if ( $m184r134 == 0 ) $m184r134="";
+$m184r135=$hlavicka->m184r135; if ( $m184r135 == 0 ) $m184r135="";
+$m184r136=$hlavicka->m184r136; if ( $m184r136 == 0 ) $m184r136="";
+$m184r141=$hlavicka->m184r141; if ( $m184r141 == 0 ) $m184r141="";
+$m184r142=$hlavicka->m184r142; if ( $m184r142 == 0 ) $m184r142="";
+$m184r143=$hlavicka->m184r143; if ( $m184r143 == 0 ) $m184r143="";
+$m184r144=$hlavicka->m184r144; if ( $m184r144 == 0 ) $m184r144="";
+$m184r145=$hlavicka->m184r145; if ( $m184r145 == 0 ) $m184r145="";
+$m184r146=$hlavicka->m184r146; if ( $m184r146 == 0 ) $m184r146="";
+$m184r151=$hlavicka->m184r151; if ( $m184r151 == 0 ) $m184r151="";
+$m184r152=$hlavicka->m184r152; if ( $m184r152 == 0 ) $m184r152="";
+$m184r153=$hlavicka->m184r153; if ( $m184r153 == 0 ) $m184r153="";
+$m184r154=$hlavicka->m184r154; if ( $m184r154 == 0 ) $m184r154="";
+$m184r155=$hlavicka->m184r155; if ( $m184r155 == 0 ) $m184r155="";
+$m184r156=$hlavicka->m184r156; if ( $m184r156 == 0 ) $m184r156="";
+$m184r161=$hlavicka->m184r161; if ( $m184r161 == 0 ) $m184r161="";
+$m184r162=$hlavicka->m184r162; if ( $m184r162 == 0 ) $m184r162="";
+$m184r163=$hlavicka->m184r163; if ( $m184r163 == 0 ) $m184r163="";
+$m184r164=$hlavicka->m184r164; if ( $m184r164 == 0 ) $m184r164="";
+$m184r165=$hlavicka->m184r165; if ( $m184r165 == 0 ) $m184r165="";
+$m184r166=$hlavicka->m184r166; if ( $m184r166 == 0 ) $m184r166="";
+$m184r171=$hlavicka->m184r171; if ( $m184r171 == 0 ) $m184r171="";
+$m184r172=$hlavicka->m184r172; if ( $m184r172 == 0 ) $m184r172="";
+$m184r173=$hlavicka->m184r173; if ( $m184r173 == 0 ) $m184r173="";
+$m184r174=$hlavicka->m184r174; if ( $m184r174 == 0 ) $m184r174="";
+$m184r175=$hlavicka->m184r175; if ( $m184r175 == 0 ) $m184r175="";
+$m184r176=$hlavicka->m184r176; if ( $m184r176 == 0 ) $m184r176="";
+$m184r181=$hlavicka->m184r181; if ( $m184r181 == 0 ) $m184r181="";
+$m184r182=$hlavicka->m184r182; if ( $m184r182 == 0 ) $m184r182="";
+$m184r183=$hlavicka->m184r183; if ( $m184r183 == 0 ) $m184r183="";
+$m184r184=$hlavicka->m184r184; if ( $m184r184 == 0 ) $m184r184="";
+$m184r185=$hlavicka->m184r185; if ( $m184r185 == 0 ) $m184r185="";
+$m184r186=$hlavicka->m184r186; if ( $m184r186 == 0 ) $m184r186="";
+$m184r191=$hlavicka->m184r191; if ( $m184r191 == 0 ) $m184r191="";
+$m184r192=$hlavicka->m184r192; if ( $m184r192 == 0 ) $m184r192="";
+$m184r193=$hlavicka->m184r193; if ( $m184r193 == 0 ) $m184r193="";
+$m184r194=$hlavicka->m184r194; if ( $m184r194 == 0 ) $m184r194="";
+$m184r195=$hlavicka->m184r195; if ( $m184r195 == 0 ) $m184r195="";
+$m184r196=$hlavicka->m184r196; if ( $m184r196 == 0 ) $m184r196="";
+$m184r201=$hlavicka->m184r201; if ( $m184r201 == 0 ) $m184r201="";
+$m184r202=$hlavicka->m184r202; if ( $m184r202 == 0 ) $m184r202="";
+$m184r203=$hlavicka->m184r203; if ( $m184r203 == 0 ) $m184r203="";
+$m184r204=$hlavicka->m184r204; if ( $m184r204 == 0 ) $m184r204="";
+$m184r205=$hlavicka->m184r205; if ( $m184r205 == 0 ) $m184r205="";
+$m184r206=$hlavicka->m184r206; if ( $m184r206 == 0 ) $m184r206="";
+$m184r211=$hlavicka->m184r211; if ( $m184r211 == 0 ) $m184r211="";
+$m184r212=$hlavicka->m184r212; if ( $m184r212 == 0 ) $m184r212="";
+$m184r213=$hlavicka->m184r213; if ( $m184r213 == 0 ) $m184r213="";
+$m184r214=$hlavicka->m184r214; if ( $m184r214 == 0 ) $m184r214="";
+$m184r215=$hlavicka->m184r215; if ( $m184r215 == 0 ) $m184r215="";
+$m184r216=$hlavicka->m184r216; if ( $m184r216 == 0 ) $m184r216="";
+$m184r221=$hlavicka->m184r221; if ( $m184r221 == 0 ) $m184r221="";
+$m184r222=$hlavicka->m184r222; if ( $m184r222 == 0 ) $m184r222="";
+$m184r223=$hlavicka->m184r223; if ( $m184r223 == 0 ) $m184r223="";
+$m184r224=$hlavicka->m184r224; if ( $m184r224 == 0 ) $m184r224="";
+$m184r225=$hlavicka->m184r225; if ( $m184r225 == 0 ) $m184r225="";
+$m184r226=$hlavicka->m184r226; if ( $m184r226 == 0 ) $m184r226="";
+$m184r231=$hlavicka->m184r231; if ( $m184r231 == 0 ) $m184r231="";
+$m184r232=$hlavicka->m184r232; if ( $m184r232 == 0 ) $m184r232="";
+$m184r233=$hlavicka->m184r233; if ( $m184r233 == 0 ) $m184r233="";
+$m184r234=$hlavicka->m184r234; if ( $m184r234 == 0 ) $m184r234="";
+$m184r235=$hlavicka->m184r235; if ( $m184r235 == 0 ) $m184r235="";
+$m184r236=$hlavicka->m184r236; if ( $m184r236 == 0 ) $m184r236="";
+$m184r241=$hlavicka->m184r241; if ( $m184r241 == 0 ) $m184r241="";
+$m184r242=$hlavicka->m184r242; if ( $m184r242 == 0 ) $m184r242="";
+$m184r243=$hlavicka->m184r243; if ( $m184r243 == 0 ) $m184r243="";
+$m184r244=$hlavicka->m184r244; if ( $m184r244 == 0 ) $m184r244="";
+$m184r245=$hlavicka->m184r245; if ( $m184r245 == 0 ) $m184r245="";
+$m184r246=$hlavicka->m184r246; if ( $m184r246 == 0 ) $m184r246="";
+$m184r251=$hlavicka->m184r251; if ( $m184r251 == 0 ) $m184r251="";
+$m184r252=$hlavicka->m184r252; if ( $m184r252 == 0 ) $m184r252="";
+$m184r253=$hlavicka->m184r253; if ( $m184r253 == 0 ) $m184r253="";
+$m184r254=$hlavicka->m184r254; if ( $m184r254 == 0 ) $m184r254="";
+$m184r255=$hlavicka->m184r255; if ( $m184r255 == 0 ) $m184r255="";
+$m184r256=$hlavicka->m184r256; if ( $m184r256 == 0 ) $m184r256="";
+$m184r261=$hlavicka->m184r261; if ( $m184r261 == 0 ) $m184r261="";
+$m184r262=$hlavicka->m184r262; if ( $m184r262 == 0 ) $m184r262="";
+$m184r263=$hlavicka->m184r263; if ( $m184r263 == 0 ) $m184r263="";
+$m184r264=$hlavicka->m184r264; if ( $m184r264 == 0 ) $m184r264="";
+$m184r265=$hlavicka->m184r265; if ( $m184r265 == 0 ) $m184r265="";
+$m184r266=$hlavicka->m184r266; if ( $m184r266 == 0 ) $m184r266="";
+$m184r271=$hlavicka->m184r271; if ( $m184r271 == 0 ) $m184r271="";
+$m184r272=$hlavicka->m184r272; if ( $m184r272 == 0 ) $m184r272="";
+$m184r273=$hlavicka->m184r273; if ( $m184r273 == 0 ) $m184r273="";
+$m184r274=$hlavicka->m184r274; if ( $m184r274 == 0 ) $m184r274="";
+$m184r275=$hlavicka->m184r275; if ( $m184r275 == 0 ) $m184r275="";
+$m184r276=$hlavicka->m184r276; if ( $m184r276 == 0 ) $m184r276="";
+$m184r281=$hlavicka->m184r281; if ( $m184r281 == 0 ) $m184r281="";
+$m184r282=$hlavicka->m184r282; if ( $m184r282 == 0 ) $m184r282="";
+$m184r283=$hlavicka->m184r283; if ( $m184r283 == 0 ) $m184r283="";
+$m184r284=$hlavicka->m184r284; if ( $m184r284 == 0 ) $m184r284="";
+$m184r285=$hlavicka->m184r285; if ( $m184r285 == 0 ) $m184r285="";
+$m184r286=$hlavicka->m184r286; if ( $m184r286 == 0 ) $m184r286="";
+$m184r291=$hlavicka->m184r291; if ( $m184r291 == 0 ) $m184r291="";
+$m184r292=$hlavicka->m184r292; if ( $m184r292 == 0 ) $m184r292="";
+$m184r293=$hlavicka->m184r293; if ( $m184r293 == 0 ) $m184r293="";
+$m184r294=$hlavicka->m184r294; if ( $m184r294 == 0 ) $m184r294="";
+$m184r295=$hlavicka->m184r295; if ( $m184r295 == 0 ) $m184r295="";
+$m184r296=$hlavicka->m184r296; if ( $m184r296 == 0 ) $m184r296="";
+$m184r301=$hlavicka->m184r301; if ( $m184r301 == 0 ) $m184r301="";
+$m184r302=$hlavicka->m184r302; if ( $m184r302 == 0 ) $m184r302="";
+$m184r303=$hlavicka->m184r303; if ( $m184r303 == 0 ) $m184r303="";
+$m184r304=$hlavicka->m184r304; if ( $m184r304 == 0 ) $m184r304="";
+$m184r305=$hlavicka->m184r305; if ( $m184r305 == 0 ) $m184r305="";
+$m184r306=$hlavicka->m184r306; if ( $m184r306 == 0 ) $m184r306="";
+$m184r311=$hlavicka->m184r311; if ( $m184r311 == 0 ) $m184r311="";
+$m184r312=$hlavicka->m184r312; if ( $m184r312 == 0 ) $m184r312="";
+$m184r313=$hlavicka->m184r313; if ( $m184r313 == 0 ) $m184r313="";
+$m184r314=$hlavicka->m184r314; if ( $m184r314 == 0 ) $m184r314="";
+$m184r315=$hlavicka->m184r315; if ( $m184r315 == 0 ) $m184r315="";
+$m184r316=$hlavicka->m184r316; if ( $m184r316 == 0 ) $m184r316="";
+$m184r321=$hlavicka->m184r321; if ( $m184r321 == 0 ) $m184r321="";
+$m184r322=$hlavicka->m184r322; if ( $m184r322 == 0 ) $m184r322="";
+$m184r323=$hlavicka->m184r323; if ( $m184r323 == 0 ) $m184r323="";
+$m184r324=$hlavicka->m184r324; if ( $m184r324 == 0 ) $m184r324="";
+$m184r325=$hlavicka->m184r325; if ( $m184r325 == 0 ) $m184r325="";
+$m184r326=$hlavicka->m184r326; if ( $m184r326 == 0 ) $m184r326="";
+$m184r992=$hlavicka->m184r992;
+//if ( $m184r992 == 0 ) $m184r992="";
+$m184r993=$hlavicka->m184r993;
+//if ( $m184r993 == 0 ) $m184r993="";
+$m184r994=$hlavicka->m184r994;
+//if ( $m184r994 == 0 ) $m184r994="";
+$m184r995=$hlavicka->m184r995;
+//if ( $m184r995 == 0 ) $m184r995="";
+$m184r996=$hlavicka->m184r996;
+//if ( $m184r996 == 0 ) $m184r996="";
+$pdf->Cell(195,41," ","$rmc1",1,"L");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,7,"$m184r11","$rmc",0,"R");$pdf->Cell(24,7,"$m184r12","$rmc",0,"R");
+$pdf->Cell(25,7,"$m184r13","$rmc",0,"R");$pdf->Cell(53,7,"$m184r14","$rmc",0,"R");
+$pdf->Cell(27,7,"$m184r15","$rmc",0,"R");$pdf->Cell(25,7,"$m184r16","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r21","$rmc",0,"R");$pdf->Cell(24,6,"$m184r22","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r23","$rmc",0,"R");$pdf->Cell(53,6,"$m184r24","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r25","$rmc",0,"R");$pdf->Cell(25,6,"$m184r26","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r31","$rmc",0,"R");$pdf->Cell(24,6,"$m184r32","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r33","$rmc",0,"R");$pdf->Cell(53,6,"$m184r34","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r35","$rmc",0,"R");$pdf->Cell(25,6,"$m184r36","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r41","$rmc",0,"R");$pdf->Cell(24,6,"$m184r42","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r43","$rmc",0,"R");$pdf->Cell(53,6,"$m184r44","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r45","$rmc",0,"R");$pdf->Cell(25,6,"$m184r46","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r51","$rmc",0,"R");$pdf->Cell(24,6,"$m184r52","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r53","$rmc",0,"R");$pdf->Cell(53,6,"$m184r54","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r55","$rmc",0,"R");$pdf->Cell(25,6,"$m184r56","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r61","$rmc",0,"R");$pdf->Cell(24,6,"$m184r62","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r63","$rmc",0,"R");$pdf->Cell(53,6,"$m184r64","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r65","$rmc",0,"R");$pdf->Cell(25,6,"$m184r66","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r71","$rmc",0,"R");$pdf->Cell(24,6,"$m184r72","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r73","$rmc",0,"R");$pdf->Cell(53,6,"$m184r74","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r75","$rmc",0,"R");$pdf->Cell(25,6,"$m184r76","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r81","$rmc",0,"R");$pdf->Cell(24,6,"$m184r82","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r83","$rmc",0,"R");$pdf->Cell(53,6,"$m184r84","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r85","$rmc",0,"R");$pdf->Cell(25,6,"$m184r86","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,5,"$m184r91","$rmc",0,"R");$pdf->Cell(24,5,"$m184r92","$rmc",0,"R");
+$pdf->Cell(25,5,"$m184r93","$rmc",0,"R");$pdf->Cell(53,5,"$m184r94","$rmc",0,"R");
+$pdf->Cell(27,5,"$m184r95","$rmc",0,"R");$pdf->Cell(25,5,"$m184r96","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r101","$rmc",0,"R");$pdf->Cell(24,6,"$m184r102","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r103","$rmc",0,"R");$pdf->Cell(53,6,"$m184r104","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r105","$rmc",0,"R");$pdf->Cell(25,6,"$m184r106","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r111","$rmc",0,"R");$pdf->Cell(24,6,"$m184r112","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r113","$rmc",0,"R");$pdf->Cell(53,6,"$m184r114","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r115","$rmc",0,"R");$pdf->Cell(25,6,"$m184r116","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r121","$rmc",0,"R");$pdf->Cell(24,6,"$m184r122","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r123","$rmc",0,"R");$pdf->Cell(53,6,"$m184r124","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r125","$rmc",0,"R");$pdf->Cell(25,6,"$m184r126","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r131","$rmc",0,"R");$pdf->Cell(24,6,"$m184r132","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r133","$rmc",0,"R");$pdf->Cell(53,6,"$m184r134","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r135","$rmc",0,"R");$pdf->Cell(25,6,"$m184r136","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r141","$rmc",0,"R");$pdf->Cell(24,6,"$m184r142","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r143","$rmc",0,"R");$pdf->Cell(53,6,"$m184r144","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r145","$rmc",0,"R");$pdf->Cell(25,6,"$m184r146","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r151","$rmc",0,"R");$pdf->Cell(24,6,"$m184r152","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r153","$rmc",0,"R");$pdf->Cell(53,6,"$m184r154","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r155","$rmc",0,"R");$pdf->Cell(25,6,"$m184r156","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r161","$rmc",0,"R");$pdf->Cell(24,6,"$m184r162","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r163","$rmc",0,"R");$pdf->Cell(53,6,"$m184r164","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r165","$rmc",0,"R");$pdf->Cell(25,6,"$m184r166","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r171","$rmc",0,"R");$pdf->Cell(24,6,"$m184r172","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r173","$rmc",0,"R");$pdf->Cell(53,6,"$m184r174","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r175","$rmc",0,"R");$pdf->Cell(25,6,"$m184r176","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r181","$rmc",0,"R");$pdf->Cell(24,6,"$m184r182","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r183","$rmc",0,"R");$pdf->Cell(53,6,"$m184r184","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r185","$rmc",0,"R");$pdf->Cell(25,6,"$m184r186","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r191","$rmc",0,"R");$pdf->Cell(24,6,"$m184r192","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r193","$rmc",0,"R");$pdf->Cell(53,6,"$m184r194","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r195","$rmc",0,"R");$pdf->Cell(25,6,"$m184r196","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r201","$rmc",0,"R");$pdf->Cell(24,6,"$m184r202","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r203","$rmc",0,"R");$pdf->Cell(53,6,"$m184r204","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r205","$rmc",0,"R");$pdf->Cell(25,6,"$m184r206","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r211","$rmc",0,"R");$pdf->Cell(24,6,"$m184r212","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r213","$rmc",0,"R");$pdf->Cell(53,6,"$m184r214","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r215","$rmc",0,"R");$pdf->Cell(25,6,"$m184r216","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r221","$rmc",0,"R");$pdf->Cell(24,6,"$m184r222","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r223","$rmc",0,"R");$pdf->Cell(53,6,"$m184r224","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r225","$rmc",0,"R");$pdf->Cell(25,6,"$m184r226","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r231","$rmc",0,"R");$pdf->Cell(24,6,"$m184r232","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r233","$rmc",0,"R");$pdf->Cell(53,6,"$m184r234","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r235","$rmc",0,"R");$pdf->Cell(25,6,"$m184r236","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r241","$rmc",0,"R");$pdf->Cell(24,6,"$m184r242","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r243","$rmc",0,"R");$pdf->Cell(53,6,"$m184r244","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r245","$rmc",0,"R");$pdf->Cell(25,6,"$m184r246","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r251","$rmc",0,"R");$pdf->Cell(24,6,"$m184r252","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r253","$rmc",0,"R");$pdf->Cell(53,6,"$m184r254","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r255","$rmc",0,"R");$pdf->Cell(25,6,"$m184r256","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r261","$rmc",0,"R");$pdf->Cell(24,6,"$m184r262","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r263","$rmc",0,"R");$pdf->Cell(53,6,"$m184r264","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r265","$rmc",0,"R");$pdf->Cell(25,6,"$m184r266","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r271","$rmc",0,"R");$pdf->Cell(24,6,"$m184r272","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r273","$rmc",0,"R");$pdf->Cell(53,6,"$m184r274","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r275","$rmc",0,"R");$pdf->Cell(25,6,"$m184r276","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r281","$rmc",0,"R");$pdf->Cell(24,6,"$m184r282","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r283","$rmc",0,"R");$pdf->Cell(53,6,"$m184r284","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r285","$rmc",0,"R");$pdf->Cell(25,6,"$m184r286","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r291","$rmc",0,"R");$pdf->Cell(24,6,"$m184r292","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r293","$rmc",0,"R");$pdf->Cell(53,6,"$m184r294","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r295","$rmc",0,"R");$pdf->Cell(25,6,"$m184r296","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r301","$rmc",0,"R");$pdf->Cell(24,6,"$m184r302","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r303","$rmc",0,"R");$pdf->Cell(53,6,"$m184r304","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r305","$rmc",0,"R");$pdf->Cell(25,6,"$m184r306","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r311","$rmc",0,"R");$pdf->Cell(24,6,"$m184r312","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r313","$rmc",0,"R");$pdf->Cell(53,6,"$m184r314","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r315","$rmc",0,"R");$pdf->Cell(25,6,"$m184r316","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$m184r321","$rmc",0,"R");$pdf->Cell(24,6,"$m184r322","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r323","$rmc",0,"R");$pdf->Cell(53,6,"$m184r324","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r325","$rmc",0,"R");$pdf->Cell(25,6,"$m184r326","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"","$rmc",0,"R");$pdf->Cell(24,6,"$m184r992","$rmc",0,"R");
+$pdf->Cell(25,6,"$m184r993","$rmc",0,"R");$pdf->Cell(53,6,"$m184r994","$rmc",0,"R");
+$pdf->Cell(27,6,"$m184r995","$rmc",0,"R");$pdf->Cell(25,6,"$m184r996","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"7/12","$rmc",1,"R");
+                                       }
+
+if ( $strana == 8 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str8.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str8.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 185
+$pdf->SetFont('arial','',10);
+$pdf->Cell(190,18.5," ","$rmc1",1,"L");
+$pdf->Cell(83,5," ","$rmc1",0,"L");
+if ( $kli_vrok == 2016 ) { $text="Trûby \n za v˝voz \n tovaru \n (zo stÂ. 2)"; }
+if ( $kli_vrok > 2016 ) { $text="Trûby \n z predaja\n do zahraniËia \n (zo stÂ. 2)"; }
+$pdf->MultiCell(28,4.5,"$text","$rmc","C");
+$pdf->Cell(195,7," ","$rmc1",1,"L");
+$pdf->SetFont('arial','',12);
+$m185r11=$hlavicka->m185r11; if ( $m185r11 == 0 ) $m185r11="";
+$m185r12=$hlavicka->m185r12; if ( $m185r12 == 0 ) $m185r12="";
+$m185r13=$hlavicka->m185r13; if ( $m185r13 == 0 ) $m185r13="";
+$m185r14=$hlavicka->m185r14; if ( $m185r14 == 0 ) $m185r14="";
+$m185r15=$hlavicka->m185r15; if ( $m185r15 == 0 ) $m185r15="";
+$m185r16=$hlavicka->m185r16; if ( $m185r16 == 0 ) $m185r16="";
+$m185r17=$hlavicka->m185r17; if ( $m185r17 == 0 ) $m185r17="";
+$m185r21=$hlavicka->m185r21; if ( $m185r21 == 0 ) $m185r21="";
+$m185r22=$hlavicka->m185r22; if ( $m185r22 == 0 ) $m185r22="";
+$m185r23=$hlavicka->m185r23; if ( $m185r23 == 0 ) $m185r23="";
+$m185r24=$hlavicka->m185r24; if ( $m185r24 == 0 ) $m185r24="";
+$m185r25=$hlavicka->m185r25; if ( $m185r25 == 0 ) $m185r25="";
+$m185r26=$hlavicka->m185r26; if ( $m185r26 == 0 ) $m185r26="";
+$m185r27=$hlavicka->m185r27; if ( $m185r27 == 0 ) $m185r27="";
+$m185r31=$hlavicka->m185r31; if ( $m185r31 == 0 ) $m185r31="";
+$m185r32=$hlavicka->m185r32; if ( $m185r32 == 0 ) $m185r32="";
+$m185r33=$hlavicka->m185r33; if ( $m185r33 == 0 ) $m185r33="";
+$m185r34=$hlavicka->m185r34; if ( $m185r34 == 0 ) $m185r34="";
+$m185r35=$hlavicka->m185r35; if ( $m185r35 == 0 ) $m185r35="";
+$m185r36=$hlavicka->m185r36; if ( $m185r36 == 0 ) $m185r36="";
+$m185r37=$hlavicka->m185r37; if ( $m185r37 == 0 ) $m185r37="";
+$m185r41=$hlavicka->m185r41; if ( $m185r41 == 0 ) $m185r41="";
+$m185r42=$hlavicka->m185r42; if ( $m185r42 == 0 ) $m185r42="";
+$m185r43=$hlavicka->m185r43; if ( $m185r43 == 0 ) $m185r43="";
+$m185r44=$hlavicka->m185r44; if ( $m185r44 == 0 ) $m185r44="";
+$m185r45=$hlavicka->m185r45; if ( $m185r45 == 0 ) $m185r45="";
+$m185r46=$hlavicka->m185r46; if ( $m185r46 == 0 ) $m185r46="";
+$m185r47=$hlavicka->m185r47; if ( $m185r47 == 0 ) $m185r47="";
+$m185r51=$hlavicka->m185r51; if ( $m185r51 == 0 ) $m185r51="";
+$m185r52=$hlavicka->m185r52; if ( $m185r52 == 0 ) $m185r52="";
+$m185r53=$hlavicka->m185r53; if ( $m185r53 == 0 ) $m185r53="";
+$m185r54=$hlavicka->m185r54; if ( $m185r54 == 0 ) $m185r54="";
+$m185r55=$hlavicka->m185r55; if ( $m185r55 == 0 ) $m185r55="";
+$m185r56=$hlavicka->m185r56; if ( $m185r56 == 0 ) $m185r56="";
+$m185r57=$hlavicka->m185r57; if ( $m185r57 == 0 ) $m185r57="";
+$m185r61=$hlavicka->m185r61; if ( $m185r61 == 0 ) $m185r61="";
+$m185r62=$hlavicka->m185r62; if ( $m185r62 == 0 ) $m185r62="";
+$m185r63=$hlavicka->m185r63; if ( $m185r63 == 0 ) $m185r63="";
+$m185r64=$hlavicka->m185r64; if ( $m185r64 == 0 ) $m185r64="";
+$m185r65=$hlavicka->m185r65; if ( $m185r65 == 0 ) $m185r65="";
+$m185r66=$hlavicka->m185r66; if ( $m185r66 == 0 ) $m185r66="";
+$m185r67=$hlavicka->m185r67; if ( $m185r67 == 0 ) $m185r67="";
+$m185r71=$hlavicka->m185r71; if ( $m185r71 == 0 ) $m185r71="";
+$m185r72=$hlavicka->m185r72; if ( $m185r72 == 0 ) $m185r72="";
+$m185r73=$hlavicka->m185r73; if ( $m185r73 == 0 ) $m185r73="";
+$m185r74=$hlavicka->m185r74; if ( $m185r74 == 0 ) $m185r74="";
+$m185r75=$hlavicka->m185r75; if ( $m185r75 == 0 ) $m185r75="";
+$m185r76=$hlavicka->m185r76; if ( $m185r76 == 0 ) $m185r76="";
+$m185r77=$hlavicka->m185r77; if ( $m185r77 == 0 ) $m185r77="";
+$m185r81=$hlavicka->m185r81; if ( $m185r81 == 0 ) $m185r81="";
+$m185r82=$hlavicka->m185r82; if ( $m185r82 == 0 ) $m185r82="";
+$m185r83=$hlavicka->m185r83; if ( $m185r83 == 0 ) $m185r83="";
+$m185r84=$hlavicka->m185r84; if ( $m185r84 == 0 ) $m185r84="";
+$m185r85=$hlavicka->m185r85; if ( $m185r85 == 0 ) $m185r85="";
+$m185r86=$hlavicka->m185r86; if ( $m185r86 == 0 ) $m185r86="";
+$m185r87=$hlavicka->m185r87; if ( $m185r87 == 0 ) $m185r87="";
+$m185r91=$hlavicka->m185r91; if ( $m185r91 == 0 ) $m185r91="";
+$m185r92=$hlavicka->m185r92; if ( $m185r92 == 0 ) $m185r92="";
+$m185r93=$hlavicka->m185r93; if ( $m185r93 == 0 ) $m185r93="";
+$m185r94=$hlavicka->m185r94; if ( $m185r94 == 0 ) $m185r94="";
+$m185r95=$hlavicka->m185r95; if ( $m185r95 == 0 ) $m185r95="";
+$m185r96=$hlavicka->m185r96; if ( $m185r96 == 0 ) $m185r96="";
+$m185r97=$hlavicka->m185r97; if ( $m185r97 == 0 ) $m185r97="";
+$m185r101=$hlavicka->m185r101; if ( $m185r101 == 0 ) $m185r101="";
+$m185r102=$hlavicka->m185r102; if ( $m185r102 == 0 ) $m185r102="";
+$m185r103=$hlavicka->m185r103; if ( $m185r103 == 0 ) $m185r103="";
+$m185r104=$hlavicka->m185r104; if ( $m185r104 == 0 ) $m185r104="";
+$m185r105=$hlavicka->m185r105; if ( $m185r105 == 0 ) $m185r105="";
+$m185r106=$hlavicka->m185r106; if ( $m185r106 == 0 ) $m185r106="";
+$m185r107=$hlavicka->m185r107; if ( $m185r107 == 0 ) $m185r107="";
+$m185r111=$hlavicka->m185r111; if ( $m185r111 == 0 ) $m185r111="";
+$m185r112=$hlavicka->m185r112; if ( $m185r112 == 0 ) $m185r112="";
+$m185r113=$hlavicka->m185r113; if ( $m185r113 == 0 ) $m185r113="";
+$m185r114=$hlavicka->m185r114; if ( $m185r114 == 0 ) $m185r114="";
+$m185r115=$hlavicka->m185r115; if ( $m185r115 == 0 ) $m185r115="";
+$m185r116=$hlavicka->m185r116; if ( $m185r116 == 0 ) $m185r116="";
+$m185r117=$hlavicka->m185r117; if ( $m185r117 == 0 ) $m185r117="";
+$m185r121=$hlavicka->m185r121; if ( $m185r121 == 0 ) $m185r121="";
+$m185r122=$hlavicka->m185r122; if ( $m185r122 == 0 ) $m185r122="";
+$m185r123=$hlavicka->m185r123; if ( $m185r123 == 0 ) $m185r123="";
+$m185r124=$hlavicka->m185r124; if ( $m185r124 == 0 ) $m185r124="";
+$m185r125=$hlavicka->m185r125; if ( $m185r125 == 0 ) $m185r125="";
+$m185r126=$hlavicka->m185r126; if ( $m185r126 == 0 ) $m185r126="";
+$m185r127=$hlavicka->m185r127; if ( $m185r127 == 0 ) $m185r127="";
+$m185r131=$hlavicka->m185r131; if ( $m185r131 == 0 ) $m185r131="";
+$m185r132=$hlavicka->m185r132; if ( $m185r132 == 0 ) $m185r132="";
+$m185r133=$hlavicka->m185r133; if ( $m185r133 == 0 ) $m185r133="";
+$m185r134=$hlavicka->m185r134; if ( $m185r134 == 0 ) $m185r134="";
+$m185r135=$hlavicka->m185r135; if ( $m185r135 == 0 ) $m185r135="";
+$m185r136=$hlavicka->m185r136; if ( $m185r136 == 0 ) $m185r136="";
+$m185r137=$hlavicka->m185r137; if ( $m185r137 == 0 ) $m185r137="";
+$m185r141=$hlavicka->m185r141; if ( $m185r141 == 0 ) $m185r141="";
+$m185r142=$hlavicka->m185r142; if ( $m185r142 == 0 ) $m185r142="";
+$m185r143=$hlavicka->m185r143; if ( $m185r143 == 0 ) $m185r143="";
+$m185r144=$hlavicka->m185r144; if ( $m185r144 == 0 ) $m185r144="";
+$m185r145=$hlavicka->m185r145; if ( $m185r145 == 0 ) $m185r145="";
+$m185r146=$hlavicka->m185r146; if ( $m185r146 == 0 ) $m185r146="";
+$m185r147=$hlavicka->m185r147; if ( $m185r147 == 0 ) $m185r147="";
+$m185r151=$hlavicka->m185r151; if ( $m185r151 == 0 ) $m185r151="";
+$m185r152=$hlavicka->m185r152; if ( $m185r152 == 0 ) $m185r152="";
+$m185r153=$hlavicka->m185r153; if ( $m185r153 == 0 ) $m185r153="";
+$m185r154=$hlavicka->m185r154; if ( $m185r154 == 0 ) $m185r154="";
+$m185r155=$hlavicka->m185r155; if ( $m185r155 == 0 ) $m185r155="";
+$m185r156=$hlavicka->m185r156; if ( $m185r156 == 0 ) $m185r156="";
+$m185r157=$hlavicka->m185r157; if ( $m185r157 == 0 ) $m185r157="";
+$m185r161=$hlavicka->m185r161; if ( $m185r161 == 0 ) $m185r161="";
+$m185r162=$hlavicka->m185r162; if ( $m185r162 == 0 ) $m185r162="";
+$m185r163=$hlavicka->m185r163; if ( $m185r163 == 0 ) $m185r163="";
+$m185r164=$hlavicka->m185r164; if ( $m185r164 == 0 ) $m185r164="";
+$m185r165=$hlavicka->m185r165; if ( $m185r165 == 0 ) $m185r165="";
+$m185r166=$hlavicka->m185r166; if ( $m185r166 == 0 ) $m185r166="";
+$m185r167=$hlavicka->m185r167; if ( $m185r167 == 0 ) $m185r167="";
+$m185r171=$hlavicka->m185r171; if ( $m185r171 == 0 ) $m185r171="";
+$m185r172=$hlavicka->m185r172; if ( $m185r172 == 0 ) $m185r172="";
+$m185r173=$hlavicka->m185r173; if ( $m185r173 == 0 ) $m185r173="";
+$m185r174=$hlavicka->m185r174; if ( $m185r174 == 0 ) $m185r174="";
+$m185r175=$hlavicka->m185r175; if ( $m185r175 == 0 ) $m185r175="";
+$m185r176=$hlavicka->m185r176; if ( $m185r176 == 0 ) $m185r176="";
+$m185r177=$hlavicka->m185r177; if ( $m185r177 == 0 ) $m185r177="";
+$m185r181=$hlavicka->m185r181; if ( $m185r181 == 0 ) $m185r181="";
+$m185r182=$hlavicka->m185r182; if ( $m185r182 == 0 ) $m185r182="";
+$m185r183=$hlavicka->m185r183; if ( $m185r183 == 0 ) $m185r183="";
+$m185r184=$hlavicka->m185r184; if ( $m185r184 == 0 ) $m185r184="";
+$m185r185=$hlavicka->m185r185; if ( $m185r185 == 0 ) $m185r185="";
+$m185r186=$hlavicka->m185r186; if ( $m185r186 == 0 ) $m185r186="";
+$m185r187=$hlavicka->m185r187; if ( $m185r187 == 0 ) $m185r187="";
+$m185r191=$hlavicka->m185r191; if ( $m185r191 == 0 ) $m185r191="";
+$m185r192=$hlavicka->m185r192; if ( $m185r192 == 0 ) $m185r192="";
+$m185r193=$hlavicka->m185r193; if ( $m185r193 == 0 ) $m185r193="";
+$m185r194=$hlavicka->m185r194; if ( $m185r194 == 0 ) $m185r194="";
+$m185r195=$hlavicka->m185r195; if ( $m185r195 == 0 ) $m185r195="";
+$m185r196=$hlavicka->m185r196; if ( $m185r196 == 0 ) $m185r196="";
+$m185r197=$hlavicka->m185r197; if ( $m185r197 == 0 ) $m185r197="";
+$m185r201=$hlavicka->m185r201; if ( $m185r201 == 0 ) $m185r201="";
+$m185r202=$hlavicka->m185r202; if ( $m185r202 == 0 ) $m185r202="";
+$m185r203=$hlavicka->m185r203; if ( $m185r203 == 0 ) $m185r203="";
+$m185r204=$hlavicka->m185r204; if ( $m185r204 == 0 ) $m185r204="";
+$m185r205=$hlavicka->m185r205; if ( $m185r205 == 0 ) $m185r205="";
+$m185r206=$hlavicka->m185r206; if ( $m185r206 == 0 ) $m185r206="";
+$m185r207=$hlavicka->m185r207; if ( $m185r207 == 0 ) $m185r207="";
+$m185r211=$hlavicka->m185r211; if ( $m185r211 == 0 ) $m185r211="";
+$m185r212=$hlavicka->m185r212; if ( $m185r212 == 0 ) $m185r212="";
+$m185r213=$hlavicka->m185r213; if ( $m185r213 == 0 ) $m185r213="";
+$m185r214=$hlavicka->m185r214; if ( $m185r214 == 0 ) $m185r214="";
+$m185r215=$hlavicka->m185r215; if ( $m185r215 == 0 ) $m185r215="";
+$m185r216=$hlavicka->m185r216; if ( $m185r216 == 0 ) $m185r216="";
+$m185r217=$hlavicka->m185r217; if ( $m185r217 == 0 ) $m185r217="";
+$m185r221=$hlavicka->m185r221; if ( $m185r221 == 0 ) $m185r221="";
+$m185r222=$hlavicka->m185r222; if ( $m185r222 == 0 ) $m185r222="";
+$m185r223=$hlavicka->m185r223; if ( $m185r223 == 0 ) $m185r223="";
+$m185r224=$hlavicka->m185r224; if ( $m185r224 == 0 ) $m185r224="";
+$m185r225=$hlavicka->m185r225; if ( $m185r225 == 0 ) $m185r225="";
+$m185r226=$hlavicka->m185r226; if ( $m185r226 == 0 ) $m185r226="";
+$m185r227=$hlavicka->m185r227; if ( $m185r227 == 0 ) $m185r227="";
+$m185r231=$hlavicka->m185r231; if ( $m185r231 == 0 ) $m185r231="";
+$m185r232=$hlavicka->m185r232; if ( $m185r232 == 0 ) $m185r232="";
+$m185r233=$hlavicka->m185r233; if ( $m185r233 == 0 ) $m185r233="";
+$m185r234=$hlavicka->m185r234; if ( $m185r234 == 0 ) $m185r234="";
+$m185r235=$hlavicka->m185r235; if ( $m185r235 == 0 ) $m185r235="";
+$m185r236=$hlavicka->m185r236; if ( $m185r236 == 0 ) $m185r236="";
+$m185r237=$hlavicka->m185r237; if ( $m185r237 == 0 ) $m185r237="";
+$m185r241=$hlavicka->m185r241; if ( $m185r241 == 0 ) $m185r241="";
+$m185r242=$hlavicka->m185r242; if ( $m185r242 == 0 ) $m185r242="";
+$m185r243=$hlavicka->m185r243; if ( $m185r243 == 0 ) $m185r243="";
+$m185r244=$hlavicka->m185r244; if ( $m185r244 == 0 ) $m185r244="";
+$m185r245=$hlavicka->m185r245; if ( $m185r245 == 0 ) $m185r245="";
+$m185r246=$hlavicka->m185r246; if ( $m185r246 == 0 ) $m185r246="";
+$m185r247=$hlavicka->m185r247; if ( $m185r247 == 0 ) $m185r247="";
+$m185r251=$hlavicka->m185r251; if ( $m185r251 == 0 ) $m185r251="";
+$m185r252=$hlavicka->m185r252; if ( $m185r252 == 0 ) $m185r252="";
+$m185r253=$hlavicka->m185r253; if ( $m185r253 == 0 ) $m185r253="";
+$m185r254=$hlavicka->m185r254; if ( $m185r254 == 0 ) $m185r254="";
+$m185r255=$hlavicka->m185r255; if ( $m185r255 == 0 ) $m185r255="";
+$m185r256=$hlavicka->m185r256; if ( $m185r256 == 0 ) $m185r256="";
+$m185r257=$hlavicka->m185r257; if ( $m185r257 == 0 ) $m185r257="";
+$m185r261=$hlavicka->m185r261; if ( $m185r261 == 0 ) $m185r261="";
+$m185r262=$hlavicka->m185r262; if ( $m185r262 == 0 ) $m185r262="";
+$m185r263=$hlavicka->m185r263; if ( $m185r263 == 0 ) $m185r263="";
+$m185r264=$hlavicka->m185r264; if ( $m185r264 == 0 ) $m185r264="";
+$m185r265=$hlavicka->m185r265; if ( $m185r265 == 0 ) $m185r265="";
+$m185r266=$hlavicka->m185r266; if ( $m185r266 == 0 ) $m185r266="";
+$m185r267=$hlavicka->m185r267; if ( $m185r267 == 0 ) $m185r267="";
+$m185r271=$hlavicka->m185r271; if ( $m185r271 == 0 ) $m185r271="";
+$m185r272=$hlavicka->m185r272; if ( $m185r272 == 0 ) $m185r272="";
+$m185r273=$hlavicka->m185r273; if ( $m185r273 == 0 ) $m185r273="";
+$m185r274=$hlavicka->m185r274; if ( $m185r274 == 0 ) $m185r274="";
+$m185r275=$hlavicka->m185r275; if ( $m185r275 == 0 ) $m185r275="";
+$m185r276=$hlavicka->m185r276; if ( $m185r276 == 0 ) $m185r276="";
+$m185r277=$hlavicka->m185r277; if ( $m185r277 == 0 ) $m185r277="";
+$m185r281=$hlavicka->m185r281; if ( $m185r281 == 0 ) $m185r281="";
+$m185r282=$hlavicka->m185r282; if ( $m185r282 == 0 ) $m185r282="";
+$m185r283=$hlavicka->m185r283; if ( $m185r283 == 0 ) $m185r283="";
+$m185r284=$hlavicka->m185r284; if ( $m185r284 == 0 ) $m185r284="";
+$m185r285=$hlavicka->m185r285; if ( $m185r285 == 0 ) $m185r285="";
+$m185r286=$hlavicka->m185r286; if ( $m185r286 == 0 ) $m185r286="";
+$m185r287=$hlavicka->m185r287; if ( $m185r287 == 0 ) $m185r287="";
+$m185r291=$hlavicka->m185r291; if ( $m185r291 == 0 ) $m185r291="";
+$m185r292=$hlavicka->m185r292; if ( $m185r292 == 0 ) $m185r292="";
+$m185r293=$hlavicka->m185r293; if ( $m185r293 == 0 ) $m185r293="";
+$m185r294=$hlavicka->m185r294; if ( $m185r294 == 0 ) $m185r294="";
+$m185r295=$hlavicka->m185r295; if ( $m185r295 == 0 ) $m185r295="";
+$m185r296=$hlavicka->m185r296; if ( $m185r296 == 0 ) $m185r296="";
+$m185r297=$hlavicka->m185r297; if ( $m185r297 == 0 ) $m185r297="";
+$m185r301=$hlavicka->m185r301; if ( $m185r301 == 0 ) $m185r301="";
+$m185r302=$hlavicka->m185r302; if ( $m185r302 == 0 ) $m185r302="";
+$m185r303=$hlavicka->m185r303; if ( $m185r303 == 0 ) $m185r303="";
+$m185r304=$hlavicka->m185r304; if ( $m185r304 == 0 ) $m185r304="";
+$m185r305=$hlavicka->m185r305; if ( $m185r305 == 0 ) $m185r305="";
+$m185r306=$hlavicka->m185r306; if ( $m185r306 == 0 ) $m185r306="";
+$m185r307=$hlavicka->m185r307; if ( $m185r307 == 0 ) $m185r307="";
+$m185r992=$hlavicka->m185r992;
+//if ( $m185r992 == 0 ) $m185r992="";
+$m185r993=$hlavicka->m185r993;
+//if ( $m185r993 == 0 ) $m185r993="";
+$m185r994=$hlavicka->m185r994;
+//if ( $m185r994 == 0 ) $m185r994="";
+$m185r995=$hlavicka->m185r995;
+//if ( $m185r995 == 0 ) $m185r995="";
+$m185r996=$hlavicka->m185r996;
+//if ( $m185r996 == 0 ) $m185r996="";
+$m185r997=$hlavicka->m185r997;
+//if ( $m185r997 == 0 ) $m185r997="";
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r11","$rmc",0,"R");$pdf->Cell(25,6,"$m185r12","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r13","$rmc",0,"R");$pdf->Cell(28,6,"$m185r14","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r15","$rmc",0,"R");$pdf->Cell(25,6,"$m185r16","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r17","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m185r21","$rmc",0,"R");$pdf->Cell(25,7,"$m185r22","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r23","$rmc",0,"R");$pdf->Cell(28,7,"$m185r24","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r25","$rmc",0,"R");$pdf->Cell(25,7,"$m185r26","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r27","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r31","$rmc",0,"R");$pdf->Cell(25,6,"$m185r32","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r33","$rmc",0,"R");$pdf->Cell(28,6,"$m185r34","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r35","$rmc",0,"R");$pdf->Cell(25,6,"$m185r36","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r37","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r41","$rmc",0,"R");$pdf->Cell(25,6,"$m185r42","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r43","$rmc",0,"R");$pdf->Cell(28,6,"$m185r44","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r45","$rmc",0,"R");$pdf->Cell(25,6,"$m185r46","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r47","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r51","$rmc",0,"R");$pdf->Cell(25,6,"$m185r52","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r53","$rmc",0,"R");$pdf->Cell(28,6,"$m185r54","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r55","$rmc",0,"R");$pdf->Cell(25,6,"$m185r56","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r57","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m185r61","$rmc",0,"R");$pdf->Cell(25,7,"$m185r62","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r63","$rmc",0,"R");$pdf->Cell(28,7,"$m185r64","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r65","$rmc",0,"R");$pdf->Cell(25,7,"$m185r66","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r67","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r71","$rmc",0,"R");$pdf->Cell(25,6,"$m185r72","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r73","$rmc",0,"R");$pdf->Cell(28,6,"$m185r74","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r75","$rmc",0,"R");$pdf->Cell(25,6,"$m185r76","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r77","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r81","$rmc",0,"R");$pdf->Cell(25,6,"$m185r82","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r83","$rmc",0,"R");$pdf->Cell(28,6,"$m185r84","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r85","$rmc",0,"R");$pdf->Cell(25,6,"$m185r86","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r87","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r91","$rmc",0,"R");$pdf->Cell(25,6,"$m185r92","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r93","$rmc",0,"R");$pdf->Cell(28,6,"$m185r94","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r95","$rmc",0,"R");$pdf->Cell(25,6,"$m185r96","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r97","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m185r101","$rmc",0,"R");$pdf->Cell(25,7,"$m185r102","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r103","$rmc",0,"R");$pdf->Cell(28,7,"$m185r104","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r105","$rmc",0,"R");$pdf->Cell(25,7,"$m185r106","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r107","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r111","$rmc",0,"R");$pdf->Cell(25,6,"$m185r112","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r113","$rmc",0,"R");$pdf->Cell(28,6,"$m185r114","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r115","$rmc",0,"R");$pdf->Cell(25,6,"$m185r116","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r117","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m185r121","$rmc",0,"R");$pdf->Cell(25,7,"$m185r122","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r123","$rmc",0,"R");$pdf->Cell(28,7,"$m185r124","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r125","$rmc",0,"R");$pdf->Cell(25,7,"$m185r126","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r127","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r131","$rmc",0,"R");$pdf->Cell(25,6,"$m185r132","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r133","$rmc",0,"R");$pdf->Cell(28,6,"$m185r134","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r135","$rmc",0,"R");$pdf->Cell(25,6,"$m185r136","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r137","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r141","$rmc",0,"R");$pdf->Cell(25,6,"$m185r142","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r143","$rmc",0,"R");$pdf->Cell(28,6,"$m185r144","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r145","$rmc",0,"R");$pdf->Cell(25,6,"$m185r146","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r147","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r151","$rmc",0,"R");$pdf->Cell(25,6,"$m185r152","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r153","$rmc",0,"R");$pdf->Cell(28,6,"$m185r154","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r155","$rmc",0,"R");$pdf->Cell(25,6,"$m185r156","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r157","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m185r161","$rmc",0,"R");$pdf->Cell(25,7,"$m185r162","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r163","$rmc",0,"R");$pdf->Cell(28,7,"$m185r164","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r165","$rmc",0,"R");$pdf->Cell(25,7,"$m185r166","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r167","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r171","$rmc",0,"R");$pdf->Cell(25,6,"$m185r172","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r173","$rmc",0,"R");$pdf->Cell(28,6,"$m185r174","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r175","$rmc",0,"R");$pdf->Cell(25,6,"$m185r176","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r177","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r181","$rmc",0,"R");$pdf->Cell(25,6,"$m185r182","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r183","$rmc",0,"R");$pdf->Cell(28,6,"$m185r184","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r185","$rmc",0,"R");$pdf->Cell(25,6,"$m185r186","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r187","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r191","$rmc",0,"R");$pdf->Cell(25,6,"$m185r192","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r193","$rmc",0,"R");$pdf->Cell(28,6,"$m185r194","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r195","$rmc",0,"R");$pdf->Cell(25,6,"$m185r196","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r197","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m185r201","$rmc",0,"R");$pdf->Cell(25,7,"$m185r202","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r203","$rmc",0,"R");$pdf->Cell(28,7,"$m185r204","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r205","$rmc",0,"R");$pdf->Cell(25,7,"$m185r206","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r207","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r211","$rmc",0,"R");$pdf->Cell(25,6,"$m185r212","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r213","$rmc",0,"R");$pdf->Cell(28,6,"$m185r214","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r215","$rmc",0,"R");$pdf->Cell(25,6,"$m185r216","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r217","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r221","$rmc",0,"R");$pdf->Cell(25,6,"$m185r222","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r223","$rmc",0,"R");$pdf->Cell(28,6,"$m185r224","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r225","$rmc",0,"R");$pdf->Cell(25,6,"$m185r226","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r227","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r231","$rmc",0,"R");$pdf->Cell(25,6,"$m185r232","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r233","$rmc",0,"R");$pdf->Cell(28,6,"$m185r234","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r235","$rmc",0,"R");$pdf->Cell(25,6,"$m185r236","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r237","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m185r241","$rmc",0,"R");$pdf->Cell(25,7,"$m185r242","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r243","$rmc",0,"R");$pdf->Cell(28,7,"$m185r244","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r245","$rmc",0,"R");$pdf->Cell(25,7,"$m185r246","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r247","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r251","$rmc",0,"R");$pdf->Cell(25,6,"$m185r252","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r253","$rmc",0,"R");$pdf->Cell(28,6,"$m185r254","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r255","$rmc",0,"R");$pdf->Cell(25,6,"$m185r256","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r257","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r261","$rmc",0,"R");$pdf->Cell(25,6,"$m185r262","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r263","$rmc",0,"R");$pdf->Cell(28,6,"$m185r264","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r265","$rmc",0,"R");$pdf->Cell(25,6,"$m185r266","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r267","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r271","$rmc",0,"R");$pdf->Cell(25,6,"$m185r272","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r273","$rmc",0,"R");$pdf->Cell(28,6,"$m185r274","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r275","$rmc",0,"R");$pdf->Cell(25,6,"$m185r276","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r277","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m185r281","$rmc",0,"R");$pdf->Cell(25,7,"$m185r282","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r283","$rmc",0,"R");$pdf->Cell(28,7,"$m185r284","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r285","$rmc",0,"R");$pdf->Cell(25,7,"$m185r286","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r287","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r291","$rmc",0,"R");$pdf->Cell(25,6,"$m185r292","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r293","$rmc",0,"R");$pdf->Cell(28,6,"$m185r294","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r295","$rmc",0,"R");$pdf->Cell(25,6,"$m185r296","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r297","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m185r301","$rmc",0,"R");$pdf->Cell(25,6,"$m185r302","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r303","$rmc",0,"R");$pdf->Cell(28,6,"$m185r304","$rmc",0,"R");
+$pdf->Cell(27,6,"$m185r305","$rmc",0,"R");$pdf->Cell(25,6,"$m185r306","$rmc",0,"R");
+$pdf->Cell(25,6,"$m185r307","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"","$rmc",0,"R");$pdf->Cell(25,7,"$m185r992","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r993","$rmc",0,"R");$pdf->Cell(28,7,"$m185r994","$rmc",0,"R");
+$pdf->Cell(27,7,"$m185r995","$rmc",0,"R");$pdf->Cell(25,7,"$m185r996","$rmc",0,"R");
+$pdf->Cell(25,7,"$m185r997","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"8/12","$rmc",1,"R");
+                                       }
+}
+$i = $i + 1;
+  }
+//koniec tlac strana 1 az 8
+
+
+//vytlac strana 9 az 12
+$sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_zav101s2 WHERE ico >= 0 "."";
+//echo $sqltt;
+//exit;
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+if ( $strana == 9 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str9.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str9.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,5," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+//modul 186
+$pdf->SetFont('arial','',10);
+$pdf->Cell(190,14.5," ","$rmc1",1,"L");
+$pdf->Cell(83,5," ","$rmc1",0,"L");
+if ( $kli_vrok == 2016 ) { $text="Trûby \n za v˝voz \n tovaru \n (zo stÂ. 2)"; }
+if ( $kli_vrok > 2016 ) { $text="Trûby \n z predaja\n do zahraniËia \n (zo stÂ. 2)"; }
+$pdf->MultiCell(28,4.5,"$text","$rmc","C");
+$pdf->Cell(195,7," ","$rmc1",1,"L");
+$pdf->SetFont('arial','',12);
+$m186r11=$hlavicka->m186r11; if ( $m186r11 == 0 ) $m186r11="";
+$m186r12=$hlavicka->m186r12; if ( $m186r12 == 0 ) $m186r12="";
+$m186r13=$hlavicka->m186r13; if ( $m186r13 == 0 ) $m186r13="";
+$m186r14=$hlavicka->m186r14; if ( $m186r14 == 0 ) $m186r14="";
+$m186r15=$hlavicka->m186r15; if ( $m186r15 == 0 ) $m186r15="";
+$m186r16=$hlavicka->m186r16; if ( $m186r16 == 0 ) $m186r16="";
+$m186r17=$hlavicka->m186r17; if ( $m186r17 == 0 ) $m186r17="";
+$m186r21=$hlavicka->m186r21; if ( $m186r21 == 0 ) $m186r21="";
+$m186r22=$hlavicka->m186r22; if ( $m186r22 == 0 ) $m186r22="";
+$m186r23=$hlavicka->m186r23; if ( $m186r23 == 0 ) $m186r23="";
+$m186r24=$hlavicka->m186r24; if ( $m186r24 == 0 ) $m186r24="";
+$m186r25=$hlavicka->m186r25; if ( $m186r25 == 0 ) $m186r25="";
+$m186r26=$hlavicka->m186r26; if ( $m186r26 == 0 ) $m186r26="";
+$m186r27=$hlavicka->m186r27; if ( $m186r27 == 0 ) $m186r27="";
+$m186r31=$hlavicka->m186r31; if ( $m186r31 == 0 ) $m186r31="";
+$m186r32=$hlavicka->m186r32; if ( $m186r32 == 0 ) $m186r32="";
+$m186r33=$hlavicka->m186r33; if ( $m186r33 == 0 ) $m186r33="";
+$m186r34=$hlavicka->m186r34; if ( $m186r34 == 0 ) $m186r34="";
+$m186r35=$hlavicka->m186r35; if ( $m186r35 == 0 ) $m186r35="";
+$m186r36=$hlavicka->m186r36; if ( $m186r36 == 0 ) $m186r36="";
+$m186r37=$hlavicka->m186r37; if ( $m186r37 == 0 ) $m186r37="";
+$m186r41=$hlavicka->m186r41; if ( $m186r41 == 0 ) $m186r41="";
+$m186r42=$hlavicka->m186r42; if ( $m186r42 == 0 ) $m186r42="";
+$m186r43=$hlavicka->m186r43; if ( $m186r43 == 0 ) $m186r43="";
+$m186r44=$hlavicka->m186r44; if ( $m186r44 == 0 ) $m186r44="";
+$m186r45=$hlavicka->m186r45; if ( $m186r45 == 0 ) $m186r45="";
+$m186r46=$hlavicka->m186r46; if ( $m186r46 == 0 ) $m186r46="";
+$m186r47=$hlavicka->m186r47; if ( $m186r47 == 0 ) $m186r47="";
+$m186r51=$hlavicka->m186r51; if ( $m186r51 == 0 ) $m186r51="";
+$m186r52=$hlavicka->m186r52; if ( $m186r52 == 0 ) $m186r52="";
+$m186r53=$hlavicka->m186r53; if ( $m186r53 == 0 ) $m186r53="";
+$m186r54=$hlavicka->m186r54; if ( $m186r54 == 0 ) $m186r54="";
+$m186r55=$hlavicka->m186r55; if ( $m186r55 == 0 ) $m186r55="";
+$m186r56=$hlavicka->m186r56; if ( $m186r56 == 0 ) $m186r56="";
+$m186r57=$hlavicka->m186r57; if ( $m186r57 == 0 ) $m186r57="";
+$m186r61=$hlavicka->m186r61; if ( $m186r61 == 0 ) $m186r61="";
+$m186r62=$hlavicka->m186r62; if ( $m186r62 == 0 ) $m186r62="";
+$m186r63=$hlavicka->m186r63; if ( $m186r63 == 0 ) $m186r63="";
+$m186r64=$hlavicka->m186r64; if ( $m186r64 == 0 ) $m186r64="";
+$m186r65=$hlavicka->m186r65; if ( $m186r65 == 0 ) $m186r65="";
+$m186r66=$hlavicka->m186r66; if ( $m186r66 == 0 ) $m186r66="";
+$m186r67=$hlavicka->m186r67; if ( $m186r67 == 0 ) $m186r67="";
+$m186r71=$hlavicka->m186r71; if ( $m186r71 == 0 ) $m186r71="";
+$m186r72=$hlavicka->m186r72; if ( $m186r72 == 0 ) $m186r72="";
+$m186r73=$hlavicka->m186r73; if ( $m186r73 == 0 ) $m186r73="";
+$m186r74=$hlavicka->m186r74; if ( $m186r74 == 0 ) $m186r74="";
+$m186r75=$hlavicka->m186r75; if ( $m186r75 == 0 ) $m186r75="";
+$m186r76=$hlavicka->m186r76; if ( $m186r76 == 0 ) $m186r76="";
+$m186r77=$hlavicka->m186r77; if ( $m186r77 == 0 ) $m186r77="";
+$m186r81=$hlavicka->m186r81; if ( $m186r81 == 0 ) $m186r81="";
+$m186r82=$hlavicka->m186r82; if ( $m186r82 == 0 ) $m186r82="";
+$m186r83=$hlavicka->m186r83; if ( $m186r83 == 0 ) $m186r83="";
+$m186r84=$hlavicka->m186r84; if ( $m186r84 == 0 ) $m186r84="";
+$m186r85=$hlavicka->m186r85; if ( $m186r85 == 0 ) $m186r85="";
+$m186r86=$hlavicka->m186r86; if ( $m186r86 == 0 ) $m186r86="";
+$m186r87=$hlavicka->m186r87; if ( $m186r87 == 0 ) $m186r87="";
+$m186r91=$hlavicka->m186r91; if ( $m186r91 == 0 ) $m186r91="";
+$m186r92=$hlavicka->m186r92; if ( $m186r92 == 0 ) $m186r92="";
+$m186r93=$hlavicka->m186r93; if ( $m186r93 == 0 ) $m186r93="";
+$m186r94=$hlavicka->m186r94; if ( $m186r94 == 0 ) $m186r94="";
+$m186r95=$hlavicka->m186r95; if ( $m186r95 == 0 ) $m186r95="";
+$m186r96=$hlavicka->m186r96; if ( $m186r96 == 0 ) $m186r96="";
+$m186r97=$hlavicka->m186r97; if ( $m186r97 == 0 ) $m186r97="";
+$m186r101=$hlavicka->m186r101; if ( $m186r101 == 0 ) $m186r101="";
+$m186r102=$hlavicka->m186r102; if ( $m186r102 == 0 ) $m186r102="";
+$m186r103=$hlavicka->m186r103; if ( $m186r103 == 0 ) $m186r103="";
+$m186r104=$hlavicka->m186r104; if ( $m186r104 == 0 ) $m186r104="";
+$m186r105=$hlavicka->m186r105; if ( $m186r105 == 0 ) $m186r105="";
+$m186r106=$hlavicka->m186r106; if ( $m186r106 == 0 ) $m186r106="";
+$m186r107=$hlavicka->m186r107; if ( $m186r107 == 0 ) $m186r107="";
+$m186r111=$hlavicka->m186r111; if ( $m186r111 == 0 ) $m186r111="";
+$m186r112=$hlavicka->m186r112; if ( $m186r112 == 0 ) $m186r112="";
+$m186r113=$hlavicka->m186r113; if ( $m186r113 == 0 ) $m186r113="";
+$m186r114=$hlavicka->m186r114; if ( $m186r114 == 0 ) $m186r114="";
+$m186r115=$hlavicka->m186r115; if ( $m186r115 == 0 ) $m186r115="";
+$m186r116=$hlavicka->m186r116; if ( $m186r116 == 0 ) $m186r116="";
+$m186r117=$hlavicka->m186r117; if ( $m186r117 == 0 ) $m186r117="";
+$m186r121=$hlavicka->m186r121; if ( $m186r121 == 0 ) $m186r121="";
+$m186r122=$hlavicka->m186r122; if ( $m186r122 == 0 ) $m186r122="";
+$m186r123=$hlavicka->m186r123; if ( $m186r123 == 0 ) $m186r123="";
+$m186r124=$hlavicka->m186r124; if ( $m186r124 == 0 ) $m186r124="";
+$m186r125=$hlavicka->m186r125; if ( $m186r125 == 0 ) $m186r125="";
+$m186r126=$hlavicka->m186r126; if ( $m186r126 == 0 ) $m186r126="";
+$m186r127=$hlavicka->m186r127; if ( $m186r127 == 0 ) $m186r127="";
+$m186r131=$hlavicka->m186r131; if ( $m186r131 == 0 ) $m186r131="";
+$m186r132=$hlavicka->m186r132; if ( $m186r132 == 0 ) $m186r132="";
+$m186r133=$hlavicka->m186r133; if ( $m186r133 == 0 ) $m186r133="";
+$m186r134=$hlavicka->m186r134; if ( $m186r134 == 0 ) $m186r134="";
+$m186r135=$hlavicka->m186r135; if ( $m186r135 == 0 ) $m186r135="";
+$m186r136=$hlavicka->m186r136; if ( $m186r136 == 0 ) $m186r136="";
+$m186r137=$hlavicka->m186r137; if ( $m186r137 == 0 ) $m186r137="";
+$m186r141=$hlavicka->m186r141; if ( $m186r141 == 0 ) $m186r141="";
+$m186r142=$hlavicka->m186r142; if ( $m186r142 == 0 ) $m186r142="";
+$m186r143=$hlavicka->m186r143; if ( $m186r143 == 0 ) $m186r143="";
+$m186r144=$hlavicka->m186r144; if ( $m186r144 == 0 ) $m186r144="";
+$m186r145=$hlavicka->m186r145; if ( $m186r145 == 0 ) $m186r145="";
+$m186r146=$hlavicka->m186r146; if ( $m186r146 == 0 ) $m186r146="";
+$m186r147=$hlavicka->m186r147; if ( $m186r147 == 0 ) $m186r147="";
+$m186r151=$hlavicka->m186r151; if ( $m186r151 == 0 ) $m186r151="";
+$m186r152=$hlavicka->m186r152; if ( $m186r152 == 0 ) $m186r152="";
+$m186r153=$hlavicka->m186r153; if ( $m186r153 == 0 ) $m186r153="";
+$m186r154=$hlavicka->m186r154; if ( $m186r154 == 0 ) $m186r154="";
+$m186r155=$hlavicka->m186r155; if ( $m186r155 == 0 ) $m186r155="";
+$m186r156=$hlavicka->m186r156; if ( $m186r156 == 0 ) $m186r156="";
+$m186r157=$hlavicka->m186r157; if ( $m186r157 == 0 ) $m186r157="";
+$m186r161=$hlavicka->m186r161; if ( $m186r161 == 0 ) $m186r161="";
+$m186r162=$hlavicka->m186r162; if ( $m186r162 == 0 ) $m186r162="";
+$m186r163=$hlavicka->m186r163; if ( $m186r163 == 0 ) $m186r163="";
+$m186r164=$hlavicka->m186r164; if ( $m186r164 == 0 ) $m186r164="";
+$m186r165=$hlavicka->m186r165; if ( $m186r165 == 0 ) $m186r165="";
+$m186r166=$hlavicka->m186r166; if ( $m186r166 == 0 ) $m186r166="";
+$m186r167=$hlavicka->m186r167; if ( $m186r167 == 0 ) $m186r167="";
+$m186r171=$hlavicka->m186r171; if ( $m186r171 == 0 ) $m186r171="";
+$m186r172=$hlavicka->m186r172; if ( $m186r172 == 0 ) $m186r172="";
+$m186r173=$hlavicka->m186r173; if ( $m186r173 == 0 ) $m186r173="";
+$m186r174=$hlavicka->m186r174; if ( $m186r174 == 0 ) $m186r174="";
+$m186r175=$hlavicka->m186r175; if ( $m186r175 == 0 ) $m186r175="";
+$m186r176=$hlavicka->m186r176; if ( $m186r176 == 0 ) $m186r176="";
+$m186r177=$hlavicka->m186r177; if ( $m186r177 == 0 ) $m186r177="";
+$m186r181=$hlavicka->m186r181; if ( $m186r181 == 0 ) $m186r181="";
+$m186r182=$hlavicka->m186r182; if ( $m186r182 == 0 ) $m186r182="";
+$m186r183=$hlavicka->m186r183; if ( $m186r183 == 0 ) $m186r183="";
+$m186r184=$hlavicka->m186r184; if ( $m186r184 == 0 ) $m186r184="";
+$m186r185=$hlavicka->m186r185; if ( $m186r185 == 0 ) $m186r185="";
+$m186r186=$hlavicka->m186r186; if ( $m186r186 == 0 ) $m186r186="";
+$m186r187=$hlavicka->m186r187; if ( $m186r187 == 0 ) $m186r187="";
+$m186r191=$hlavicka->m186r191; if ( $m186r191 == 0 ) $m186r191="";
+$m186r192=$hlavicka->m186r192; if ( $m186r192 == 0 ) $m186r192="";
+$m186r193=$hlavicka->m186r193; if ( $m186r193 == 0 ) $m186r193="";
+$m186r194=$hlavicka->m186r194; if ( $m186r194 == 0 ) $m186r194="";
+$m186r195=$hlavicka->m186r195; if ( $m186r195 == 0 ) $m186r195="";
+$m186r196=$hlavicka->m186r196; if ( $m186r196 == 0 ) $m186r196="";
+$m186r197=$hlavicka->m186r197; if ( $m186r197 == 0 ) $m186r197="";
+$m186r201=$hlavicka->m186r201; if ( $m186r201 == 0 ) $m186r201="";
+$m186r202=$hlavicka->m186r202; if ( $m186r202 == 0 ) $m186r202="";
+$m186r203=$hlavicka->m186r203; if ( $m186r203 == 0 ) $m186r203="";
+$m186r204=$hlavicka->m186r204; if ( $m186r204 == 0 ) $m186r204="";
+$m186r205=$hlavicka->m186r205; if ( $m186r205 == 0 ) $m186r205="";
+$m186r206=$hlavicka->m186r206; if ( $m186r206 == 0 ) $m186r206="";
+$m186r207=$hlavicka->m186r207; if ( $m186r207 == 0 ) $m186r207="";
+$m186r211=$hlavicka->m186r211; if ( $m186r211 == 0 ) $m186r211="";
+$m186r212=$hlavicka->m186r212; if ( $m186r212 == 0 ) $m186r212="";
+$m186r213=$hlavicka->m186r213; if ( $m186r213 == 0 ) $m186r213="";
+$m186r214=$hlavicka->m186r214; if ( $m186r214 == 0 ) $m186r214="";
+$m186r215=$hlavicka->m186r215; if ( $m186r215 == 0 ) $m186r215="";
+$m186r216=$hlavicka->m186r216; if ( $m186r216 == 0 ) $m186r216="";
+$m186r217=$hlavicka->m186r217; if ( $m186r217 == 0 ) $m186r217="";
+$m186r221=$hlavicka->m186r221; if ( $m186r221 == 0 ) $m186r221="";
+$m186r222=$hlavicka->m186r222; if ( $m186r222 == 0 ) $m186r222="";
+$m186r223=$hlavicka->m186r223; if ( $m186r223 == 0 ) $m186r223="";
+$m186r224=$hlavicka->m186r224; if ( $m186r224 == 0 ) $m186r224="";
+$m186r225=$hlavicka->m186r225; if ( $m186r225 == 0 ) $m186r225="";
+$m186r226=$hlavicka->m186r226; if ( $m186r226 == 0 ) $m186r226="";
+$m186r227=$hlavicka->m186r227; if ( $m186r227 == 0 ) $m186r227="";
+$m186r231=$hlavicka->m186r231; if ( $m186r231 == 0 ) $m186r231="";
+$m186r232=$hlavicka->m186r232; if ( $m186r232 == 0 ) $m186r232="";
+$m186r233=$hlavicka->m186r233; if ( $m186r233 == 0 ) $m186r233="";
+$m186r234=$hlavicka->m186r234; if ( $m186r234 == 0 ) $m186r234="";
+$m186r235=$hlavicka->m186r235; if ( $m186r235 == 0 ) $m186r235="";
+$m186r236=$hlavicka->m186r236; if ( $m186r236 == 0 ) $m186r236="";
+$m186r237=$hlavicka->m186r237; if ( $m186r237 == 0 ) $m186r237="";
+$m186r241=$hlavicka->m186r241; if ( $m186r241 == 0 ) $m186r241="";
+$m186r242=$hlavicka->m186r242; if ( $m186r242 == 0 ) $m186r242="";
+$m186r243=$hlavicka->m186r243; if ( $m186r243 == 0 ) $m186r243="";
+$m186r244=$hlavicka->m186r244; if ( $m186r244 == 0 ) $m186r244="";
+$m186r245=$hlavicka->m186r245; if ( $m186r245 == 0 ) $m186r245="";
+$m186r246=$hlavicka->m186r246; if ( $m186r246 == 0 ) $m186r246="";
+$m186r247=$hlavicka->m186r247; if ( $m186r247 == 0 ) $m186r247="";
+$m186r251=$hlavicka->m186r251; if ( $m186r251 == 0 ) $m186r251="";
+$m186r252=$hlavicka->m186r252; if ( $m186r252 == 0 ) $m186r252="";
+$m186r253=$hlavicka->m186r253; if ( $m186r253 == 0 ) $m186r253="";
+$m186r254=$hlavicka->m186r254; if ( $m186r254 == 0 ) $m186r254="";
+$m186r255=$hlavicka->m186r255; if ( $m186r255 == 0 ) $m186r255="";
+$m186r256=$hlavicka->m186r256; if ( $m186r256 == 0 ) $m186r256="";
+$m186r257=$hlavicka->m186r257; if ( $m186r257 == 0 ) $m186r257="";
+$m186r261=$hlavicka->m186r261; if ( $m186r261 == 0 ) $m186r261="";
+$m186r262=$hlavicka->m186r262; if ( $m186r262 == 0 ) $m186r262="";
+$m186r263=$hlavicka->m186r263; if ( $m186r263 == 0 ) $m186r263="";
+$m186r264=$hlavicka->m186r264; if ( $m186r264 == 0 ) $m186r264="";
+$m186r265=$hlavicka->m186r265; if ( $m186r265 == 0 ) $m186r265="";
+$m186r266=$hlavicka->m186r266; if ( $m186r266 == 0 ) $m186r266="";
+$m186r267=$hlavicka->m186r267; if ( $m186r267 == 0 ) $m186r267="";
+$m186r271=$hlavicka->m186r271; if ( $m186r271 == 0 ) $m186r271="";
+$m186r272=$hlavicka->m186r272; if ( $m186r272 == 0 ) $m186r272="";
+$m186r273=$hlavicka->m186r273; if ( $m186r273 == 0 ) $m186r273="";
+$m186r274=$hlavicka->m186r274; if ( $m186r274 == 0 ) $m186r274="";
+$m186r275=$hlavicka->m186r275; if ( $m186r275 == 0 ) $m186r275="";
+$m186r276=$hlavicka->m186r276; if ( $m186r276 == 0 ) $m186r276="";
+$m186r277=$hlavicka->m186r277; if ( $m186r277 == 0 ) $m186r277="";
+$m186r281=$hlavicka->m186r281; if ( $m186r281 == 0 ) $m186r281="";
+$m186r282=$hlavicka->m186r282; if ( $m186r282 == 0 ) $m186r282="";
+$m186r283=$hlavicka->m186r283; if ( $m186r283 == 0 ) $m186r283="";
+$m186r284=$hlavicka->m186r284; if ( $m186r284 == 0 ) $m186r284="";
+$m186r285=$hlavicka->m186r285; if ( $m186r285 == 0 ) $m186r285="";
+$m186r286=$hlavicka->m186r286; if ( $m186r286 == 0 ) $m186r286="";
+$m186r287=$hlavicka->m186r287; if ( $m186r287 == 0 ) $m186r287="";
+$m186r291=$hlavicka->m186r291; if ( $m186r291 == 0 ) $m186r291="";
+$m186r292=$hlavicka->m186r292; if ( $m186r292 == 0 ) $m186r292="";
+$m186r293=$hlavicka->m186r293; if ( $m186r293 == 0 ) $m186r293="";
+$m186r294=$hlavicka->m186r294; if ( $m186r294 == 0 ) $m186r294="";
+$m186r295=$hlavicka->m186r295; if ( $m186r295 == 0 ) $m186r295="";
+$m186r296=$hlavicka->m186r296; if ( $m186r296 == 0 ) $m186r296="";
+$m186r297=$hlavicka->m186r297; if ( $m186r297 == 0 ) $m186r297="";
+$m186r301=$hlavicka->m186r301; if ( $m186r301 == 0 ) $m186r301="";
+$m186r302=$hlavicka->m186r302; if ( $m186r302 == 0 ) $m186r302="";
+$m186r303=$hlavicka->m186r303; if ( $m186r303 == 0 ) $m186r303="";
+$m186r304=$hlavicka->m186r304; if ( $m186r304 == 0 ) $m186r304="";
+$m186r305=$hlavicka->m186r305; if ( $m186r305 == 0 ) $m186r305="";
+$m186r306=$hlavicka->m186r306; if ( $m186r306 == 0 ) $m186r306="";
+$m186r307=$hlavicka->m186r307; if ( $m186r307 == 0 ) $m186r307="";
+$m186r992=$hlavicka->m186r992;
+//if ( $m186r992 == 0 ) $m186r992="";
+$m186r993=$hlavicka->m186r993;
+//if ( $m186r993 == 0 ) $m186r993="";
+$m186r994=$hlavicka->m186r994;
+//if ( $m186r994 == 0 ) $m186r994="";
+$m186r995=$hlavicka->m186r995;
+//if ( $m186r995 == 0 ) $m186r995="";
+$m186r996=$hlavicka->m186r996;
+//if ( $m186r996 == 0 ) $m186r996="";
+$m186r997=$hlavicka->m186r997;
+//if ( $m186r997 == 0 ) $m186r997="";
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r11","$rmc",0,"R");$pdf->Cell(25,6,"$m186r12","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r13","$rmc",0,"R");$pdf->Cell(28,6,"$m186r14","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r15","$rmc",0,"R");$pdf->Cell(25,6,"$m186r16","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r17","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m186r21","$rmc",0,"R");$pdf->Cell(25,7,"$m186r22","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r23","$rmc",0,"R");$pdf->Cell(28,7,"$m186r24","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r25","$rmc",0,"R");$pdf->Cell(25,7,"$m186r26","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r27","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r31","$rmc",0,"R");$pdf->Cell(25,6,"$m186r32","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r33","$rmc",0,"R");$pdf->Cell(28,6,"$m186r34","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r35","$rmc",0,"R");$pdf->Cell(25,6,"$m186r36","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r37","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m186r41","$rmc",0,"R");$pdf->Cell(25,7,"$m186r42","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r43","$rmc",0,"R");$pdf->Cell(28,7,"$m186r44","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r45","$rmc",0,"R");$pdf->Cell(25,7,"$m186r46","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r47","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r51","$rmc",0,"R");$pdf->Cell(25,6,"$m186r52","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r53","$rmc",0,"R");$pdf->Cell(28,6,"$m186r54","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r55","$rmc",0,"R");$pdf->Cell(25,6,"$m186r56","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r57","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r61","$rmc",0,"R");$pdf->Cell(25,6,"$m186r62","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r63","$rmc",0,"R");$pdf->Cell(28,6,"$m186r64","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r65","$rmc",0,"R");$pdf->Cell(25,6,"$m186r66","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r67","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r71","$rmc",0,"R");$pdf->Cell(25,6,"$m186r72","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r73","$rmc",0,"R");$pdf->Cell(28,6,"$m186r74","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r75","$rmc",0,"R");$pdf->Cell(25,6,"$m186r76","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r77","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r81","$rmc",0,"R");$pdf->Cell(25,6,"$m186r82","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r83","$rmc",0,"R");$pdf->Cell(28,6,"$m186r84","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r85","$rmc",0,"R");$pdf->Cell(25,6,"$m186r86","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r87","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r91","$rmc",0,"R");$pdf->Cell(25,6,"$m186r92","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r93","$rmc",0,"R");$pdf->Cell(28,6,"$m186r94","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r95","$rmc",0,"R");$pdf->Cell(25,6,"$m186r96","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r97","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m186r101","$rmc",0,"R");$pdf->Cell(25,7,"$m186r102","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r103","$rmc",0,"R");$pdf->Cell(28,7,"$m186r104","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r105","$rmc",0,"R");$pdf->Cell(25,7,"$m186r106","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r107","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r111","$rmc",0,"R");$pdf->Cell(25,6,"$m186r112","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r113","$rmc",0,"R");$pdf->Cell(28,6,"$m186r114","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r115","$rmc",0,"R");$pdf->Cell(25,6,"$m186r116","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r117","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m186r121","$rmc",0,"R");$pdf->Cell(25,7,"$m186r122","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r123","$rmc",0,"R");$pdf->Cell(28,7,"$m186r124","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r125","$rmc",0,"R");$pdf->Cell(25,7,"$m186r126","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r127","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r131","$rmc",0,"R");$pdf->Cell(25,6,"$m186r132","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r133","$rmc",0,"R");$pdf->Cell(28,6,"$m186r134","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r135","$rmc",0,"R");$pdf->Cell(25,6,"$m186r136","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r137","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r141","$rmc",0,"R");$pdf->Cell(25,6,"$m186r142","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r143","$rmc",0,"R");$pdf->Cell(28,6,"$m186r144","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r145","$rmc",0,"R");$pdf->Cell(25,6,"$m186r146","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r147","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r151","$rmc",0,"R");$pdf->Cell(25,6,"$m186r152","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r153","$rmc",0,"R");$pdf->Cell(28,6,"$m186r154","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r155","$rmc",0,"R");$pdf->Cell(25,6,"$m186r156","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r157","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m186r161","$rmc",0,"R");$pdf->Cell(25,7,"$m186r162","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r163","$rmc",0,"R");$pdf->Cell(28,7,"$m186r164","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r165","$rmc",0,"R");$pdf->Cell(25,7,"$m186r166","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r167","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r171","$rmc",0,"R");$pdf->Cell(25,6,"$m186r172","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r173","$rmc",0,"R");$pdf->Cell(28,6,"$m186r174","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r175","$rmc",0,"R");$pdf->Cell(25,6,"$m186r176","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r177","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r181","$rmc",0,"R");$pdf->Cell(25,6,"$m186r182","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r183","$rmc",0,"R");$pdf->Cell(28,6,"$m186r184","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r185","$rmc",0,"R");$pdf->Cell(25,6,"$m186r186","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r187","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r191","$rmc",0,"R");$pdf->Cell(25,6,"$m186r192","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r193","$rmc",0,"R");$pdf->Cell(28,6,"$m186r194","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r195","$rmc",0,"R");$pdf->Cell(25,6,"$m186r196","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r197","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m186r201","$rmc",0,"R");$pdf->Cell(25,7,"$m186r202","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r203","$rmc",0,"R");$pdf->Cell(28,7,"$m186r204","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r205","$rmc",0,"R");$pdf->Cell(25,7,"$m186r206","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r207","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r211","$rmc",0,"R");$pdf->Cell(25,6,"$m186r212","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r213","$rmc",0,"R");$pdf->Cell(28,6,"$m186r214","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r215","$rmc",0,"R");$pdf->Cell(25,6,"$m186r216","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r217","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r221","$rmc",0,"R");$pdf->Cell(25,6,"$m186r222","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r223","$rmc",0,"R");$pdf->Cell(28,6,"$m186r224","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r225","$rmc",0,"R");$pdf->Cell(25,6,"$m186r226","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r227","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r231","$rmc",0,"R");$pdf->Cell(25,6,"$m186r232","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r233","$rmc",0,"R");$pdf->Cell(28,6,"$m186r234","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r235","$rmc",0,"R");$pdf->Cell(25,6,"$m186r236","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r237","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m186r241","$rmc",0,"R");$pdf->Cell(25,7,"$m186r242","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r243","$rmc",0,"R");$pdf->Cell(28,7,"$m186r244","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r245","$rmc",0,"R");$pdf->Cell(25,7,"$m186r246","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r247","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r251","$rmc",0,"R");$pdf->Cell(25,6,"$m186r252","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r253","$rmc",0,"R");$pdf->Cell(28,6,"$m186r254","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r255","$rmc",0,"R");$pdf->Cell(25,6,"$m186r256","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r257","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r261","$rmc",0,"R");$pdf->Cell(25,6,"$m186r262","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r263","$rmc",0,"R");$pdf->Cell(28,6,"$m186r264","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r265","$rmc",0,"R");$pdf->Cell(25,6,"$m186r266","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r267","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r271","$rmc",0,"R");$pdf->Cell(25,6,"$m186r272","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r273","$rmc",0,"R");$pdf->Cell(28,6,"$m186r274","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r275","$rmc",0,"R");$pdf->Cell(25,6,"$m186r276","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r277","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"$m186r281","$rmc",0,"R");$pdf->Cell(25,7,"$m186r282","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r283","$rmc",0,"R");$pdf->Cell(28,7,"$m186r284","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r285","$rmc",0,"R");$pdf->Cell(25,7,"$m186r286","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r287","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r291","$rmc",0,"R");$pdf->Cell(25,6,"$m186r292","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r293","$rmc",0,"R");$pdf->Cell(28,6,"$m186r294","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r295","$rmc",0,"R");$pdf->Cell(25,6,"$m186r296","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r297","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$m186r301","$rmc",0,"R");$pdf->Cell(25,6,"$m186r302","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r303","$rmc",0,"R");$pdf->Cell(28,6,"$m186r304","$rmc",0,"R");
+$pdf->Cell(27,6,"$m186r305","$rmc",0,"R");$pdf->Cell(25,6,"$m186r306","$rmc",0,"R");
+$pdf->Cell(25,6,"$m186r307","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(22,7,"","$rmc",0,"R");$pdf->Cell(25,7,"$m186r992","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r993","$rmc",0,"R");$pdf->Cell(28,7,"$m186r994","$rmc",0,"R");
+$pdf->Cell(27,7,"$m186r995","$rmc",0,"R");$pdf->Cell(25,7,"$m186r996","$rmc",0,"R");
+$pdf->Cell(25,7,"$m186r997","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"9/12","$rmc",1,"R");
+                                       }
+
+if ( $strana == 10 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str10.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str10.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 187
+$m187r1=$hlavicka->m187r1; if ( $m187r1 == 0 ) $m187r1="";
+$pdf->Cell(195,25," ","$rmc1",1,"L");
+$pdf->Cell(113,5," ","$rmc1",0,"R");$pdf->Cell(74,6,"$m187r1","$rmc",1,"R");
+
+//modul 100101
+$m1590r1a=" ";
+$m1590r1b=" ";
+if ( $hlavicka->m1590r1a == 1 ) { $m1590r1a="x"; }
+if ( $hlavicka->m1590r1b == 1 ) { $m1590r1b="x"; }
+$pdf->Cell(190,20," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1590r1a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r1b","$rmc",1,"C");
+
+//modul 100102
+$m1590r2a=" ";
+$m1590r2b=" ";
+if ( $hlavicka->m1590r2a == 1 ) { $m1590r2a="x"; }
+if ( $hlavicka->m1590r2b == 1 ) { $m1590r2b="x"; }
+$pdf->Cell(190,24," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r2a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r2b","$rmc",1,"C");
+
+//modul 590
+$m590r11=$hlavicka->m590r11; if ( $m590r11 == 0 ) $m590r11="";
+$m590r12=$hlavicka->m590r12; if ( $m590r12 == 0 ) $m590r12="";
+$m590r13=$hlavicka->m590r13; if ( $m590r13 == 0 ) $m590r13="";
+$m590r14=$hlavicka->m590r14; if ( $m590r14 == 0 ) $m590r14="";
+$m590r15=$hlavicka->m590r15; if ( $m590r15 == 0 ) $m590r15="";
+$m590r21=$hlavicka->m590r21; if ( $m590r21 == 0 ) $m590r21="";
+$m590r22=$hlavicka->m590r22; if ( $m590r22 == 0 ) $m590r22="";
+$m590r23=$hlavicka->m590r23; if ( $m590r23 == 0 ) $m590r23="";
+$m590r24=$hlavicka->m590r24; if ( $m590r24 == 0 ) $m590r24="";
+$m590r25=$hlavicka->m590r25; if ( $m590r25 == 0 ) $m590r25="";
+$m590r31=$hlavicka->m590r31; if ( $m590r31 == 0 ) $m590r31="";
+$m590r32=$hlavicka->m590r32; if ( $m590r32 == 0 ) $m590r32="";
+$m590r33=$hlavicka->m590r33; if ( $m590r33 == 0 ) $m590r33="";
+$m590r34=$hlavicka->m590r34; if ( $m590r34 == 0 ) $m590r34="";
+$m590r35=$hlavicka->m590r35; if ( $m590r35 == 0 ) $m590r35="";
+$m590r41=$hlavicka->m590r41; if ( $m590r41 == 0 ) $m590r41="";
+$m590r42=$hlavicka->m590r42; if ( $m590r42 == 0 ) $m590r42="";
+$m590r43=$hlavicka->m590r43; if ( $m590r43 == 0 ) $m590r43="";
+$m590r44=$hlavicka->m590r44; if ( $m590r44 == 0 ) $m590r44="";
+$m590r45=$hlavicka->m590r45; if ( $m590r45 == 0 ) $m590r45="";
+$m590r51=$hlavicka->m590r51; if ( $m590r51 == 0 ) $m590r51="";
+$m590r52=$hlavicka->m590r52; if ( $m590r52 == 0 ) $m590r52="";
+$m590r53=$hlavicka->m590r53; if ( $m590r53 == 0 ) $m590r53="";
+$m590r54=$hlavicka->m590r54; if ( $m590r54 == 0 ) $m590r54="";
+$m590r55=$hlavicka->m590r55; if ( $m590r55 == 0 ) $m590r55="";
+$m590r61=$hlavicka->m590r61; if ( $m590r61 == 0 ) $m590r61="";
+$m590r62=$hlavicka->m590r62; if ( $m590r62 == 0 ) $m590r62="";
+$m590r63=$hlavicka->m590r63; if ( $m590r63 == 0 ) $m590r63="";
+$m590r64=$hlavicka->m590r64; if ( $m590r64 == 0 ) $m590r64="";
+$m590r65=$hlavicka->m590r65; if ( $m590r65 == 0 ) $m590r65="";
+$m590r71=$hlavicka->m590r71; if ( $m590r71 == 0 ) $m590r71="";
+$m590r72=$hlavicka->m590r72; if ( $m590r72 == 0 ) $m590r72="";
+$m590r73=$hlavicka->m590r73; if ( $m590r73 == 0 ) $m590r73="";
+$m590r74=$hlavicka->m590r74; if ( $m590r74 == 0 ) $m590r74="";
+$m590r75=$hlavicka->m590r75; if ( $m590r75 == 0 ) $m590r75="";
+$m590r81=$hlavicka->m590r81; if ( $m590r81 == 0 ) $m590r81="";
+$m590r82=$hlavicka->m590r82; if ( $m590r82 == 0 ) $m590r82="";
+$m590r83=$hlavicka->m590r83; if ( $m590r83 == 0 ) $m590r83="";
+$m590r84=$hlavicka->m590r84; if ( $m590r84 == 0 ) $m590r84="";
+$m590r85=$hlavicka->m590r85; if ( $m590r85 == 0 ) $m590r85="";
+$m590r91=$hlavicka->m590r91; if ( $m590r91 == 0 ) $m590r91="";
+$m590r92=$hlavicka->m590r92; if ( $m590r92 == 0 ) $m590r92="";
+$m590r93=$hlavicka->m590r93; if ( $m590r93 == 0 ) $m590r93="";
+$m590r94=$hlavicka->m590r94; if ( $m590r94 == 0 ) $m590r94="";
+$m590r95=$hlavicka->m590r95; if ( $m590r95 == 0 ) $m590r95="";
+$m590r101=$hlavicka->m590r101; if ( $m590r101 == 0 ) $m590r101="";
+$m590r102=$hlavicka->m590r102; if ( $m590r102 == 0 ) $m590r102="";
+$m590r103=$hlavicka->m590r103; if ( $m590r103 == 0 ) $m590r103="";
+$m590r104=$hlavicka->m590r104; if ( $m590r104 == 0 ) $m590r104="";
+$m590r105=$hlavicka->m590r105; if ( $m590r105 == 0 ) $m590r105="";
+$m590r111=$hlavicka->m590r111; if ( $m590r111 == 0 ) $m590r111="";
+$m590r112=$hlavicka->m590r112; if ( $m590r112 == 0 ) $m590r112="";
+$m590r113=$hlavicka->m590r113; if ( $m590r113 == 0 ) $m590r113="";
+$m590r114=$hlavicka->m590r114; if ( $m590r114 == 0 ) $m590r114="";
+$m590r115=$hlavicka->m590r115; if ( $m590r115 == 0 ) $m590r115="";
+$m590r121=$hlavicka->m590r121; if ( $m590r121 == 0 ) $m590r121="";
+$m590r122=$hlavicka->m590r122; if ( $m590r122 == 0 ) $m590r122="";
+$m590r123=$hlavicka->m590r123; if ( $m590r123 == 0 ) $m590r123="";
+$m590r124=$hlavicka->m590r124; if ( $m590r124 == 0 ) $m590r124="";
+$m590r125=$hlavicka->m590r125; if ( $m590r125 == 0 ) $m590r125="";
+$m590r131=$hlavicka->m590r131; if ( $m590r131 == 0 ) $m590r131="";
+$m590r132=$hlavicka->m590r132; if ( $m590r132 == 0 ) $m590r132="";
+$m590r133=$hlavicka->m590r133; if ( $m590r133 == 0 ) $m590r133="";
+$m590r134=$hlavicka->m590r134; if ( $m590r134 == 0 ) $m590r134="";
+$m590r135=$hlavicka->m590r135; if ( $m590r135 == 0 ) $m590r135="";
+$m590r141=$hlavicka->m590r141; if ( $m590r141 == 0 ) $m590r141="";
+$m590r142=$hlavicka->m590r142; if ( $m590r142 == 0 ) $m590r142="";
+$m590r143=$hlavicka->m590r143; if ( $m590r143 == 0 ) $m590r143="";
+$m590r144=$hlavicka->m590r144; if ( $m590r144 == 0 ) $m590r144="";
+$m590r145=$hlavicka->m590r145; if ( $m590r145 == 0 ) $m590r145="";
+$m590r151=$hlavicka->m590r151; if ( $m590r151 == 0 ) $m590r151="";
+$m590r152=$hlavicka->m590r152; if ( $m590r152 == 0 ) $m590r152="";
+$m590r153=$hlavicka->m590r153; if ( $m590r153 == 0 ) $m590r153="";
+$m590r154=$hlavicka->m590r154; if ( $m590r154 == 0 ) $m590r154="";
+$m590r155=$hlavicka->m590r155; if ( $m590r155 == 0 ) $m590r155="";
+$m590r161=$hlavicka->m590r161; if ( $m590r161 == 0 ) $m590r161="";
+$m590r162=$hlavicka->m590r162; if ( $m590r162 == 0 ) $m590r162="";
+$m590r163=$hlavicka->m590r163; if ( $m590r163 == 0 ) $m590r163="";
+$m590r164=$hlavicka->m590r164; if ( $m590r164 == 0 ) $m590r164="";
+$m590r165=$hlavicka->m590r165; if ( $m590r165 == 0 ) $m590r165="";
+$m590r171=$hlavicka->m590r171; if ( $m590r171 == 0 ) $m590r171="";
+$m590r172=$hlavicka->m590r172; if ( $m590r172 == 0 ) $m590r172="";
+$m590r173=$hlavicka->m590r173; if ( $m590r173 == 0 ) $m590r173="";
+$m590r174=$hlavicka->m590r174; if ( $m590r174 == 0 ) $m590r174="";
+$m590r175=$hlavicka->m590r175; if ( $m590r175 == 0 ) $m590r175="";
+$m590r181=$hlavicka->m590r181; if ( $m590r181 == 0 ) $m590r181="";
+$m590r182=$hlavicka->m590r182; if ( $m590r182 == 0 ) $m590r182="";
+$m590r183=$hlavicka->m590r183; if ( $m590r183 == 0 ) $m590r183="";
+$m590r184=$hlavicka->m590r184; if ( $m590r184 == 0 ) $m590r184="";
+$m590r185=$hlavicka->m590r185; if ( $m590r185 == 0 ) $m590r185="";
+$m590r191=$hlavicka->m590r191; if ( $m590r191 == 0 ) $m590r191="";
+$m590r192=$hlavicka->m590r192; if ( $m590r192 == 0 ) $m590r192="";
+$m590r193=$hlavicka->m590r193; if ( $m590r193 == 0 ) $m590r193="";
+$m590r194=$hlavicka->m590r194; if ( $m590r194 == 0 ) $m590r194="";
+$m590r195=$hlavicka->m590r195; if ( $m590r195 == 0 ) $m590r195="";
+$m590r201=$hlavicka->m590r201; if ( $m590r201 == 0 ) $m590r201="";
+$m590r202=$hlavicka->m590r202; if ( $m590r202 == 0 ) $m590r202="";
+$m590r203=$hlavicka->m590r203; if ( $m590r203 == 0 ) $m590r203="";
+$m590r204=$hlavicka->m590r204; if ( $m590r204 == 0 ) $m590r204="";
+$m590r205=$hlavicka->m590r205; if ( $m590r205 == 0 ) $m590r205="";
+$m590r211=$hlavicka->m590r211; if ( $m590r211 == 0 ) $m590r211="";
+$m590r212=$hlavicka->m590r212; if ( $m590r212 == 0 ) $m590r212="";
+$m590r213=$hlavicka->m590r213; if ( $m590r213 == 0 ) $m590r213="";
+$m590r214=$hlavicka->m590r214; if ( $m590r214 == 0 ) $m590r214="";
+$m590r215=$hlavicka->m590r215; if ( $m590r215 == 0 ) $m590r215="";
+$pdf->Cell(195,45," ","$rmc1",1,"L");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r11","$rmc",0,"R");$pdf->Cell(42,6,"$m590r12","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r13","$rmc",0,"R");$pdf->Cell(35,6,"$m590r14","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r15","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r21","$rmc",0,"R");$pdf->Cell(42,6,"$m590r22","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r23","$rmc",0,"R");$pdf->Cell(35,6,"$m590r24","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r25","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r31","$rmc",0,"R");$pdf->Cell(42,5,"$m590r32","$rmc",0,"R");
+$pdf->Cell(38,5,"$m590r33","$rmc",0,"R");$pdf->Cell(35,5,"$m590r34","$rmc",0,"R");
+$pdf->Cell(32,5,"$m590r35","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r41","$rmc",0,"R");$pdf->Cell(42,6,"$m590r42","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r43","$rmc",0,"R");$pdf->Cell(35,6,"$m590r44","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r45","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r51","$rmc",0,"R");$pdf->Cell(42,6,"$m590r52","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r53","$rmc",0,"R");$pdf->Cell(35,6,"$m590r54","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r55","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r61","$rmc",0,"R");$pdf->Cell(42,6,"$m590r62","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r63","$rmc",0,"R");$pdf->Cell(35,6,"$m590r64","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r65","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r71","$rmc",0,"R");$pdf->Cell(42,5,"$m590r72","$rmc",0,"R");
+$pdf->Cell(38,5,"$m590r73","$rmc",0,"R");$pdf->Cell(35,5,"$m590r74","$rmc",0,"R");
+$pdf->Cell(32,5,"$m590r75","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r81","$rmc",0,"R");$pdf->Cell(42,6,"$m590r82","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r83","$rmc",0,"R");$pdf->Cell(35,6,"$m590r84","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r85","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r91","$rmc",0,"R");$pdf->Cell(42,6,"$m590r92","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r93","$rmc",0,"R");$pdf->Cell(35,6,"$m590r94","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r95","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r101","$rmc",0,"R");$pdf->Cell(42,6,"$m590r102","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r103","$rmc",0,"R");$pdf->Cell(35,6,"$m590r104","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r105","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r111","$rmc",0,"R");$pdf->Cell(42,6,"$m590r112","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r113","$rmc",0,"R");$pdf->Cell(35,6,"$m590r114","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r115","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r121","$rmc",0,"R");$pdf->Cell(42,5,"$m590r122","$rmc",0,"R");
+$pdf->Cell(38,5,"$m590r123","$rmc",0,"R");$pdf->Cell(35,5,"$m590r124","$rmc",0,"R");
+$pdf->Cell(32,5,"$m590r125","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r131","$rmc",0,"R");$pdf->Cell(42,6,"$m590r132","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r133","$rmc",0,"R");$pdf->Cell(35,6,"$m590r134","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r135","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r141","$rmc",0,"R");$pdf->Cell(42,6,"$m590r142","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r143","$rmc",0,"R");$pdf->Cell(35,6,"$m590r144","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r145","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r151","$rmc",0,"R");$pdf->Cell(42,6,"$m590r152","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r153","$rmc",0,"R");$pdf->Cell(35,6,"$m590r154","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r155","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r161","$rmc",0,"R");$pdf->Cell(42,5,"$m590r162","$rmc",0,"R");
+$pdf->Cell(38,5,"$m590r163","$rmc",0,"R");$pdf->Cell(35,5,"$m590r164","$rmc",0,"R");
+$pdf->Cell(32,5,"$m590r165","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r171","$rmc",0,"R");$pdf->Cell(42,6,"$m590r172","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r173","$rmc",0,"R");$pdf->Cell(35,6,"$m590r174","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r175","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r181","$rmc",0,"R");$pdf->Cell(42,6,"$m590r182","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r183","$rmc",0,"R");$pdf->Cell(35,6,"$m590r184","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r185","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r191","$rmc",0,"R");$pdf->Cell(42,6,"$m590r192","$rmc",0,"R");
+$pdf->Cell(38,6,"$m590r193","$rmc",0,"R");$pdf->Cell(35,6,"$m590r194","$rmc",0,"R");
+$pdf->Cell(32,6,"$m590r195","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r201","$rmc",0,"R");$pdf->Cell(42,5,"$m590r202","$rmc",0,"R");
+$pdf->Cell(38,5,"$m590r203","$rmc",0,"R");$pdf->Cell(35,5,"$m590r204","$rmc",0,"R");
+$pdf->Cell(32,5,"$m590r205","$rmc",1,"R");
+$pdf->Cell(11,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r211","$rmc",0,"R");$pdf->Cell(42,5,"$m590r212","$rmc",0,"R");
+$pdf->Cell(38,5,"$m590r213","$rmc",0,"R");$pdf->Cell(35,5,"$m590r214","$rmc",0,"R");
+$pdf->Cell(32,5,"$m590r215","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"10/12","$rmc",1,"R");
+                                        }
+
+if ( $strana == 11 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str11.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str11.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 304
+$m304r1=$hlavicka->m304r1; if ( $m304r1 == 0 ) $m304r1="";
+$m304r2=$hlavicka->m304r2; if ( $m304r2 == 0 ) $m304r2="";
+$m304r3=$hlavicka->m304r3; if ( $m304r3 == 0 ) $m304r3="";
+$m304r4=$hlavicka->m304r4; if ( $m304r4 == 0 ) $m304r4="";
+$m304r5=$hlavicka->m304r5; if ( $m304r5 == 0 ) $m304r5="";
+$m304r6=$hlavicka->m304r6; if ( $m304r6 == 0 ) $m304r6="";
+$m304r7=$hlavicka->m304r7; if ( $m304r7 == 0 ) $m304r7="";
+$m304r8=$hlavicka->m304r8; if ( $m304r8 == 0 ) $m304r8="";
+$m304r9=$hlavicka->m304r9; if ( $m304r9 == 0 ) $m304r9="";
+$m304r10=$hlavicka->m304r10; if ( $m304r10 == 0 ) $m304r10="";
+$m304r11=$hlavicka->m304r11; if ( $m304r11 == 0 ) $m304r11="";
+$m304r12=$hlavicka->m304r12; if ( $m304r12 == 0 ) $m304r12="";
+$m304r13=$hlavicka->m304r13; if ( $m304r13 == 0 ) $m304r13="";
+$m304r14=$hlavicka->m304r14; if ( $m304r14 == 0 ) $m304r14="";
+$m304r15=$hlavicka->m304r15; if ( $m304r15 == 0 ) $m304r15="";
+$m304r16=$hlavicka->m304r16; if ( $m304r16 == 0 ) $m304r16="";
+$m304r99=$hlavicka->m304r99;
+//if ( $m304r99 == 0 ) $m304r99="";
+$pdf->Cell(195,41," ","$rmc1",1,"L");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r1","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r2","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r3","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r4","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r5","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r6","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r7","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,9,"$m304r8","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r9","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r10","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r11","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r12","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r13","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r14","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r15","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r16","$rmc",1,"R");
+$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"11/12","$rmc",1,"R");
+                                        }
+
+if ( $strana == 12 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str12.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str12.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 110
+$m110r12=$hlavicka->m110r12; if ( $m110r12 == 0 ) $m110r12="";
+$m110r13=$hlavicka->m110r13; if ( $m110r13 == 0 ) $m110r13="";
+$m110r14=$hlavicka->m110r14; if ( $m110r14 == 0 ) $m110r14="";
+$m110r15=$hlavicka->m110r15; if ( $m110r15 == 0 ) $m110r15="";
+$m110r16=$hlavicka->m110r16; if ( $m110r16 == 0 ) $m110r16="";
+$m110r17=$hlavicka->m110r17; if ( $m110r17 == 0 ) $m110r17="";
+$m110r18=$hlavicka->m110r18; if ( $m110r18 == 0 ) $m110r18="";
+$m110r19=$hlavicka->m110r19; if ( $m110r19 == 0 ) $m110r19="";
+$m110r22=$hlavicka->m110r22; if ( $m110r22 == 0 ) $m110r22="";
+$m110r23=$hlavicka->m110r23; if ( $m110r23 == 0 ) $m110r23="";
+$m110r24=$hlavicka->m110r24; if ( $m110r24 == 0 ) $m110r24="";
+$m110r25=$hlavicka->m110r25; if ( $m110r25 == 0 ) $m110r25="";
+$m110r26=$hlavicka->m110r26; if ( $m110r26 == 0 ) $m110r26="";
+$m110r27=$hlavicka->m110r27; if ( $m110r27 == 0 ) $m110r27="";
+$m220r28=$hlavicka->m220r28; if ( $m220r28 == 0 ) $m220r28="";
+$m220r29=$hlavicka->m220r29; if ( $m220r29 == 0 ) $m220r29="";
+$m110r32=$hlavicka->m110r32; if ( $m110r32 == 0 ) $m110r32="";
+$m110r33=$hlavicka->m110r33; if ( $m110r33 == 0 ) $m110r33="";
+$m110r34=$hlavicka->m110r34; if ( $m110r34 == 0 ) $m110r34="";
+$m110r35=$hlavicka->m110r35; if ( $m110r35 == 0 ) $m110r35="";
+$m110r36=$hlavicka->m110r36; if ( $m110r36 == 0 ) $m110r36="";
+$m110r37=$hlavicka->m110r37; if ( $m110r37 == 0 ) $m110r37="";
+$m330r38=$hlavicka->m330r38; if ( $m330r38 == 0 ) $m330r38="";
+$m330r39=$hlavicka->m330r39; if ( $m330r39 == 0 ) $m330r39="";
+$m110r42=$hlavicka->m110r42; if ( $m110r42 == 0 ) $m110r42="";
+$m110r43=$hlavicka->m110r43; if ( $m110r43 == 0 ) $m110r43="";
+$m110r44=$hlavicka->m110r44; if ( $m110r44 == 0 ) $m110r44="";
+$m110r45=$hlavicka->m110r45; if ( $m110r45 == 0 ) $m110r45="";
+$m110r46=$hlavicka->m110r46; if ( $m110r46 == 0 ) $m110r46="";
+$m110r47=$hlavicka->m110r47; if ( $m110r47 == 0 ) $m110r47="";
+$m440r48=$hlavicka->m440r48; if ( $m440r48 == 0 ) $m440r48="";
+$m440r49=$hlavicka->m440r49; if ( $m440r49 == 0 ) $m440r49="";
+$m110r52=$hlavicka->m110r52; if ( $m110r52 == 0 ) $m110r52="";
+$m110r53=$hlavicka->m110r53; if ( $m110r53 == 0 ) $m110r53="";
+$m110r54=$hlavicka->m110r54; if ( $m110r54 == 0 ) $m110r54="";
+$m110r55=$hlavicka->m110r55; if ( $m110r55 == 0 ) $m110r55="";
+$m110r56=$hlavicka->m110r56; if ( $m110r56 == 0 ) $m110r56="";
+$m110r57=$hlavicka->m110r57; if ( $m110r57 == 0 ) $m110r57="";
+$m110r58=$hlavicka->m110r58; if ( $m110r58 == 0 ) $m110r58="";
+$m110r59=$hlavicka->m110r59; if ( $m110r59 == 0 ) $m110r59="";
+$m110r62=$hlavicka->m110r62; if ( $m110r62 == 0 ) $m110r62="";
+$m110r63=$hlavicka->m110r63; if ( $m110r63 == 0 ) $m110r63="";
+$m110r64=$hlavicka->m110r64; if ( $m110r64 == 0 ) $m110r64="";
+$m110r65=$hlavicka->m110r65; if ( $m110r65 == 0 ) $m110r65="";
+$m110r66=$hlavicka->m110r66; if ( $m110r66 == 0 ) $m110r66="";
+$m110r67=$hlavicka->m110r67; if ( $m110r67 == 0 ) $m110r67="";
+$m110r68=$hlavicka->m110r68; if ( $m110r68 == 0 ) $m110r68="";
+$m110r69=$hlavicka->m110r69; if ( $m110r69 == 0 ) $m110r69="";
+$m110r72=$hlavicka->m110r72; if ( $m110r72 == 0 ) $m110r72="";
+$m110r73=$hlavicka->m110r73; if ( $m110r73 == 0 ) $m110r73="";
+$m110r74=$hlavicka->m110r74; if ( $m110r74 == 0 ) $m110r74="";
+$m110r75=$hlavicka->m110r75; if ( $m110r75 == 0 ) $m110r75="";
+$m110r76=$hlavicka->m110r76; if ( $m110r76 == 0 ) $m110r76="";
+$m110r77=$hlavicka->m110r77; if ( $m110r77 == 0 ) $m110r77="";
+$m110r78=$hlavicka->m110r78; if ( $m110r78 == 0 ) $m110r78="";
+$m110r79=$hlavicka->m110r79; if ( $m110r79 == 0 ) $m110r79="";
+$m110r82=$hlavicka->m110r82; if ( $m110r82 == 0 ) $m110r82="";
+$m110r83=$hlavicka->m110r83; if ( $m110r83 == 0 ) $m110r83="";
+$m110r84=$hlavicka->m110r84; if ( $m110r84 == 0 ) $m110r84="";
+$m110r85=$hlavicka->m110r85; if ( $m110r85 == 0 ) $m110r85="";
+$m110r86=$hlavicka->m110r86; if ( $m110r86 == 0 ) $m110r86="";
+$m110r87=$hlavicka->m110r87; if ( $m110r87 == 0 ) $m110r87="";
+$m110r88=$hlavicka->m110r88; if ( $m110r88 == 0 ) $m110r88="";
+$m110r89=$hlavicka->m110r89; if ( $m110r89 == 0 ) $m110r89="";
+$m110r92=$hlavicka->m110r92; if ( $m110r92 == 0 ) $m110r92="";
+$m110r93=$hlavicka->m110r93; if ( $m110r93 == 0 ) $m110r93="";
+$m110r94=$hlavicka->m110r94; if ( $m110r94 == 0 ) $m110r94="";
+$m110r95=$hlavicka->m110r95; if ( $m110r95 == 0 ) $m110r95="";
+$m110r96=$hlavicka->m110r96; if ( $m110r96 == 0 ) $m110r96="";
+$m110r97=$hlavicka->m110r97; if ( $m110r97 == 0 ) $m110r97="";
+$m110r18=$hlavicka->m110r18; if ( $m110r18 == 0 ) $m110r18="";
+$m110r19=$hlavicka->m110r19; if ( $m110r19 == 0 ) $m110r19="";
+$m110r102=$hlavicka->m110r102; if ( $m110r102 == 0 ) $m110r102="";
+$m110r103=$hlavicka->m110r103; if ( $m110r103 == 0 ) $m110r103="";
+$m110r104=$hlavicka->m110r104; if ( $m110r104 == 0 ) $m110r104="";
+$m110r105=$hlavicka->m110r105; if ( $m110r105 == 0 ) $m110r105="";
+$m110r106=$hlavicka->m110r106; if ( $m110r106 == 0 ) $m110r106="";
+$m110r107=$hlavicka->m110r107; if ( $m110r107 == 0 ) $m110r107="";
+$m110r108=$hlavicka->m110r108; if ( $m110r108 == 0 ) $m110r108="";
+$m110r109=$hlavicka->m110r109; if ( $m110r109 == 0 ) $m110r109="";
+$m110r112=$hlavicka->m110r112; if ( $m110r112 == 0 ) $m110r112="";
+$m110r113=$hlavicka->m110r113; if ( $m110r113 == 0 ) $m110r113="";
+$m110r114=$hlavicka->m110r114; if ( $m110r114 == 0 ) $m110r114="";
+$m110r115=$hlavicka->m110r115; if ( $m110r115 == 0 ) $m110r115="";
+$m110r116=$hlavicka->m110r116; if ( $m110r116 == 0 ) $m110r116="";
+$m110r117=$hlavicka->m110r117; if ( $m110r117 == 0 ) $m110r117="";
+$m110r118=$hlavicka->m110r118; if ( $m110r118 == 0 ) $m110r118="";
+$m110r119=$hlavicka->m110r119; if ( $m110r119 == 0 ) $m110r119="";
+$m110r122=$hlavicka->m110r122; if ( $m110r122 == 0 ) $m110r122="";
+$m110r123=$hlavicka->m110r123; if ( $m110r123 == 0 ) $m110r123="";
+$m110r124=$hlavicka->m110r124; if ( $m110r124 == 0 ) $m110r124="";
+$m110r125=$hlavicka->m110r125; if ( $m110r125 == 0 ) $m110r125="";
+$m110r126=$hlavicka->m110r126; if ( $m110r126 == 0 ) $m110r126="";
+$m110r127=$hlavicka->m110r127; if ( $m110r127 == 0 ) $m110r127="";
+$m110r128=$hlavicka->m110r128; if ( $m110r128 == 0 ) $m110r128="";
+$m110r129=$hlavicka->m110r129; if ( $m110r129 == 0 ) $m110r129="";
+$m110r132=$hlavicka->m110r132; if ( $m110r132 == 0 ) $m110r132="";
+$m110r133=$hlavicka->m110r133; if ( $m110r133 == 0 ) $m110r133="";
+$m110r134=$hlavicka->m110r134; if ( $m110r134 == 0 ) $m110r134="";
+$m110r135=$hlavicka->m110r135; if ( $m110r135 == 0 ) $m110r135="";
+$m110r136=$hlavicka->m110r136; if ( $m110r136 == 0 ) $m110r136="";
+$m110r137=$hlavicka->m110r137; if ( $m110r137 == 0 ) $m110r137="";
+$m110r138=$hlavicka->m110r138; if ( $m110r138 == 0 ) $m110r138="";
+$m110r139=$hlavicka->m110r139; if ( $m110r139 == 0 ) $m110r139="";
+$m110r142=$hlavicka->m110r142; if ( $m110r142 == 0 ) $m110r142="";
+$m110r143=$hlavicka->m110r143; if ( $m110r143 == 0 ) $m110r143="";
+$m110r144=$hlavicka->m110r144; if ( $m110r144 == 0 ) $m110r144="";
+$m110r145=$hlavicka->m110r145; if ( $m110r145 == 0 ) $m110r145="";
+$m110r146=$hlavicka->m110r146; if ( $m110r146 == 0 ) $m110r146="";
+$m110r147=$hlavicka->m110r147; if ( $m110r147 == 0 ) $m110r147="";
+$m110r148=$hlavicka->m110r148; if ( $m110r148 == 0 ) $m110r148="";
+$m110r149=$hlavicka->m110r149; if ( $m110r149 == 0 ) $m110r149="";
+$m110r152=$hlavicka->m110r152; if ( $m110r152 == 0 ) $m110r152="";
+$m110r153=$hlavicka->m110r153; if ( $m110r153 == 0 ) $m110r153="";
+$m110r154=$hlavicka->m110r154; if ( $m110r154 == 0 ) $m110r154="";
+$m110r155=$hlavicka->m110r155; if ( $m110r155 == 0 ) $m110r155="";
+$m110r156=$hlavicka->m110r156; if ( $m110r156 == 0 ) $m110r156="";
+$m110r157=$hlavicka->m110r157; if ( $m110r157 == 0 ) $m110r157="";
+$m110r158=$hlavicka->m110r158; if ( $m110r158 == 0 ) $m110r158="";
+$m110r159=$hlavicka->m110r159; if ( $m110r159 == 0 ) $m110r159="";
+$m110r162=$hlavicka->m110r162; if ( $m110r162 == 0 ) $m110r162="";
+$m110r163=$hlavicka->m110r163; if ( $m110r163 == 0 ) $m110r163="";
+$m110r164=$hlavicka->m110r164; if ( $m110r164 == 0 ) $m110r164="";
+$m110r165=$hlavicka->m110r165; if ( $m110r165 == 0 ) $m110r165="";
+$m110r166=$hlavicka->m110r166; if ( $m110r166 == 0 ) $m110r166="";
+$m110r167=$hlavicka->m110r167; if ( $m110r167 == 0 ) $m110r167="";
+$m110r168=$hlavicka->m110r168; if ( $m110r168 == 0 ) $m110r168="";
+$m110r169=$hlavicka->m110r169; if ( $m110r169 == 0 ) $m110r169="";
+$m110r172=$hlavicka->m110r172; if ( $m110r172 == 0 ) $m110r172="";
+$m110r173=$hlavicka->m110r173; if ( $m110r173 == 0 ) $m110r173="";
+$m110r174=$hlavicka->m110r174; if ( $m110r174 == 0 ) $m110r174="";
+$m110r175=$hlavicka->m110r175; if ( $m110r175 == 0 ) $m110r175="";
+$m110r176=$hlavicka->m110r176; if ( $m110r176 == 0 ) $m110r176="";
+$m110r177=$hlavicka->m110r177; if ( $m110r177 == 0 ) $m110r177="";
+$m110r178=$hlavicka->m110r178; if ( $m110r178 == 0 ) $m110r178="";
+$m110r179=$hlavicka->m110r179; if ( $m110r179 == 0 ) $m110r179="";
+$m110r182=$hlavicka->m110r182; if ( $m110r182 == 0 ) $m110r182="";
+$m110r183=$hlavicka->m110r183; if ( $m110r183 == 0 ) $m110r183="";
+$m110r184=$hlavicka->m110r184; if ( $m110r184 == 0 ) $m110r184="";
+$m110r185=$hlavicka->m110r185; if ( $m110r185 == 0 ) $m110r185="";
+$m110r186=$hlavicka->m110r186; if ( $m110r186 == 0 ) $m110r186="";
+$m110r187=$hlavicka->m110r187; if ( $m110r187 == 0 ) $m110r187="";
+$m110r188=$hlavicka->m110r188; if ( $m110r188 == 0 ) $m110r188="";
+$m110r189=$hlavicka->m110r189; if ( $m110r189 == 0 ) $m110r189="";
+$m110r192=$hlavicka->m110r192; if ( $m110r192 == 0 ) $m110r192="";
+$m110r193=$hlavicka->m110r193; if ( $m110r193 == 0 ) $m110r193="";
+$m110r194=$hlavicka->m110r194; if ( $m110r194 == 0 ) $m110r194="";
+$m110r195=$hlavicka->m110r195; if ( $m110r195 == 0 ) $m110r195="";
+$m110r196=$hlavicka->m110r196; if ( $m110r196 == 0 ) $m110r196="";
+$m110r197=$hlavicka->m110r197; if ( $m110r197 == 0 ) $m110r197="";
+$m110r198=$hlavicka->m110r198; if ( $m110r198 == 0 ) $m110r198="";
+$m110r199=$hlavicka->m110r199; if ( $m110r199 == 0 ) $m110r199="";
+$m110r202=$hlavicka->m110r202; if ( $m110r202 == 0 ) $m110r202="";
+$m110r203=$hlavicka->m110r203; if ( $m110r203 == 0 ) $m110r203="";
+$m110r204=$hlavicka->m110r204; if ( $m110r204 == 0 ) $m110r204="";
+$m110r205=$hlavicka->m110r205; if ( $m110r205 == 0 ) $m110r205="";
+$m110r206=$hlavicka->m110r206; if ( $m110r206 == 0 ) $m110r206="";
+$m110r207=$hlavicka->m110r207; if ( $m110r207 == 0 ) $m110r207="";
+$m110r208=$hlavicka->m110r208; if ( $m110r208 == 0 ) $m110r208="";
+$m110r209=$hlavicka->m110r209; if ( $m110r209 == 0 ) $m110r209="";
+$m110r212=$hlavicka->m110r212; if ( $m110r212 == 0 ) $m110r212="";
+$m110r213=$hlavicka->m110r213; if ( $m110r213 == 0 ) $m110r213="";
+$m110r214=$hlavicka->m110r214; if ( $m110r214 == 0 ) $m110r214="";
+$m110r215=$hlavicka->m110r215; if ( $m110r215 == 0 ) $m110r215="";
+$m110r216=$hlavicka->m110r216; if ( $m110r216 == 0 ) $m110r216="";
+$m110r217=$hlavicka->m110r217; if ( $m110r217 == 0 ) $m110r217="";
+$m110r218=$hlavicka->m110r218; if ( $m110r218 == 0 ) $m110r218="";
+$m110r219=$hlavicka->m110r219; if ( $m110r219 == 0 ) $m110r219="";
+$m110r222=$hlavicka->m110r222; if ( $m110r222 == 0 ) $m110r222="";
+$m110r223=$hlavicka->m110r223; if ( $m110r223 == 0 ) $m110r223="";
+$m110r224=$hlavicka->m110r224; if ( $m110r224 == 0 ) $m110r224="";
+$m110r225=$hlavicka->m110r225; if ( $m110r225 == 0 ) $m110r225="";
+$m110r226=$hlavicka->m110r226; if ( $m110r226 == 0 ) $m110r226="";
+$m110r227=$hlavicka->m110r227; if ( $m110r227 == 0 ) $m110r227="";
+$m110r228=$hlavicka->m110r228; if ( $m110r228 == 0 ) $m110r228="";
+$m110r229=$hlavicka->m110r229; if ( $m110r229 == 0 ) $m110r229="";
+$m110r232=$hlavicka->m110r232; if ( $m110r232 == 0 ) $m110r232="";
+$m110r233=$hlavicka->m110r233; if ( $m110r233 == 0 ) $m110r233="";
+$m110r234=$hlavicka->m110r234; if ( $m110r234 == 0 ) $m110r234="";
+$m110r235=$hlavicka->m110r235; if ( $m110r235 == 0 ) $m110r235="";
+$m110r236=$hlavicka->m110r236; if ( $m110r236 == 0 ) $m110r236="";
+$m110r237=$hlavicka->m110r237; if ( $m110r237 == 0 ) $m110r237="";
+$m110r238=$hlavicka->m110r238; if ( $m110r238 == 0 ) $m110r238="";
+$m110r239=$hlavicka->m110r239; if ( $m110r239 == 0 ) $m110r239="";
+$m110r242=$hlavicka->m110r242; if ( $m110r242 == 0 ) $m110r242="";
+$m110r243=$hlavicka->m110r243; if ( $m110r243 == 0 ) $m110r243="";
+$m110r244=$hlavicka->m110r244; if ( $m110r244 == 0 ) $m110r244="";
+$m110r245=$hlavicka->m110r245; if ( $m110r245 == 0 ) $m110r245="";
+$m110r246=$hlavicka->m110r246; if ( $m110r246 == 0 ) $m110r246="";
+$m110r247=$hlavicka->m110r247; if ( $m110r247 == 0 ) $m110r247="";
+$m110r248=$hlavicka->m110r248; if ( $m110r248 == 0 ) $m110r248="";
+$m110r249=$hlavicka->m110r249; if ( $m110r249 == 0 ) $m110r249="";
+$m110r252=$hlavicka->m110r252; if ( $m110r252 == 0 ) $m110r252="";
+$m110r253=$hlavicka->m110r253; if ( $m110r253 == 0 ) $m110r253="";
+$m110r254=$hlavicka->m110r254; if ( $m110r254 == 0 ) $m110r254="";
+$m110r255=$hlavicka->m110r255; if ( $m110r255 == 0 ) $m110r255="";
+$m110r256=$hlavicka->m110r256; if ( $m110r256 == 0 ) $m110r256="";
+$m110r257=$hlavicka->m110r257; if ( $m110r257 == 0 ) $m110r257="";
+$m110r258=$hlavicka->m110r258; if ( $m110r258 == 0 ) $m110r258="";
+$m110r259=$hlavicka->m110r259; if ( $m110r259 == 0 ) $m110r259="";
+$m110r262=$hlavicka->m110r262; if ( $m110r262 == 0 ) $m110r262="";
+$m110r263=$hlavicka->m110r263; if ( $m110r263 == 0 ) $m110r263="";
+$m110r264=$hlavicka->m110r264; if ( $m110r264 == 0 ) $m110r264="";
+$m110r265=$hlavicka->m110r265; if ( $m110r265 == 0 ) $m110r265="";
+$m110r266=$hlavicka->m110r266; if ( $m110r266 == 0 ) $m110r266="";
+$m110r267=$hlavicka->m110r267; if ( $m110r267 == 0 ) $m110r267="";
+$m110r268=$hlavicka->m110r268; if ( $m110r268 == 0 ) $m110r268="";
+$m110r269=$hlavicka->m110r269; if ( $m110r269 == 0 ) $m110r269="";
+$m110r272=$hlavicka->m110r272; if ( $m110r272 == 0 ) $m110r272="";
+$m110r273=$hlavicka->m110r273; if ( $m110r273 == 0 ) $m110r273="";
+$m110r274=$hlavicka->m110r274; if ( $m110r274 == 0 ) $m110r274="";
+$m110r275=$hlavicka->m110r275; if ( $m110r275 == 0 ) $m110r275="";
+$m110r276=$hlavicka->m110r276; if ( $m110r276 == 0 ) $m110r276="";
+$m110r277=$hlavicka->m110r277; if ( $m110r277 == 0 ) $m110r277="";
+$m110r278=$hlavicka->m110r278; if ( $m110r278 == 0 ) $m110r278="";
+$m110r279=$hlavicka->m110r279; if ( $m110r279 == 0 ) $m110r279="";
+$m110r282=$hlavicka->m110r282; if ( $m110r282 == 0 ) $m110r282="";
+$m110r283=$hlavicka->m110r283; if ( $m110r283 == 0 ) $m110r283="";
+$m110r284=$hlavicka->m110r284; if ( $m110r284 == 0 ) $m110r284="";
+$m110r285=$hlavicka->m110r285; if ( $m110r285 == 0 ) $m110r285="";
+$m110r286=$hlavicka->m110r286; if ( $m110r286 == 0 ) $m110r286="";
+$m110r287=$hlavicka->m110r287; if ( $m110r287 == 0 ) $m110r287="";
+$m110r288=$hlavicka->m110r288; if ( $m110r288 == 0 ) $m110r288="";
+$m110r289=$hlavicka->m110r289; if ( $m110r289 == 0 ) $m110r289="";
+$m110r292=$hlavicka->m110r292; if ( $m110r292 == 0 ) $m110r292="";
+$m110r293=$hlavicka->m110r293; if ( $m110r293 == 0 ) $m110r293="";
+$m110r294=$hlavicka->m110r294; if ( $m110r294 == 0 ) $m110r294="";
+$m110r295=$hlavicka->m110r295; if ( $m110r295 == 0 ) $m110r295="";
+$m110r296=$hlavicka->m110r296; if ( $m110r296 == 0 ) $m110r296="";
+$m110r297=$hlavicka->m110r297; if ( $m110r297 == 0 ) $m110r297="";
+$m110r298=$hlavicka->m110r298; if ( $m110r298 == 0 ) $m110r298="";
+$m110r299=$hlavicka->m110r299; if ( $m110r299 == 0 ) $m110r299="";
+$m110r302=$hlavicka->m110r302; if ( $m110r302 == 0 ) $m110r302="";
+$m110r303=$hlavicka->m110r303; if ( $m110r303 == 0 ) $m110r303="";
+$m110r304=$hlavicka->m110r304; if ( $m110r304 == 0 ) $m110r304="";
+$m110r305=$hlavicka->m110r305; if ( $m110r305 == 0 ) $m110r305="";
+$m110r306=$hlavicka->m110r306; if ( $m110r306 == 0 ) $m110r306="";
+$m110r307=$hlavicka->m110r307; if ( $m110r307 == 0 ) $m110r307="";
+$m110r308=$hlavicka->m110r308; if ( $m110r308 == 0 ) $m110r308="";
+$m110r309=$hlavicka->m110r309; if ( $m110r309 == 0 ) $m110r309="";
+$m110r312=$hlavicka->m110r312; if ( $m110r312 == 0 ) $m110r312="";
+$m110r313=$hlavicka->m110r313; if ( $m110r313 == 0 ) $m110r313="";
+$m110r314=$hlavicka->m110r314; if ( $m110r314 == 0 ) $m110r314="";
+$m110r315=$hlavicka->m110r315; if ( $m110r315 == 0 ) $m110r315="";
+$m110r316=$hlavicka->m110r316; if ( $m110r316 == 0 ) $m110r316="";
+$m110r317=$hlavicka->m110r317; if ( $m110r317 == 0 ) $m110r317="";
+$m110r318=$hlavicka->m110r318; if ( $m110r318 == 0 ) $m110r318="";
+$m110r319=$hlavicka->m110r319; if ( $m110r319 == 0 ) $m110r319="";
+$m110r322=$hlavicka->m110r322; if ( $m110r322 == 0 ) $m110r322="";
+$m110r323=$hlavicka->m110r323; if ( $m110r323 == 0 ) $m110r323="";
+$m110r324=$hlavicka->m110r324; if ( $m110r324 == 0 ) $m110r324="";
+$m110r325=$hlavicka->m110r325; if ( $m110r325 == 0 ) $m110r325="";
+$m110r326=$hlavicka->m110r326; if ( $m110r326 == 0 ) $m110r326="";
+$m110r327=$hlavicka->m110r327; if ( $m110r327 == 0 ) $m110r327="";
+$m110r328=$hlavicka->m110r328; if ( $m110r328 == 0 ) $m110r328="";
+$m110r329=$hlavicka->m110r329; if ( $m110r329 == 0 ) $m110r329="";
+$m110r332=$hlavicka->m110r332; if ( $m110r332 == 0 ) $m110r332="";
+$m110r333=$hlavicka->m110r333; if ( $m110r333 == 0 ) $m110r333="";
+$m110r334=$hlavicka->m110r334; if ( $m110r334 == 0 ) $m110r334="";
+$m110r335=$hlavicka->m110r335; if ( $m110r335 == 0 ) $m110r335="";
+$m110r336=$hlavicka->m110r336; if ( $m110r336 == 0 ) $m110r336="";
+$m110r337=$hlavicka->m110r337; if ( $m110r337 == 0 ) $m110r337="";
+$m110r338=$hlavicka->m110r338; if ( $m110r338 == 0 ) $m110r338="";
+$m110r339=$hlavicka->m110r339; if ( $m110r339 == 0 ) $m110r339="";
+$m110r342=$hlavicka->m110r342; if ( $m110r342 == 0 ) $m110r342="";
+$m110r343=$hlavicka->m110r343; if ( $m110r343 == 0 ) $m110r343="";
+$m110r344=$hlavicka->m110r344; if ( $m110r344 == 0 ) $m110r344="";
+$m110r345=$hlavicka->m110r345; if ( $m110r345 == 0 ) $m110r345="";
+$m110r346=$hlavicka->m110r346; if ( $m110r346 == 0 ) $m110r346="";
+$m110r347=$hlavicka->m110r347; if ( $m110r347 == 0 ) $m110r347="";
+$m110r348=$hlavicka->m110r348; if ( $m110r348 == 0 ) $m110r348="";
+$m110r349=$hlavicka->m110r349; if ( $m110r349 == 0 ) $m110r349="";
+$m110r992=$hlavicka->m110r992;
+//if ( $m110r992 == 0 ) $m110r992="";
+$m110r993=$hlavicka->m110r993;
+//if ( $m110r993 == 0 ) $m110r993="";
+$m110r994=$hlavicka->m110r994;
+//if ( $m110r994 == 0 ) $m110r994="";
+$m110r995=$hlavicka->m110r995;
+//if ( $m110r995 == 0 ) $m110r995="";
+$m110r996=$hlavicka->m110r996;
+//if ( $m110r996 == 0 ) $m110r996="";
+$m110r997=$hlavicka->m110r997;
+//if ( $m110r997 == 0 ) $m110r997="";
+$pdf->Cell(195,45," ","$rmc1",1,"L");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r12","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r13","$rmc",0,"R");$pdf->Cell(17,6,"$m110r14","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r15","$rmc",0,"R");$pdf->Cell(15,6,"$m110r16","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r17","$rmc",0,"R");$pdf->Cell(17,6,"$m110r18","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r19","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r22","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r23","$rmc",0,"R");$pdf->Cell(17,5,"$m110r24","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r25","$rmc",0,"R");$pdf->Cell(15,5,"$m110r26","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r27","$rmc",0,"R");$pdf->Cell(17,5,"$m110r28","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r29","$rmc",1,"R");
+$pdf->Cell(51,5," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r32","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r33","$rmc",0,"R");$pdf->Cell(17,5,"$m110r34","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r35","$rmc",0,"R");$pdf->Cell(15,5,"$m110r36","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r37","$rmc",0,"R");$pdf->Cell(17,5,"$m110r38","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r39","$rmc",1,"R");
+$pdf->Cell(51,5," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r42","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r43","$rmc",0,"R");$pdf->Cell(17,5,"$m110r44","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r45","$rmc",0,"R");$pdf->Cell(15,5,"$m110r46","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r47","$rmc",0,"R");$pdf->Cell(17,5,"$m110r48","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r49","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r52","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r53","$rmc",0,"R");$pdf->Cell(17,6,"$m110r54","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r55","$rmc",0,"R");$pdf->Cell(15,6,"$m110r56","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r57","$rmc",0,"R");$pdf->Cell(17,6,"$m110r58","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r59","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r62","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r63","$rmc",0,"R");$pdf->Cell(17,5,"$m110r64","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r65","$rmc",0,"R");$pdf->Cell(15,5,"$m110r66","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r67","$rmc",0,"R");$pdf->Cell(17,5,"$m110r68","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r69","$rmc",1,"R");
+$pdf->Cell(51,5," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r72","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r73","$rmc",0,"R");$pdf->Cell(17,5,"$m110r74","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r75","$rmc",0,"R");$pdf->Cell(15,5,"$m110r76","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r77","$rmc",0,"R");$pdf->Cell(17,5,"$m110r78","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r79","$rmc",1,"R");
+$pdf->Cell(51,5," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r82","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r83","$rmc",0,"R");$pdf->Cell(17,5,"$m110r84","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r85","$rmc",0,"R");$pdf->Cell(15,5,"$m110r86","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r87","$rmc",0,"R");$pdf->Cell(17,5,"$m110r88","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r89","$rmc",1,"R");
+$pdf->Cell(51,6," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r92","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r93","$rmc",0,"R");$pdf->Cell(17,6,"$m110r94","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r95","$rmc",0,"R");$pdf->Cell(15,6,"$m110r96","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r97","$rmc",0,"R");$pdf->Cell(17,6,"$m110r98","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r99","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,7,"","$rmc",0,"R");$pdf->Cell(15,7,"$m110r102","$rmc",0,"R");
+$pdf->Cell(15,7,"$m110r103","$rmc",0,"R");$pdf->Cell(17,7,"$m110r104","$rmc",0,"R");
+$pdf->Cell(15,7,"$m110r105","$rmc",0,"R");$pdf->Cell(15,7,"$m110r106","$rmc",0,"R");
+$pdf->Cell(18,7,"$m110r107","$rmc",0,"R");$pdf->Cell(17,7,"$m110r108","$rmc",0,"R");
+$pdf->Cell(15,7,"$m110r109","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r112","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r113","$rmc",0,"R");$pdf->Cell(17,5,"$m110r114","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r115","$rmc",0,"R");$pdf->Cell(15,5,"$m110r116","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r117","$rmc",0,"R");$pdf->Cell(17,5,"$m110r118","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r119","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r122","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r123","$rmc",0,"R");$pdf->Cell(17,6,"$m110r124","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r125","$rmc",0,"R");$pdf->Cell(15,6,"$m110r126","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r127","$rmc",0,"R");$pdf->Cell(17,6,"$m110r128","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r129","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r132","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r133","$rmc",0,"R");$pdf->Cell(17,5,"$m110r134","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r135","$rmc",0,"R");$pdf->Cell(15,5,"$m110r136","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r137","$rmc",0,"R");$pdf->Cell(17,5,"$m110r138","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r139","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,7,"","$rmc",0,"R");$pdf->Cell(15,7,"$m110r142","$rmc",0,"R");
+$pdf->Cell(15,7,"$m110r143","$rmc",0,"R");$pdf->Cell(17,7,"$m110r144","$rmc",0,"R");
+$pdf->Cell(15,7,"$m110r145","$rmc",0,"R");$pdf->Cell(15,7,"$m110r146","$rmc",0,"R");
+$pdf->Cell(18,7,"$m110r147","$rmc",0,"R");$pdf->Cell(17,7,"$m110r148","$rmc",0,"R");
+$pdf->Cell(15,7,"$m110r149","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r152","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r153","$rmc",0,"R");$pdf->Cell(17,6,"$m110r154","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r155","$rmc",0,"R");$pdf->Cell(15,6,"$m110r156","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r157","$rmc",0,"R");$pdf->Cell(17,6,"$m110r158","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r159","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r162","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r163","$rmc",0,"R");$pdf->Cell(17,5,"$m110r164","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r165","$rmc",0,"R");$pdf->Cell(15,5,"$m110r166","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r167","$rmc",0,"R");$pdf->Cell(17,5,"$m110r168","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r169","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r172","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r173","$rmc",0,"R");$pdf->Cell(17,5,"$m110r174","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r175","$rmc",0,"R");$pdf->Cell(15,5,"$m110r176","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r177","$rmc",0,"R");$pdf->Cell(17,5,"$m110r178","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r179","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r182","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r183","$rmc",0,"R");$pdf->Cell(17,6,"$m110r184","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r185","$rmc",0,"R");$pdf->Cell(15,6,"$m110r186","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r187","$rmc",0,"R");$pdf->Cell(17,6,"$m110r188","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r189","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r192","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r193","$rmc",0,"R");$pdf->Cell(17,5,"$m110r194","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r195","$rmc",0,"R");$pdf->Cell(15,5,"$m110r196","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r197","$rmc",0,"R");$pdf->Cell(17,5,"$m110r198","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r199","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r202","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r203","$rmc",0,"R");$pdf->Cell(17,5,"$m110r204","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r205","$rmc",0,"R");$pdf->Cell(15,5,"$m110r206","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r207","$rmc",0,"R");$pdf->Cell(17,5,"$m110r208","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r209","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r212","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r213","$rmc",0,"R");$pdf->Cell(17,5,"$m110r214","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r215","$rmc",0,"R");$pdf->Cell(15,5,"$m110r216","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r217","$rmc",0,"R");$pdf->Cell(17,5,"$m110r218","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r219","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r222","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r223","$rmc",0,"R");$pdf->Cell(17,6,"$m110r224","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r225","$rmc",0,"R");$pdf->Cell(15,6,"$m110r226","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r227","$rmc",0,"R");$pdf->Cell(17,6,"$m110r228","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r229","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r232","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r233","$rmc",0,"R");$pdf->Cell(17,5,"$m110r234","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r235","$rmc",0,"R");$pdf->Cell(15,5,"$m110r236","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r237","$rmc",0,"R");$pdf->Cell(17,5,"$m110r238","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r239","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r242","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r243","$rmc",0,"R");$pdf->Cell(17,5,"$m110r244","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r245","$rmc",0,"R");$pdf->Cell(15,5,"$m110r246","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r247","$rmc",0,"R");$pdf->Cell(17,5,"$m110r248","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r249","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r252","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r253","$rmc",0,"R");$pdf->Cell(17,6,"$m110r254","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r255","$rmc",0,"R");$pdf->Cell(15,6,"$m110r256","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r257","$rmc",0,"R");$pdf->Cell(17,6,"$m110r258","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r259","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r262","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r263","$rmc",0,"R");$pdf->Cell(17,5,"$m110r264","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r265","$rmc",0,"R");$pdf->Cell(15,5,"$m110r266","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r267","$rmc",0,"R");$pdf->Cell(17,5,"$m110r268","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r269","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r272","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r273","$rmc",0,"R");$pdf->Cell(17,5,"$m110r274","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r275","$rmc",0,"R");$pdf->Cell(15,5,"$m110r276","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r277","$rmc",0,"R");$pdf->Cell(17,5,"$m110r278","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r279","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r282","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r283","$rmc",0,"R");$pdf->Cell(17,5,"$m110r284","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r285","$rmc",0,"R");$pdf->Cell(15,5,"$m110r286","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r287","$rmc",0,"R");$pdf->Cell(17,5,"$m110r288","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r289","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r292","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r293","$rmc",0,"R");$pdf->Cell(17,6,"$m110r294","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r295","$rmc",0,"R");$pdf->Cell(15,6,"$m110r296","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r297","$rmc",0,"R");$pdf->Cell(17,6,"$m110r298","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r299","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r302","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r303","$rmc",0,"R");$pdf->Cell(17,5,"$m110r304","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r305","$rmc",0,"R");$pdf->Cell(15,5,"$m110r306","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r307","$rmc",0,"R");$pdf->Cell(17,5,"$m110r308","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r309","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r312","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r313","$rmc",0,"R");$pdf->Cell(17,5,"$m110r314","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r315","$rmc",0,"R");$pdf->Cell(15,5,"$m110r316","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r317","$rmc",0,"R");$pdf->Cell(17,5,"$m110r318","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r319","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r322","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r323","$rmc",0,"R");$pdf->Cell(17,5,"$m110r324","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r325","$rmc",0,"R");$pdf->Cell(15,5,"$m110r326","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r327","$rmc",0,"R");$pdf->Cell(17,5,"$m110r328","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r329","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r332","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r333","$rmc",0,"R");$pdf->Cell(17,6,"$m110r334","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r335","$rmc",0,"R");$pdf->Cell(15,6,"$m110r336","$rmc",0,"R");
+$pdf->Cell(18,6,"$m110r337","$rmc",0,"R");$pdf->Cell(17,6,"$m110r338","$rmc",0,"R");
+$pdf->Cell(15,6,"$m110r339","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r342","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r343","$rmc",0,"R");$pdf->Cell(17,5,"$m110r344","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r345","$rmc",0,"R");$pdf->Cell(15,5,"$m110r346","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r347","$rmc",0,"R");$pdf->Cell(17,5,"$m110r348","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r349","$rmc",1,"R");
+$pdf->Cell(51,4," ","$rmc1",0,"L");
+$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r992","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r993","$1mc",0,"R");$pdf->Cell(17,5,"$m110r994","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r995","$rmc",0,"R");$pdf->Cell(15,5,"$m110r996","$rmc",0,"R");
+$pdf->Cell(18,5,"$m110r997","$rmc",0,"R");$pdf->Cell(17,5,"$m110r998","$rmc",0,"R");
+$pdf->Cell(15,5,"$m110r999","$rmc",1,"R");
+$pdf->SetFont('arial','',12);
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"12/12","$rmc",1,"R");
+                                       }
+}
+$i = $i + 1;
+  }
+$pdf->Output("../tmp/statistika.$kli_uzid.pdf");
+?>
 <script type="text/javascript">
+ var okno = window.open("../tmp/statistika.<?php echo $kli_uzid; ?>.pdf","_self");
+</script>
+<?php
+}
+//koniec vytlac
+
+$cislista = include("uct_lista_norm.php");
+//celkovy koniec dokumentu
+} while (false);
+?>
+<script type="text/javascript">
+//parameter okna
+var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
+
 <?php
 //uprava
   if ( $copern == 102 )
@@ -9093,10 +14297,11 @@ form input[type=text] {
    document.formv1.m590r203.value = '<?php echo "$m590r203";?>';
    document.formv1.m590r204.value = '<?php echo "$m590r204";?>';
    document.formv1.m590r205.value = '<?php echo "$m590r205";?>';
- //document.formv1.m590r992.value = '<?php echo "$m590r992";?>';
- //document.formv1.m590r993.value = '<?php echo "$m590r993";?>';
- //document.formv1.m590r994.value = '<?php echo "$m590r994";?>';
- //document.formv1.m590r995.value = '<?php echo "$m590r995";?>';
+   document.formv1.m590r211.value = '<?php echo "$m590r211";?>';
+   document.formv1.m590r212.value = '<?php echo "$m590r212";?>';
+   document.formv1.m590r213.value = '<?php echo "$m590r213";?>';
+   document.formv1.m590r214.value = '<?php echo "$m590r214";?>';
+   document.formv1.m590r215.value = '<?php echo "$m590r215";?>';
 <?php                      } ?>
 
 <?php if ( $strana == 11 ) { ?>
@@ -9410,32 +14615,39 @@ form input[type=text] {
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
   {
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
   function CisCPAp2()
   {
-   window.open('../dokumenty/statistika2016/cpa_ciselnik_pril2_v16.pdf',
-'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+    window.open('../dokumenty/statistika2016/cpa_ciselnik_pril2_v16.pdf', '_blank', blank_param);
   }
   function CisCPAp1()
   {
-   window.open('../dokumenty/statistika2016/cpa_ciselnik_pril1_v16.pdf',
-'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+    window.open('../dokumenty/statistika2016/cpa_ciselnik_pril1_v16.pdf', '_blank', blank_param);
   }
-  function MetodVypln()
+
+  function FormMetod()
   {
-   window.open('<?php echo $jpg_cesta; ?>_metodika.pdf',
-'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+<?php if ( $kli_vrok == 2016 ) { ?>
+    window.open('<?php echo $jpg_source; ?>_metodika.pdf', '_blank', blank_param);
+<?php } ?>
+<?php if ( $kli_vrok > 2016 ) { ?>
+    window.open('../dokumenty/statistika2017/roc_zav101/roc_zav101_v17_metodika.pdf', '_blank', blank_param);
+<?php } ?>
   }
-  function TlacVykaz()
+  function editForm(strana)
   {
-   window.open('../ucto/statistika_zav101.php?copern=11&strana=9999', '_blank');
+    window.open('statistika_zav101.php?copern=102&strana=' + strana + '', '_self');
   }
+  function FormPDF(strana)
+  {
+    window.open('statistika_zav101.php?copern=11&strana=' + strana + '', '_blank', blank_param);
+  }
+
   function StatUdajeFirma()
   {
-   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0',
-'_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
+    window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>', '_blank', blank_param);
   }
   function NacitajMzdy()
   {
@@ -9446,5086 +14658,7 @@ form input[type=text] {
    window.open('../ucto/uobrat.php?modul=' + modul + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=30201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
   }
 
-//bud alebo checkbox v module 100101
-  function klikm1590r1ano()
-  {
-   document.formv1.m1590r1b.checked = false;
-  }
-  function klikm1590r1nie()
-  {
-   document.formv1.m1590r1a.checked = false;
-  }
-//bud alebo checkbox v module 100102
-  function klikm1590r2ano()
-  {
-   document.formv1.m1590r2b.checked = false;
-  }
-  function klikm1590r2nie()
-  {
-   document.formv1.m1590r2a.checked = false;
-  }
+
 </script>
-</HEAD>
-<BODY onload="ObnovUI();">
-<?php
-//uprav udaje
-if ( $copern == 102 )
-     {
-?>
-<div id="wrap-heading">
- <table id="heading">
- <tr>
-  <td class="ilogin">EuroSecom</td>
-  <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
- </tr>
- <tr>
-  <td class="header">RoËn˝ z·vodn˝ v˝kaz vo veæk˝ch podnikoch ZAV 1-01</td>
-  <td>
-   <div class="bar-btn-form-tool">
-    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp2();" title="»ÌselnÌk CPA - prÌloha Ë.2" class="btn-form-tool">
-    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp1();" title="»ÌselnÌk CPA - prÌloha Ë.1" class="btn-form-tool">
-    <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="MetodickÈ vysvetlivky k obsahu v˝kazu" class="btn-form-tool">
-    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
-   </div>
-  </td>
- </tr>
- </table>
-</div>
-
-<div id="content">
-<FORM name="formv1" method="post" action="statistika_zav101.php?copern=103&strana=<?php echo $strana; ?>">
-<?php
-$clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive";
-$clas5="noactive"; $clas6="noactive"; $clas7="noactive"; $clas8="noactive";
-$clas9="noactive"; $clas10="noactive"; $clas11="noactive"; $clas12="noactive";
-if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
-if ( $strana == 3 ) $clas3="active"; if ( $strana == 4 ) $clas4="active";
-if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
-if ( $strana == 7 ) $clas7="active"; if ( $strana == 8 ) $clas8="active";
-if ( $strana == 9 ) $clas9="active"; if ( $strana == 10 ) $clas10="active";
-if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
-$source="statistika_zav101.php?";
-?>
-<div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
-<!-- hidden
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6>
--->
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
-</div>
-
-<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 1.strana 237kB">
-
-<span class="text-echo" style="top:380px; left:467px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
-<!-- ORGANIZACIA -->
-<span class="text-echo" style="top:923px; left:55px; line-height: 20px;"><?php echo "$fir_fnaz<br>$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
-<span class="text-echo" style="top:940px; left:806px;"><?php echo $okres; ?></span>
-<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:937px; left:839px;">
-
-<!-- Vyplnil -->
-<span class="text-echo" style="top:1022px; left:55px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="width:499px; top:1038px; left:390px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="width:499px; top:1087px; left:55px;"><?php echo $fir_fem1; ?></span>
-<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1085px; left:390px;"/>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 2.strana 225kB">
-<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 592 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(592);" style="top:157px; left:670px;" class="btn-row-tool">
-<input type="text" name="m592r11" id="m592r11" style="width:91px; top:358px; left:98px;"/>
-<input type="text" name="m592r12" id="m592r12" style="width:131px; top:358px; left:202px;"/>
-<input type="text" name="m592r13" id="m592r13" style="width:112px; top:358px; left:345px;"/>
-<input type="text" name="m592r14" id="m592r14" style="width:135px; top:358px; left:470px;"/>
-<input type="text" name="m592r15" id="m592r15" style="width:135px; top:358px; left:617px;"/>
-<input type="text" name="m592r16" id="m592r16" style="width:123px; top:358px; left:764px;"/>
-<input type="text" name="m592r21" id="m592r21" style="width:91px; top:390px; left:98px;"/>
-<input type="text" name="m592r22" id="m592r22" style="width:131px; top:390px; left:202px;"/>
-<input type="text" name="m592r23" id="m592r23" style="width:112px; top:390px; left:345px;"/>
-<input type="text" name="m592r24" id="m592r24" style="width:135px; top:390px; left:470px;"/>
-<input type="text" name="m592r25" id="m592r25" style="width:135px; top:390px; left:617px;"/>
-<input type="text" name="m592r26" id="m592r26" style="width:123px; top:390px; left:764px;"/>
-<input type="text" name="m592r31" id="m592r31" style="width:91px; top:422px; left:98px;"/>
-<input type="text" name="m592r32" id="m592r32" style="width:131px; top:422px; left:202px;"/>
-<input type="text" name="m592r33" id="m592r33" style="width:112px; top:422px; left:345px;"/>
-<input type="text" name="m592r34" id="m592r34" style="width:135px; top:422px; left:470px;"/>
-<input type="text" name="m592r35" id="m592r35" style="width:135px; top:422px; left:617px;"/>
-<input type="text" name="m592r36" id="m592r36" style="width:123px; top:422px; left:764px;"/>
-<input type="text" name="m592r41" id="m592r41" style="width:91px; top:454px; left:98px;"/>
-<input type="text" name="m592r42" id="m592r42" style="width:131px; top:454px; left:202px;"/>
-<input type="text" name="m592r43" id="m592r43" style="width:112px; top:454px; left:345px;"/>
-<input type="text" name="m592r44" id="m592r44" style="width:135px; top:454px; left:470px;"/>
-<input type="text" name="m592r45" id="m592r45" style="width:135px; top:454px; left:617px;"/>
-<input type="text" name="m592r46" id="m592r46" style="width:123px; top:454px; left:764px;"/>
-<input type="text" name="m592r51" id="m592r51" style="width:91px; top:486px; left:98px;"/>
-<input type="text" name="m592r52" id="m592r52" style="width:131px; top:486px; left:202px;"/>
-<input type="text" name="m592r53" id="m592r53" style="width:112px; top:486px; left:345px;"/>
-<input type="text" name="m592r54" id="m592r54" style="width:135px; top:486px; left:470px;"/>
-<input type="text" name="m592r55" id="m592r55" style="width:135px; top:486px; left:617px;"/>
-<input type="text" name="m592r56" id="m592r56" style="width:123px; top:486px; left:764px;"/>
-<input type="text" name="m592r61" id="m592r61" style="width:91px; top:517px; left:98px;"/>
-<input type="text" name="m592r62" id="m592r62" style="width:131px; top:517px; left:202px;"/>
-<input type="text" name="m592r63" id="m592r63" style="width:112px; top:517px; left:345px;"/>
-<input type="text" name="m592r64" id="m592r64" style="width:135px; top:517px; left:470px;"/>
-<input type="text" name="m592r65" id="m592r65" style="width:135px; top:517px; left:617px;"/>
-<input type="text" name="m592r66" id="m592r66" style="width:123px; top:517px; left:764px;"/>
-<input type="text" name="m592r71" id="m592r71" style="width:91px; top:549px; left:98px;"/>
-<input type="text" name="m592r72" id="m592r72" style="width:131px; top:549px; left:202px;"/>
-<input type="text" name="m592r73" id="m592r73" style="width:112px; top:549px; left:345px;"/>
-<input type="text" name="m592r74" id="m592r74" style="width:135px; top:549px; left:470px;"/>
-<input type="text" name="m592r75" id="m592r75" style="width:135px; top:549px; left:617px;"/>
-<input type="text" name="m592r76" id="m592r76" style="width:123px; top:549px; left:764px;"/>
-<input type="text" name="m592r81" id="m592r81" style="width:91px; top:581px; left:98px;"/>
-<input type="text" name="m592r82" id="m592r82" style="width:131px; top:581px; left:202px;"/>
-<input type="text" name="m592r83" id="m592r83" style="width:112px; top:581px; left:345px;"/>
-<input type="text" name="m592r84" id="m592r84" style="width:135px; top:581px; left:470px;"/>
-<input type="text" name="m592r85" id="m592r85" style="width:135px; top:581px; left:617px;"/>
-<input type="text" name="m592r86" id="m592r86" style="width:123px; top:581px; left:764px;"/>
-<input type="text" name="m592r91" id="m592r91" style="width:91px; top:613px; left:98px;"/>
-<input type="text" name="m592r92" id="m592r92" style="width:131px; top:613px; left:202px;"/>
-<input type="text" name="m592r93" id="m592r93" style="width:112px; top:613px; left:345px;"/>
-<input type="text" name="m592r94" id="m592r94" style="width:135px; top:613px; left:470px;"/>
-<input type="text" name="m592r95" id="m592r95" style="width:135px; top:613px; left:617px;"/>
-<input type="text" name="m592r96" id="m592r96" style="width:123px; top:613px; left:764px;"/>
-<input type="text" name="m592r101" id="m592r101" style="width:91px; top:644px; left:98px;"/>
-<input type="text" name="m592r102" id="m592r102" style="width:131px; top:644px; left:202px;"/>
-<input type="text" name="m592r103" id="m592r103" style="width:112px; top:644px; left:345px;"/>
-<input type="text" name="m592r104" id="m592r104" style="width:135px; top:644px; left:470px;"/>
-<input type="text" name="m592r105" id="m592r105" style="width:135px; top:644px; left:617px;"/>
-<input type="text" name="m592r106" id="m592r106" style="width:123px; top:644px; left:764px;"/>
-<input type="text" name="m592r111" id="m592r111" style="width:91px; top:677px; left:98px;"/>
-<input type="text" name="m592r112" id="m592r112" style="width:131px; top:677px; left:202px;"/>
-<input type="text" name="m592r113" id="m592r113" style="width:112px; top:677px; left:345px;"/>
-<input type="text" name="m592r114" id="m592r114" style="width:135px; top:677px; left:470px;"/>
-<input type="text" name="m592r115" id="m592r115" style="width:135px; top:677px; left:617px;"/>
-<input type="text" name="m592r116" id="m592r116" style="width:123px; top:677px; left:764px;"/>
-<input type="text" name="m592r121" id="m592r121" style="width:91px; top:708px; left:98px;"/>
-<input type="text" name="m592r122" id="m592r122" style="width:131px; top:708px; left:202px;"/>
-<input type="text" name="m592r123" id="m592r123" style="width:112px; top:708px; left:345px;"/>
-<input type="text" name="m592r124" id="m592r124" style="width:135px; top:708px; left:470px;"/>
-<input type="text" name="m592r125" id="m592r125" style="width:135px; top:708px; left:617px;"/>
-<input type="text" name="m592r126" id="m592r126" style="width:123px; top:708px; left:764px;"/>
-<input type="text" name="m592r131" id="m592r131" style="width:91px; top:740px; left:98px;"/>
-<input type="text" name="m592r132" id="m592r132" style="width:131px; top:740px; left:202px;"/>
-<input type="text" name="m592r133" id="m592r133" style="width:112px; top:740px; left:345px;"/>
-<input type="text" name="m592r134" id="m592r134" style="width:135px; top:740px; left:470px;"/>
-<input type="text" name="m592r135" id="m592r135" style="width:135px; top:740px; left:617px;"/>
-<input type="text" name="m592r136" id="m592r136" style="width:123px; top:740px; left:764px;"/>
-<input type="text" name="m592r141" id="m592r141" style="width:91px; top:772px; left:98px;"/>
-<input type="text" name="m592r142" id="m592r142" style="width:131px; top:772px; left:202px;"/>
-<input type="text" name="m592r143" id="m592r143" style="width:112px; top:772px; left:345px;"/>
-<input type="text" name="m592r144" id="m592r144" style="width:135px; top:772px; left:470px;"/>
-<input type="text" name="m592r145" id="m592r145" style="width:135px; top:772px; left:617px;"/>
-<input type="text" name="m592r146" id="m592r146" style="width:123px; top:772px; left:764px;"/>
-<input type="text" name="m592r151" id="m592r151" style="width:91px; top:804px; left:98px;"/>
-<input type="text" name="m592r152" id="m592r152" style="width:131px; top:804px; left:202px;"/>
-<input type="text" name="m592r153" id="m592r153" style="width:112px; top:804px; left:345px;"/>
-<input type="text" name="m592r154" id="m592r154" style="width:135px; top:804px; left:470px;"/>
-<input type="text" name="m592r155" id="m592r155" style="width:135px; top:804px; left:617px;"/>
-<input type="text" name="m592r156" id="m592r156" style="width:123px; top:804px; left:764px;"/>
-<input type="text" name="m592r161" id="m592r161" style="width:91px; top:836px; left:98px;"/>
-<input type="text" name="m592r162" id="m592r162" style="width:131px; top:836px; left:202px;"/>
-<input type="text" name="m592r163" id="m592r163" style="width:112px; top:836px; left:345px;"/>
-<input type="text" name="m592r164" id="m592r164" style="width:135px; top:836px; left:470px;"/>
-<input type="text" name="m592r165" id="m592r165" style="width:135px; top:836px; left:617px;"/>
-<input type="text" name="m592r166" id="m592r166" style="width:123px; top:836px; left:764px;"/>
-<input type="text" name="m592r171" id="m592r171" style="width:91px; top:867px; left:98px;"/>
-<input type="text" name="m592r172" id="m592r172" style="width:131px; top:867px; left:202px;"/>
-<input type="text" name="m592r173" id="m592r173" style="width:112px; top:867px; left:345px;"/>
-<input type="text" name="m592r174" id="m592r174" style="width:135px; top:867px; left:470px;"/>
-<input type="text" name="m592r175" id="m592r175" style="width:135px; top:867px; left:617px;"/>
-<input type="text" name="m592r176" id="m592r176" style="width:123px; top:867px; left:764px;"/>
-<input type="text" name="m592r181" id="m592r181" style="width:91px; top:899px; left:98px;"/>
-<input type="text" name="m592r182" id="m592r182" style="width:131px; top:899px; left:202px;"/>
-<input type="text" name="m592r183" id="m592r183" style="width:112px; top:899px; left:345px;"/>
-<input type="text" name="m592r184" id="m592r184" style="width:135px; top:899px; left:470px;"/>
-<input type="text" name="m592r185" id="m592r185" style="width:135px; top:899px; left:617px;"/>
-<input type="text" name="m592r186" id="m592r186" style="width:123px; top:899px; left:764px;"/>
-<input type="text" name="m592r191" id="m592r191" style="width:91px; top:931px; left:98px;"/>
-<input type="text" name="m592r192" id="m592r192" style="width:131px; top:931px; left:202px;"/>
-<input type="text" name="m592r193" id="m592r193" style="width:112px; top:931px; left:345px;"/>
-<input type="text" name="m592r194" id="m592r194" style="width:135px; top:931px; left:470px;"/>
-<input type="text" name="m592r195" id="m592r195" style="width:135px; top:931px; left:617px;"/>
-<input type="text" name="m592r196" id="m592r196" style="width:123px; top:931px; left:764px;"/>
-<input type="text" name="m592r201" id="m592r201" style="width:91px; top:963px; left:98px;"/>
-<input type="text" name="m592r202" id="m592r202" style="width:131px; top:963px; left:202px;"/>
-<input type="text" name="m592r203" id="m592r203" style="width:112px; top:963px; left:345px;"/>
-<input type="text" name="m592r204" id="m592r204" style="width:135px; top:963px; left:470px;"/>
-<input type="text" name="m592r205" id="m592r205" style="width:135px; top:963px; left:617px;"/>
-<input type="text" name="m592r206" id="m592r206" style="width:123px; top:963px; left:764px;"/>
-<input type="text" name="m592r211" id="m592r211" style="width:91px; top:994px; left:98px;"/>
-<input type="text" name="m592r212" id="m592r212" style="width:131px; top:994px; left:202px;"/>
-<input type="text" name="m592r213" id="m592r213" style="width:112px; top:994px; left:345px;"/>
-<input type="text" name="m592r214" id="m592r214" style="width:135px; top:994px; left:470px;"/>
-<input type="text" name="m592r215" id="m592r215" style="width:135px; top:994px; left:617px;"/>
-<input type="text" name="m592r216" id="m592r216" style="width:123px; top:994px; left:764px;"/>
-<input type="text" name="m592r221" id="m592r221" style="width:91px; top:1026px; left:98px;"/>
-<input type="text" name="m592r222" id="m592r222" style="width:131px; top:1026px; left:202px;"/>
-<input type="text" name="m592r223" id="m592r223" style="width:112px; top:1026px; left:345px;"/>
-<input type="text" name="m592r224" id="m592r224" style="width:135px; top:1026px; left:470px;"/>
-<input type="text" name="m592r225" id="m592r225" style="width:135px; top:1026px; left:617px;"/>
-<input type="text" name="m592r226" id="m592r226" style="width:123px; top:1026px; left:764px;"/>
-<input type="text" name="m592r231" id="m592r231" style="width:91px; top:1058px; left:98px;"/>
-<input type="text" name="m592r232" id="m592r232" style="width:131px; top:1058px; left:202px;"/>
-<input type="text" name="m592r233" id="m592r233" style="width:112px; top:1058px; left:345px;"/>
-<input type="text" name="m592r234" id="m592r234" style="width:135px; top:1058px; left:470px;"/>
-<input type="text" name="m592r235" id="m592r235" style="width:135px; top:1058px; left:617px;"/>
-<input type="text" name="m592r236" id="m592r236" style="width:123px; top:1058px; left:764px;"/>
-<input type="text" name="m592r241" id="m592r241" style="width:91px; top:1090px; left:98px;"/>
-<input type="text" name="m592r242" id="m592r242" style="width:131px; top:1090px; left:202px;"/>
-<input type="text" name="m592r243" id="m592r243" style="width:112px; top:1090px; left:345px;"/>
-<input type="text" name="m592r244" id="m592r244" style="width:135px; top:1090px; left:470px;"/>
-<input type="text" name="m592r245" id="m592r245" style="width:135px; top:1090px; left:617px;"/>
-<input type="text" name="m592r246" id="m592r246" style="width:123px; top:1090px; left:764px;"/>
-<input type="text" name="m592r251" id="m592r251" style="width:91px; top:1122px; left:98px;"/>
-<input type="text" name="m592r252" id="m592r252" style="width:131px; top:1122px; left:202px;"/>
-<input type="text" name="m592r253" id="m592r253" style="width:112px; top:1122px; left:345px;"/>
-<input type="text" name="m592r254" id="m592r254" style="width:135px; top:1122px; left:470px;"/>
-<input type="text" name="m592r255" id="m592r255" style="width:135px; top:1122px; left:617px;"/>
-<input type="text" name="m592r256" id="m592r256" style="width:123px; top:1122px; left:764px;"/>
-<span class="text-echo" style="top:1160px; right:615px;"><?php echo $m592r992; ?></span>
-<span class="text-echo" style="top:1160px; right:490px;"><?php echo $m592r993; ?></span>
-<span class="text-echo" style="top:1160px; right:344px;"><?php echo $m592r994; ?></span>
-<span class="text-echo" style="top:1160px; right:196px;"><?php echo $m592r995; ?></span>
-<span class="text-echo" style="top:1160px; right:60px;"><?php echo $m592r996; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 3.strana 269kB">
-<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 177 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(177);" style="top:103px; left:315px;" class="btn-row-tool">
-<input type="text" name="m177r1" id="m177r1" style="width:100px; top:196px; left:735px;"/>
-<input type="text" name="m177r2" id="m177r2" style="width:100px; top:227px; left:735px;"/>
-<input type="text" name="m177r3" id="m177r3" style="width:100px; top:257px; left:735px;"/>
-<input type="text" name="m177r4" id="m177r4" style="width:100px; top:282px; left:735px;"/>
-<input type="text" name="m177r5" id="m177r5" style="width:100px; top:307px; left:735px;"/>
-<input type="text" name="m177r6" id="m177r6" style="width:100px; top:331px; left:735px;"/>
-<input type="text" name="m177r7" id="m177r7" style="width:100px; top:356px; left:735px;"/>
-<input type="text" name="m177r8" id="m177r8" style="width:100px; top:381px; left:735px;"/>
-<input type="text" name="m177r9" id="m177r9" style="width:100px; top:406px; left:735px;"/>
-<input type="text" name="m177r10" id="m177r10" style="width:100px; top:431px; left:735px;"/>
-<span class="text-echo" style="top:460px; right:110px;"><?php echo $m177r99; ?></span>
-
-<!-- modul 178 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(178);" style="top:557px; left:531px;" class="btn-row-tool">
-<input type="text" name="m178r1" id="m178r1" style="width:100px; top:652px; left:680px;"/>
-<input type="text" name="m178r2" id="m178r2" style="width:100px; top:677px; left:680px;"/>
-<input type="text" name="m178r3" id="m178r3" style="width:100px; top:717px; left:680px;"/>
-<input type="text" name="m178r4" id="m178r4" style="width:100px; top:756px; left:680px;"/>
-<input type="text" name="m178r5" id="m178r5" style="width:100px; top:782px; left:680px;"/>
-<input type="text" name="m178r6" id="m178r6" style="width:100px; top:807px; left:680px;"/>
-<input type="text" name="m178r7" id="m178r7" style="width:100px; top:832px; left:680px;"/>
-<input type="text" name="m178r8" id="m178r8" style="width:100px; top:863px; left:680px;"/>
-<input type="text" name="m178r9" id="m178r9" style="width:100px; top:894px; left:680px;"/>
-<input type="text" name="m178r10" id="m178r10" style="width:100px; top:920px; left:680px;"/>
-<input type="text" name="m178r11" id="m178r11" style="width:100px; top:945px; left:680px;"/>
-<input type="text" name="m178r12" id="m178r12" style="width:100px; top:970px; left:680px;"/>
-<input type="text" name="m178r13" id="m178r13" style="width:100px; top:995px; left:680px;"/>
-<input type="text" name="m178r14" id="m178r14" style="width:100px; top:1020px; left:680px;"/>
-<input type="text" name="m178r15" id="m178r15" style="width:100px; top:1046px; left:680px;"/>
-<input type="text" name="m178r16" id="m178r16" style="width:100px; top:1071px; left:680px;"/>
-<input type="text" name="m178r17" id="m178r17" style="width:100px; top:1096px; left:680px;"/>
-<input type="text" name="m178r18" id="m178r18" style="width:100px; top:1121px; left:680px;"/>
-<input type="text" name="m178r19" id="m178r19" style="width:100px; top:1147px; left:680px;"/>
-<span class="text-echo" style="top:1176px; right:165px;"><?php echo $m178r99; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 4.strana 160kB">
-<span class="text-echo" style="top:95px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 179 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(179);" style="top:155px; left:432px;" class="btn-row-tool">
-<input type="text" name="m179r1" id="m179r1" style="width:100px; top:267px; left:675px;"/>
-<input type="text" name="m179r2" id="m179r2" style="width:100px; top:304px; left:675px;"/>
-<input type="text" name="m179r3" id="m179r3" style="width:100px; top:340px; left:675px;"/>
-<input type="text" name="m179r4" id="m179r4" style="width:100px; top:375px; left:675px;"/>
-<input type="text" name="m179r5" id="m179r5" style="width:100px; top:406px; left:675px;"/>
-<input type="text" name="m179r6" id="m179r6" style="width:100px; top:438px; left:675px;"/>
-<input type="text" name="m179r7" id="m179r7" style="width:100px; top:470px; left:675px;"/>
-<input type="text" name="m179r8" id="m179r8" style="width:100px; top:502px; left:675px;"/>
-<input type="text" name="m179r9" id="m179r9" style="width:100px; top:533px; left:675px;"/>
-<span class="text-echo" style="top:570px; right:170px;"><?php echo $m179r99; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 5.strana 270kB">
-<span class="text-echo" style="top:75px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 182 -->
-<input type="text" name="m182r11" id="m182r11" style="width:101px; top:297px; left:91px;"/>
-<input type="text" name="m182r12" id="m182r12" style="width:101px; top:297px; left:204px;"/>
-<input type="text" name="m182r13" id="m182r13" style="width:102px; top:297px; left:317px;"/>
-<input type="text" name="m182r14" id="m182r14" style="width:129px; top:297px; left:430px;"/>
-<input type="text" name="m182r15" id="m182r15" style="width:101px; top:297px; left:572px;"/>
-<input type="text" name="m182r16" id="m182r16" style="width:101px; top:297px; left:685px;"/>
-<input type="text" name="m182r17" id="m182r17" style="width:101px; top:297px; left:798px;"/>
-<input type="text" name="m182r21" id="m182r21" style="width:101px; top:324px; left:91px;"/>
-<input type="text" name="m182r22" id="m182r22" style="width:101px; top:324px; left:204px;"/>
-<input type="text" name="m182r23" id="m182r23" style="width:102px; top:324px; left:317px;"/>
-<input type="text" name="m182r24" id="m182r24" style="width:129px; top:324px; left:430px;"/>
-<input type="text" name="m182r25" id="m182r25" style="width:101px; top:324px; left:572px;"/>
-<input type="text" name="m182r26" id="m182r26" style="width:101px; top:324px; left:685px;"/>
-<input type="text" name="m182r27" id="m182r27" style="width:101px; top:324px; left:798px;"/>
-<input type="text" name="m182r31" id="m182r31" style="width:101px; top:351px; left:91px;"/>
-<input type="text" name="m182r32" id="m182r32" style="width:101px; top:351px; left:204px;"/>
-<input type="text" name="m182r33" id="m182r33" style="width:102px; top:351px; left:317px;"/>
-<input type="text" name="m182r34" id="m182r34" style="width:129px; top:351px; left:430px;"/>
-<input type="text" name="m182r35" id="m182r35" style="width:101px; top:351px; left:572px;"/>
-<input type="text" name="m182r36" id="m182r36" style="width:101px; top:351px; left:685px;"/>
-<input type="text" name="m182r37" id="m182r37" style="width:101px; top:351px; left:798px;"/>
-<input type="text" name="m182r41" id="m182r41" style="width:101px; top:377px; left:91px;"/>
-<input type="text" name="m182r42" id="m182r42" style="width:101px; top:377px; left:204px;"/>
-<input type="text" name="m182r43" id="m182r43" style="width:102px; top:377px; left:317px;"/>
-<input type="text" name="m182r44" id="m182r44" style="width:129px; top:377px; left:430px;"/>
-<input type="text" name="m182r45" id="m182r45" style="width:101px; top:377px; left:572px;"/>
-<input type="text" name="m182r46" id="m182r46" style="width:101px; top:377px; left:685px;"/>
-<input type="text" name="m182r47" id="m182r47" style="width:101px; top:377px; left:798px;"/>
-<input type="text" name="m182r51" id="m182r51" style="width:101px; top:404px; left:91px;"/>
-<input type="text" name="m182r52" id="m182r52" style="width:101px; top:404px; left:204px;"/>
-<input type="text" name="m182r53" id="m182r53" style="width:102px; top:404px; left:317px;"/>
-<input type="text" name="m182r54" id="m182r54" style="width:129px; top:404px; left:430px;"/>
-<input type="text" name="m182r55" id="m182r55" style="width:101px; top:404px; left:572px;"/>
-<input type="text" name="m182r56" id="m182r56" style="width:101px; top:404px; left:685px;"/>
-<input type="text" name="m182r57" id="m182r57" style="width:101px; top:404px; left:798px;"/>
-<input type="text" name="m182r61" id="m182r61" style="width:101px; top:430px; left:91px;"/>
-<input type="text" name="m182r62" id="m182r62" style="width:101px; top:430px; left:204px;"/>
-<input type="text" name="m182r63" id="m182r63" style="width:102px; top:430px; left:317px;"/>
-<input type="text" name="m182r64" id="m182r64" style="width:129px; top:430px; left:430px;"/>
-<input type="text" name="m182r65" id="m182r65" style="width:101px; top:430px; left:572px;"/>
-<input type="text" name="m182r66" id="m182r66" style="width:101px; top:430px; left:685px;"/>
-<input type="text" name="m182r67" id="m182r67" style="width:101px; top:430px; left:798px;"/>
-<input type="text" name="m182r71" id="m182r71" style="width:101px; top:457px; left:91px;"/>
-<input type="text" name="m182r72" id="m182r72" style="width:101px; top:457px; left:204px;"/>
-<input type="text" name="m182r73" id="m182r73" style="width:102px; top:457px; left:317px;"/>
-<input type="text" name="m182r74" id="m182r74" style="width:129px; top:457px; left:430px;"/>
-<input type="text" name="m182r75" id="m182r75" style="width:101px; top:457px; left:572px;"/>
-<input type="text" name="m182r76" id="m182r76" style="width:101px; top:457px; left:685px;"/>
-<input type="text" name="m182r77" id="m182r77" style="width:101px; top:457px; left:798px;"/>
-<input type="text" name="m182r81" id="m182r81" style="width:101px; top:484px; left:91px;"/>
-<input type="text" name="m182r82" id="m182r82" style="width:101px; top:484px; left:204px;"/>
-<input type="text" name="m182r83" id="m182r83" style="width:102px; top:484px; left:317px;"/>
-<input type="text" name="m182r84" id="m182r84" style="width:129px; top:484px; left:430px;"/>
-<input type="text" name="m182r85" id="m182r85" style="width:101px; top:484px; left:572px;"/>
-<input type="text" name="m182r86" id="m182r86" style="width:101px; top:484px; left:685px;"/>
-<input type="text" name="m182r87" id="m182r87" style="width:101px; top:484px; left:798px;"/>
-<input type="text" name="m182r91" id="m182r91" style="width:101px; top:510px; left:91px;"/>
-<input type="text" name="m182r92" id="m182r92" style="width:101px; top:510px; left:204px;"/>
-<input type="text" name="m182r93" id="m182r93" style="width:102px; top:510px; left:317px;"/>
-<input type="text" name="m182r94" id="m182r94" style="width:129px; top:510px; left:430px;"/>
-<input type="text" name="m182r95" id="m182r95" style="width:101px; top:510px; left:572px;"/>
-<input type="text" name="m182r96" id="m182r96" style="width:101px; top:510px; left:685px;"/>
-<input type="text" name="m182r97" id="m182r97" style="width:101px; top:510px; left:798px;"/>
-<input type="text" name="m182r101" id="m182r101" style="width:101px; top:537px; left:91px;"/>
-<input type="text" name="m182r102" id="m182r102" style="width:101px; top:537px; left:204px;"/>
-<input type="text" name="m182r103" id="m182r103" style="width:102px; top:537px; left:317px;"/>
-<input type="text" name="m182r104" id="m182r104" style="width:129px; top:537px; left:430px;"/>
-<input type="text" name="m182r105" id="m182r105" style="width:101px; top:537px; left:572px;"/>
-<input type="text" name="m182r106" id="m182r106" style="width:101px; top:537px; left:685px;"/>
-<input type="text" name="m182r107" id="m182r107" style="width:101px; top:537px; left:798px;"/>
-<input type="text" name="m182r111" id="m182r111" style="width:101px; top:563px; left:91px;"/>
-<input type="text" name="m182r112" id="m182r112" style="width:101px; top:563px; left:204px;"/>
-<input type="text" name="m182r113" id="m182r113" style="width:102px; top:563px; left:317px;"/>
-<input type="text" name="m182r114" id="m182r114" style="width:129px; top:563px; left:430px;"/>
-<input type="text" name="m182r115" id="m182r115" style="width:101px; top:563px; left:572px;"/>
-<input type="text" name="m182r116" id="m182r116" style="width:101px; top:563px; left:685px;"/>
-<input type="text" name="m182r117" id="m182r117" style="width:101px; top:563px; left:798px;"/>
-<input type="text" name="m182r121" id="m182r121" style="width:101px; top:590px; left:91px;"/>
-<input type="text" name="m182r122" id="m182r122" style="width:101px; top:590px; left:204px;"/>
-<input type="text" name="m182r123" id="m182r123" style="width:102px; top:590px; left:317px;"/>
-<input type="text" name="m182r124" id="m182r124" style="width:129px; top:590px; left:430px;"/>
-<input type="text" name="m182r125" id="m182r125" style="width:101px; top:590px; left:572px;"/>
-<input type="text" name="m182r126" id="m182r126" style="width:101px; top:590px; left:685px;"/>
-<input type="text" name="m182r127" id="m182r127" style="width:101px; top:590px; left:798px;"/>
-<input type="text" name="m182r131" id="m182r131" style="width:101px; top:617px; left:91px;"/>
-<input type="text" name="m182r132" id="m182r132" style="width:101px; top:617px; left:204px;"/>
-<input type="text" name="m182r133" id="m182r133" style="width:102px; top:617px; left:317px;"/>
-<input type="text" name="m182r134" id="m182r134" style="width:129px; top:617px; left:430px;"/>
-<input type="text" name="m182r135" id="m182r135" style="width:101px; top:617px; left:572px;"/>
-<input type="text" name="m182r136" id="m182r136" style="width:101px; top:617px; left:685px;"/>
-<input type="text" name="m182r137" id="m182r137" style="width:101px; top:617px; left:798px;"/>
-<input type="text" name="m182r141" id="m182r141" style="width:101px; top:643px; left:91px;"/>
-<input type="text" name="m182r142" id="m182r142" style="width:101px; top:643px; left:204px;"/>
-<input type="text" name="m182r143" id="m182r143" style="width:102px; top:643px; left:317px;"/>
-<input type="text" name="m182r144" id="m182r144" style="width:129px; top:643px; left:430px;"/>
-<input type="text" name="m182r145" id="m182r145" style="width:101px; top:643px; left:572px;"/>
-<input type="text" name="m182r146" id="m182r146" style="width:101px; top:643px; left:685px;"/>
-<input type="text" name="m182r147" id="m182r147" style="width:101px; top:643px; left:798px;"/>
-<input type="text" name="m182r151" id="m182r151" style="width:101px; top:670px; left:91px;"/>
-<input type="text" name="m182r152" id="m182r152" style="width:101px; top:670px; left:204px;"/>
-<input type="text" name="m182r153" id="m182r153" style="width:102px; top:670px; left:317px;"/>
-<input type="text" name="m182r154" id="m182r154" style="width:129px; top:670px; left:430px;"/>
-<input type="text" name="m182r155" id="m182r155" style="width:101px; top:670px; left:572px;"/>
-<input type="text" name="m182r156" id="m182r156" style="width:101px; top:670px; left:685px;"/>
-<input type="text" name="m182r157" id="m182r157" style="width:101px; top:670px; left:798px;"/>
-<input type="text" name="m182r161" id="m182r161" style="width:101px; top:696px; left:91px;"/>
-<input type="text" name="m182r162" id="m182r162" style="width:101px; top:696px; left:204px;"/>
-<input type="text" name="m182r163" id="m182r163" style="width:102px; top:696px; left:317px;"/>
-<input type="text" name="m182r164" id="m182r164" style="width:129px; top:696px; left:430px;"/>
-<input type="text" name="m182r165" id="m182r165" style="width:101px; top:696px; left:572px;"/>
-<input type="text" name="m182r166" id="m182r166" style="width:101px; top:696px; left:685px;"/>
-<input type="text" name="m182r167" id="m182r167" style="width:101px; top:696px; left:798px;"/>
-<input type="text" name="m182r171" id="m182r171" style="width:101px; top:723px; left:91px;"/>
-<input type="text" name="m182r172" id="m182r172" style="width:101px; top:723px; left:204px;"/>
-<input type="text" name="m182r173" id="m182r173" style="width:102px; top:723px; left:317px;"/>
-<input type="text" name="m182r174" id="m182r174" style="width:129px; top:723px; left:430px;"/>
-<input type="text" name="m182r175" id="m182r175" style="width:101px; top:723px; left:572px;"/>
-<input type="text" name="m182r176" id="m182r176" style="width:101px; top:723px; left:685px;"/>
-<input type="text" name="m182r177" id="m182r177" style="width:101px; top:723px; left:798px;"/>
-<input type="text" name="m182r181" id="m182r181" style="width:101px; top:749px; left:91px;"/>
-<input type="text" name="m182r182" id="m182r182" style="width:101px; top:749px; left:204px;"/>
-<input type="text" name="m182r183" id="m182r183" style="width:102px; top:749px; left:317px;"/>
-<input type="text" name="m182r184" id="m182r184" style="width:129px; top:749px; left:430px;"/>
-<input type="text" name="m182r185" id="m182r185" style="width:101px; top:749px; left:572px;"/>
-<input type="text" name="m182r186" id="m182r186" style="width:101px; top:749px; left:685px;"/>
-<input type="text" name="m182r187" id="m182r187" style="width:101px; top:749px; left:798px;"/>
-<input type="text" name="m182r191" id="m182r191" style="width:101px; top:776px; left:91px;"/>
-<input type="text" name="m182r192" id="m182r192" style="width:101px; top:776px; left:204px;"/>
-<input type="text" name="m182r193" id="m182r193" style="width:102px; top:776px; left:317px;"/>
-<input type="text" name="m182r194" id="m182r194" style="width:129px; top:776px; left:430px;"/>
-<input type="text" name="m182r195" id="m182r195" style="width:101px; top:776px; left:572px;"/>
-<input type="text" name="m182r196" id="m182r196" style="width:101px; top:776px; left:685px;"/>
-<input type="text" name="m182r197" id="m182r197" style="width:101px; top:776px; left:798px;"/>
-<input type="text" name="m182r201" id="m182r201" style="width:101px; top:802px; left:91px;"/>
-<input type="text" name="m182r202" id="m182r202" style="width:101px; top:802px; left:204px;"/>
-<input type="text" name="m182r203" id="m182r203" style="width:102px; top:802px; left:317px;"/>
-<input type="text" name="m182r204" id="m182r204" style="width:129px; top:802px; left:430px;"/>
-<input type="text" name="m182r205" id="m182r205" style="width:101px; top:802px; left:572px;"/>
-<input type="text" name="m182r206" id="m182r206" style="width:101px; top:802px; left:685px;"/>
-<input type="text" name="m182r207" id="m182r207" style="width:101px; top:802px; left:798px;"/>
-<input type="text" name="m182r211" id="m182r211" style="width:101px; top:829px; left:91px;"/>
-<input type="text" name="m182r212" id="m182r212" style="width:101px; top:829px; left:204px;"/>
-<input type="text" name="m182r213" id="m182r213" style="width:102px; top:829px; left:317px;"/>
-<input type="text" name="m182r214" id="m182r214" style="width:129px; top:829px; left:430px;"/>
-<input type="text" name="m182r215" id="m182r215" style="width:101px; top:829px; left:572px;"/>
-<input type="text" name="m182r216" id="m182r216" style="width:101px; top:829px; left:685px;"/>
-<input type="text" name="m182r217" id="m182r217" style="width:101px; top:829px; left:798px;"/>
-<input type="text" name="m182r221" id="m182r221" style="width:101px; top:855px; left:91px;"/>
-<input type="text" name="m182r222" id="m182r222" style="width:101px; top:855px; left:204px;"/>
-<input type="text" name="m182r223" id="m182r223" style="width:102px; top:855px; left:317px;"/>
-<input type="text" name="m182r224" id="m182r224" style="width:129px; top:855px; left:430px;"/>
-<input type="text" name="m182r225" id="m182r225" style="width:101px; top:855px; left:572px;"/>
-<input type="text" name="m182r226" id="m182r226" style="width:101px; top:855px; left:685px;"/>
-<input type="text" name="m182r227" id="m182r227" style="width:101px; top:855px; left:798px;"/>
-<input type="text" name="m182r231" id="m182r231" style="width:101px; top:882px; left:91px;"/>
-<input type="text" name="m182r232" id="m182r232" style="width:101px; top:882px; left:204px;"/>
-<input type="text" name="m182r233" id="m182r233" style="width:102px; top:882px; left:317px;"/>
-<input type="text" name="m182r234" id="m182r234" style="width:129px; top:882px; left:430px;"/>
-<input type="text" name="m182r235" id="m182r235" style="width:101px; top:882px; left:572px;"/>
-<input type="text" name="m182r236" id="m182r236" style="width:101px; top:882px; left:685px;"/>
-<input type="text" name="m182r237" id="m182r237" style="width:101px; top:882px; left:798px;"/>
-<input type="text" name="m182r241" id="m182r241" style="width:101px; top:909px; left:91px;"/>
-<input type="text" name="m182r242" id="m182r242" style="width:101px; top:909px; left:204px;"/>
-<input type="text" name="m182r243" id="m182r243" style="width:102px; top:909px; left:317px;"/>
-<input type="text" name="m182r244" id="m182r244" style="width:129px; top:909px; left:430px;"/>
-<input type="text" name="m182r245" id="m182r245" style="width:101px; top:909px; left:572px;"/>
-<input type="text" name="m182r246" id="m182r246" style="width:101px; top:909px; left:685px;"/>
-<input type="text" name="m182r247" id="m182r247" style="width:101px; top:909px; left:798px;"/>
-<input type="text" name="m182r251" id="m182r251" style="width:101px; top:935px; left:91px;"/>
-<input type="text" name="m182r252" id="m182r252" style="width:101px; top:935px; left:204px;"/>
-<input type="text" name="m182r253" id="m182r253" style="width:102px; top:935px; left:317px;"/>
-<input type="text" name="m182r254" id="m182r254" style="width:129px; top:935px; left:430px;"/>
-<input type="text" name="m182r255" id="m182r255" style="width:101px; top:935px; left:572px;"/>
-<input type="text" name="m182r256" id="m182r256" style="width:101px; top:935px; left:685px;"/>
-<input type="text" name="m182r257" id="m182r257" style="width:101px; top:935px; left:798px;"/>
-<input type="text" name="m182r261" id="m182r261" style="width:101px; top:962px; left:91px;"/>
-<input type="text" name="m182r262" id="m182r262" style="width:101px; top:962px; left:204px;"/>
-<input type="text" name="m182r263" id="m182r263" style="width:102px; top:962px; left:317px;"/>
-<input type="text" name="m182r264" id="m182r264" style="width:129px; top:962px; left:430px;"/>
-<input type="text" name="m182r265" id="m182r265" style="width:101px; top:962px; left:572px;"/>
-<input type="text" name="m182r266" id="m182r266" style="width:101px; top:962px; left:685px;"/>
-<input type="text" name="m182r267" id="m182r267" style="width:101px; top:962px; left:798px;"/>
-<input type="text" name="m182r271" id="m182r271" style="width:101px; top:988px; left:91px;"/>
-<input type="text" name="m182r272" id="m182r272" style="width:101px; top:988px; left:204px;"/>
-<input type="text" name="m182r273" id="m182r273" style="width:102px; top:988px; left:317px;"/>
-<input type="text" name="m182r274" id="m182r274" style="width:129px; top:988px; left:430px;"/>
-<input type="text" name="m182r275" id="m182r275" style="width:101px; top:988px; left:572px;"/>
-<input type="text" name="m182r276" id="m182r276" style="width:101px; top:988px; left:685px;"/>
-<input type="text" name="m182r277" id="m182r277" style="width:101px; top:988px; left:798px;"/>
-<input type="text" name="m182r281" id="m182r281" style="width:101px; top:1015px; left:91px;"/>
-<input type="text" name="m182r282" id="m182r282" style="width:101px; top:1015px; left:204px;"/>
-<input type="text" name="m182r283" id="m182r283" style="width:102px; top:1015px; left:317px;"/>
-<input type="text" name="m182r284" id="m182r284" style="width:129px; top:1015px; left:430px;"/>
-<input type="text" name="m182r285" id="m182r285" style="width:101px; top:1015px; left:572px;"/>
-<input type="text" name="m182r286" id="m182r286" style="width:101px; top:1015px; left:685px;"/>
-<input type="text" name="m182r287" id="m182r287" style="width:101px; top:1015px; left:798px;"/>
-<input type="text" name="m182r291" id="m182r291" style="width:101px; top:1041px; left:91px;"/>
-<input type="text" name="m182r292" id="m182r292" style="width:101px; top:1041px; left:204px;"/>
-<input type="text" name="m182r293" id="m182r293" style="width:102px; top:1041px; left:317px;"/>
-<input type="text" name="m182r294" id="m182r294" style="width:129px; top:1041px; left:430px;"/>
-<input type="text" name="m182r295" id="m182r295" style="width:101px; top:1041px; left:572px;"/>
-<input type="text" name="m182r296" id="m182r296" style="width:101px; top:1041px; left:685px;"/>
-<input type="text" name="m182r297" id="m182r297" style="width:101px; top:1041px; left:798px;"/>
-<input type="text" name="m182r301" id="m182r301" style="width:101px; top:1068px; left:91px;"/>
-<input type="text" name="m182r302" id="m182r302" style="width:101px; top:1068px; left:204px;"/>
-<input type="text" name="m182r303" id="m182r303" style="width:102px; top:1068px; left:317px;"/>
-<input type="text" name="m182r304" id="m182r304" style="width:129px; top:1068px; left:430px;"/>
-<input type="text" name="m182r305" id="m182r305" style="width:101px; top:1068px; left:572px;"/>
-<input type="text" name="m182r306" id="m182r306" style="width:101px; top:1068px; left:685px;"/>
-<input type="text" name="m182r307" id="m182r307" style="width:101px; top:1068px; left:798px;"/>
-<input type="text" name="m182r311" id="m182r311" style="width:101px; top:1094px; left:91px;"/>
-<input type="text" name="m182r312" id="m182r312" style="width:101px; top:1094px; left:204px;"/>
-<input type="text" name="m182r313" id="m182r313" style="width:102px; top:1094px; left:317px;"/>
-<input type="text" name="m182r314" id="m182r314" style="width:129px; top:1094px; left:430px;"/>
-<input type="text" name="m182r315" id="m182r315" style="width:101px; top:1094px; left:572px;"/>
-<input type="text" name="m182r316" id="m182r316" style="width:101px; top:1094px; left:685px;"/>
-<input type="text" name="m182r317" id="m182r317" style="width:101px; top:1094px; left:798px;"/>
-<input type="text" name="m182r321" id="m182r321" style="width:101px; top:1121px; left:91px;"/>
-<input type="text" name="m182r322" id="m182r322" style="width:101px; top:1121px; left:204px;"/>
-<input type="text" name="m182r323" id="m182r323" style="width:102px; top:1121px; left:317px;"/>
-<input type="text" name="m182r324" id="m182r324" style="width:129px; top:1121px; left:430px;"/>
-<input type="text" name="m182r325" id="m182r325" style="width:101px; top:1121px; left:572px;"/>
-<input type="text" name="m182r326" id="m182r326" style="width:101px; top:1121px; left:685px;"/>
-<input type="text" name="m182r327" id="m182r327" style="width:101px; top:1121px; left:798px;"/>
-<input type="text" name="m182r331" id="m182r331" style="width:101px; top:1148px; left:91px;"/>
-<input type="text" name="m182r332" id="m182r332" style="width:101px; top:1148px; left:204px;"/>
-<input type="text" name="m182r333" id="m182r333" style="width:102px; top:1148px; left:317px;"/>
-<input type="text" name="m182r334" id="m182r334" style="width:129px; top:1148px; left:430px;"/>
-<input type="text" name="m182r335" id="m182r335" style="width:101px; top:1148px; left:572px;"/>
-<input type="text" name="m182r336" id="m182r336" style="width:101px; top:1148px; left:685px;"/>
-<input type="text" name="m182r337" id="m182r337" style="width:101px; top:1148px; left:798px;"/>
-<span class="text-echo" style="top:1178px; right:642px;"><?php echo $m182r992; ?></span>
-<span class="text-echo" style="top:1178px; right:529px;"><?php echo $m182r993; ?></span>
-<span class="text-echo" style="top:1178px; right:387px;"><?php echo $m182r994; ?></span>
-<span class="text-echo" style="top:1178px; right:274px;"><?php echo $m182r995; ?></span>
-<span class="text-echo" style="top:1178px; right:160px;"><?php echo $m182r996; ?></span>
-<span class="text-echo" style="top:1178px; right:48px;"><?php echo $m182r997; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 6.strana 237kB">
-<span class="text-echo" style="top:95px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 183 -->
-<input type="text" name="m183r11" id="m183r11" style="width:138px; top:319px; left:91px;"/>
-<input type="text" name="m183r12" id="m183r12" style="width:138px; top:319px; left:240px;"/>
-<input type="text" name="m183r13" id="m183r13" style="width:138px; top:319px; left:389px;"/>
-<input type="text" name="m183r14" id="m183r14" style="width:349px; top:319px; left:539px;"/>
-<input type="text" name="m183r21" id="m183r21" style="width:138px; top:347px; left:91px;"/>
-<input type="text" name="m183r22" id="m183r22" style="width:138px; top:347px; left:240px;"/>
-<input type="text" name="m183r23" id="m183r23" style="width:138px; top:347px; left:389px;"/>
-<input type="text" name="m183r24" id="m183r24" style="width:349px; top:347px; left:539px;"/>
-<input type="text" name="m183r31" id="m183r31" style="width:138px; top:374px; left:91px;"/>
-<input type="text" name="m183r32" id="m183r32" style="width:138px; top:374px; left:240px;"/>
-<input type="text" name="m183r33" id="m183r33" style="width:138px; top:374px; left:389px;"/>
-<input type="text" name="m183r34" id="m183r34" style="width:349px; top:374px; left:539px;"/>
-<input type="text" name="m183r41" id="m183r41" style="width:138px; top:401px; left:91px;"/>
-<input type="text" name="m183r42" id="m183r42" style="width:138px; top:401px; left:240px;"/>
-<input type="text" name="m183r43" id="m183r43" style="width:138px; top:401px; left:389px;"/>
-<input type="text" name="m183r44" id="m183r44" style="width:349px; top:401px; left:539px;"/>
-<input type="text" name="m183r51" id="m183r51" style="width:138px; top:429px; left:91px;"/>
-<input type="text" name="m183r52" id="m183r52" style="width:138px; top:429px; left:240px;"/>
-<input type="text" name="m183r53" id="m183r53" style="width:138px; top:429px; left:389px;"/>
-<input type="text" name="m183r54" id="m183r54" style="width:349px; top:429px; left:539px;"/>
-<input type="text" name="m183r61" id="m183r61" style="width:138px; top:456px; left:91px;"/>
-<input type="text" name="m183r62" id="m183r62" style="width:138px; top:456px; left:240px;"/>
-<input type="text" name="m183r63" id="m183r63" style="width:138px; top:456px; left:389px;"/>
-<input type="text" name="m183r64" id="m183r64" style="width:349px; top:456px; left:539px;"/>
-<input type="text" name="m183r71" id="m183r71" style="width:138px; top:483px; left:91px;"/>
-<input type="text" name="m183r72" id="m183r72" style="width:138px; top:483px; left:240px;"/>
-<input type="text" name="m183r73" id="m183r73" style="width:138px; top:483px; left:389px;"/>
-<input type="text" name="m183r74" id="m183r74" style="width:349px; top:483px; left:539px;"/>
-<input type="text" name="m183r81" id="m183r81" style="width:138px; top:511px; left:91px;"/>
-<input type="text" name="m183r82" id="m183r82" style="width:138px; top:511px; left:240px;"/>
-<input type="text" name="m183r83" id="m183r83" style="width:138px; top:511px; left:389px;"/>
-<input type="text" name="m183r84" id="m183r84" style="width:349px; top:511px; left:539px;"/>
-<input type="text" name="m183r91" id="m183r91" style="width:138px; top:539px; left:91px;"/>
-<input type="text" name="m183r92" id="m183r92" style="width:138px; top:539px; left:240px;"/>
-<input type="text" name="m183r93" id="m183r93" style="width:138px; top:539px; left:389px;"/>
-<input type="text" name="m183r94" id="m183r94" style="width:349px; top:539px; left:539px;"/>
-<input type="text" name="m183r101" id="m183r101" style="width:138px; top:566px; left:91px;"/>
-<input type="text" name="m183r102" id="m183r102" style="width:138px; top:566px; left:240px;"/>
-<input type="text" name="m183r103" id="m183r103" style="width:138px; top:566px; left:389px;"/>
-<input type="text" name="m183r104" id="m183r104" style="width:349px; top:566px; left:539px;"/>
-<input type="text" name="m183r111" id="m183r111" style="width:138px; top:593px; left:91px;"/>
-<input type="text" name="m183r112" id="m183r112" style="width:138px; top:593px; left:240px;"/>
-<input type="text" name="m183r113" id="m183r113" style="width:138px; top:593px; left:389px;"/>
-<input type="text" name="m183r114" id="m183r114" style="width:349px; top:593px; left:539px;"/>
-<input type="text" name="m183r121" id="m183r121" style="width:138px; top:621px; left:91px;"/>
-<input type="text" name="m183r122" id="m183r122" style="width:138px; top:621px; left:240px;"/>
-<input type="text" name="m183r123" id="m183r123" style="width:138px; top:621px; left:389px;"/>
-<input type="text" name="m183r124" id="m183r124" style="width:349px; top:621px; left:539px;"/>
-<input type="text" name="m183r131" id="m183r131" style="width:138px; top:648px; left:91px;"/>
-<input type="text" name="m183r132" id="m183r132" style="width:138px; top:648px; left:240px;"/>
-<input type="text" name="m183r133" id="m183r133" style="width:138px; top:648px; left:389px;"/>
-<input type="text" name="m183r134" id="m183r134" style="width:349px; top:648px; left:539px;"/>
-<input type="text" name="m183r141" id="m183r141" style="width:138px; top:676px; left:91px;"/>
-<input type="text" name="m183r142" id="m183r142" style="width:138px; top:676px; left:240px;"/>
-<input type="text" name="m183r143" id="m183r143" style="width:138px; top:676px; left:389px;"/>
-<input type="text" name="m183r144" id="m183r144" style="width:349px; top:676px; left:539px;"/>
-<input type="text" name="m183r151" id="m183r151" style="width:138px; top:703px; left:91px;"/>
-<input type="text" name="m183r152" id="m183r152" style="width:138px; top:703px; left:240px;"/>
-<input type="text" name="m183r153" id="m183r153" style="width:138px; top:703px; left:389px;"/>
-<input type="text" name="m183r154" id="m183r154" style="width:349px; top:703px; left:539px;"/>
-<input type="text" name="m183r161" id="m183r161" style="width:138px; top:730px; left:91px;"/>
-<input type="text" name="m183r162" id="m183r162" style="width:138px; top:730px; left:240px;"/>
-<input type="text" name="m183r163" id="m183r163" style="width:138px; top:730px; left:389px;"/>
-<input type="text" name="m183r164" id="m183r164" style="width:349px; top:730px; left:539px;"/>
-<input type="text" name="m183r171" id="m183r171" style="width:138px; top:758px; left:91px;"/>
-<input type="text" name="m183r172" id="m183r172" style="width:138px; top:758px; left:240px;"/>
-<input type="text" name="m183r173" id="m183r173" style="width:138px; top:758px; left:389px;"/>
-<input type="text" name="m183r174" id="m183r174" style="width:349px; top:758px; left:539px;"/>
-<input type="text" name="m183r181" id="m183r181" style="width:138px; top:785px; left:91px;"/>
-<input type="text" name="m183r182" id="m183r182" style="width:138px; top:785px; left:240px;"/>
-<input type="text" name="m183r183" id="m183r183" style="width:138px; top:785px; left:389px;"/>
-<input type="text" name="m183r184" id="m183r184" style="width:349px; top:785px; left:539px;"/>
-<input type="text" name="m183r191" id="m183r191" style="width:138px; top:813px; left:91px;"/>
-<input type="text" name="m183r192" id="m183r192" style="width:138px; top:813px; left:240px;"/>
-<input type="text" name="m183r193" id="m183r193" style="width:138px; top:813px; left:389px;"/>
-<input type="text" name="m183r194" id="m183r194" style="width:349px; top:813px; left:539px;"/>
-<input type="text" name="m183r201" id="m183r201" style="width:138px; top:840px; left:91px;"/>
-<input type="text" name="m183r202" id="m183r202" style="width:138px; top:840px; left:240px;"/>
-<input type="text" name="m183r203" id="m183r203" style="width:138px; top:840px; left:389px;"/>
-<input type="text" name="m183r204" id="m183r204" style="width:349px; top:840px; left:539px;"/>
-<input type="text" name="m183r211" id="m183r211" style="width:138px; top:867px; left:91px;"/>
-<input type="text" name="m183r212" id="m183r212" style="width:138px; top:867px; left:240px;"/>
-<input type="text" name="m183r213" id="m183r213" style="width:138px; top:867px; left:389px;"/>
-<input type="text" name="m183r214" id="m183r214" style="width:349px; top:867px; left:539px;"/>
-<input type="text" name="m183r221" id="m183r221" style="width:138px; top:895px; left:91px;"/>
-<input type="text" name="m183r222" id="m183r222" style="width:138px; top:895px; left:240px;"/>
-<input type="text" name="m183r223" id="m183r223" style="width:138px; top:895px; left:389px;"/>
-<input type="text" name="m183r224" id="m183r224" style="width:349px; top:895px; left:539px;"/>
-<input type="text" name="m183r231" id="m183r231" style="width:138px; top:922px; left:91px;"/>
-<input type="text" name="m183r232" id="m183r232" style="width:138px; top:922px; left:240px;"/>
-<input type="text" name="m183r233" id="m183r233" style="width:138px; top:922px; left:389px;"/>
-<input type="text" name="m183r234" id="m183r234" style="width:349px; top:922px; left:539px;"/>
-<input type="text" name="m183r241" id="m183r241" style="width:138px; top:950px; left:91px;"/>
-<input type="text" name="m183r242" id="m183r242" style="width:138px; top:950px; left:240px;"/>
-<input type="text" name="m183r243" id="m183r243" style="width:138px; top:950px; left:389px;"/>
-<input type="text" name="m183r244" id="m183r244" style="width:349px; top:950px; left:539px;"/>
-<input type="text" name="m183r251" id="m183r251" style="width:138px; top:977px; left:91px;"/>
-<input type="text" name="m183r252" id="m183r252" style="width:138px; top:977px; left:240px;"/>
-<input type="text" name="m183r253" id="m183r253" style="width:138px; top:977px; left:389px;"/>
-<input type="text" name="m183r254" id="m183r254" style="width:349px; top:977px; left:539px;"/>
-<input type="text" name="m183r261" id="m183r261" style="width:138px; top:1005px; left:91px;"/>
-<input type="text" name="m183r262" id="m183r262" style="width:138px; top:1005px; left:240px;"/>
-<input type="text" name="m183r263" id="m183r263" style="width:138px; top:1005px; left:389px;"/>
-<input type="text" name="m183r264" id="m183r264" style="width:349px; top:1005px; left:539px;"/>
-<input type="text" name="m183r271" id="m183r271" style="width:138px; top:1032px; left:91px;"/>
-<input type="text" name="m183r272" id="m183r272" style="width:138px; top:1032px; left:240px;"/>
-<input type="text" name="m183r273" id="m183r273" style="width:138px; top:1032px; left:389px;"/>
-<input type="text" name="m183r274" id="m183r274" style="width:349px; top:1032px; left:539px;"/>
-<input type="text" name="m183r281" id="m183r281" style="width:138px; top:1059px; left:91px;"/>
-<input type="text" name="m183r282" id="m183r282" style="width:138px; top:1059px; left:240px;"/>
-<input type="text" name="m183r283" id="m183r283" style="width:138px; top:1059px; left:389px;"/>
-<input type="text" name="m183r284" id="m183r284" style="width:349px; top:1059px; left:539px;"/>
-<input type="text" name="m183r291" id="m183r291" style="width:138px; top:1087px; left:91px;"/>
-<input type="text" name="m183r292" id="m183r292" style="width:138px; top:1087px; left:240px;"/>
-<input type="text" name="m183r293" id="m183r293" style="width:138px; top:1087px; left:389px;"/>
-<input type="text" name="m183r294" id="m183r294" style="width:349px; top:1087px; left:539px;"/>
-<input type="text" name="m183r301" id="m183r301" style="width:138px; top:1114px; left:91px;"/>
-<input type="text" name="m183r302" id="m183r302" style="width:138px; top:1114px; left:240px;"/>
-<input type="text" name="m183r303" id="m183r303" style="width:138px; top:1114px; left:389px;"/>
-<input type="text" name="m183r304" id="m183r304" style="width:349px; top:1114px; left:539px;"/>
-<span class="text-echo" style="top:1146px; right:572px;"><?php echo $m183r992; ?></span>
-<span class="text-echo" style="top:1146px; right:422px;"><?php echo $m183r993; ?></span>
-<span class="text-echo" style="top:1146px; right:61px;"><?php echo $m183r994; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 7 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 7.strana 267kB">
-<span class="text-echo" style="top:97px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 184 -->
-<input type="text" name="m184r11" id="m184r11" style="width:92px; top:299px; left:98px;"/>
-<input type="text" name="m184r12" id="m184r12" style="width:99px; top:299px; left:201px;"/>
-<input type="text" name="m184r13" id="m184r13" style="width:102px; top:299px; left:311px;"/>
-<input type="text" name="m184r14" id="m184r14" style="width:227px; top:299px; left:424px;"/>
-<input type="text" name="m184r15" id="m184r15" style="width:113px; top:299px; left:662px;"/>
-<input type="text" name="m184r16" id="m184r16" style="width:102px; top:299px; left:786px;"/>
-<input type="text" name="m184r21" id="m184r21" style="width:92px; top:325px; left:98px;"/>
-<input type="text" name="m184r22" id="m184r22" style="width:99px; top:325px; left:201px;"/>
-<input type="text" name="m184r23" id="m184r23" style="width:102px; top:325px; left:311px;"/>
-<input type="text" name="m184r24" id="m184r24" style="width:227px; top:325px; left:424px;"/>
-<input type="text" name="m184r25" id="m184r25" style="width:113px; top:325px; left:662px;"/>
-<input type="text" name="m184r26" id="m184r26" style="width:102px; top:325px; left:786px;"/>
-<input type="text" name="m184r31" id="m184r31" style="width:92px; top:352px; left:98px;"/>
-<input type="text" name="m184r32" id="m184r32" style="width:99px; top:352px; left:201px;"/>
-<input type="text" name="m184r33" id="m184r33" style="width:102px; top:352px; left:311px;"/>
-<input type="text" name="m184r34" id="m184r34" style="width:227px; top:352px; left:424px;"/>
-<input type="text" name="m184r35" id="m184r35" style="width:113px; top:352px; left:662px;"/>
-<input type="text" name="m184r36" id="m184r36" style="width:102px; top:352px; left:786px;"/>
-<input type="text" name="m184r41" id="m184r41" style="width:92px; top:377px; left:98px;"/>
-<input type="text" name="m184r42" id="m184r42" style="width:99px; top:377px; left:201px;"/>
-<input type="text" name="m184r43" id="m184r43" style="width:102px; top:377px; left:311px;"/>
-<input type="text" name="m184r44" id="m184r44" style="width:227px; top:377px; left:424px;"/>
-<input type="text" name="m184r45" id="m184r45" style="width:113px; top:377px; left:662px;"/>
-<input type="text" name="m184r46" id="m184r46" style="width:102px; top:377px; left:786px;"/>
-<input type="text" name="m184r51" id="m184r51" style="width:92px; top:404px; left:98px;"/>
-<input type="text" name="m184r52" id="m184r52" style="width:99px; top:404px; left:201px;"/>
-<input type="text" name="m184r53" id="m184r53" style="width:102px; top:404px; left:311px;"/>
-<input type="text" name="m184r54" id="m184r54" style="width:227px; top:404px; left:424px;"/>
-<input type="text" name="m184r55" id="m184r55" style="width:113px; top:404px; left:662px;"/>
-<input type="text" name="m184r56" id="m184r56" style="width:102px; top:404px; left:786px;"/>
-<input type="text" name="m184r61" id="m184r61" style="width:92px; top:430px; left:98px;"/>
-<input type="text" name="m184r62" id="m184r62" style="width:99px; top:430px; left:201px;"/>
-<input type="text" name="m184r63" id="m184r63" style="width:102px; top:430px; left:311px;"/>
-<input type="text" name="m184r64" id="m184r64" style="width:227px; top:430px; left:424px;"/>
-<input type="text" name="m184r65" id="m184r65" style="width:113px; top:430px; left:662px;"/>
-<input type="text" name="m184r66" id="m184r66" style="width:102px; top:430px; left:786px;"/>
-<input type="text" name="m184r71" id="m184r71" style="width:92px; top:456px; left:98px;"/>
-<input type="text" name="m184r72" id="m184r72" style="width:99px; top:456px; left:201px;"/>
-<input type="text" name="m184r73" id="m184r73" style="width:102px; top:456px; left:311px;"/>
-<input type="text" name="m184r74" id="m184r74" style="width:227px; top:456px; left:424px;"/>
-<input type="text" name="m184r75" id="m184r75" style="width:113px; top:456px; left:662px;"/>
-<input type="text" name="m184r76" id="m184r76" style="width:102px; top:456px; left:786px;"/>
-<input type="text" name="m184r81" id="m184r81" style="width:92px; top:482px; left:98px;"/>
-<input type="text" name="m184r82" id="m184r82" style="width:99px; top:482px; left:201px;"/>
-<input type="text" name="m184r83" id="m184r83" style="width:102px; top:482px; left:311px;"/>
-<input type="text" name="m184r84" id="m184r84" style="width:227px; top:482px; left:424px;"/>
-<input type="text" name="m184r85" id="m184r85" style="width:113px; top:482px; left:662px;"/>
-<input type="text" name="m184r86" id="m184r86" style="width:102px; top:482px; left:786px;"/>
-<input type="text" name="m184r91" id="m184r91" style="width:92px; top:508px; left:98px;"/>
-<input type="text" name="m184r92" id="m184r92" style="width:99px; top:508px; left:201px;"/>
-<input type="text" name="m184r93" id="m184r93" style="width:102px; top:508px; left:311px;"/>
-<input type="text" name="m184r94" id="m184r94" style="width:227px; top:508px; left:424px;"/>
-<input type="text" name="m184r95" id="m184r95" style="width:113px; top:508px; left:662px;"/>
-<input type="text" name="m184r96" id="m184r96" style="width:102px; top:508px; left:786px;"/>
-<input type="text" name="m184r101" id="m184r101" style="width:92px; top:534px; left:98px;"/>
-<input type="text" name="m184r102" id="m184r102" style="width:99px; top:534px; left:201px;"/>
-<input type="text" name="m184r103" id="m184r103" style="width:102px; top:534px; left:311px;"/>
-<input type="text" name="m184r104" id="m184r104" style="width:227px; top:534px; left:424px;"/>
-<input type="text" name="m184r105" id="m184r105" style="width:113px; top:534px; left:662px;"/>
-<input type="text" name="m184r106" id="m184r106" style="width:102px; top:534px; left:786px;"/>
-<input type="text" name="m184r111" id="m184r111" style="width:92px; top:560px; left:98px;"/>
-<input type="text" name="m184r112" id="m184r112" style="width:99px; top:560px; left:201px;"/>
-<input type="text" name="m184r113" id="m184r113" style="width:102px; top:560px; left:311px;"/>
-<input type="text" name="m184r114" id="m184r114" style="width:227px; top:560px; left:424px;"/>
-<input type="text" name="m184r115" id="m184r115" style="width:113px; top:560px; left:662px;"/>
-<input type="text" name="m184r116" id="m184r116" style="width:102px; top:560px; left:786px;"/>
-<input type="text" name="m184r121" id="m184r121" style="width:92px; top:586px; left:98px;"/>
-<input type="text" name="m184r122" id="m184r122" style="width:99px; top:586px; left:201px;"/>
-<input type="text" name="m184r123" id="m184r123" style="width:102px; top:586px; left:311px;"/>
-<input type="text" name="m184r124" id="m184r124" style="width:227px; top:586px; left:424px;"/>
-<input type="text" name="m184r125" id="m184r125" style="width:113px; top:586px; left:662px;"/>
-<input type="text" name="m184r126" id="m184r126" style="width:102px; top:586px; left:786px;"/>
-<input type="text" name="m184r131" id="m184r131" style="width:92px; top:612px; left:98px;"/>
-<input type="text" name="m184r132" id="m184r132" style="width:99px; top:612px; left:201px;"/>
-<input type="text" name="m184r133" id="m184r133" style="width:102px; top:612px; left:311px;"/>
-<input type="text" name="m184r134" id="m184r134" style="width:227px; top:612px; left:424px;"/>
-<input type="text" name="m184r135" id="m184r135" style="width:113px; top:612px; left:662px;"/>
-<input type="text" name="m184r136" id="m184r136" style="width:102px; top:612px; left:786px;"/>
-<input type="text" name="m184r141" id="m184r141" style="width:92px; top:638px; left:98px;"/>
-<input type="text" name="m184r142" id="m184r142" style="width:99px; top:638px; left:201px;"/>
-<input type="text" name="m184r143" id="m184r143" style="width:102px; top:638px; left:311px;"/>
-<input type="text" name="m184r144" id="m184r144" style="width:227px; top:638px; left:424px;"/>
-<input type="text" name="m184r145" id="m184r145" style="width:113px; top:638px; left:662px;"/>
-<input type="text" name="m184r146" id="m184r146" style="width:102px; top:638px; left:786px;"/>
-<input type="text" name="m184r151" id="m184r151" style="width:92px; top:665px; left:98px;"/>
-<input type="text" name="m184r152" id="m184r152" style="width:99px; top:665px; left:201px;"/>
-<input type="text" name="m184r153" id="m184r153" style="width:102px; top:665px; left:311px;"/>
-<input type="text" name="m184r154" id="m184r154" style="width:227px; top:665px; left:424px;"/>
-<input type="text" name="m184r155" id="m184r155" style="width:113px; top:665px; left:662px;"/>
-<input type="text" name="m184r156" id="m184r156" style="width:102px; top:665px; left:786px;"/>
-<input type="text" name="m184r161" id="m184r161" style="width:92px; top:691px; left:98px;"/>
-<input type="text" name="m184r162" id="m184r162" style="width:99px; top:691px; left:201px;"/>
-<input type="text" name="m184r163" id="m184r163" style="width:102px; top:691px; left:311px;"/>
-<input type="text" name="m184r164" id="m184r164" style="width:227px; top:691px; left:424px;"/>
-<input type="text" name="m184r165" id="m184r165" style="width:113px; top:691px; left:662px;"/>
-<input type="text" name="m184r166" id="m184r166" style="width:102px; top:691px; left:786px;"/>
-<input type="text" name="m184r171" id="m184r171" style="width:92px; top:717px; left:98px;"/>
-<input type="text" name="m184r172" id="m184r172" style="width:99px; top:717px; left:201px;"/>
-<input type="text" name="m184r173" id="m184r173" style="width:102px; top:717px; left:311px;"/>
-<input type="text" name="m184r174" id="m184r174" style="width:227px; top:717px; left:424px;"/>
-<input type="text" name="m184r175" id="m184r175" style="width:113px; top:717px; left:662px;"/>
-<input type="text" name="m184r176" id="m184r176" style="width:102px; top:717px; left:786px;"/>
-<input type="text" name="m184r181" id="m184r181" style="width:92px; top:743px; left:98px;"/>
-<input type="text" name="m184r182" id="m184r182" style="width:99px; top:743px; left:201px;"/>
-<input type="text" name="m184r183" id="m184r183" style="width:102px; top:743px; left:311px;"/>
-<input type="text" name="m184r184" id="m184r184" style="width:227px; top:743px; left:424px;"/>
-<input type="text" name="m184r185" id="m184r185" style="width:113px; top:743px; left:662px;"/>
-<input type="text" name="m184r186" id="m184r186" style="width:102px; top:743px; left:786px;"/>
-<input type="text" name="m184r191" id="m184r191" style="width:92px; top:769px; left:98px;"/>
-<input type="text" name="m184r192" id="m184r192" style="width:99px; top:769px; left:201px;"/>
-<input type="text" name="m184r193" id="m184r193" style="width:102px; top:769px; left:311px;"/>
-<input type="text" name="m184r194" id="m184r194" style="width:227px; top:769px; left:424px;"/>
-<input type="text" name="m184r195" id="m184r195" style="width:113px; top:769px; left:662px;"/>
-<input type="text" name="m184r196" id="m184r196" style="width:102px; top:769px; left:786px;"/>
-<input type="text" name="m184r201" id="m184r201" style="width:92px; top:795px; left:98px;"/>
-<input type="text" name="m184r202" id="m184r202" style="width:99px; top:795px; left:201px;"/>
-<input type="text" name="m184r203" id="m184r203" style="width:102px; top:795px; left:311px;"/>
-<input type="text" name="m184r204" id="m184r204" style="width:227px; top:795px; left:424px;"/>
-<input type="text" name="m184r205" id="m184r205" style="width:113px; top:795px; left:662px;"/>
-<input type="text" name="m184r206" id="m184r206" style="width:102px; top:795px; left:786px;"/>
-<input type="text" name="m184r211" id="m184r211" style="width:92px; top:821px; left:98px;"/>
-<input type="text" name="m184r212" id="m184r212" style="width:99px; top:821px; left:201px;"/>
-<input type="text" name="m184r213" id="m184r213" style="width:102px; top:821px; left:311px;"/>
-<input type="text" name="m184r214" id="m184r214" style="width:227px; top:821px; left:424px;"/>
-<input type="text" name="m184r215" id="m184r215" style="width:113px; top:821px; left:662px;"/>
-<input type="text" name="m184r216" id="m184r216" style="width:102px; top:821px; left:786px;"/>
-<input type="text" name="m184r221" id="m184r221" style="width:92px; top:847px; left:98px;"/>
-<input type="text" name="m184r222" id="m184r222" style="width:99px; top:847px; left:201px;"/>
-<input type="text" name="m184r223" id="m184r223" style="width:102px; top:847px; left:311px;"/>
-<input type="text" name="m184r224" id="m184r224" style="width:227px; top:847px; left:424px;"/>
-<input type="text" name="m184r225" id="m184r225" style="width:113px; top:847px; left:662px;"/>
-<input type="text" name="m184r226" id="m184r226" style="width:102px; top:847px; left:786px;"/>
-<input type="text" name="m184r231" id="m184r231" style="width:92px; top:873px; left:98px;"/>
-<input type="text" name="m184r232" id="m184r232" style="width:99px; top:873px; left:201px;"/>
-<input type="text" name="m184r233" id="m184r233" style="width:102px; top:873px; left:311px;"/>
-<input type="text" name="m184r234" id="m184r234" style="width:227px; top:873px; left:424px;"/>
-<input type="text" name="m184r235" id="m184r235" style="width:113px; top:873px; left:662px;"/>
-<input type="text" name="m184r236" id="m184r236" style="width:102px; top:873px; left:786px;"/>
-<input type="text" name="m184r241" id="m184r241" style="width:92px; top:899px; left:98px;"/>
-<input type="text" name="m184r242" id="m184r242" style="width:99px; top:899px; left:201px;"/>
-<input type="text" name="m184r243" id="m184r243" style="width:102px; top:899px; left:311px;"/>
-<input type="text" name="m184r244" id="m184r244" style="width:227px; top:899px; left:424px;"/>
-<input type="text" name="m184r245" id="m184r245" style="width:113px; top:899px; left:662px;"/>
-<input type="text" name="m184r246" id="m184r246" style="width:102px; top:899px; left:786px;"/>
-<input type="text" name="m184r251" id="m184r251" style="width:92px; top:926px; left:98px;"/>
-<input type="text" name="m184r252" id="m184r252" style="width:99px; top:926px; left:201px;"/>
-<input type="text" name="m184r253" id="m184r253" style="width:102px; top:926px; left:311px;"/>
-<input type="text" name="m184r254" id="m184r254" style="width:227px; top:926px; left:424px;"/>
-<input type="text" name="m184r255" id="m184r255" style="width:113px; top:926px; left:662px;"/>
-<input type="text" name="m184r256" id="m184r256" style="width:102px; top:926px; left:786px;"/>
-<input type="text" name="m184r261" id="m184r261" style="width:92px; top:951px; left:98px;"/>
-<input type="text" name="m184r262" id="m184r262" style="width:99px; top:951px; left:201px;"/>
-<input type="text" name="m184r263" id="m184r263" style="width:102px; top:951px; left:311px;"/>
-<input type="text" name="m184r264" id="m184r264" style="width:227px; top:951px; left:424px;"/>
-<input type="text" name="m184r265" id="m184r265" style="width:113px; top:951px; left:662px;"/>
-<input type="text" name="m184r266" id="m184r266" style="width:102px; top:951px; left:786px;"/>
-<input type="text" name="m184r271" id="m184r271" style="width:92px; top:978px; left:98px;"/>
-<input type="text" name="m184r272" id="m184r272" style="width:99px; top:978px; left:201px;"/>
-<input type="text" name="m184r273" id="m184r273" style="width:102px; top:978px; left:311px;"/>
-<input type="text" name="m184r274" id="m184r274" style="width:227px; top:978px; left:424px;"/>
-<input type="text" name="m184r275" id="m184r275" style="width:113px; top:978px; left:662px;"/>
-<input type="text" name="m184r276" id="m184r276" style="width:102px; top:978px; left:786px;"/>
-<input type="text" name="m184r281" id="m184r281" style="width:92px; top:1004px; left:98px;"/>
-<input type="text" name="m184r282" id="m184r282" style="width:99px; top:1004px; left:201px;"/>
-<input type="text" name="m184r283" id="m184r283" style="width:102px; top:1004px; left:311px;"/>
-<input type="text" name="m184r284" id="m184r284" style="width:227px; top:1004px; left:424px;"/>
-<input type="text" name="m184r285" id="m184r285" style="width:113px; top:1004px; left:662px;"/>
-<input type="text" name="m184r286" id="m184r286" style="width:102px; top:1004px; left:786px;"/>
-<input type="text" name="m184r291" id="m184r291" style="width:92px; top:1030px; left:98px;"/>
-<input type="text" name="m184r292" id="m184r292" style="width:99px; top:1030px; left:201px;"/>
-<input type="text" name="m184r293" id="m184r293" style="width:102px; top:1030px; left:311px;"/>
-<input type="text" name="m184r294" id="m184r294" style="width:227px; top:1030px; left:424px;"/>
-<input type="text" name="m184r295" id="m184r295" style="width:113px; top:1030px; left:662px;"/>
-<input type="text" name="m184r296" id="m184r296" style="width:102px; top:1030px; left:786px;"/>
-<input type="text" name="m184r301" id="m184r301" style="width:92px; top:1056px; left:98px;"/>
-<input type="text" name="m184r302" id="m184r302" style="width:99px; top:1056px; left:201px;"/>
-<input type="text" name="m184r303" id="m184r303" style="width:102px; top:1056px; left:311px;"/>
-<input type="text" name="m184r304" id="m184r304" style="width:227px; top:1056px; left:424px;"/>
-<input type="text" name="m184r305" id="m184r305" style="width:113px; top:1056px; left:662px;"/>
-<input type="text" name="m184r306" id="m184r306" style="width:102px; top:1056px; left:786px;"/>
-<input type="text" name="m184r311" id="m184r311" style="width:92px; top:1082px; left:98px;"/>
-<input type="text" name="m184r312" id="m184r312" style="width:99px; top:1082px; left:201px;"/>
-<input type="text" name="m184r313" id="m184r313" style="width:102px; top:1082px; left:311px;"/>
-<input type="text" name="m184r314" id="m184r314" style="width:227px; top:1082px; left:424px;"/>
-<input type="text" name="m184r315" id="m184r315" style="width:113px; top:1082px; left:662px;"/>
-<input type="text" name="m184r316" id="m184r316" style="width:102px; top:1082px; left:786px;"/>
-<input type="text" name="m184r321" id="m184r321" style="width:92px; top:1108px; left:98px;"/>
-<input type="text" name="m184r322" id="m184r322" style="width:99px; top:1108px; left:201px;"/>
-<input type="text" name="m184r323" id="m184r323" style="width:102px; top:1108px; left:311px;"/>
-<input type="text" name="m184r324" id="m184r324" style="width:227px; top:1108px; left:424px;"/>
-<input type="text" name="m184r325" id="m184r325" style="width:113px; top:1108px; left:662px;"/>
-<input type="text" name="m184r326" id="m184r326" style="width:102px; top:1108px; left:786px;"/>
-<span class="text-echo" style="top:1139px; right:649px;"><?php echo $m184r992; ?></span>
-<span class="text-echo" style="top:1139px; right:536px;"><?php echo $m184r993; ?></span>
-<span class="text-echo" style="top:1139px; right:299px;"><?php echo $m184r994; ?></span>
-<span class="text-echo" style="top:1139px; right:175px;"><?php echo $m184r995; ?></span>
-<span class="text-echo" style="top:1139px; right:62px;"><?php echo $m184r996; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 8 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 8.strana 254kB">
-<span class="text-echo" style="top:78px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 185 -->
-<input type="text" name="m185r11" id="m185r11" style="width:87px; top:289px; left:100px;"/>
-<input type="text" name="m185r12" id="m185r12" style="width:103px; top:289px; left:197px;"/>
-<input type="text" name="m185r13" id="m185r13" style="width:102px; top:289px; left:311px;"/>
-<input type="text" name="m185r14" id="m185r14" style="width:113px; top:289px; left:424px;"/>
-<input type="text" name="m185r15" id="m185r15" style="width:113px; top:289px; left:549px;"/>
-<input type="text" name="m185r16" id="m185r16" style="width:102px; top:289px; left:673px;"/>
-<input type="text" name="m185r17" id="m185r17" style="width:101px; top:289px; left:787px;"/>
-<input type="text" name="m185r21" id="m185r21" style="width:87px; top:317px; left:100px;"/>
-<input type="text" name="m185r22" id="m185r22" style="width:103px; top:317px; left:197px;"/>
-<input type="text" name="m185r23" id="m185r23" style="width:102px; top:317px; left:311px;"/>
-<input type="text" name="m185r24" id="m185r24" style="width:113px; top:317px; left:424px;"/>
-<input type="text" name="m185r25" id="m185r25" style="width:113px; top:317px; left:549px;"/>
-<input type="text" name="m185r26" id="m185r26" style="width:102px; top:317px; left:673px;"/>
-<input type="text" name="m185r27" id="m185r27" style="width:101px; top:317px; left:787px;"/>
-<input type="text" name="m185r31" id="m185r31" style="width:87px; top:344px; left:100px;"/>
-<input type="text" name="m185r32" id="m185r32" style="width:103px; top:344px; left:197px;"/>
-<input type="text" name="m185r33" id="m185r33" style="width:102px; top:344px; left:311px;"/>
-<input type="text" name="m185r34" id="m185r34" style="width:113px; top:344px; left:424px;"/>
-<input type="text" name="m185r35" id="m185r35" style="width:113px; top:344px; left:549px;"/>
-<input type="text" name="m185r36" id="m185r36" style="width:102px; top:344px; left:673px;"/>
-<input type="text" name="m185r37" id="m185r37" style="width:101px; top:344px; left:787px;"/>
-<input type="text" name="m185r41" id="m185r41" style="width:87px; top:371px; left:100px;"/>
-<input type="text" name="m185r42" id="m185r42" style="width:103px; top:371px; left:197px;"/>
-<input type="text" name="m185r43" id="m185r43" style="width:102px; top:371px; left:311px;"/>
-<input type="text" name="m185r44" id="m185r44" style="width:113px; top:371px; left:424px;"/>
-<input type="text" name="m185r45" id="m185r45" style="width:113px; top:371px; left:549px;"/>
-<input type="text" name="m185r46" id="m185r46" style="width:102px; top:371px; left:673px;"/>
-<input type="text" name="m185r47" id="m185r47" style="width:101px; top:371px; left:787px;"/>
-<input type="text" name="m185r51" id="m185r51" style="width:87px; top:399px; left:100px;"/>
-<input type="text" name="m185r52" id="m185r52" style="width:103px; top:399px; left:197px;"/>
-<input type="text" name="m185r53" id="m185r53" style="width:102px; top:399px; left:311px;"/>
-<input type="text" name="m185r54" id="m185r54" style="width:113px; top:399px; left:424px;"/>
-<input type="text" name="m185r55" id="m185r55" style="width:113px; top:399px; left:549px;"/>
-<input type="text" name="m185r56" id="m185r56" style="width:102px; top:399px; left:673px;"/>
-<input type="text" name="m185r57" id="m185r57" style="width:101px; top:399px; left:787px;"/>
-<input type="text" name="m185r61" id="m185r61" style="width:87px; top:426px; left:100px;"/>
-<input type="text" name="m185r62" id="m185r62" style="width:103px; top:426px; left:197px;"/>
-<input type="text" name="m185r63" id="m185r63" style="width:102px; top:426px; left:311px;"/>
-<input type="text" name="m185r64" id="m185r64" style="width:113px; top:426px; left:424px;"/>
-<input type="text" name="m185r65" id="m185r65" style="width:113px; top:426px; left:549px;"/>
-<input type="text" name="m185r66" id="m185r66" style="width:102px; top:426px; left:673px;"/>
-<input type="text" name="m185r67" id="m185r67" style="width:101px; top:426px; left:787px;"/>
-<input type="text" name="m185r71" id="m185r71" style="width:87px; top:454px; left:100px;"/>
-<input type="text" name="m185r72" id="m185r72" style="width:103px; top:454px; left:197px;"/>
-<input type="text" name="m185r73" id="m185r73" style="width:102px; top:454px; left:311px;"/>
-<input type="text" name="m185r74" id="m185r74" style="width:113px; top:454px; left:424px;"/>
-<input type="text" name="m185r75" id="m185r75" style="width:113px; top:454px; left:549px;"/>
-<input type="text" name="m185r76" id="m185r76" style="width:102px; top:454px; left:673px;"/>
-<input type="text" name="m185r77" id="m185r77" style="width:101px; top:454px; left:787px;"/>
-<input type="text" name="m185r81" id="m185r81" style="width:87px; top:481px; left:100px;"/>
-<input type="text" name="m185r82" id="m185r82" style="width:103px; top:481px; left:197px;"/>
-<input type="text" name="m185r83" id="m185r83" style="width:102px; top:481px; left:311px;"/>
-<input type="text" name="m185r84" id="m185r84" style="width:113px; top:481px; left:424px;"/>
-<input type="text" name="m185r85" id="m185r85" style="width:113px; top:481px; left:549px;"/>
-<input type="text" name="m185r86" id="m185r86" style="width:102px; top:481px; left:673px;"/>
-<input type="text" name="m185r87" id="m185r87" style="width:101px; top:481px; left:787px;"/>
-<input type="text" name="m185r91" id="m185r91" style="width:87px; top:508px; left:100px;"/>
-<input type="text" name="m185r92" id="m185r92" style="width:103px; top:508px; left:197px;"/>
-<input type="text" name="m185r93" id="m185r93" style="width:102px; top:508px; left:311px;"/>
-<input type="text" name="m185r94" id="m185r94" style="width:113px; top:508px; left:424px;"/>
-<input type="text" name="m185r95" id="m185r95" style="width:113px; top:508px; left:549px;"/>
-<input type="text" name="m185r96" id="m185r96" style="width:102px; top:508px; left:673px;"/>
-<input type="text" name="m185r97" id="m185r97" style="width:101px; top:508px; left:787px;"/>
-<input type="text" name="m185r101" id="m185r101" style="width:87px; top:535px; left:100px;"/>
-<input type="text" name="m185r102" id="m185r102" style="width:103px; top:535px; left:197px;"/>
-<input type="text" name="m185r103" id="m185r103" style="width:102px; top:535px; left:311px;"/>
-<input type="text" name="m185r104" id="m185r104" style="width:113px; top:535px; left:424px;"/>
-<input type="text" name="m185r105" id="m185r105" style="width:113px; top:535px; left:549px;"/>
-<input type="text" name="m185r106" id="m185r106" style="width:102px; top:535px; left:673px;"/>
-<input type="text" name="m185r107" id="m185r107" style="width:101px; top:535px; left:787px;"/>
-<input type="text" name="m185r111" id="m185r111" style="width:87px; top:563px; left:100px;"/>
-<input type="text" name="m185r112" id="m185r112" style="width:103px; top:563px; left:197px;"/>
-<input type="text" name="m185r113" id="m185r113" style="width:102px; top:563px; left:311px;"/>
-<input type="text" name="m185r114" id="m185r114" style="width:113px; top:563px; left:424px;"/>
-<input type="text" name="m185r115" id="m185r115" style="width:113px; top:563px; left:549px;"/>
-<input type="text" name="m185r116" id="m185r116" style="width:102px; top:563px; left:673px;"/>
-<input type="text" name="m185r117" id="m185r117" style="width:101px; top:563px; left:787px;"/>
-<input type="text" name="m185r121" id="m185r121" style="width:87px; top:590px; left:100px;"/>
-<input type="text" name="m185r122" id="m185r122" style="width:103px; top:590px; left:197px;"/>
-<input type="text" name="m185r123" id="m185r123" style="width:102px; top:590px; left:311px;"/>
-<input type="text" name="m185r124" id="m185r124" style="width:113px; top:590px; left:424px;"/>
-<input type="text" name="m185r125" id="m185r125" style="width:113px; top:590px; left:549px;"/>
-<input type="text" name="m185r126" id="m185r126" style="width:102px; top:590px; left:673px;"/>
-<input type="text" name="m185r127" id="m185r127" style="width:101px; top:590px; left:787px;"/>
-<input type="text" name="m185r131" id="m185r131" style="width:87px; top:618px; left:100px;"/>
-<input type="text" name="m185r132" id="m185r132" style="width:103px; top:618px; left:197px;"/>
-<input type="text" name="m185r133" id="m185r133" style="width:102px; top:618px; left:311px;"/>
-<input type="text" name="m185r134" id="m185r134" style="width:113px; top:618px; left:424px;"/>
-<input type="text" name="m185r135" id="m185r135" style="width:113px; top:618px; left:549px;"/>
-<input type="text" name="m185r136" id="m185r136" style="width:102px; top:618px; left:673px;"/>
-<input type="text" name="m185r137" id="m185r137" style="width:101px; top:618px; left:787px;"/>
-<input type="text" name="m185r141" id="m185r141" style="width:87px; top:646px; left:100px;"/>
-<input type="text" name="m185r142" id="m185r142" style="width:103px; top:646px; left:197px;"/>
-<input type="text" name="m185r143" id="m185r143" style="width:102px; top:646px; left:311px;"/>
-<input type="text" name="m185r144" id="m185r144" style="width:113px; top:646px; left:424px;"/>
-<input type="text" name="m185r145" id="m185r145" style="width:113px; top:646px; left:549px;"/>
-<input type="text" name="m185r146" id="m185r146" style="width:102px; top:646px; left:673px;"/>
-<input type="text" name="m185r147" id="m185r147" style="width:101px; top:646px; left:787px;"/>
-<input type="text" name="m185r151" id="m185r151" style="width:87px; top:673px; left:100px;"/>
-<input type="text" name="m185r152" id="m185r152" style="width:103px; top:673px; left:197px;"/>
-<input type="text" name="m185r153" id="m185r153" style="width:102px; top:673px; left:311px;"/>
-<input type="text" name="m185r154" id="m185r154" style="width:113px; top:673px; left:424px;"/>
-<input type="text" name="m185r155" id="m185r155" style="width:113px; top:673px; left:549px;"/>
-<input type="text" name="m185r156" id="m185r156" style="width:102px; top:673px; left:673px;"/>
-<input type="text" name="m185r157" id="m185r157" style="width:101px; top:673px; left:787px;"/>
-<input type="text" name="m185r161" id="m185r161" style="width:87px; top:700px; left:100px;"/>
-<input type="text" name="m185r162" id="m185r162" style="width:103px; top:700px; left:197px;"/>
-<input type="text" name="m185r163" id="m185r163" style="width:102px; top:700px; left:311px;"/>
-<input type="text" name="m185r164" id="m185r164" style="width:113px; top:700px; left:424px;"/>
-<input type="text" name="m185r165" id="m185r165" style="width:113px; top:700px; left:549px;"/>
-<input type="text" name="m185r166" id="m185r166" style="width:102px; top:700px; left:673px;"/>
-<input type="text" name="m185r167" id="m185r167" style="width:101px; top:700px; left:787px;"/>
-<input type="text" name="m185r171" id="m185r171" style="width:87px; top:727px; left:100px;"/>
-<input type="text" name="m185r172" id="m185r172" style="width:103px; top:727px; left:197px;"/>
-<input type="text" name="m185r173" id="m185r173" style="width:102px; top:727px; left:311px;"/>
-<input type="text" name="m185r174" id="m185r174" style="width:113px; top:727px; left:424px;"/>
-<input type="text" name="m185r175" id="m185r175" style="width:113px; top:727px; left:549px;"/>
-<input type="text" name="m185r176" id="m185r176" style="width:102px; top:727px; left:673px;"/>
-<input type="text" name="m185r177" id="m185r177" style="width:101px; top:727px; left:787px;"/>
-<input type="text" name="m185r181" id="m185r181" style="width:87px; top:755px; left:100px;"/>
-<input type="text" name="m185r182" id="m185r182" style="width:103px; top:755px; left:197px;"/>
-<input type="text" name="m185r183" id="m185r183" style="width:102px; top:755px; left:311px;"/>
-<input type="text" name="m185r184" id="m185r184" style="width:113px; top:755px; left:424px;"/>
-<input type="text" name="m185r185" id="m185r185" style="width:113px; top:755px; left:549px;"/>
-<input type="text" name="m185r186" id="m185r186" style="width:102px; top:755px; left:673px;"/>
-<input type="text" name="m185r187" id="m185r187" style="width:101px; top:755px; left:787px;"/>
-<input type="text" name="m185r191" id="m185r191" style="width:87px; top:782px; left:100px;"/>
-<input type="text" name="m185r192" id="m185r192" style="width:103px; top:782px; left:197px;"/>
-<input type="text" name="m185r193" id="m185r193" style="width:102px; top:782px; left:311px;"/>
-<input type="text" name="m185r194" id="m185r194" style="width:113px; top:782px; left:424px;"/>
-<input type="text" name="m185r195" id="m185r195" style="width:113px; top:782px; left:549px;"/>
-<input type="text" name="m185r196" id="m185r196" style="width:102px; top:782px; left:673px;"/>
-<input type="text" name="m185r197" id="m185r197" style="width:101px; top:782px; left:787px;"/>
-<input type="text" name="m185r201" id="m185r201" style="width:87px; top:810px; left:100px;"/>
-<input type="text" name="m185r202" id="m185r202" style="width:103px; top:810px; left:197px;"/>
-<input type="text" name="m185r203" id="m185r203" style="width:102px; top:810px; left:311px;"/>
-<input type="text" name="m185r204" id="m185r204" style="width:113px; top:810px; left:424px;"/>
-<input type="text" name="m185r205" id="m185r205" style="width:113px; top:810px; left:549px;"/>
-<input type="text" name="m185r206" id="m185r206" style="width:102px; top:810px; left:673px;"/>
-<input type="text" name="m185r207" id="m185r207" style="width:101px; top:810px; left:787px;"/>
-<input type="text" name="m185r211" id="m185r211" style="width:87px; top:837px; left:100px;"/>
-<input type="text" name="m185r212" id="m185r212" style="width:103px; top:837px; left:197px;"/>
-<input type="text" name="m185r213" id="m185r213" style="width:102px; top:837px; left:311px;"/>
-<input type="text" name="m185r214" id="m185r214" style="width:113px; top:837px; left:424px;"/>
-<input type="text" name="m185r215" id="m185r215" style="width:113px; top:837px; left:549px;"/>
-<input type="text" name="m185r216" id="m185r216" style="width:102px; top:837px; left:673px;"/>
-<input type="text" name="m185r217" id="m185r217" style="width:101px; top:837px; left:787px;"/>
-<input type="text" name="m185r221" id="m185r221" style="width:87px; top:865px; left:100px;"/>
-<input type="text" name="m185r222" id="m185r222" style="width:103px; top:865px; left:197px;"/>
-<input type="text" name="m185r223" id="m185r223" style="width:102px; top:865px; left:311px;"/>
-<input type="text" name="m185r224" id="m185r224" style="width:113px; top:865px; left:424px;"/>
-<input type="text" name="m185r225" id="m185r225" style="width:113px; top:865px; left:549px;"/>
-<input type="text" name="m185r226" id="m185r226" style="width:102px; top:865px; left:673px;"/>
-<input type="text" name="m185r227" id="m185r227" style="width:101px; top:865px; left:787px;"/>
-<input type="text" name="m185r231" id="m185r231" style="width:87px; top:892px; left:100px;"/>
-<input type="text" name="m185r232" id="m185r232" style="width:103px; top:892px; left:197px;"/>
-<input type="text" name="m185r233" id="m185r233" style="width:102px; top:892px; left:311px;"/>
-<input type="text" name="m185r234" id="m185r234" style="width:113px; top:892px; left:424px;"/>
-<input type="text" name="m185r235" id="m185r235" style="width:113px; top:892px; left:549px;"/>
-<input type="text" name="m185r236" id="m185r236" style="width:102px; top:892px; left:673px;"/>
-<input type="text" name="m185r237" id="m185r237" style="width:101px; top:892px; left:787px;"/>
-<input type="text" name="m185r241" id="m185r241" style="width:87px; top:919px; left:100px;"/>
-<input type="text" name="m185r242" id="m185r242" style="width:103px; top:919px; left:197px;"/>
-<input type="text" name="m185r243" id="m185r243" style="width:102px; top:919px; left:311px;"/>
-<input type="text" name="m185r244" id="m185r244" style="width:113px; top:919px; left:424px;"/>
-<input type="text" name="m185r245" id="m185r245" style="width:113px; top:919px; left:549px;"/>
-<input type="text" name="m185r246" id="m185r246" style="width:102px; top:919px; left:673px;"/>
-<input type="text" name="m185r247" id="m185r247" style="width:101px; top:919px; left:787px;"/>
-<input type="text" name="m185r251" id="m185r251" style="width:87px; top:947px; left:100px;"/>
-<input type="text" name="m185r252" id="m185r252" style="width:103px; top:947px; left:197px;"/>
-<input type="text" name="m185r253" id="m185r253" style="width:102px; top:947px; left:311px;"/>
-<input type="text" name="m185r254" id="m185r254" style="width:113px; top:947px; left:424px;"/>
-<input type="text" name="m185r255" id="m185r255" style="width:113px; top:947px; left:549px;"/>
-<input type="text" name="m185r256" id="m185r256" style="width:102px; top:947px; left:673px;"/>
-<input type="text" name="m185r257" id="m185r257" style="width:101px; top:947px; left:787px;"/>
-<input type="text" name="m185r261" id="m185r261" style="width:87px; top:974px; left:100px;"/>
-<input type="text" name="m185r262" id="m185r262" style="width:103px; top:974px; left:197px;"/>
-<input type="text" name="m185r263" id="m185r263" style="width:102px; top:974px; left:311px;"/>
-<input type="text" name="m185r264" id="m185r264" style="width:113px; top:974px; left:424px;"/>
-<input type="text" name="m185r265" id="m185r265" style="width:113px; top:974px; left:549px;"/>
-<input type="text" name="m185r266" id="m185r266" style="width:102px; top:974px; left:673px;"/>
-<input type="text" name="m185r267" id="m185r267" style="width:101px; top:974px; left:787px;"/>
-<input type="text" name="m185r271" id="m185r271" style="width:87px; top:1002px; left:100px;"/>
-<input type="text" name="m185r272" id="m185r272" style="width:103px; top:1002px; left:197px;"/>
-<input type="text" name="m185r273" id="m185r273" style="width:102px; top:1002px; left:311px;"/>
-<input type="text" name="m185r274" id="m185r274" style="width:113px; top:1002px; left:424px;"/>
-<input type="text" name="m185r275" id="m185r275" style="width:113px; top:1002px; left:549px;"/>
-<input type="text" name="m185r276" id="m185r276" style="width:102px; top:1002px; left:673px;"/>
-<input type="text" name="m185r277" id="m185r277" style="width:101px; top:1002px; left:787px;"/>
-<input type="text" name="m185r281" id="m185r281" style="width:87px; top:1029px; left:100px;"/>
-<input type="text" name="m185r282" id="m185r282" style="width:103px; top:1029px; left:197px;"/>
-<input type="text" name="m185r283" id="m185r283" style="width:102px; top:1029px; left:311px;"/>
-<input type="text" name="m185r284" id="m185r284" style="width:113px; top:1029px; left:424px;"/>
-<input type="text" name="m185r285" id="m185r285" style="width:113px; top:1029px; left:549px;"/>
-<input type="text" name="m185r286" id="m185r286" style="width:102px; top:1029px; left:673px;"/>
-<input type="text" name="m185r287" id="m185r287" style="width:101px; top:1029px; left:787px;"/>
-<input type="text" name="m185r291" id="m185r291" style="width:87px; top:1057px; left:100px;"/>
-<input type="text" name="m185r292" id="m185r292" style="width:103px; top:1057px; left:197px;"/>
-<input type="text" name="m185r293" id="m185r293" style="width:102px; top:1057px; left:311px;"/>
-<input type="text" name="m185r294" id="m185r294" style="width:113px; top:1057px; left:424px;"/>
-<input type="text" name="m185r295" id="m185r295" style="width:113px; top:1057px; left:549px;"/>
-<input type="text" name="m185r296" id="m185r296" style="width:102px; top:1057px; left:673px;"/>
-<input type="text" name="m185r297" id="m185r297" style="width:101px; top:1057px; left:787px;"/>
-<input type="text" name="m185r301" id="m185r301" style="width:87px; top:1084px; left:100px;"/>
-<input type="text" name="m185r302" id="m185r302" style="width:103px; top:1084px; left:197px;"/>
-<input type="text" name="m185r303" id="m185r303" style="width:102px; top:1084px; left:311px;"/>
-<input type="text" name="m185r304" id="m185r304" style="width:113px; top:1084px; left:424px;"/>
-<input type="text" name="m185r305" id="m185r305" style="width:113px; top:1084px; left:549px;"/>
-<input type="text" name="m185r306" id="m185r306" style="width:102px; top:1084px; left:673px;"/>
-<input type="text" name="m185r307" id="m185r307" style="width:101px; top:1084px; left:787px;"/>
-<span class="text-echo" style="top:1116px; right:648px;"><?php echo $m185r992; ?></span>
-<span class="text-echo" style="top:1116px; right:535px;"><?php echo $m185r993; ?></span>
-<span class="text-echo" style="top:1116px; right:410px;"><?php echo $m185r994; ?></span>
-<span class="text-echo" style="top:1116px; right:285px;"><?php echo $m185r995; ?></span>
-<span class="text-echo" style="top:1116px; right:173px;"><?php echo $m185r996; ?></span>
-<span class="text-echo" style="top:1116px; right:60px;"><?php echo $m185r997; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 9 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 9.strana 254kB">
-<span class="text-echo" style="top:97px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 186 -->
-<input type="text" name="m186r11" id="m186r11" style="width:87px; top:289px; left:100px;"/>
-<input type="text" name="m186r12" id="m186r12" style="width:103px; top:289px; left:197px;"/>
-<input type="text" name="m186r13" id="m186r13" style="width:102px; top:289px; left:311px;"/>
-<input type="text" name="m186r14" id="m186r14" style="width:114px; top:289px; left:424px;"/>
-<input type="text" name="m186r15" id="m186r15" style="width:115px; top:289px; left:548px;"/>
-<input type="text" name="m186r16" id="m186r16" style="width:102px; top:289px; left:673px;"/>
-<input type="text" name="m186r17" id="m186r17" style="width:101px; top:289px; left:787px;"/>
-<input type="text" name="m186r21" id="m186r21" style="width:87px; top:316px; left:100px;"/>
-<input type="text" name="m186r22" id="m186r22" style="width:103px; top:316px; left:197px;"/>
-<input type="text" name="m186r23" id="m186r23" style="width:102px; top:316px; left:311px;"/>
-<input type="text" name="m186r24" id="m186r24" style="width:114px; top:316px; left:424px;"/>
-<input type="text" name="m186r25" id="m186r25" style="width:115px; top:316px; left:548px;"/>
-<input type="text" name="m186r26" id="m186r26" style="width:102px; top:316px; left:673px;"/>
-<input type="text" name="m186r27" id="m186r27" style="width:101px; top:316px; left:787px;"/>
-<input type="text" name="m186r31" id="m186r31" style="width:87px; top:344px; left:100px;"/>
-<input type="text" name="m186r32" id="m186r32" style="width:103px; top:344px; left:197px;"/>
-<input type="text" name="m186r33" id="m186r33" style="width:102px; top:344px; left:311px;"/>
-<input type="text" name="m186r34" id="m186r34" style="width:114px; top:344px; left:424px;"/>
-<input type="text" name="m186r35" id="m186r35" style="width:115px; top:344px; left:548px;"/>
-<input type="text" name="m186r36" id="m186r36" style="width:102px; top:344px; left:673px;"/>
-<input type="text" name="m186r37" id="m186r37" style="width:101px; top:344px; left:787px;"/>
-<input type="text" name="m186r41" id="m186r41" style="width:87px; top:371px; left:100px;"/>
-<input type="text" name="m186r42" id="m186r42" style="width:103px; top:371px; left:197px;"/>
-<input type="text" name="m186r43" id="m186r43" style="width:102px; top:371px; left:311px;"/>
-<input type="text" name="m186r44" id="m186r44" style="width:114px; top:371px; left:424px;"/>
-<input type="text" name="m186r45" id="m186r45" style="width:115px; top:371px; left:548px;"/>
-<input type="text" name="m186r46" id="m186r46" style="width:102px; top:371px; left:673px;"/>
-<input type="text" name="m186r47" id="m186r47" style="width:101px; top:371px; left:787px;"/>
-<input type="text" name="m186r51" id="m186r51" style="width:87px; top:399px; left:100px;"/>
-<input type="text" name="m186r52" id="m186r52" style="width:103px; top:399px; left:197px;"/>
-<input type="text" name="m186r53" id="m186r53" style="width:102px; top:399px; left:311px;"/>
-<input type="text" name="m186r54" id="m186r54" style="width:114px; top:399px; left:424px;"/>
-<input type="text" name="m186r55" id="m186r55" style="width:115px; top:399px; left:548px;"/>
-<input type="text" name="m186r56" id="m186r56" style="width:102px; top:399px; left:673px;"/>
-<input type="text" name="m186r57" id="m186r57" style="width:101px; top:399px; left:787px;"/>
-<input type="text" name="m186r61" id="m186r61" style="width:87px; top:426px; left:100px;"/>
-<input type="text" name="m186r62" id="m186r62" style="width:103px; top:426px; left:197px;"/>
-<input type="text" name="m186r63" id="m186r63" style="width:102px; top:426px; left:311px;"/>
-<input type="text" name="m186r64" id="m186r64" style="width:114px; top:426px; left:424px;"/>
-<input type="text" name="m186r65" id="m186r65" style="width:115px; top:426px; left:548px;"/>
-<input type="text" name="m186r66" id="m186r66" style="width:102px; top:426px; left:673px;"/>
-<input type="text" name="m186r67" id="m186r67" style="width:101px; top:426px; left:787px;"/>
-<input type="text" name="m186r71" id="m186r71" style="width:87px; top:454px; left:100px;"/>
-<input type="text" name="m186r72" id="m186r72" style="width:103px; top:454px; left:197px;"/>
-<input type="text" name="m186r73" id="m186r73" style="width:102px; top:454px; left:311px;"/>
-<input type="text" name="m186r74" id="m186r74" style="width:114px; top:454px; left:424px;"/>
-<input type="text" name="m186r75" id="m186r75" style="width:115px; top:454px; left:548px;"/>
-<input type="text" name="m186r76" id="m186r76" style="width:102px; top:454px; left:673px;"/>
-<input type="text" name="m186r77" id="m186r77" style="width:101px; top:454px; left:787px;"/>
-<input type="text" name="m186r81" id="m186r81" style="width:87px; top:481px; left:100px;"/>
-<input type="text" name="m186r82" id="m186r82" style="width:103px; top:481px; left:197px;"/>
-<input type="text" name="m186r83" id="m186r83" style="width:102px; top:481px; left:311px;"/>
-<input type="text" name="m186r84" id="m186r84" style="width:114px; top:481px; left:424px;"/>
-<input type="text" name="m186r85" id="m186r85" style="width:115px; top:481px; left:548px;"/>
-<input type="text" name="m186r86" id="m186r86" style="width:102px; top:481px; left:673px;"/>
-<input type="text" name="m186r87" id="m186r87" style="width:101px; top:481px; left:787px;"/>
-<input type="text" name="m186r91" id="m186r91" style="width:87px; top:508px; left:100px;"/>
-<input type="text" name="m186r92" id="m186r92" style="width:103px; top:508px; left:197px;"/>
-<input type="text" name="m186r93" id="m186r93" style="width:102px; top:508px; left:311px;"/>
-<input type="text" name="m186r94" id="m186r94" style="width:114px; top:508px; left:424px;"/>
-<input type="text" name="m186r95" id="m186r95" style="width:115px; top:508px; left:548px;"/>
-<input type="text" name="m186r96" id="m186r96" style="width:102px; top:508px; left:673px;"/>
-<input type="text" name="m186r97" id="m186r97" style="width:101px; top:508px; left:787px;"/>
-<input type="text" name="m186r101" id="m186r101" style="width:87px; top:536px; left:100px;"/>
-<input type="text" name="m186r102" id="m186r102" style="width:103px; top:536px; left:197px;"/>
-<input type="text" name="m186r103" id="m186r103" style="width:102px; top:536px; left:311px;"/>
-<input type="text" name="m186r104" id="m186r104" style="width:114px; top:536px; left:424px;"/>
-<input type="text" name="m186r105" id="m186r105" style="width:115px; top:536px; left:548px;"/>
-<input type="text" name="m186r106" id="m186r106" style="width:102px; top:536px; left:673px;"/>
-<input type="text" name="m186r107" id="m186r107" style="width:101px; top:536px; left:787px;"/>
-<input type="text" name="m186r111" id="m186r111" style="width:87px; top:563px; left:100px;"/>
-<input type="text" name="m186r112" id="m186r112" style="width:103px; top:563px; left:197px;"/>
-<input type="text" name="m186r113" id="m186r113" style="width:102px; top:563px; left:311px;"/>
-<input type="text" name="m186r114" id="m186r114" style="width:114px; top:563px; left:424px;"/>
-<input type="text" name="m186r115" id="m186r115" style="width:115px; top:563px; left:548px;"/>
-<input type="text" name="m186r116" id="m186r116" style="width:102px; top:563px; left:673px;"/>
-<input type="text" name="m186r117" id="m186r117" style="width:101px; top:563px; left:787px;"/>
-<input type="text" name="m186r121" id="m186r121" style="width:87px; top:591px; left:100px;"/>
-<input type="text" name="m186r122" id="m186r122" style="width:103px; top:591px; left:197px;"/>
-<input type="text" name="m186r123" id="m186r123" style="width:102px; top:591px; left:311px;"/>
-<input type="text" name="m186r124" id="m186r124" style="width:114px; top:591px; left:424px;"/>
-<input type="text" name="m186r125" id="m186r125" style="width:115px; top:591px; left:548px;"/>
-<input type="text" name="m186r126" id="m186r126" style="width:102px; top:591px; left:673px;"/>
-<input type="text" name="m186r127" id="m186r127" style="width:101px; top:591px; left:787px;"/>
-<input type="text" name="m186r131" id="m186r131" style="width:87px; top:618px; left:100px;"/>
-<input type="text" name="m186r132" id="m186r132" style="width:103px; top:618px; left:197px;"/>
-<input type="text" name="m186r133" id="m186r133" style="width:102px; top:618px; left:311px;"/>
-<input type="text" name="m186r134" id="m186r134" style="width:114px; top:618px; left:424px;"/>
-<input type="text" name="m186r135" id="m186r135" style="width:115px; top:618px; left:548px;"/>
-<input type="text" name="m186r136" id="m186r136" style="width:102px; top:618px; left:673px;"/>
-<input type="text" name="m186r137" id="m186r137" style="width:101px; top:618px; left:787px;"/>
-<input type="text" name="m186r141" id="m186r141" style="width:87px; top:645px; left:100px;"/>
-<input type="text" name="m186r142" id="m186r142" style="width:103px; top:645px; left:197px;"/>
-<input type="text" name="m186r143" id="m186r143" style="width:102px; top:645px; left:311px;"/>
-<input type="text" name="m186r144" id="m186r144" style="width:114px; top:645px; left:424px;"/>
-<input type="text" name="m186r145" id="m186r145" style="width:115px; top:645px; left:548px;"/>
-<input type="text" name="m186r146" id="m186r146" style="width:102px; top:645px; left:673px;"/>
-<input type="text" name="m186r147" id="m186r147" style="width:101px; top:645px; left:787px;"/>
-<input type="text" name="m186r151" id="m186r151" style="width:87px; top:673px; left:100px;"/>
-<input type="text" name="m186r152" id="m186r152" style="width:103px; top:673px; left:197px;"/>
-<input type="text" name="m186r153" id="m186r153" style="width:102px; top:673px; left:311px;"/>
-<input type="text" name="m186r154" id="m186r154" style="width:114px; top:673px; left:424px;"/>
-<input type="text" name="m186r155" id="m186r155" style="width:115px; top:673px; left:548px;"/>
-<input type="text" name="m186r156" id="m186r156" style="width:102px; top:673px; left:673px;"/>
-<input type="text" name="m186r157" id="m186r157" style="width:101px; top:673px; left:787px;"/>
-<input type="text" name="m186r161" id="m186r161" style="width:87px; top:700px; left:100px;"/>
-<input type="text" name="m186r162" id="m186r162" style="width:103px; top:700px; left:197px;"/>
-<input type="text" name="m186r163" id="m186r163" style="width:102px; top:700px; left:311px;"/>
-<input type="text" name="m186r164" id="m186r164" style="width:114px; top:700px; left:424px;"/>
-<input type="text" name="m186r165" id="m186r165" style="width:115px; top:700px; left:548px;"/>
-<input type="text" name="m186r166" id="m186r166" style="width:102px; top:700px; left:673px;"/>
-<input type="text" name="m186r167" id="m186r167" style="width:101px; top:700px; left:787px;"/>
-<input type="text" name="m186r171" id="m186r171" style="width:87px; top:728px; left:100px;"/>
-<input type="text" name="m186r172" id="m186r172" style="width:103px; top:728px; left:197px;"/>
-<input type="text" name="m186r173" id="m186r173" style="width:102px; top:728px; left:311px;"/>
-<input type="text" name="m186r174" id="m186r174" style="width:114px; top:728px; left:424px;"/>
-<input type="text" name="m186r175" id="m186r175" style="width:115px; top:728px; left:548px;"/>
-<input type="text" name="m186r176" id="m186r176" style="width:102px; top:728px; left:673px;"/>
-<input type="text" name="m186r177" id="m186r177" style="width:101px; top:728px; left:787px;"/>
-<input type="text" name="m186r181" id="m186r181" style="width:87px; top:755px; left:100px;"/>
-<input type="text" name="m186r182" id="m186r182" style="width:103px; top:755px; left:197px;"/>
-<input type="text" name="m186r183" id="m186r183" style="width:102px; top:755px; left:311px;"/>
-<input type="text" name="m186r184" id="m186r184" style="width:114px; top:755px; left:424px;"/>
-<input type="text" name="m186r185" id="m186r185" style="width:115px; top:755px; left:548px;"/>
-<input type="text" name="m186r186" id="m186r186" style="width:102px; top:755px; left:673px;"/>
-<input type="text" name="m186r187" id="m186r187" style="width:101px; top:755px; left:787px;"/>
-<input type="text" name="m186r191" id="m186r191" style="width:87px; top:782px; left:100px;"/>
-<input type="text" name="m186r192" id="m186r192" style="width:103px; top:782px; left:197px;"/>
-<input type="text" name="m186r193" id="m186r193" style="width:102px; top:782px; left:311px;"/>
-<input type="text" name="m186r194" id="m186r194" style="width:114px; top:782px; left:424px;"/>
-<input type="text" name="m186r195" id="m186r195" style="width:115px; top:782px; left:548px;"/>
-<input type="text" name="m186r196" id="m186r196" style="width:102px; top:782px; left:673px;"/>
-<input type="text" name="m186r197" id="m186r197" style="width:101px; top:782px; left:787px;"/>
-<input type="text" name="m186r201" id="m186r201" style="width:87px; top:810px; left:100px;"/>
-<input type="text" name="m186r202" id="m186r202" style="width:103px; top:810px; left:197px;"/>
-<input type="text" name="m186r203" id="m186r203" style="width:102px; top:810px; left:311px;"/>
-<input type="text" name="m186r204" id="m186r204" style="width:114px; top:810px; left:424px;"/>
-<input type="text" name="m186r205" id="m186r205" style="width:115px; top:810px; left:548px;"/>
-<input type="text" name="m186r206" id="m186r206" style="width:102px; top:810px; left:673px;"/>
-<input type="text" name="m186r207" id="m186r207" style="width:101px; top:810px; left:787px;"/>
-<input type="text" name="m186r211" id="m186r211" style="width:87px; top:837px; left:100px;"/>
-<input type="text" name="m186r212" id="m186r212" style="width:103px; top:837px; left:197px;"/>
-<input type="text" name="m186r213" id="m186r213" style="width:102px; top:837px; left:311px;"/>
-<input type="text" name="m186r214" id="m186r214" style="width:114px; top:837px; left:424px;"/>
-<input type="text" name="m186r215" id="m186r215" style="width:115px; top:837px; left:548px;"/>
-<input type="text" name="m186r216" id="m186r216" style="width:102px; top:837px; left:673px;"/>
-<input type="text" name="m186r217" id="m186r217" style="width:101px; top:837px; left:787px;"/>
-<input type="text" name="m186r221" id="m186r221" style="width:87px; top:865px; left:100px;"/>
-<input type="text" name="m186r222" id="m186r222" style="width:103px; top:865px; left:197px;"/>
-<input type="text" name="m186r223" id="m186r223" style="width:102px; top:865px; left:311px;"/>
-<input type="text" name="m186r224" id="m186r224" style="width:114px; top:865px; left:424px;"/>
-<input type="text" name="m186r225" id="m186r225" style="width:115px; top:865px; left:548px;"/>
-<input type="text" name="m186r226" id="m186r226" style="width:102px; top:865px; left:673px;"/>
-<input type="text" name="m186r227" id="m186r227" style="width:101px; top:865px; left:787px;"/>
-<input type="text" name="m186r231" id="m186r231" style="width:87px; top:892px; left:100px;"/>
-<input type="text" name="m186r232" id="m186r232" style="width:103px; top:892px; left:197px;"/>
-<input type="text" name="m186r233" id="m186r233" style="width:102px; top:892px; left:311px;"/>
-<input type="text" name="m186r234" id="m186r234" style="width:114px; top:892px; left:424px;"/>
-<input type="text" name="m186r235" id="m186r235" style="width:115px; top:892px; left:548px;"/>
-<input type="text" name="m186r236" id="m186r236" style="width:102px; top:892px; left:673px;"/>
-<input type="text" name="m186r237" id="m186r237" style="width:101px; top:892px; left:787px;"/>
-<input type="text" name="m186r241" id="m186r241" style="width:87px; top:920px; left:100px;"/>
-<input type="text" name="m186r242" id="m186r242" style="width:103px; top:920px; left:197px;"/>
-<input type="text" name="m186r243" id="m186r243" style="width:102px; top:920px; left:311px;"/>
-<input type="text" name="m186r244" id="m186r244" style="width:114px; top:920px; left:424px;"/>
-<input type="text" name="m186r245" id="m186r245" style="width:115px; top:920px; left:548px;"/>
-<input type="text" name="m186r246" id="m186r246" style="width:102px; top:920px; left:673px;"/>
-<input type="text" name="m186r247" id="m186r247" style="width:101px; top:920px; left:787px;"/>
-<input type="text" name="m186r251" id="m186r251" style="width:87px; top:947px; left:100px;"/>
-<input type="text" name="m186r252" id="m186r252" style="width:103px; top:947px; left:197px;"/>
-<input type="text" name="m186r253" id="m186r253" style="width:102px; top:947px; left:311px;"/>
-<input type="text" name="m186r254" id="m186r254" style="width:114px; top:947px; left:424px;"/>
-<input type="text" name="m186r255" id="m186r255" style="width:115px; top:947px; left:548px;"/>
-<input type="text" name="m186r256" id="m186r256" style="width:102px; top:947px; left:673px;"/>
-<input type="text" name="m186r257" id="m186r257" style="width:101px; top:947px; left:787px;"/>
-<input type="text" name="m186r261" id="m186r261" style="width:87px; top:974px; left:100px;"/>
-<input type="text" name="m186r262" id="m186r262" style="width:103px; top:974px; left:197px;"/>
-<input type="text" name="m186r263" id="m186r263" style="width:102px; top:974px; left:311px;"/>
-<input type="text" name="m186r264" id="m186r264" style="width:114px; top:974px; left:424px;"/>
-<input type="text" name="m186r265" id="m186r265" style="width:115px; top:974px; left:548px;"/>
-<input type="text" name="m186r266" id="m186r266" style="width:102px; top:974px; left:673px;"/>
-<input type="text" name="m186r267" id="m186r267" style="width:101px; top:974px; left:787px;"/>
-<input type="text" name="m186r271" id="m186r271" style="width:87px; top:1002px; left:100px;"/>
-<input type="text" name="m186r272" id="m186r272" style="width:103px; top:1002px; left:197px;"/>
-<input type="text" name="m186r273" id="m186r273" style="width:102px; top:1002px; left:311px;"/>
-<input type="text" name="m186r274" id="m186r274" style="width:114px; top:1002px; left:424px;"/>
-<input type="text" name="m186r275" id="m186r275" style="width:115px; top:1002px; left:548px;"/>
-<input type="text" name="m186r276" id="m186r276" style="width:102px; top:1002px; left:673px;"/>
-<input type="text" name="m186r277" id="m186r277" style="width:101px; top:1002px; left:787px;"/>
-<input type="text" name="m186r281" id="m186r281" style="width:87px; top:1029px; left:100px;"/>
-<input type="text" name="m186r282" id="m186r282" style="width:103px; top:1029px; left:197px;"/>
-<input type="text" name="m186r283" id="m186r283" style="width:102px; top:1029px; left:311px;"/>
-<input type="text" name="m186r284" id="m186r284" style="width:114px; top:1029px; left:424px;"/>
-<input type="text" name="m186r285" id="m186r285" style="width:115px; top:1029px; left:548px;"/>
-<input type="text" name="m186r286" id="m186r286" style="width:102px; top:1029px; left:673px;"/>
-<input type="text" name="m186r287" id="m186r287" style="width:101px; top:1029px; left:787px;"/>
-<input type="text" name="m186r291" id="m186r291" style="width:87px; top:1056px; left:100px;"/>
-<input type="text" name="m186r292" id="m186r292" style="width:103px; top:1056px; left:197px;"/>
-<input type="text" name="m186r293" id="m186r293" style="width:102px; top:1056px; left:311px;"/>
-<input type="text" name="m186r294" id="m186r294" style="width:114px; top:1056px; left:424px;"/>
-<input type="text" name="m186r295" id="m186r295" style="width:115px; top:1056px; left:548px;"/>
-<input type="text" name="m186r296" id="m186r296" style="width:102px; top:1056px; left:673px;"/>
-<input type="text" name="m186r297" id="m186r297" style="width:101px; top:1056px; left:787px;"/>
-<input type="text" name="m186r301" id="m186r301" style="width:87px; top:1084px; left:100px;"/>
-<input type="text" name="m186r302" id="m186r302" style="width:103px; top:1084px; left:197px;"/>
-<input type="text" name="m186r303" id="m186r303" style="width:102px; top:1084px; left:311px;"/>
-<input type="text" name="m186r304" id="m186r304" style="width:114px; top:1084px; left:424px;"/>
-<input type="text" name="m186r305" id="m186r305" style="width:115px; top:1084px; left:548px;"/>
-<input type="text" name="m186r306" id="m186r306" style="width:102px; top:1084px; left:673px;"/>
-<input type="text" name="m186r307" id="m186r307" style="width:101px; top:1084px; left:787px;"/>
-<span class="text-echo" style="top:1116px; right:648px;"><?php echo $m186r992; ?></span>
-<span class="text-echo" style="top:1116px; right:536px;"><?php echo $m186r993; ?></span>
-<span class="text-echo" style="top:1116px; right:411px;"><?php echo $m186r994; ?></span>
-<span class="text-echo" style="top:1116px; right:285px;"><?php echo $m186r995; ?></span>
-<span class="text-echo" style="top:1116px; right:173px;"><?php echo $m186r996; ?></span>
-<span class="text-echo" style="top:1116px; right:60px;"><?php echo $m186r997; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 10 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 10.strana 240kB">
-<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 187 -->
-<input type="text" name="m187r1" id="m187r1" style="width:100px; top:208px; left:675px;"/>
-
-<!-- modul 100101 -->
-<input type="checkbox" name="m1590r1a" value="1" onclick="klikm1590r1ano();" style="top:322px; left:839px;"/>
-<input type="checkbox" name="m1590r1b" value="1" onclick="klikm1590r1nie();" style="top:342px; left:839px;"/>
-
-<!-- modul 100102 -->
-<input type="checkbox" name="m1590r2a" value="1" onclick="klikm1590r2ano();" style="top:469px; left:839px;"/>
-<input type="checkbox" name="m1590r2b" value="1" onclick="klikm1590r2nie();" style="top:490px; left:839px;"/>
-
-<!-- modul 590 -->
-<input type="text" name="m590r11" id="m590r11" style="width:124px; top:707px; left:100px;"/>
-<input type="text" name="m590r12" id="m590r12" style="width:178px; top:707px; left:235px;"/>
-<input type="text" name="m590r13" id="m590r13" style="width:159px; top:707px; left:424px;"/>
-<input type="text" name="m590r14" id="m590r14" style="width:147px; top:707px; left:594px;"/>
-<input type="text" name="m590r15" id="m590r15" style="width:136px; top:707px; left:752px;"/>
-<input type="text" name="m590r21" id="m590r21" style="width:124px; top:732px; left:100px;"/>
-<input type="text" name="m590r22" id="m590r22" style="width:178px; top:732px; left:235px;"/>
-<input type="text" name="m590r23" id="m590r23" style="width:159px; top:732px; left:424px;"/>
-<input type="text" name="m590r24" id="m590r24" style="width:147px; top:732px; left:594px;"/>
-<input type="text" name="m590r25" id="m590r25" style="width:136px; top:732px; left:752px;"/>
-<input type="text" name="m590r31" id="m590r31" style="width:124px; top:758px; left:100px;"/>
-<input type="text" name="m590r32" id="m590r32" style="width:178px; top:758px; left:235px;"/>
-<input type="text" name="m590r33" id="m590r33" style="width:159px; top:758px; left:424px;"/>
-<input type="text" name="m590r34" id="m590r34" style="width:147px; top:758px; left:594px;"/>
-<input type="text" name="m590r35" id="m590r35" style="width:136px; top:758px; left:752px;"/>
-<input type="text" name="m590r41" id="m590r41" style="width:124px; top:783px; left:100px;"/>
-<input type="text" name="m590r42" id="m590r42" style="width:178px; top:783px; left:235px;"/>
-<input type="text" name="m590r43" id="m590r43" style="width:159px; top:783px; left:424px;"/>
-<input type="text" name="m590r44" id="m590r44" style="width:147px; top:783px; left:594px;"/>
-<input type="text" name="m590r45" id="m590r45" style="width:136px; top:783px; left:752px;"/>
-<input type="text" name="m590r51" id="m590r51" style="width:124px; top:808px; left:100px;"/>
-<input type="text" name="m590r52" id="m590r52" style="width:178px; top:808px; left:235px;"/>
-<input type="text" name="m590r53" id="m590r53" style="width:159px; top:808px; left:424px;"/>
-<input type="text" name="m590r54" id="m590r54" style="width:147px; top:808px; left:594px;"/>
-<input type="text" name="m590r55" id="m590r55" style="width:136px; top:808px; left:752px;"/>
-<input type="text" name="m590r61" id="m590r61" style="width:124px; top:833px; left:100px;"/>
-<input type="text" name="m590r62" id="m590r62" style="width:178px; top:833px; left:235px;"/>
-<input type="text" name="m590r63" id="m590r63" style="width:159px; top:833px; left:424px;"/>
-<input type="text" name="m590r64" id="m590r64" style="width:147px; top:833px; left:594px;"/>
-<input type="text" name="m590r65" id="m590r65" style="width:136px; top:833px; left:752px;"/>
-<input type="text" name="m590r71" id="m590r71" style="width:124px; top:859px; left:100px;"/>
-<input type="text" name="m590r72" id="m590r72" style="width:178px; top:859px; left:235px;"/>
-<input type="text" name="m590r73" id="m590r73" style="width:159px; top:859px; left:424px;"/>
-<input type="text" name="m590r74" id="m590r74" style="width:147px; top:859px; left:594px;"/>
-<input type="text" name="m590r75" id="m590r75" style="width:136px; top:859px; left:752px;"/>
-<input type="text" name="m590r81" id="m590r81" style="width:124px; top:884px; left:100px;"/>
-<input type="text" name="m590r82" id="m590r82" style="width:178px; top:884px; left:235px;"/>
-<input type="text" name="m590r83" id="m590r83" style="width:159px; top:884px; left:424px;"/>
-<input type="text" name="m590r84" id="m590r84" style="width:147px; top:884px; left:594px;"/>
-<input type="text" name="m590r85" id="m590r85" style="width:136px; top:884px; left:752px;"/>
-<input type="text" name="m590r91" id="m590r91" style="width:124px; top:909px; left:100px;"/>
-<input type="text" name="m590r92" id="m590r92" style="width:178px; top:909px; left:235px;"/>
-<input type="text" name="m590r93" id="m590r93" style="width:159px; top:909px; left:424px;"/>
-<input type="text" name="m590r94" id="m590r94" style="width:147px; top:909px; left:594px;"/>
-<input type="text" name="m590r95" id="m590r95" style="width:136px; top:909px; left:752px;"/>
-<input type="text" name="m590r101" id="m590r101" style="width:124px; top:934px; left:100px;"/>
-<input type="text" name="m590r102" id="m590r102" style="width:178px; top:934px; left:235px;"/>
-<input type="text" name="m590r103" id="m590r103" style="width:159px; top:934px; left:424px;"/>
-<input type="text" name="m590r104" id="m590r104" style="width:147px; top:934px; left:594px;"/>
-<input type="text" name="m590r105" id="m590r105" style="width:136px; top:934px; left:752px;"/>
-<input type="text" name="m590r111" id="m590r111" style="width:124px; top:960px; left:100px;"/>
-<input type="text" name="m590r112" id="m590r112" style="width:178px; top:960px; left:235px;"/>
-<input type="text" name="m590r113" id="m590r113" style="width:159px; top:960px; left:424px;"/>
-<input type="text" name="m590r114" id="m590r114" style="width:147px; top:960px; left:594px;"/>
-<input type="text" name="m590r115" id="m590r115" style="width:136px; top:960px; left:752px;"/>
-<input type="text" name="m590r121" id="m590r121" style="width:124px; top:985px; left:100px;"/>
-<input type="text" name="m590r122" id="m590r122" style="width:178px; top:985px; left:235px;"/>
-<input type="text" name="m590r123" id="m590r123" style="width:159px; top:985px; left:424px;"/>
-<input type="text" name="m590r124" id="m590r124" style="width:147px; top:985px; left:594px;"/>
-<input type="text" name="m590r125" id="m590r125" style="width:136px; top:985px; left:752px;"/>
-<input type="text" name="m590r131" id="m590r131" style="width:124px; top:1010px; left:100px;"/>
-<input type="text" name="m590r132" id="m590r132" style="width:178px; top:1010px; left:235px;"/>
-<input type="text" name="m590r133" id="m590r133" style="width:159px; top:1010px; left:424px;"/>
-<input type="text" name="m590r134" id="m590r134" style="width:147px; top:1010px; left:594px;"/>
-<input type="text" name="m590r135" id="m590r135" style="width:136px; top:1010px; left:752px;"/>
-<input type="text" name="m590r141" id="m590r141" style="width:124px; top:1035px; left:100px;"/>
-<input type="text" name="m590r142" id="m590r142" style="width:178px; top:1035px; left:235px;"/>
-<input type="text" name="m590r143" id="m590r143" style="width:159px; top:1035px; left:424px;"/>
-<input type="text" name="m590r144" id="m590r144" style="width:147px; top:1035px; left:594px;"/>
-<input type="text" name="m590r145" id="m590r145" style="width:136px; top:1035px; left:752px;"/>
-<input type="text" name="m590r151" id="m590r151" style="width:124px; top:1061px; left:100px;"/>
-<input type="text" name="m590r152" id="m590r152" style="width:178px; top:1061px; left:235px;"/>
-<input type="text" name="m590r153" id="m590r153" style="width:159px; top:1061px; left:424px;"/>
-<input type="text" name="m590r154" id="m590r154" style="width:147px; top:1061px; left:594px;"/>
-<input type="text" name="m590r155" id="m590r155" style="width:136px; top:1061px; left:752px;"/>
-<input type="text" name="m590r161" id="m590r161" style="width:124px; top:1086px; left:100px;"/>
-<input type="text" name="m590r162" id="m590r162" style="width:178px; top:1086px; left:235px;"/>
-<input type="text" name="m590r163" id="m590r163" style="width:159px; top:1086px; left:424px;"/>
-<input type="text" name="m590r164" id="m590r164" style="width:147px; top:1086px; left:594px;"/>
-<input type="text" name="m590r165" id="m590r165" style="width:136px; top:1086px; left:752px;"/>
-<input type="text" name="m590r171" id="m590r171" style="width:124px; top:1111px; left:100px;"/>
-<input type="text" name="m590r172" id="m590r172" style="width:178px; top:1111px; left:235px;"/>
-<input type="text" name="m590r173" id="m590r173" style="width:159px; top:1111px; left:424px;"/>
-<input type="text" name="m590r174" id="m590r174" style="width:147px; top:1111px; left:594px;"/>
-<input type="text" name="m590r175" id="m590r175" style="width:136px; top:1111px; left:752px;"/>
-<input type="text" name="m590r181" id="m590r181" style="width:124px; top:1136px; left:100px;"/>
-<input type="text" name="m590r182" id="m590r182" style="width:178px; top:1136px; left:235px;"/>
-<input type="text" name="m590r183" id="m590r183" style="width:159px; top:1136px; left:424px;"/>
-<input type="text" name="m590r184" id="m590r184" style="width:147px; top:1136px; left:594px;"/>
-<input type="text" name="m590r185" id="m590r185" style="width:136px; top:1136px; left:752px;"/>
-<input type="text" name="m590r191" id="m590r191" style="width:124px; top:1162px; left:100px;"/>
-<input type="text" name="m590r192" id="m590r192" style="width:178px; top:1162px; left:235px;"/>
-<input type="text" name="m590r193" id="m590r193" style="width:159px; top:1162px; left:424px;"/>
-<input type="text" name="m590r194" id="m590r194" style="width:147px; top:1162px; left:594px;"/>
-<input type="text" name="m590r195" id="m590r195" style="width:136px; top:1162px; left:752px;"/>
-<input type="text" name="m590r201" id="m590r201" style="width:124px; top:1187px; left:100px;"/>
-<input type="text" name="m590r202" id="m590r202" style="width:178px; top:1187px; left:235px;"/>
-<input type="text" name="m590r203" id="m590r203" style="width:159px; top:1187px; left:424px;"/>
-<input type="text" name="m590r204" id="m590r204" style="width:147px; top:1187px; left:594px;"/>
-<input type="text" name="m590r205" id="m590r205" style="width:136px; top:1187px; left:752px;"/>
-<span class="text-echo" style="top:1218px; right:535px;"><?php echo $m590r992; ?></span>
-<span class="text-echo" style="top:1218px; right:376px;"><?php echo $m590r993; ?></span>
-<span class="text-echo" style="top:1218px; right:218px;"><?php echo $m590r994; ?></span>
-<span class="text-echo" style="top:1218px; right:60px;"><?php echo $m590r995; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 11 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 11.strana 277kB">
-<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 304 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z miezd" onclick="NacitajMzdy();" style="top:158px; left:378px;" class="btn-row-tool">
-<input type="text" name="m304r1" id="m304r1" style="width:100px; top:282px; left:755px;"/>
-<input type="text" name="m304r2" id="m304r2" style="width:100px; top:314px; left:755px;"/>
-<input type="text" name="m304r3" id="m304r3" style="width:100px; top:346px; left:755px;"/>
-<input type="text" name="m304r4" id="m304r4" style="width:100px; top:378px; left:755px;"/>
-<input type="text" name="m304r5" id="m304r5" style="width:100px; top:410px; left:755px;"/>
-<input type="text" name="m304r6" id="m304r6" style="width:100px; top:442px; left:755px;"/>
-<input type="text" name="m304r7" id="m304r7" style="width:100px; top:476px; left:755px;"/>
-<input type="text" name="m304r8" id="m304r8" style="width:100px; top:512px; left:755px;"/>
-<input type="text" name="m304r9" id="m304r9" style="width:100px; top:547px; left:755px;"/>
-<input type="text" name="m304r10" id="m304r10" style="width:100px; top:579px; left:755px;"/>
-<input type="text" name="m304r11" id="m304r11" style="width:100px; top:610px; left:755px;"/>
-<input type="text" name="m304r12" id="m304r12" style="width:100px; top:642px; left:755px;"/>
-<input type="text" name="m304r13" id="m304r13" style="width:100px; top:674px; left:755px;"/>
-<input type="text" name="m304r14" id="m304r14" style="width:100px; top:706px; left:755px;"/>
-<input type="text" name="m304r15" id="m304r15" style="width:100px; top:737px; left:755px;"/>
-<input type="text" name="m304r16" id="m304r16" style="width:100px; top:769px; left:755px;"/>
-<span class="text-echo" style="top:805px; right:95px;"><?php echo $m304r99; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 12 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 274kB">
-<span class="text-echo" style="top:77px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 110 -->
-<input type="text" name="m110r12" id="m110r12" style="width:58px; top:297px; left:344px;"/>
-<input type="text" name="m110r13" id="m110r13" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:297px; left:413px;"/>
-<input type="text" name="m110r14" id="m110r14" style="width:68px; top:297px; left:481px;"/>
-<input type="text" name="m110r15" id="m110r15" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:297px; left:560px;"/>
-<input type="text" name="m110r16" id="m110r16" style="width:57px; top:297px; left:628px;"/>
-<input type="text" name="m110r17" id="m110r17" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:297px; left:696px;"/>
-<input type="text" name="m110r18" id="m110r18" style="width:68px; top:297px; left:775px;"/>
-<input type="text" name="m110r19" id="m110r19" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:297px; left:854px;"/>
-<input type="text" name="m110r22" id="m110r22" style="width:58px; top:320px; left:344px;"/>
-<input type="text" name="m110r23" id="m110r23" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:320px; left:413px;"/>
-<input type="text" name="m110r24" id="m110r24" style="width:68px; top:320px; left:481px;"/>
-<input type="text" name="m110r25" id="m110r25" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:320px; left:560px;"/>
-<input type="text" name="m110r26" id="m110r26" style="width:57px; top:320px; left:628px;"/>
-<input type="text" name="m110r27" id="m110r27" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:320px; left:696px;"/>
-<input type="text" name="m110r28" id="m110r28" style="width:68px; top:320px; left:775px;"/>
-<input type="text" name="m110r29" id="m110r29" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:320px; left:854px;"/>
-<input type="text" name="m110r32" id="m110r32" style="width:58px; top:343px; left:344px;"/>
-<input type="text" name="m110r33" id="m110r33" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:343px; left:413px;"/>
-<input type="text" name="m110r34" id="m110r34" style="width:68px; top:343px; left:481px;"/>
-<input type="text" name="m110r35" id="m110r35" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:343px; left:560px;"/>
-<input type="text" name="m110r36" id="m110r36" style="width:57px; top:343px; left:628px;"/>
-<input type="text" name="m110r37" id="m110r37" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:343px; left:696px;"/>
-<input type="text" name="m110r38" id="m110r38" style="width:68px; top:343px; left:775px;"/>
-<input type="text" name="m110r39" id="m110r39" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:343px; left:854px;"/>
-<input type="text" name="m110r42" id="m110r42" style="width:58px; top:366px; left:344px;"/>
-<input type="text" name="m110r43" id="m110r43" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:366px; left:413px;"/>
-<input type="text" name="m110r44" id="m110r44" style="width:68px; top:366px; left:481px;"/>
-<input type="text" name="m110r45" id="m110r45" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:366px; left:560px;"/>
-<input type="text" name="m110r46" id="m110r46" style="width:57px; top:366px; left:628px;"/>
-<input type="text" name="m110r47" id="m110r47" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:366px; left:696px;"/>
-<input type="text" name="m110r48" id="m110r48" style="width:68px; top:366px; left:775px;"/>
-<input type="text" name="m110r49" id="m110r49" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:366px; left:854px;"/>
-<input type="text" name="m110r52" id="m110r52" style="width:58px; top:389px; left:344px;"/>
-<input type="text" name="m110r53" id="m110r53" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:389px; left:413px;"/>
-<input type="text" name="m110r54" id="m110r54" style="width:68px; top:389px; left:481px;"/>
-<input type="text" name="m110r55" id="m110r55" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:389px; left:560px;"/>
-<input type="text" name="m110r56" id="m110r56" style="width:57px; top:389px; left:628px;"/>
-<input type="text" name="m110r57" id="m110r57" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:389px; left:696px;"/>
-<input type="text" name="m110r58" id="m110r58" style="width:68px; top:389px; left:775px;"/>
-<input type="text" name="m110r59" id="m110r59" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:389px; left:854px;"/>
-<input type="text" name="m110r62" id="m110r62" style="width:58px; top:412px; left:344px;"/>
-<input type="text" name="m110r63" id="m110r63" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:412px; left:413px;"/>
-<input type="text" name="m110r64" id="m110r64" style="width:68px; top:412px; left:481px;"/>
-<input type="text" name="m110r65" id="m110r65" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:412px; left:560px;"/>
-<input type="text" name="m110r66" id="m110r66" style="width:57px; top:412px; left:628px;"/>
-<input type="text" name="m110r67" id="m110r67" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:412px; left:696px;"/>
-<input type="text" name="m110r68" id="m110r68" style="width:68px; top:412px; left:775px;"/>
-<input type="text" name="m110r69" id="m110r69" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:412px; left:854px;"/>
-<input type="text" name="m110r72" id="m110r72" style="width:58px; top:435px; left:344px;"/>
-<input type="text" name="m110r73" id="m110r73" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:435px; left:413px;"/>
-<input type="text" name="m110r74" id="m110r74" style="width:68px; top:435px; left:481px;"/>
-<input type="text" name="m110r75" id="m110r75" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:435px; left:560px;"/>
-<input type="text" name="m110r76" id="m110r76" style="width:57px; top:435px; left:628px;"/>
-<input type="text" name="m110r77" id="m110r77" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:435px; left:696px;"/>
-<input type="text" name="m110r78" id="m110r78" style="width:68px; top:435px; left:775px;"/>
-<input type="text" name="m110r79" id="m110r79" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:435px; left:854px;"/>
-<input type="text" name="m110r82" id="m110r82" style="width:58px; top:458px; left:344px;"/>
-<input type="text" name="m110r83" id="m110r83" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:458px; left:413px;"/>
-<input type="text" name="m110r84" id="m110r84" style="width:68px; top:458px; left:481px;"/>
-<input type="text" name="m110r85" id="m110r85" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:458px; left:560px;"/>
-<input type="text" name="m110r86" id="m110r86" style="width:57px; top:458px; left:628px;"/>
-<input type="text" name="m110r87" id="m110r87" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:458px; left:696px;"/>
-<input type="text" name="m110r88" id="m110r88" style="width:68px; top:458px; left:775px;"/>
-<input type="text" name="m110r89" id="m110r89" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:458px; left:854px;"/>
-<input type="text" name="m110r92" id="m110r92" style="width:58px; top:481px; left:344px;"/>
-<input type="text" name="m110r93" id="m110r93" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:481px; left:413px;"/>
-<input type="text" name="m110r94" id="m110r94" style="width:68px; top:481px; left:481px;"/>
-<input type="text" name="m110r95" id="m110r95" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:481px; left:560px;"/>
-<input type="text" name="m110r96" id="m110r96" style="width:57px; top:481px; left:628px;"/>
-<input type="text" name="m110r97" id="m110r97" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:481px; left:696px;"/>
-<input type="text" name="m110r98" id="m110r98" style="width:68px; top:481px; left:775px;"/>
-<input type="text" name="m110r99" id="m110r99" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:481px; left:854px;"/>
-<input type="text" name="m110r102" id="m110r102" style="width:58px; top:509px; left:344px;"/>
-<input type="text" name="m110r103" id="m110r103" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:509px; left:413px;"/>
-<input type="text" name="m110r104" id="m110r104" style="width:68px; top:509px; left:481px;"/>
-<input type="text" name="m110r105" id="m110r105" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:509px; left:560px;"/>
-<input type="text" name="m110r106" id="m110r106" style="width:57px; top:509px; left:628px;"/>
-<input type="text" name="m110r107" id="m110r107" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:509px; left:696px;"/>
-<input type="text" name="m110r108" id="m110r108" style="width:68px; top:509px; left:775px;"/>
-<input type="text" name="m110r109" id="m110r109" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:509px; left:854px;"/>
-<input type="text" name="m110r112" id="m110r112" style="width:58px; top:536px; left:344px;"/>
-<input type="text" name="m110r113" id="m110r113" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:536px; left:413px;"/>
-<input type="text" name="m110r114" id="m110r114" style="width:68px; top:536px; left:481px;"/>
-<input type="text" name="m110r115" id="m110r115" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:536px; left:560px;"/>
-<input type="text" name="m110r116" id="m110r116" style="width:57px; top:536px; left:628px;"/>
-<input type="text" name="m110r117" id="m110r117" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:536px; left:696px;"/>
-<input type="text" name="m110r118" id="m110r118" style="width:68px; top:536px; left:775px;"/>
-<input type="text" name="m110r119" id="m110r119" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:536px; left:854px;"/>
-<input type="text" name="m110r122" id="m110r122" style="width:58px; top:560px; left:344px;"/>
-<input type="text" name="m110r123" id="m110r123" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:560px; left:413px;"/>
-<input type="text" name="m110r124" id="m110r124" style="width:68px; top:560px; left:481px;"/>
-<input type="text" name="m110r125" id="m110r125" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:560px; left:560px;"/>
-<input type="text" name="m110r126" id="m110r126" style="width:57px; top:560px; left:628px;"/>
-<input type="text" name="m110r127" id="m110r127" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:560px; left:696px;"/>
-<input type="text" name="m110r128" id="m110r128" style="width:68px; top:560px; left:775px;"/>
-<input type="text" name="m110r129" id="m110r129" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:560px; left:854px;"/>
-<input type="text" name="m110r132" id="m110r132" style="width:58px; top:583px; left:344px;"/>
-<input type="text" name="m110r133" id="m110r133" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:583px; left:413px;"/>
-<input type="text" name="m110r134" id="m110r134" style="width:68px; top:583px; left:481px;"/>
-<input type="text" name="m110r135" id="m110r135" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:583px; left:560px;"/>
-<input type="text" name="m110r136" id="m110r136" style="width:57px; top:583px; left:628px;"/>
-<input type="text" name="m110r137" id="m110r137" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:583px; left:696px;"/>
-<input type="text" name="m110r138" id="m110r138" style="width:68px; top:583px; left:775px;"/>
-<input type="text" name="m110r139" id="m110r139" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:583px; left:854px;"/>
-<input type="text" name="m110r142" id="m110r142" style="width:58px; top:611px; left:344px;"/>
-<input type="text" name="m110r143" id="m110r143" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:611px; left:413px;"/>
-<input type="text" name="m110r144" id="m110r144" style="width:68px; top:611px; left:481px;"/>
-<input type="text" name="m110r145" id="m110r145" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:611px; left:560px;"/>
-<input type="text" name="m110r146" id="m110r146" style="width:57px; top:611px; left:628px;"/>
-<input type="text" name="m110r147" id="m110r147" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:611px; left:696px;"/>
-<input type="text" name="m110r148" id="m110r148" style="width:68px; top:611px; left:775px;"/>
-<input type="text" name="m110r149" id="m110r149" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:611px; left:854px;"/>
-<input type="text" name="m110r152" id="m110r152" style="width:58px; top:639px; left:344px;"/>
-<input type="text" name="m110r153" id="m110r153" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:639px; left:413px;"/>
-<input type="text" name="m110r154" id="m110r154" style="width:68px; top:639px; left:481px;"/>
-<input type="text" name="m110r155" id="m110r155" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:639px; left:560px;"/>
-<input type="text" name="m110r156" id="m110r156" style="width:57px; top:639px; left:628px;"/>
-<input type="text" name="m110r157" id="m110r157" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:639px; left:696px;"/>
-<input type="text" name="m110r158" id="m110r158" style="width:68px; top:639px; left:775px;"/>
-<input type="text" name="m110r159" id="m110r159" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:639px; left:854px;"/>
-<input type="text" name="m110r162" id="m110r162" style="width:58px; top:662px; left:344px;"/>
-<input type="text" name="m110r163" id="m110r163" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:662px; left:413px;"/>
-<input type="text" name="m110r164" id="m110r164" style="width:68px; top:662px; left:481px;"/>
-<input type="text" name="m110r165" id="m110r165" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:662px; left:560px;"/>
-<input type="text" name="m110r166" id="m110r166" style="width:57px; top:662px; left:628px;"/>
-<input type="text" name="m110r167" id="m110r167" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:662px; left:696px;"/>
-<input type="text" name="m110r168" id="m110r168" style="width:68px; top:662px; left:775px;"/>
-<input type="text" name="m110r169" id="m110r169" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:662px; left:854px;"/>
-<input type="text" name="m110r172" id="m110r172" style="width:58px; top:685px; left:344px;"/>
-<input type="text" name="m110r173" id="m110r173" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:685px; left:413px;"/>
-<input type="text" name="m110r174" id="m110r174" style="width:68px; top:685px; left:481px;"/>
-<input type="text" name="m110r175" id="m110r175" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:685px; left:560px;"/>
-<input type="text" name="m110r176" id="m110r176" style="width:57px; top:685px; left:628px;"/>
-<input type="text" name="m110r177" id="m110r177" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:685px; left:696px;"/>
-<input type="text" name="m110r178" id="m110r178" style="width:68px; top:685px; left:775px;"/>
-<input type="text" name="m110r179" id="m110r179" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:685px; left:854px;"/>
-<input type="text" name="m110r182" id="m110r182" style="width:58px; top:708px; left:344px;"/>
-<input type="text" name="m110r183" id="m110r183" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:708px; left:413px;"/>
-<input type="text" name="m110r184" id="m110r184" style="width:68px; top:708px; left:481px;"/>
-<input type="text" name="m110r185" id="m110r185" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:708px; left:560px;"/>
-<input type="text" name="m110r186" id="m110r186" style="width:57px; top:708px; left:628px;"/>
-<input type="text" name="m110r187" id="m110r187" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:708px; left:696px;"/>
-<input type="text" name="m110r188" id="m110r188" style="width:68px; top:708px; left:775px;"/>
-<input type="text" name="m110r189" id="m110r189" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:708px; left:854px;"/>
-<input type="text" name="m110r192" id="m110r192" style="width:58px; top:731px; left:344px;"/>
-<input type="text" name="m110r193" id="m110r193" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:731px; left:413px;"/>
-<input type="text" name="m110r194" id="m110r194" style="width:68px; top:731px; left:481px;"/>
-<input type="text" name="m110r195" id="m110r195" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:731px; left:560px;"/>
-<input type="text" name="m110r196" id="m110r196" style="width:57px; top:731px; left:628px;"/>
-<input type="text" name="m110r197" id="m110r197" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:731px; left:696px;"/>
-<input type="text" name="m110r198" id="m110r198" style="width:68px; top:731px; left:775px;"/>
-<input type="text" name="m110r199" id="m110r199" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:731px; left:854px;"/>
-<input type="text" name="m110r202" id="m110r202" style="width:58px; top:754px; left:344px;"/>
-<input type="text" name="m110r203" id="m110r203" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:754px; left:413px;"/>
-<input type="text" name="m110r204" id="m110r204" style="width:68px; top:754px; left:481px;"/>
-<input type="text" name="m110r205" id="m110r205" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:754px; left:560px;"/>
-<input type="text" name="m110r206" id="m110r206" style="width:57px; top:754px; left:628px;"/>
-<input type="text" name="m110r207" id="m110r207" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:754px; left:696px;"/>
-<input type="text" name="m110r208" id="m110r208" style="width:68px; top:754px; left:775px;"/>
-<input type="text" name="m110r209" id="m110r209" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:754px; left:854px;"/>
-<input type="text" name="m110r212" id="m110r212" style="width:58px; top:777px; left:344px;"/>
-<input type="text" name="m110r213" id="m110r213" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:777px; left:413px;"/>
-<input type="text" name="m110r214" id="m110r214" style="width:68px; top:777px; left:481px;"/>
-<input type="text" name="m110r215" id="m110r215" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:777px; left:560px;"/>
-<input type="text" name="m110r216" id="m110r216" style="width:57px; top:777px; left:628px;"/>
-<input type="text" name="m110r217" id="m110r217" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:777px; left:696px;"/>
-<input type="text" name="m110r218" id="m110r218" style="width:68px; top:777px; left:775px;"/>
-<input type="text" name="m110r219" id="m110r219" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:777px; left:854px;"/>
-<input type="text" name="m110r222" id="m110r222" style="width:58px; top:800px; left:344px;"/>
-<input type="text" name="m110r224" id="m110r224" style="width:68px; top:800px; left:481px;"/>
-<input type="text" name="m110r226" id="m110r226" style="width:57px; top:800px; left:628px;"/>
-<input type="text" name="m110r228" id="m110r228" style="width:68px; top:800px; left:775px;"/>
-<input type="text" name="m110r232" id="m110r232" style="width:58px; top:823px; left:344px;"/>
-<input type="text" name="m110r234" id="m110r234" style="width:68px; top:823px; left:481px;"/>
-<input type="text" name="m110r236" id="m110r236" style="width:57px; top:823px; left:628px;"/>
-<input type="text" name="m110r238" id="m110r238" style="width:68px; top:823px; left:775px;"/>
-<input type="text" name="m110r242" id="m110r242" style="width:58px; top:846px; left:344px;"/>
-<input type="text" name="m110r243" id="m110r243" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:846px; left:413px;"/>
-<input type="text" name="m110r244" id="m110r244" style="width:68px; top:846px; left:481px;"/>
-<input type="text" name="m110r245" id="m110r245" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:846px; left:560px;"/>
-<input type="text" name="m110r246" id="m110r246" style="width:57px; top:846px; left:628px;"/>
-<input type="text" name="m110r247" id="m110r247" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:846px; left:696px;"/>
-<input type="text" name="m110r248" id="m110r248" style="width:68px; top:846px; left:775px;"/>
-<input type="text" name="m110r249" id="m110r249" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:846px; left:854px;"/>
-<input type="text" name="m110r252" id="m110r252" style="width:58px; top:869px; left:344px;"/>
-<input type="text" name="m110r253" id="m110r253" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:869px; left:413px;"/>
-<input type="text" name="m110r254" id="m110r254" style="width:68px; top:869px; left:481px;"/>
-<input type="text" name="m110r255" id="m110r255" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:869px; left:560px;"/>
-<input type="text" name="m110r256" id="m110r256" style="width:57px; top:869px; left:628px;"/>
-<input type="text" name="m110r257" id="m110r257" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:869px; left:696px;"/>
-<input type="text" name="m110r258" id="m110r258" style="width:68px; top:869px; left:775px;"/>
-<input type="text" name="m110r259" id="m110r259" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:869px; left:854px;"/>
-<input type="text" name="m110r262" id="m110r262" style="width:58px; top:892px; left:344px;"/>
-<input type="text" name="m110r263" id="m110r263" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:892px; left:413px;"/>
-<input type="text" name="m110r264" id="m110r264" style="width:68px; top:892px; left:481px;"/>
-<input type="text" name="m110r265" id="m110r265" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:892px; left:560px;"/>
-<input type="text" name="m110r266" id="m110r266" style="width:57px; top:892px; left:628px;"/>
-<input type="text" name="m110r267" id="m110r267" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:892px; left:696px;"/>
-<input type="text" name="m110r268" id="m110r268" style="width:68px; top:892px; left:775px;"/>
-<input type="text" name="m110r269" id="m110r269" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:892px; left:854px;"/>
-<input type="text" name="m110r272" id="m110r272" style="width:58px; top:915px; left:344px;"/>
-<input type="text" name="m110r273" id="m110r273" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:915px; left:413px;"/>
-<input type="text" name="m110r274" id="m110r274" style="width:68px; top:915px; left:481px;"/>
-<input type="text" name="m110r275" id="m110r275" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:915px; left:560px;"/>
-<input type="text" name="m110r276" id="m110r276" style="width:57px; top:915px; left:628px;"/>
-<input type="text" name="m110r277" id="m110r277" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:915px; left:696px;"/>
-<input type="text" name="m110r278" id="m110r278" style="width:68px; top:915px; left:775px;"/>
-<input type="text" name="m110r279" id="m110r279" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:915px; left:854px;"/>
-<input type="text" name="m110r282" id="m110r282" style="width:58px; top:938px; left:344px;"/>
-<input type="text" name="m110r283" id="m110r283" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:938px; left:413px;"/>
-<input type="text" name="m110r284" id="m110r284" style="width:68px; top:938px; left:481px;"/>
-<input type="text" name="m110r285" id="m110r285" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:938px; left:560px;"/>
-<input type="text" name="m110r286" id="m110r286" style="width:57px; top:938px; left:628px;"/>
-<input type="text" name="m110r287" id="m110r287" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:938px; left:696px;"/>
-<input type="text" name="m110r288" id="m110r288" style="width:68px; top:938px; left:775px;"/>
-<input type="text" name="m110r289" id="m110r289" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:938px; left:854px;"/>
-<input type="text" name="m110r292" id="m110r292" style="width:58px; top:961px; left:344px;"/>
-<input type="text" name="m110r293" id="m110r293" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:961px; left:413px;"/>
-<input type="text" name="m110r294" id="m110r294" style="width:68px; top:961px; left:481px;"/>
-<input type="text" name="m110r295" id="m110r295" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:961px; left:560px;"/>
-<input type="text" name="m110r296" id="m110r296" style="width:57px; top:961px; left:628px;"/>
-<input type="text" name="m110r297" id="m110r297" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:961px; left:696px;"/>
-<input type="text" name="m110r298" id="m110r298" style="width:68px; top:961px; left:775px;"/>
-<input type="text" name="m110r299" id="m110r299" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:961px; left:854px;"/>
-<input type="text" name="m110r302" id="m110r302" style="width:58px; top:984px; left:344px;"/>
-<input type="text" name="m110r303" id="m110r303" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:984px; left:413px;"/>
-<input type="text" name="m110r304" id="m110r304" style="width:68px; top:984px; left:481px;"/>
-<input type="text" name="m110r305" id="m110r305" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:984px; left:560px;"/>
-<input type="text" name="m110r306" id="m110r306" style="width:57px; top:984px; left:628px;"/>
-<input type="text" name="m110r307" id="m110r307" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:984px; left:696px;"/>
-<input type="text" name="m110r308" id="m110r308" style="width:68px; top:984px; left:775px;"/>
-<input type="text" name="m110r309" id="m110r309" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:984px; left:854px;"/>
-<input type="text" name="m110r312" id="m110r312" style="width:58px; top:1007px; left:344px;"/>
-<input type="text" name="m110r313" id="m110r313" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:1007px; left:413px;"/>
-<input type="text" name="m110r314" id="m110r314" style="width:68px; top:1007px; left:481px;"/>
-<input type="text" name="m110r315" id="m110r315" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1007px; left:560px;"/>
-<input type="text" name="m110r316" id="m110r316" style="width:57px; top:1007px; left:628px;"/>
-<input type="text" name="m110r317" id="m110r317" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:1007px; left:696px;"/>
-<input type="text" name="m110r318" id="m110r318" style="width:68px; top:1007px; left:775px;"/>
-<input type="text" name="m110r319" id="m110r319" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1007px; left:854px;"/>
-<input type="text" name="m110r322" id="m110r322" style="width:58px; top:1030px; left:344px;"/>
-<input type="text" name="m110r323" id="m110r323" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:1030px; left:413px;"/>
-<input type="text" name="m110r324" id="m110r324" style="width:68px; top:1030px; left:481px;"/>
-<input type="text" name="m110r325" id="m110r325" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1030px; left:560px;"/>
-<input type="text" name="m110r326" id="m110r326" style="width:57px; top:1030px; left:628px;"/>
-<input type="text" name="m110r327" id="m110r327" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:1030px; left:696px;"/>
-<input type="text" name="m110r328" id="m110r328" style="width:68px; top:1030px; left:775px;"/>
-<input type="text" name="m110r329" id="m110r329" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1030px; left:854px;"/>
-<input type="text" name="m110r332" id="m110r332" style="width:58px; top:1053px; left:344px;"/>
-<input type="text" name="m110r334" id="m110r334" style="width:68px; top:1053px; left:481px;"/>
-<input type="text" name="m110r336" id="m110r336" style="width:57px; top:1053px; left:628px;"/>
-<input type="text" name="m110r338" id="m110r338" style="width:68px; top:1053px; left:775px;"/>
-<input type="text" name="m110r342" id="m110r342" style="width:58px; top:1076px; left:344px;"/>
-<input type="text" name="m110r344" id="m110r344" style="width:68px; top:1076px; left:481px;"/>
-<input type="text" name="m110r346" id="m110r346" style="width:57px; top:1076px; left:628px;"/>
-<input type="text" name="m110r348" id="m110r348" style="width:68px; top:1076px; left:775px;"/>
-<span class="text-echo" style="top:1103px; right:544px;"><?php echo $m110r992; ?></span>
-<span class="text-echo" style="top:1103px; right:475px;"><?php echo $m110r993; ?></span>
-<span class="text-echo" style="top:1103px; right:395px;"><?php echo $m110r994; ?></span>
-<span class="text-echo" style="top:1103px; right:327px;"><?php echo $m110r995; ?></span>
-<span class="text-echo" style="top:1103px; right:260px;"><?php echo $m110r996; ?></span>
-<span class="text-echo" style="top:1103px; right:181px;"><?php echo $m110r997; ?></span>
-<span class="text-echo" style="top:1103px; right:102px;"><?php echo $m110r998; ?></span>
-<span class="text-echo" style="top:1103px; right:35px;"><?php echo $m110r999; ?></span>
-<?php                                        } ?>
-
-<div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
-
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
-</div>
-
-</FORM>
-</div> <!-- koniec #content -->
-<?php
-     }
-//koniec uprav
-?>
-
-
-<?php
-/////////////////////////////////////////////////VYTLAC VYKAZ
-if ( $copern == 11 )
-{
-if ( File_Exists("../tmp/statistika.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/statistika.$kli_uzid.pdf"); }
-     define('FPDF_FONTPATH','../fpdf/font/');
-     require('../fpdf/fpdf.php');
-
-$sirka_vyska="210,320";
-$velkost_strany = explode(",", $sirka_vyska);
-$pdf=new FPDF("P","mm", $velkost_strany );
-$pdf->Open();
-$pdf->AddFont('arial','','arial.php');
-
-//vytlac
-$sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_zav101 WHERE ico >= 0 "."";
-//echo $sqltt;
-//exit;
-
-$sql = mysql_query("$sqltt");
-$pol = mysql_num_rows($sql);
-
-$i=0;
-$j=0; //zaciatok strany ak by som chcel strankovat
-  while ($i <= $pol )
-  {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-{
-$hlavicka=mysql_fetch_object($sql);
-
-if ( $strana == 1 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,70," ","$rmc1",1,"L");
-$pdf->Cell(91,7," ","$rmc1",0,"L");
-$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
-$pdf->Cell(7,8,"$C","$rmc",0,"C");$pdf->Cell(8,8,"$D","$rmc",0,"C");
-$pdf->Cell(7,8,"$E","$rmc",0,"C");$pdf->Cell(8,8,"$F","$rmc",0,"C");
-$pdf->Cell(7,8,"$G","$rmc",0,"C");$pdf->Cell(8,8,"$H","$rmc",0,"C");
-//p.c.zav.jednotky
-$pc_zj="001";
-$A=substr($pc_zj,0,1);
-$B=substr($pc_zj,1,1);
-$C=substr($pc_zj,2,1);
-$pdf->Cell(10,8,"$A","$rmc",0,"C");$pdf->Cell(10,8,"$B","$rmc",0,"C");
-$pdf->Cell(10,8,"$C","$rmc",1,"C");
-
-//ORGANIZACIA
-$pdf->Cell(190,118," ","$rmc1",1,"L");
-$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,4,"$fir_fnaz","$rmc",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(153,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(34,4,"$okres","$rmc",1,"C");
-
-//VYPLNIL
-$pdf->Cell(195,14," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,5,"$fir_mzdt05","$rmc",0,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(43,11,"$fir_mzdt04","$rmc",1,"L");
-$pdf->Cell(195,3," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,6,"$fir_fem1","$rmc",0,"L");
-//odoslane
-$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(43,6,"$odoslane_sk","$rmc",1,"L");
-                                       }
-
-if ( $strana == 2 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 592
-$m592r11=$hlavicka->m592r11; if ( $m592r11 == 0 ) $m592r11="";
-$m592r12=$hlavicka->m592r12; if ( $m592r12 == 0 ) $m592r12="";
-$m592r13=$hlavicka->m592r13; if ( $m592r13 == 0 ) $m592r13="";
-$m592r14=$hlavicka->m592r14; if ( $m592r14 == 0 ) $m592r14="";
-$m592r15=$hlavicka->m592r15; if ( $m592r15 == 0 ) $m592r15="";
-$m592r16=$hlavicka->m592r16; if ( $m592r16 == 0 ) $m592r16="";
-$m592r21=$hlavicka->m592r21; if ( $m592r21 == 0 ) $m592r21="";
-$m592r22=$hlavicka->m592r22; if ( $m592r22 == 0 ) $m592r22="";
-$m592r23=$hlavicka->m592r23; if ( $m592r23 == 0 ) $m592r23="";
-$m592r24=$hlavicka->m592r24; if ( $m592r24 == 0 ) $m592r24="";
-$m592r25=$hlavicka->m592r25; if ( $m592r25 == 0 ) $m592r25="";
-$m592r26=$hlavicka->m592r26; if ( $m592r26 == 0 ) $m592r26="";
-$m592r31=$hlavicka->m592r31; if ( $m592r31 == 0 ) $m592r31="";
-$m592r32=$hlavicka->m592r32; if ( $m592r32 == 0 ) $m592r32="";
-$m592r33=$hlavicka->m592r33; if ( $m592r33 == 0 ) $m592r33="";
-$m592r34=$hlavicka->m592r34; if ( $m592r34 == 0 ) $m592r34="";
-$m592r35=$hlavicka->m592r35; if ( $m592r35 == 0 ) $m592r35="";
-$m592r36=$hlavicka->m592r36; if ( $m592r36 == 0 ) $m592r36="";
-$m592r41=$hlavicka->m592r41; if ( $m592r41 == 0 ) $m592r41="";
-$m592r42=$hlavicka->m592r42; if ( $m592r42 == 0 ) $m592r42="";
-$m592r43=$hlavicka->m592r43; if ( $m592r43 == 0 ) $m592r43="";
-$m592r44=$hlavicka->m592r44; if ( $m592r44 == 0 ) $m592r44="";
-$m592r45=$hlavicka->m592r45; if ( $m592r45 == 0 ) $m592r45="";
-$m592r46=$hlavicka->m592r46; if ( $m592r46 == 0 ) $m592r46="";
-$m592r51=$hlavicka->m592r51; if ( $m592r51 == 0 ) $m592r51="";
-$m592r52=$hlavicka->m592r52; if ( $m592r52 == 0 ) $m592r52="";
-$m592r53=$hlavicka->m592r53; if ( $m592r53 == 0 ) $m592r53="";
-$m592r54=$hlavicka->m592r54; if ( $m592r54 == 0 ) $m592r54="";
-$m592r55=$hlavicka->m592r55; if ( $m592r55 == 0 ) $m592r55="";
-$m592r56=$hlavicka->m592r56; if ( $m592r56 == 0 ) $m592r56="";
-$m592r61=$hlavicka->m592r61; if ( $m592r61 == 0 ) $m592r61="";
-$m592r62=$hlavicka->m592r62; if ( $m592r62 == 0 ) $m592r62="";
-$m592r63=$hlavicka->m592r63; if ( $m592r63 == 0 ) $m592r63="";
-$m592r64=$hlavicka->m592r64; if ( $m592r64 == 0 ) $m592r64="";
-$m592r65=$hlavicka->m592r65; if ( $m592r65 == 0 ) $m592r65="";
-$m592r66=$hlavicka->m592r66; if ( $m592r66 == 0 ) $m592r66="";
-$m592r71=$hlavicka->m592r71; if ( $m592r71 == 0 ) $m592r71="";
-$m592r72=$hlavicka->m592r72; if ( $m592r72 == 0 ) $m592r72="";
-$m592r73=$hlavicka->m592r73; if ( $m592r73 == 0 ) $m592r73="";
-$m592r74=$hlavicka->m592r74; if ( $m592r74 == 0 ) $m592r74="";
-$m592r75=$hlavicka->m592r75; if ( $m592r75 == 0 ) $m592r75="";
-$m592r76=$hlavicka->m592r76; if ( $m592r76 == 0 ) $m592r76="";
-$m592r81=$hlavicka->m592r81; if ( $m592r81 == 0 ) $m592r81="";
-$m592r82=$hlavicka->m592r82; if ( $m592r82 == 0 ) $m592r82="";
-$m592r83=$hlavicka->m592r83; if ( $m592r83 == 0 ) $m592r83="";
-$m592r84=$hlavicka->m592r84; if ( $m592r84 == 0 ) $m592r84="";
-$m592r85=$hlavicka->m592r85; if ( $m592r85 == 0 ) $m592r85="";
-$m592r86=$hlavicka->m592r86; if ( $m592r86 == 0 ) $m592r86="";
-$m592r91=$hlavicka->m592r91; if ( $m592r91 == 0 ) $m592r91="";
-$m592r92=$hlavicka->m592r92; if ( $m592r92 == 0 ) $m592r92="";
-$m592r93=$hlavicka->m592r93; if ( $m592r93 == 0 ) $m592r93="";
-$m592r94=$hlavicka->m592r94; if ( $m592r94 == 0 ) $m592r94="";
-$m592r95=$hlavicka->m592r95; if ( $m592r95 == 0 ) $m592r95="";
-$m592r96=$hlavicka->m592r96; if ( $m592r96 == 0 ) $m592r96="";
-$m592r101=$hlavicka->m592r101; if ( $m592r101 == 0 ) $m592r101="";
-$m592r102=$hlavicka->m592r102; if ( $m592r102 == 0 ) $m592r102="";
-$m592r103=$hlavicka->m592r103; if ( $m592r103 == 0 ) $m592r103="";
-$m592r104=$hlavicka->m592r104; if ( $m592r104 == 0 ) $m592r104="";
-$m592r105=$hlavicka->m592r105; if ( $m592r105 == 0 ) $m592r105="";
-$m592r106=$hlavicka->m592r106; if ( $m592r106 == 0 ) $m592r106="";
-$m592r111=$hlavicka->m592r111; if ( $m592r111 == 0 ) $m592r111="";
-$m592r112=$hlavicka->m592r112; if ( $m592r112 == 0 ) $m592r112="";
-$m592r113=$hlavicka->m592r113; if ( $m592r113 == 0 ) $m592r113="";
-$m592r114=$hlavicka->m592r114; if ( $m592r114 == 0 ) $m592r114="";
-$m592r115=$hlavicka->m592r115; if ( $m592r115 == 0 ) $m592r115="";
-$m592r116=$hlavicka->m592r116; if ( $m592r116 == 0 ) $m592r116="";
-$m592r121=$hlavicka->m592r121; if ( $m592r121 == 0 ) $m592r121="";
-$m592r122=$hlavicka->m592r122; if ( $m592r122 == 0 ) $m592r122="";
-$m592r123=$hlavicka->m592r123; if ( $m592r123 == 0 ) $m592r123="";
-$m592r124=$hlavicka->m592r124; if ( $m592r124 == 0 ) $m592r124="";
-$m592r125=$hlavicka->m592r125; if ( $m592r125 == 0 ) $m592r125="";
-$m592r126=$hlavicka->m592r126; if ( $m592r126 == 0 ) $m592r126="";
-$m592r131=$hlavicka->m592r131; if ( $m592r131 == 0 ) $m592r131="";
-$m592r132=$hlavicka->m592r132; if ( $m592r132 == 0 ) $m592r132="";
-$m592r133=$hlavicka->m592r133; if ( $m592r133 == 0 ) $m592r133="";
-$m592r134=$hlavicka->m592r134; if ( $m592r134 == 0 ) $m592r134="";
-$m592r135=$hlavicka->m592r135; if ( $m592r135 == 0 ) $m592r135="";
-$m592r136=$hlavicka->m592r136; if ( $m592r136 == 0 ) $m592r136="";
-$m592r141=$hlavicka->m592r141; if ( $m592r141 == 0 ) $m592r141="";
-$m592r142=$hlavicka->m592r142; if ( $m592r142 == 0 ) $m592r142="";
-$m592r143=$hlavicka->m592r143; if ( $m592r143 == 0 ) $m592r143="";
-$m592r144=$hlavicka->m592r144; if ( $m592r144 == 0 ) $m592r144="";
-$m592r145=$hlavicka->m592r145; if ( $m592r145 == 0 ) $m592r145="";
-$m592r146=$hlavicka->m592r146; if ( $m592r146 == 0 ) $m592r146="";
-$m592r151=$hlavicka->m592r151; if ( $m592r151 == 0 ) $m592r151="";
-$m592r152=$hlavicka->m592r152; if ( $m592r152 == 0 ) $m592r152="";
-$m592r153=$hlavicka->m592r153; if ( $m592r153 == 0 ) $m592r153="";
-$m592r154=$hlavicka->m592r154; if ( $m592r154 == 0 ) $m592r154="";
-$m592r155=$hlavicka->m592r155; if ( $m592r155 == 0 ) $m592r155="";
-$m592r156=$hlavicka->m592r156; if ( $m592r156 == 0 ) $m592r156="";
-$m592r161=$hlavicka->m592r161; if ( $m592r161 == 0 ) $m592r161="";
-$m592r162=$hlavicka->m592r162; if ( $m592r162 == 0 ) $m592r162="";
-$m592r163=$hlavicka->m592r163; if ( $m592r163 == 0 ) $m592r163="";
-$m592r164=$hlavicka->m592r164; if ( $m592r164 == 0 ) $m592r164="";
-$m592r165=$hlavicka->m592r165; if ( $m592r165 == 0 ) $m592r165="";
-$m592r166=$hlavicka->m592r166; if ( $m592r166 == 0 ) $m592r166="";
-$m592r171=$hlavicka->m592r171; if ( $m592r171 == 0 ) $m592r171="";
-$m592r172=$hlavicka->m592r172; if ( $m592r172 == 0 ) $m592r172="";
-$m592r173=$hlavicka->m592r173; if ( $m592r173 == 0 ) $m592r173="";
-$m592r174=$hlavicka->m592r174; if ( $m592r174 == 0 ) $m592r174="";
-$m592r175=$hlavicka->m592r175; if ( $m592r175 == 0 ) $m592r175="";
-$m592r176=$hlavicka->m592r176; if ( $m592r176 == 0 ) $m592r176="";
-$m592r181=$hlavicka->m592r181; if ( $m592r181 == 0 ) $m592r181="";
-$m592r182=$hlavicka->m592r182; if ( $m592r182 == 0 ) $m592r182="";
-$m592r183=$hlavicka->m592r183; if ( $m592r183 == 0 ) $m592r183="";
-$m592r184=$hlavicka->m592r184; if ( $m592r184 == 0 ) $m592r184="";
-$m592r185=$hlavicka->m592r185; if ( $m592r185 == 0 ) $m592r185="";
-$m592r186=$hlavicka->m592r186; if ( $m592r186 == 0 ) $m592r186="";
-$m592r191=$hlavicka->m592r191; if ( $m592r191 == 0 ) $m592r191="";
-$m592r192=$hlavicka->m592r192; if ( $m592r192 == 0 ) $m592r192="";
-$m592r193=$hlavicka->m592r193; if ( $m592r193 == 0 ) $m592r193="";
-$m592r194=$hlavicka->m592r194; if ( $m592r194 == 0 ) $m592r194="";
-$m592r195=$hlavicka->m592r195; if ( $m592r195 == 0 ) $m592r195="";
-$m592r196=$hlavicka->m592r196; if ( $m592r196 == 0 ) $m592r196="";
-$m592r201=$hlavicka->m592r201; if ( $m592r201 == 0 ) $m592r201="";
-$m592r202=$hlavicka->m592r202; if ( $m592r202 == 0 ) $m592r202="";
-$m592r203=$hlavicka->m592r203; if ( $m592r203 == 0 ) $m592r203="";
-$m592r204=$hlavicka->m592r204; if ( $m592r204 == 0 ) $m592r204="";
-$m592r205=$hlavicka->m592r205; if ( $m592r205 == 0 ) $m592r205="";
-$m592r206=$hlavicka->m592r206; if ( $m592r206 == 0 ) $m592r206="";
-$m592r211=$hlavicka->m592r211; if ( $m592r211 == 0 ) $m592r211="";
-$m592r212=$hlavicka->m592r212; if ( $m592r212 == 0 ) $m592r212="";
-$m592r213=$hlavicka->m592r213; if ( $m592r213 == 0 ) $m592r213="";
-$m592r214=$hlavicka->m592r214; if ( $m592r214 == 0 ) $m592r214="";
-$m592r215=$hlavicka->m592r215; if ( $m592r215 == 0 ) $m592r215="";
-$m592r216=$hlavicka->m592r216; if ( $m592r216 == 0 ) $m592r216="";
-$m592r221=$hlavicka->m592r221; if ( $m592r221 == 0 ) $m592r221="";
-$m592r222=$hlavicka->m592r222; if ( $m592r222 == 0 ) $m592r222="";
-$m592r223=$hlavicka->m592r223; if ( $m592r223 == 0 ) $m592r223="";
-$m592r224=$hlavicka->m592r224; if ( $m592r224 == 0 ) $m592r224="";
-$m592r225=$hlavicka->m592r225; if ( $m592r225 == 0 ) $m592r225="";
-$m592r226=$hlavicka->m592r226; if ( $m592r226 == 0 ) $m592r226="";
-$m592r231=$hlavicka->m592r231; if ( $m592r231 == 0 ) $m592r231="";
-$m592r232=$hlavicka->m592r232; if ( $m592r232 == 0 ) $m592r232="";
-$m592r233=$hlavicka->m592r233; if ( $m592r233 == 0 ) $m592r233="";
-$m592r234=$hlavicka->m592r234; if ( $m592r234 == 0 ) $m592r234="";
-$m592r235=$hlavicka->m592r235; if ( $m592r235 == 0 ) $m592r235="";
-$m592r236=$hlavicka->m592r236; if ( $m592r236 == 0 ) $m592r236="";
-$m592r241=$hlavicka->m592r241; if ( $m592r241 == 0 ) $m592r241="";
-$m592r242=$hlavicka->m592r242; if ( $m592r242 == 0 ) $m592r242="";
-$m592r243=$hlavicka->m592r243; if ( $m592r243 == 0 ) $m592r243="";
-$m592r244=$hlavicka->m592r244; if ( $m592r244 == 0 ) $m592r244="";
-$m592r245=$hlavicka->m592r245; if ( $m592r245 == 0 ) $m592r245="";
-$m592r246=$hlavicka->m592r246; if ( $m592r246 == 0 ) $m592r246="";
-$m592r251=$hlavicka->m592r251; if ( $m592r251 == 0 ) $m592r251="";
-$m592r252=$hlavicka->m592r252; if ( $m592r252 == 0 ) $m592r252="";
-$m592r253=$hlavicka->m592r253; if ( $m592r253 == 0 ) $m592r253="";
-$m592r254=$hlavicka->m592r254; if ( $m592r254 == 0 ) $m592r254="";
-$m592r255=$hlavicka->m592r255; if ( $m592r255 == 0 ) $m592r255="";
-$m592r256=$hlavicka->m592r256; if ( $m592r256 == 0 ) $m592r256="";
-$m592r992=$hlavicka->m592r992;
-//if ( $m592r992 == 0 ) $m592r992="";
-$m592r993=$hlavicka->m592r993;
-//if ( $m592r993 == 0 ) $m592r993="";
-$m592r994=$hlavicka->m592r994;
-//if ( $m592r994 == 0 ) $m592r994="";
-$m592r995=$hlavicka->m592r995;
-//if ( $m592r995 == 0 ) $m592r995="";
-$m592r996=$hlavicka->m592r996;
-//if ( $m592r996 == 0 ) $m592r996="";
-$pdf->Cell(195,58," ","$rmc1",1,"L");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,8,"$m592r11","$rmc",0,"R");$pdf->Cell(32,8,"$m592r12","$rmc",0,"R");
-$pdf->Cell(27,8,"$m592r13","$rmc",0,"R");$pdf->Cell(33,8,"$m592r14","$rmc",0,"R");
-$pdf->Cell(32,8,"$m592r15","$rmc",0,"R");$pdf->Cell(30,8,"$m592r16","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r21","$rmc",0,"R");$pdf->Cell(32,7,"$m592r22","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r23","$rmc",0,"R");$pdf->Cell(33,7,"$m592r24","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r25","$rmc",0,"R");$pdf->Cell(30,7,"$m592r26","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r31","$rmc",0,"R");$pdf->Cell(32,7,"$m592r32","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r33","$rmc",0,"R");$pdf->Cell(33,7,"$m592r34","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r35","$rmc",0,"R");$pdf->Cell(30,7,"$m592r36","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,8,"$m592r41","$rmc",0,"R");$pdf->Cell(32,8,"$m592r42","$rmc",0,"R");
-$pdf->Cell(27,8,"$m592r43","$rmc",0,"R");$pdf->Cell(33,8,"$m592r44","$rmc",0,"R");
-$pdf->Cell(32,8,"$m592r45","$rmc",0,"R");$pdf->Cell(30,8,"$m592r46","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r51","$rmc",0,"R");$pdf->Cell(32,7,"$m592r52","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r53","$rmc",0,"R");$pdf->Cell(33,7,"$m592r54","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r55","$rmc",0,"R");$pdf->Cell(30,7,"$m592r56","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r61","$rmc",0,"R");$pdf->Cell(32,7,"$m592r62","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r63","$rmc",0,"R");$pdf->Cell(33,7,"$m592r64","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r65","$rmc",0,"R");$pdf->Cell(30,7,"$m592r66","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r71","$rmc",0,"R");$pdf->Cell(32,7,"$m592r72","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r73","$rmc",0,"R");$pdf->Cell(33,7,"$m592r74","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r75","$rmc",0,"R");$pdf->Cell(30,7,"$m592r76","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,8,"$m592r81","$rmc",0,"R");$pdf->Cell(32,8,"$m592r82","$rmc",0,"R");
-$pdf->Cell(27,8,"$m592r83","$rmc",0,"R");$pdf->Cell(33,8,"$m592r84","$rmc",0,"R");
-$pdf->Cell(32,8,"$m592r85","$rmc",0,"R");$pdf->Cell(30,8,"$m592r86","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r91","$rmc",0,"R");$pdf->Cell(32,7,"$m592r92","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r93","$rmc",0,"R");$pdf->Cell(33,7,"$m592r94","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r95","$rmc",0,"R");$pdf->Cell(30,7,"$m592r96","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r101","$rmc",0,"R");$pdf->Cell(32,7,"$m592r102","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r103","$rmc",0,"R");$pdf->Cell(33,7,"$m592r104","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r105","$rmc",0,"R");$pdf->Cell(30,7,"$m592r106","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r111","$rmc",0,"R");$pdf->Cell(32,7,"$m592r112","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r113","$rmc",0,"R");$pdf->Cell(33,7,"$m592r114","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r115","$rmc",0,"R");$pdf->Cell(30,7,"$m592r116","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,8,"$m592r121","$rmc",0,"R");$pdf->Cell(32,8,"$m592r122","$rmc",0,"R");
-$pdf->Cell(27,8,"$m592r123","$rmc",0,"R");$pdf->Cell(33,8,"$m592r124","$rmc",0,"R");
-$pdf->Cell(32,8,"$m592r125","$rmc",0,"R");$pdf->Cell(30,8,"$m592r126","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r131","$rmc",0,"R");$pdf->Cell(32,7,"$m592r132","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r133","$rmc",0,"R");$pdf->Cell(33,7,"$m592r134","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r135","$rmc",0,"R");$pdf->Cell(30,7,"$m592r136","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r141","$rmc",0,"R");$pdf->Cell(32,7,"$m592r142","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r143","$rmc",0,"R");$pdf->Cell(33,7,"$m592r144","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r145","$rmc",0,"R");$pdf->Cell(30,7,"$m592r146","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,8,"$m592r151","$rmc",0,"R");$pdf->Cell(32,8,"$m592r152","$rmc",0,"R");
-$pdf->Cell(27,8,"$m592r153","$rmc",0,"R");$pdf->Cell(33,8,"$m592r154","$rmc",0,"R");
-$pdf->Cell(32,8,"$m592r155","$rmc",0,"R");$pdf->Cell(30,8,"$m592r156","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r161","$rmc",0,"R");$pdf->Cell(32,7,"$m592r162","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r163","$rmc",0,"R");$pdf->Cell(33,7,"$m592r164","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r165","$rmc",0,"R");$pdf->Cell(30,7,"$m592r166","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r171","$rmc",0,"R");$pdf->Cell(32,7,"$m592r172","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r173","$rmc",0,"R");$pdf->Cell(33,7,"$m592r174","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r175","$rmc",0,"R");$pdf->Cell(30,7,"$m592r176","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r181","$rmc",0,"R");$pdf->Cell(32,7,"$m592r182","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r183","$rmc",0,"R");$pdf->Cell(33,7,"$m592r184","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r185","$rmc",0,"R");$pdf->Cell(30,7,"$m592r186","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,8,"$m592r191","$rmc",0,"R");$pdf->Cell(32,8,"$m592r192","$rmc",0,"R");
-$pdf->Cell(27,8,"$m592r193","$rmc",0,"R");$pdf->Cell(33,8,"$m592r194","$rmc",0,"R");
-$pdf->Cell(32,8,"$m592r195","$rmc",0,"R");$pdf->Cell(30,8,"$m592r196","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r201","$rmc",0,"R");$pdf->Cell(32,7,"$m592r202","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r203","$rmc",0,"R");$pdf->Cell(33,7,"$m592r204","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r205","$rmc",0,"R");$pdf->Cell(30,7,"$m592r206","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r211","$rmc",0,"R");$pdf->Cell(32,7,"$m592r212","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r213","$rmc",0,"R");$pdf->Cell(33,7,"$m592r214","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r215","$rmc",0,"R");$pdf->Cell(30,7,"$m592r216","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r221","$rmc",0,"R");$pdf->Cell(32,7,"$m592r222","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r223","$rmc",0,"R");$pdf->Cell(33,7,"$m592r224","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r225","$rmc",0,"R");$pdf->Cell(30,7,"$m592r226","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,8,"$m592r231","$rmc",0,"R");$pdf->Cell(32,8,"$m592r232","$rmc",0,"R");
-$pdf->Cell(27,8,"$m592r233","$rmc",0,"R");$pdf->Cell(33,8,"$m592r234","$rmc",0,"R");
-$pdf->Cell(32,8,"$m592r235","$rmc",0,"R");$pdf->Cell(30,8,"$m592r236","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r241","$rmc",0,"R");$pdf->Cell(32,7,"$m592r242","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r243","$rmc",0,"R");$pdf->Cell(33,7,"$m592r244","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r245","$rmc",0,"R");$pdf->Cell(30,7,"$m592r246","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m592r251","$rmc",0,"R");$pdf->Cell(32,7,"$m592r252","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r253","$rmc",0,"R");$pdf->Cell(33,7,"$m592r254","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r255","$rmc",0,"R");$pdf->Cell(30,7,"$m592r256","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"","$rmc",0,"R");$pdf->Cell(32,7,"$m592r992","$rmc",0,"R");
-$pdf->Cell(27,7,"$m592r993","$rmc",0,"R");$pdf->Cell(33,7,"$m592r994","$rmc",0,"R");
-$pdf->Cell(32,7,"$m592r995","$rmc",0,"R");$pdf->Cell(30,7,"$m592r996","$rmc",1,"R");
-                                       }
-
-if ( $strana == 3 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str3.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 177
-$m177r1=$hlavicka->m177r1; if ( $m177r1 == 0 ) $m177r1="";
-$m177r2=$hlavicka->m177r2; if ( $m177r2 == 0 ) $m177r2="";
-$m177r3=$hlavicka->m177r3; if ( $m177r3 == 0 ) $m177r3="";
-$m177r4=$hlavicka->m177r4; if ( $m177r4 == 0 ) $m177r4="";
-$m177r5=$hlavicka->m177r5; if ( $m177r5 == 0 ) $m177r5="";
-$m177r6=$hlavicka->m177r6; if ( $m177r6 == 0 ) $m177r6="";
-$m177r7=$hlavicka->m177r7; if ( $m177r7 == 0 ) $m177r7="";
-$m177r8=$hlavicka->m177r8; if ( $m177r8 == 0 ) $m177r8="";
-$m177r9=$hlavicka->m177r9; if ( $m177r9 == 0 ) $m177r9="";
-$m177r10=$hlavicka->m177r10; if ( $m177r10 == 0 ) $m177r10="";
-$m177r99=$hlavicka->m177r99;
-//if ( $m177r99 == 0 ) $m177r99="";
-$pdf->Cell(195,22," ","$rmc1",1,"L");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r1","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,8,"$m177r2","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r3","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m177r4","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r5","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r6","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r7","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m177r8","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r9","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r10","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m177r99","$rmc",1,"R");
-
-//modul 178
-$m178r1=$hlavicka->m178r1; if ( $m178r1 == 0 ) $m178r1="";
-$m178r2=$hlavicka->m178r2; if ( $m178r2 == 0 ) $m178r2="";
-$m178r3=$hlavicka->m178r3; if ( $m178r3 == 0 ) $m178r3="";
-$m178r4=$hlavicka->m178r4; if ( $m178r4 == 0 ) $m178r4="";
-$m178r5=$hlavicka->m178r5; if ( $m178r5 == 0 ) $m178r5="";
-$m178r6=$hlavicka->m178r6; if ( $m178r6 == 0 ) $m178r6="";
-$m178r7=$hlavicka->m178r7; if ( $m178r7 == 0 ) $m178r7="";
-$m178r8=$hlavicka->m178r8; if ( $m178r8 == 0 ) $m178r8="";
-$m178r9=$hlavicka->m178r9; if ( $m178r9 == 0 ) $m178r9="";
-$m178r10=$hlavicka->m178r10; if ( $m178r10 == 0 ) $m178r10="";
-$m178r11=$hlavicka->m178r11; if ( $m178r11 == 0 ) $m178r11="";
-$m178r12=$hlavicka->m178r12; if ( $m178r12 == 0 ) $m178r12="";
-$m178r13=$hlavicka->m178r13; if ( $m178r13 == 0 ) $m178r13="";
-$m178r14=$hlavicka->m178r14; if ( $m178r14 == 0 ) $m178r14="";
-$m178r15=$hlavicka->m178r15; if ( $m178r15 == 0 ) $m178r15="";
-$m178r16=$hlavicka->m178r16; if ( $m178r16 == 0 ) $m178r16="";
-$m178r17=$hlavicka->m178r17; if ( $m178r17 == 0 ) $m178r17="";
-$m178r18=$hlavicka->m178r18; if ( $m178r18 == 0 ) $m178r18="";
-$m178r19=$hlavicka->m178r19; if ( $m178r19 == 0 ) $m178r19="";
-$m178r99=$hlavicka->m178r99;
-//if ( $m178r99 == 0 ) $m178r99="";
-$pdf->Cell(195,38," ","$rmc1",1,"L");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r1","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r2","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,12,"$m178r3","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r4","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r5","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r6","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r7","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,8,"$m178r8","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r9","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m178r10","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r11","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r12","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r13","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m178r14","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r15","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r16","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r17","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r18","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,5,"$m178r19","$rmc",1,"R");
-$pdf->Cell(138,5," ","$rmc1",0,"R");$pdf->Cell(49,6,"$m178r99","$rmc",1,"R");
-                                       }
-
-if ( $strana == 4 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str4.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str4.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,5," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 179
-$m179r1=$hlavicka->m179r1; if ( $m179r1 == 0 ) $m179r1="";
-$m179r2=$hlavicka->m179r2; if ( $m179r2 == 0 ) $m179r2="";
-$m179r3=$hlavicka->m179r3; if ( $m179r3 == 0 ) $m179r3="";
-$m179r4=$hlavicka->m179r4; if ( $m179r4 == 0 ) $m179r4="";
-$m179r5=$hlavicka->m179r5; if ( $m179r5 == 0 ) $m179r5="";
-$m179r6=$hlavicka->m179r6; if ( $m179r6 == 0 ) $m179r6="";
-$m179r7=$hlavicka->m179r7; if ( $m179r7 == 0 ) $m179r7="";
-$m179r8=$hlavicka->m179r8; if ( $m179r8 == 0 ) $m179r8="";
-$m179r9=$hlavicka->m179r9; if ( $m179r9 == 0 ) $m179r9="";
-$m179r99=$hlavicka->m179r99;
-//if ( $m179r99 == 0 ) $m179r99="";
-$pdf->Cell(195,33," ","$rmc1",1,"L");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,9,"$m179r1","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,8,"$m179r2","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,8,"$m179r3","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r4","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,8,"$m179r5","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r6","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r7","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r8","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,8,"$m179r9","$rmc",1,"R");
-$pdf->Cell(128,5," ","$rmc1",0,"R");$pdf->Cell(60,7,"$m179r99","$rmc",1,"R");
-                                       }
-
-if ( $strana == 5 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str5.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(94,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 182
-$m182r11=$hlavicka->m182r11; if ( $m182r11 == 0 ) $m182r11="";
-$m182r12=$hlavicka->m182r12; if ( $m182r12 == 0 ) $m182r12="";
-$m182r13=$hlavicka->m182r13; if ( $m182r13 == 0 ) $m182r13="";
-$m182r14=$hlavicka->m182r14; if ( $m182r14 == 0 ) $m182r14="";
-$m182r15=$hlavicka->m182r15; if ( $m182r15 == 0 ) $m182r15="";
-$m182r16=$hlavicka->m182r16; if ( $m182r16 == 0 ) $m182r16="";
-$m182r17=$hlavicka->m182r17; if ( $m182r17 == 0 ) $m182r17="";
-$m182r21=$hlavicka->m182r21; if ( $m182r21 == 0 ) $m182r21="";
-$m182r22=$hlavicka->m182r22; if ( $m182r22 == 0 ) $m182r22="";
-$m182r23=$hlavicka->m182r23; if ( $m182r23 == 0 ) $m182r23="";
-$m182r24=$hlavicka->m182r24; if ( $m182r24 == 0 ) $m182r24="";
-$m182r25=$hlavicka->m182r25; if ( $m182r25 == 0 ) $m182r25="";
-$m182r26=$hlavicka->m182r26; if ( $m182r26 == 0 ) $m182r26="";
-$m182r27=$hlavicka->m182r27; if ( $m182r27 == 0 ) $m182r27="";
-$m182r31=$hlavicka->m182r31; if ( $m182r31 == 0 ) $m182r31="";
-$m182r32=$hlavicka->m182r32; if ( $m182r32 == 0 ) $m182r32="";
-$m182r33=$hlavicka->m182r33; if ( $m182r33 == 0 ) $m182r33="";
-$m182r34=$hlavicka->m182r34; if ( $m182r34 == 0 ) $m182r34="";
-$m182r35=$hlavicka->m182r35; if ( $m182r35 == 0 ) $m182r35="";
-$m182r36=$hlavicka->m182r36; if ( $m182r36 == 0 ) $m182r36="";
-$m182r37=$hlavicka->m182r37; if ( $m182r37 == 0 ) $m182r37="";
-$m182r41=$hlavicka->m182r41; if ( $m182r41 == 0 ) $m182r41="";
-$m182r42=$hlavicka->m182r42; if ( $m182r42 == 0 ) $m182r42="";
-$m182r43=$hlavicka->m182r43; if ( $m182r43 == 0 ) $m182r43="";
-$m182r44=$hlavicka->m182r44; if ( $m182r44 == 0 ) $m182r44="";
-$m182r45=$hlavicka->m182r45; if ( $m182r45 == 0 ) $m182r45="";
-$m182r46=$hlavicka->m182r46; if ( $m182r46 == 0 ) $m182r46="";
-$m182r47=$hlavicka->m182r47; if ( $m182r47 == 0 ) $m182r47="";
-$m182r51=$hlavicka->m182r51; if ( $m182r51 == 0 ) $m182r51="";
-$m182r52=$hlavicka->m182r52; if ( $m182r52 == 0 ) $m182r52="";
-$m182r53=$hlavicka->m182r53; if ( $m182r53 == 0 ) $m182r53="";
-$m182r54=$hlavicka->m182r54; if ( $m182r54 == 0 ) $m182r54="";
-$m182r55=$hlavicka->m182r55; if ( $m182r55 == 0 ) $m182r55="";
-$m182r56=$hlavicka->m182r56; if ( $m182r56 == 0 ) $m182r56="";
-$m182r57=$hlavicka->m182r57; if ( $m182r57 == 0 ) $m182r57="";
-$m182r61=$hlavicka->m182r61; if ( $m182r61 == 0 ) $m182r61="";
-$m182r62=$hlavicka->m182r62; if ( $m182r62 == 0 ) $m182r62="";
-$m182r63=$hlavicka->m182r63; if ( $m182r63 == 0 ) $m182r63="";
-$m182r64=$hlavicka->m182r64; if ( $m182r64 == 0 ) $m182r64="";
-$m182r65=$hlavicka->m182r65; if ( $m182r65 == 0 ) $m182r65="";
-$m182r66=$hlavicka->m182r66; if ( $m182r66 == 0 ) $m182r66="";
-$m182r67=$hlavicka->m182r67; if ( $m182r67 == 0 ) $m182r67="";
-$m182r71=$hlavicka->m182r71; if ( $m182r71 == 0 ) $m182r71="";
-$m182r72=$hlavicka->m182r72; if ( $m182r72 == 0 ) $m182r72="";
-$m182r73=$hlavicka->m182r73; if ( $m182r73 == 0 ) $m182r73="";
-$m182r74=$hlavicka->m182r74; if ( $m182r74 == 0 ) $m182r74="";
-$m182r75=$hlavicka->m182r75; if ( $m182r75 == 0 ) $m182r75="";
-$m182r76=$hlavicka->m182r76; if ( $m182r76 == 0 ) $m182r76="";
-$m182r77=$hlavicka->m182r77; if ( $m182r77 == 0 ) $m182r77="";
-$m182r81=$hlavicka->m182r81; if ( $m182r81 == 0 ) $m182r81="";
-$m182r82=$hlavicka->m182r82; if ( $m182r82 == 0 ) $m182r82="";
-$m182r83=$hlavicka->m182r83; if ( $m182r83 == 0 ) $m182r83="";
-$m182r84=$hlavicka->m182r84; if ( $m182r84 == 0 ) $m182r84="";
-$m182r85=$hlavicka->m182r85; if ( $m182r85 == 0 ) $m182r85="";
-$m182r86=$hlavicka->m182r86; if ( $m182r86 == 0 ) $m182r86="";
-$m182r87=$hlavicka->m182r87; if ( $m182r87 == 0 ) $m182r87="";
-$m182r91=$hlavicka->m182r91; if ( $m182r91 == 0 ) $m182r91="";
-$m182r92=$hlavicka->m182r92; if ( $m182r92 == 0 ) $m182r92="";
-$m182r93=$hlavicka->m182r93; if ( $m182r93 == 0 ) $m182r93="";
-$m182r94=$hlavicka->m182r94; if ( $m182r94 == 0 ) $m182r94="";
-$m182r95=$hlavicka->m182r95; if ( $m182r95 == 0 ) $m182r95="";
-$m182r96=$hlavicka->m182r96; if ( $m182r96 == 0 ) $m182r96="";
-$m182r97=$hlavicka->m182r97; if ( $m182r97 == 0 ) $m182r97="";
-$m182r101=$hlavicka->m182r101; if ( $m182r101 == 0 ) $m182r101="";
-$m182r102=$hlavicka->m182r102; if ( $m182r102 == 0 ) $m182r102="";
-$m182r103=$hlavicka->m182r103; if ( $m182r103 == 0 ) $m182r103="";
-$m182r104=$hlavicka->m182r104; if ( $m182r104 == 0 ) $m182r104="";
-$m182r105=$hlavicka->m182r105; if ( $m182r105 == 0 ) $m182r105="";
-$m182r106=$hlavicka->m182r106; if ( $m182r106 == 0 ) $m182r106="";
-$m182r107=$hlavicka->m182r107; if ( $m182r107 == 0 ) $m182r107="";
-$m182r111=$hlavicka->m182r111; if ( $m182r111 == 0 ) $m182r111="";
-$m182r112=$hlavicka->m182r112; if ( $m182r112 == 0 ) $m182r112="";
-$m182r113=$hlavicka->m182r113; if ( $m182r113 == 0 ) $m182r113="";
-$m182r114=$hlavicka->m182r114; if ( $m182r114 == 0 ) $m182r114="";
-$m182r115=$hlavicka->m182r115; if ( $m182r115 == 0 ) $m182r115="";
-$m182r116=$hlavicka->m182r116; if ( $m182r116 == 0 ) $m182r116="";
-$m182r117=$hlavicka->m182r117; if ( $m182r117 == 0 ) $m182r117="";
-$m182r121=$hlavicka->m182r121; if ( $m182r121 == 0 ) $m182r121="";
-$m182r122=$hlavicka->m182r122; if ( $m182r122 == 0 ) $m182r122="";
-$m182r123=$hlavicka->m182r123; if ( $m182r123 == 0 ) $m182r123="";
-$m182r124=$hlavicka->m182r124; if ( $m182r124 == 0 ) $m182r124="";
-$m182r125=$hlavicka->m182r125; if ( $m182r125 == 0 ) $m182r125="";
-$m182r126=$hlavicka->m182r126; if ( $m182r126 == 0 ) $m182r126="";
-$m182r127=$hlavicka->m182r127; if ( $m182r127 == 0 ) $m182r127="";
-$m182r131=$hlavicka->m182r131; if ( $m182r131 == 0 ) $m182r131="";
-$m182r132=$hlavicka->m182r132; if ( $m182r132 == 0 ) $m182r132="";
-$m182r133=$hlavicka->m182r133; if ( $m182r133 == 0 ) $m182r133="";
-$m182r134=$hlavicka->m182r134; if ( $m182r134 == 0 ) $m182r134="";
-$m182r135=$hlavicka->m182r135; if ( $m182r135 == 0 ) $m182r135="";
-$m182r136=$hlavicka->m182r136; if ( $m182r136 == 0 ) $m182r136="";
-$m182r137=$hlavicka->m182r137; if ( $m182r137 == 0 ) $m182r137="";
-$m182r141=$hlavicka->m182r141; if ( $m182r141 == 0 ) $m182r141="";
-$m182r142=$hlavicka->m182r142; if ( $m182r142 == 0 ) $m182r142="";
-$m182r143=$hlavicka->m182r143; if ( $m182r143 == 0 ) $m182r143="";
-$m182r144=$hlavicka->m182r144; if ( $m182r144 == 0 ) $m182r144="";
-$m182r145=$hlavicka->m182r145; if ( $m182r145 == 0 ) $m182r145="";
-$m182r146=$hlavicka->m182r146; if ( $m182r146 == 0 ) $m182r146="";
-$m182r147=$hlavicka->m182r147; if ( $m182r147 == 0 ) $m182r147="";
-$m182r151=$hlavicka->m182r151; if ( $m182r151 == 0 ) $m182r151="";
-$m182r152=$hlavicka->m182r152; if ( $m182r152 == 0 ) $m182r152="";
-$m182r153=$hlavicka->m182r153; if ( $m182r153 == 0 ) $m182r153="";
-$m182r154=$hlavicka->m182r154; if ( $m182r154 == 0 ) $m182r154="";
-$m182r155=$hlavicka->m182r155; if ( $m182r155 == 0 ) $m182r155="";
-$m182r156=$hlavicka->m182r156; if ( $m182r156 == 0 ) $m182r156="";
-$m182r157=$hlavicka->m182r157; if ( $m182r157 == 0 ) $m182r157="";
-$m182r161=$hlavicka->m182r161; if ( $m182r161 == 0 ) $m182r161="";
-$m182r162=$hlavicka->m182r162; if ( $m182r162 == 0 ) $m182r162="";
-$m182r163=$hlavicka->m182r163; if ( $m182r163 == 0 ) $m182r163="";
-$m182r164=$hlavicka->m182r164; if ( $m182r164 == 0 ) $m182r164="";
-$m182r165=$hlavicka->m182r165; if ( $m182r165 == 0 ) $m182r165="";
-$m182r166=$hlavicka->m182r166; if ( $m182r166 == 0 ) $m182r166="";
-$m182r167=$hlavicka->m182r167; if ( $m182r167 == 0 ) $m182r167="";
-$m182r171=$hlavicka->m182r171; if ( $m182r171 == 0 ) $m182r171="";
-$m182r172=$hlavicka->m182r172; if ( $m182r172 == 0 ) $m182r172="";
-$m182r173=$hlavicka->m182r173; if ( $m182r173 == 0 ) $m182r173="";
-$m182r174=$hlavicka->m182r174; if ( $m182r174 == 0 ) $m182r174="";
-$m182r175=$hlavicka->m182r175; if ( $m182r175 == 0 ) $m182r175="";
-$m182r176=$hlavicka->m182r176; if ( $m182r176 == 0 ) $m182r176="";
-$m182r177=$hlavicka->m182r177; if ( $m182r177 == 0 ) $m182r177="";
-$m182r181=$hlavicka->m182r181; if ( $m182r181 == 0 ) $m182r181="";
-$m182r182=$hlavicka->m182r182; if ( $m182r182 == 0 ) $m182r182="";
-$m182r183=$hlavicka->m182r183; if ( $m182r183 == 0 ) $m182r183="";
-$m182r184=$hlavicka->m182r184; if ( $m182r184 == 0 ) $m182r184="";
-$m182r185=$hlavicka->m182r185; if ( $m182r185 == 0 ) $m182r185="";
-$m182r186=$hlavicka->m182r186; if ( $m182r186 == 0 ) $m182r186="";
-$m182r187=$hlavicka->m182r187; if ( $m182r187 == 0 ) $m182r187="";
-$m182r191=$hlavicka->m182r191; if ( $m182r191 == 0 ) $m182r191="";
-$m182r192=$hlavicka->m182r192; if ( $m182r192 == 0 ) $m182r192="";
-$m182r193=$hlavicka->m182r193; if ( $m182r193 == 0 ) $m182r193="";
-$m182r194=$hlavicka->m182r194; if ( $m182r194 == 0 ) $m182r194="";
-$m182r195=$hlavicka->m182r195; if ( $m182r195 == 0 ) $m182r195="";
-$m182r196=$hlavicka->m182r196; if ( $m182r196 == 0 ) $m182r196="";
-$m182r197=$hlavicka->m182r197; if ( $m182r197 == 0 ) $m182r197="";
-$m182r201=$hlavicka->m182r201; if ( $m182r201 == 0 ) $m182r201="";
-$m182r202=$hlavicka->m182r202; if ( $m182r202 == 0 ) $m182r202="";
-$m182r203=$hlavicka->m182r203; if ( $m182r203 == 0 ) $m182r203="";
-$m182r204=$hlavicka->m182r204; if ( $m182r204 == 0 ) $m182r204="";
-$m182r205=$hlavicka->m182r205; if ( $m182r205 == 0 ) $m182r205="";
-$m182r206=$hlavicka->m182r206; if ( $m182r206 == 0 ) $m182r206="";
-$m182r207=$hlavicka->m182r207; if ( $m182r207 == 0 ) $m182r207="";
-$m182r211=$hlavicka->m182r211; if ( $m182r211 == 0 ) $m182r211="";
-$m182r212=$hlavicka->m182r212; if ( $m182r212 == 0 ) $m182r212="";
-$m182r213=$hlavicka->m182r213; if ( $m182r213 == 0 ) $m182r213="";
-$m182r214=$hlavicka->m182r214; if ( $m182r214 == 0 ) $m182r214="";
-$m182r215=$hlavicka->m182r215; if ( $m182r215 == 0 ) $m182r215="";
-$m182r216=$hlavicka->m182r216; if ( $m182r216 == 0 ) $m182r216="";
-$m182r217=$hlavicka->m182r217; if ( $m182r217 == 0 ) $m182r217="";
-$m182r221=$hlavicka->m182r221; if ( $m182r221 == 0 ) $m182r221="";
-$m182r222=$hlavicka->m182r222; if ( $m182r222 == 0 ) $m182r222="";
-$m182r223=$hlavicka->m182r223; if ( $m182r223 == 0 ) $m182r223="";
-$m182r224=$hlavicka->m182r224; if ( $m182r224 == 0 ) $m182r224="";
-$m182r225=$hlavicka->m182r225; if ( $m182r225 == 0 ) $m182r225="";
-$m182r226=$hlavicka->m182r226; if ( $m182r226 == 0 ) $m182r226="";
-$m182r227=$hlavicka->m182r227; if ( $m182r227 == 0 ) $m182r227="";
-$m182r231=$hlavicka->m182r231; if ( $m182r231 == 0 ) $m182r231="";
-$m182r232=$hlavicka->m182r232; if ( $m182r232 == 0 ) $m182r232="";
-$m182r233=$hlavicka->m182r233; if ( $m182r233 == 0 ) $m182r233="";
-$m182r234=$hlavicka->m182r234; if ( $m182r234 == 0 ) $m182r234="";
-$m182r235=$hlavicka->m182r235; if ( $m182r235 == 0 ) $m182r235="";
-$m182r236=$hlavicka->m182r236; if ( $m182r236 == 0 ) $m182r236="";
-$m182r237=$hlavicka->m182r237; if ( $m182r237 == 0 ) $m182r237="";
-$m182r241=$hlavicka->m182r241; if ( $m182r241 == 0 ) $m182r241="";
-$m182r242=$hlavicka->m182r242; if ( $m182r242 == 0 ) $m182r242="";
-$m182r243=$hlavicka->m182r243; if ( $m182r243 == 0 ) $m182r243="";
-$m182r244=$hlavicka->m182r244; if ( $m182r244 == 0 ) $m182r244="";
-$m182r245=$hlavicka->m182r245; if ( $m182r245 == 0 ) $m182r245="";
-$m182r246=$hlavicka->m182r246; if ( $m182r246 == 0 ) $m182r246="";
-$m182r247=$hlavicka->m182r247; if ( $m182r247 == 0 ) $m182r247="";
-$m182r251=$hlavicka->m182r251; if ( $m182r251 == 0 ) $m182r251="";
-$m182r252=$hlavicka->m182r252; if ( $m182r252 == 0 ) $m182r252="";
-$m182r253=$hlavicka->m182r253; if ( $m182r253 == 0 ) $m182r253="";
-$m182r254=$hlavicka->m182r254; if ( $m182r254 == 0 ) $m182r254="";
-$m182r255=$hlavicka->m182r255; if ( $m182r255 == 0 ) $m182r255="";
-$m182r256=$hlavicka->m182r256; if ( $m182r256 == 0 ) $m182r256="";
-$m182r257=$hlavicka->m182r257; if ( $m182r257 == 0 ) $m182r257="";
-$m182r261=$hlavicka->m182r261; if ( $m182r261 == 0 ) $m182r261="";
-$m182r262=$hlavicka->m182r262; if ( $m182r262 == 0 ) $m182r262="";
-$m182r263=$hlavicka->m182r263; if ( $m182r263 == 0 ) $m182r263="";
-$m182r264=$hlavicka->m182r264; if ( $m182r264 == 0 ) $m182r264="";
-$m182r265=$hlavicka->m182r265; if ( $m182r265 == 0 ) $m182r265="";
-$m182r266=$hlavicka->m182r266; if ( $m182r266 == 0 ) $m182r266="";
-$m182r267=$hlavicka->m182r267; if ( $m182r267 == 0 ) $m182r267="";
-$m182r271=$hlavicka->m182r271; if ( $m182r271 == 0 ) $m182r271="";
-$m182r272=$hlavicka->m182r272; if ( $m182r272 == 0 ) $m182r272="";
-$m182r273=$hlavicka->m182r273; if ( $m182r273 == 0 ) $m182r273="";
-$m182r274=$hlavicka->m182r274; if ( $m182r274 == 0 ) $m182r274="";
-$m182r275=$hlavicka->m182r275; if ( $m182r275 == 0 ) $m182r275="";
-$m182r276=$hlavicka->m182r276; if ( $m182r276 == 0 ) $m182r276="";
-$m182r277=$hlavicka->m182r277; if ( $m182r277 == 0 ) $m182r277="";
-$m182r281=$hlavicka->m182r281; if ( $m182r281 == 0 ) $m182r281="";
-$m182r282=$hlavicka->m182r282; if ( $m182r282 == 0 ) $m182r282="";
-$m182r283=$hlavicka->m182r283; if ( $m182r283 == 0 ) $m182r283="";
-$m182r284=$hlavicka->m182r284; if ( $m182r284 == 0 ) $m182r284="";
-$m182r285=$hlavicka->m182r285; if ( $m182r285 == 0 ) $m182r285="";
-$m182r286=$hlavicka->m182r286; if ( $m182r286 == 0 ) $m182r286="";
-$m182r287=$hlavicka->m182r287; if ( $m182r287 == 0 ) $m182r287="";
-$m182r291=$hlavicka->m182r291; if ( $m182r291 == 0 ) $m182r291="";
-$m182r292=$hlavicka->m182r292; if ( $m182r292 == 0 ) $m182r292="";
-$m182r293=$hlavicka->m182r293; if ( $m182r293 == 0 ) $m182r293="";
-$m182r294=$hlavicka->m182r294; if ( $m182r294 == 0 ) $m182r294="";
-$m182r295=$hlavicka->m182r295; if ( $m182r295 == 0 ) $m182r295="";
-$m182r296=$hlavicka->m182r296; if ( $m182r296 == 0 ) $m182r296="";
-$m182r297=$hlavicka->m182r297; if ( $m182r297 == 0 ) $m182r297="";
-$m182r301=$hlavicka->m182r301; if ( $m182r301 == 0 ) $m182r301="";
-$m182r302=$hlavicka->m182r302; if ( $m182r302 == 0 ) $m182r302="";
-$m182r303=$hlavicka->m182r303; if ( $m182r303 == 0 ) $m182r303="";
-$m182r304=$hlavicka->m182r304; if ( $m182r304 == 0 ) $m182r304="";
-$m182r305=$hlavicka->m182r305; if ( $m182r305 == 0 ) $m182r305="";
-$m182r306=$hlavicka->m182r306; if ( $m182r306 == 0 ) $m182r306="";
-$m182r307=$hlavicka->m182r307; if ( $m182r307 == 0 ) $m182r307="";
-$m182r311=$hlavicka->m182r311; if ( $m182r311 == 0 ) $m182r311="";
-$m182r312=$hlavicka->m182r312; if ( $m182r312 == 0 ) $m182r312="";
-$m182r313=$hlavicka->m182r313; if ( $m182r313 == 0 ) $m182r313="";
-$m182r314=$hlavicka->m182r314; if ( $m182r314 == 0 ) $m182r314="";
-$m182r315=$hlavicka->m182r315; if ( $m182r315 == 0 ) $m182r315="";
-$m182r316=$hlavicka->m182r316; if ( $m182r316 == 0 ) $m182r316="";
-$m182r317=$hlavicka->m182r317; if ( $m182r317 == 0 ) $m182r317="";
-$m182r321=$hlavicka->m182r321; if ( $m182r321 == 0 ) $m182r321="";
-$m182r322=$hlavicka->m182r322; if ( $m182r322 == 0 ) $m182r322="";
-$m182r323=$hlavicka->m182r323; if ( $m182r323 == 0 ) $m182r323="";
-$m182r324=$hlavicka->m182r324; if ( $m182r324 == 0 ) $m182r324="";
-$m182r325=$hlavicka->m182r325; if ( $m182r325 == 0 ) $m182r325="";
-$m182r326=$hlavicka->m182r326; if ( $m182r326 == 0 ) $m182r326="";
-$m182r327=$hlavicka->m182r327; if ( $m182r327 == 0 ) $m182r327="";
-$m182r331=$hlavicka->m182r331; if ( $m182r331 == 0 ) $m182r331="";
-$m182r332=$hlavicka->m182r332; if ( $m182r332 == 0 ) $m182r332="";
-$m182r333=$hlavicka->m182r333; if ( $m182r333 == 0 ) $m182r333="";
-$m182r334=$hlavicka->m182r334; if ( $m182r334 == 0 ) $m182r334="";
-$m182r335=$hlavicka->m182r335; if ( $m182r335 == 0 ) $m182r335="";
-$m182r336=$hlavicka->m182r336; if ( $m182r336 == 0 ) $m182r336="";
-$m182r337=$hlavicka->m182r337; if ( $m182r337 == 0 ) $m182r337="";
-$m182r992=$hlavicka->m182r992;
-//if ( $m182r992 == 0 ) $m182r992="";
-$m182r993=$hlavicka->m182r993;
-//if ( $m182r993 == 0 ) $m182r993="";
-$m182r994=$hlavicka->m182r994;
-//if ( $m182r994 == 0 ) $m182r994="";
-$m182r995=$hlavicka->m182r995;
-//if ( $m182r995 == 0 ) $m182r995="";
-$m182r996=$hlavicka->m182r996;
-//if ( $m182r996 == 0 ) $m182r996="";
-$m182r997=$hlavicka->m182r997;
-//if ( $m182r997 == 0 ) $m182r997="";
-$pdf->Cell(195,45," ","$rmc1",1,"L");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r11","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r12","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r13","$rmc",0,"R");$pdf->Cell(31,6,"$m182r14","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r15","$rmc",0,"R");$pdf->Cell(25,6,"$m182r16","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r17","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r21","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r22","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r23","$rmc",0,"R");$pdf->Cell(31,6,"$m182r24","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r25","$rmc",0,"R");$pdf->Cell(25,6,"$m182r26","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r27","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r31","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r32","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r33","$rmc",0,"R");$pdf->Cell(31,6,"$m182r34","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r35","$rmc",0,"R");$pdf->Cell(25,6,"$m182r36","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r37","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,7,"$m182r41","$rmc",0,"R");$pdf->Cell(25.5,7,"$m182r42","$rmc",0,"R");
-$pdf->Cell(25,7,"$m182r43","$rmc",0,"R");$pdf->Cell(31,7,"$m182r44","$rmc",0,"R");
-$pdf->Cell(25,7,"$m182r45","$rmc",0,"R");$pdf->Cell(25,7,"$m182r46","$rmc",0,"R");
-$pdf->Cell(25,7,"$m182r47","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r51","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r52","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r53","$rmc",0,"R");$pdf->Cell(31,6,"$m182r54","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r55","$rmc",0,"R");$pdf->Cell(25,6,"$m182r56","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r57","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r61","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r62","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r63","$rmc",0,"R");$pdf->Cell(31,6,"$m182r64","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r65","$rmc",0,"R");$pdf->Cell(25,6,"$m182r66","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r67","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r71","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r72","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r73","$rmc",0,"R");$pdf->Cell(31,6,"$m182r74","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r75","$rmc",0,"R");$pdf->Cell(25,6,"$m182r76","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r77","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r81","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r82","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r83","$rmc",0,"R");$pdf->Cell(31,6,"$m182r84","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r85","$rmc",0,"R");$pdf->Cell(25,6,"$m182r86","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r87","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r91","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r92","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r93","$rmc",0,"R");$pdf->Cell(31,6,"$m182r94","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r95","$rmc",0,"R");$pdf->Cell(25,6,"$m182r96","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r97","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r101","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r102","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r103","$rmc",0,"R");$pdf->Cell(31,6,"$m182r104","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r105","$rmc",0,"R");$pdf->Cell(25,6,"$m182r106","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r107","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r111","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r112","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r113","$rmc",0,"R");$pdf->Cell(31,6,"$m182r114","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r115","$rmc",0,"R");$pdf->Cell(25,6,"$m182r116","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r117","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r121","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r122","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r123","$rmc",0,"R");$pdf->Cell(31,6,"$m182r124","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r125","$rmc",0,"R");$pdf->Cell(25,6,"$m182r126","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r127","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r131","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r132","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r133","$rmc",0,"R");$pdf->Cell(31,6,"$m182r134","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r135","$rmc",0,"R");$pdf->Cell(25,6,"$m182r136","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r137","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r141","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r142","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r143","$rmc",0,"R");$pdf->Cell(31,6,"$m182r144","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r145","$rmc",0,"R");$pdf->Cell(25,6,"$m182r146","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r147","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r151","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r152","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r153","$rmc",0,"R");$pdf->Cell(31,6,"$m182r154","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r155","$rmc",0,"R");$pdf->Cell(25,6,"$m182r156","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r157","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r161","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r162","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r163","$rmc",0,"R");$pdf->Cell(31,6,"$m182r164","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r165","$rmc",0,"R");$pdf->Cell(25,6,"$m182r166","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r167","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r171","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r172","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r173","$rmc",0,"R");$pdf->Cell(31,6,"$m182r174","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r175","$rmc",0,"R");$pdf->Cell(25,6,"$m182r176","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r177","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,7,"$m182r181","$rmc",0,"R");$pdf->Cell(25.5,7,"$m182r182","$rmc",0,"R");
-$pdf->Cell(25,7,"$m182r183","$rmc",0,"R");$pdf->Cell(31,7,"$m182r184","$rmc",0,"R");
-$pdf->Cell(25,7,"$m182r185","$rmc",0,"R");$pdf->Cell(25,7,"$m182r186","$rmc",0,"R");
-$pdf->Cell(25,7,"$m182r187","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r191","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r192","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r193","$rmc",0,"R");$pdf->Cell(31,6,"$m182r194","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r195","$rmc",0,"R");$pdf->Cell(25,6,"$m182r196","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r197","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r201","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r202","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r203","$rmc",0,"R");$pdf->Cell(31,6,"$m182r204","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r205","$rmc",0,"R");$pdf->Cell(25,6,"$m182r206","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r207","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r211","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r212","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r213","$rmc",0,"R");$pdf->Cell(31,6,"$m182r214","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r215","$rmc",0,"R");$pdf->Cell(25,6,"$m182r216","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r217","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r221","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r222","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r223","$rmc",0,"R");$pdf->Cell(31,6,"$m182r224","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r225","$rmc",0,"R");$pdf->Cell(25,6,"$m182r226","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r227","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r231","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r232","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r233","$rmc",0,"R");$pdf->Cell(31,6,"$m182r234","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r235","$rmc",0,"R");$pdf->Cell(25,6,"$m182r236","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r237","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r241","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r242","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r243","$rmc",0,"R");$pdf->Cell(31,6,"$m182r244","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r245","$rmc",0,"R");$pdf->Cell(25,6,"$m182r246","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r247","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r251","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r252","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r253","$rmc",0,"R");$pdf->Cell(31,6,"$m182r254","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r255","$rmc",0,"R");$pdf->Cell(25,6,"$m182r256","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r257","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r261","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r262","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r263","$rmc",0,"R");$pdf->Cell(31,6,"$m182r264","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r265","$rmc",0,"R");$pdf->Cell(25,6,"$m182r266","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r267","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r271","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r272","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r273","$rmc",0,"R");$pdf->Cell(31,6,"$m182r274","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r275","$rmc",0,"R");$pdf->Cell(25,6,"$m182r276","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r277","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r281","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r282","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r283","$rmc",0,"R");$pdf->Cell(31,6,"$m182r284","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r285","$rmc",0,"R");$pdf->Cell(25,6,"$m182r286","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r287","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r291","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r292","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r293","$rmc",0,"R");$pdf->Cell(31,6,"$m182r294","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r295","$rmc",0,"R");$pdf->Cell(25,6,"$m182r296","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r297","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r301","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r302","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r303","$rmc",0,"R");$pdf->Cell(31,6,"$m182r304","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r305","$rmc",0,"R");$pdf->Cell(25,6,"$m182r306","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r307","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r311","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r312","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r313","$rmc",0,"R");$pdf->Cell(31,6,"$m182r314","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r315","$rmc",0,"R");$pdf->Cell(25,6,"$m182r316","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r317","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r321","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r322","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r323","$rmc",0,"R");$pdf->Cell(31,6,"$m182r324","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r325","$rmc",0,"R");$pdf->Cell(25,6,"$m182r326","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r327","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6,"$m182r331","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r332","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r333","$rmc",0,"R");$pdf->Cell(31,6,"$m182r334","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r335","$rmc",0,"R");$pdf->Cell(25,6,"$m182r336","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r337","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(25,6," ","$rmc",0,"R");$pdf->Cell(25.5,6,"$m182r992","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r993","$rmc",0,"R");$pdf->Cell(31,6,"$m182r994","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r995","$rmc",0,"R");$pdf->Cell(25,6,"$m182r996","$rmc",0,"R");
-$pdf->Cell(25,6,"$m182r997","$rmc",1,"R");
-                                       }
-
-if ( $strana == 6 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str6.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str6.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,5," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-
-//modul 183
-$m183r11=$hlavicka->m183r11; if ( $m183r11 == 0 ) $m183r11="";
-$m183r12=$hlavicka->m183r12; if ( $m183r12 == 0 ) $m183r12="";
-$m183r13=$hlavicka->m183r13; if ( $m183r13 == 0 ) $m183r13="";
-$m183r14=$hlavicka->m183r14; if ( $m183r14 == 0 ) $m183r14="";
-$m183r21=$hlavicka->m183r21; if ( $m183r21 == 0 ) $m183r21="";
-$m183r22=$hlavicka->m183r22; if ( $m183r22 == 0 ) $m183r22="";
-$m183r23=$hlavicka->m183r23; if ( $m183r23 == 0 ) $m183r23="";
-$m183r24=$hlavicka->m183r24; if ( $m183r24 == 0 ) $m183r24="";
-$m183r31=$hlavicka->m183r31; if ( $m183r31 == 0 ) $m183r31="";
-$m183r32=$hlavicka->m183r32; if ( $m183r32 == 0 ) $m183r32="";
-$m183r33=$hlavicka->m183r33; if ( $m183r33 == 0 ) $m183r33="";
-$m183r34=$hlavicka->m183r34; if ( $m183r34 == 0 ) $m183r34="";
-$m183r41=$hlavicka->m183r41; if ( $m183r41 == 0 ) $m183r41="";
-$m183r42=$hlavicka->m183r42; if ( $m183r42 == 0 ) $m183r42="";
-$m183r43=$hlavicka->m183r43; if ( $m183r43 == 0 ) $m183r43="";
-$m183r44=$hlavicka->m183r44; if ( $m183r44 == 0 ) $m183r44="";
-$m183r51=$hlavicka->m183r51; if ( $m183r51 == 0 ) $m183r51="";
-$m183r52=$hlavicka->m183r52; if ( $m183r52 == 0 ) $m183r52="";
-$m183r53=$hlavicka->m183r53; if ( $m183r53 == 0 ) $m183r53="";
-$m183r54=$hlavicka->m183r54; if ( $m183r54 == 0 ) $m183r54="";
-$m183r61=$hlavicka->m183r61; if ( $m183r61 == 0 ) $m183r61="";
-$m183r62=$hlavicka->m183r62; if ( $m183r62 == 0 ) $m183r62="";
-$m183r63=$hlavicka->m183r63; if ( $m183r63 == 0 ) $m183r63="";
-$m183r64=$hlavicka->m183r64; if ( $m183r64 == 0 ) $m183r64="";
-$m183r71=$hlavicka->m183r71; if ( $m183r71 == 0 ) $m183r71="";
-$m183r72=$hlavicka->m183r72; if ( $m183r72 == 0 ) $m183r72="";
-$m183r73=$hlavicka->m183r73; if ( $m183r73 == 0 ) $m183r73="";
-$m183r74=$hlavicka->m183r74; if ( $m183r74 == 0 ) $m183r74="";
-$m183r81=$hlavicka->m183r81; if ( $m183r81 == 0 ) $m183r81="";
-$m183r82=$hlavicka->m183r82; if ( $m183r82 == 0 ) $m183r82="";
-$m183r83=$hlavicka->m183r83; if ( $m183r83 == 0 ) $m183r83="";
-$m183r84=$hlavicka->m183r84; if ( $m183r84 == 0 ) $m183r84="";
-$m183r91=$hlavicka->m183r91; if ( $m183r91 == 0 ) $m183r91="";
-$m183r92=$hlavicka->m183r92; if ( $m183r92 == 0 ) $m183r92="";
-$m183r93=$hlavicka->m183r93; if ( $m183r93 == 0 ) $m183r93="";
-$m183r94=$hlavicka->m183r94; if ( $m183r94 == 0 ) $m183r94="";
-$m183r101=$hlavicka->m183r101; if ( $m183r101 == 0 ) $m183r101="";
-$m183r102=$hlavicka->m183r102; if ( $m183r102 == 0 ) $m183r102="";
-$m183r103=$hlavicka->m183r103; if ( $m183r103 == 0 ) $m183r103="";
-$m183r104=$hlavicka->m183r104; if ( $m183r104 == 0 ) $m183r104="";
-$m183r111=$hlavicka->m183r111; if ( $m183r111 == 0 ) $m183r111="";
-$m183r112=$hlavicka->m183r112; if ( $m183r112 == 0 ) $m183r112="";
-$m183r113=$hlavicka->m183r113; if ( $m183r113 == 0 ) $m183r113="";
-$m183r114=$hlavicka->m183r114; if ( $m183r114 == 0 ) $m183r114="";
-$m183r121=$hlavicka->m183r121; if ( $m183r121 == 0 ) $m183r121="";
-$m183r122=$hlavicka->m183r122; if ( $m183r122 == 0 ) $m183r122="";
-$m183r123=$hlavicka->m183r123; if ( $m183r123 == 0 ) $m183r123="";
-$m183r124=$hlavicka->m183r124; if ( $m183r124 == 0 ) $m183r124="";
-$m183r131=$hlavicka->m183r131; if ( $m183r131 == 0 ) $m183r131="";
-$m183r132=$hlavicka->m183r132; if ( $m183r132 == 0 ) $m183r132="";
-$m183r133=$hlavicka->m183r133; if ( $m183r133 == 0 ) $m183r133="";
-$m183r134=$hlavicka->m183r134; if ( $m183r134 == 0 ) $m183r134="";
-$m183r141=$hlavicka->m183r141; if ( $m183r141 == 0 ) $m183r141="";
-$m183r142=$hlavicka->m183r142; if ( $m183r142 == 0 ) $m183r142="";
-$m183r143=$hlavicka->m183r143; if ( $m183r143 == 0 ) $m183r143="";
-$m183r144=$hlavicka->m183r144; if ( $m183r144 == 0 ) $m183r144="";
-$m183r151=$hlavicka->m183r151; if ( $m183r151 == 0 ) $m183r151="";
-$m183r152=$hlavicka->m183r152; if ( $m183r152 == 0 ) $m183r152="";
-$m183r153=$hlavicka->m183r153; if ( $m183r153 == 0 ) $m183r153="";
-$m183r154=$hlavicka->m183r154; if ( $m183r154 == 0 ) $m183r154="";
-$m183r161=$hlavicka->m183r161; if ( $m183r161 == 0 ) $m183r161="";
-$m183r162=$hlavicka->m183r162; if ( $m183r162 == 0 ) $m183r162="";
-$m183r163=$hlavicka->m183r163; if ( $m183r163 == 0 ) $m183r163="";
-$m183r164=$hlavicka->m183r164; if ( $m183r164 == 0 ) $m183r164="";
-$m183r171=$hlavicka->m183r171; if ( $m183r171 == 0 ) $m183r171="";
-$m183r172=$hlavicka->m183r172; if ( $m183r172 == 0 ) $m183r172="";
-$m183r173=$hlavicka->m183r173; if ( $m183r173 == 0 ) $m183r173="";
-$m183r174=$hlavicka->m183r174; if ( $m183r174 == 0 ) $m183r174="";
-$m183r181=$hlavicka->m183r181; if ( $m183r181 == 0 ) $m183r181="";
-$m183r182=$hlavicka->m183r182; if ( $m183r182 == 0 ) $m183r182="";
-$m183r183=$hlavicka->m183r183; if ( $m183r183 == 0 ) $m183r183="";
-$m183r184=$hlavicka->m183r184; if ( $m183r184 == 0 ) $m183r184="";
-$m183r191=$hlavicka->m183r191; if ( $m183r191 == 0 ) $m183r191="";
-$m183r192=$hlavicka->m183r192; if ( $m183r192 == 0 ) $m183r192="";
-$m183r193=$hlavicka->m183r193; if ( $m183r193 == 0 ) $m183r193="";
-$m183r194=$hlavicka->m183r194; if ( $m183r194 == 0 ) $m183r194="";
-$m183r201=$hlavicka->m183r201; if ( $m183r201 == 0 ) $m183r201="";
-$m183r202=$hlavicka->m183r202; if ( $m183r202 == 0 ) $m183r202="";
-$m183r203=$hlavicka->m183r203; if ( $m183r203 == 0 ) $m183r203="";
-$m183r204=$hlavicka->m183r204; if ( $m183r204 == 0 ) $m183r204="";
-$m183r211=$hlavicka->m183r211; if ( $m183r211 == 0 ) $m183r211="";
-$m183r212=$hlavicka->m183r212; if ( $m183r212 == 0 ) $m183r212="";
-$m183r213=$hlavicka->m183r213; if ( $m183r213 == 0 ) $m183r213="";
-$m183r214=$hlavicka->m183r214; if ( $m183r214 == 0 ) $m183r214="";
-$m183r221=$hlavicka->m183r221; if ( $m183r221 == 0 ) $m183r221="";
-$m183r222=$hlavicka->m183r222; if ( $m183r222 == 0 ) $m183r222="";
-$m183r223=$hlavicka->m183r223; if ( $m183r223 == 0 ) $m183r223="";
-$m183r224=$hlavicka->m183r224; if ( $m183r224 == 0 ) $m183r224="";
-$m183r231=$hlavicka->m183r231; if ( $m183r231 == 0 ) $m183r231="";
-$m183r232=$hlavicka->m183r232; if ( $m183r232 == 0 ) $m183r232="";
-$m183r233=$hlavicka->m183r233; if ( $m183r233 == 0 ) $m183r233="";
-$m183r234=$hlavicka->m183r234; if ( $m183r234 == 0 ) $m183r234="";
-$m183r241=$hlavicka->m183r241; if ( $m183r241 == 0 ) $m183r241="";
-$m183r242=$hlavicka->m183r242; if ( $m183r242 == 0 ) $m183r242="";
-$m183r243=$hlavicka->m183r243; if ( $m183r243 == 0 ) $m183r243="";
-$m183r244=$hlavicka->m183r244; if ( $m183r244 == 0 ) $m183r244="";
-$m183r251=$hlavicka->m183r251; if ( $m183r251 == 0 ) $m183r251="";
-$m183r252=$hlavicka->m183r252; if ( $m183r252 == 0 ) $m183r252="";
-$m183r253=$hlavicka->m183r253; if ( $m183r253 == 0 ) $m183r253="";
-$m183r254=$hlavicka->m183r254; if ( $m183r254 == 0 ) $m183r254="";
-$m183r261=$hlavicka->m183r261; if ( $m183r261 == 0 ) $m183r261="";
-$m183r262=$hlavicka->m183r262; if ( $m183r262 == 0 ) $m183r262="";
-$m183r263=$hlavicka->m183r263; if ( $m183r263 == 0 ) $m183r263="";
-$m183r264=$hlavicka->m183r264; if ( $m183r264 == 0 ) $m183r264="";
-$m183r271=$hlavicka->m183r271; if ( $m183r271 == 0 ) $m183r271="";
-$m183r272=$hlavicka->m183r272; if ( $m183r272 == 0 ) $m183r272="";
-$m183r273=$hlavicka->m183r273; if ( $m183r273 == 0 ) $m183r273="";
-$m183r274=$hlavicka->m183r274; if ( $m183r274 == 0 ) $m183r274="";
-$m183r281=$hlavicka->m183r281; if ( $m183r281 == 0 ) $m183r281="";
-$m183r282=$hlavicka->m183r282; if ( $m183r282 == 0 ) $m183r282="";
-$m183r283=$hlavicka->m183r283; if ( $m183r283 == 0 ) $m183r283="";
-$m183r284=$hlavicka->m183r284; if ( $m183r284 == 0 ) $m183r284="";
-$m183r291=$hlavicka->m183r291; if ( $m183r291 == 0 ) $m183r291="";
-$m183r292=$hlavicka->m183r292; if ( $m183r292 == 0 ) $m183r292="";
-$m183r293=$hlavicka->m183r293; if ( $m183r293 == 0 ) $m183r293="";
-$m183r294=$hlavicka->m183r294; if ( $m183r294 == 0 ) $m183r294="";
-$m183r301=$hlavicka->m183r301; if ( $m183r301 == 0 ) $m183r301="";
-$m183r302=$hlavicka->m183r302; if ( $m183r302 == 0 ) $m183r302="";
-$m183r303=$hlavicka->m183r303; if ( $m183r303 == 0 ) $m183r303="";
-$m183r304=$hlavicka->m183r304; if ( $m183r304 == 0 ) $m183r304="";
-$m183r992=$hlavicka->m183r992;
-//if ( $m183r992 == 0 ) $m183r992="";
-$m183r993=$hlavicka->m183r993;
-//if ( $m183r993 == 0 ) $m183r993="";
-$m183r994=$hlavicka->m183r994;
-//if ( $m183r994 == 0 ) $m183r994="";
-$pdf->Cell(195,45.5," ","$rmc1",1,"L");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"$m183r11","$rmc",0,"R");$pdf->Cell(33,7,"$m183r12","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r13","$rmc",0,"R");$pdf->Cell(80,7,"$m183r14","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r21","$rmc",0,"R");$pdf->Cell(33,6,"$m183r22","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r23","$rmc",0,"R");$pdf->Cell(80,6,"$m183r24","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r31","$rmc",0,"R");$pdf->Cell(33,6,"$m183r32","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r33","$rmc",0,"R");$pdf->Cell(80,6,"$m183r34","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"$m183r41","$rmc",0,"R");$pdf->Cell(33,7,"$m183r42","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r43","$rmc",0,"R");$pdf->Cell(80,7,"$m183r44","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r51","$rmc",0,"R");$pdf->Cell(33,6,"$m183r52","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r53","$rmc",0,"R");$pdf->Cell(80,6,"$m183r54","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"$m183r61","$rmc",0,"R");$pdf->Cell(33,7,"$m183r62","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r63","$rmc",0,"R");$pdf->Cell(80,7,"$m183r64","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r71","$rmc",0,"R");$pdf->Cell(33,6,"$m183r72","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r73","$rmc",0,"R");$pdf->Cell(80,6,"$m183r74","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r81","$rmc",0,"R");$pdf->Cell(33,6,"$m183r82","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r83","$rmc",0,"R");$pdf->Cell(80,6,"$m183r84","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r91","$rmc",0,"R");$pdf->Cell(33,6,"$m183r92","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r93","$rmc",0,"R");$pdf->Cell(80,6,"$m183r94","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r101","$rmc",0,"R");$pdf->Cell(33,6,"$m183r102","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r103","$rmc",0,"R");$pdf->Cell(80,6,"$m183r104","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r111","$rmc",0,"R");$pdf->Cell(33,6,"$m183r112","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r113","$rmc",0,"R");$pdf->Cell(80,6,"$m183r114","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"$m183r121","$rmc",0,"R");$pdf->Cell(33,7,"$m183r122","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r123","$rmc",0,"R");$pdf->Cell(80,7,"$m183r124","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r131","$rmc",0,"R");$pdf->Cell(33,6,"$m183r132","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r133","$rmc",0,"R");$pdf->Cell(80,6,"$m183r134","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r141","$rmc",0,"R");$pdf->Cell(33,6,"$m183r142","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r143","$rmc",0,"R");$pdf->Cell(80,6,"$m183r144","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"$m183r151","$rmc",0,"R");$pdf->Cell(33,7,"$m183r152","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r153","$rmc",0,"R");$pdf->Cell(80,7,"$m183r154","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r161","$rmc",0,"R");$pdf->Cell(33,6,"$m183r162","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r163","$rmc",0,"R");$pdf->Cell(80,6,"$m183r164","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r171","$rmc",0,"R");$pdf->Cell(33,6,"$m183r172","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r173","$rmc",0,"R");$pdf->Cell(80,6,"$m183r174","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r181","$rmc",0,"R");$pdf->Cell(33,6,"$m183r182","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r183","$rmc",0,"R");$pdf->Cell(80,6,"$m183r184","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"$m183r191","$rmc",0,"R");$pdf->Cell(33,7,"$m183r192","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r193","$rmc",0,"R");$pdf->Cell(80,7,"$m183r194","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r201","$rmc",0,"R");$pdf->Cell(33,6,"$m183r202","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r203","$rmc",0,"R");$pdf->Cell(80,6,"$m183r204","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r211","$rmc",0,"R");$pdf->Cell(33,6,"$m183r212","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r213","$rmc",0,"R");$pdf->Cell(80,6,"$m183r214","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r221","$rmc",0,"R");$pdf->Cell(33,6,"$m183r222","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r223","$rmc",0,"R");$pdf->Cell(80,6,"$m183r224","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"$m183r231","$rmc",0,"R");$pdf->Cell(33,7,"$m183r232","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r233","$rmc",0,"R");$pdf->Cell(80,7,"$m183r234","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r241","$rmc",0,"R");$pdf->Cell(33,6,"$m183r242","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r243","$rmc",0,"R");$pdf->Cell(80,6,"$m183r244","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r251","$rmc",0,"R");$pdf->Cell(33,6,"$m183r252","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r253","$rmc",0,"R");$pdf->Cell(80,6,"$m183r254","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r261","$rmc",0,"R");$pdf->Cell(33,6,"$m183r262","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r263","$rmc",0,"R");$pdf->Cell(80,6,"$m183r264","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"$m183r271","$rmc",0,"R");$pdf->Cell(33,7,"$m183r272","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r273","$rmc",0,"R");$pdf->Cell(80,7,"$m183r274","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r281","$rmc",0,"R");$pdf->Cell(33,6,"$m183r282","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r283","$rmc",0,"R");$pdf->Cell(80,6,"$m183r284","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r291","$rmc",0,"R");$pdf->Cell(33,6,"$m183r292","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r293","$rmc",0,"R");$pdf->Cell(80,6,"$m183r294","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,6,"$m183r301","$rmc",0,"R");$pdf->Cell(33,6,"$m183r302","$rmc",0,"R");
-$pdf->Cell(33,6,"$m183r303","$rmc",0,"R");$pdf->Cell(80,6,"$m183r304","$rmc",1,"R");
-$pdf->Cell(9,4," ","$rmc1",0,"L");
-$pdf->Cell(33,7,"","$rmc",0,"R");$pdf->Cell(33,7,"$m183r992","$rmc",0,"R");
-$pdf->Cell(33,7,"$m183r993","$rmc",0,"R");$pdf->Cell(80,7,"$m183r994","$rmc",1,"R");
-                                       }
-
-if ( $strana == 7 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str7.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str7.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,5," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 184
-$m184r11=$hlavicka->m184r11; if ( $m184r11 == 0 ) $m184r11="";
-$m184r12=$hlavicka->m184r12; if ( $m184r12 == 0 ) $m184r12="";
-$m184r13=$hlavicka->m184r13; if ( $m184r13 == 0 ) $m184r13="";
-$m184r14=$hlavicka->m184r14; if ( $m184r14 == 0 ) $m184r14="";
-$m184r15=$hlavicka->m184r15; if ( $m184r15 == 0 ) $m184r15="";
-$m184r16=$hlavicka->m184r16; if ( $m184r16 == 0 ) $m184r16="";
-$m184r21=$hlavicka->m184r21; if ( $m184r21 == 0 ) $m184r21="";
-$m184r22=$hlavicka->m184r22; if ( $m184r22 == 0 ) $m184r22="";
-$m184r23=$hlavicka->m184r23; if ( $m184r23 == 0 ) $m184r23="";
-$m184r24=$hlavicka->m184r24; if ( $m184r24 == 0 ) $m184r24="";
-$m184r25=$hlavicka->m184r25; if ( $m184r25 == 0 ) $m184r25="";
-$m184r26=$hlavicka->m184r26; if ( $m184r26 == 0 ) $m184r26="";
-$m184r31=$hlavicka->m184r31; if ( $m184r31 == 0 ) $m184r31="";
-$m184r32=$hlavicka->m184r32; if ( $m184r32 == 0 ) $m184r32="";
-$m184r33=$hlavicka->m184r33; if ( $m184r33 == 0 ) $m184r33="";
-$m184r34=$hlavicka->m184r34; if ( $m184r34 == 0 ) $m184r34="";
-$m184r35=$hlavicka->m184r35; if ( $m184r35 == 0 ) $m184r35="";
-$m184r36=$hlavicka->m184r36; if ( $m184r36 == 0 ) $m184r36="";
-$m184r41=$hlavicka->m184r41; if ( $m184r41 == 0 ) $m184r41="";
-$m184r42=$hlavicka->m184r42; if ( $m184r42 == 0 ) $m184r42="";
-$m184r43=$hlavicka->m184r43; if ( $m184r43 == 0 ) $m184r43="";
-$m184r44=$hlavicka->m184r44; if ( $m184r44 == 0 ) $m184r44="";
-$m184r45=$hlavicka->m184r45; if ( $m184r45 == 0 ) $m184r45="";
-$m184r46=$hlavicka->m184r46; if ( $m184r46 == 0 ) $m184r46="";
-$m184r51=$hlavicka->m184r51; if ( $m184r51 == 0 ) $m184r51="";
-$m184r52=$hlavicka->m184r52; if ( $m184r52 == 0 ) $m184r52="";
-$m184r53=$hlavicka->m184r53; if ( $m184r53 == 0 ) $m184r53="";
-$m184r54=$hlavicka->m184r54; if ( $m184r54 == 0 ) $m184r54="";
-$m184r55=$hlavicka->m184r55; if ( $m184r55 == 0 ) $m184r55="";
-$m184r56=$hlavicka->m184r56; if ( $m184r56 == 0 ) $m184r56="";
-$m184r61=$hlavicka->m184r61; if ( $m184r61 == 0 ) $m184r61="";
-$m184r62=$hlavicka->m184r62; if ( $m184r62 == 0 ) $m184r62="";
-$m184r63=$hlavicka->m184r63; if ( $m184r63 == 0 ) $m184r63="";
-$m184r64=$hlavicka->m184r64; if ( $m184r64 == 0 ) $m184r64="";
-$m184r65=$hlavicka->m184r65; if ( $m184r65 == 0 ) $m184r65="";
-$m184r66=$hlavicka->m184r66; if ( $m184r66 == 0 ) $m184r66="";
-$m184r71=$hlavicka->m184r71; if ( $m184r71 == 0 ) $m184r71="";
-$m184r72=$hlavicka->m184r72; if ( $m184r72 == 0 ) $m184r72="";
-$m184r73=$hlavicka->m184r73; if ( $m184r73 == 0 ) $m184r73="";
-$m184r74=$hlavicka->m184r74; if ( $m184r74 == 0 ) $m184r74="";
-$m184r75=$hlavicka->m184r75; if ( $m184r75 == 0 ) $m184r75="";
-$m184r76=$hlavicka->m184r76; if ( $m184r76 == 0 ) $m184r76="";
-$m184r81=$hlavicka->m184r81; if ( $m184r81 == 0 ) $m184r81="";
-$m184r82=$hlavicka->m184r82; if ( $m184r82 == 0 ) $m184r82="";
-$m184r83=$hlavicka->m184r83; if ( $m184r83 == 0 ) $m184r83="";
-$m184r84=$hlavicka->m184r84; if ( $m184r84 == 0 ) $m184r84="";
-$m184r85=$hlavicka->m184r85; if ( $m184r85 == 0 ) $m184r85="";
-$m184r86=$hlavicka->m184r86; if ( $m184r86 == 0 ) $m184r86="";
-$m184r91=$hlavicka->m184r91; if ( $m184r91 == 0 ) $m184r91="";
-$m184r92=$hlavicka->m184r92; if ( $m184r92 == 0 ) $m184r92="";
-$m184r93=$hlavicka->m184r93; if ( $m184r93 == 0 ) $m184r93="";
-$m184r94=$hlavicka->m184r94; if ( $m184r94 == 0 ) $m184r94="";
-$m184r95=$hlavicka->m184r95; if ( $m184r95 == 0 ) $m184r95="";
-$m184r96=$hlavicka->m184r96; if ( $m184r96 == 0 ) $m184r96="";
-$m184r101=$hlavicka->m184r101; if ( $m184r101 == 0 ) $m184r101="";
-$m184r102=$hlavicka->m184r102; if ( $m184r102 == 0 ) $m184r102="";
-$m184r103=$hlavicka->m184r103; if ( $m184r103 == 0 ) $m184r103="";
-$m184r104=$hlavicka->m184r104; if ( $m184r104 == 0 ) $m184r104="";
-$m184r105=$hlavicka->m184r105; if ( $m184r105 == 0 ) $m184r105="";
-$m184r106=$hlavicka->m184r106; if ( $m184r106 == 0 ) $m184r106="";
-$m184r111=$hlavicka->m184r111; if ( $m184r111 == 0 ) $m184r111="";
-$m184r112=$hlavicka->m184r112; if ( $m184r112 == 0 ) $m184r112="";
-$m184r113=$hlavicka->m184r113; if ( $m184r113 == 0 ) $m184r113="";
-$m184r114=$hlavicka->m184r114; if ( $m184r114 == 0 ) $m184r114="";
-$m184r115=$hlavicka->m184r115; if ( $m184r115 == 0 ) $m184r115="";
-$m184r116=$hlavicka->m184r116; if ( $m184r116 == 0 ) $m184r116="";
-$m184r121=$hlavicka->m184r121; if ( $m184r121 == 0 ) $m184r121="";
-$m184r122=$hlavicka->m184r122; if ( $m184r122 == 0 ) $m184r122="";
-$m184r123=$hlavicka->m184r123; if ( $m184r123 == 0 ) $m184r123="";
-$m184r124=$hlavicka->m184r124; if ( $m184r124 == 0 ) $m184r124="";
-$m184r125=$hlavicka->m184r125; if ( $m184r125 == 0 ) $m184r125="";
-$m184r126=$hlavicka->m184r126; if ( $m184r126 == 0 ) $m184r126="";
-$m184r131=$hlavicka->m184r131; if ( $m184r131 == 0 ) $m184r131="";
-$m184r132=$hlavicka->m184r132; if ( $m184r132 == 0 ) $m184r132="";
-$m184r133=$hlavicka->m184r133; if ( $m184r133 == 0 ) $m184r133="";
-$m184r134=$hlavicka->m184r134; if ( $m184r134 == 0 ) $m184r134="";
-$m184r135=$hlavicka->m184r135; if ( $m184r135 == 0 ) $m184r135="";
-$m184r136=$hlavicka->m184r136; if ( $m184r136 == 0 ) $m184r136="";
-$m184r141=$hlavicka->m184r141; if ( $m184r141 == 0 ) $m184r141="";
-$m184r142=$hlavicka->m184r142; if ( $m184r142 == 0 ) $m184r142="";
-$m184r143=$hlavicka->m184r143; if ( $m184r143 == 0 ) $m184r143="";
-$m184r144=$hlavicka->m184r144; if ( $m184r144 == 0 ) $m184r144="";
-$m184r145=$hlavicka->m184r145; if ( $m184r145 == 0 ) $m184r145="";
-$m184r146=$hlavicka->m184r146; if ( $m184r146 == 0 ) $m184r146="";
-$m184r151=$hlavicka->m184r151; if ( $m184r151 == 0 ) $m184r151="";
-$m184r152=$hlavicka->m184r152; if ( $m184r152 == 0 ) $m184r152="";
-$m184r153=$hlavicka->m184r153; if ( $m184r153 == 0 ) $m184r153="";
-$m184r154=$hlavicka->m184r154; if ( $m184r154 == 0 ) $m184r154="";
-$m184r155=$hlavicka->m184r155; if ( $m184r155 == 0 ) $m184r155="";
-$m184r156=$hlavicka->m184r156; if ( $m184r156 == 0 ) $m184r156="";
-$m184r161=$hlavicka->m184r161; if ( $m184r161 == 0 ) $m184r161="";
-$m184r162=$hlavicka->m184r162; if ( $m184r162 == 0 ) $m184r162="";
-$m184r163=$hlavicka->m184r163; if ( $m184r163 == 0 ) $m184r163="";
-$m184r164=$hlavicka->m184r164; if ( $m184r164 == 0 ) $m184r164="";
-$m184r165=$hlavicka->m184r165; if ( $m184r165 == 0 ) $m184r165="";
-$m184r166=$hlavicka->m184r166; if ( $m184r166 == 0 ) $m184r166="";
-$m184r171=$hlavicka->m184r171; if ( $m184r171 == 0 ) $m184r171="";
-$m184r172=$hlavicka->m184r172; if ( $m184r172 == 0 ) $m184r172="";
-$m184r173=$hlavicka->m184r173; if ( $m184r173 == 0 ) $m184r173="";
-$m184r174=$hlavicka->m184r174; if ( $m184r174 == 0 ) $m184r174="";
-$m184r175=$hlavicka->m184r175; if ( $m184r175 == 0 ) $m184r175="";
-$m184r176=$hlavicka->m184r176; if ( $m184r176 == 0 ) $m184r176="";
-$m184r181=$hlavicka->m184r181; if ( $m184r181 == 0 ) $m184r181="";
-$m184r182=$hlavicka->m184r182; if ( $m184r182 == 0 ) $m184r182="";
-$m184r183=$hlavicka->m184r183; if ( $m184r183 == 0 ) $m184r183="";
-$m184r184=$hlavicka->m184r184; if ( $m184r184 == 0 ) $m184r184="";
-$m184r185=$hlavicka->m184r185; if ( $m184r185 == 0 ) $m184r185="";
-$m184r186=$hlavicka->m184r186; if ( $m184r186 == 0 ) $m184r186="";
-$m184r191=$hlavicka->m184r191; if ( $m184r191 == 0 ) $m184r191="";
-$m184r192=$hlavicka->m184r192; if ( $m184r192 == 0 ) $m184r192="";
-$m184r193=$hlavicka->m184r193; if ( $m184r193 == 0 ) $m184r193="";
-$m184r194=$hlavicka->m184r194; if ( $m184r194 == 0 ) $m184r194="";
-$m184r195=$hlavicka->m184r195; if ( $m184r195 == 0 ) $m184r195="";
-$m184r196=$hlavicka->m184r196; if ( $m184r196 == 0 ) $m184r196="";
-$m184r201=$hlavicka->m184r201; if ( $m184r201 == 0 ) $m184r201="";
-$m184r202=$hlavicka->m184r202; if ( $m184r202 == 0 ) $m184r202="";
-$m184r203=$hlavicka->m184r203; if ( $m184r203 == 0 ) $m184r203="";
-$m184r204=$hlavicka->m184r204; if ( $m184r204 == 0 ) $m184r204="";
-$m184r205=$hlavicka->m184r205; if ( $m184r205 == 0 ) $m184r205="";
-$m184r206=$hlavicka->m184r206; if ( $m184r206 == 0 ) $m184r206="";
-$m184r211=$hlavicka->m184r211; if ( $m184r211 == 0 ) $m184r211="";
-$m184r212=$hlavicka->m184r212; if ( $m184r212 == 0 ) $m184r212="";
-$m184r213=$hlavicka->m184r213; if ( $m184r213 == 0 ) $m184r213="";
-$m184r214=$hlavicka->m184r214; if ( $m184r214 == 0 ) $m184r214="";
-$m184r215=$hlavicka->m184r215; if ( $m184r215 == 0 ) $m184r215="";
-$m184r216=$hlavicka->m184r216; if ( $m184r216 == 0 ) $m184r216="";
-$m184r221=$hlavicka->m184r221; if ( $m184r221 == 0 ) $m184r221="";
-$m184r222=$hlavicka->m184r222; if ( $m184r222 == 0 ) $m184r222="";
-$m184r223=$hlavicka->m184r223; if ( $m184r223 == 0 ) $m184r223="";
-$m184r224=$hlavicka->m184r224; if ( $m184r224 == 0 ) $m184r224="";
-$m184r225=$hlavicka->m184r225; if ( $m184r225 == 0 ) $m184r225="";
-$m184r226=$hlavicka->m184r226; if ( $m184r226 == 0 ) $m184r226="";
-$m184r231=$hlavicka->m184r231; if ( $m184r231 == 0 ) $m184r231="";
-$m184r232=$hlavicka->m184r232; if ( $m184r232 == 0 ) $m184r232="";
-$m184r233=$hlavicka->m184r233; if ( $m184r233 == 0 ) $m184r233="";
-$m184r234=$hlavicka->m184r234; if ( $m184r234 == 0 ) $m184r234="";
-$m184r235=$hlavicka->m184r235; if ( $m184r235 == 0 ) $m184r235="";
-$m184r236=$hlavicka->m184r236; if ( $m184r236 == 0 ) $m184r236="";
-$m184r241=$hlavicka->m184r241; if ( $m184r241 == 0 ) $m184r241="";
-$m184r242=$hlavicka->m184r242; if ( $m184r242 == 0 ) $m184r242="";
-$m184r243=$hlavicka->m184r243; if ( $m184r243 == 0 ) $m184r243="";
-$m184r244=$hlavicka->m184r244; if ( $m184r244 == 0 ) $m184r244="";
-$m184r245=$hlavicka->m184r245; if ( $m184r245 == 0 ) $m184r245="";
-$m184r246=$hlavicka->m184r246; if ( $m184r246 == 0 ) $m184r246="";
-$m184r251=$hlavicka->m184r251; if ( $m184r251 == 0 ) $m184r251="";
-$m184r252=$hlavicka->m184r252; if ( $m184r252 == 0 ) $m184r252="";
-$m184r253=$hlavicka->m184r253; if ( $m184r253 == 0 ) $m184r253="";
-$m184r254=$hlavicka->m184r254; if ( $m184r254 == 0 ) $m184r254="";
-$m184r255=$hlavicka->m184r255; if ( $m184r255 == 0 ) $m184r255="";
-$m184r256=$hlavicka->m184r256; if ( $m184r256 == 0 ) $m184r256="";
-$m184r261=$hlavicka->m184r261; if ( $m184r261 == 0 ) $m184r261="";
-$m184r262=$hlavicka->m184r262; if ( $m184r262 == 0 ) $m184r262="";
-$m184r263=$hlavicka->m184r263; if ( $m184r263 == 0 ) $m184r263="";
-$m184r264=$hlavicka->m184r264; if ( $m184r264 == 0 ) $m184r264="";
-$m184r265=$hlavicka->m184r265; if ( $m184r265 == 0 ) $m184r265="";
-$m184r266=$hlavicka->m184r266; if ( $m184r266 == 0 ) $m184r266="";
-$m184r271=$hlavicka->m184r271; if ( $m184r271 == 0 ) $m184r271="";
-$m184r272=$hlavicka->m184r272; if ( $m184r272 == 0 ) $m184r272="";
-$m184r273=$hlavicka->m184r273; if ( $m184r273 == 0 ) $m184r273="";
-$m184r274=$hlavicka->m184r274; if ( $m184r274 == 0 ) $m184r274="";
-$m184r275=$hlavicka->m184r275; if ( $m184r275 == 0 ) $m184r275="";
-$m184r276=$hlavicka->m184r276; if ( $m184r276 == 0 ) $m184r276="";
-$m184r281=$hlavicka->m184r281; if ( $m184r281 == 0 ) $m184r281="";
-$m184r282=$hlavicka->m184r282; if ( $m184r282 == 0 ) $m184r282="";
-$m184r283=$hlavicka->m184r283; if ( $m184r283 == 0 ) $m184r283="";
-$m184r284=$hlavicka->m184r284; if ( $m184r284 == 0 ) $m184r284="";
-$m184r285=$hlavicka->m184r285; if ( $m184r285 == 0 ) $m184r285="";
-$m184r286=$hlavicka->m184r286; if ( $m184r286 == 0 ) $m184r286="";
-$m184r291=$hlavicka->m184r291; if ( $m184r291 == 0 ) $m184r291="";
-$m184r292=$hlavicka->m184r292; if ( $m184r292 == 0 ) $m184r292="";
-$m184r293=$hlavicka->m184r293; if ( $m184r293 == 0 ) $m184r293="";
-$m184r294=$hlavicka->m184r294; if ( $m184r294 == 0 ) $m184r294="";
-$m184r295=$hlavicka->m184r295; if ( $m184r295 == 0 ) $m184r295="";
-$m184r296=$hlavicka->m184r296; if ( $m184r296 == 0 ) $m184r296="";
-$m184r301=$hlavicka->m184r301; if ( $m184r301 == 0 ) $m184r301="";
-$m184r302=$hlavicka->m184r302; if ( $m184r302 == 0 ) $m184r302="";
-$m184r303=$hlavicka->m184r303; if ( $m184r303 == 0 ) $m184r303="";
-$m184r304=$hlavicka->m184r304; if ( $m184r304 == 0 ) $m184r304="";
-$m184r305=$hlavicka->m184r305; if ( $m184r305 == 0 ) $m184r305="";
-$m184r306=$hlavicka->m184r306; if ( $m184r306 == 0 ) $m184r306="";
-$m184r311=$hlavicka->m184r311; if ( $m184r311 == 0 ) $m184r311="";
-$m184r312=$hlavicka->m184r312; if ( $m184r312 == 0 ) $m184r312="";
-$m184r313=$hlavicka->m184r313; if ( $m184r313 == 0 ) $m184r313="";
-$m184r314=$hlavicka->m184r314; if ( $m184r314 == 0 ) $m184r314="";
-$m184r315=$hlavicka->m184r315; if ( $m184r315 == 0 ) $m184r315="";
-$m184r316=$hlavicka->m184r316; if ( $m184r316 == 0 ) $m184r316="";
-$m184r321=$hlavicka->m184r321; if ( $m184r321 == 0 ) $m184r321="";
-$m184r322=$hlavicka->m184r322; if ( $m184r322 == 0 ) $m184r322="";
-$m184r323=$hlavicka->m184r323; if ( $m184r323 == 0 ) $m184r323="";
-$m184r324=$hlavicka->m184r324; if ( $m184r324 == 0 ) $m184r324="";
-$m184r325=$hlavicka->m184r325; if ( $m184r325 == 0 ) $m184r325="";
-$m184r326=$hlavicka->m184r326; if ( $m184r326 == 0 ) $m184r326="";
-$m184r992=$hlavicka->m184r992;
-//if ( $m184r992 == 0 ) $m184r992="";
-$m184r993=$hlavicka->m184r993;
-//if ( $m184r993 == 0 ) $m184r993="";
-$m184r994=$hlavicka->m184r994;
-//if ( $m184r994 == 0 ) $m184r994="";
-$m184r995=$hlavicka->m184r995;
-//if ( $m184r995 == 0 ) $m184r995="";
-$m184r996=$hlavicka->m184r996;
-//if ( $m184r996 == 0 ) $m184r996="";
-$pdf->Cell(195,41," ","$rmc1",1,"L");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,7,"$m184r11","$rmc",0,"R");$pdf->Cell(24,7,"$m184r12","$rmc",0,"R");
-$pdf->Cell(25,7,"$m184r13","$rmc",0,"R");$pdf->Cell(53,7,"$m184r14","$rmc",0,"R");
-$pdf->Cell(27,7,"$m184r15","$rmc",0,"R");$pdf->Cell(25,7,"$m184r16","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r21","$rmc",0,"R");$pdf->Cell(24,6,"$m184r22","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r23","$rmc",0,"R");$pdf->Cell(53,6,"$m184r24","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r25","$rmc",0,"R");$pdf->Cell(25,6,"$m184r26","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r31","$rmc",0,"R");$pdf->Cell(24,6,"$m184r32","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r33","$rmc",0,"R");$pdf->Cell(53,6,"$m184r34","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r35","$rmc",0,"R");$pdf->Cell(25,6,"$m184r36","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r41","$rmc",0,"R");$pdf->Cell(24,6,"$m184r42","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r43","$rmc",0,"R");$pdf->Cell(53,6,"$m184r44","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r45","$rmc",0,"R");$pdf->Cell(25,6,"$m184r46","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r51","$rmc",0,"R");$pdf->Cell(24,6,"$m184r52","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r53","$rmc",0,"R");$pdf->Cell(53,6,"$m184r54","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r55","$rmc",0,"R");$pdf->Cell(25,6,"$m184r56","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r61","$rmc",0,"R");$pdf->Cell(24,6,"$m184r62","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r63","$rmc",0,"R");$pdf->Cell(53,6,"$m184r64","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r65","$rmc",0,"R");$pdf->Cell(25,6,"$m184r66","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r71","$rmc",0,"R");$pdf->Cell(24,6,"$m184r72","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r73","$rmc",0,"R");$pdf->Cell(53,6,"$m184r74","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r75","$rmc",0,"R");$pdf->Cell(25,6,"$m184r76","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r81","$rmc",0,"R");$pdf->Cell(24,6,"$m184r82","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r83","$rmc",0,"R");$pdf->Cell(53,6,"$m184r84","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r85","$rmc",0,"R");$pdf->Cell(25,6,"$m184r86","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,5,"$m184r91","$rmc",0,"R");$pdf->Cell(24,5,"$m184r92","$rmc",0,"R");
-$pdf->Cell(25,5,"$m184r93","$rmc",0,"R");$pdf->Cell(53,5,"$m184r94","$rmc",0,"R");
-$pdf->Cell(27,5,"$m184r95","$rmc",0,"R");$pdf->Cell(25,5,"$m184r96","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r101","$rmc",0,"R");$pdf->Cell(24,6,"$m184r102","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r103","$rmc",0,"R");$pdf->Cell(53,6,"$m184r104","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r105","$rmc",0,"R");$pdf->Cell(25,6,"$m184r106","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r111","$rmc",0,"R");$pdf->Cell(24,6,"$m184r112","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r113","$rmc",0,"R");$pdf->Cell(53,6,"$m184r114","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r115","$rmc",0,"R");$pdf->Cell(25,6,"$m184r116","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r121","$rmc",0,"R");$pdf->Cell(24,6,"$m184r122","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r123","$rmc",0,"R");$pdf->Cell(53,6,"$m184r124","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r125","$rmc",0,"R");$pdf->Cell(25,6,"$m184r126","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r131","$rmc",0,"R");$pdf->Cell(24,6,"$m184r132","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r133","$rmc",0,"R");$pdf->Cell(53,6,"$m184r134","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r135","$rmc",0,"R");$pdf->Cell(25,6,"$m184r136","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r141","$rmc",0,"R");$pdf->Cell(24,6,"$m184r142","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r143","$rmc",0,"R");$pdf->Cell(53,6,"$m184r144","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r145","$rmc",0,"R");$pdf->Cell(25,6,"$m184r146","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r151","$rmc",0,"R");$pdf->Cell(24,6,"$m184r152","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r153","$rmc",0,"R");$pdf->Cell(53,6,"$m184r154","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r155","$rmc",0,"R");$pdf->Cell(25,6,"$m184r156","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r161","$rmc",0,"R");$pdf->Cell(24,6,"$m184r162","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r163","$rmc",0,"R");$pdf->Cell(53,6,"$m184r164","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r165","$rmc",0,"R");$pdf->Cell(25,6,"$m184r166","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r171","$rmc",0,"R");$pdf->Cell(24,6,"$m184r172","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r173","$rmc",0,"R");$pdf->Cell(53,6,"$m184r174","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r175","$rmc",0,"R");$pdf->Cell(25,6,"$m184r176","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r181","$rmc",0,"R");$pdf->Cell(24,6,"$m184r182","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r183","$rmc",0,"R");$pdf->Cell(53,6,"$m184r184","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r185","$rmc",0,"R");$pdf->Cell(25,6,"$m184r186","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r191","$rmc",0,"R");$pdf->Cell(24,6,"$m184r192","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r193","$rmc",0,"R");$pdf->Cell(53,6,"$m184r194","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r195","$rmc",0,"R");$pdf->Cell(25,6,"$m184r196","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r201","$rmc",0,"R");$pdf->Cell(24,6,"$m184r202","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r203","$rmc",0,"R");$pdf->Cell(53,6,"$m184r204","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r205","$rmc",0,"R");$pdf->Cell(25,6,"$m184r206","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r211","$rmc",0,"R");$pdf->Cell(24,6,"$m184r212","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r213","$rmc",0,"R");$pdf->Cell(53,6,"$m184r214","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r215","$rmc",0,"R");$pdf->Cell(25,6,"$m184r216","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r221","$rmc",0,"R");$pdf->Cell(24,6,"$m184r222","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r223","$rmc",0,"R");$pdf->Cell(53,6,"$m184r224","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r225","$rmc",0,"R");$pdf->Cell(25,6,"$m184r226","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r231","$rmc",0,"R");$pdf->Cell(24,6,"$m184r232","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r233","$rmc",0,"R");$pdf->Cell(53,6,"$m184r234","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r235","$rmc",0,"R");$pdf->Cell(25,6,"$m184r236","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r241","$rmc",0,"R");$pdf->Cell(24,6,"$m184r242","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r243","$rmc",0,"R");$pdf->Cell(53,6,"$m184r244","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r245","$rmc",0,"R");$pdf->Cell(25,6,"$m184r246","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r251","$rmc",0,"R");$pdf->Cell(24,6,"$m184r252","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r253","$rmc",0,"R");$pdf->Cell(53,6,"$m184r254","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r255","$rmc",0,"R");$pdf->Cell(25,6,"$m184r256","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r261","$rmc",0,"R");$pdf->Cell(24,6,"$m184r262","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r263","$rmc",0,"R");$pdf->Cell(53,6,"$m184r264","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r265","$rmc",0,"R");$pdf->Cell(25,6,"$m184r266","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r271","$rmc",0,"R");$pdf->Cell(24,6,"$m184r272","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r273","$rmc",0,"R");$pdf->Cell(53,6,"$m184r274","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r275","$rmc",0,"R");$pdf->Cell(25,6,"$m184r276","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r281","$rmc",0,"R");$pdf->Cell(24,6,"$m184r282","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r283","$rmc",0,"R");$pdf->Cell(53,6,"$m184r284","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r285","$rmc",0,"R");$pdf->Cell(25,6,"$m184r286","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r291","$rmc",0,"R");$pdf->Cell(24,6,"$m184r292","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r293","$rmc",0,"R");$pdf->Cell(53,6,"$m184r294","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r295","$rmc",0,"R");$pdf->Cell(25,6,"$m184r296","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r301","$rmc",0,"R");$pdf->Cell(24,6,"$m184r302","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r303","$rmc",0,"R");$pdf->Cell(53,6,"$m184r304","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r305","$rmc",0,"R");$pdf->Cell(25,6,"$m184r306","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r311","$rmc",0,"R");$pdf->Cell(24,6,"$m184r312","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r313","$rmc",0,"R");$pdf->Cell(53,6,"$m184r314","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r315","$rmc",0,"R");$pdf->Cell(25,6,"$m184r316","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$m184r321","$rmc",0,"R");$pdf->Cell(24,6,"$m184r322","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r323","$rmc",0,"R");$pdf->Cell(53,6,"$m184r324","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r325","$rmc",0,"R");$pdf->Cell(25,6,"$m184r326","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"","$rmc",0,"R");$pdf->Cell(24,6,"$m184r992","$rmc",0,"R");
-$pdf->Cell(25,6,"$m184r993","$rmc",0,"R");$pdf->Cell(53,6,"$m184r994","$rmc",0,"R");
-$pdf->Cell(27,6,"$m184r995","$rmc",0,"R");$pdf->Cell(25,6,"$m184r996","$rmc",1,"R");
-                                       }
-
-if ( $strana == 8 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str8.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str8.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 185
-$m185r11=$hlavicka->m185r11; if ( $m185r11 == 0 ) $m185r11="";
-$m185r12=$hlavicka->m185r12; if ( $m185r12 == 0 ) $m185r12="";
-$m185r13=$hlavicka->m185r13; if ( $m185r13 == 0 ) $m185r13="";
-$m185r14=$hlavicka->m185r14; if ( $m185r14 == 0 ) $m185r14="";
-$m185r15=$hlavicka->m185r15; if ( $m185r15 == 0 ) $m185r15="";
-$m185r16=$hlavicka->m185r16; if ( $m185r16 == 0 ) $m185r16="";
-$m185r17=$hlavicka->m185r17; if ( $m185r17 == 0 ) $m185r17="";
-$m185r21=$hlavicka->m185r21; if ( $m185r21 == 0 ) $m185r21="";
-$m185r22=$hlavicka->m185r22; if ( $m185r22 == 0 ) $m185r22="";
-$m185r23=$hlavicka->m185r23; if ( $m185r23 == 0 ) $m185r23="";
-$m185r24=$hlavicka->m185r24; if ( $m185r24 == 0 ) $m185r24="";
-$m185r25=$hlavicka->m185r25; if ( $m185r25 == 0 ) $m185r25="";
-$m185r26=$hlavicka->m185r26; if ( $m185r26 == 0 ) $m185r26="";
-$m185r27=$hlavicka->m185r27; if ( $m185r27 == 0 ) $m185r27="";
-$m185r31=$hlavicka->m185r31; if ( $m185r31 == 0 ) $m185r31="";
-$m185r32=$hlavicka->m185r32; if ( $m185r32 == 0 ) $m185r32="";
-$m185r33=$hlavicka->m185r33; if ( $m185r33 == 0 ) $m185r33="";
-$m185r34=$hlavicka->m185r34; if ( $m185r34 == 0 ) $m185r34="";
-$m185r35=$hlavicka->m185r35; if ( $m185r35 == 0 ) $m185r35="";
-$m185r36=$hlavicka->m185r36; if ( $m185r36 == 0 ) $m185r36="";
-$m185r37=$hlavicka->m185r37; if ( $m185r37 == 0 ) $m185r37="";
-$m185r41=$hlavicka->m185r41; if ( $m185r41 == 0 ) $m185r41="";
-$m185r42=$hlavicka->m185r42; if ( $m185r42 == 0 ) $m185r42="";
-$m185r43=$hlavicka->m185r43; if ( $m185r43 == 0 ) $m185r43="";
-$m185r44=$hlavicka->m185r44; if ( $m185r44 == 0 ) $m185r44="";
-$m185r45=$hlavicka->m185r45; if ( $m185r45 == 0 ) $m185r45="";
-$m185r46=$hlavicka->m185r46; if ( $m185r46 == 0 ) $m185r46="";
-$m185r47=$hlavicka->m185r47; if ( $m185r47 == 0 ) $m185r47="";
-$m185r51=$hlavicka->m185r51; if ( $m185r51 == 0 ) $m185r51="";
-$m185r52=$hlavicka->m185r52; if ( $m185r52 == 0 ) $m185r52="";
-$m185r53=$hlavicka->m185r53; if ( $m185r53 == 0 ) $m185r53="";
-$m185r54=$hlavicka->m185r54; if ( $m185r54 == 0 ) $m185r54="";
-$m185r55=$hlavicka->m185r55; if ( $m185r55 == 0 ) $m185r55="";
-$m185r56=$hlavicka->m185r56; if ( $m185r56 == 0 ) $m185r56="";
-$m185r57=$hlavicka->m185r57; if ( $m185r57 == 0 ) $m185r57="";
-$m185r61=$hlavicka->m185r61; if ( $m185r61 == 0 ) $m185r61="";
-$m185r62=$hlavicka->m185r62; if ( $m185r62 == 0 ) $m185r62="";
-$m185r63=$hlavicka->m185r63; if ( $m185r63 == 0 ) $m185r63="";
-$m185r64=$hlavicka->m185r64; if ( $m185r64 == 0 ) $m185r64="";
-$m185r65=$hlavicka->m185r65; if ( $m185r65 == 0 ) $m185r65="";
-$m185r66=$hlavicka->m185r66; if ( $m185r66 == 0 ) $m185r66="";
-$m185r67=$hlavicka->m185r67; if ( $m185r67 == 0 ) $m185r67="";
-$m185r71=$hlavicka->m185r71; if ( $m185r71 == 0 ) $m185r71="";
-$m185r72=$hlavicka->m185r72; if ( $m185r72 == 0 ) $m185r72="";
-$m185r73=$hlavicka->m185r73; if ( $m185r73 == 0 ) $m185r73="";
-$m185r74=$hlavicka->m185r74; if ( $m185r74 == 0 ) $m185r74="";
-$m185r75=$hlavicka->m185r75; if ( $m185r75 == 0 ) $m185r75="";
-$m185r76=$hlavicka->m185r76; if ( $m185r76 == 0 ) $m185r76="";
-$m185r77=$hlavicka->m185r77; if ( $m185r77 == 0 ) $m185r77="";
-$m185r81=$hlavicka->m185r81; if ( $m185r81 == 0 ) $m185r81="";
-$m185r82=$hlavicka->m185r82; if ( $m185r82 == 0 ) $m185r82="";
-$m185r83=$hlavicka->m185r83; if ( $m185r83 == 0 ) $m185r83="";
-$m185r84=$hlavicka->m185r84; if ( $m185r84 == 0 ) $m185r84="";
-$m185r85=$hlavicka->m185r85; if ( $m185r85 == 0 ) $m185r85="";
-$m185r86=$hlavicka->m185r86; if ( $m185r86 == 0 ) $m185r86="";
-$m185r87=$hlavicka->m185r87; if ( $m185r87 == 0 ) $m185r87="";
-$m185r91=$hlavicka->m185r91; if ( $m185r91 == 0 ) $m185r91="";
-$m185r92=$hlavicka->m185r92; if ( $m185r92 == 0 ) $m185r92="";
-$m185r93=$hlavicka->m185r93; if ( $m185r93 == 0 ) $m185r93="";
-$m185r94=$hlavicka->m185r94; if ( $m185r94 == 0 ) $m185r94="";
-$m185r95=$hlavicka->m185r95; if ( $m185r95 == 0 ) $m185r95="";
-$m185r96=$hlavicka->m185r96; if ( $m185r96 == 0 ) $m185r96="";
-$m185r97=$hlavicka->m185r97; if ( $m185r97 == 0 ) $m185r97="";
-$m185r101=$hlavicka->m185r101; if ( $m185r101 == 0 ) $m185r101="";
-$m185r102=$hlavicka->m185r102; if ( $m185r102 == 0 ) $m185r102="";
-$m185r103=$hlavicka->m185r103; if ( $m185r103 == 0 ) $m185r103="";
-$m185r104=$hlavicka->m185r104; if ( $m185r104 == 0 ) $m185r104="";
-$m185r105=$hlavicka->m185r105; if ( $m185r105 == 0 ) $m185r105="";
-$m185r106=$hlavicka->m185r106; if ( $m185r106 == 0 ) $m185r106="";
-$m185r107=$hlavicka->m185r107; if ( $m185r107 == 0 ) $m185r107="";
-$m185r111=$hlavicka->m185r111; if ( $m185r111 == 0 ) $m185r111="";
-$m185r112=$hlavicka->m185r112; if ( $m185r112 == 0 ) $m185r112="";
-$m185r113=$hlavicka->m185r113; if ( $m185r113 == 0 ) $m185r113="";
-$m185r114=$hlavicka->m185r114; if ( $m185r114 == 0 ) $m185r114="";
-$m185r115=$hlavicka->m185r115; if ( $m185r115 == 0 ) $m185r115="";
-$m185r116=$hlavicka->m185r116; if ( $m185r116 == 0 ) $m185r116="";
-$m185r117=$hlavicka->m185r117; if ( $m185r117 == 0 ) $m185r117="";
-$m185r121=$hlavicka->m185r121; if ( $m185r121 == 0 ) $m185r121="";
-$m185r122=$hlavicka->m185r122; if ( $m185r122 == 0 ) $m185r122="";
-$m185r123=$hlavicka->m185r123; if ( $m185r123 == 0 ) $m185r123="";
-$m185r124=$hlavicka->m185r124; if ( $m185r124 == 0 ) $m185r124="";
-$m185r125=$hlavicka->m185r125; if ( $m185r125 == 0 ) $m185r125="";
-$m185r126=$hlavicka->m185r126; if ( $m185r126 == 0 ) $m185r126="";
-$m185r127=$hlavicka->m185r127; if ( $m185r127 == 0 ) $m185r127="";
-$m185r131=$hlavicka->m185r131; if ( $m185r131 == 0 ) $m185r131="";
-$m185r132=$hlavicka->m185r132; if ( $m185r132 == 0 ) $m185r132="";
-$m185r133=$hlavicka->m185r133; if ( $m185r133 == 0 ) $m185r133="";
-$m185r134=$hlavicka->m185r134; if ( $m185r134 == 0 ) $m185r134="";
-$m185r135=$hlavicka->m185r135; if ( $m185r135 == 0 ) $m185r135="";
-$m185r136=$hlavicka->m185r136; if ( $m185r136 == 0 ) $m185r136="";
-$m185r137=$hlavicka->m185r137; if ( $m185r137 == 0 ) $m185r137="";
-$m185r141=$hlavicka->m185r141; if ( $m185r141 == 0 ) $m185r141="";
-$m185r142=$hlavicka->m185r142; if ( $m185r142 == 0 ) $m185r142="";
-$m185r143=$hlavicka->m185r143; if ( $m185r143 == 0 ) $m185r143="";
-$m185r144=$hlavicka->m185r144; if ( $m185r144 == 0 ) $m185r144="";
-$m185r145=$hlavicka->m185r145; if ( $m185r145 == 0 ) $m185r145="";
-$m185r146=$hlavicka->m185r146; if ( $m185r146 == 0 ) $m185r146="";
-$m185r147=$hlavicka->m185r147; if ( $m185r147 == 0 ) $m185r147="";
-$m185r151=$hlavicka->m185r151; if ( $m185r151 == 0 ) $m185r151="";
-$m185r152=$hlavicka->m185r152; if ( $m185r152 == 0 ) $m185r152="";
-$m185r153=$hlavicka->m185r153; if ( $m185r153 == 0 ) $m185r153="";
-$m185r154=$hlavicka->m185r154; if ( $m185r154 == 0 ) $m185r154="";
-$m185r155=$hlavicka->m185r155; if ( $m185r155 == 0 ) $m185r155="";
-$m185r156=$hlavicka->m185r156; if ( $m185r156 == 0 ) $m185r156="";
-$m185r157=$hlavicka->m185r157; if ( $m185r157 == 0 ) $m185r157="";
-$m185r161=$hlavicka->m185r161; if ( $m185r161 == 0 ) $m185r161="";
-$m185r162=$hlavicka->m185r162; if ( $m185r162 == 0 ) $m185r162="";
-$m185r163=$hlavicka->m185r163; if ( $m185r163 == 0 ) $m185r163="";
-$m185r164=$hlavicka->m185r164; if ( $m185r164 == 0 ) $m185r164="";
-$m185r165=$hlavicka->m185r165; if ( $m185r165 == 0 ) $m185r165="";
-$m185r166=$hlavicka->m185r166; if ( $m185r166 == 0 ) $m185r166="";
-$m185r167=$hlavicka->m185r167; if ( $m185r167 == 0 ) $m185r167="";
-$m185r171=$hlavicka->m185r171; if ( $m185r171 == 0 ) $m185r171="";
-$m185r172=$hlavicka->m185r172; if ( $m185r172 == 0 ) $m185r172="";
-$m185r173=$hlavicka->m185r173; if ( $m185r173 == 0 ) $m185r173="";
-$m185r174=$hlavicka->m185r174; if ( $m185r174 == 0 ) $m185r174="";
-$m185r175=$hlavicka->m185r175; if ( $m185r175 == 0 ) $m185r175="";
-$m185r176=$hlavicka->m185r176; if ( $m185r176 == 0 ) $m185r176="";
-$m185r177=$hlavicka->m185r177; if ( $m185r177 == 0 ) $m185r177="";
-$m185r181=$hlavicka->m185r181; if ( $m185r181 == 0 ) $m185r181="";
-$m185r182=$hlavicka->m185r182; if ( $m185r182 == 0 ) $m185r182="";
-$m185r183=$hlavicka->m185r183; if ( $m185r183 == 0 ) $m185r183="";
-$m185r184=$hlavicka->m185r184; if ( $m185r184 == 0 ) $m185r184="";
-$m185r185=$hlavicka->m185r185; if ( $m185r185 == 0 ) $m185r185="";
-$m185r186=$hlavicka->m185r186; if ( $m185r186 == 0 ) $m185r186="";
-$m185r187=$hlavicka->m185r187; if ( $m185r187 == 0 ) $m185r187="";
-$m185r191=$hlavicka->m185r191; if ( $m185r191 == 0 ) $m185r191="";
-$m185r192=$hlavicka->m185r192; if ( $m185r192 == 0 ) $m185r192="";
-$m185r193=$hlavicka->m185r193; if ( $m185r193 == 0 ) $m185r193="";
-$m185r194=$hlavicka->m185r194; if ( $m185r194 == 0 ) $m185r194="";
-$m185r195=$hlavicka->m185r195; if ( $m185r195 == 0 ) $m185r195="";
-$m185r196=$hlavicka->m185r196; if ( $m185r196 == 0 ) $m185r196="";
-$m185r197=$hlavicka->m185r197; if ( $m185r197 == 0 ) $m185r197="";
-$m185r201=$hlavicka->m185r201; if ( $m185r201 == 0 ) $m185r201="";
-$m185r202=$hlavicka->m185r202; if ( $m185r202 == 0 ) $m185r202="";
-$m185r203=$hlavicka->m185r203; if ( $m185r203 == 0 ) $m185r203="";
-$m185r204=$hlavicka->m185r204; if ( $m185r204 == 0 ) $m185r204="";
-$m185r205=$hlavicka->m185r205; if ( $m185r205 == 0 ) $m185r205="";
-$m185r206=$hlavicka->m185r206; if ( $m185r206 == 0 ) $m185r206="";
-$m185r207=$hlavicka->m185r207; if ( $m185r207 == 0 ) $m185r207="";
-$m185r211=$hlavicka->m185r211; if ( $m185r211 == 0 ) $m185r211="";
-$m185r212=$hlavicka->m185r212; if ( $m185r212 == 0 ) $m185r212="";
-$m185r213=$hlavicka->m185r213; if ( $m185r213 == 0 ) $m185r213="";
-$m185r214=$hlavicka->m185r214; if ( $m185r214 == 0 ) $m185r214="";
-$m185r215=$hlavicka->m185r215; if ( $m185r215 == 0 ) $m185r215="";
-$m185r216=$hlavicka->m185r216; if ( $m185r216 == 0 ) $m185r216="";
-$m185r217=$hlavicka->m185r217; if ( $m185r217 == 0 ) $m185r217="";
-$m185r221=$hlavicka->m185r221; if ( $m185r221 == 0 ) $m185r221="";
-$m185r222=$hlavicka->m185r222; if ( $m185r222 == 0 ) $m185r222="";
-$m185r223=$hlavicka->m185r223; if ( $m185r223 == 0 ) $m185r223="";
-$m185r224=$hlavicka->m185r224; if ( $m185r224 == 0 ) $m185r224="";
-$m185r225=$hlavicka->m185r225; if ( $m185r225 == 0 ) $m185r225="";
-$m185r226=$hlavicka->m185r226; if ( $m185r226 == 0 ) $m185r226="";
-$m185r227=$hlavicka->m185r227; if ( $m185r227 == 0 ) $m185r227="";
-$m185r231=$hlavicka->m185r231; if ( $m185r231 == 0 ) $m185r231="";
-$m185r232=$hlavicka->m185r232; if ( $m185r232 == 0 ) $m185r232="";
-$m185r233=$hlavicka->m185r233; if ( $m185r233 == 0 ) $m185r233="";
-$m185r234=$hlavicka->m185r234; if ( $m185r234 == 0 ) $m185r234="";
-$m185r235=$hlavicka->m185r235; if ( $m185r235 == 0 ) $m185r235="";
-$m185r236=$hlavicka->m185r236; if ( $m185r236 == 0 ) $m185r236="";
-$m185r237=$hlavicka->m185r237; if ( $m185r237 == 0 ) $m185r237="";
-$m185r241=$hlavicka->m185r241; if ( $m185r241 == 0 ) $m185r241="";
-$m185r242=$hlavicka->m185r242; if ( $m185r242 == 0 ) $m185r242="";
-$m185r243=$hlavicka->m185r243; if ( $m185r243 == 0 ) $m185r243="";
-$m185r244=$hlavicka->m185r244; if ( $m185r244 == 0 ) $m185r244="";
-$m185r245=$hlavicka->m185r245; if ( $m185r245 == 0 ) $m185r245="";
-$m185r246=$hlavicka->m185r246; if ( $m185r246 == 0 ) $m185r246="";
-$m185r247=$hlavicka->m185r247; if ( $m185r247 == 0 ) $m185r247="";
-$m185r251=$hlavicka->m185r251; if ( $m185r251 == 0 ) $m185r251="";
-$m185r252=$hlavicka->m185r252; if ( $m185r252 == 0 ) $m185r252="";
-$m185r253=$hlavicka->m185r253; if ( $m185r253 == 0 ) $m185r253="";
-$m185r254=$hlavicka->m185r254; if ( $m185r254 == 0 ) $m185r254="";
-$m185r255=$hlavicka->m185r255; if ( $m185r255 == 0 ) $m185r255="";
-$m185r256=$hlavicka->m185r256; if ( $m185r256 == 0 ) $m185r256="";
-$m185r257=$hlavicka->m185r257; if ( $m185r257 == 0 ) $m185r257="";
-$m185r261=$hlavicka->m185r261; if ( $m185r261 == 0 ) $m185r261="";
-$m185r262=$hlavicka->m185r262; if ( $m185r262 == 0 ) $m185r262="";
-$m185r263=$hlavicka->m185r263; if ( $m185r263 == 0 ) $m185r263="";
-$m185r264=$hlavicka->m185r264; if ( $m185r264 == 0 ) $m185r264="";
-$m185r265=$hlavicka->m185r265; if ( $m185r265 == 0 ) $m185r265="";
-$m185r266=$hlavicka->m185r266; if ( $m185r266 == 0 ) $m185r266="";
-$m185r267=$hlavicka->m185r267; if ( $m185r267 == 0 ) $m185r267="";
-$m185r271=$hlavicka->m185r271; if ( $m185r271 == 0 ) $m185r271="";
-$m185r272=$hlavicka->m185r272; if ( $m185r272 == 0 ) $m185r272="";
-$m185r273=$hlavicka->m185r273; if ( $m185r273 == 0 ) $m185r273="";
-$m185r274=$hlavicka->m185r274; if ( $m185r274 == 0 ) $m185r274="";
-$m185r275=$hlavicka->m185r275; if ( $m185r275 == 0 ) $m185r275="";
-$m185r276=$hlavicka->m185r276; if ( $m185r276 == 0 ) $m185r276="";
-$m185r277=$hlavicka->m185r277; if ( $m185r277 == 0 ) $m185r277="";
-$m185r281=$hlavicka->m185r281; if ( $m185r281 == 0 ) $m185r281="";
-$m185r282=$hlavicka->m185r282; if ( $m185r282 == 0 ) $m185r282="";
-$m185r283=$hlavicka->m185r283; if ( $m185r283 == 0 ) $m185r283="";
-$m185r284=$hlavicka->m185r284; if ( $m185r284 == 0 ) $m185r284="";
-$m185r285=$hlavicka->m185r285; if ( $m185r285 == 0 ) $m185r285="";
-$m185r286=$hlavicka->m185r286; if ( $m185r286 == 0 ) $m185r286="";
-$m185r287=$hlavicka->m185r287; if ( $m185r287 == 0 ) $m185r287="";
-$m185r291=$hlavicka->m185r291; if ( $m185r291 == 0 ) $m185r291="";
-$m185r292=$hlavicka->m185r292; if ( $m185r292 == 0 ) $m185r292="";
-$m185r293=$hlavicka->m185r293; if ( $m185r293 == 0 ) $m185r293="";
-$m185r294=$hlavicka->m185r294; if ( $m185r294 == 0 ) $m185r294="";
-$m185r295=$hlavicka->m185r295; if ( $m185r295 == 0 ) $m185r295="";
-$m185r296=$hlavicka->m185r296; if ( $m185r296 == 0 ) $m185r296="";
-$m185r297=$hlavicka->m185r297; if ( $m185r297 == 0 ) $m185r297="";
-$m185r301=$hlavicka->m185r301; if ( $m185r301 == 0 ) $m185r301="";
-$m185r302=$hlavicka->m185r302; if ( $m185r302 == 0 ) $m185r302="";
-$m185r303=$hlavicka->m185r303; if ( $m185r303 == 0 ) $m185r303="";
-$m185r304=$hlavicka->m185r304; if ( $m185r304 == 0 ) $m185r304="";
-$m185r305=$hlavicka->m185r305; if ( $m185r305 == 0 ) $m185r305="";
-$m185r306=$hlavicka->m185r306; if ( $m185r306 == 0 ) $m185r306="";
-$m185r307=$hlavicka->m185r307; if ( $m185r307 == 0 ) $m185r307="";
-$m185r992=$hlavicka->m185r992;
-//if ( $m185r992 == 0 ) $m185r992="";
-$m185r993=$hlavicka->m185r993;
-//if ( $m185r993 == 0 ) $m185r993="";
-$m185r994=$hlavicka->m185r994;
-//if ( $m185r994 == 0 ) $m185r994="";
-$m185r995=$hlavicka->m185r995;
-//if ( $m185r995 == 0 ) $m185r995="";
-$m185r996=$hlavicka->m185r996;
-//if ( $m185r996 == 0 ) $m185r996="";
-$m185r997=$hlavicka->m185r997;
-//if ( $m185r997 == 0 ) $m185r997="";
-$pdf->Cell(195,43," ","$rmc1",1,"L");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r11","$rmc",0,"R");$pdf->Cell(25,6,"$m185r12","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r13","$rmc",0,"R");$pdf->Cell(28,6,"$m185r14","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r15","$rmc",0,"R");$pdf->Cell(25,6,"$m185r16","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r17","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m185r21","$rmc",0,"R");$pdf->Cell(25,7,"$m185r22","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r23","$rmc",0,"R");$pdf->Cell(28,7,"$m185r24","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r25","$rmc",0,"R");$pdf->Cell(25,7,"$m185r26","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r27","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r31","$rmc",0,"R");$pdf->Cell(25,6,"$m185r32","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r33","$rmc",0,"R");$pdf->Cell(28,6,"$m185r34","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r35","$rmc",0,"R");$pdf->Cell(25,6,"$m185r36","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r37","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r41","$rmc",0,"R");$pdf->Cell(25,6,"$m185r42","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r43","$rmc",0,"R");$pdf->Cell(28,6,"$m185r44","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r45","$rmc",0,"R");$pdf->Cell(25,6,"$m185r46","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r47","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r51","$rmc",0,"R");$pdf->Cell(25,6,"$m185r52","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r53","$rmc",0,"R");$pdf->Cell(28,6,"$m185r54","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r55","$rmc",0,"R");$pdf->Cell(25,6,"$m185r56","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r57","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m185r61","$rmc",0,"R");$pdf->Cell(25,7,"$m185r62","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r63","$rmc",0,"R");$pdf->Cell(28,7,"$m185r64","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r65","$rmc",0,"R");$pdf->Cell(25,7,"$m185r66","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r67","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r71","$rmc",0,"R");$pdf->Cell(25,6,"$m185r72","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r73","$rmc",0,"R");$pdf->Cell(28,6,"$m185r74","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r75","$rmc",0,"R");$pdf->Cell(25,6,"$m185r76","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r77","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r81","$rmc",0,"R");$pdf->Cell(25,6,"$m185r82","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r83","$rmc",0,"R");$pdf->Cell(28,6,"$m185r84","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r85","$rmc",0,"R");$pdf->Cell(25,6,"$m185r86","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r87","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r91","$rmc",0,"R");$pdf->Cell(25,6,"$m185r92","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r93","$rmc",0,"R");$pdf->Cell(28,6,"$m185r94","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r95","$rmc",0,"R");$pdf->Cell(25,6,"$m185r96","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r97","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m185r101","$rmc",0,"R");$pdf->Cell(25,7,"$m185r102","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r103","$rmc",0,"R");$pdf->Cell(28,7,"$m185r104","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r105","$rmc",0,"R");$pdf->Cell(25,7,"$m185r106","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r107","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r111","$rmc",0,"R");$pdf->Cell(25,6,"$m185r112","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r113","$rmc",0,"R");$pdf->Cell(28,6,"$m185r114","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r115","$rmc",0,"R");$pdf->Cell(25,6,"$m185r116","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r117","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m185r121","$rmc",0,"R");$pdf->Cell(25,7,"$m185r122","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r123","$rmc",0,"R");$pdf->Cell(28,7,"$m185r124","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r125","$rmc",0,"R");$pdf->Cell(25,7,"$m185r126","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r127","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r131","$rmc",0,"R");$pdf->Cell(25,6,"$m185r132","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r133","$rmc",0,"R");$pdf->Cell(28,6,"$m185r134","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r135","$rmc",0,"R");$pdf->Cell(25,6,"$m185r136","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r137","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r141","$rmc",0,"R");$pdf->Cell(25,6,"$m185r142","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r143","$rmc",0,"R");$pdf->Cell(28,6,"$m185r144","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r145","$rmc",0,"R");$pdf->Cell(25,6,"$m185r146","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r147","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r151","$rmc",0,"R");$pdf->Cell(25,6,"$m185r152","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r153","$rmc",0,"R");$pdf->Cell(28,6,"$m185r154","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r155","$rmc",0,"R");$pdf->Cell(25,6,"$m185r156","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r157","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m185r161","$rmc",0,"R");$pdf->Cell(25,7,"$m185r162","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r163","$rmc",0,"R");$pdf->Cell(28,7,"$m185r164","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r165","$rmc",0,"R");$pdf->Cell(25,7,"$m185r166","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r167","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r171","$rmc",0,"R");$pdf->Cell(25,6,"$m185r172","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r173","$rmc",0,"R");$pdf->Cell(28,6,"$m185r174","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r175","$rmc",0,"R");$pdf->Cell(25,6,"$m185r176","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r177","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r181","$rmc",0,"R");$pdf->Cell(25,6,"$m185r182","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r183","$rmc",0,"R");$pdf->Cell(28,6,"$m185r184","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r185","$rmc",0,"R");$pdf->Cell(25,6,"$m185r186","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r187","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r191","$rmc",0,"R");$pdf->Cell(25,6,"$m185r192","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r193","$rmc",0,"R");$pdf->Cell(28,6,"$m185r194","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r195","$rmc",0,"R");$pdf->Cell(25,6,"$m185r196","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r197","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m185r201","$rmc",0,"R");$pdf->Cell(25,7,"$m185r202","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r203","$rmc",0,"R");$pdf->Cell(28,7,"$m185r204","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r205","$rmc",0,"R");$pdf->Cell(25,7,"$m185r206","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r207","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r211","$rmc",0,"R");$pdf->Cell(25,6,"$m185r212","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r213","$rmc",0,"R");$pdf->Cell(28,6,"$m185r214","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r215","$rmc",0,"R");$pdf->Cell(25,6,"$m185r216","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r217","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r221","$rmc",0,"R");$pdf->Cell(25,6,"$m185r222","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r223","$rmc",0,"R");$pdf->Cell(28,6,"$m185r224","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r225","$rmc",0,"R");$pdf->Cell(25,6,"$m185r226","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r227","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r231","$rmc",0,"R");$pdf->Cell(25,6,"$m185r232","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r233","$rmc",0,"R");$pdf->Cell(28,6,"$m185r234","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r235","$rmc",0,"R");$pdf->Cell(25,6,"$m185r236","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r237","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m185r241","$rmc",0,"R");$pdf->Cell(25,7,"$m185r242","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r243","$rmc",0,"R");$pdf->Cell(28,7,"$m185r244","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r245","$rmc",0,"R");$pdf->Cell(25,7,"$m185r246","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r247","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r251","$rmc",0,"R");$pdf->Cell(25,6,"$m185r252","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r253","$rmc",0,"R");$pdf->Cell(28,6,"$m185r254","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r255","$rmc",0,"R");$pdf->Cell(25,6,"$m185r256","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r257","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r261","$rmc",0,"R");$pdf->Cell(25,6,"$m185r262","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r263","$rmc",0,"R");$pdf->Cell(28,6,"$m185r264","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r265","$rmc",0,"R");$pdf->Cell(25,6,"$m185r266","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r267","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r271","$rmc",0,"R");$pdf->Cell(25,6,"$m185r272","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r273","$rmc",0,"R");$pdf->Cell(28,6,"$m185r274","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r275","$rmc",0,"R");$pdf->Cell(25,6,"$m185r276","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r277","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m185r281","$rmc",0,"R");$pdf->Cell(25,7,"$m185r282","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r283","$rmc",0,"R");$pdf->Cell(28,7,"$m185r284","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r285","$rmc",0,"R");$pdf->Cell(25,7,"$m185r286","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r287","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r291","$rmc",0,"R");$pdf->Cell(25,6,"$m185r292","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r293","$rmc",0,"R");$pdf->Cell(28,6,"$m185r294","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r295","$rmc",0,"R");$pdf->Cell(25,6,"$m185r296","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r297","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m185r301","$rmc",0,"R");$pdf->Cell(25,6,"$m185r302","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r303","$rmc",0,"R");$pdf->Cell(28,6,"$m185r304","$rmc",0,"R");
-$pdf->Cell(27,6,"$m185r305","$rmc",0,"R");$pdf->Cell(25,6,"$m185r306","$rmc",0,"R");
-$pdf->Cell(25,6,"$m185r307","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"","$rmc",0,"R");$pdf->Cell(25,7,"$m185r992","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r993","$rmc",0,"R");$pdf->Cell(28,7,"$m185r994","$rmc",0,"R");
-$pdf->Cell(27,7,"$m185r995","$rmc",0,"R");$pdf->Cell(25,7,"$m185r996","$rmc",0,"R");
-$pdf->Cell(25,7,"$m185r997","$rmc",1,"R");
-                                       }
-}
-$i = $i + 1;
-  }
-//koniec tlac strana 1 az 8
-
-
-//vytlac strana 9 az 12
-$sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_zav101s2 WHERE ico >= 0 "."";
-//echo $sqltt;
-//exit;
-
-$sql = mysql_query("$sqltt");
-$pol = mysql_num_rows($sql);
-
-$i=0;
-$j=0; //zaciatok strany ak by som chcel strankovat
-  while ($i <= $pol )
-  {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-{
-$hlavicka=mysql_fetch_object($sql);
-
-if ( $strana == 9 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str9.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str9.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,5," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 186
-$m186r11=$hlavicka->m186r11; if ( $m186r11 == 0 ) $m186r11="";
-$m186r12=$hlavicka->m186r12; if ( $m186r12 == 0 ) $m186r12="";
-$m186r13=$hlavicka->m186r13; if ( $m186r13 == 0 ) $m186r13="";
-$m186r14=$hlavicka->m186r14; if ( $m186r14 == 0 ) $m186r14="";
-$m186r15=$hlavicka->m186r15; if ( $m186r15 == 0 ) $m186r15="";
-$m186r16=$hlavicka->m186r16; if ( $m186r16 == 0 ) $m186r16="";
-$m186r17=$hlavicka->m186r17; if ( $m186r17 == 0 ) $m186r17="";
-$m186r21=$hlavicka->m186r21; if ( $m186r21 == 0 ) $m186r21="";
-$m186r22=$hlavicka->m186r22; if ( $m186r22 == 0 ) $m186r22="";
-$m186r23=$hlavicka->m186r23; if ( $m186r23 == 0 ) $m186r23="";
-$m186r24=$hlavicka->m186r24; if ( $m186r24 == 0 ) $m186r24="";
-$m186r25=$hlavicka->m186r25; if ( $m186r25 == 0 ) $m186r25="";
-$m186r26=$hlavicka->m186r26; if ( $m186r26 == 0 ) $m186r26="";
-$m186r27=$hlavicka->m186r27; if ( $m186r27 == 0 ) $m186r27="";
-$m186r31=$hlavicka->m186r31; if ( $m186r31 == 0 ) $m186r31="";
-$m186r32=$hlavicka->m186r32; if ( $m186r32 == 0 ) $m186r32="";
-$m186r33=$hlavicka->m186r33; if ( $m186r33 == 0 ) $m186r33="";
-$m186r34=$hlavicka->m186r34; if ( $m186r34 == 0 ) $m186r34="";
-$m186r35=$hlavicka->m186r35; if ( $m186r35 == 0 ) $m186r35="";
-$m186r36=$hlavicka->m186r36; if ( $m186r36 == 0 ) $m186r36="";
-$m186r37=$hlavicka->m186r37; if ( $m186r37 == 0 ) $m186r37="";
-$m186r41=$hlavicka->m186r41; if ( $m186r41 == 0 ) $m186r41="";
-$m186r42=$hlavicka->m186r42; if ( $m186r42 == 0 ) $m186r42="";
-$m186r43=$hlavicka->m186r43; if ( $m186r43 == 0 ) $m186r43="";
-$m186r44=$hlavicka->m186r44; if ( $m186r44 == 0 ) $m186r44="";
-$m186r45=$hlavicka->m186r45; if ( $m186r45 == 0 ) $m186r45="";
-$m186r46=$hlavicka->m186r46; if ( $m186r46 == 0 ) $m186r46="";
-$m186r47=$hlavicka->m186r47; if ( $m186r47 == 0 ) $m186r47="";
-$m186r51=$hlavicka->m186r51; if ( $m186r51 == 0 ) $m186r51="";
-$m186r52=$hlavicka->m186r52; if ( $m186r52 == 0 ) $m186r52="";
-$m186r53=$hlavicka->m186r53; if ( $m186r53 == 0 ) $m186r53="";
-$m186r54=$hlavicka->m186r54; if ( $m186r54 == 0 ) $m186r54="";
-$m186r55=$hlavicka->m186r55; if ( $m186r55 == 0 ) $m186r55="";
-$m186r56=$hlavicka->m186r56; if ( $m186r56 == 0 ) $m186r56="";
-$m186r57=$hlavicka->m186r57; if ( $m186r57 == 0 ) $m186r57="";
-$m186r61=$hlavicka->m186r61; if ( $m186r61 == 0 ) $m186r61="";
-$m186r62=$hlavicka->m186r62; if ( $m186r62 == 0 ) $m186r62="";
-$m186r63=$hlavicka->m186r63; if ( $m186r63 == 0 ) $m186r63="";
-$m186r64=$hlavicka->m186r64; if ( $m186r64 == 0 ) $m186r64="";
-$m186r65=$hlavicka->m186r65; if ( $m186r65 == 0 ) $m186r65="";
-$m186r66=$hlavicka->m186r66; if ( $m186r66 == 0 ) $m186r66="";
-$m186r67=$hlavicka->m186r67; if ( $m186r67 == 0 ) $m186r67="";
-$m186r71=$hlavicka->m186r71; if ( $m186r71 == 0 ) $m186r71="";
-$m186r72=$hlavicka->m186r72; if ( $m186r72 == 0 ) $m186r72="";
-$m186r73=$hlavicka->m186r73; if ( $m186r73 == 0 ) $m186r73="";
-$m186r74=$hlavicka->m186r74; if ( $m186r74 == 0 ) $m186r74="";
-$m186r75=$hlavicka->m186r75; if ( $m186r75 == 0 ) $m186r75="";
-$m186r76=$hlavicka->m186r76; if ( $m186r76 == 0 ) $m186r76="";
-$m186r77=$hlavicka->m186r77; if ( $m186r77 == 0 ) $m186r77="";
-$m186r81=$hlavicka->m186r81; if ( $m186r81 == 0 ) $m186r81="";
-$m186r82=$hlavicka->m186r82; if ( $m186r82 == 0 ) $m186r82="";
-$m186r83=$hlavicka->m186r83; if ( $m186r83 == 0 ) $m186r83="";
-$m186r84=$hlavicka->m186r84; if ( $m186r84 == 0 ) $m186r84="";
-$m186r85=$hlavicka->m186r85; if ( $m186r85 == 0 ) $m186r85="";
-$m186r86=$hlavicka->m186r86; if ( $m186r86 == 0 ) $m186r86="";
-$m186r87=$hlavicka->m186r87; if ( $m186r87 == 0 ) $m186r87="";
-$m186r91=$hlavicka->m186r91; if ( $m186r91 == 0 ) $m186r91="";
-$m186r92=$hlavicka->m186r92; if ( $m186r92 == 0 ) $m186r92="";
-$m186r93=$hlavicka->m186r93; if ( $m186r93 == 0 ) $m186r93="";
-$m186r94=$hlavicka->m186r94; if ( $m186r94 == 0 ) $m186r94="";
-$m186r95=$hlavicka->m186r95; if ( $m186r95 == 0 ) $m186r95="";
-$m186r96=$hlavicka->m186r96; if ( $m186r96 == 0 ) $m186r96="";
-$m186r97=$hlavicka->m186r97; if ( $m186r97 == 0 ) $m186r97="";
-$m186r101=$hlavicka->m186r101; if ( $m186r101 == 0 ) $m186r101="";
-$m186r102=$hlavicka->m186r102; if ( $m186r102 == 0 ) $m186r102="";
-$m186r103=$hlavicka->m186r103; if ( $m186r103 == 0 ) $m186r103="";
-$m186r104=$hlavicka->m186r104; if ( $m186r104 == 0 ) $m186r104="";
-$m186r105=$hlavicka->m186r105; if ( $m186r105 == 0 ) $m186r105="";
-$m186r106=$hlavicka->m186r106; if ( $m186r106 == 0 ) $m186r106="";
-$m186r107=$hlavicka->m186r107; if ( $m186r107 == 0 ) $m186r107="";
-$m186r111=$hlavicka->m186r111; if ( $m186r111 == 0 ) $m186r111="";
-$m186r112=$hlavicka->m186r112; if ( $m186r112 == 0 ) $m186r112="";
-$m186r113=$hlavicka->m186r113; if ( $m186r113 == 0 ) $m186r113="";
-$m186r114=$hlavicka->m186r114; if ( $m186r114 == 0 ) $m186r114="";
-$m186r115=$hlavicka->m186r115; if ( $m186r115 == 0 ) $m186r115="";
-$m186r116=$hlavicka->m186r116; if ( $m186r116 == 0 ) $m186r116="";
-$m186r117=$hlavicka->m186r117; if ( $m186r117 == 0 ) $m186r117="";
-$m186r121=$hlavicka->m186r121; if ( $m186r121 == 0 ) $m186r121="";
-$m186r122=$hlavicka->m186r122; if ( $m186r122 == 0 ) $m186r122="";
-$m186r123=$hlavicka->m186r123; if ( $m186r123 == 0 ) $m186r123="";
-$m186r124=$hlavicka->m186r124; if ( $m186r124 == 0 ) $m186r124="";
-$m186r125=$hlavicka->m186r125; if ( $m186r125 == 0 ) $m186r125="";
-$m186r126=$hlavicka->m186r126; if ( $m186r126 == 0 ) $m186r126="";
-$m186r127=$hlavicka->m186r127; if ( $m186r127 == 0 ) $m186r127="";
-$m186r131=$hlavicka->m186r131; if ( $m186r131 == 0 ) $m186r131="";
-$m186r132=$hlavicka->m186r132; if ( $m186r132 == 0 ) $m186r132="";
-$m186r133=$hlavicka->m186r133; if ( $m186r133 == 0 ) $m186r133="";
-$m186r134=$hlavicka->m186r134; if ( $m186r134 == 0 ) $m186r134="";
-$m186r135=$hlavicka->m186r135; if ( $m186r135 == 0 ) $m186r135="";
-$m186r136=$hlavicka->m186r136; if ( $m186r136 == 0 ) $m186r136="";
-$m186r137=$hlavicka->m186r137; if ( $m186r137 == 0 ) $m186r137="";
-$m186r141=$hlavicka->m186r141; if ( $m186r141 == 0 ) $m186r141="";
-$m186r142=$hlavicka->m186r142; if ( $m186r142 == 0 ) $m186r142="";
-$m186r143=$hlavicka->m186r143; if ( $m186r143 == 0 ) $m186r143="";
-$m186r144=$hlavicka->m186r144; if ( $m186r144 == 0 ) $m186r144="";
-$m186r145=$hlavicka->m186r145; if ( $m186r145 == 0 ) $m186r145="";
-$m186r146=$hlavicka->m186r146; if ( $m186r146 == 0 ) $m186r146="";
-$m186r147=$hlavicka->m186r147; if ( $m186r147 == 0 ) $m186r147="";
-$m186r151=$hlavicka->m186r151; if ( $m186r151 == 0 ) $m186r151="";
-$m186r152=$hlavicka->m186r152; if ( $m186r152 == 0 ) $m186r152="";
-$m186r153=$hlavicka->m186r153; if ( $m186r153 == 0 ) $m186r153="";
-$m186r154=$hlavicka->m186r154; if ( $m186r154 == 0 ) $m186r154="";
-$m186r155=$hlavicka->m186r155; if ( $m186r155 == 0 ) $m186r155="";
-$m186r156=$hlavicka->m186r156; if ( $m186r156 == 0 ) $m186r156="";
-$m186r157=$hlavicka->m186r157; if ( $m186r157 == 0 ) $m186r157="";
-$m186r161=$hlavicka->m186r161; if ( $m186r161 == 0 ) $m186r161="";
-$m186r162=$hlavicka->m186r162; if ( $m186r162 == 0 ) $m186r162="";
-$m186r163=$hlavicka->m186r163; if ( $m186r163 == 0 ) $m186r163="";
-$m186r164=$hlavicka->m186r164; if ( $m186r164 == 0 ) $m186r164="";
-$m186r165=$hlavicka->m186r165; if ( $m186r165 == 0 ) $m186r165="";
-$m186r166=$hlavicka->m186r166; if ( $m186r166 == 0 ) $m186r166="";
-$m186r167=$hlavicka->m186r167; if ( $m186r167 == 0 ) $m186r167="";
-$m186r171=$hlavicka->m186r171; if ( $m186r171 == 0 ) $m186r171="";
-$m186r172=$hlavicka->m186r172; if ( $m186r172 == 0 ) $m186r172="";
-$m186r173=$hlavicka->m186r173; if ( $m186r173 == 0 ) $m186r173="";
-$m186r174=$hlavicka->m186r174; if ( $m186r174 == 0 ) $m186r174="";
-$m186r175=$hlavicka->m186r175; if ( $m186r175 == 0 ) $m186r175="";
-$m186r176=$hlavicka->m186r176; if ( $m186r176 == 0 ) $m186r176="";
-$m186r177=$hlavicka->m186r177; if ( $m186r177 == 0 ) $m186r177="";
-$m186r181=$hlavicka->m186r181; if ( $m186r181 == 0 ) $m186r181="";
-$m186r182=$hlavicka->m186r182; if ( $m186r182 == 0 ) $m186r182="";
-$m186r183=$hlavicka->m186r183; if ( $m186r183 == 0 ) $m186r183="";
-$m186r184=$hlavicka->m186r184; if ( $m186r184 == 0 ) $m186r184="";
-$m186r185=$hlavicka->m186r185; if ( $m186r185 == 0 ) $m186r185="";
-$m186r186=$hlavicka->m186r186; if ( $m186r186 == 0 ) $m186r186="";
-$m186r187=$hlavicka->m186r187; if ( $m186r187 == 0 ) $m186r187="";
-$m186r191=$hlavicka->m186r191; if ( $m186r191 == 0 ) $m186r191="";
-$m186r192=$hlavicka->m186r192; if ( $m186r192 == 0 ) $m186r192="";
-$m186r193=$hlavicka->m186r193; if ( $m186r193 == 0 ) $m186r193="";
-$m186r194=$hlavicka->m186r194; if ( $m186r194 == 0 ) $m186r194="";
-$m186r195=$hlavicka->m186r195; if ( $m186r195 == 0 ) $m186r195="";
-$m186r196=$hlavicka->m186r196; if ( $m186r196 == 0 ) $m186r196="";
-$m186r197=$hlavicka->m186r197; if ( $m186r197 == 0 ) $m186r197="";
-$m186r201=$hlavicka->m186r201; if ( $m186r201 == 0 ) $m186r201="";
-$m186r202=$hlavicka->m186r202; if ( $m186r202 == 0 ) $m186r202="";
-$m186r203=$hlavicka->m186r203; if ( $m186r203 == 0 ) $m186r203="";
-$m186r204=$hlavicka->m186r204; if ( $m186r204 == 0 ) $m186r204="";
-$m186r205=$hlavicka->m186r205; if ( $m186r205 == 0 ) $m186r205="";
-$m186r206=$hlavicka->m186r206; if ( $m186r206 == 0 ) $m186r206="";
-$m186r207=$hlavicka->m186r207; if ( $m186r207 == 0 ) $m186r207="";
-$m186r211=$hlavicka->m186r211; if ( $m186r211 == 0 ) $m186r211="";
-$m186r212=$hlavicka->m186r212; if ( $m186r212 == 0 ) $m186r212="";
-$m186r213=$hlavicka->m186r213; if ( $m186r213 == 0 ) $m186r213="";
-$m186r214=$hlavicka->m186r214; if ( $m186r214 == 0 ) $m186r214="";
-$m186r215=$hlavicka->m186r215; if ( $m186r215 == 0 ) $m186r215="";
-$m186r216=$hlavicka->m186r216; if ( $m186r216 == 0 ) $m186r216="";
-$m186r217=$hlavicka->m186r217; if ( $m186r217 == 0 ) $m186r217="";
-$m186r221=$hlavicka->m186r221; if ( $m186r221 == 0 ) $m186r221="";
-$m186r222=$hlavicka->m186r222; if ( $m186r222 == 0 ) $m186r222="";
-$m186r223=$hlavicka->m186r223; if ( $m186r223 == 0 ) $m186r223="";
-$m186r224=$hlavicka->m186r224; if ( $m186r224 == 0 ) $m186r224="";
-$m186r225=$hlavicka->m186r225; if ( $m186r225 == 0 ) $m186r225="";
-$m186r226=$hlavicka->m186r226; if ( $m186r226 == 0 ) $m186r226="";
-$m186r227=$hlavicka->m186r227; if ( $m186r227 == 0 ) $m186r227="";
-$m186r231=$hlavicka->m186r231; if ( $m186r231 == 0 ) $m186r231="";
-$m186r232=$hlavicka->m186r232; if ( $m186r232 == 0 ) $m186r232="";
-$m186r233=$hlavicka->m186r233; if ( $m186r233 == 0 ) $m186r233="";
-$m186r234=$hlavicka->m186r234; if ( $m186r234 == 0 ) $m186r234="";
-$m186r235=$hlavicka->m186r235; if ( $m186r235 == 0 ) $m186r235="";
-$m186r236=$hlavicka->m186r236; if ( $m186r236 == 0 ) $m186r236="";
-$m186r237=$hlavicka->m186r237; if ( $m186r237 == 0 ) $m186r237="";
-$m186r241=$hlavicka->m186r241; if ( $m186r241 == 0 ) $m186r241="";
-$m186r242=$hlavicka->m186r242; if ( $m186r242 == 0 ) $m186r242="";
-$m186r243=$hlavicka->m186r243; if ( $m186r243 == 0 ) $m186r243="";
-$m186r244=$hlavicka->m186r244; if ( $m186r244 == 0 ) $m186r244="";
-$m186r245=$hlavicka->m186r245; if ( $m186r245 == 0 ) $m186r245="";
-$m186r246=$hlavicka->m186r246; if ( $m186r246 == 0 ) $m186r246="";
-$m186r247=$hlavicka->m186r247; if ( $m186r247 == 0 ) $m186r247="";
-$m186r251=$hlavicka->m186r251; if ( $m186r251 == 0 ) $m186r251="";
-$m186r252=$hlavicka->m186r252; if ( $m186r252 == 0 ) $m186r252="";
-$m186r253=$hlavicka->m186r253; if ( $m186r253 == 0 ) $m186r253="";
-$m186r254=$hlavicka->m186r254; if ( $m186r254 == 0 ) $m186r254="";
-$m186r255=$hlavicka->m186r255; if ( $m186r255 == 0 ) $m186r255="";
-$m186r256=$hlavicka->m186r256; if ( $m186r256 == 0 ) $m186r256="";
-$m186r257=$hlavicka->m186r257; if ( $m186r257 == 0 ) $m186r257="";
-$m186r261=$hlavicka->m186r261; if ( $m186r261 == 0 ) $m186r261="";
-$m186r262=$hlavicka->m186r262; if ( $m186r262 == 0 ) $m186r262="";
-$m186r263=$hlavicka->m186r263; if ( $m186r263 == 0 ) $m186r263="";
-$m186r264=$hlavicka->m186r264; if ( $m186r264 == 0 ) $m186r264="";
-$m186r265=$hlavicka->m186r265; if ( $m186r265 == 0 ) $m186r265="";
-$m186r266=$hlavicka->m186r266; if ( $m186r266 == 0 ) $m186r266="";
-$m186r267=$hlavicka->m186r267; if ( $m186r267 == 0 ) $m186r267="";
-$m186r271=$hlavicka->m186r271; if ( $m186r271 == 0 ) $m186r271="";
-$m186r272=$hlavicka->m186r272; if ( $m186r272 == 0 ) $m186r272="";
-$m186r273=$hlavicka->m186r273; if ( $m186r273 == 0 ) $m186r273="";
-$m186r274=$hlavicka->m186r274; if ( $m186r274 == 0 ) $m186r274="";
-$m186r275=$hlavicka->m186r275; if ( $m186r275 == 0 ) $m186r275="";
-$m186r276=$hlavicka->m186r276; if ( $m186r276 == 0 ) $m186r276="";
-$m186r277=$hlavicka->m186r277; if ( $m186r277 == 0 ) $m186r277="";
-$m186r281=$hlavicka->m186r281; if ( $m186r281 == 0 ) $m186r281="";
-$m186r282=$hlavicka->m186r282; if ( $m186r282 == 0 ) $m186r282="";
-$m186r283=$hlavicka->m186r283; if ( $m186r283 == 0 ) $m186r283="";
-$m186r284=$hlavicka->m186r284; if ( $m186r284 == 0 ) $m186r284="";
-$m186r285=$hlavicka->m186r285; if ( $m186r285 == 0 ) $m186r285="";
-$m186r286=$hlavicka->m186r286; if ( $m186r286 == 0 ) $m186r286="";
-$m186r287=$hlavicka->m186r287; if ( $m186r287 == 0 ) $m186r287="";
-$m186r291=$hlavicka->m186r291; if ( $m186r291 == 0 ) $m186r291="";
-$m186r292=$hlavicka->m186r292; if ( $m186r292 == 0 ) $m186r292="";
-$m186r293=$hlavicka->m186r293; if ( $m186r293 == 0 ) $m186r293="";
-$m186r294=$hlavicka->m186r294; if ( $m186r294 == 0 ) $m186r294="";
-$m186r295=$hlavicka->m186r295; if ( $m186r295 == 0 ) $m186r295="";
-$m186r296=$hlavicka->m186r296; if ( $m186r296 == 0 ) $m186r296="";
-$m186r297=$hlavicka->m186r297; if ( $m186r297 == 0 ) $m186r297="";
-$m186r301=$hlavicka->m186r301; if ( $m186r301 == 0 ) $m186r301="";
-$m186r302=$hlavicka->m186r302; if ( $m186r302 == 0 ) $m186r302="";
-$m186r303=$hlavicka->m186r303; if ( $m186r303 == 0 ) $m186r303="";
-$m186r304=$hlavicka->m186r304; if ( $m186r304 == 0 ) $m186r304="";
-$m186r305=$hlavicka->m186r305; if ( $m186r305 == 0 ) $m186r305="";
-$m186r306=$hlavicka->m186r306; if ( $m186r306 == 0 ) $m186r306="";
-$m186r307=$hlavicka->m186r307; if ( $m186r307 == 0 ) $m186r307="";
-$m186r992=$hlavicka->m186r992;
-//if ( $m186r992 == 0 ) $m186r992="";
-$m186r993=$hlavicka->m186r993;
-//if ( $m186r993 == 0 ) $m186r993="";
-$m186r994=$hlavicka->m186r994;
-//if ( $m186r994 == 0 ) $m186r994="";
-$m186r995=$hlavicka->m186r995;
-//if ( $m186r995 == 0 ) $m186r995="";
-$m186r996=$hlavicka->m186r996;
-//if ( $m186r996 == 0 ) $m186r996="";
-$m186r997=$hlavicka->m186r997;
-//if ( $m186r997 == 0 ) $m186r997="";
-$pdf->Cell(195,39," ","$rmc1",1,"L");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r11","$rmc",0,"R");$pdf->Cell(25,6,"$m186r12","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r13","$rmc",0,"R");$pdf->Cell(28,6,"$m186r14","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r15","$rmc",0,"R");$pdf->Cell(25,6,"$m186r16","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r17","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m186r21","$rmc",0,"R");$pdf->Cell(25,7,"$m186r22","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r23","$rmc",0,"R");$pdf->Cell(28,7,"$m186r24","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r25","$rmc",0,"R");$pdf->Cell(25,7,"$m186r26","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r27","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r31","$rmc",0,"R");$pdf->Cell(25,6,"$m186r32","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r33","$rmc",0,"R");$pdf->Cell(28,6,"$m186r34","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r35","$rmc",0,"R");$pdf->Cell(25,6,"$m186r36","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r37","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m186r41","$rmc",0,"R");$pdf->Cell(25,7,"$m186r42","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r43","$rmc",0,"R");$pdf->Cell(28,7,"$m186r44","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r45","$rmc",0,"R");$pdf->Cell(25,7,"$m186r46","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r47","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r51","$rmc",0,"R");$pdf->Cell(25,6,"$m186r52","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r53","$rmc",0,"R");$pdf->Cell(28,6,"$m186r54","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r55","$rmc",0,"R");$pdf->Cell(25,6,"$m186r56","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r57","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r61","$rmc",0,"R");$pdf->Cell(25,6,"$m186r62","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r63","$rmc",0,"R");$pdf->Cell(28,6,"$m186r64","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r65","$rmc",0,"R");$pdf->Cell(25,6,"$m186r66","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r67","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r71","$rmc",0,"R");$pdf->Cell(25,6,"$m186r72","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r73","$rmc",0,"R");$pdf->Cell(28,6,"$m186r74","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r75","$rmc",0,"R");$pdf->Cell(25,6,"$m186r76","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r77","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r81","$rmc",0,"R");$pdf->Cell(25,6,"$m186r82","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r83","$rmc",0,"R");$pdf->Cell(28,6,"$m186r84","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r85","$rmc",0,"R");$pdf->Cell(25,6,"$m186r86","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r87","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r91","$rmc",0,"R");$pdf->Cell(25,6,"$m186r92","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r93","$rmc",0,"R");$pdf->Cell(28,6,"$m186r94","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r95","$rmc",0,"R");$pdf->Cell(25,6,"$m186r96","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r97","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m186r101","$rmc",0,"R");$pdf->Cell(25,7,"$m186r102","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r103","$rmc",0,"R");$pdf->Cell(28,7,"$m186r104","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r105","$rmc",0,"R");$pdf->Cell(25,7,"$m186r106","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r107","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r111","$rmc",0,"R");$pdf->Cell(25,6,"$m186r112","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r113","$rmc",0,"R");$pdf->Cell(28,6,"$m186r114","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r115","$rmc",0,"R");$pdf->Cell(25,6,"$m186r116","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r117","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m186r121","$rmc",0,"R");$pdf->Cell(25,7,"$m186r122","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r123","$rmc",0,"R");$pdf->Cell(28,7,"$m186r124","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r125","$rmc",0,"R");$pdf->Cell(25,7,"$m186r126","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r127","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r131","$rmc",0,"R");$pdf->Cell(25,6,"$m186r132","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r133","$rmc",0,"R");$pdf->Cell(28,6,"$m186r134","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r135","$rmc",0,"R");$pdf->Cell(25,6,"$m186r136","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r137","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r141","$rmc",0,"R");$pdf->Cell(25,6,"$m186r142","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r143","$rmc",0,"R");$pdf->Cell(28,6,"$m186r144","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r145","$rmc",0,"R");$pdf->Cell(25,6,"$m186r146","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r147","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r151","$rmc",0,"R");$pdf->Cell(25,6,"$m186r152","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r153","$rmc",0,"R");$pdf->Cell(28,6,"$m186r154","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r155","$rmc",0,"R");$pdf->Cell(25,6,"$m186r156","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r157","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m186r161","$rmc",0,"R");$pdf->Cell(25,7,"$m186r162","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r163","$rmc",0,"R");$pdf->Cell(28,7,"$m186r164","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r165","$rmc",0,"R");$pdf->Cell(25,7,"$m186r166","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r167","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r171","$rmc",0,"R");$pdf->Cell(25,6,"$m186r172","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r173","$rmc",0,"R");$pdf->Cell(28,6,"$m186r174","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r175","$rmc",0,"R");$pdf->Cell(25,6,"$m186r176","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r177","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r181","$rmc",0,"R");$pdf->Cell(25,6,"$m186r182","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r183","$rmc",0,"R");$pdf->Cell(28,6,"$m186r184","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r185","$rmc",0,"R");$pdf->Cell(25,6,"$m186r186","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r187","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r191","$rmc",0,"R");$pdf->Cell(25,6,"$m186r192","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r193","$rmc",0,"R");$pdf->Cell(28,6,"$m186r194","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r195","$rmc",0,"R");$pdf->Cell(25,6,"$m186r196","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r197","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m186r201","$rmc",0,"R");$pdf->Cell(25,7,"$m186r202","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r203","$rmc",0,"R");$pdf->Cell(28,7,"$m186r204","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r205","$rmc",0,"R");$pdf->Cell(25,7,"$m186r206","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r207","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r211","$rmc",0,"R");$pdf->Cell(25,6,"$m186r212","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r213","$rmc",0,"R");$pdf->Cell(28,6,"$m186r214","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r215","$rmc",0,"R");$pdf->Cell(25,6,"$m186r216","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r217","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r221","$rmc",0,"R");$pdf->Cell(25,6,"$m186r222","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r223","$rmc",0,"R");$pdf->Cell(28,6,"$m186r224","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r225","$rmc",0,"R");$pdf->Cell(25,6,"$m186r226","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r227","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r231","$rmc",0,"R");$pdf->Cell(25,6,"$m186r232","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r233","$rmc",0,"R");$pdf->Cell(28,6,"$m186r234","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r235","$rmc",0,"R");$pdf->Cell(25,6,"$m186r236","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r237","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m186r241","$rmc",0,"R");$pdf->Cell(25,7,"$m186r242","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r243","$rmc",0,"R");$pdf->Cell(28,7,"$m186r244","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r245","$rmc",0,"R");$pdf->Cell(25,7,"$m186r246","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r247","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r251","$rmc",0,"R");$pdf->Cell(25,6,"$m186r252","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r253","$rmc",0,"R");$pdf->Cell(28,6,"$m186r254","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r255","$rmc",0,"R");$pdf->Cell(25,6,"$m186r256","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r257","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r261","$rmc",0,"R");$pdf->Cell(25,6,"$m186r262","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r263","$rmc",0,"R");$pdf->Cell(28,6,"$m186r264","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r265","$rmc",0,"R");$pdf->Cell(25,6,"$m186r266","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r267","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r271","$rmc",0,"R");$pdf->Cell(25,6,"$m186r272","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r273","$rmc",0,"R");$pdf->Cell(28,6,"$m186r274","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r275","$rmc",0,"R");$pdf->Cell(25,6,"$m186r276","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r277","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"$m186r281","$rmc",0,"R");$pdf->Cell(25,7,"$m186r282","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r283","$rmc",0,"R");$pdf->Cell(28,7,"$m186r284","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r285","$rmc",0,"R");$pdf->Cell(25,7,"$m186r286","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r287","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r291","$rmc",0,"R");$pdf->Cell(25,6,"$m186r292","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r293","$rmc",0,"R");$pdf->Cell(28,6,"$m186r294","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r295","$rmc",0,"R");$pdf->Cell(25,6,"$m186r296","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r297","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,6,"$m186r301","$rmc",0,"R");$pdf->Cell(25,6,"$m186r302","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r303","$rmc",0,"R");$pdf->Cell(28,6,"$m186r304","$rmc",0,"R");
-$pdf->Cell(27,6,"$m186r305","$rmc",0,"R");$pdf->Cell(25,6,"$m186r306","$rmc",0,"R");
-$pdf->Cell(25,6,"$m186r307","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(22,7,"","$rmc",0,"R");$pdf->Cell(25,7,"$m186r992","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r993","$rmc",0,"R");$pdf->Cell(28,7,"$m186r994","$rmc",0,"R");
-$pdf->Cell(27,7,"$m186r995","$rmc",0,"R");$pdf->Cell(25,7,"$m186r996","$rmc",0,"R");
-$pdf->Cell(25,7,"$m186r997","$rmc",1,"R");
-                                       }
-
-if ( $strana == 10 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str10.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str10.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 187
-$m187r1=$hlavicka->m187r1; if ( $m187r1 == 0 ) $m187r1="";
-$pdf->Cell(195,25," ","$rmc1",1,"L");
-$pdf->Cell(113,5," ","$rmc1",0,"R");$pdf->Cell(74,6,"$m187r1","$rmc",1,"R");
-
-//modul 100101
-$m1590r1a=" ";
-$m1590r1b=" ";
-if ( $hlavicka->m1590r1a == 1 ) { $m1590r1a="x"; }
-if ( $hlavicka->m1590r1b == 1 ) { $m1590r1b="x"; }
-$pdf->Cell(190,20," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1590r1a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r1b","$rmc",1,"C");
-
-//modul 100102
-$m1590r2a=" ";
-$m1590r2b=" ";
-if ( $hlavicka->m1590r2a == 1 ) { $m1590r2a="x"; }
-if ( $hlavicka->m1590r2b == 1 ) { $m1590r2b="x"; }
-$pdf->Cell(190,24," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r2a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r2b","$rmc",1,"C");
-
-//modul 590
-$m590r11=$hlavicka->m590r11; if ( $m590r11 == 0 ) $m590r11="";
-$m590r12=$hlavicka->m590r12; if ( $m590r12 == 0 ) $m590r12="";
-$m590r13=$hlavicka->m590r13; if ( $m590r13 == 0 ) $m590r13="";
-$m590r14=$hlavicka->m590r14; if ( $m590r14 == 0 ) $m590r14="";
-$m590r15=$hlavicka->m590r15; if ( $m590r15 == 0 ) $m590r15="";
-$m590r21=$hlavicka->m590r21; if ( $m590r21 == 0 ) $m590r21="";
-$m590r22=$hlavicka->m590r22; if ( $m590r22 == 0 ) $m590r22="";
-$m590r23=$hlavicka->m590r23; if ( $m590r23 == 0 ) $m590r23="";
-$m590r24=$hlavicka->m590r24; if ( $m590r24 == 0 ) $m590r24="";
-$m590r25=$hlavicka->m590r25; if ( $m590r25 == 0 ) $m590r25="";
-$m590r31=$hlavicka->m590r31; if ( $m590r31 == 0 ) $m590r31="";
-$m590r32=$hlavicka->m590r32; if ( $m590r32 == 0 ) $m590r32="";
-$m590r33=$hlavicka->m590r33; if ( $m590r33 == 0 ) $m590r33="";
-$m590r34=$hlavicka->m590r34; if ( $m590r34 == 0 ) $m590r34="";
-$m590r35=$hlavicka->m590r35; if ( $m590r35 == 0 ) $m590r35="";
-$m590r41=$hlavicka->m590r41; if ( $m590r41 == 0 ) $m590r41="";
-$m590r42=$hlavicka->m590r42; if ( $m590r42 == 0 ) $m590r42="";
-$m590r43=$hlavicka->m590r43; if ( $m590r43 == 0 ) $m590r43="";
-$m590r44=$hlavicka->m590r44; if ( $m590r44 == 0 ) $m590r44="";
-$m590r45=$hlavicka->m590r45; if ( $m590r45 == 0 ) $m590r45="";
-$m590r51=$hlavicka->m590r51; if ( $m590r51 == 0 ) $m590r51="";
-$m590r52=$hlavicka->m590r52; if ( $m590r52 == 0 ) $m590r52="";
-$m590r53=$hlavicka->m590r53; if ( $m590r53 == 0 ) $m590r53="";
-$m590r54=$hlavicka->m590r54; if ( $m590r54 == 0 ) $m590r54="";
-$m590r55=$hlavicka->m590r55; if ( $m590r55 == 0 ) $m590r55="";
-$m590r61=$hlavicka->m590r61; if ( $m590r61 == 0 ) $m590r61="";
-$m590r62=$hlavicka->m590r62; if ( $m590r62 == 0 ) $m590r62="";
-$m590r63=$hlavicka->m590r63; if ( $m590r63 == 0 ) $m590r63="";
-$m590r64=$hlavicka->m590r64; if ( $m590r64 == 0 ) $m590r64="";
-$m590r65=$hlavicka->m590r65; if ( $m590r65 == 0 ) $m590r65="";
-$m590r71=$hlavicka->m590r71; if ( $m590r71 == 0 ) $m590r71="";
-$m590r72=$hlavicka->m590r72; if ( $m590r72 == 0 ) $m590r72="";
-$m590r73=$hlavicka->m590r73; if ( $m590r73 == 0 ) $m590r73="";
-$m590r74=$hlavicka->m590r74; if ( $m590r74 == 0 ) $m590r74="";
-$m590r75=$hlavicka->m590r75; if ( $m590r75 == 0 ) $m590r75="";
-$m590r81=$hlavicka->m590r81; if ( $m590r81 == 0 ) $m590r81="";
-$m590r82=$hlavicka->m590r82; if ( $m590r82 == 0 ) $m590r82="";
-$m590r83=$hlavicka->m590r83; if ( $m590r83 == 0 ) $m590r83="";
-$m590r84=$hlavicka->m590r84; if ( $m590r84 == 0 ) $m590r84="";
-$m590r85=$hlavicka->m590r85; if ( $m590r85 == 0 ) $m590r85="";
-$m590r91=$hlavicka->m590r91; if ( $m590r91 == 0 ) $m590r91="";
-$m590r92=$hlavicka->m590r92; if ( $m590r92 == 0 ) $m590r92="";
-$m590r93=$hlavicka->m590r93; if ( $m590r93 == 0 ) $m590r93="";
-$m590r94=$hlavicka->m590r94; if ( $m590r94 == 0 ) $m590r94="";
-$m590r95=$hlavicka->m590r95; if ( $m590r95 == 0 ) $m590r95="";
-$m590r101=$hlavicka->m590r101; if ( $m590r101 == 0 ) $m590r101="";
-$m590r102=$hlavicka->m590r102; if ( $m590r102 == 0 ) $m590r102="";
-$m590r103=$hlavicka->m590r103; if ( $m590r103 == 0 ) $m590r103="";
-$m590r104=$hlavicka->m590r104; if ( $m590r104 == 0 ) $m590r104="";
-$m590r105=$hlavicka->m590r105; if ( $m590r105 == 0 ) $m590r105="";
-$m590r111=$hlavicka->m590r111; if ( $m590r111 == 0 ) $m590r111="";
-$m590r112=$hlavicka->m590r112; if ( $m590r112 == 0 ) $m590r112="";
-$m590r113=$hlavicka->m590r113; if ( $m590r113 == 0 ) $m590r113="";
-$m590r114=$hlavicka->m590r114; if ( $m590r114 == 0 ) $m590r114="";
-$m590r115=$hlavicka->m590r115; if ( $m590r115 == 0 ) $m590r115="";
-$m590r121=$hlavicka->m590r121; if ( $m590r121 == 0 ) $m590r121="";
-$m590r122=$hlavicka->m590r122; if ( $m590r122 == 0 ) $m590r122="";
-$m590r123=$hlavicka->m590r123; if ( $m590r123 == 0 ) $m590r123="";
-$m590r124=$hlavicka->m590r124; if ( $m590r124 == 0 ) $m590r124="";
-$m590r125=$hlavicka->m590r125; if ( $m590r125 == 0 ) $m590r125="";
-$m590r131=$hlavicka->m590r131; if ( $m590r131 == 0 ) $m590r131="";
-$m590r132=$hlavicka->m590r132; if ( $m590r132 == 0 ) $m590r132="";
-$m590r133=$hlavicka->m590r133; if ( $m590r133 == 0 ) $m590r133="";
-$m590r134=$hlavicka->m590r134; if ( $m590r134 == 0 ) $m590r134="";
-$m590r135=$hlavicka->m590r135; if ( $m590r135 == 0 ) $m590r135="";
-$m590r141=$hlavicka->m590r141; if ( $m590r141 == 0 ) $m590r141="";
-$m590r142=$hlavicka->m590r142; if ( $m590r142 == 0 ) $m590r142="";
-$m590r143=$hlavicka->m590r143; if ( $m590r143 == 0 ) $m590r143="";
-$m590r144=$hlavicka->m590r144; if ( $m590r144 == 0 ) $m590r144="";
-$m590r145=$hlavicka->m590r145; if ( $m590r145 == 0 ) $m590r145="";
-$m590r151=$hlavicka->m590r151; if ( $m590r151 == 0 ) $m590r151="";
-$m590r152=$hlavicka->m590r152; if ( $m590r152 == 0 ) $m590r152="";
-$m590r153=$hlavicka->m590r153; if ( $m590r153 == 0 ) $m590r153="";
-$m590r154=$hlavicka->m590r154; if ( $m590r154 == 0 ) $m590r154="";
-$m590r155=$hlavicka->m590r155; if ( $m590r155 == 0 ) $m590r155="";
-$m590r161=$hlavicka->m590r161; if ( $m590r161 == 0 ) $m590r161="";
-$m590r162=$hlavicka->m590r162; if ( $m590r162 == 0 ) $m590r162="";
-$m590r163=$hlavicka->m590r163; if ( $m590r163 == 0 ) $m590r163="";
-$m590r164=$hlavicka->m590r164; if ( $m590r164 == 0 ) $m590r164="";
-$m590r165=$hlavicka->m590r165; if ( $m590r165 == 0 ) $m590r165="";
-$m590r171=$hlavicka->m590r171; if ( $m590r171 == 0 ) $m590r171="";
-$m590r172=$hlavicka->m590r172; if ( $m590r172 == 0 ) $m590r172="";
-$m590r173=$hlavicka->m590r173; if ( $m590r173 == 0 ) $m590r173="";
-$m590r174=$hlavicka->m590r174; if ( $m590r174 == 0 ) $m590r174="";
-$m590r175=$hlavicka->m590r175; if ( $m590r175 == 0 ) $m590r175="";
-$m590r181=$hlavicka->m590r181; if ( $m590r181 == 0 ) $m590r181="";
-$m590r182=$hlavicka->m590r182; if ( $m590r182 == 0 ) $m590r182="";
-$m590r183=$hlavicka->m590r183; if ( $m590r183 == 0 ) $m590r183="";
-$m590r184=$hlavicka->m590r184; if ( $m590r184 == 0 ) $m590r184="";
-$m590r185=$hlavicka->m590r185; if ( $m590r185 == 0 ) $m590r185="";
-$m590r191=$hlavicka->m590r191; if ( $m590r191 == 0 ) $m590r191="";
-$m590r192=$hlavicka->m590r192; if ( $m590r192 == 0 ) $m590r192="";
-$m590r193=$hlavicka->m590r193; if ( $m590r193 == 0 ) $m590r193="";
-$m590r194=$hlavicka->m590r194; if ( $m590r194 == 0 ) $m590r194="";
-$m590r195=$hlavicka->m590r195; if ( $m590r195 == 0 ) $m590r195="";
-$m590r201=$hlavicka->m590r201; if ( $m590r201 == 0 ) $m590r201="";
-$m590r202=$hlavicka->m590r202; if ( $m590r202 == 0 ) $m590r202="";
-$m590r203=$hlavicka->m590r203; if ( $m590r203 == 0 ) $m590r203="";
-$m590r204=$hlavicka->m590r204; if ( $m590r204 == 0 ) $m590r204="";
-$m590r205=$hlavicka->m590r205; if ( $m590r205 == 0 ) $m590r205="";
-$m590r992=$hlavicka->m590r992;
-//if ( $m590r992 == 0 ) $m590r992="";
-$m590r993=$hlavicka->m590r993;
-//if ( $m590r993 == 0 ) $m590r993="";
-$m590r994=$hlavicka->m590r994;
-//if ( $m590r994 == 0 ) $m590r994="";
-$m590r995=$hlavicka->m590r995;
-//if ( $m590r995 == 0 ) $m590r995="";
-$pdf->Cell(195,45," ","$rmc1",1,"L");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r11","$rmc",0,"R");$pdf->Cell(42,6,"$m590r12","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r13","$rmc",0,"R");$pdf->Cell(35,6,"$m590r14","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r15","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r21","$rmc",0,"R");$pdf->Cell(42,6,"$m590r22","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r23","$rmc",0,"R");$pdf->Cell(35,6,"$m590r24","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r25","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r31","$rmc",0,"R");$pdf->Cell(42,5,"$m590r32","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r33","$rmc",0,"R");$pdf->Cell(35,5,"$m590r34","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r35","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r41","$rmc",0,"R");$pdf->Cell(42,6,"$m590r42","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r43","$rmc",0,"R");$pdf->Cell(35,6,"$m590r44","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r45","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r51","$rmc",0,"R");$pdf->Cell(42,6,"$m590r52","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r53","$rmc",0,"R");$pdf->Cell(35,6,"$m590r54","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r55","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r61","$rmc",0,"R");$pdf->Cell(42,6,"$m590r62","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r63","$rmc",0,"R");$pdf->Cell(35,6,"$m590r64","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r65","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r71","$rmc",0,"R");$pdf->Cell(42,5,"$m590r72","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r73","$rmc",0,"R");$pdf->Cell(35,5,"$m590r74","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r75","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r81","$rmc",0,"R");$pdf->Cell(42,6,"$m590r82","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r83","$rmc",0,"R");$pdf->Cell(35,6,"$m590r84","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r85","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r91","$rmc",0,"R");$pdf->Cell(42,6,"$m590r92","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r93","$rmc",0,"R");$pdf->Cell(35,6,"$m590r94","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r95","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r101","$rmc",0,"R");$pdf->Cell(42,6,"$m590r102","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r103","$rmc",0,"R");$pdf->Cell(35,6,"$m590r104","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r105","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r111","$rmc",0,"R");$pdf->Cell(42,6,"$m590r112","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r113","$rmc",0,"R");$pdf->Cell(35,6,"$m590r114","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r115","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r121","$rmc",0,"R");$pdf->Cell(42,5,"$m590r122","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r123","$rmc",0,"R");$pdf->Cell(35,5,"$m590r124","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r125","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r131","$rmc",0,"R");$pdf->Cell(42,6,"$m590r132","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r133","$rmc",0,"R");$pdf->Cell(35,6,"$m590r134","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r135","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r141","$rmc",0,"R");$pdf->Cell(42,6,"$m590r142","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r143","$rmc",0,"R");$pdf->Cell(35,6,"$m590r144","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r145","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r151","$rmc",0,"R");$pdf->Cell(42,6,"$m590r152","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r153","$rmc",0,"R");$pdf->Cell(35,6,"$m590r154","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r155","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r161","$rmc",0,"R");$pdf->Cell(42,5,"$m590r162","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r163","$rmc",0,"R");$pdf->Cell(35,5,"$m590r164","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r165","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r171","$rmc",0,"R");$pdf->Cell(42,6,"$m590r172","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r173","$rmc",0,"R");$pdf->Cell(35,6,"$m590r174","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r175","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r181","$rmc",0,"R");$pdf->Cell(42,6,"$m590r182","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r183","$rmc",0,"R");$pdf->Cell(35,6,"$m590r184","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r185","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r191","$rmc",0,"R");$pdf->Cell(42,6,"$m590r192","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r193","$rmc",0,"R");$pdf->Cell(35,6,"$m590r194","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r195","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r201","$rmc",0,"R");$pdf->Cell(42,5,"$m590r202","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r203","$rmc",0,"R");$pdf->Cell(35,5,"$m590r204","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r205","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6.5,"","$rmc",0,"R");$pdf->Cell(42,6.5,"$m590r992","$rmc",0,"R");
-$pdf->Cell(38,6.5,"$m590r993","$rmc",0,"R");$pdf->Cell(35,6.5,"$m590r994","$rmc",0,"R");
-$pdf->Cell(32,6.5,"$m590r995","$rmc",1,"R");
-                                        }
-
-if ( $strana == 11 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str11.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str11.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 304
-$m304r1=$hlavicka->m304r1; if ( $m304r1 == 0 ) $m304r1="";
-$m304r2=$hlavicka->m304r2; if ( $m304r2 == 0 ) $m304r2="";
-$m304r3=$hlavicka->m304r3; if ( $m304r3 == 0 ) $m304r3="";
-$m304r4=$hlavicka->m304r4; if ( $m304r4 == 0 ) $m304r4="";
-$m304r5=$hlavicka->m304r5; if ( $m304r5 == 0 ) $m304r5="";
-$m304r6=$hlavicka->m304r6; if ( $m304r6 == 0 ) $m304r6="";
-$m304r7=$hlavicka->m304r7; if ( $m304r7 == 0 ) $m304r7="";
-$m304r8=$hlavicka->m304r8; if ( $m304r8 == 0 ) $m304r8="";
-$m304r9=$hlavicka->m304r9; if ( $m304r9 == 0 ) $m304r9="";
-$m304r10=$hlavicka->m304r10; if ( $m304r10 == 0 ) $m304r10="";
-$m304r11=$hlavicka->m304r11; if ( $m304r11 == 0 ) $m304r11="";
-$m304r12=$hlavicka->m304r12; if ( $m304r12 == 0 ) $m304r12="";
-$m304r13=$hlavicka->m304r13; if ( $m304r13 == 0 ) $m304r13="";
-$m304r14=$hlavicka->m304r14; if ( $m304r14 == 0 ) $m304r14="";
-$m304r15=$hlavicka->m304r15; if ( $m304r15 == 0 ) $m304r15="";
-$m304r16=$hlavicka->m304r16; if ( $m304r16 == 0 ) $m304r16="";
-$m304r99=$hlavicka->m304r99;
-//if ( $m304r99 == 0 ) $m304r99="";
-$pdf->Cell(195,41," ","$rmc1",1,"L");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r1","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r2","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r3","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r4","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r5","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r6","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r7","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,9,"$m304r8","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r9","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r10","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r11","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r12","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r13","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r14","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,8,"$m304r15","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r16","$rmc",1,"R");
-$pdf->Cell(130,5," ","$rmc1",0,"R");$pdf->Cell(45,7,"$m304r99","$rmc",1,"R");
-                                        }
-
-if ( $strana == 12 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str12.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str12.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
-//modul 110
-$m110r12=$hlavicka->m110r12; if ( $m110r12 == 0 ) $m110r12="";
-$m110r13=$hlavicka->m110r13; if ( $m110r13 == 0 ) $m110r13="";
-$m110r14=$hlavicka->m110r14; if ( $m110r14 == 0 ) $m110r14="";
-$m110r15=$hlavicka->m110r15; if ( $m110r15 == 0 ) $m110r15="";
-$m110r16=$hlavicka->m110r16; if ( $m110r16 == 0 ) $m110r16="";
-$m110r17=$hlavicka->m110r17; if ( $m110r17 == 0 ) $m110r17="";
-$m110r18=$hlavicka->m110r18; if ( $m110r18 == 0 ) $m110r18="";
-$m110r19=$hlavicka->m110r19; if ( $m110r19 == 0 ) $m110r19="";
-$m110r22=$hlavicka->m110r22; if ( $m110r22 == 0 ) $m110r22="";
-$m110r23=$hlavicka->m110r23; if ( $m110r23 == 0 ) $m110r23="";
-$m110r24=$hlavicka->m110r24; if ( $m110r24 == 0 ) $m110r24="";
-$m110r25=$hlavicka->m110r25; if ( $m110r25 == 0 ) $m110r25="";
-$m110r26=$hlavicka->m110r26; if ( $m110r26 == 0 ) $m110r26="";
-$m110r27=$hlavicka->m110r27; if ( $m110r27 == 0 ) $m110r27="";
-$m220r28=$hlavicka->m220r28; if ( $m220r28 == 0 ) $m220r28="";
-$m220r29=$hlavicka->m220r29; if ( $m220r29 == 0 ) $m220r29="";
-$m110r32=$hlavicka->m110r32; if ( $m110r32 == 0 ) $m110r32="";
-$m110r33=$hlavicka->m110r33; if ( $m110r33 == 0 ) $m110r33="";
-$m110r34=$hlavicka->m110r34; if ( $m110r34 == 0 ) $m110r34="";
-$m110r35=$hlavicka->m110r35; if ( $m110r35 == 0 ) $m110r35="";
-$m110r36=$hlavicka->m110r36; if ( $m110r36 == 0 ) $m110r36="";
-$m110r37=$hlavicka->m110r37; if ( $m110r37 == 0 ) $m110r37="";
-$m330r38=$hlavicka->m330r38; if ( $m330r38 == 0 ) $m330r38="";
-$m330r39=$hlavicka->m330r39; if ( $m330r39 == 0 ) $m330r39="";
-$m110r42=$hlavicka->m110r42; if ( $m110r42 == 0 ) $m110r42="";
-$m110r43=$hlavicka->m110r43; if ( $m110r43 == 0 ) $m110r43="";
-$m110r44=$hlavicka->m110r44; if ( $m110r44 == 0 ) $m110r44="";
-$m110r45=$hlavicka->m110r45; if ( $m110r45 == 0 ) $m110r45="";
-$m110r46=$hlavicka->m110r46; if ( $m110r46 == 0 ) $m110r46="";
-$m110r47=$hlavicka->m110r47; if ( $m110r47 == 0 ) $m110r47="";
-$m440r48=$hlavicka->m440r48; if ( $m440r48 == 0 ) $m440r48="";
-$m440r49=$hlavicka->m440r49; if ( $m440r49 == 0 ) $m440r49="";
-$m110r52=$hlavicka->m110r52; if ( $m110r52 == 0 ) $m110r52="";
-$m110r53=$hlavicka->m110r53; if ( $m110r53 == 0 ) $m110r53="";
-$m110r54=$hlavicka->m110r54; if ( $m110r54 == 0 ) $m110r54="";
-$m110r55=$hlavicka->m110r55; if ( $m110r55 == 0 ) $m110r55="";
-$m110r56=$hlavicka->m110r56; if ( $m110r56 == 0 ) $m110r56="";
-$m110r57=$hlavicka->m110r57; if ( $m110r57 == 0 ) $m110r57="";
-$m110r58=$hlavicka->m110r58; if ( $m110r58 == 0 ) $m110r58="";
-$m110r59=$hlavicka->m110r59; if ( $m110r59 == 0 ) $m110r59="";
-$m110r62=$hlavicka->m110r62; if ( $m110r62 == 0 ) $m110r62="";
-$m110r63=$hlavicka->m110r63; if ( $m110r63 == 0 ) $m110r63="";
-$m110r64=$hlavicka->m110r64; if ( $m110r64 == 0 ) $m110r64="";
-$m110r65=$hlavicka->m110r65; if ( $m110r65 == 0 ) $m110r65="";
-$m110r66=$hlavicka->m110r66; if ( $m110r66 == 0 ) $m110r66="";
-$m110r67=$hlavicka->m110r67; if ( $m110r67 == 0 ) $m110r67="";
-$m110r68=$hlavicka->m110r68; if ( $m110r68 == 0 ) $m110r68="";
-$m110r69=$hlavicka->m110r69; if ( $m110r69 == 0 ) $m110r69="";
-$m110r72=$hlavicka->m110r72; if ( $m110r72 == 0 ) $m110r72="";
-$m110r73=$hlavicka->m110r73; if ( $m110r73 == 0 ) $m110r73="";
-$m110r74=$hlavicka->m110r74; if ( $m110r74 == 0 ) $m110r74="";
-$m110r75=$hlavicka->m110r75; if ( $m110r75 == 0 ) $m110r75="";
-$m110r76=$hlavicka->m110r76; if ( $m110r76 == 0 ) $m110r76="";
-$m110r77=$hlavicka->m110r77; if ( $m110r77 == 0 ) $m110r77="";
-$m110r78=$hlavicka->m110r78; if ( $m110r78 == 0 ) $m110r78="";
-$m110r79=$hlavicka->m110r79; if ( $m110r79 == 0 ) $m110r79="";
-$m110r82=$hlavicka->m110r82; if ( $m110r82 == 0 ) $m110r82="";
-$m110r83=$hlavicka->m110r83; if ( $m110r83 == 0 ) $m110r83="";
-$m110r84=$hlavicka->m110r84; if ( $m110r84 == 0 ) $m110r84="";
-$m110r85=$hlavicka->m110r85; if ( $m110r85 == 0 ) $m110r85="";
-$m110r86=$hlavicka->m110r86; if ( $m110r86 == 0 ) $m110r86="";
-$m110r87=$hlavicka->m110r87; if ( $m110r87 == 0 ) $m110r87="";
-$m110r88=$hlavicka->m110r88; if ( $m110r88 == 0 ) $m110r88="";
-$m110r89=$hlavicka->m110r89; if ( $m110r89 == 0 ) $m110r89="";
-$m110r92=$hlavicka->m110r92; if ( $m110r92 == 0 ) $m110r92="";
-$m110r93=$hlavicka->m110r93; if ( $m110r93 == 0 ) $m110r93="";
-$m110r94=$hlavicka->m110r94; if ( $m110r94 == 0 ) $m110r94="";
-$m110r95=$hlavicka->m110r95; if ( $m110r95 == 0 ) $m110r95="";
-$m110r96=$hlavicka->m110r96; if ( $m110r96 == 0 ) $m110r96="";
-$m110r97=$hlavicka->m110r97; if ( $m110r97 == 0 ) $m110r97="";
-$m110r18=$hlavicka->m110r18; if ( $m110r18 == 0 ) $m110r18="";
-$m110r19=$hlavicka->m110r19; if ( $m110r19 == 0 ) $m110r19="";
-$m110r102=$hlavicka->m110r102; if ( $m110r102 == 0 ) $m110r102="";
-$m110r103=$hlavicka->m110r103; if ( $m110r103 == 0 ) $m110r103="";
-$m110r104=$hlavicka->m110r104; if ( $m110r104 == 0 ) $m110r104="";
-$m110r105=$hlavicka->m110r105; if ( $m110r105 == 0 ) $m110r105="";
-$m110r106=$hlavicka->m110r106; if ( $m110r106 == 0 ) $m110r106="";
-$m110r107=$hlavicka->m110r107; if ( $m110r107 == 0 ) $m110r107="";
-$m110r108=$hlavicka->m110r108; if ( $m110r108 == 0 ) $m110r108="";
-$m110r109=$hlavicka->m110r109; if ( $m110r109 == 0 ) $m110r109="";
-$m110r112=$hlavicka->m110r112; if ( $m110r112 == 0 ) $m110r112="";
-$m110r113=$hlavicka->m110r113; if ( $m110r113 == 0 ) $m110r113="";
-$m110r114=$hlavicka->m110r114; if ( $m110r114 == 0 ) $m110r114="";
-$m110r115=$hlavicka->m110r115; if ( $m110r115 == 0 ) $m110r115="";
-$m110r116=$hlavicka->m110r116; if ( $m110r116 == 0 ) $m110r116="";
-$m110r117=$hlavicka->m110r117; if ( $m110r117 == 0 ) $m110r117="";
-$m110r118=$hlavicka->m110r118; if ( $m110r118 == 0 ) $m110r118="";
-$m110r119=$hlavicka->m110r119; if ( $m110r119 == 0 ) $m110r119="";
-$m110r122=$hlavicka->m110r122; if ( $m110r122 == 0 ) $m110r122="";
-$m110r123=$hlavicka->m110r123; if ( $m110r123 == 0 ) $m110r123="";
-$m110r124=$hlavicka->m110r124; if ( $m110r124 == 0 ) $m110r124="";
-$m110r125=$hlavicka->m110r125; if ( $m110r125 == 0 ) $m110r125="";
-$m110r126=$hlavicka->m110r126; if ( $m110r126 == 0 ) $m110r126="";
-$m110r127=$hlavicka->m110r127; if ( $m110r127 == 0 ) $m110r127="";
-$m110r128=$hlavicka->m110r128; if ( $m110r128 == 0 ) $m110r128="";
-$m110r129=$hlavicka->m110r129; if ( $m110r129 == 0 ) $m110r129="";
-$m110r132=$hlavicka->m110r132; if ( $m110r132 == 0 ) $m110r132="";
-$m110r133=$hlavicka->m110r133; if ( $m110r133 == 0 ) $m110r133="";
-$m110r134=$hlavicka->m110r134; if ( $m110r134 == 0 ) $m110r134="";
-$m110r135=$hlavicka->m110r135; if ( $m110r135 == 0 ) $m110r135="";
-$m110r136=$hlavicka->m110r136; if ( $m110r136 == 0 ) $m110r136="";
-$m110r137=$hlavicka->m110r137; if ( $m110r137 == 0 ) $m110r137="";
-$m110r138=$hlavicka->m110r138; if ( $m110r138 == 0 ) $m110r138="";
-$m110r139=$hlavicka->m110r139; if ( $m110r139 == 0 ) $m110r139="";
-$m110r142=$hlavicka->m110r142; if ( $m110r142 == 0 ) $m110r142="";
-$m110r143=$hlavicka->m110r143; if ( $m110r143 == 0 ) $m110r143="";
-$m110r144=$hlavicka->m110r144; if ( $m110r144 == 0 ) $m110r144="";
-$m110r145=$hlavicka->m110r145; if ( $m110r145 == 0 ) $m110r145="";
-$m110r146=$hlavicka->m110r146; if ( $m110r146 == 0 ) $m110r146="";
-$m110r147=$hlavicka->m110r147; if ( $m110r147 == 0 ) $m110r147="";
-$m110r148=$hlavicka->m110r148; if ( $m110r148 == 0 ) $m110r148="";
-$m110r149=$hlavicka->m110r149; if ( $m110r149 == 0 ) $m110r149="";
-$m110r152=$hlavicka->m110r152; if ( $m110r152 == 0 ) $m110r152="";
-$m110r153=$hlavicka->m110r153; if ( $m110r153 == 0 ) $m110r153="";
-$m110r154=$hlavicka->m110r154; if ( $m110r154 == 0 ) $m110r154="";
-$m110r155=$hlavicka->m110r155; if ( $m110r155 == 0 ) $m110r155="";
-$m110r156=$hlavicka->m110r156; if ( $m110r156 == 0 ) $m110r156="";
-$m110r157=$hlavicka->m110r157; if ( $m110r157 == 0 ) $m110r157="";
-$m110r158=$hlavicka->m110r158; if ( $m110r158 == 0 ) $m110r158="";
-$m110r159=$hlavicka->m110r159; if ( $m110r159 == 0 ) $m110r159="";
-$m110r162=$hlavicka->m110r162; if ( $m110r162 == 0 ) $m110r162="";
-$m110r163=$hlavicka->m110r163; if ( $m110r163 == 0 ) $m110r163="";
-$m110r164=$hlavicka->m110r164; if ( $m110r164 == 0 ) $m110r164="";
-$m110r165=$hlavicka->m110r165; if ( $m110r165 == 0 ) $m110r165="";
-$m110r166=$hlavicka->m110r166; if ( $m110r166 == 0 ) $m110r166="";
-$m110r167=$hlavicka->m110r167; if ( $m110r167 == 0 ) $m110r167="";
-$m110r168=$hlavicka->m110r168; if ( $m110r168 == 0 ) $m110r168="";
-$m110r169=$hlavicka->m110r169; if ( $m110r169 == 0 ) $m110r169="";
-$m110r172=$hlavicka->m110r172; if ( $m110r172 == 0 ) $m110r172="";
-$m110r173=$hlavicka->m110r173; if ( $m110r173 == 0 ) $m110r173="";
-$m110r174=$hlavicka->m110r174; if ( $m110r174 == 0 ) $m110r174="";
-$m110r175=$hlavicka->m110r175; if ( $m110r175 == 0 ) $m110r175="";
-$m110r176=$hlavicka->m110r176; if ( $m110r176 == 0 ) $m110r176="";
-$m110r177=$hlavicka->m110r177; if ( $m110r177 == 0 ) $m110r177="";
-$m110r178=$hlavicka->m110r178; if ( $m110r178 == 0 ) $m110r178="";
-$m110r179=$hlavicka->m110r179; if ( $m110r179 == 0 ) $m110r179="";
-$m110r182=$hlavicka->m110r182; if ( $m110r182 == 0 ) $m110r182="";
-$m110r183=$hlavicka->m110r183; if ( $m110r183 == 0 ) $m110r183="";
-$m110r184=$hlavicka->m110r184; if ( $m110r184 == 0 ) $m110r184="";
-$m110r185=$hlavicka->m110r185; if ( $m110r185 == 0 ) $m110r185="";
-$m110r186=$hlavicka->m110r186; if ( $m110r186 == 0 ) $m110r186="";
-$m110r187=$hlavicka->m110r187; if ( $m110r187 == 0 ) $m110r187="";
-$m110r188=$hlavicka->m110r188; if ( $m110r188 == 0 ) $m110r188="";
-$m110r189=$hlavicka->m110r189; if ( $m110r189 == 0 ) $m110r189="";
-$m110r192=$hlavicka->m110r192; if ( $m110r192 == 0 ) $m110r192="";
-$m110r193=$hlavicka->m110r193; if ( $m110r193 == 0 ) $m110r193="";
-$m110r194=$hlavicka->m110r194; if ( $m110r194 == 0 ) $m110r194="";
-$m110r195=$hlavicka->m110r195; if ( $m110r195 == 0 ) $m110r195="";
-$m110r196=$hlavicka->m110r196; if ( $m110r196 == 0 ) $m110r196="";
-$m110r197=$hlavicka->m110r197; if ( $m110r197 == 0 ) $m110r197="";
-$m110r198=$hlavicka->m110r198; if ( $m110r198 == 0 ) $m110r198="";
-$m110r199=$hlavicka->m110r199; if ( $m110r199 == 0 ) $m110r199="";
-$m110r202=$hlavicka->m110r202; if ( $m110r202 == 0 ) $m110r202="";
-$m110r203=$hlavicka->m110r203; if ( $m110r203 == 0 ) $m110r203="";
-$m110r204=$hlavicka->m110r204; if ( $m110r204 == 0 ) $m110r204="";
-$m110r205=$hlavicka->m110r205; if ( $m110r205 == 0 ) $m110r205="";
-$m110r206=$hlavicka->m110r206; if ( $m110r206 == 0 ) $m110r206="";
-$m110r207=$hlavicka->m110r207; if ( $m110r207 == 0 ) $m110r207="";
-$m110r208=$hlavicka->m110r208; if ( $m110r208 == 0 ) $m110r208="";
-$m110r209=$hlavicka->m110r209; if ( $m110r209 == 0 ) $m110r209="";
-$m110r212=$hlavicka->m110r212; if ( $m110r212 == 0 ) $m110r212="";
-$m110r213=$hlavicka->m110r213; if ( $m110r213 == 0 ) $m110r213="";
-$m110r214=$hlavicka->m110r214; if ( $m110r214 == 0 ) $m110r214="";
-$m110r215=$hlavicka->m110r215; if ( $m110r215 == 0 ) $m110r215="";
-$m110r216=$hlavicka->m110r216; if ( $m110r216 == 0 ) $m110r216="";
-$m110r217=$hlavicka->m110r217; if ( $m110r217 == 0 ) $m110r217="";
-$m110r218=$hlavicka->m110r218; if ( $m110r218 == 0 ) $m110r218="";
-$m110r219=$hlavicka->m110r219; if ( $m110r219 == 0 ) $m110r219="";
-$m110r222=$hlavicka->m110r222; if ( $m110r222 == 0 ) $m110r222="";
-$m110r223=$hlavicka->m110r223; if ( $m110r223 == 0 ) $m110r223="";
-$m110r224=$hlavicka->m110r224; if ( $m110r224 == 0 ) $m110r224="";
-$m110r225=$hlavicka->m110r225; if ( $m110r225 == 0 ) $m110r225="";
-$m110r226=$hlavicka->m110r226; if ( $m110r226 == 0 ) $m110r226="";
-$m110r227=$hlavicka->m110r227; if ( $m110r227 == 0 ) $m110r227="";
-$m110r228=$hlavicka->m110r228; if ( $m110r228 == 0 ) $m110r228="";
-$m110r229=$hlavicka->m110r229; if ( $m110r229 == 0 ) $m110r229="";
-$m110r232=$hlavicka->m110r232; if ( $m110r232 == 0 ) $m110r232="";
-$m110r233=$hlavicka->m110r233; if ( $m110r233 == 0 ) $m110r233="";
-$m110r234=$hlavicka->m110r234; if ( $m110r234 == 0 ) $m110r234="";
-$m110r235=$hlavicka->m110r235; if ( $m110r235 == 0 ) $m110r235="";
-$m110r236=$hlavicka->m110r236; if ( $m110r236 == 0 ) $m110r236="";
-$m110r237=$hlavicka->m110r237; if ( $m110r237 == 0 ) $m110r237="";
-$m110r238=$hlavicka->m110r238; if ( $m110r238 == 0 ) $m110r238="";
-$m110r239=$hlavicka->m110r239; if ( $m110r239 == 0 ) $m110r239="";
-$m110r242=$hlavicka->m110r242; if ( $m110r242 == 0 ) $m110r242="";
-$m110r243=$hlavicka->m110r243; if ( $m110r243 == 0 ) $m110r243="";
-$m110r244=$hlavicka->m110r244; if ( $m110r244 == 0 ) $m110r244="";
-$m110r245=$hlavicka->m110r245; if ( $m110r245 == 0 ) $m110r245="";
-$m110r246=$hlavicka->m110r246; if ( $m110r246 == 0 ) $m110r246="";
-$m110r247=$hlavicka->m110r247; if ( $m110r247 == 0 ) $m110r247="";
-$m110r248=$hlavicka->m110r248; if ( $m110r248 == 0 ) $m110r248="";
-$m110r249=$hlavicka->m110r249; if ( $m110r249 == 0 ) $m110r249="";
-$m110r252=$hlavicka->m110r252; if ( $m110r252 == 0 ) $m110r252="";
-$m110r253=$hlavicka->m110r253; if ( $m110r253 == 0 ) $m110r253="";
-$m110r254=$hlavicka->m110r254; if ( $m110r254 == 0 ) $m110r254="";
-$m110r255=$hlavicka->m110r255; if ( $m110r255 == 0 ) $m110r255="";
-$m110r256=$hlavicka->m110r256; if ( $m110r256 == 0 ) $m110r256="";
-$m110r257=$hlavicka->m110r257; if ( $m110r257 == 0 ) $m110r257="";
-$m110r258=$hlavicka->m110r258; if ( $m110r258 == 0 ) $m110r258="";
-$m110r259=$hlavicka->m110r259; if ( $m110r259 == 0 ) $m110r259="";
-$m110r262=$hlavicka->m110r262; if ( $m110r262 == 0 ) $m110r262="";
-$m110r263=$hlavicka->m110r263; if ( $m110r263 == 0 ) $m110r263="";
-$m110r264=$hlavicka->m110r264; if ( $m110r264 == 0 ) $m110r264="";
-$m110r265=$hlavicka->m110r265; if ( $m110r265 == 0 ) $m110r265="";
-$m110r266=$hlavicka->m110r266; if ( $m110r266 == 0 ) $m110r266="";
-$m110r267=$hlavicka->m110r267; if ( $m110r267 == 0 ) $m110r267="";
-$m110r268=$hlavicka->m110r268; if ( $m110r268 == 0 ) $m110r268="";
-$m110r269=$hlavicka->m110r269; if ( $m110r269 == 0 ) $m110r269="";
-$m110r272=$hlavicka->m110r272; if ( $m110r272 == 0 ) $m110r272="";
-$m110r273=$hlavicka->m110r273; if ( $m110r273 == 0 ) $m110r273="";
-$m110r274=$hlavicka->m110r274; if ( $m110r274 == 0 ) $m110r274="";
-$m110r275=$hlavicka->m110r275; if ( $m110r275 == 0 ) $m110r275="";
-$m110r276=$hlavicka->m110r276; if ( $m110r276 == 0 ) $m110r276="";
-$m110r277=$hlavicka->m110r277; if ( $m110r277 == 0 ) $m110r277="";
-$m110r278=$hlavicka->m110r278; if ( $m110r278 == 0 ) $m110r278="";
-$m110r279=$hlavicka->m110r279; if ( $m110r279 == 0 ) $m110r279="";
-$m110r282=$hlavicka->m110r282; if ( $m110r282 == 0 ) $m110r282="";
-$m110r283=$hlavicka->m110r283; if ( $m110r283 == 0 ) $m110r283="";
-$m110r284=$hlavicka->m110r284; if ( $m110r284 == 0 ) $m110r284="";
-$m110r285=$hlavicka->m110r285; if ( $m110r285 == 0 ) $m110r285="";
-$m110r286=$hlavicka->m110r286; if ( $m110r286 == 0 ) $m110r286="";
-$m110r287=$hlavicka->m110r287; if ( $m110r287 == 0 ) $m110r287="";
-$m110r288=$hlavicka->m110r288; if ( $m110r288 == 0 ) $m110r288="";
-$m110r289=$hlavicka->m110r289; if ( $m110r289 == 0 ) $m110r289="";
-$m110r292=$hlavicka->m110r292; if ( $m110r292 == 0 ) $m110r292="";
-$m110r293=$hlavicka->m110r293; if ( $m110r293 == 0 ) $m110r293="";
-$m110r294=$hlavicka->m110r294; if ( $m110r294 == 0 ) $m110r294="";
-$m110r295=$hlavicka->m110r295; if ( $m110r295 == 0 ) $m110r295="";
-$m110r296=$hlavicka->m110r296; if ( $m110r296 == 0 ) $m110r296="";
-$m110r297=$hlavicka->m110r297; if ( $m110r297 == 0 ) $m110r297="";
-$m110r298=$hlavicka->m110r298; if ( $m110r298 == 0 ) $m110r298="";
-$m110r299=$hlavicka->m110r299; if ( $m110r299 == 0 ) $m110r299="";
-$m110r302=$hlavicka->m110r302; if ( $m110r302 == 0 ) $m110r302="";
-$m110r303=$hlavicka->m110r303; if ( $m110r303 == 0 ) $m110r303="";
-$m110r304=$hlavicka->m110r304; if ( $m110r304 == 0 ) $m110r304="";
-$m110r305=$hlavicka->m110r305; if ( $m110r305 == 0 ) $m110r305="";
-$m110r306=$hlavicka->m110r306; if ( $m110r306 == 0 ) $m110r306="";
-$m110r307=$hlavicka->m110r307; if ( $m110r307 == 0 ) $m110r307="";
-$m110r308=$hlavicka->m110r308; if ( $m110r308 == 0 ) $m110r308="";
-$m110r309=$hlavicka->m110r309; if ( $m110r309 == 0 ) $m110r309="";
-$m110r312=$hlavicka->m110r312; if ( $m110r312 == 0 ) $m110r312="";
-$m110r313=$hlavicka->m110r313; if ( $m110r313 == 0 ) $m110r313="";
-$m110r314=$hlavicka->m110r314; if ( $m110r314 == 0 ) $m110r314="";
-$m110r315=$hlavicka->m110r315; if ( $m110r315 == 0 ) $m110r315="";
-$m110r316=$hlavicka->m110r316; if ( $m110r316 == 0 ) $m110r316="";
-$m110r317=$hlavicka->m110r317; if ( $m110r317 == 0 ) $m110r317="";
-$m110r318=$hlavicka->m110r318; if ( $m110r318 == 0 ) $m110r318="";
-$m110r319=$hlavicka->m110r319; if ( $m110r319 == 0 ) $m110r319="";
-$m110r322=$hlavicka->m110r322; if ( $m110r322 == 0 ) $m110r322="";
-$m110r323=$hlavicka->m110r323; if ( $m110r323 == 0 ) $m110r323="";
-$m110r324=$hlavicka->m110r324; if ( $m110r324 == 0 ) $m110r324="";
-$m110r325=$hlavicka->m110r325; if ( $m110r325 == 0 ) $m110r325="";
-$m110r326=$hlavicka->m110r326; if ( $m110r326 == 0 ) $m110r326="";
-$m110r327=$hlavicka->m110r327; if ( $m110r327 == 0 ) $m110r327="";
-$m110r328=$hlavicka->m110r328; if ( $m110r328 == 0 ) $m110r328="";
-$m110r329=$hlavicka->m110r329; if ( $m110r329 == 0 ) $m110r329="";
-$m110r332=$hlavicka->m110r332; if ( $m110r332 == 0 ) $m110r332="";
-$m110r333=$hlavicka->m110r333; if ( $m110r333 == 0 ) $m110r333="";
-$m110r334=$hlavicka->m110r334; if ( $m110r334 == 0 ) $m110r334="";
-$m110r335=$hlavicka->m110r335; if ( $m110r335 == 0 ) $m110r335="";
-$m110r336=$hlavicka->m110r336; if ( $m110r336 == 0 ) $m110r336="";
-$m110r337=$hlavicka->m110r337; if ( $m110r337 == 0 ) $m110r337="";
-$m110r338=$hlavicka->m110r338; if ( $m110r338 == 0 ) $m110r338="";
-$m110r339=$hlavicka->m110r339; if ( $m110r339 == 0 ) $m110r339="";
-$m110r342=$hlavicka->m110r342; if ( $m110r342 == 0 ) $m110r342="";
-$m110r343=$hlavicka->m110r343; if ( $m110r343 == 0 ) $m110r343="";
-$m110r344=$hlavicka->m110r344; if ( $m110r344 == 0 ) $m110r344="";
-$m110r345=$hlavicka->m110r345; if ( $m110r345 == 0 ) $m110r345="";
-$m110r346=$hlavicka->m110r346; if ( $m110r346 == 0 ) $m110r346="";
-$m110r347=$hlavicka->m110r347; if ( $m110r347 == 0 ) $m110r347="";
-$m110r348=$hlavicka->m110r348; if ( $m110r348 == 0 ) $m110r348="";
-$m110r349=$hlavicka->m110r349; if ( $m110r349 == 0 ) $m110r349="";
-$m110r992=$hlavicka->m110r992;
-//if ( $m110r992 == 0 ) $m110r992="";
-$m110r993=$hlavicka->m110r993;
-//if ( $m110r993 == 0 ) $m110r993="";
-$m110r994=$hlavicka->m110r994;
-//if ( $m110r994 == 0 ) $m110r994="";
-$m110r995=$hlavicka->m110r995;
-//if ( $m110r995 == 0 ) $m110r995="";
-$m110r996=$hlavicka->m110r996;
-//if ( $m110r996 == 0 ) $m110r996="";
-$m110r997=$hlavicka->m110r997;
-//if ( $m110r997 == 0 ) $m110r997="";
-$pdf->Cell(195,45," ","$rmc1",1,"L");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r12","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r13","$rmc",0,"R");$pdf->Cell(17,6,"$m110r14","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r15","$rmc",0,"R");$pdf->Cell(15,6,"$m110r16","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r17","$rmc",0,"R");$pdf->Cell(17,6,"$m110r18","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r19","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r22","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r23","$rmc",0,"R");$pdf->Cell(17,5,"$m110r24","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r25","$rmc",0,"R");$pdf->Cell(15,5,"$m110r26","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r27","$rmc",0,"R");$pdf->Cell(17,5,"$m110r28","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r29","$rmc",1,"R");
-$pdf->Cell(51,5," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r32","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r33","$rmc",0,"R");$pdf->Cell(17,5,"$m110r34","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r35","$rmc",0,"R");$pdf->Cell(15,5,"$m110r36","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r37","$rmc",0,"R");$pdf->Cell(17,5,"$m110r38","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r39","$rmc",1,"R");
-$pdf->Cell(51,5," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r42","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r43","$rmc",0,"R");$pdf->Cell(17,5,"$m110r44","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r45","$rmc",0,"R");$pdf->Cell(15,5,"$m110r46","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r47","$rmc",0,"R");$pdf->Cell(17,5,"$m110r48","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r49","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r52","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r53","$rmc",0,"R");$pdf->Cell(17,6,"$m110r54","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r55","$rmc",0,"R");$pdf->Cell(15,6,"$m110r56","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r57","$rmc",0,"R");$pdf->Cell(17,6,"$m110r58","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r59","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r62","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r63","$rmc",0,"R");$pdf->Cell(17,5,"$m110r64","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r65","$rmc",0,"R");$pdf->Cell(15,5,"$m110r66","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r67","$rmc",0,"R");$pdf->Cell(17,5,"$m110r68","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r69","$rmc",1,"R");
-$pdf->Cell(51,5," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r72","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r73","$rmc",0,"R");$pdf->Cell(17,5,"$m110r74","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r75","$rmc",0,"R");$pdf->Cell(15,5,"$m110r76","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r77","$rmc",0,"R");$pdf->Cell(17,5,"$m110r78","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r79","$rmc",1,"R");
-$pdf->Cell(51,5," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r82","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r83","$rmc",0,"R");$pdf->Cell(17,5,"$m110r84","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r85","$rmc",0,"R");$pdf->Cell(15,5,"$m110r86","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r87","$rmc",0,"R");$pdf->Cell(17,5,"$m110r88","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r89","$rmc",1,"R");
-$pdf->Cell(51,6," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r92","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r93","$rmc",0,"R");$pdf->Cell(17,6,"$m110r94","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r95","$rmc",0,"R");$pdf->Cell(15,6,"$m110r96","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r97","$rmc",0,"R");$pdf->Cell(17,6,"$m110r98","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r99","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,7,"","$rmc",0,"R");$pdf->Cell(15,7,"$m110r102","$rmc",0,"R");
-$pdf->Cell(15,7,"$m110r103","$rmc",0,"R");$pdf->Cell(17,7,"$m110r104","$rmc",0,"R");
-$pdf->Cell(15,7,"$m110r105","$rmc",0,"R");$pdf->Cell(15,7,"$m110r106","$rmc",0,"R");
-$pdf->Cell(18,7,"$m110r107","$rmc",0,"R");$pdf->Cell(17,7,"$m110r108","$rmc",0,"R");
-$pdf->Cell(15,7,"$m110r109","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r112","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r113","$rmc",0,"R");$pdf->Cell(17,5,"$m110r114","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r115","$rmc",0,"R");$pdf->Cell(15,5,"$m110r116","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r117","$rmc",0,"R");$pdf->Cell(17,5,"$m110r118","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r119","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r122","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r123","$rmc",0,"R");$pdf->Cell(17,6,"$m110r124","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r125","$rmc",0,"R");$pdf->Cell(15,6,"$m110r126","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r127","$rmc",0,"R");$pdf->Cell(17,6,"$m110r128","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r129","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r132","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r133","$rmc",0,"R");$pdf->Cell(17,5,"$m110r134","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r135","$rmc",0,"R");$pdf->Cell(15,5,"$m110r136","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r137","$rmc",0,"R");$pdf->Cell(17,5,"$m110r138","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r139","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,7,"","$rmc",0,"R");$pdf->Cell(15,7,"$m110r142","$rmc",0,"R");
-$pdf->Cell(15,7,"$m110r143","$rmc",0,"R");$pdf->Cell(17,7,"$m110r144","$rmc",0,"R");
-$pdf->Cell(15,7,"$m110r145","$rmc",0,"R");$pdf->Cell(15,7,"$m110r146","$rmc",0,"R");
-$pdf->Cell(18,7,"$m110r147","$rmc",0,"R");$pdf->Cell(17,7,"$m110r148","$rmc",0,"R");
-$pdf->Cell(15,7,"$m110r149","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r152","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r153","$rmc",0,"R");$pdf->Cell(17,6,"$m110r154","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r155","$rmc",0,"R");$pdf->Cell(15,6,"$m110r156","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r157","$rmc",0,"R");$pdf->Cell(17,6,"$m110r158","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r159","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r162","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r163","$rmc",0,"R");$pdf->Cell(17,5,"$m110r164","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r165","$rmc",0,"R");$pdf->Cell(15,5,"$m110r166","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r167","$rmc",0,"R");$pdf->Cell(17,5,"$m110r168","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r169","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r172","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r173","$rmc",0,"R");$pdf->Cell(17,5,"$m110r174","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r175","$rmc",0,"R");$pdf->Cell(15,5,"$m110r176","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r177","$rmc",0,"R");$pdf->Cell(17,5,"$m110r178","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r179","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r182","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r183","$rmc",0,"R");$pdf->Cell(17,6,"$m110r184","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r185","$rmc",0,"R");$pdf->Cell(15,6,"$m110r186","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r187","$rmc",0,"R");$pdf->Cell(17,6,"$m110r188","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r189","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r192","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r193","$rmc",0,"R");$pdf->Cell(17,5,"$m110r194","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r195","$rmc",0,"R");$pdf->Cell(15,5,"$m110r196","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r197","$rmc",0,"R");$pdf->Cell(17,5,"$m110r198","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r199","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r202","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r203","$rmc",0,"R");$pdf->Cell(17,5,"$m110r204","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r205","$rmc",0,"R");$pdf->Cell(15,5,"$m110r206","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r207","$rmc",0,"R");$pdf->Cell(17,5,"$m110r208","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r209","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r212","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r213","$rmc",0,"R");$pdf->Cell(17,5,"$m110r214","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r215","$rmc",0,"R");$pdf->Cell(15,5,"$m110r216","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r217","$rmc",0,"R");$pdf->Cell(17,5,"$m110r218","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r219","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r222","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r223","$rmc",0,"R");$pdf->Cell(17,6,"$m110r224","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r225","$rmc",0,"R");$pdf->Cell(15,6,"$m110r226","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r227","$rmc",0,"R");$pdf->Cell(17,6,"$m110r228","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r229","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r232","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r233","$rmc",0,"R");$pdf->Cell(17,5,"$m110r234","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r235","$rmc",0,"R");$pdf->Cell(15,5,"$m110r236","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r237","$rmc",0,"R");$pdf->Cell(17,5,"$m110r238","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r239","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r242","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r243","$rmc",0,"R");$pdf->Cell(17,5,"$m110r244","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r245","$rmc",0,"R");$pdf->Cell(15,5,"$m110r246","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r247","$rmc",0,"R");$pdf->Cell(17,5,"$m110r248","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r249","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r252","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r253","$rmc",0,"R");$pdf->Cell(17,6,"$m110r254","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r255","$rmc",0,"R");$pdf->Cell(15,6,"$m110r256","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r257","$rmc",0,"R");$pdf->Cell(17,6,"$m110r258","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r259","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r262","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r263","$rmc",0,"R");$pdf->Cell(17,5,"$m110r264","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r265","$rmc",0,"R");$pdf->Cell(15,5,"$m110r266","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r267","$rmc",0,"R");$pdf->Cell(17,5,"$m110r268","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r269","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r272","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r273","$rmc",0,"R");$pdf->Cell(17,5,"$m110r274","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r275","$rmc",0,"R");$pdf->Cell(15,5,"$m110r276","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r277","$rmc",0,"R");$pdf->Cell(17,5,"$m110r278","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r279","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r282","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r283","$rmc",0,"R");$pdf->Cell(17,5,"$m110r284","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r285","$rmc",0,"R");$pdf->Cell(15,5,"$m110r286","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r287","$rmc",0,"R");$pdf->Cell(17,5,"$m110r288","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r289","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r292","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r293","$rmc",0,"R");$pdf->Cell(17,6,"$m110r294","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r295","$rmc",0,"R");$pdf->Cell(15,6,"$m110r296","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r297","$rmc",0,"R");$pdf->Cell(17,6,"$m110r298","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r299","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r302","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r303","$rmc",0,"R");$pdf->Cell(17,5,"$m110r304","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r305","$rmc",0,"R");$pdf->Cell(15,5,"$m110r306","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r307","$rmc",0,"R");$pdf->Cell(17,5,"$m110r308","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r309","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r312","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r313","$rmc",0,"R");$pdf->Cell(17,5,"$m110r314","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r315","$rmc",0,"R");$pdf->Cell(15,5,"$m110r316","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r317","$rmc",0,"R");$pdf->Cell(17,5,"$m110r318","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r319","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r322","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r323","$rmc",0,"R");$pdf->Cell(17,5,"$m110r324","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r325","$rmc",0,"R");$pdf->Cell(15,5,"$m110r326","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r327","$rmc",0,"R");$pdf->Cell(17,5,"$m110r328","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r329","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,6,"","$rmc",0,"R");$pdf->Cell(15,6,"$m110r332","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r333","$rmc",0,"R");$pdf->Cell(17,6,"$m110r334","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r335","$rmc",0,"R");$pdf->Cell(15,6,"$m110r336","$rmc",0,"R");
-$pdf->Cell(18,6,"$m110r337","$rmc",0,"R");$pdf->Cell(17,6,"$m110r338","$rmc",0,"R");
-$pdf->Cell(15,6,"$m110r339","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r342","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r343","$rmc",0,"R");$pdf->Cell(17,5,"$m110r344","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r345","$rmc",0,"R");$pdf->Cell(15,5,"$m110r346","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r347","$rmc",0,"R");$pdf->Cell(17,5,"$m110r348","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r349","$rmc",1,"R");
-$pdf->Cell(51,4," ","$rmc1",0,"L");
-$pdf->Cell(15,5,"","$rmc",0,"R");$pdf->Cell(15,5,"$m110r992","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r993","$1mc",0,"R");$pdf->Cell(17,5,"$m110r994","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r995","$rmc",0,"R");$pdf->Cell(15,5,"$m110r996","$rmc",0,"R");
-$pdf->Cell(18,5,"$m110r997","$rmc",0,"R");$pdf->Cell(17,5,"$m110r998","$rmc",0,"R");
-$pdf->Cell(15,5,"$m110r999","$rmc",1,"R");
-                                       }
-}
-$i = $i + 1;
-  }
-$pdf->Output("../tmp/statistika.$kli_uzid.pdf");
-?>
-<script type="text/javascript">
- var okno = window.open("../tmp/statistika.<?php echo $kli_uzid; ?>.pdf","_self");
-</script>
-<?php
-}
-//koniec vytlac
-
-$cislista = include("uct_lista_norm.php");
-//celkovy koniec dokumentu
-} while (false);
-?>
-</BODY>
-</HTML>
+</body>
+</html>
