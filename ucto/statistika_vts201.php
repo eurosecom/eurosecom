@@ -4873,6 +4873,13 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
 
 <!-- modul 179b -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky" onclick="NacitajZobratovky(179);" style="top:110px; left:346px;" class="btn-row-tool">
+<!-- legenda r.1 -->
+<div style="position:absolute; top:225px; left:265px; width:250px; height:26px; line-height:26px; font-size:11px; font-family:arial; background-color:white; padding-left:4px; box-sizing: border-box;">
+<?php
+if ( $kli_vrok == 2016 ) { echo "za výrobky a služby (okrem DPH)"; }
+if ( $kli_vrok > 2016 ) { echo "za výrobky a služ.(okrem DPH, SD a daní z dov.)"; }
+?>
+</div>
 <input type="text" name="m179r01" id="m179r01" style="width:100px; top:228px; left:680px;"/>
 <input type="text" name="m179r02" id="m179r02" style="width:100px; top:255px; left:680px;"/>
 <span class="text-echo" style="top:287px; right:164px;"><?php echo $m179r99; ?></span>
@@ -5306,7 +5313,7 @@ $pdf->Cell(7,7,"$G","$rmc",0,"C");$pdf->Cell(7,7,"$H","$rmc",1,"C");
 //modul 100315
 $pdf->Cell(195,34," ","$rmc1",1,"L");
 $pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,7,"$cinnost","$rmc",1,"C");
-$pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,5,"$fir_sknace","$rmc",1,"C");
+$pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,5,"$sknace","$rmc",1,"C");
 
 //modul 2
 $mod2r01=$hlavicka->mod2r01; if ( $mod2r01 == 0 ) $mod2r01="";
@@ -6181,6 +6188,12 @@ $m179r02=$hlavicka->m179r02; if ( $m179r02 == 0 ) $m179r02="";
 $m179r99=$hlavicka->m179r99;
 //if ( $m179r99 == 0 ) $m179r99="";
 $pdf->Cell(195,30," ","$rmc1",1,"L");
+if ( $kli_vrok == 2016 ) { $text="za výrobky a služby (okrem DPH)"; }
+if ( $kli_vrok > 2016 ) { $text="za výrobky a služby (okrem DPH, SD a \n daní z dovozu)"; }
+$pdf->SetFont('arial','',8);
+$pdf->Cell(48,5," ","$rmc1",0,"L");$pdf->MultiCell(56,3,"$text","$rmc","L");
+$pdf->SetFont('arial','',12);
+$pdf->SetY(46);
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,7,"$m179r01","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m179r02","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m179r99","$rmc",1,"R");
