@@ -3248,7 +3248,6 @@ form input[type=text] {
   font-size: 14px;
 }
 </style>
-
 </head>
 <body onload="ObnovUI();">
 <?php
@@ -3266,6 +3265,7 @@ if ( $copern == 102 )
   <td class="header">Roèný výkaz produkèných odvetví v malých podnikoch v info, komunikácii...</td>
   <td>
    <div class="bar-btn-form-tool">
+    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisSKNACEp3();" title="Èíselník SKNACE - príloha è. 3" class="btn-form-tool">
     <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp2();" title="Èíselník CPA - príloha è. 2" class="btn-form-tool">
     <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp1();" title="Èíselník CPA - príloha è. 1" class="btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="FormMetod();" title="Metodické vysvetlivky k obsahu výkazu" class="btn-form-tool">
@@ -3352,9 +3352,6 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
 
 <!-- modul 100315 -->
 <span class="text-echo" style="top:257px; left:411px;"><?php echo $cinnost; ?></span>
-<?php
-$sknace=str_replace(".", "", $fir_sknace);
-?>
 <span class="text-echo center" style="top:285px; left:630px;"><?php echo $sknace; ?></span>
 
 <!-- modul 2 -->
@@ -4248,7 +4245,7 @@ $pdf->Cell(7,6,"$G","$rmc",0,"C");$pdf->Cell(8,6,"$H","$rmc",1,"C");
 //modul 100315
 $pdf->Cell(195,36," ","$rmc1",1,"L");
 $pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,7,"$cinnost","$rmc",1,"C");
-$pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,6,"$fir_sknace","$rmc",1,"C");
+$pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,6,"$sknace","$rmc",1,"C");
 
 //modul 2
 $mod2r01=$hlavicka->mod2r01; if ( $mod2r01 == 0 ) $mod2r01="";
@@ -6306,7 +6303,10 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
   {
     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
-
+  function CisSKNACEp3()
+  {
+    window.open('../dokumenty/statistika2016/sknace_zoznam_pril3_v16.pdf', '_blank', blank_param);
+  }
   function CisCPAp2()
   {
     window.open('../dokumenty/statistika2016/cpa_ciselnik_pril2_v16.pdf', '_blank', blank_param);
