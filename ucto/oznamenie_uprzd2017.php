@@ -165,7 +165,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctoznamenie_uprzd SET ".
 " kriad='$kriad', kdoda='$kdoda', obod='$obodsql', obdo='$obdosql',
   oprav='$oprav', datoprav='$datoprav_sql',
   ulava30a='$ulava30a', ulava30b='$ulava30b', datum='$datumsql' ".
-" WHERE oc = 1 AND cpl = $cislo_cpl ";
+" WHERE oc = 1 ";
                     }
 
 if ( $strana == 2 ) {
@@ -312,6 +312,7 @@ $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 if ( $strana == 1 OR $strana == 9999 ) {
+$zodic = $fir_riadok->zodic;
 $kriad = 1*$fir_riadok->kriad;
 $kdoda = 1*$fir_riadok->kdoda;
 $obod = $fir_riadok->obod;
@@ -541,10 +542,8 @@ dl.legend-area > dt {
    </td>
    <td>
     <div class="bar-btn-form-tool">
-<?php if ( $strana != 5 AND $copern != 110 ) { ?>
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML(<?php echo $cislo_cpl; ?>, '<?php echo $zodic; ?>');" title="Export do XML" class="btn-form-tool">
-<?php } ?>
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $cislo_cpl; ?>);" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();" title="Export do XML" class="btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -677,8 +676,8 @@ $cisloi=$i+1;
  <td align="right">
   <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl; ?>);" title="Upravi">&nbsp;&nbsp;&nbsp;
   <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->zodic; ?>');" title="Vymaza">&nbsp;&nbsp;&nbsp;
-  <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $rsluz->cpl; ?>);" title="Zobrazi v PDF">&nbsp;&nbsp;&nbsp;
-  <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->zodic; ?>');" title="Export do XML">
+  <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();" title="Zobrazi v PDF">&nbsp;&nbsp;&nbsp;
+  <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();" title="Export do XML">
 &nbsp;&nbsp;&nbsp;</td>
 </tr>
 <?php
@@ -1163,9 +1162,7 @@ $rmc=0;
 $rmc1=0;
 
 //vytlac
-$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
-$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 AND cpl = $cislo_cpl ORDER BY zodic ";
-if( $cislo_cpl == 0 ) { $sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 AND cpl > 0 ORDER BY zodic "; }
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 AND cpl > 0 ORDER BY zodic "; 
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1178,7 +1175,7 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
-if ( $strana == 1 OR $strana == 9999 ) {
+if ( ( $strana == 1 OR $strana == 9999 ) AND $j == 0 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
@@ -1843,6 +1840,7 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t13","$rmc",1,"C");
                                        } //koniec 2.strany
 }
 $i = $i + 1;
+$j = $j + 1;
   }
 $pdf->Output("$outfilex");
 ?>
@@ -1879,7 +1877,7 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
   {
 <?php if ( $strana == 1 ) { ?>
 <?php if ( $kriad == 1 ) { ?> document.formv1.kriad.checked = "checked"; <?php } ?>
-<?php if ( $kriad == 1 ) { ?> document.formv1.kdoda.checked = "checked"; <?php } ?>
+<?php if ( $kdoda == 1 ) { ?> document.formv1.kdoda.checked = "checked"; <?php } ?>
    document.formv1.obod.value = '<?php echo $obodsk; ?>';
    document.formv1.obdo.value = '<?php echo $obdosk; ?>';
 <?php if ( $oprav == 1 ) { ?> document.formv1.oprav.checked = "checked"; <?php } ?>
@@ -1923,9 +1921,9 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function TlacDMV(cpl)
+  function TlacDMV()
   {
-   window.open('oznamenie_uprzd2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&drupoh=1&strana=9999&cislo_cpl=' + cpl + '', '_blank', blank_param);
+   window.open('oznamenie_uprzd2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&drupoh=1&strana=9999&cislo_cpl=0', '_blank', blank_param);
   }
 
 
@@ -1943,10 +1941,9 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
   {
    window.open('../ucto/oznamenie_uprzd2017.php?copern=336&uprav=0', '_self' )
   }
-  function DMVdoXML(cpl, cislo_dic)
+  function DMVdoXML()
   {
-   var cislo_cpl = cpl;
-   window.open('oznamenie_uprzd2017.php?copern=110&drupoh=1&uprav=1&cislo_cpl=' + cislo_cpl + '&cislo_dic=' + cislo_dic + '', '_blank', blank_param);
+   window.open('oznamenie_uprzd2017.php?copern=110&drupoh=1&uprav=1&cislo_cpl=0&cislo_dic=0', '_blank', blank_param);
   }
 </script>
 </body>
