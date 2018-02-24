@@ -7828,7 +7828,7 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
   <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
   <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
   <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
-
+<!-- hidden
   <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
   <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
   <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
@@ -7842,7 +7842,7 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
   <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
   <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
   <h6 class="toright">TlaËiù:</h6>
-<!-- hidden-->
+-->
   <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
 
@@ -9138,125 +9138,121 @@ if ( $kli_vrok > 2016 ) { echo "Trûby<br>z predaja<br>do zahraniËia<br>(zo stÂ. 
 
 <?php if ( $strana == 10 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str10.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
-<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
+<span class="text-echo" style="top:66px; left:486px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 <!-- modul 187 -->
-<input type="text" name="m187r1" id="m187r1" style="width:100px; top:208px; left:675px;"/>
-
+<input type="text" name="m187r1" id="m187r1" style="width:100px; top:220px; left:675px;"/>
 <!-- modul 100101 -->
-<input type="checkbox" name="m1590r1a" value="1" onclick="klikm1590r1ano();" style="top:322px; left:839px;"/>
-<input type="checkbox" name="m1590r1b" value="1" onclick="klikm1590r1nie();" style="top:342px; left:839px;"/>
-
+<input type="checkbox" name="m1590r1a" value="1" onclick="klikm1590r1ano();" style="top:349px; left:838px;"/>
+<input type="checkbox" name="m1590r1b" value="1" onclick="klikm1590r1nie();" style="top:378px; left:838px;"/>
 <!-- modul 100102 -->
-<input type="checkbox" name="m1590r2a" value="1" onclick="klikm1590r2ano();" style="top:469px; left:839px;"/>
-<input type="checkbox" name="m1590r2b" value="1" onclick="klikm1590r2nie();" style="top:490px; left:839px;"/>
-
+<input type="checkbox" name="m1590r2a" value="1" onclick="klikm1590r2ano();" style="top:514px; left:838px;"/>
+<input type="checkbox" name="m1590r2b" value="1" onclick="klikm1590r2nie();" style="top:543px; left:838px;"/>
 <!-- modul 590 -->
-<input type="text" name="m590r11" id="m590r11" style="width:124px; top:707px; left:100px;"/>
-<input type="text" name="m590r12" id="m590r12" style="width:178px; top:707px; left:235px;"/>
-<input type="text" name="m590r13" id="m590r13" style="width:159px; top:707px; left:424px;"/>
-<input type="text" name="m590r14" id="m590r14" style="width:147px; top:707px; left:594px;"/>
-<input type="text" name="m590r15" id="m590r15" style="width:136px; top:707px; left:752px;"/>
-<input type="text" name="m590r21" id="m590r21" style="width:124px; top:732px; left:100px;"/>
-<input type="text" name="m590r22" id="m590r22" style="width:178px; top:732px; left:235px;"/>
-<input type="text" name="m590r23" id="m590r23" style="width:159px; top:732px; left:424px;"/>
-<input type="text" name="m590r24" id="m590r24" style="width:147px; top:732px; left:594px;"/>
-<input type="text" name="m590r25" id="m590r25" style="width:136px; top:732px; left:752px;"/>
-<input type="text" name="m590r31" id="m590r31" style="width:124px; top:758px; left:100px;"/>
-<input type="text" name="m590r32" id="m590r32" style="width:178px; top:758px; left:235px;"/>
-<input type="text" name="m590r33" id="m590r33" style="width:159px; top:758px; left:424px;"/>
-<input type="text" name="m590r34" id="m590r34" style="width:147px; top:758px; left:594px;"/>
-<input type="text" name="m590r35" id="m590r35" style="width:136px; top:758px; left:752px;"/>
-<input type="text" name="m590r41" id="m590r41" style="width:124px; top:783px; left:100px;"/>
-<input type="text" name="m590r42" id="m590r42" style="width:178px; top:783px; left:235px;"/>
-<input type="text" name="m590r43" id="m590r43" style="width:159px; top:783px; left:424px;"/>
-<input type="text" name="m590r44" id="m590r44" style="width:147px; top:783px; left:594px;"/>
-<input type="text" name="m590r45" id="m590r45" style="width:136px; top:783px; left:752px;"/>
-<input type="text" name="m590r51" id="m590r51" style="width:124px; top:808px; left:100px;"/>
-<input type="text" name="m590r52" id="m590r52" style="width:178px; top:808px; left:235px;"/>
-<input type="text" name="m590r53" id="m590r53" style="width:159px; top:808px; left:424px;"/>
-<input type="text" name="m590r54" id="m590r54" style="width:147px; top:808px; left:594px;"/>
-<input type="text" name="m590r55" id="m590r55" style="width:136px; top:808px; left:752px;"/>
-<input type="text" name="m590r61" id="m590r61" style="width:124px; top:833px; left:100px;"/>
-<input type="text" name="m590r62" id="m590r62" style="width:178px; top:833px; left:235px;"/>
-<input type="text" name="m590r63" id="m590r63" style="width:159px; top:833px; left:424px;"/>
-<input type="text" name="m590r64" id="m590r64" style="width:147px; top:833px; left:594px;"/>
-<input type="text" name="m590r65" id="m590r65" style="width:136px; top:833px; left:752px;"/>
-<input type="text" name="m590r71" id="m590r71" style="width:124px; top:859px; left:100px;"/>
-<input type="text" name="m590r72" id="m590r72" style="width:178px; top:859px; left:235px;"/>
-<input type="text" name="m590r73" id="m590r73" style="width:159px; top:859px; left:424px;"/>
-<input type="text" name="m590r74" id="m590r74" style="width:147px; top:859px; left:594px;"/>
-<input type="text" name="m590r75" id="m590r75" style="width:136px; top:859px; left:752px;"/>
-<input type="text" name="m590r81" id="m590r81" style="width:124px; top:884px; left:100px;"/>
-<input type="text" name="m590r82" id="m590r82" style="width:178px; top:884px; left:235px;"/>
-<input type="text" name="m590r83" id="m590r83" style="width:159px; top:884px; left:424px;"/>
-<input type="text" name="m590r84" id="m590r84" style="width:147px; top:884px; left:594px;"/>
-<input type="text" name="m590r85" id="m590r85" style="width:136px; top:884px; left:752px;"/>
-<input type="text" name="m590r91" id="m590r91" style="width:124px; top:909px; left:100px;"/>
-<input type="text" name="m590r92" id="m590r92" style="width:178px; top:909px; left:235px;"/>
-<input type="text" name="m590r93" id="m590r93" style="width:159px; top:909px; left:424px;"/>
-<input type="text" name="m590r94" id="m590r94" style="width:147px; top:909px; left:594px;"/>
-<input type="text" name="m590r95" id="m590r95" style="width:136px; top:909px; left:752px;"/>
-<input type="text" name="m590r101" id="m590r101" style="width:124px; top:934px; left:100px;"/>
-<input type="text" name="m590r102" id="m590r102" style="width:178px; top:934px; left:235px;"/>
-<input type="text" name="m590r103" id="m590r103" style="width:159px; top:934px; left:424px;"/>
-<input type="text" name="m590r104" id="m590r104" style="width:147px; top:934px; left:594px;"/>
-<input type="text" name="m590r105" id="m590r105" style="width:136px; top:934px; left:752px;"/>
-<input type="text" name="m590r111" id="m590r111" style="width:124px; top:960px; left:100px;"/>
-<input type="text" name="m590r112" id="m590r112" style="width:178px; top:960px; left:235px;"/>
-<input type="text" name="m590r113" id="m590r113" style="width:159px; top:960px; left:424px;"/>
-<input type="text" name="m590r114" id="m590r114" style="width:147px; top:960px; left:594px;"/>
-<input type="text" name="m590r115" id="m590r115" style="width:136px; top:960px; left:752px;"/>
-<input type="text" name="m590r121" id="m590r121" style="width:124px; top:985px; left:100px;"/>
-<input type="text" name="m590r122" id="m590r122" style="width:178px; top:985px; left:235px;"/>
-<input type="text" name="m590r123" id="m590r123" style="width:159px; top:985px; left:424px;"/>
-<input type="text" name="m590r124" id="m590r124" style="width:147px; top:985px; left:594px;"/>
-<input type="text" name="m590r125" id="m590r125" style="width:136px; top:985px; left:752px;"/>
-<input type="text" name="m590r131" id="m590r131" style="width:124px; top:1010px; left:100px;"/>
-<input type="text" name="m590r132" id="m590r132" style="width:178px; top:1010px; left:235px;"/>
-<input type="text" name="m590r133" id="m590r133" style="width:159px; top:1010px; left:424px;"/>
-<input type="text" name="m590r134" id="m590r134" style="width:147px; top:1010px; left:594px;"/>
-<input type="text" name="m590r135" id="m590r135" style="width:136px; top:1010px; left:752px;"/>
-<input type="text" name="m590r141" id="m590r141" style="width:124px; top:1035px; left:100px;"/>
-<input type="text" name="m590r142" id="m590r142" style="width:178px; top:1035px; left:235px;"/>
-<input type="text" name="m590r143" id="m590r143" style="width:159px; top:1035px; left:424px;"/>
-<input type="text" name="m590r144" id="m590r144" style="width:147px; top:1035px; left:594px;"/>
-<input type="text" name="m590r145" id="m590r145" style="width:136px; top:1035px; left:752px;"/>
-<input type="text" name="m590r151" id="m590r151" style="width:124px; top:1061px; left:100px;"/>
-<input type="text" name="m590r152" id="m590r152" style="width:178px; top:1061px; left:235px;"/>
-<input type="text" name="m590r153" id="m590r153" style="width:159px; top:1061px; left:424px;"/>
-<input type="text" name="m590r154" id="m590r154" style="width:147px; top:1061px; left:594px;"/>
-<input type="text" name="m590r155" id="m590r155" style="width:136px; top:1061px; left:752px;"/>
-<input type="text" name="m590r161" id="m590r161" style="width:124px; top:1086px; left:100px;"/>
-<input type="text" name="m590r162" id="m590r162" style="width:178px; top:1086px; left:235px;"/>
-<input type="text" name="m590r163" id="m590r163" style="width:159px; top:1086px; left:424px;"/>
-<input type="text" name="m590r164" id="m590r164" style="width:147px; top:1086px; left:594px;"/>
-<input type="text" name="m590r165" id="m590r165" style="width:136px; top:1086px; left:752px;"/>
-<input type="text" name="m590r171" id="m590r171" style="width:124px; top:1111px; left:100px;"/>
-<input type="text" name="m590r172" id="m590r172" style="width:178px; top:1111px; left:235px;"/>
-<input type="text" name="m590r173" id="m590r173" style="width:159px; top:1111px; left:424px;"/>
-<input type="text" name="m590r174" id="m590r174" style="width:147px; top:1111px; left:594px;"/>
-<input type="text" name="m590r175" id="m590r175" style="width:136px; top:1111px; left:752px;"/>
-<input type="text" name="m590r181" id="m590r181" style="width:124px; top:1136px; left:100px;"/>
-<input type="text" name="m590r182" id="m590r182" style="width:178px; top:1136px; left:235px;"/>
-<input type="text" name="m590r183" id="m590r183" style="width:159px; top:1136px; left:424px;"/>
-<input type="text" name="m590r184" id="m590r184" style="width:147px; top:1136px; left:594px;"/>
-<input type="text" name="m590r185" id="m590r185" style="width:136px; top:1136px; left:752px;"/>
-<input type="text" name="m590r191" id="m590r191" style="width:124px; top:1162px; left:100px;"/>
-<input type="text" name="m590r192" id="m590r192" style="width:178px; top:1162px; left:235px;"/>
-<input type="text" name="m590r193" id="m590r193" style="width:159px; top:1162px; left:424px;"/>
-<input type="text" name="m590r194" id="m590r194" style="width:147px; top:1162px; left:594px;"/>
-<input type="text" name="m590r195" id="m590r195" style="width:136px; top:1162px; left:752px;"/>
-<input type="text" name="m590r201" id="m590r201" style="width:124px; top:1187px; left:100px;"/>
-<input type="text" name="m590r202" id="m590r202" style="width:178px; top:1187px; left:235px;"/>
-<input type="text" name="m590r203" id="m590r203" style="width:159px; top:1187px; left:424px;"/>
-<input type="text" name="m590r204" id="m590r204" style="width:147px; top:1187px; left:594px;"/>
-<input type="text" name="m590r205" id="m590r205" style="width:136px; top:1187px; left:752px;"/>
-<input type="text" name="m590r211" id="m590r211" style="width:124px; top:1212px; left:100px;"/>
-<input type="text" name="m590r212" id="m590r212" style="width:178px; top:1212px; left:235px;"/>
-<input type="text" name="m590r213" id="m590r213" style="width:159px; top:1212px; left:424px;"/>
-<input type="text" name="m590r214" id="m590r214" style="width:147px; top:1212px; left:594px;"/>
-<input type="text" name="m590r215" id="m590r215" style="width:136px; top:1212px; left:752px;"/>
+<input type="text" name="m590r11" id="m590r11" style="width:124px; top:777px; left:90px;"/>
+<input type="text" name="m590r12" id="m590r12" style="width:157px; top:777px; left:227px;"/>
+<input type="text" name="m590r13" id="m590r13" style="width:156px; top:777px; left:395px;"/>
+<input type="text" name="m590r14" id="m590r14" style="width:156px; top:777px; left:564px;"/>
+<input type="text" name="m590r15" id="m590r15" style="width:157px; top:777px; left:731px;"/>
+<input type="text" name="m590r21" id="m590r21" style="width:124px; top:800px; left:90px;"/>
+<input type="text" name="m590r22" id="m590r22" style="width:157px; top:800px; left:227px;"/>
+<input type="text" name="m590r23" id="m590r23" style="width:156px; top:800px; left:395px;"/>
+<input type="text" name="m590r24" id="m590r24" style="width:156px; top:800px; left:564px;"/>
+<input type="text" name="m590r25" id="m590r25" style="width:157px; top:800px; left:731px;"/>
+<input type="text" name="m590r31" id="m590r31" style="width:124px; top:823px; left:90px;"/>
+<input type="text" name="m590r32" id="m590r32" style="width:157px; top:823px; left:227px;"/>
+<input type="text" name="m590r33" id="m590r33" style="width:156px; top:823px; left:395px;"/>
+<input type="text" name="m590r34" id="m590r34" style="width:156px; top:823px; left:564px;"/>
+<input type="text" name="m590r35" id="m590r35" style="width:157px; top:823px; left:731px;"/>
+<input type="text" name="m590r41" id="m590r41" style="width:124px; top:846px; left:90px;"/>
+<input type="text" name="m590r42" id="m590r42" style="width:157px; top:846px; left:227px;"/>
+<input type="text" name="m590r43" id="m590r43" style="width:156px; top:846px; left:395px;"/>
+<input type="text" name="m590r44" id="m590r44" style="width:156px; top:846px; left:564px;"/>
+<input type="text" name="m590r45" id="m590r45" style="width:157px; top:846px; left:731px;"/>
+<input type="text" name="m590r51" id="m590r51" style="width:124px; top:869px; left:90px;"/>
+<input type="text" name="m590r52" id="m590r52" style="width:157px; top:869px; left:227px;"/>
+<input type="text" name="m590r53" id="m590r53" style="width:156px; top:869px; left:395px;"/>
+<input type="text" name="m590r54" id="m590r54" style="width:156px; top:869px; left:564px;"/>
+<input type="text" name="m590r55" id="m590r55" style="width:157px; top:869px; left:731px;"/>
+<input type="text" name="m590r61" id="m590r61" style="width:124px; top:892px; left:90px;"/>
+<input type="text" name="m590r62" id="m590r62" style="width:157px; top:892px; left:227px;"/>
+<input type="text" name="m590r63" id="m590r63" style="width:156px; top:892px; left:395px;"/>
+<input type="text" name="m590r64" id="m590r64" style="width:156px; top:892px; left:564px;"/>
+<input type="text" name="m590r65" id="m590r65" style="width:157px; top:892px; left:731px;"/>
+<input type="text" name="m590r71" id="m590r71" style="width:124px; top:915px; left:90px;"/>
+<input type="text" name="m590r72" id="m590r72" style="width:157px; top:915px; left:227px;"/>
+<input type="text" name="m590r73" id="m590r73" style="width:156px; top:915px; left:395px;"/>
+<input type="text" name="m590r74" id="m590r74" style="width:156px; top:915px; left:564px;"/>
+<input type="text" name="m590r75" id="m590r75" style="width:157px; top:915px; left:731px;"/>
+<input type="text" name="m590r81" id="m590r81" style="width:124px; top:938px; left:90px;"/>
+<input type="text" name="m590r82" id="m590r82" style="width:157px; top:938px; left:227px;"/>
+<input type="text" name="m590r83" id="m590r83" style="width:156px; top:938px; left:395px;"/>
+<input type="text" name="m590r84" id="m590r84" style="width:156px; top:938px; left:564px;"/>
+<input type="text" name="m590r85" id="m590r85" style="width:157px; top:938px; left:731px;"/>
+<input type="text" name="m590r91" id="m590r91" style="width:124px; top:961px; left:90px;"/>
+<input type="text" name="m590r92" id="m590r92" style="width:157px; top:961px; left:227px;"/>
+<input type="text" name="m590r93" id="m590r93" style="width:156px; top:961px; left:395px;"/>
+<input type="text" name="m590r94" id="m590r94" style="width:156px; top:961px; left:564px;"/>
+<input type="text" name="m590r95" id="m590r95" style="width:157px; top:961px; left:731px;"/>
+<input type="text" name="m590r101" id="m590r101" style="width:124px; top:984px; left:90px;"/>
+<input type="text" name="m590r102" id="m590r102" style="width:157px; top:984px; left:227px;"/>
+<input type="text" name="m590r103" id="m590r103" style="width:156px; top:984px; left:395px;"/>
+<input type="text" name="m590r104" id="m590r104" style="width:156px; top:984px; left:564px;"/>
+<input type="text" name="m590r105" id="m590r105" style="width:157px; top:984px; left:731px;"/>
+<input type="text" name="m590r111" id="m590r111" style="width:124px; top:1007px; left:90px;"/>
+<input type="text" name="m590r112" id="m590r112" style="width:157px; top:1007px; left:227px;"/>
+<input type="text" name="m590r113" id="m590r113" style="width:156px; top:1007px; left:395px;"/>
+<input type="text" name="m590r114" id="m590r114" style="width:156px; top:1007px; left:564px;"/>
+<input type="text" name="m590r115" id="m590r115" style="width:157px; top:1007px; left:731px;"/>
+<input type="text" name="m590r121" id="m590r121" style="width:124px; top:1030px; left:90px;"/>
+<input type="text" name="m590r122" id="m590r122" style="width:157px; top:1030px; left:227px;"/>
+<input type="text" name="m590r123" id="m590r123" style="width:156px; top:1030px; left:395px;"/>
+<input type="text" name="m590r124" id="m590r124" style="width:156px; top:1030px; left:564px;"/>
+<input type="text" name="m590r125" id="m590r125" style="width:157px; top:1030px; left:731px;"/>
+<input type="text" name="m590r131" id="m590r131" style="width:124px; top:1053px; left:90px;"/>
+<input type="text" name="m590r132" id="m590r132" style="width:157px; top:1053px; left:227px;"/>
+<input type="text" name="m590r133" id="m590r133" style="width:156px; top:1053px; left:395px;"/>
+<input type="text" name="m590r134" id="m590r134" style="width:156px; top:1053px; left:564px;"/>
+<input type="text" name="m590r135" id="m590r135" style="width:157px; top:1053px; left:731px;"/>
+<input type="text" name="m590r141" id="m590r141" style="width:124px; top:1076px; left:90px;"/>
+<input type="text" name="m590r142" id="m590r142" style="width:157px; top:1076px; left:227px;"/>
+<input type="text" name="m590r143" id="m590r143" style="width:156px; top:1076px; left:395px;"/>
+<input type="text" name="m590r144" id="m590r144" style="width:156px; top:1076px; left:564px;"/>
+<input type="text" name="m590r145" id="m590r145" style="width:157px; top:1076px; left:731px;"/>
+<input type="text" name="m590r151" id="m590r151" style="width:124px; top:1099px; left:90px;"/>
+<input type="text" name="m590r152" id="m590r152" style="width:157px; top:1099px; left:227px;"/>
+<input type="text" name="m590r153" id="m590r153" style="width:156px; top:1099px; left:395px;"/>
+<input type="text" name="m590r154" id="m590r154" style="width:156px; top:1099px; left:564px;"/>
+<input type="text" name="m590r155" id="m590r155" style="width:157px; top:1099px; left:731px;"/>
+<input type="text" name="m590r161" id="m590r161" style="width:124px; top:1122px; left:90px;"/>
+<input type="text" name="m590r162" id="m590r162" style="width:157px; top:1122px; left:227px;"/>
+<input type="text" name="m590r163" id="m590r163" style="width:156px; top:1122px; left:395px;"/>
+<input type="text" name="m590r164" id="m590r164" style="width:156px; top:1122px; left:564px;"/>
+<input type="text" name="m590r165" id="m590r165" style="width:157px; top:1122px; left:731px;"/>
+<input type="text" name="m590r171" id="m590r171" style="width:124px; top:1145px; left:90px;"/>
+<input type="text" name="m590r172" id="m590r172" style="width:157px; top:1145px; left:227px;"/>
+<input type="text" name="m590r173" id="m590r173" style="width:156px; top:1145px; left:395px;"/>
+<input type="text" name="m590r174" id="m590r174" style="width:156px; top:1145px; left:564px;"/>
+<input type="text" name="m590r175" id="m590r175" style="width:157px; top:1145px; left:731px;"/>
+<input type="text" name="m590r181" id="m590r181" style="width:124px; top:1168px; left:90px;"/>
+<input type="text" name="m590r182" id="m590r182" style="width:157px; top:1168px; left:227px;"/>
+<input type="text" name="m590r183" id="m590r183" style="width:156px; top:1168px; left:395px;"/>
+<input type="text" name="m590r184" id="m590r184" style="width:156px; top:1168px; left:564px;"/>
+<input type="text" name="m590r185" id="m590r185" style="width:157px; top:1168px; left:731px;"/>
+<input type="text" name="m590r191" id="m590r191" style="width:124px; top:1191px; left:90px;"/>
+<input type="text" name="m590r192" id="m590r192" style="width:157px; top:1191px; left:227px;"/>
+<input type="text" name="m590r193" id="m590r193" style="width:156px; top:1191px; left:395px;"/>
+<input type="text" name="m590r194" id="m590r194" style="width:156px; top:1191px; left:564px;"/>
+<input type="text" name="m590r195" id="m590r195" style="width:157px; top:1191px; left:731px;"/>
+<input type="text" name="m590r201" id="m590r201" style="width:124px; top:1214px; left:90px;"/>
+<input type="text" name="m590r202" id="m590r202" style="width:157px; top:1214px; left:227px;"/>
+<input type="text" name="m590r203" id="m590r203" style="width:156px; top:1214px; left:395px;"/>
+<input type="text" name="m590r204" id="m590r204" style="width:156px; top:1214px; left:564px;"/>
+<input type="text" name="m590r205" id="m590r205" style="width:157px; top:1214px; left:731px;"/>
+<input type="text" name="m590r211" id="m590r211" style="width:124px; top:1238px; left:90px;"/>
+<input type="text" name="m590r212" id="m590r212" style="width:157px; top:1238px; left:227px;"/>
+<input type="text" name="m590r213" id="m590r213" style="width:156px; top:1238px; left:395px;"/>
+<input type="text" name="m590r214" id="m590r214" style="width:156px; top:1238px; left:564px;"/>
+<input type="text" name="m590r215" id="m590r215" style="width:157px; top:1238px; left:731px;"/>
 <script>
   function klikm1590r1ano()
   {
@@ -12100,46 +12096,43 @@ if ( File_Exists($jpg_source.'_str10.jpg') AND $i == 0 )
 {
 $pdf->Image($jpg_source.'_str10.jpg',0,0,210,297);
 }
-$pdf->SetY(10);
+$pdf->SetY(8.5);
 
 //ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(93,7," ","$rmc1",0,"L");
+$text=$fir_ficox;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
+$pdf->Cell(94,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
 $pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
 $pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
 $pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
-
 //modul 187
 $m187r1=$hlavicka->m187r1; if ( $m187r1 == 0 ) $m187r1="";
-$pdf->Cell(195,25," ","$rmc1",1,"L");
+$pdf->Cell(195,30," ","$rmc1",1,"L");
 $pdf->Cell(113,5," ","$rmc1",0,"R");$pdf->Cell(74,6,"$m187r1","$rmc",1,"R");
-
 //modul 100101
 $m1590r1a=" ";
 $m1590r1b=" ";
 if ( $hlavicka->m1590r1a == 1 ) { $m1590r1a="x"; }
 if ( $hlavicka->m1590r1b == 1 ) { $m1590r1b="x"; }
-$pdf->Cell(190,20," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1590r1a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r1b","$rmc",1,"C");
-
+$pdf->Cell(190,22.5," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,6.5,"$m1590r1a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,6,"$m1590r1b","$rmc",1,"C");
 //modul 100102
 $m1590r2a=" ";
 $m1590r2b=" ";
 if ( $hlavicka->m1590r2a == 1 ) { $m1590r2a="x"; }
 if ( $hlavicka->m1590r2b == 1 ) { $m1590r2b="x"; }
-$pdf->Cell(190,24," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r2a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1590r2b","$rmc",1,"C");
+$pdf->Cell(190,25," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,6.5,"$m1590r2a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,6.5,"$m1590r2b","$rmc",1,"C");
 
 //modul 590
 $m590r11=$hlavicka->m590r11; if ( $m590r11 == 0 ) $m590r11="";
@@ -12247,91 +12240,91 @@ $m590r212=$hlavicka->m590r212; if ( $m590r212 == 0 ) $m590r212="";
 $m590r213=$hlavicka->m590r213; if ( $m590r213 == 0 ) $m590r213="";
 $m590r214=$hlavicka->m590r214; if ( $m590r214 == 0 ) $m590r214="";
 $m590r215=$hlavicka->m590r215; if ( $m590r215 == 0 ) $m590r215="";
-$pdf->Cell(195,45," ","$rmc1",1,"L");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r11","$rmc",0,"R");$pdf->Cell(42,6,"$m590r12","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r13","$rmc",0,"R");$pdf->Cell(35,6,"$m590r14","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r15","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r21","$rmc",0,"R");$pdf->Cell(42,6,"$m590r22","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r23","$rmc",0,"R");$pdf->Cell(35,6,"$m590r24","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r25","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r31","$rmc",0,"R");$pdf->Cell(42,5,"$m590r32","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r33","$rmc",0,"R");$pdf->Cell(35,5,"$m590r34","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r35","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r41","$rmc",0,"R");$pdf->Cell(42,6,"$m590r42","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r43","$rmc",0,"R");$pdf->Cell(35,6,"$m590r44","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r45","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r51","$rmc",0,"R");$pdf->Cell(42,6,"$m590r52","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r53","$rmc",0,"R");$pdf->Cell(35,6,"$m590r54","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r55","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r61","$rmc",0,"R");$pdf->Cell(42,6,"$m590r62","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r63","$rmc",0,"R");$pdf->Cell(35,6,"$m590r64","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r65","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r71","$rmc",0,"R");$pdf->Cell(42,5,"$m590r72","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r73","$rmc",0,"R");$pdf->Cell(35,5,"$m590r74","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r75","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r81","$rmc",0,"R");$pdf->Cell(42,6,"$m590r82","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r83","$rmc",0,"R");$pdf->Cell(35,6,"$m590r84","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r85","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r91","$rmc",0,"R");$pdf->Cell(42,6,"$m590r92","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r93","$rmc",0,"R");$pdf->Cell(35,6,"$m590r94","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r95","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r101","$rmc",0,"R");$pdf->Cell(42,6,"$m590r102","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r103","$rmc",0,"R");$pdf->Cell(35,6,"$m590r104","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r105","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r111","$rmc",0,"R");$pdf->Cell(42,6,"$m590r112","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r113","$rmc",0,"R");$pdf->Cell(35,6,"$m590r114","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r115","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r121","$rmc",0,"R");$pdf->Cell(42,5,"$m590r122","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r123","$rmc",0,"R");$pdf->Cell(35,5,"$m590r124","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r125","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r131","$rmc",0,"R");$pdf->Cell(42,6,"$m590r132","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r133","$rmc",0,"R");$pdf->Cell(35,6,"$m590r134","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r135","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r141","$rmc",0,"R");$pdf->Cell(42,6,"$m590r142","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r143","$rmc",0,"R");$pdf->Cell(35,6,"$m590r144","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r145","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r151","$rmc",0,"R");$pdf->Cell(42,6,"$m590r152","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r153","$rmc",0,"R");$pdf->Cell(35,6,"$m590r154","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r155","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r161","$rmc",0,"R");$pdf->Cell(42,5,"$m590r162","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r163","$rmc",0,"R");$pdf->Cell(35,5,"$m590r164","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r165","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r171","$rmc",0,"R");$pdf->Cell(42,6,"$m590r172","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r173","$rmc",0,"R");$pdf->Cell(35,6,"$m590r174","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r175","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r181","$rmc",0,"R");$pdf->Cell(42,6,"$m590r182","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r183","$rmc",0,"R");$pdf->Cell(35,6,"$m590r184","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r185","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$m590r191","$rmc",0,"R");$pdf->Cell(42,6,"$m590r192","$rmc",0,"R");
-$pdf->Cell(38,6,"$m590r193","$rmc",0,"R");$pdf->Cell(35,6,"$m590r194","$rmc",0,"R");
-$pdf->Cell(32,6,"$m590r195","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r201","$rmc",0,"R");$pdf->Cell(42,5,"$m590r202","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r203","$rmc",0,"R");$pdf->Cell(35,5,"$m590r204","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r205","$rmc",1,"R");
-$pdf->Cell(11,4," ","$rmc1",0,"L");
-$pdf->Cell(30,5,"$m590r211","$rmc",0,"R");$pdf->Cell(42,5,"$m590r212","$rmc",0,"R");
-$pdf->Cell(38,5,"$m590r213","$rmc",0,"R");$pdf->Cell(35,5,"$m590r214","$rmc",0,"R");
-$pdf->Cell(32,5,"$m590r215","$rmc",1,"R");
+$pdf->Cell(195,48.5," ","$rmc1",1,"L");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r11","$rmc",0,"R");$pdf->Cell(37,6,"$m590r12","$rmc",0,"R");
+$pdf->Cell(37.5,6,"$m590r13","$rmc",0,"R");$pdf->Cell(37,6,"$m590r14","$rmc",0,"R");
+$pdf->Cell(37,6,"$m590r15","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r21","$rmc",0,"R");$pdf->Cell(37,5,"$m590r22","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r23","$rmc",0,"R");$pdf->Cell(37,5,"$m590r24","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r25","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r31","$rmc",0,"R");$pdf->Cell(37,5,"$m590r32","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r33","$rmc",0,"R");$pdf->Cell(37,5,"$m590r34","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r35","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r41","$rmc",0,"R");$pdf->Cell(37,6,"$m590r42","$rmc",0,"R");
+$pdf->Cell(37.5,6,"$m590r43","$rmc",0,"R");$pdf->Cell(37,6,"$m590r44","$rmc",0,"R");
+$pdf->Cell(37,6,"$m590r45","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r51","$rmc",0,"R");$pdf->Cell(37,5,"$m590r52","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r53","$rmc",0,"R");$pdf->Cell(37,5,"$m590r54","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r55","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r61","$rmc",0,"R");$pdf->Cell(37,5,"$m590r62","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r63","$rmc",0,"R");$pdf->Cell(37,5,"$m590r64","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r65","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r71","$rmc",0,"R");$pdf->Cell(37,5,"$m590r72","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r73","$rmc",0,"R");$pdf->Cell(37,5,"$m590r74","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r75","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r81","$rmc",0,"R");$pdf->Cell(37,6,"$m590r82","$rmc",0,"R");
+$pdf->Cell(37.5,6,"$m590r83","$rmc",0,"R");$pdf->Cell(37,6,"$m590r84","$rmc",0,"R");
+$pdf->Cell(37,6,"$m590r85","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,4.5,"$m590r91","$rmc",0,"R");$pdf->Cell(37,4.5,"$m590r92","$rmc",0,"R");
+$pdf->Cell(37.5,4.5,"$m590r93","$rmc",0,"R");$pdf->Cell(37,4.5,"$m590r94","$rmc",0,"R");
+$pdf->Cell(37,4.5,"$m590r95","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r101","$rmc",0,"R");$pdf->Cell(37,6,"$m590r102","$rmc",0,"R");
+$pdf->Cell(37.5,6,"$m590r103","$rmc",0,"R");$pdf->Cell(37,6,"$m590r104","$rmc",0,"R");
+$pdf->Cell(37,6,"$m590r105","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r111","$rmc",0,"R");$pdf->Cell(37,5,"$m590r112","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r113","$rmc",0,"R");$pdf->Cell(37,5,"$m590r114","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r115","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r121","$rmc",0,"R");$pdf->Cell(37,5,"$m590r122","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r123","$rmc",0,"R");$pdf->Cell(37,5,"$m590r124","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r125","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5.5,"$m590r131","$rmc",0,"R");$pdf->Cell(37,5.5,"$m590r132","$rmc",0,"R");
+$pdf->Cell(37.5,5.5,"$m590r133","$rmc",0,"R");$pdf->Cell(37,5.5,"$m590r134","$rmc",0,"R");
+$pdf->Cell(37,5.5,"$m590r135","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r141","$rmc",0,"R");$pdf->Cell(37,5,"$m590r142","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r143","$rmc",0,"R");$pdf->Cell(37,5,"$m590r144","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r145","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$m590r151","$rmc",0,"R");$pdf->Cell(37,6,"$m590r152","$rmc",0,"R");
+$pdf->Cell(37.5,6,"$m590r153","$rmc",0,"R");$pdf->Cell(37,6,"$m590r154","$rmc",0,"R");
+$pdf->Cell(37,6,"$m590r155","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r161","$rmc",0,"R");$pdf->Cell(37,5,"$m590r162","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r163","$rmc",0,"R");$pdf->Cell(37,5,"$m590r164","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r165","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r171","$rmc",0,"R");$pdf->Cell(37,5,"$m590r172","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r173","$rmc",0,"R");$pdf->Cell(37,5,"$m590r174","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r175","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r181","$rmc",0,"R");$pdf->Cell(37,5,"$m590r182","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r183","$rmc",0,"R");$pdf->Cell(37,5,"$m590r184","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r185","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5.5,"$m590r191","$rmc",0,"R");$pdf->Cell(37,5.5,"$m590r192","$rmc",0,"R");
+$pdf->Cell(37.5,5.5,"$m590r193","$rmc",0,"R");$pdf->Cell(37,5.5,"$m590r194","$rmc",0,"R");
+$pdf->Cell(37,5.5,"$m590r195","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r201","$rmc",0,"R");$pdf->Cell(37,5,"$m590r202","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r203","$rmc",0,"R");$pdf->Cell(37,5,"$m590r204","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r205","$rmc",1,"R");
+$pdf->Cell(9.5,4," ","$rmc1",0,"L");
+$pdf->Cell(30,5,"$m590r211","$rmc",0,"R");$pdf->Cell(37,5,"$m590r212","$rmc",0,"R");
+$pdf->Cell(37.5,5,"$m590r213","$rmc",0,"R");$pdf->Cell(37,5,"$m590r214","$rmc",0,"R");
+$pdf->Cell(37,5,"$m590r215","$rmc",1,"R");
 
 //pagination
 $pdf->SetY(292);
