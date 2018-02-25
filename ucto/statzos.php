@@ -632,37 +632,36 @@ window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-//vykaz Fin704
+<?php if ( $kli_vrok < 2018 ) { ?>
+//Fin704
 <?php
 $rokfin704="_2016";
 ?>
-
-function TlacFin704()
-                {
-var h_oc = document.forms.formfin704.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  function TlacFin704()
+  {
+    var h_oc = document.forms.formfin704.h_oc.value;
+    var h_fmzdy = 0;
+    window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0', '_blank', blank_param);
+  }
+  function UpravFin704()
+  {
+    var h_oc = document.forms.formfin704.h_oc.value;
+    var h_fmzdy = 0;
+    window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2', '_blank',blank_param);
                 }
-
-function UpravFin704()
-                {
-var h_oc = document.forms.formfin704.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  function ZnovuFin704()
+  {
+    var h_oc = document.forms.formfin704.h_oc.value;
+    var h_fmzdy = 0;
+    window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2', '_blank', blank_param);
                 }
-
-function ZnovuFin704()
-                {
-var h_oc = document.forms.formfin704.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
+  function DbfFin704()
+  {
+    var h_oc = document.forms.formfin704.h_oc.value;
+    var h_fmzdy = 0;
+    window.open('fin704dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0', '_blank', blank_param);
+  }
+<?php                         } ?>
 
 //DBF
 
@@ -783,15 +782,7 @@ window.open('vykaz_fin604_csv.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function DbfFin704()
-                {
-var h_oc = document.forms.formfin704.h_oc.value;
-var h_fmzdy = 0;
 
-
-window.open('fin704dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
 //vykaz Fin1a12
 <?php
@@ -882,8 +873,9 @@ function VyberVstup()
         document.forms.formfin404.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
         document.forms.formfin504.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
         document.forms.formfin604.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+<?php if ( $kli_vrok < 2018 ) { ?>
         document.forms.formfin704.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
-
+<?php                          } ?>
 <?php                           } ?>
 <?php  if( $dajstatvyk == 1 ) { ?>
 
@@ -1333,7 +1325,7 @@ if ( $kli_vrok >= 2013 ) {
 <img src='../obr/zoznam.png' onclick="UpravFin604();" title="Upravi hodnoty" class="toleft line-box box-green">
 </form>
 </div> <!-- .line-area -->
-
+<?php if ( $kli_vrok < 2018 ) { ?>
 <div class="line-area" style="margin-bottom">
 <form name="formfin704" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacFin704();" title="Zobrazi v PDF" class="toleft line-box box-blue">
@@ -1361,8 +1353,10 @@ if ( $kli_vrok >= 2013 ) {
 <img src='../obr/zoznam.png' onclick="UpravFin704();" title="Upravi hodnoty" class="toleft line-box box-green">
 </form>
 </div> <!-- .line-area -->
+<?php                          } ?>
 <?php
                          }
+//$kli_vrok >= 2013
 ?>
 <?php
 //KONIEC VYKAZY FIN NUJ rok2016
