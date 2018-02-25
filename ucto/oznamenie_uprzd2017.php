@@ -75,7 +75,7 @@ $upravene = mysql_query("$uprtxt");
 
 
 $copern=20;
-$strana=1;
+$strana=2;
 $zoznamaut=0;
     }
 //koniec nastav dic
