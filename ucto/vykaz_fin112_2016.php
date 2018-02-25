@@ -27,7 +27,12 @@ $rmc=0;
 $rmc1=0;
 
 //.jpg podklad
+if ( $kli_vrok < 2018 ) {
 $jpg_cesta="../dokumenty/statistika2016/fin112/fin1-12_v16";
+                        }
+if ( $kli_vrok >= 2018 ) {
+$jpg_cesta="../dokumenty/tlacivo2018/fin1-12/fin1-12_v18";
+                        }
 $jpg_popis="Finanèný výkaz o príjmoch, výdavkoch a finanèných operáciách FIN 1-12 za rok ".$kli_vrok;
 
 $pole = explode(".", $kli_vume);
@@ -1226,14 +1231,8 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
   function MetodVypln()
   {
-<?php if ( $kli_vrok < 2018 ) { ?>
    window.open('<?php echo $jpg_cesta; ?>_vysvetlivky.pdf',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
-<?php              } ?>
-<?php if ( $kli_vrok >= 2018 ) { ?>
-   window.open('../dokumenty/tlacivo2018/fin1-12/fin1-12_v18_vysvetlivky.pdf',
-'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
-<?php              } ?>
   }
   function TlacVykaz()
   {
