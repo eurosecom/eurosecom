@@ -240,7 +240,8 @@ body, .box-bluedefault {
 }
 </style>
 <script type="text/javascript">
-
+//parameter okna
+var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 
 //suhrnny DPH
   function TlacSuhrn()
@@ -480,18 +481,17 @@ function TlacFin204pod16()
 var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204pod; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0&strana=9999',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204pod; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&strana=9999',
+ '_blank', blank_param);
                 }
-
 
 function UpravFin204pod16()
                 {
 var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204pod; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204pod; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&strana=2',
+ '_blank', blank_param);
                 }
 
 function ZnovuFin204pod16()
@@ -500,7 +500,7 @@ var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
 window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204pod; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+ '_blank', blank_param);
                 }
 
 //vykaz Fin304
@@ -874,7 +874,9 @@ function VyberVstup()
 
 <?php  if( $dajfinvykazy == 1 ) { ?>
         document.forms.formfin1a12.h_oc.value='<?php echo $kli_vmes; ?>';
+<?php  if ( $kli_vrok <= 2017 ) { ?>
         document.forms.formfin204no16.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+<?php                           } ?>
         document.forms.formfin204pod16.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
         document.forms.formfin304.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
         document.forms.formfin404.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
@@ -1196,7 +1198,7 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/tlac.png' onclick="TlacFin204pod16();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 2-04 <span>Finanèný výkaz o vybraných údajoch z aktív a z pasív</span></strong>
+ <strong>FIN 2-04<span>Finanèný výkaz o vybraných údajoch z aktív a z pasív</span></strong>
  <img src="../obr/info.png" title="FIN 2-04 verzia<?php echo $rokfin204pod; ?>">
 </div>
 <div>
@@ -1209,8 +1211,7 @@ if ( $nedaj == 0 ) { ?>
 </div>
 </div>
 <img src='../obr/vlozit.png' onclick="ZnovuFin204pod16();" title="Naèíta údaje" class="toleft line-box box-lightblue">
-<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank');"
-     title="Nastavi generovanie" class="toleft line-box box-brown">
+<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank');" title="Nastavi generovanie" class="toleft line-box box-brown">
   <button type="button" onclick="DbfFin204pod16();" title="Export do DBF" class="btn-text toleft">DBF</button>
 <?php if ( $kli_vrok >= 2017 ) { ?>
   <button type="button" onclick="CsvFin204pod16()" title="Export do CSV" class="btn-text toleft">CSV</button>
