@@ -1890,8 +1890,15 @@ Príloha
 Súbor pre elektronickú podate¾òu</td>
 
 <td class="bmenu" width="2%">
+<?php
+if( $kli_vrok < 2018 )
+{
+?>
 <a href="#" onClick="window.open('../mzdy/vykaz_zpprerus.php?cislo_oc=9999&copern=101&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0&cislo_zdrv=<?php echo $polozka->zdrv; ?>', '_blank', '<?php echo $tlcswin; ?>' )">
 <img src='../obr/import.png' width=20 height=15 border=0 title='Vytvorenie el.súboru, úprava a tlaè Prerušení platenia ZP ( nemoc...)' ></a>
+<?php
+}
+?>
 </td>
 
 </tr>
