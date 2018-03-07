@@ -388,26 +388,34 @@ $ulozene = mysql_query("$sqty");
 }
 if( $h_zk1 != 0 )
 {
+$rdp_zk1x=$rdp_zk1;
+if( $samodph == 1 ) { $rdp_zk1x=30; }
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk1', '$h_uce', '$rdp_zk1', 0, '$h_zk1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk1', '$h_uce', '$rdp_zk1x', 0, '$h_zk1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_dn1 != 0 )
 {
+$rdp_zk1x=$rdp_zk1;
+if( $samodph == 1 ) { $rdp_zk1x=30; }
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn1', '$h_uce', '$rdp_zk1', 0, '$h_dn1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn1', '$h_uce', '$rdp_zk1x', 0, '$h_dn1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_zk2 != 0 )
 {
+$rdp_zk2x=$rdp_zk2;
+if( $samodph == 1 ) { $rdp_zk2x=25; }
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk2', '$h_uce', '$rdp_zk2', 0, '$h_zk2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk2', '$h_uce', '$rdp_zk2x', 0, '$h_zk2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_dn2 != 0 )
 {
+$rdp_zk2x=$rdp_zk2;
+if( $samodph == 1 ) { $rdp_zk2x=25; }
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '$rdp_zk2', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '$rdp_zk2x', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 
@@ -537,26 +545,34 @@ $ulozene = mysql_query("$sqty");
 }
 if( $h_zk1 != 0 )
 {
+$rdp_zk1x=$rdp_zk1;
+if( $samodph == 1 ) { $rdp_zk1x=30; }
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk1', '$h_uce', '$rdp_zk1', 0, '$h_zk1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk1', '$h_uce', '$rdp_zk1x', 0, '$h_zk1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_dn1 != 0 )
 {
+$rdp_zk1x=$rdp_zk1;
+if( $samodph == 1 ) { $rdp_zk1x=30; }
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn1', '$h_uce', '$rdp_zk1', 0, '$h_dn1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn1', '$h_uce', '$rdp_zk1x', 0, '$h_dn1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_zk2 != 0 )
 {
+$rdp_zk2x=$rdp_zk2;
+if( $samodph == 1 ) { $rdp_zk2x=25; }
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk2', '$h_uce', '$rdp_zk2', 0, '$h_zk2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk2', '$h_uce', '$rdp_zk2x', 0, '$h_zk2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_dn2 != 0 )
 {
+$rdp_zk2x=$rdp_zk2;
+if( $samodph == 1 ) { $rdp_zk2x=25; }
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '$rdp_zk2', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '$rdp_zk2x', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 
