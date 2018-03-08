@@ -442,7 +442,14 @@ $j = $j + 1;
 //tlac zoznamu pdf
 if ( $copern == 11 )
 {
-if ( File_Exists("../tmp/mzdtlac$kli_uzid.pdf") ) { $soubor = unlink("../tmp/mzdtlac$kli_uzid.pdf"); }
+
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$outfilexdel="../tmp/zoznamrz_".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
+$outfilex="../tmp/zoznamrz_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -571,7 +578,7 @@ $j = $j + 1;
 if ( $j > 38 ) $j=0;
   }
 
-$pdf->Output("../tmp/mzdtlac.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -580,7 +587,7 @@ $vysledok = mysql_query("$sqlt");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/mzdtlac.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php
