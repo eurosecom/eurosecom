@@ -479,7 +479,14 @@ if ( $copern == 1  )
 //zostava PDF
 if ( $copern == 10 )
      {
-if ( File_Exists("../tmp/poznamky.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/poznamky.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$outfilexdel="../tmp/poznamky_".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
+$outfilex="../tmp/poznamky_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -543,6 +550,7 @@ if( $kli_vxcf == 855 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $prieb
 if( $kli_vxcf == 856 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
 if( $kli_vxcf == 857 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
 if( $kli_vxcf == 858 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
+if( $kli_vxcf == 859 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
 //if( $kli_vxcf == 73  AND $_SERVER['SERVER_NAME'] == "localhost" )       { $priebeznauzav=1; $kli_vrokxd=2013; }
 
 if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrokxd >= 2014 AND $bez1 == 0 ) {
@@ -13498,13 +13506,33 @@ $i = $i + 1;
 
   }
 
-$pdf->Output("../tmp/poznamky.$kli_uzid.pdf");
+
+//aj cash
+$ajcash = 1*$_REQUEST['ajcash'];
+if( $ajcash == 1 )
+{
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prccash1000ziss".$kli_uzid.
+" LEFT JOIN F$kli_vxcf"."_uctpoccash2011_stt".
+" ON F$kli_vxcf"."_prccash1000ziss$kli_uzid.icx=F$kli_vxcf"."_uctpoccash2011_stt.fic".
+" WHERE prx = 99 ".""; 
+
+$fort=1;
+$citfir = include("cashflow2011_pdf.php");
+
+//exit;
+
+
+}
+//koniec aj cash
+
+$pdf->Output("$outfilex");
 
 
 if( $urobxml == 0 ) {
 ?> 
 <script type="text/javascript">
-  var okno = window.open("../tmp/poznamky.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
                     }

@@ -238,7 +238,14 @@ if ( $copern != 10 )
 //zostava PDF
 if ( $copern == 10 )
      {
-if ( File_Exists("../tmp/poznamky.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/poznamky.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$outfilexdel="../tmp/poznamky_".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
+$outfilex="../tmp/poznamky_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -2566,13 +2573,13 @@ $i = $i + 1;
 
   }
 
-$pdf->Output("../tmp/poznamky.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 
 if ( $urobxml == 0 ) {
 ?> 
 <script type="text/javascript">
-  var okno = window.open("../tmp/poznamky.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
                      }
