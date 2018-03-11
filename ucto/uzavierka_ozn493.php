@@ -633,7 +633,14 @@ fclose($soubor);
 //pdf
 if ( $copern == 10 )
 {
-if ( File_Exists("../tmp/uzoznamenie.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/uzoznamenie.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$outfilexdel="../tmp/oznam_".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
+$outfilex="../tmp/oznam_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -1332,10 +1339,10 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,5,"$t13","$rmc",1,"C");
 }
 $i = $i + 1;
   }
-$pdf->Output("../tmp/uzoznamenie.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?>
 <script type="text/javascript">
-  var okno = window.open("../tmp/uzoznamenie.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
 }
