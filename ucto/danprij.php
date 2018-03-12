@@ -1340,7 +1340,7 @@ if ( $rokdppo == 2016 ) { $rokdppo="2015"; }
   function TlacPriznanie()
   {
    var h_oc = 0;
-   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>_pdf.php?copern=11&drupoh=1&typ=PDF&strana=999',
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=11&drupoh=1&typ=PDF&strana=999',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravPriznanie()
@@ -1356,7 +1356,7 @@ if ( $rokdppo == 2016 ) { $rokdppo="2015"; }
   }
   function POdoXML()
   {
-   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=10&sysx=UCT&drupoh=1',
+   window.open('../ucto/priznaniepo_xml<?php echo $rokdppo; ?>.php?copern=110&sysx=UCT&drupoh=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 <?php
