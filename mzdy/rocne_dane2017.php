@@ -913,10 +913,10 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=r01 WHERE oc = $cislo_oc AND r00 >= 4560.00 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=r01 WHERE oc = $cislo_oc AND r00 >= 5220.00 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=0, r08=0 WHERE oc = $cislo_oc AND r00 < 4560.00 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=0, r08=0 WHERE oc = $cislo_oc AND r00 < 5220.00 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=0, r09=0 WHERE oc = $cislo_oc AND r08 = 0 ";
