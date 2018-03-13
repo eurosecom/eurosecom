@@ -3890,7 +3890,8 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 //polozka65
 $pdf->Cell(190,4," ","$rmc1",1,"L");
 $text="0123456789";
-$hodx=100*$hlavicka->r65;
+$hodx=$hlavicka->r65;
+$hodx=str_replace(".","",$hodx);
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
@@ -3912,7 +3913,8 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 //polozka66
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="0123456789";
-$hodx=100*$hlavicka->r66;
+$hodx=$hlavicka->r66;
+$hodx=str_replace(".","",$hodx);
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);

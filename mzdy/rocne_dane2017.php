@@ -2454,7 +2454,8 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
 //r24
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$hodx=100*$r17n;
+$hodx=$r17n;
+$hodx=str_replace(".","",$hodx);
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf('% 10s',$hodx);
 $A=substr($text,0,1);
@@ -2475,7 +2476,8 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
 //r25
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$hodx=100*$zp2hod;
+$hodx=$zp2hod;
+$hodx=str_replace(".","",$hodx);
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf('% 10s',$hodx);
 $A=substr($text,0,1);
