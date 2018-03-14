@@ -638,7 +638,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 
-$sql = "SELECT px08 FROM F".$kli_vxcf."_uctvykaz_fin204pod";
+$sql = "SELECT px09 FROM F".$kli_vxcf."_uctvykaz_fin204pod";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -651,7 +651,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctvykaz_fin204podd2';
 $pocdes="10,2";
 $sqlt = <<<mzdprc
 (
-   px08         DECIMAL($pocdes) DEFAULT 0,
+   px09         DECIMAL($pocdes) DEFAULT 0,
    oc           INT(7) DEFAULT 0,
    druh         DECIMAL(10,0) DEFAULT 0,
    okres        VARCHAR(11),
@@ -785,6 +785,20 @@ $sqlt = <<<mzdprc
    r116         DECIMAL($pocdes),
    r117         DECIMAL($pocdes),
    r118         DECIMAL($pocdes),
+   r119          DECIMAL($pocdes),
+   r120          DECIMAL($pocdes),
+   r121          DECIMAL($pocdes),
+   r122          DECIMAL($pocdes),
+   r123          DECIMAL($pocdes),
+   r124          DECIMAL($pocdes),
+   r125          DECIMAL($pocdes),
+   r126          DECIMAL($pocdes),
+   r127          DECIMAL($pocdes),
+   r128          DECIMAL($pocdes),
+   r129          DECIMAL($pocdes),
+   r130          DECIMAL($pocdes),
+   r131          DECIMAL($pocdes),
+
    rk01          DECIMAL($pocdes),
    rk02          DECIMAL($pocdes),
    rk03          DECIMAL($pocdes),
@@ -849,6 +863,12 @@ $sqlt = <<<mzdprc
    rk62          DECIMAL($pocdes),
    rk63          DECIMAL($pocdes),
    rk64          DECIMAL($pocdes),
+   rk65          DECIMAL($pocdes),
+   rk66          DECIMAL($pocdes),
+   rk67          DECIMAL($pocdes),
+   rk68          DECIMAL($pocdes),
+   rk69          DECIMAL($pocdes),
+
    rn01          DECIMAL($pocdes),
    rn02          DECIMAL($pocdes),
    rn03          DECIMAL($pocdes),
@@ -913,6 +933,12 @@ $sqlt = <<<mzdprc
    rn62          DECIMAL($pocdes),
    rn63          DECIMAL($pocdes),
    rn64          DECIMAL($pocdes),
+   rn65          DECIMAL($pocdes),
+   rn66          DECIMAL($pocdes),
+   rn67          DECIMAL($pocdes),
+   rn68          DECIMAL($pocdes),
+   rn69          DECIMAL($pocdes),
+
    rm01          DECIMAL($pocdes),
    rm02          DECIMAL($pocdes),
    rm03          DECIMAL($pocdes),
@@ -1005,6 +1031,45 @@ $sqlt = <<<mzdprc
    rm90          DECIMAL($pocdes),
    rm91          DECIMAL($pocdes),
    rm92          DECIMAL($pocdes),
+   rm93          DECIMAL($pocdes),
+   rm94          DECIMAL($pocdes),
+   rm95          DECIMAL($pocdes),
+   rm96          DECIMAL($pocdes),
+   rm97          DECIMAL($pocdes),
+   rm98          DECIMAL($pocdes),
+   rm99          DECIMAL($pocdes),
+   rm100          DECIMAL($pocdes),
+   rm101          DECIMAL($pocdes),
+   rm102          DECIMAL($pocdes),
+   rm103          DECIMAL($pocdes),
+   rm104          DECIMAL($pocdes),
+   rm105          DECIMAL($pocdes),
+   rm106          DECIMAL($pocdes),
+   rm107          DECIMAL($pocdes),
+   rm108          DECIMAL($pocdes),
+   rm109          DECIMAL($pocdes),
+   rm110          DECIMAL($pocdes),
+   rm111          DECIMAL($pocdes),
+   rm112          DECIMAL($pocdes),
+   rm113          DECIMAL($pocdes),
+   rm114          DECIMAL($pocdes),
+   rm115          DECIMAL($pocdes),
+   rm116          DECIMAL($pocdes),
+   rm117          DECIMAL($pocdes),
+   rm118          DECIMAL($pocdes),
+   rm119          DECIMAL($pocdes),
+   rm120          DECIMAL($pocdes),
+   rm121          DECIMAL($pocdes),
+   rm122          DECIMAL($pocdes),
+   rm123          DECIMAL($pocdes),
+   rm124          DECIMAL($pocdes),
+   rm125          DECIMAL($pocdes),
+   rm126          DECIMAL($pocdes),
+   rm127          DECIMAL($pocdes),
+   rm128          DECIMAL($pocdes),
+   rm129          DECIMAL($pocdes),
+   rm130          DECIMAL($pocdes),
+   rm131          DECIMAL($pocdes),
    ico           INT
 );
 mzdprc;
@@ -1012,139 +1077,7 @@ mzdprc;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctvykaz_fin204pod'.$sqlt;
 $vytvor = mysql_query("$vsql");
 }
-//zmeny2018
-$sql = "SELECT rm131 FROM F".$kli_vxcf."_uctvykaz_fin204pod WHERE ico=0";
-$vysledok = mysql_query($sql);
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD new2018 DECIMAL(2,0) DEFAULT 0 AFTER ico";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r119 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r120 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r121 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r122 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r123 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r124 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r125 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r126 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r127 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r128 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r129 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r130 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD r131 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rk65 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rk66 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rk67 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rk68 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rk69 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rn65 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rn66 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rn67 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rn68 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rn69 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm93 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm94 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm95 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm96 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm97 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm98 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm99 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm100 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm101 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm102 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm103 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm104 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm105 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm106 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm107 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm108 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm109 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm110 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm111 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm112 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm113 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm114 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm115 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm116 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm117 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm118 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm119 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm120 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm121 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm122 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm123 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm124 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm125 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm126 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm127 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm128 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm129 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm130 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin204pod ADD rm131 DECIMAL($pocdes) DEFAULT 0 AFTER new2018";
-$vysledek = mysql_query("$sql");
-}
-//koniec vytvorenie
+
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin204pod";
 $vytvor = mysql_query("$vsql");
@@ -1197,28 +1130,39 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,0,uce,uce,0,0,0,0,pmd,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "$fir_fico FROM F$kli_vxcf"."_uctosnova".
 " WHERE F$kli_vxcf"."_uctosnova.pmd != 0";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " -pda,$cislo_oc,0,'','','0000-00-00',".
 " 0,0,uce,uce,0,0,0,0,0,pda,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "$fir_fico FROM F$kli_vxcf"."_uctosnova".
 " WHERE F$kli_vxcf"."_uctosnova.pda != 0";
 //echo $dsqlt;
@@ -1258,12 +1202,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 "0,0,ucm,ucm,0,0,0,0,F$kli_vxcf"."_$uctovanie.hod,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
 " WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ucm > 0 AND ume <= $kli_vume";
 //echo $dsqlt;
@@ -1274,12 +1223,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,0,ucd,0,ucd,0,0,0,0,F$kli_vxcf"."_$uctovanie.hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
 " WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ucd > 0 AND ume <= $kli_vume";
 $dsql = mysql_query("$dsqlt");
@@ -1289,12 +1243,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 "0,0,ucm,ucm,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM ".$databaza."F$kli_vmcf"."_$uctovanie,".$databaza."F$kli_vmcf"."_$doklad".
 " WHERE ".$databaza."F$kli_vmcf"."_$uctovanie.dok=".$databaza."F$kli_vmcf"."_$doklad.dok AND ( LEFT(ucm,1) = 5 OR LEFT(ucm,1) = 6 ) ";
 //echo $dsqlt;
@@ -1305,12 +1264,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,0,ucd,0,ucd,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM ".$databaza."F$kli_vmcf"."_$uctovanie,".$databaza."F$kli_vmcf"."_$doklad".
 " WHERE ".$databaza."F$kli_vmcf"."_$uctovanie.dok=".$databaza."F$kli_vmcf"."_$doklad.dok AND ( LEFT(ucd,1) = 5 OR LEFT(ucd,1) = 6 ) ";
 $dsql = mysql_query("$dsqlt");
@@ -1325,12 +1289,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,0,ucm,ucm,0,0,0,0,SUM(hod),0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie".
 " WHERE ( ucm > 0 AND ume <= $kli_vume ) GROUP BY F$kli_vxcf"."_$uctovanie.ucm";
 //echo $dsqlt;
@@ -1341,12 +1310,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,0,ucd,0,ucd,0,0,0,0,SUM(hod),".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie".
 " WHERE ( ucd > 0 AND ume <= $kli_vume ) GROUP BY F$kli_vxcf"."_$uctovanie.ucd";
 $dsql = mysql_query("$dsqlt");
@@ -1356,12 +1330,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,0,ucm,ucm,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM ".$databaza."F$kli_vmcf"."_$uctovanie".
 " WHERE ( LEFT(ucm,1) = 5 OR LEFT(ucm,1) = 6 ) GROUP BY ".$databaza."F$kli_vmcf"."_$uctovanie.ucm";
 //echo $dsqlt;
@@ -1372,12 +1351,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,0,ucd,0,ucd,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM ".$databaza."F$kli_vmcf"."_$uctovanie".
 " WHERE ( LEFT(ucd,1) = 5 OR LEFT(ucd,1) = 6 ) GROUP BY ".$databaza."F$kli_vmcf"."_$uctovanie.ucd";
 $dsql = mysql_query("$dsqlt");
@@ -1415,7 +1399,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid".
 $oznac = mysql_query("$sqtoz");
 
 //HV
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rdk=48 WHERE LEFT(uce,1) = 5 OR LEFT(uce,1) = 6 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rdk=75 WHERE LEFT(uce,1) = 5 OR LEFT(uce,1) = 6 ";
 $oznac = mysql_query("$sqtoz");
 
 
@@ -1477,16 +1461,16 @@ exit;
 //rozdel do riadkov , vypocitaj netto
 
 $rdk=1;
-while ($rdk <= 79 )
+while ($rdk <= 131 )
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk AND kor = 0 ";
-if( $rdk > 43 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
+if( $rdk > 68 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
 $oznac = mysql_query("$sqtoz");
 
-if( $rdk < 44 ) {
+if( $rdk < 69 ) {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rk$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1495,8 +1479,8 @@ $oznac = mysql_query("$sqtoz");
 
                 }
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=px08 WHERE rdk = $rdk ";
-if( $rdk > 43 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=-px08 WHERE rdk = $rdk "; }
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=px09 WHERE rdk = $rdk ";
+if( $rdk > 68 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=-px09 WHERE rdk = $rdk "; }
 $oznac = mysql_query("$sqtoz");
 
 $rdk=$rdk+1;
@@ -1519,21 +1503,25 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid "." SELECT".
 "SUM(r81),SUM(r82),SUM(r83),SUM(r84),SUM(r85),SUM(r86),SUM(r87),SUM(r88),SUM(r89),SUM(r90),".
 "SUM(r91),SUM(r92),SUM(r93),SUM(r94),SUM(r95),SUM(r96),SUM(r97),SUM(r98),SUM(r99),SUM(r100),".
 "SUM(r101),SUM(r102),SUM(r103),SUM(r104),SUM(r105),SUM(r106),SUM(r107),SUM(r108),SUM(r109),SUM(r110),".
-"SUM(r111),SUM(r112),SUM(r113),SUM(r114),SUM(r115),SUM(r116),SUM(r117),SUM(r118),".
+"SUM(r111),SUM(r112),SUM(r113),SUM(r114),SUM(r115),SUM(r116),SUM(r117),SUM(r118),SUM(r119),SUM(r120),".
+"SUM(r121),SUM(r122),SUM(r123),SUM(r124),SUM(r125),SUM(r126),SUM(r127),SUM(r128),SUM(r129),SUM(r130),SUM(r131),".
+
 "SUM(rk01),SUM(rk02),SUM(rk03),SUM(rk04),SUM(rk05),SUM(rk06),SUM(rk07),SUM(rk08),SUM(rk09),SUM(rk10),".
 "SUM(rk11),SUM(rk12),SUM(rk13),SUM(rk14),SUM(rk15),SUM(rk16),SUM(rk17),SUM(rk18),SUM(rk19),SUM(rk20),".
 "SUM(rk21),SUM(rk22),SUM(rk23),SUM(rk24),SUM(rk25),SUM(rk26),SUM(rk27),SUM(rk28),SUM(rk29),SUM(rk30),".
 "SUM(rk31),SUM(rk32),SUM(rk33),SUM(rk34),SUM(rk35),SUM(rk36),SUM(rk37),SUM(rk38),SUM(rk39),SUM(rk40),".
 "SUM(rk41),SUM(rk42),SUM(rk43),SUM(rk44),SUM(rk45),SUM(rk46),SUM(rk47),SUM(rk48),SUM(rk49),SUM(rk50),".
 "SUM(rk51),SUM(rk52),SUM(rk53),SUM(rk54),SUM(rk55),SUM(rk56),SUM(rk57),SUM(rk58),SUM(rk59),SUM(rk60),".
-"SUM(rk61),SUM(rk62),SUM(rk63),SUM(rk64),".
+"SUM(rk61),SUM(rk62),SUM(rk63),SUM(rk64),SUM(rk65),SUM(rk66),SUM(rk67),SUM(rk68),SUM(rk69),".
+
 "SUM(rn01),SUM(rn02),SUM(rn03),SUM(rn04),SUM(rn05),SUM(rn06),SUM(rn07),SUM(rn08),SUM(rn09),SUM(rn10),".
 "SUM(rn11),SUM(rn12),SUM(rn13),SUM(rn14),SUM(rn15),SUM(rn16),SUM(rn17),SUM(rn18),SUM(rn19),SUM(rn20),".
 "SUM(rn21),SUM(rn22),SUM(rn23),SUM(rn24),SUM(rn25),SUM(rn26),SUM(rn27),SUM(rn28),SUM(rn29),SUM(rn30),".
 "SUM(rn31),SUM(rn32),SUM(rn33),SUM(rn34),SUM(rn35),SUM(rn36),SUM(rn37),SUM(rn38),SUM(rn39),SUM(rn40),".
 "SUM(rn41),SUM(rn42),SUM(rn43),SUM(rn44),SUM(rn45),SUM(rn46),SUM(rn47),SUM(rn48),SUM(rn49),SUM(rn50),".
 "SUM(rn51),SUM(rn52),SUM(rn53),SUM(rn54),SUM(rn55),SUM(rn56),SUM(rn57),SUM(rn58),SUM(rn59),SUM(rn60),".
-"SUM(rn61),SUM(rn62),SUM(rn63),SUM(rn64),".
+"SUM(rn61),SUM(rn62),SUM(rn63),SUM(rn64),SUM(rn65),SUM(rn66),SUM(rn67),SUM(rn68),SUM(rn69),".
+
 "SUM(rm01),SUM(rm02),SUM(rm03),SUM(rm04),SUM(rm05),SUM(rm06),SUM(rm07),SUM(rm08),SUM(rm09),SUM(rm10),".
 "SUM(rm11),SUM(rm12),SUM(rm13),SUM(rm14),SUM(rm15),SUM(rm16),SUM(rm17),SUM(rm18),SUM(rm19),SUM(rm20),".
 "SUM(rm21),SUM(rm22),SUM(rm23),SUM(rm24),SUM(rm25),SUM(rm26),SUM(rm27),SUM(rm28),SUM(rm29),SUM(rm30),".
@@ -1543,7 +1531,10 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid "." SELECT".
 "SUM(rm61),SUM(rm62),SUM(rm63),SUM(rm64),SUM(rm65),SUM(rm66),SUM(rm67),SUM(rm68),SUM(rm69),SUM(rm70),".
 "SUM(rm71),SUM(rm72),SUM(rm73),SUM(rm74),SUM(rm75),SUM(rm76),SUM(rm77),SUM(rm78),SUM(rm79),SUM(rm80),".
 "SUM(rm81),SUM(rm82),SUM(rm83),SUM(rm84),SUM(rm85),SUM(rm86),SUM(rm87),SUM(rm88),SUM(rm89),SUM(rm90),".
-"SUM(rm91),SUM(rm92),".
+"SUM(rm91),SUM(rm92),SUM(rm93),SUM(rm94),SUM(rm95),SUM(rm96),SUM(rm97),SUM(rm98),SUM(rm99),SUM(rm100),".
+"SUM(rm101),SUM(rm102),SUM(rm103),SUM(rm104),SUM(rm105),SUM(rm106),SUM(rm107),SUM(rm108),SUM(rm109),SUM(rm110),".
+"SUM(rm111),SUM(rm112),SUM(rm113),SUM(rm114),SUM(rm115),SUM(rm116),SUM(rm117),SUM(rm118),SUM(rm119),SUM(rm120),".
+"SUM(rm121),SUM(rm122),SUM(rm123),SUM(rm124),SUM(rm125),SUM(rm126),SUM(rm127),SUM(rm128),SUM(rm129),SUM(rm130),SUM(rm131),".
 "$fir_fico".
 " FROM F$kli_vxcf"."_uctprcvykaz$kli_uzid".
 " WHERE rdk > 0".
@@ -1567,6 +1558,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin204pod".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+//exit;
 
 
 }
