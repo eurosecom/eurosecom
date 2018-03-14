@@ -65,7 +65,7 @@ if( $firmaneex == 1 ) { echo "Zadana firma cislo ".$firmax." neexistuje v ciseln
 $databaza="";
 $kli_vrokx=$kli_vrok;
 $kli_vrok=$kli_vrokxy;
-$dtb2 = include("../cis/oddel_dtbz2.php");
+$dtb2 = include("../cis/oddel_dtbz4.php");
 $kli_vrok=$kli_vrokx;
 
 $ulozttt = "INSERT INTO F$kli_vxcf"."_poznamky_no2011texty ( ozntxt, hdntxt ) VALUES ('$h_ozntxt', '' ) "; 
@@ -284,13 +284,13 @@ if( $firmaneex == 1 ) { echo "Zadaná firma èíslo ".$fix." neexistuje v èíselníku
 $databaza="";
 $kli_vrokx=$kli_vrok;
 $kli_vrok=$kli_vrokxy;
-$dtb2 = include("../cis/oddel_dtbz2.php");
+$dtb2 = include("../cis/oddel_dtbz4.php");
 $kli_vrok=$kli_vrokx;
 
 //_poznamky_no2011texty   psys  ozntxt  hdntxt  prmx1  prmx2  prmx3  prmx4  oldp  oldc1  oldc2  konx  konx8  ico 
 
-//z akych poznamok ideme
-$idemezostarych=1;
+//z akych poznamok ideme, uz len nove
+$idemezostarych=0;
 $poslhh = "SELECT * FROM F$kli_vxcf"."_poznamky_no2011texty WHERE ico >= 0 ";
 $posl = mysql_query("$poslhh"); 
 $kolkordk = 1*mysql_num_rows($posl);
@@ -300,7 +300,7 @@ if( $kolkordk > 5 ) { $idemezostarych=0; }
 //len ked prenos zo starych
 if( $idemezostarych == 1 )
      {
-//echo "ideme zo starych";
+echo "ideme zo starych";
 
 $sqult = "DROP TABLE F$kli_vxcf"."_poznamkypoprc ";
 $ulozene = mysql_query("$sqult");
