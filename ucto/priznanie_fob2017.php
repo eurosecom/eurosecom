@@ -2142,7 +2142,16 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD alla2017 DECIMAL(2,0) NOT NULL AFTER new2017";
 $vysledek = mysql_query("$sql");
 }
+$sql = "SELECT allb2017 FROM F".$kli_vxcf."_mzdpriznanie_fob";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob MODIFY pmen VARCHAR(60) NOT NULL";
+$vysledek = mysql_query("$sql");
 
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD allb2017 DECIMAL(2,0) NOT NULL AFTER new2017";
+$vysledek = mysql_query("$sql");
+}
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob";
 $vytvor = mysql_query("$vsql");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob";
