@@ -5917,8 +5917,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t35","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t37","$rmc",1,"C");
 //
 $pdf->Cell(195,3," ","$rmc1",1,"L");
-$text="ABCDEFGHIJKLMNOPRSTUVXYZW+-1234567890";
-$text="";
+$text=substr($hlavicka->pmen,37,36);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);

@@ -5205,11 +5205,12 @@ if ( $pico == 0 ) $pico="";
 $pravnaForma=iconv("CP1250", "UTF-8", $hlavicka->pfor);
   $text = "   <pravnaForma><![CDATA[".$pravnaForma."]]></pravnaForma>"."\r\n"; fwrite($soubor, $text);
   $text = "   <obchMeno>"."\r\n"; fwrite($soubor, $text);
-$riadok=iconv("CP1250", "UTF-8", $hlavicka->pmen);
+$riadok=iconv("CP1250", "UTF-8", substr($hlavicka->pmen,0,37));
   $text = "    <riadok><![CDATA[".$riadok."]]></riadok>"."\r\n"; fwrite($soubor, $text);
-$riadok="";
+$riadok=iconv("CP1250", "UTF-8", substr($hlavicka->pmen,37,36));
   $text = "    <riadok><![CDATA[".$riadok."]]></riadok>"."\r\n"; fwrite($soubor, $text);
   $text = "   </obchMeno>"."\r\n";   fwrite($soubor, $text);
+
 $ulica=iconv("CP1250", "UTF-8", $hlavicka->puli);
   $text = "   <ulica><![CDATA[".$ulica."]]></ulica>"."\r\n"; fwrite($soubor, $text);
 $cislo=$hlavicka->pcdm;
