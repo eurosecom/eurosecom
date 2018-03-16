@@ -540,7 +540,8 @@ window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc
 
 //vykaz Fin404
 <?php
-$rokfin404="_2016";
+$rokfin404="_2018";
+if ( $kli_vrok < 2018 ) $rokodpad="_2016";
 ?>
 
 function TlacFin404()
