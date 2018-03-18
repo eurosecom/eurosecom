@@ -13528,7 +13528,6 @@ $citfir = include("cashflow2011_pdf.php");
 
 $pdf->Output("$outfilex");
 
-
 if( $urobxml == 0 ) {
 ?> 
 <script type="text/javascript">
@@ -13543,7 +13542,7 @@ if( $urobxml == 0 ) {
 if( $urobxml == 1 ) {
 ?> 
 <script type="text/javascript">
-window.open('../ucto/poznamky2013_xml.php?copern=110&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&page=1&sysx=UCT&drupoh=1&uprav=1', '_self' );
+window.open('../ucto/poznamky2013_xml.php?copern=110&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&page=1&sysx=UCT&drupoh=1&uprav=1&outfilex=<?php echo $outfilex; ?>', '_self' );
 </script>
 <?php
                     }

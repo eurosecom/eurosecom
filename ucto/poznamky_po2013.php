@@ -16262,6 +16262,11 @@ window.open('../ucto/poznamky_po2013nacitaj.php?copern=1999&stranax=' + strana +
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
+  function TlacPoznamky2013cash()
+  {
+   window.open('../ucto/poznamky_po2013tlac.php?cislo_oc=0&h_zos=&h_sch=&copern=10&drupoh=1&page=9999&strana=9999&subor=0&ajcash=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 </script>
 
@@ -16278,6 +16283,7 @@ window.open('../ucto/poznamky_po2013nacitaj.php?copern=1999&stranax=' + strana +
    <td>
     <div class="bar-btn-form-tool">
 <?php if( $kli_vrok < 2090 ) { ?>
+
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPoznamky2013bez1();"
       title="Zobrazi všetky - bez prvej strany - v PDF" class="btn-form-tool"
       style="width:16px; height:16px; margin-top:2px;">

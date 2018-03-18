@@ -1,6 +1,6 @@
 <HTML>
 <?php
-//XML pre Poznamky PODv2013 za rok 2013
+//XML pre Poznamky PODv2013 za rok 2013 a vyssie
 do
 {
 $sys = 'UCT';
@@ -11,6 +11,7 @@ $zdrd = $_REQUEST['zdrd'];
 $h_drp = $_REQUEST['h_drp'];
 $h_dap = $_REQUEST['h_dap'];
 $h_arch = $_REQUEST['h_arch'];
+$outfilex = $_REQUEST['outfilex'];
 
 $chyby = 1*$_REQUEST['chyby'];
 
@@ -401,6 +402,7 @@ $j = $j + 1;
 fclose($soubor);
 
 $nazsuborpdf="poznamky.".$kli_uzid.".pdf";
+$nazsuborpdf=outfilex;
 ?>
 
 <?php
@@ -439,6 +441,10 @@ Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Fin
 <strong>iba pdf súbor</strong>, ktorı naèítate cez prílohu k úètovnej závierke.
 </p>
 <p>
+Ak máte povinnos k závierke podáva aj vıkaz Cash Flow, vytvorte si pdf súbor Cash Flow, ktorı naèítate cez Všeobecné podanie pre Finanènú správu Slovenskej republiky.
+</p>
+<br>
+<p>
 Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Finanèná správa SR">portál finanènej správy</a> alebo aplikáciu
 <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/elektronicka-komunikacia/elektronicka-komunikacia-dane/edane" target="_blank" title="aplikácia eDane Java">eDane</a>.
 </p>
@@ -446,7 +452,7 @@ Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Fin
 
 
 <br>
-<a href="../tmp/<?php echo $nazsuborpdf; ?>">../tmp/<?php echo $nazsuborpdf; ?></a>
+<a href="<?php echo $outfilex; ?>"><?php echo $outfilex; ?></a>
 <br>
 <br>
 <?php if ( $kli_vrok < 2015 ) { ?>
