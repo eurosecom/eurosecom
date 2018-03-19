@@ -830,7 +830,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
 
 if ( $strana == 12 ) {
 $osob = trim(strip_tags($_REQUEST['osob']));
-$pril = 1*$_REQUEST['pril']; if ( $pril < 2 ) { $pril=2; }
+$pril = 1*$_REQUEST['pril']; if ( $pril < 3 ) { $pril=3; }
 $dat = $_REQUEST['dat'];
 $datsql=Sqldatum($dat);
 $zdbo = 1*$_REQUEST['zdbo'];
