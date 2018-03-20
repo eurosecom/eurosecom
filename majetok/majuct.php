@@ -230,9 +230,9 @@ $dsql = mysql_query("$dsqlt");
      }
 if( $polno == 1 )
      {
-$dsqlt = "UPDATE F$kli_vxcf"."_majprc SET ucm=CONCAT( '0', ucm ) WHERE LEFT(ucm,1) = 8 OR LEFT(ucm,1) = 7 OR LEFT(ucm,1) = 2 OR LEFT(ucm,1) = 1 OR LEFT(ucm,1) = 4 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_majprc SET ucm=CONCAT( '0', ucm ) WHERE LEFT(ucm,1) = 8 OR LEFT(ucm,1) = 7 OR LEFT(ucm,1) = 2 OR LEFT(ucm,1) = 1 OR LEFT(ucm,2) = 31 OR LEFT(ucm,1) = 4 ";
 $dsql = mysql_query("$dsqlt");
-$dsqlt = "UPDATE F$kli_vxcf"."_majprc SET ucd=CONCAT( '0', ucd ) WHERE LEFT(ucd,1) = 8 OR LEFT(ucd,1) = 7 OR LEFT(ucd,1) = 2 OR LEFT(ucd,1) = 1 OR LEFT(ucd,1) = 4 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_majprc SET ucd=CONCAT( '0', ucd ) WHERE LEFT(ucd,1) = 8 OR LEFT(ucd,1) = 7 OR LEFT(ucd,1) = 2 OR LEFT(ucd,1) = 1 OR LEFT(ucd,2) = 31 OR LEFT(ucd,1) = 4 ";
 $dsql = mysql_query("$dsqlt");
      }
 }
@@ -549,7 +549,7 @@ $h_obdp=$kli_vmes;
 $h_obdk=$kli_vmes;
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Tlaè-V</title>
   <style type="text/css">
