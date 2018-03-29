@@ -1100,7 +1100,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT ".
 "((hod/$fir_dph2)*100),(rdp+50),rdk,xrz,xrd,xsz,55555,ucd,ico,fak,dok,".
 "r11,r12,r13,r14,r15,r16,r17,r18,r19,r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30,r31,r32,r33,r34,r35,r36,r37,r38,fic ".
 " FROM F$kli_vxcf"."_prcprizdphs$kli_uzid".
-" WHERE xrz = 7 OR xrz = 9 OR xrz = 11 ";
+" WHERE xrz = 7 OR xrz = 9 OR xrz = 11 OR xrz = 13 ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
@@ -1598,7 +1598,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET dn2=hod WHERE ( xsz = 19
 $oznac = mysql_query("$sqtoz");
 
 if( $chyby == 1 AND $poliklinikase == 0 ) {
-$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET dn1=0, dn2=0 WHERE ( rdk = 8 OR rdk = 10 OR rdk = 12 ) ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET dn1=0, dn2=0 WHERE ( rdk = 8 OR rdk = 10 OR rdk = 12 OR rdk = 14 ) ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET dn1=0 WHERE ( rdk = 6 ) ";
 $oznac = mysql_query("$sqtoz");
