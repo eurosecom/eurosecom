@@ -139,7 +139,15 @@ $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
 
-if (File_Exists ("../tmp/vmajzav$kli_vume.$kli_uzid.pdf")) { $soubor = unlink("../tmp/vmajzav$kli_vume.$kli_uzid.pdf"); }
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/majzav_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/majzav_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -2599,7 +2607,7 @@ window.open('../ucto/vmajzav_xml2013.php?copern=110&page=1&sysx=UCT&drupoh=1&upr
 exit;
                                          } 
 
-$pdf->Output("../tmp/vmajzav$kli_vume.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvmajzavs'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -2631,7 +2639,7 @@ $vysledok = mysql_query("$sqlt");
 <br />
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/vmajzav<?php echo $kli_vume; ?>.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 

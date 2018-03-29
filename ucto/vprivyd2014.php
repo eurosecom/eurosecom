@@ -168,7 +168,15 @@ $vytvor = mysql_query("$vsql");
    }
 //koniec uprava generovania vykazu prijmov a vydavkov
 
-if (File_Exists ("../tmp/vprivyd$kli_vume.$kli_uzid.pdf")) { $soubor = unlink("../tmp/vprivyd$kli_vume.$kli_uzid.pdf"); }
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/privyd_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/privyd_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -1583,16 +1591,17 @@ $h_zos = $_REQUEST['h_zos'];
 $h_sch = $_REQUEST['h_sch'];
 $h_drp = 1*$_REQUEST['h_drp'];
 $celeeura= 1*$_REQUEST['celeeura'];
+if( $zandroidu == 0 ) {
 ?>
 <script type="text/javascript">
 window.open('../ucto/vmajzav2014.php?copern=10&drupoh=1&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&celeeura=<?php echo $celeeura; ?>&page=1', '_self' );
 </script>
 <?php 
 exit;
+                      }
 
 
-
-$pdf->Output("../tmp/vprivyd$kli_vume.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvprivyds'.$kli_uzid;
 //$vysledok = mysql_query("$sqlt");
@@ -1624,7 +1633,7 @@ $vysledok = mysql_query("$sqlt");
 <br />
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/vprivyd<?php echo $kli_vume; ?>.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
 // celkovy koniec dokumentu
