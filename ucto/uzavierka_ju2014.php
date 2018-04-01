@@ -1,21 +1,108 @@
 <HTML>
 <?php
-do
-{
+$zandroidu=1*$_REQUEST['zandroidu'];
+if( $zandroidu == 1 )
+  {
+//server
+if (isset($_REQUEST['serverx'])) { $serverx = $_REQUEST['serverx']; }
+
+$poles = explode("/", $serverx);
+$servxxx=$poles[0];
+$adrsxxx=$poles[1];
+
+//userhash
+$userhash = $_REQUEST['userhash'];
+
+require_once('../androidfanti/MCrypt.php');
+$mcrypt = new MCrypt();
+//#Encrypt
+//$encrypted = $mcrypt->encrypt("Text to encrypt");
+$encrypted=$userhash;
+#Decrypt
+$userxplus = $mcrypt->decrypt($encrypted);
+
+//user
+$userx=$userxplus;
+$poleu = explode("/", $userx);
+$nickxxx=$poleu[1];
+$usidxxx=1*$poleu[3];
+$pswdxxx=$poleu[5];
+$cislo_dok=1*$poleu[12];
+
+$dbcon="../".$adrsxxx."/db_connect.php";
+require_once "$dbcon";
+$db = new DB_CONNECT();
+
+$kli_vxcf=DB_FIR;
+$kli_uzid=$usidxxx;
+$kli_vxcfez=DB_FIR;
+$databazaez=DB_DATABASETOP.".";
+
+$anduct=1*$_REQUEST['anduct'];
+if( $anduct == 1 )
+  {
+//nastav databazu
+$kli_vrok=1*$_REQUEST['rokx'];
+$kli_vxcf=1*$_REQUEST['firx'];
+$dbsed="../".$adrsxxx."/nastavdbase.php";
+$sDat = include("$dbsed");
+mysql_select_db($databaza);
+$kli_vxcfez=DB_FIR;
+$databazaez=DB_DATABASETOP.".";
+  }
+
+if( AKY_CHARSET == "utf8" ) { mysql_query("SET NAMES cp1250"); }
+
+
+$druhid=0;
+$cuid=0;
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."F".$kli_vxcfez."_ezak WHERE ez_id = $usidxxx ORDER BY ez_id DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $druhid=10;
+    $cuid=1*$riaddok->cuid;
+    }
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."F".$kli_vxcfez."_ezak WHERE ez_id = $usidxxx AND ez_heslo = '$pswdxxx' ORDER BY ez_id DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $cuid=1*$riaddok->cuid;
+    $druhid=20;
+    }
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."klienti WHERE id_klienta = $cuid AND all_prav > 20000 ORDER BY id_klienta DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $druhid=99;
+    }
+if( $druhid < 20 ) { exit; }
+$kli_uzid=$cuid;
+if( $kli_uzid == 0 ) { exit; }
+
+
+$_REQUEST['h_dap']="01.01.".$kli_vrok;
+$_REQUEST['h_dak']="31.12.".$kli_vrok;
+$_REQUEST['h_stp']=1;
+$_REQUEST['h_stk']=999;
+$_REQUEST['h_aky']=1;
+$kli_vume=$_REQUEST['kli_vume'];
+
+  }
+
+if( $zandroidu == 0 )
+  {
 $sys = 'UCT';
 $urov = 1000;
-$copern = $_REQUEST['copern'];
-$tis = $_REQUEST['tis'];
-if (!isset($tis)) $tis = 0;
-
-$h_zos = $_REQUEST['h_zos'];
-$h_sch = $_REQUEST['h_sch'];
-$h_drp = $_REQUEST['h_drp'];
-$celeeura= 1*$_REQUEST['celeeura'];
-
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
+  }
 
+do
+{
+
+if( $zandroidu == 0 )
+  {
 require_once("../pswd/password.php");
 @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
   if (!$spojeni):
@@ -23,6 +110,7 @@ require_once("../pswd/password.php");
     exit;
   endif;
   mysql_select_db($mysqldb);
+  }
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -76,8 +164,8 @@ $vsql = 'CREATE TABLE prcdatum'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
 
 $pole = explode(".", $kli_vume);
-$kli_mdph=$pole[0];
-$kli_rdph=$pole[1];
+$kli_mdph=1*$pole[0];
+$kli_rdph=1*$pole[1];
 if ( $kli_mdph < 10 ) $kli_mdph="0".$kli_mdph;
 
 $pole = explode(".", $kli_vume);
@@ -214,8 +302,8 @@ $pdf->SetFont('arial','',12);
 
 //nacitaj obdobia z ufirdalsie
 $pole = explode(".", $kli_vume);
-$kli_vmesx=$pole[0];
-$kli_vrokx=$pole[1];
+$kli_vmesx=1*$pole[0];
+$kli_vrokx=1*$pole[1];
 if ( $kli_vmesx < 10 ) { $kli_vmesx="0".$kli_vmesx; }
 $kli_mrokx=$kli_vrokx-1;
 
@@ -2141,19 +2229,38 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvmajzavs1000x'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 ?> 
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+  <link type="text/css" rel="stylesheet" href="../css/styl.css">
+<title>Vykaz Ziskov PDF</title>
+  <style type="text/css">
+
+  </style>
+<script type="text/javascript">
+    
+</script>
+</HEAD>
+<BODY class="white" >
+<table class="h2" width="100%" >
+<tr>
+<td>
+<?php if( $zandroidu == 0 ) { echo "EuroSecom "; } ?> 
+<?php if( $zandroidu == 1 ) { echo "Zostava PDF prebraná, tlaèidlo Spä - do úètovných zostáv"; } ?> 
+</td>
+<td align="right"> </td>
+</tr>
+</table>
+<br />
 
 <script type="text/javascript">
   var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Uzavierka JU PDF</title>
-</HEAD>
-<BODY class="white">
+
+
+
 <?php
-//celkovy koniec dokumentu
-} while (false);
+// celkovy koniec dokumentu
+       } while (false);
 ?>
 </BODY>
 </HTML>

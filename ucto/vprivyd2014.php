@@ -1003,8 +1003,8 @@ if( $kli_vrok >= 2013 )
 
 //nacitaj obdobia z ufirdalsie
 $pole = explode(".", $kli_vume);
-$kli_vmesx=$pole[0];
-$kli_vrokx=$pole[1];
+$kli_vmesx=1*$pole[0];
+$kli_vrokx=1*$pole[1];
 if ( $kli_vmesx < 10 ) { $kli_vmesx="0".$kli_vmesx; }
 $kli_mrokx=$kli_vrokx-1;
 
@@ -1591,10 +1591,30 @@ $h_zos = $_REQUEST['h_zos'];
 $h_sch = $_REQUEST['h_sch'];
 $h_drp = 1*$_REQUEST['h_drp'];
 $celeeura= 1*$_REQUEST['celeeura'];
+$uzav = 1*$_REQUEST['uzav'];
 if( $zandroidu == 0 ) {
 ?>
 <script type="text/javascript">
 window.open('../ucto/vmajzav2014.php?copern=10&drupoh=1&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&celeeura=<?php echo $celeeura; ?>&page=1', '_self' );
+</script>
+<?php 
+exit;
+                      }
+
+if( $zandroidu == 1 AND $uzav == 1 ) 
+                      {
+
+//"/ucto/vprivyd2014.php?copern=10&drupoh="+ drupoh + "&page=1&typ=PDF&zandroidu=1&anduct=1&kli_vume="+ umex
+//                    + "&serverx=" + adresx + "&userhash=" + encrypted + "&rokx=" + rokx + "&firx=" + firx
+//                    + "&newfntz=1&h_sch=&h_zos=&h_drp=1&uzav=1&celeeura=0" );
+
+
+$prmx="typ=PDF&zandroidu=1&anduct=1&kli_vume=".$kli_vume."&serverx=".$serverx."&userhash=".$userhash."&rokx=".$kli_vrok."&firx=".$kli_vxcf."&newfntz=1&uzav=".$uzav;
+
+
+?>
+<script type="text/javascript">
+window.open('../ucto/vmajzav2014.php?<?php echo $prmx; ?>&copern=10&drupoh=1&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&celeeura=<?php echo $celeeura; ?>&page=1', '_self' );
 </script>
 <?php 
 exit;
