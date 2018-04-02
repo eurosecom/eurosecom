@@ -481,7 +481,7 @@ if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
 <div>
  <label for="h_sch">Schválené:</label>
  <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value="<?php echo $dnes; ?>"/>
+        maxlenght="10" value=""/>
 </div>
 </div>
 <a href="#" onclick="NechcemStranyPOD2013();" title="Nastavenie strán, ktoré nechcem tlaèi"
@@ -701,7 +701,7 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
 <div>
  <label for="h_sch">Schválené:</label>
  <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value="<?php echo $dnes; ?>"/>
+        maxlenght="10" value=""/>
 </div>
 </div>
 <a href="#" onclick="NacitajPoznamkyMUJ2014();" title="Naèíta údaje do poznámok"
@@ -964,7 +964,7 @@ if ( $vsetky == 1 ) {
 <div>
  <label for="h_sch">Schválené:</label>
  <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value="<?php echo $dnes; ?>"/>
+        maxlenght="10" value=""/>
 </div>
 </div>
 <a href="#" onclick="NechcemStranyNUJ2013();" title="Nastavenie strán, ktoré nechcem tlaèi"
