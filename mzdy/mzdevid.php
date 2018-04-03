@@ -340,6 +340,65 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r12=kc, r4d12=kc, r0d12=kc WHERE ume = 12.$kli_vrok";
 $oznac = mysql_query("$sqtoz");
 
+//vymaz neaktivne ak tlacim vsetky
+if( $cislo_oc == 999999 )
+  {
+
+$dsqlt = "DROP TABLE F$kli_vxcf"."_mzdprcvyplzmz".$kli_uzid." ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "CREATE TABLE F$kli_vxcf"."_mzdprcvyplzmz".$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid." WHERE dm > 100 AND dm < 999 ";
+$dsql = mysql_query("$dsqlt");
+
+//echo $dsqlt;
+
+//echo "Vymazem neaktualne";
+//exit;
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY oc ";
+$sql = mysql_query("$sqltt");
+//echo $sqltt."<br />";
+
+//celkom poloziek
+$cpol = mysql_num_rows($sql);
+$i=0;
+   while ($i <= $cpol )
+   {
+if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$riadok=mysql_fetch_object($sql);
+
+$nieje=1;
+$sqlttt = "SELECT * FROM F".$kli_vxcf."_mzdprcvyplzmz$kli_uzid WHERE oc = $riadok->oc ";
+//echo $sqlttt;
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ocx=$riaddok->oc;
+  $nieje=0;
+  }
+
+if( $nieje == 1 )
+     {
+
+$sqltt2 = "DELETE FROM F".$kli_vxcf."_mzdprcvypl$kli_uzid WHERE oc = $riadok->oc ";
+$sqldo2 = mysql_query("$sqltt2");
+
+     }
+
+
+}
+$i=$i+1;
+   }
+
+
+
+$dsqlt = "DROP TABLE F$kli_vxcf"."_mzdprcvyplzmz".$kli_uzid." ";
+$dsql = mysql_query("$dsqlt");
+
+  }
+
 
 //sumarizuj za oc
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
