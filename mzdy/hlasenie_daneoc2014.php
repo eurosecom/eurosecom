@@ -100,6 +100,119 @@ $copern=101;
      }
 //koniec zmazat zamestnanca
 
+//sumarizuj podla rc
+if ( $copern == 4402 )
+     {
+$cislo_oc = strip_tags($_REQUEST['cislo_oc']);
+
+$akerodc=""; $akerodk="";
+$sqlttt = "SELECT * FROM F".$kli_vxcf."_mzdkun WHERE oc = $cislo_oc ";
+//echo $sqlttt."<br />";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $akerodc=$riaddok->rdc;
+  $akerodk=$riaddok->rdk;
+  }
+
+//echo "idem".$akerodc." ".$akerodk."<br />";
+
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE rdc = '$akerodc' AND rdk = '$akerodk' AND oc != $cislo_oc ORDER BY oc ";
+$sql = mysql_query("$sqltt");
+//echo $sqltt."<br />";
+
+//celkom poloziek
+$cpol = mysql_num_rows($sql);
+$i=0;
+   while ($i <= $cpol )
+   {
+if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$riadok=mysql_fetch_object($sql);
+
+$sqlttt = "SELECT * FROM F".$kli_vxcf."_mzdrocnehlaseniedaneoc WHERE oc = $riadok->oc ";
+//echo $sqlttt;
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ocx=$riaddok->oc;
+  //echo "pripocitavam a mazem osc ".$ocx."<br />";
+
+  $r01a=1*$riaddok->r01a;
+  $r01b=1*$riaddok->r01b;
+  $doho=1*$riaddok->doho;
+  $dnbh=1*$riaddok->dnbh;
+  $socp=1*$riaddok->socp;
+  $zdrp=1*$riaddok->zdrp;
+  $ddssum=1*$riaddok->ddssum;
+
+  $mz01=1*$riaddok->mz01;
+  $mz02=1*$riaddok->mz02;
+  $mz03=1*$riaddok->mz03;
+  $mz04=1*$riaddok->mz04;
+  $mz05=1*$riaddok->mz05;
+  $mz06=1*$riaddok->mz06;
+  $mz07=1*$riaddok->mz07;
+  $mz08=1*$riaddok->mz08;
+  $mz09=1*$riaddok->mz09;
+  $mz10=1*$riaddok->mz10;
+  $mz11=1*$riaddok->mz11;
+  $mz12=1*$riaddok->mz12;
+
+
+$sqltt2 = "DELETE FROM F".$kli_vxcf."_mzdrocnehlaseniedaneoc WHERE oc = $riadok->oc ";
+$sqldo2 = mysql_query("$sqltt2");
+
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz01=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz01 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz02=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz02 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz03=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz03 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz04=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz04 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz05=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz05 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz06=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz06 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz07=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz07 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz08=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz08 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz09=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz09 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz10=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz10 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz11=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz11 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET mz12=1 WHERE mzc = 0 AND oc = $cislo_oc ";
+if( $mz12 == 1 ) { $sqldo2 = mysql_query("$sqltt2"); }
+
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET ".
+" mzc=1, mz01=0, mz02=0, mz03=0, mz04=0, mz05=0, mz06=0, mz07=0, mz08=0, mz09=0, mz10=0, mz11=0, mz12=0 ".
+" WHERE mzc = 0 AND  mz01 = 1 AND mz02 = 1 AND mz03 = 1 AND mz04 = 1 AND mz05 = 1 AND mz06 = 1 AND mz07 = 1 AND mz08 = 1 AND mz09 = 1 AND mz10 = 1 AND mz11 = 1 AND mz12 = 1 AND oc = $cislo_oc ";
+$sqldo2 = mysql_query("$sqltt2");
+
+$sqltt2 = "UPDATE F".$kli_vxcf."_mzdrocnehlaseniedaneoc SET ".
+" r01a=r01a+'$r01a', r01b=r01b+'$r01b', doho=doho+'$doho', dnbh=dnbh+'$dnbh', socp=socp+'$socp', zdrp=zdrp+'$zdrp', ddssum=ddssum+'$ddssum' WHERE oc = $cislo_oc ";
+$sqldo2 = mysql_query("$sqltt2");
+//echo $sqltt2."<br />";
+
+  }
+
+}
+$i=$i+1;
+   }
+
+
+
+$copern=101;
+     }
+//koniec sumarizuj podla rc
+
 //nacitaj z rz
 if ( $copern == 1102 )
      {
@@ -502,6 +615,10 @@ if ( $copern != 2 AND $copern != 102 )
   {
    window.open('../mzdy/hlasenie_daneoc2014.php?cislo_oc=<?php echo $oc; ?>&copern=1102&oc=<?php echo $oc; ?>&uprav=1', '_self', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
   }
+  function sumarRC(oc)
+  {
+   window.open('../mzdy/hlasenie_daneoc2014.php?cislo_oc='+ oc + '&copern=4402&oc='+ oc + '&uprav=1', '_self', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
+  }
 <?php $dnessk = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
   function TlacRocHlasenie2014priloha()
   {
@@ -633,7 +750,7 @@ $ra1bsum=$ra1bsum+$riadok->ra1b;
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $riadok->oc ";
 $fir_vysledok = mysql_query($sqlfir);
 if ( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok);
-$prie=$fir_riadok->prie; $meno=$fir_riadok->meno; $titl=$fir_riadok->titl; $pom=$fir_riadok->pom; }
+$prie=$fir_riadok->prie; $meno=$fir_riadok->meno; $titl=$fir_riadok->titl; $pom=$fir_riadok->pom; $rodne=$fir_riadok->rdc." ".$fir_riadok->rdk;}
 
 $rzclass="rzclass";
 if ( $riadok->tz1 == 1 ) { $rzclass="rzclassano"; }
@@ -644,7 +761,11 @@ if ( $riadok->tz1 == 1 ) { $rzclass="rzclassano"; }
    <a href="#" onclick="upravOC(<?php echo $riadok->oc;?>)" title="Upraviù prÌlohu">&nbsp;<strong><?php echo $riadok->oc;?></strong>
    <?php echo "$prie $meno / $pom"; ?>&nbsp;<img src="../obr/ikony/pencil_blue_icon.png"></a>
   </td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $riadok->r01a;?> / <span style="font-size:11px;"><?php echo $riadok->doho;?></span>&nbsp;</td>
+  <td class="<?php echo $rzclass; ?>"><?php echo $riadok->r01a;?> / <span style="font-size:11px;"><?php echo $riadok->doho;?></span>&nbsp;
+
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="sumarRC(<?php echo $riadok->oc;?>);" title="NaËÌtaù a vymazaù vöetky ostatnÈ prÌlohy s rodn˝m ËÌslom <?php echo $rodne;?>">
+
+</td>
   <td class="<?php echo $rzclass; ?>"><?php echo $riadok->r01b;?>&nbsp;</td>
   <td class="<?php echo $rzclass; ?>"><?php echo $riadok->dnbh;?>&nbsp;</td>
   <td class="<?php echo $rzclass; ?>"><?php echo $riadok->ra1b;?>&nbsp;</td>
