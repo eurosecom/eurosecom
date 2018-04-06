@@ -2149,7 +2149,9 @@ if ( $copern == 20 )
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="FormMetod();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
+<?php if ( $kli_vrok < 2018 ) { ?>
     <button type="button" onclick="DbfFin204pod16();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
+<?php } ?>
 <?php if ( $kli_vrok >= 2017 ) { ?>
     <button type="button" onclick="CsvFin204pod16()" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
 <?php } ?>

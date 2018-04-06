@@ -223,7 +223,7 @@ if ( $copern == 10 OR $copern == 20 )
 
 
 //nacitaj udaje pre upravu
-if ( $copern == 20 )
+if ( $copern == 20 OR $copern == 10 )
     {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504 ";
 
@@ -259,7 +259,7 @@ if( $stlp4 == '' ) { $stlp4=0; }
 if( $stlp5 == '' ) { $stlp5=0; }
 if( $rs00003 == '' ) { $rs00003=0; }
 if( $rs00004 == '' ) { $rs00004=0; }
-
+}
 
 $sqlxx = "SELECT SUM(stlp4) AS uhrn1, SUM(stlp5) AS uhrn2, SUM(rs00003) AS uhrn3, SUM(rs00004) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin504 ";
 $vysledokxx = mysql_query($sqlxx);
@@ -275,8 +275,6 @@ if( $uhrn2 == '' ) { $uhrn2=0; }
 if( $uhrn3 == '' ) { $uhrn3=0; }
 if( $uhrn4 == '' ) { $uhrn4=0; }
 
-
-}
 mysql_free_result($fir_vysledok);
     }
 //koniec nacitania
@@ -458,7 +456,9 @@ if ( $copern == 20 )
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
+<?php if ( $kli_vrok < 2018 ) { ?>
     <button type="button" onclick="DbfFin504();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
+<?php } ?>
 <?php if ( $kli_vrok >= 2017 ) { ?>
     <button type="button" onclick="CsvFin504();" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
 <?php } ?>
@@ -1213,16 +1213,18 @@ $pdf->Cell(28.7,6,"$stlp5","1",0,"R");$pdf->Cell(28.8,6,"$stlp6","1",0,"R");
 $pdf->Cell(28.7,6,"$stlp7","1",1,"R");
      }
 
-if ( $hlavicka->px01 == 1 )
-     {
-$pdf->SetFont('arial','B',10);
-$pdf->Cell(15.5,6," ","$rmc1",0,"C");$pdf->Cell(148.9,6,"Úhrn","1",0,"C");
-$pdf->Cell(28.8,6,"$stlp4","1",0,"R");$pdf->Cell(28.7,6,"$stlp5","1",0,"R");
-$pdf->Cell(28.8,6,"$stlp6","1",0,"R");$pdf->Cell(28.7,6,"$stlp7","1",1,"R");
-     }
+
 }
 $i = $i + 1;
   }
+
+
+$pdf->SetFont('arial','B',10);
+$pdf->Cell(15.5,6," ","$rmc1",0,"C");$pdf->Cell(148.9,6,"Úhrn","1",0,"C");
+$pdf->Cell(28.8,6,"$uhrn1","1",0,"R");$pdf->Cell(28.7,6,"$uhrn2","1",0,"R");
+$pdf->Cell(28.8,6,"$uhrn3","1",0,"R");$pdf->Cell(28.7,6,"$uhrn4","1",1,"R");
+
+
 $pdf->Output("$outfilex");
 ?>
 
