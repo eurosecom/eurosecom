@@ -52,7 +52,7 @@ $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, statu
 
 //ak nie je generovanie daj standardne
 $niejegen=0;
-$sql = "SELECT g2018f FROM F".$kli_vxcf."_genfin204pod ";
+$sql = "SELECT g2018g FROM F".$kli_vxcf."_genfin204pod ";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -75,7 +75,7 @@ $sqlt = <<<crf204nuj_no
    uce         VARCHAR(10),
    crs         INT,
    cpl01       INT,
-   g2018f      DECIMAL(2,0) DEFAULT 0,
+   g2018g      DECIMAL(2,0) DEFAULT 0,
    PRIMARY KEY(cpl)
 );
 crf204nuj_no;
@@ -182,6 +182,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '193', '26
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '194', '26' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '195', '26' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '196', '26' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '395', '26' ); "; $ulozene = mysql_query("$sqult");
 
 //pohladavky
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '311', '36' ); "; $ulozene = mysql_query("$sqult");
