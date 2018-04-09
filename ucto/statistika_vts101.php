@@ -1,5 +1,5 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
 //celkovy zaciatok VTS101 rok 2017 a vyööie
 do
@@ -18,16 +18,8 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   endif;
   mysql_select_db($mysqldb);
 
-//ramcek fpdf 1=zap,0=vyp
-$rmc=0;
-$rmc1=0;
-
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
-
-//.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/roc_vts101/roc_vts101_v16";
-$jpg_popis="tlaËivo RoËn˝ v˝kaz produkËn˝ch odvetvÌ vo vybran˝ch trhov˝ch sluûb·ch RoË VTS 1-01 ".$kli_vrok;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -41,12 +33,40 @@ $vyb_ump="1.".$kli_vrok; $vyb_umk=$kli_vmes.".".$kli_vrok;
 $copern = 1*strip_tags($_REQUEST['copern']);
 $modul = 1*$_REQUEST['modul'];
 
-
 $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 AND $copern == 11 ) $strana=9999;
 if ( $strana == 0 ) $strana=1;
+if ( $copern == 1 ) { $copern=102; }
 
-if ( $copern == 1 ) { $copern=102; };
+//pagination
+if ( $strana == 1 ) { $strana=1; $clas1="active"; }
+if ( $strana == 2 ) { $strana=2; $clas2="active"; }
+if ( $strana == 3 ) { $strana=3; $clas3="active"; }
+if ( $strana == 4 ) { $strana=4; $clas4="active"; }
+if ( $strana == 5 ) { $strana=5; $clas5="active"; }
+if ( $strana == 6 ) { $strana=6; $clas6="active"; }
+if ( $strana == 7 ) { $strana=7; $clas7="active"; }
+if ( $strana == 8 ) { $strana=8; $clas8="active"; }
+if ( $strana == 9 ) { $strana=9; $clas9="active"; }
+if ( $strana == 10 ) { $strana=10; $clas10="active"; }
+if ( $strana == 11 ) { $strana=11; $clas11="active"; }
+if ( $strana == 12 ) { $strana=12; $clas12="active"; }
+if ( $strana == 13 ) { $strana=13; $clas13="active"; }
+if ( $strana == 14 ) { $strana=14; $clas14="active"; }
+if ( $strana == 15 ) { $strana=15; $clas15="active"; }
+if ( $strana == 16 ) { $strana=16; $clas16="active"; }
+$total_strana=16;
+
+//.jpg source
+$jpg_source="../dokumenty/statistika2017/roc_vts101/roc_vts101_v17";
+$jpg_title="tlaËivo RoËn˝ v˝kaz produkËn˝ch odvetvÌ vo vybran˝ch trhov˝ch sluûb·ch RoË VTS 1-01 pre rok $kli_vrok $strana.strana";
+
+//page orientation
+$orientation='P';
+if ( $strana == 10 OR $strana == 11 OR $strana == 12 OR $strana == 13 OR $strana == 15 )
+{
+$orientation='L';
+}
 
 //vsetky moduly z obratovky
 $citajvsetkymoduly=0;
@@ -3612,6 +3632,35 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m406r9 DECIMAL(10,0) DEFAULT 0 AFTER new2016";
 $vysledek = mysql_query("$sql");
 }
+//zmeny2017
+$sql = "SELECT m571r108 FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD new2017 DECIMAL(2,0) DEFAULT 0 AFTER ico";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m585r06 VARCHAR(25) NOT NULL AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m585r7k VARCHAR(20) NOT NULL AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m585r07 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m571r100 VARCHAR(30) NOT NULL AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m571r102 VARCHAR(25) NOT NULL AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m571r103 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m571r105 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m571r106 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m571r107 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m571r108 DECIMAL(10,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+
+}
 //koniec vytvorenia definicie
 
 
@@ -3839,6 +3888,7 @@ $mod100042ano = strip_tags($_REQUEST['mod100042ano']);
 $mod100042nie = strip_tags($_REQUEST['mod100042nie']);
 $mod100043ano = strip_tags($_REQUEST['mod100043ano']);
 $mod100043nie = strip_tags($_REQUEST['mod100043nie']);
+//3.strana
 $m1100r4 = strip_tags($_REQUEST['m1100r4']);
 $m1100r5 = strip_tags($_REQUEST['m1100r5']);
 $m1100r6 = strip_tags($_REQUEST['m1100r6']);
@@ -3849,24 +3899,18 @@ $m1100r10 = strip_tags($_REQUEST['m1100r10']);
 $m1100r11 = strip_tags($_REQUEST['m1100r11']);
 $m1100r12 = strip_tags($_REQUEST['m1100r12']);
 $m1100r13 = strip_tags($_REQUEST['m1100r13']);
-//3.strana
 $mod100036kal = strip_tags($_REQUEST['mod100036kal']);
 $mod100036hos = strip_tags($_REQUEST['mod100036hos']);
 $mod100037 = strip_tags($_REQUEST['mod100037']);
-$m100214r01 = strip_tags($_REQUEST['m100214r01']);
-$m100214r02 = strip_tags($_REQUEST['m100214r02']);
 $mod100069ano = strip_tags($_REQUEST['mod100069ano']);
 $mod100069nie = strip_tags($_REQUEST['mod100069nie']);
 $m1101r2 = strip_tags($_REQUEST['m1101r2']);
+//4.strana
 $m1101r3 = strip_tags($_REQUEST['m1101r3']);
 $m1101r4a = strip_tags($_REQUEST['m1101r4a']);
 $m1101r4b = strip_tags($_REQUEST['m1101r4b']);
 $m1101r5a = strip_tags($_REQUEST['m1101r5a']);
 $m1101r5b = strip_tags($_REQUEST['m1101r5b']);
-//$m1101r8a = strip_tags($_REQUEST['m1101r8a']);
-//$m1101r8b = strip_tags($_REQUEST['m1101r8b']);
-
-//4.strana
 $m1101r6a = strip_tags($_REQUEST['m1101r6a']);
 $m1101r6b = strip_tags($_REQUEST['m1101r6b']);
 $m1101r7a = strip_tags($_REQUEST['m1101r7a']);
@@ -3874,6 +3918,7 @@ $m1101r7b = strip_tags($_REQUEST['m1101r7b']);
 $m100417ano = strip_tags($_REQUEST['m100417ano']);
 $m100417nie = strip_tags($_REQUEST['m100417nie']);
 $m100418 = strip_tags($_REQUEST['m100418']);
+//5.strana
 $m398r11 = strip_tags($_REQUEST['m398r11']);
 $m398r12 = strip_tags($_REQUEST['m398r12']);
 $m398r13 = strip_tags($_REQUEST['m398r13']);
@@ -3888,7 +3933,6 @@ $m398r993 = strip_tags($_REQUEST['m398r993']);
 $m398r994 = strip_tags($_REQUEST['m398r994']);
 $m1005r1a = strip_tags($_REQUEST['m1005r1a']);
 $m1005r1b = strip_tags($_REQUEST['m1005r1b']);
-//5.strana
 $m405r11 = strip_tags($_REQUEST['m405r11']);
 $m405r12 = strip_tags($_REQUEST['m405r12']);
 $m405r21 = strip_tags($_REQUEST['m405r21']);
@@ -3902,6 +3946,7 @@ $m405r81 = strip_tags($_REQUEST['m405r81']);
 $m405r82 = strip_tags($_REQUEST['m405r82']);
 $m405r991 = strip_tags($_REQUEST['m405r991']);
 $m405r992 = strip_tags($_REQUEST['m405r992']);
+//6.strana
 $m406r1 = strip_tags($_REQUEST['m406r1']);
 $m406r2 = strip_tags($_REQUEST['m406r2']);
 $m406r3 = strip_tags($_REQUEST['m406r3']);
@@ -3912,7 +3957,6 @@ $m406r7 = strip_tags($_REQUEST['m406r7']);
 $m406r8 = strip_tags($_REQUEST['m406r8']);
 $m406r9 = strip_tags($_REQUEST['m406r9']);
 $m406r99 = strip_tags($_REQUEST['m406r99']);
-//6.strana
 $m558r1 = strip_tags($_REQUEST['m558r1']);
 $m558r2 = strip_tags($_REQUEST['m558r2']);
 $m558r3 = strip_tags($_REQUEST['m558r3']);
@@ -3932,17 +3976,35 @@ $m558r16 = strip_tags($_REQUEST['m558r16']);
 $m558r17 = strip_tags($_REQUEST['m558r17']);
 $m558r18 = strip_tags($_REQUEST['m558r18']);
 $m558r99 = strip_tags($_REQUEST['m558r99']);
+//7.strana
+$m586r11 = strip_tags($_REQUEST['m586r11']);
+$m586r12 = strip_tags($_REQUEST['m586r12']);
+$m586r21 = strip_tags($_REQUEST['m586r21']);
+$m586r22 = strip_tags($_REQUEST['m586r22']);
+$m586r131 = strip_tags($_REQUEST['m586r131']);
+$m586r132 = strip_tags($_REQUEST['m586r132']);
+$m586r141 = strip_tags($_REQUEST['m586r141']);
+$m586r142 = strip_tags($_REQUEST['m586r142']);
+$m586r151 = strip_tags($_REQUEST['m586r151']);
+$m586r152 = strip_tags($_REQUEST['m586r152']);
+$m586r191 = strip_tags($_REQUEST['m586r191']);
+$m586r192 = strip_tags($_REQUEST['m586r192']);
+$m586r201 = strip_tags($_REQUEST['m586r201']);
+$m586r202 = strip_tags($_REQUEST['m586r202']);
+$m586r991 = strip_tags($_REQUEST['m586r991']);
+$m586r992 = strip_tags($_REQUEST['m586r992']);
 $m585r01 = strip_tags($_REQUEST['m585r01']);
 $m585r02 = strip_tags($_REQUEST['m585r02']);
-$m585r03 = strip_tags($_REQUEST['m585r03']);
-$m585r04 = strip_tags($_REQUEST['m585r04']);
-$m585r05 = strip_tags($_REQUEST['m585r05']);
 $m585r3k = strip_tags($_REQUEST['m585r3k']);
+$m585r03 = strip_tags($_REQUEST['m585r03']);
 $m585r4k = strip_tags($_REQUEST['m585r4k']);
+$m585r04 = strip_tags($_REQUEST['m585r04']);
 $m585r5k = strip_tags($_REQUEST['m585r5k']);
-//7.strana
-$m100044ano = strip_tags($_REQUEST['m100044ano']);
-$m100044nie = strip_tags($_REQUEST['m100044nie']);
+$m585r05 = strip_tags($_REQUEST['m585r05']);
+$m585r06 = strip_tags($_REQUEST['m585r06']);
+$m585r7k = strip_tags($_REQUEST['m585r7k']);
+$m585r07 = strip_tags($_REQUEST['m585r07']);
+//8.strana
 $m571r10 = strip_tags($_REQUEST['m571r10']);
 $m571r12 = strip_tags($_REQUEST['m571r12']);
 $m571r13 = strip_tags($_REQUEST['m571r13']);
@@ -4006,8 +4068,13 @@ $m571r95 = strip_tags($_REQUEST['m571r95']);
 $m571r96 = strip_tags($_REQUEST['m571r96']);
 $m571r97 = strip_tags($_REQUEST['m571r97']);
 $m571r98 = strip_tags($_REQUEST['m571r98']);
-//$m100062ano = strip_tags($_REQUEST['m100062ano']);
-//$m100062nie = strip_tags($_REQUEST['m100062nie']);
+$m571r100 = strip_tags($_REQUEST['m571r100']);
+$m571r102 = strip_tags($_REQUEST['m571r102']);
+$m571r103 = strip_tags($_REQUEST['m571r103']);
+$m571r105 = strip_tags($_REQUEST['m571r105']);
+$m571r106 = strip_tags($_REQUEST['m571r106']);
+$m571r107 = strip_tags($_REQUEST['m571r107']);
+$m571r108 = strip_tags($_REQUEST['m571r108']);
 $m581r1 = strip_tags($_REQUEST['m581r1']);
 $m581r2 = strip_tags($_REQUEST['m581r2']);
 $m581r3 = strip_tags($_REQUEST['m581r3']);
@@ -4016,19 +4083,337 @@ $m581r5 = strip_tags($_REQUEST['m581r5']);
 $m581r6 = strip_tags($_REQUEST['m581r6']);
 $m581r7 = strip_tags($_REQUEST['m581r7']);
 $m581r8 = strip_tags($_REQUEST['m581r8']);
-//$m581r9 = strip_tags($_REQUEST['m581r9']);
-//$m581r10 = strip_tags($_REQUEST['m581r10']);
-//$m581r11 = strip_tags($_REQUEST['m581r11']);
 $m581r12 = strip_tags($_REQUEST['m581r12']);
 $m581r99 = strip_tags($_REQUEST['m581r99']);
-//8.strana
 $m100301r1 = strip_tags($_REQUEST['m100301r1']);
 $m100301r2 = strip_tags($_REQUEST['m100301r2']);
+//9.strana
 $m100302 = strip_tags($_REQUEST['m100302']);
 $m100303r1 = strip_tags($_REQUEST['m100303r1']);
 $m100303r2 = strip_tags($_REQUEST['m100303r2']);
 $m100304 = strip_tags($_REQUEST['m100304']);
-//9.strana
+//10.strana
+$m572r11 = strip_tags($_REQUEST['m572r11']);
+$m572r12 = strip_tags($_REQUEST['m572r12']);
+$m572r13 = strip_tags($_REQUEST['m572r13']);
+$m572r14 = strip_tags($_REQUEST['m572r14']);
+$m572r15 = strip_tags($_REQUEST['m572r15']);
+$m572r16 = strip_tags($_REQUEST['m572r16']);
+$m572r17 = strip_tags($_REQUEST['m572r17']);
+$m572r18 = strip_tags($_REQUEST['m572r18']);
+$m572r19 = strip_tags($_REQUEST['m572r19']);
+$m572r110 = strip_tags($_REQUEST['m572r110']);
+$m572r0111 = strip_tags($_REQUEST['m572r0111']);
+$m572r21 = strip_tags($_REQUEST['m572r21']);
+$m572r22 = strip_tags($_REQUEST['m572r22']);
+$m572r23 = strip_tags($_REQUEST['m572r23']);
+$m572r25 = strip_tags($_REQUEST['m572r25']);
+$m572r26 = strip_tags($_REQUEST['m572r26']);
+$m572r27 = strip_tags($_REQUEST['m572r27']);
+$m572r28 = strip_tags($_REQUEST['m572r28']);
+$m572r29 = strip_tags($_REQUEST['m572r29']);
+$m572r210 = strip_tags($_REQUEST['m572r210']);
+$m572r0211 = strip_tags($_REQUEST['m572r0211']);
+$m572r38 = strip_tags($_REQUEST['m572r38']);
+$m572r39 = strip_tags($_REQUEST['m572r39']);
+$m572r310 = strip_tags($_REQUEST['m572r310']);
+$m572r311 = strip_tags($_REQUEST['m572r311']);
+$m572r48 = strip_tags($_REQUEST['m572r48']);
+$m572r49 = strip_tags($_REQUEST['m572r49']);
+$m572r410 = strip_tags($_REQUEST['m572r410']);
+$m572r411 = strip_tags($_REQUEST['m572r411']);
+$m572r58 = strip_tags($_REQUEST['m572r58']);
+$m572r59 = strip_tags($_REQUEST['m572r59']);
+$m572r510 = strip_tags($_REQUEST['m572r510']);
+$m572r511 = strip_tags($_REQUEST['m572r511']);
+$m572r68 = strip_tags($_REQUEST['m572r68']);
+$m572r69 = strip_tags($_REQUEST['m572r69']);
+$m572r610 = strip_tags($_REQUEST['m572r610']);
+$m572r611 = strip_tags($_REQUEST['m572r611']);
+$m572r78 = strip_tags($_REQUEST['m572r78']);
+$m572r79 = strip_tags($_REQUEST['m572r79']);
+$m572r710 = strip_tags($_REQUEST['m572r710']);
+$m572r711 = strip_tags($_REQUEST['m572r711']);
+$m572r88 = strip_tags($_REQUEST['m572r88']);
+$m572r89 = strip_tags($_REQUEST['m572r89']);
+$m572r810 = strip_tags($_REQUEST['m572r810']);
+$m572r811 = strip_tags($_REQUEST['m572r811']);
+$m572r98 = strip_tags($_REQUEST['m572r98']);
+$m572r99 = strip_tags($_REQUEST['m572r99']);
+$m572r910 = strip_tags($_REQUEST['m572r910']);
+$m572r911 = strip_tags($_REQUEST['m572r911']);
+$m572r108 = strip_tags($_REQUEST['m572r108']);
+$m572r109 = strip_tags($_REQUEST['m572r109']);
+$m572r1010 = strip_tags($_REQUEST['m572r1010']);
+$m572r1011 = strip_tags($_REQUEST['m572r1011']);
+$m572r111 = strip_tags($_REQUEST['m572r111']);
+$m572r112 = strip_tags($_REQUEST['m572r112']);
+$m572r113 = strip_tags($_REQUEST['m572r113']);
+$m572r114 = strip_tags($_REQUEST['m572r114']);
+$m572r115 = strip_tags($_REQUEST['m572r115']);
+$m572r116 = strip_tags($_REQUEST['m572r116']);
+$m572r117 = strip_tags($_REQUEST['m572r117']);
+$m572r118 = strip_tags($_REQUEST['m572r118']);
+$m572r119 = strip_tags($_REQUEST['m572r119']);
+$m572r1110 = strip_tags($_REQUEST['m572r1110']);
+$m572r1111 = strip_tags($_REQUEST['m572r1111']);
+$m572r121 = strip_tags($_REQUEST['m572r121']);
+$m572r122 = strip_tags($_REQUEST['m572r122']);
+$m572r123 = strip_tags($_REQUEST['m572r123']);
+$m572r124 = strip_tags($_REQUEST['m572r124']);
+$m572r125 = strip_tags($_REQUEST['m572r125']);
+$m572r126 = strip_tags($_REQUEST['m572r126']);
+$m572r127 = strip_tags($_REQUEST['m572r127']);
+$m572r128 = strip_tags($_REQUEST['m572r128']);
+$m572r129 = strip_tags($_REQUEST['m572r129']);
+$m572r1210 = strip_tags($_REQUEST['m572r1210']);
+$m572r1211 = strip_tags($_REQUEST['m572r1211']);
+$m572r131 = strip_tags($_REQUEST['m572r131']);
+$m572r132 = strip_tags($_REQUEST['m572r132']);
+$m572r133 = strip_tags($_REQUEST['m572r133']);
+$m572r134 = strip_tags($_REQUEST['m572r134']);
+$m572r135 = strip_tags($_REQUEST['m572r135']);
+$m572r136 = strip_tags($_REQUEST['m572r136']);
+$m572r137 = strip_tags($_REQUEST['m572r137']);
+$m572r138 = strip_tags($_REQUEST['m572r138']);
+$m572r139 = strip_tags($_REQUEST['m572r139']);
+$m572r1310 = strip_tags($_REQUEST['m572r1310']);
+$m572r1311 = strip_tags($_REQUEST['m572r1311']);
+$m572r141 = strip_tags($_REQUEST['m572r141']);
+$m572r142 = strip_tags($_REQUEST['m572r142']);
+$m572r143 = strip_tags($_REQUEST['m572r143']);
+$m572r144 = strip_tags($_REQUEST['m572r144']);
+$m572r145 = strip_tags($_REQUEST['m572r145']);
+$m572r146 = strip_tags($_REQUEST['m572r146']);
+$m572r147 = strip_tags($_REQUEST['m572r147']);
+$m572r148 = strip_tags($_REQUEST['m572r148']);
+$m572r149 = strip_tags($_REQUEST['m572r149']);
+$m572r1410 = strip_tags($_REQUEST['m572r1410']);
+$m572r1411 = strip_tags($_REQUEST['m572r1411']);
+$m572r151 = strip_tags($_REQUEST['m572r151']);
+$m572r152 = strip_tags($_REQUEST['m572r152']);
+$m572r153 = strip_tags($_REQUEST['m572r153']);
+$m572r154 = strip_tags($_REQUEST['m572r154']);
+$m572r155 = strip_tags($_REQUEST['m572r155']);
+$m572r156 = strip_tags($_REQUEST['m572r156']);
+$m572r157 = strip_tags($_REQUEST['m572r157']);
+$m572r158 = strip_tags($_REQUEST['m572r158']);
+$m572r159 = strip_tags($_REQUEST['m572r159']);
+$m572r1510 = strip_tags($_REQUEST['m572r1510']);
+$m572r1511 = strip_tags($_REQUEST['m572r1511']);
+$m572r161 = strip_tags($_REQUEST['m572r161']);
+$m572r162 = strip_tags($_REQUEST['m572r162']);
+$m572r163 = strip_tags($_REQUEST['m572r163']);
+$m572r165 = strip_tags($_REQUEST['m572r165']);
+$m572r166 = strip_tags($_REQUEST['m572r166']);
+$m572r167 = strip_tags($_REQUEST['m572r167']);
+$m572r168 = strip_tags($_REQUEST['m572r168']);
+$m572r169 = strip_tags($_REQUEST['m572r169']);
+$m572r1610 = strip_tags($_REQUEST['m572r1610']);
+$m572r1611 = strip_tags($_REQUEST['m572r1611']);
+$m572r178 = strip_tags($_REQUEST['m572r178']);
+$m572r179 = strip_tags($_REQUEST['m572r179']);
+$m572r1710 = strip_tags($_REQUEST['m572r1710']);
+$m572r1711 = strip_tags($_REQUEST['m572r1711']);
+$m572r181 = strip_tags($_REQUEST['m572r181']);
+$m572r182 = strip_tags($_REQUEST['m572r182']);
+$m572r183 = strip_tags($_REQUEST['m572r183']);
+$m572r188 = strip_tags($_REQUEST['m572r188']);
+$m572r189 = strip_tags($_REQUEST['m572r189']);
+$m572r1810 = strip_tags($_REQUEST['m572r1810']);
+$m572r1811 = strip_tags($_REQUEST['m572r1811']);
+$m572r198 = strip_tags($_REQUEST['m572r198']);
+$m572r199 = strip_tags($_REQUEST['m572r199']);
+$m572r1910 = strip_tags($_REQUEST['m572r1910']);
+$m572r1911 = strip_tags($_REQUEST['m572r1911']);
+$m572r208 = strip_tags($_REQUEST['m572r208']);
+$m572r209 = strip_tags($_REQUEST['m572r209']);
+$m572r2010 = strip_tags($_REQUEST['m572r2010']);
+$m572r2011 = strip_tags($_REQUEST['m572r2011']);
+$m572r211 = strip_tags($_REQUEST['m572r211']);
+$m572r212 = strip_tags($_REQUEST['m572r212']);
+$m572r213 = strip_tags($_REQUEST['m572r213']);
+$m572r218 = strip_tags($_REQUEST['m572r218']);
+$m572r219 = strip_tags($_REQUEST['m572r219']);
+$m572r2110 = strip_tags($_REQUEST['m572r2110']);
+$m572r2111 = strip_tags($_REQUEST['m572r2111']);
+$m572r228 = strip_tags($_REQUEST['m572r228']);
+$m572r229 = strip_tags($_REQUEST['m572r229']);
+$m572r2210 = strip_tags($_REQUEST['m572r2210']);
+$m572r2211 = strip_tags($_REQUEST['m572r2211']);
+$m572r238 = strip_tags($_REQUEST['m572r238']);
+$m572r239 = strip_tags($_REQUEST['m572r239']);
+$m572r2310 = strip_tags($_REQUEST['m572r2310']);
+$m572r2311 = strip_tags($_REQUEST['m572r2311']);
+$m572r248 = strip_tags($_REQUEST['m572r248']);
+$m572r249 = strip_tags($_REQUEST['m572r249']);
+$m572r2410 = strip_tags($_REQUEST['m572r2410']);
+$m572r2411 = strip_tags($_REQUEST['m572r2411']);
+$m572r991 = strip_tags($_REQUEST['m572r991']);
+$m572r992 = strip_tags($_REQUEST['m572r992']);
+$m572r993 = strip_tags($_REQUEST['m572r993']);
+$m572r994 = strip_tags($_REQUEST['m572r994']);
+$m572r995 = strip_tags($_REQUEST['m572r995']);
+$m572r996 = strip_tags($_REQUEST['m572r996']);
+$m572r997 = strip_tags($_REQUEST['m572r997']);
+$m572r998 = strip_tags($_REQUEST['m572r998']);
+$m572r999 = strip_tags($_REQUEST['m572r999']);
+$m572r9910 = strip_tags($_REQUEST['m572r9910']);
+$m572r9911 = strip_tags($_REQUEST['m572r9911']);
+//11.strana
+$m573r11 = strip_tags($_REQUEST['m573r11']);
+$m573r12 = strip_tags($_REQUEST['m573r12']);
+$m573r13 = strip_tags($_REQUEST['m573r13']);
+$m573r14 = strip_tags($_REQUEST['m573r14']);
+$m573r15 = strip_tags($_REQUEST['m573r15']);
+$m573r16 = strip_tags($_REQUEST['m573r16']);
+$m573r17 = strip_tags($_REQUEST['m573r17']);
+$m573r18 = strip_tags($_REQUEST['m573r18']);
+$m573r21 = strip_tags($_REQUEST['m573r21']);
+$m573r22 = strip_tags($_REQUEST['m573r22']);
+$m573r23 = strip_tags($_REQUEST['m573r23']);
+$m573r24 = strip_tags($_REQUEST['m573r24']);
+$m573r25 = strip_tags($_REQUEST['m573r25']);
+$m573r26 = strip_tags($_REQUEST['m573r26']);
+$m573r27 = strip_tags($_REQUEST['m573r27']);
+$m573r28 = strip_tags($_REQUEST['m573r28']);
+$m573r35 = strip_tags($_REQUEST['m573r35']);
+$m573r36 = strip_tags($_REQUEST['m573r36']);
+$m573r37 = strip_tags($_REQUEST['m573r37']);
+$m573r38 = strip_tags($_REQUEST['m573r38']);
+$m573r45 = strip_tags($_REQUEST['m573r45']);
+$m573r46 = strip_tags($_REQUEST['m573r46']);
+$m573r47 = strip_tags($_REQUEST['m573r47']);
+$m573r48 = strip_tags($_REQUEST['m573r48']);
+$m573r55 = strip_tags($_REQUEST['m573r55']);
+$m573r56 = strip_tags($_REQUEST['m573r56']);
+$m573r57 = strip_tags($_REQUEST['m573r57']);
+$m573r58 = strip_tags($_REQUEST['m573r58']);
+$m573r65 = strip_tags($_REQUEST['m573r65']);
+$m573r66 = strip_tags($_REQUEST['m573r66']);
+$m573r67 = strip_tags($_REQUEST['m573r67']);
+$m573r68 = strip_tags($_REQUEST['m573r68']);
+$m573r75 = strip_tags($_REQUEST['m573r75']);
+$m573r76 = strip_tags($_REQUEST['m573r76']);
+$m573r77 = strip_tags($_REQUEST['m573r77']);
+$m573r78 = strip_tags($_REQUEST['m573r78']);
+$m573r81 = strip_tags($_REQUEST['m573r81']);
+$m573r82 = strip_tags($_REQUEST['m573r82']);
+$m573r83 = strip_tags($_REQUEST['m573r83']);
+$m573r84 = strip_tags($_REQUEST['m573r84']);
+$m573r85 = strip_tags($_REQUEST['m573r85']);
+$m573r86 = strip_tags($_REQUEST['m573r86']);
+$m573r87 = strip_tags($_REQUEST['m573r87']);
+$m573r88 = strip_tags($_REQUEST['m573r88']);
+$m573r91 = strip_tags($_REQUEST['m573r91']);
+$m573r92 = strip_tags($_REQUEST['m573r92']);
+$m573r93 = strip_tags($_REQUEST['m573r93']);
+$m573r94 = strip_tags($_REQUEST['m573r94']);
+$m573r95 = strip_tags($_REQUEST['m573r95']);
+$m573r96 = strip_tags($_REQUEST['m573r96']);
+$m573r97 = strip_tags($_REQUEST['m573r97']);
+$m573r98 = strip_tags($_REQUEST['m573r98']);
+$m573r105 = strip_tags($_REQUEST['m573r105']);
+$m573r106 = strip_tags($_REQUEST['m573r106']);
+$m573r107 = strip_tags($_REQUEST['m573r107']);
+$m573r108 = strip_tags($_REQUEST['m573r108']);
+$m573r111 = strip_tags($_REQUEST['m573r111']);
+$m573r112 = strip_tags($_REQUEST['m573r112']);
+$m573r113 = strip_tags($_REQUEST['m573r113']);
+$m573r114 = strip_tags($_REQUEST['m573r114']);
+$m573r115 = strip_tags($_REQUEST['m573r115']);
+$m573r116 = strip_tags($_REQUEST['m573r116']);
+$m573r117 = strip_tags($_REQUEST['m573r117']);
+$m573r118 = strip_tags($_REQUEST['m573r118']);
+$m573r121 = strip_tags($_REQUEST['m573r121']);
+$m573r122 = strip_tags($_REQUEST['m573r122']);
+$m573r123 = strip_tags($_REQUEST['m573r123']);
+$m573r124 = strip_tags($_REQUEST['m573r124']);
+$m573r125 = strip_tags($_REQUEST['m573r125']);
+$m573r126 = strip_tags($_REQUEST['m573r126']);
+$m573r127 = strip_tags($_REQUEST['m573r127']);
+$m573r128 = strip_tags($_REQUEST['m573r128']);
+$m573r131 = strip_tags($_REQUEST['m573r131']);
+$m573r132 = strip_tags($_REQUEST['m573r132']);
+$m573r133 = strip_tags($_REQUEST['m573r133']);
+$m573r134 = strip_tags($_REQUEST['m573r134']);
+$m573r135 = strip_tags($_REQUEST['m573r135']);
+$m573r136 = strip_tags($_REQUEST['m573r136']);
+$m573r137 = strip_tags($_REQUEST['m573r137']);
+$m573r138 = strip_tags($_REQUEST['m573r138']);
+$m573r141 = strip_tags($_REQUEST['m573r141']);
+$m573r142 = strip_tags($_REQUEST['m573r142']);
+$m573r143 = strip_tags($_REQUEST['m573r143']);
+$m573r144 = strip_tags($_REQUEST['m573r144']);
+$m573r145 = strip_tags($_REQUEST['m573r145']);
+$m573r146 = strip_tags($_REQUEST['m573r146']);
+$m573r147 = strip_tags($_REQUEST['m573r147']);
+$m573r148 = strip_tags($_REQUEST['m573r148']);
+$m573r151 = strip_tags($_REQUEST['m573r151']);
+$m573r152 = strip_tags($_REQUEST['m573r152']);
+$m573r153 = strip_tags($_REQUEST['m573r153']);
+$m573r154 = strip_tags($_REQUEST['m573r154']);
+$m573r155 = strip_tags($_REQUEST['m573r155']);
+$m573r156 = strip_tags($_REQUEST['m573r156']);
+$m573r157 = strip_tags($_REQUEST['m573r157']);
+$m573r158 = strip_tags($_REQUEST['m573r158']);
+$m573r161 = strip_tags($_REQUEST['m573r161']);
+$m573r162 = strip_tags($_REQUEST['m573r162']);
+$m573r163 = strip_tags($_REQUEST['m573r163']);
+$m573r164 = strip_tags($_REQUEST['m573r164']);
+$m573r165 = strip_tags($_REQUEST['m573r165']);
+$m573r166 = strip_tags($_REQUEST['m573r166']);
+$m573r167 = strip_tags($_REQUEST['m573r167']);
+$m573r168 = strip_tags($_REQUEST['m573r168']);
+$m573r175 = strip_tags($_REQUEST['m573r175']);
+$m573r176 = strip_tags($_REQUEST['m573r176']);
+$m573r177 = strip_tags($_REQUEST['m573r177']);
+$m573r178 = strip_tags($_REQUEST['m573r178']);
+$m573r185 = strip_tags($_REQUEST['m573r185']);
+$m573r186 = strip_tags($_REQUEST['m573r186']);
+$m573r187 = strip_tags($_REQUEST['m573r187']);
+$m573r188 = strip_tags($_REQUEST['m573r188']);
+$m573r195 = strip_tags($_REQUEST['m573r195']);
+$m573r196 = strip_tags($_REQUEST['m573r196']);
+$m573r197 = strip_tags($_REQUEST['m573r197']);
+$m573r198 = strip_tags($_REQUEST['m573r198']);
+$m573r205 = strip_tags($_REQUEST['m573r205']);
+$m573r206 = strip_tags($_REQUEST['m573r206']);
+$m573r207 = strip_tags($_REQUEST['m573r207']);
+$m573r208 = strip_tags($_REQUEST['m573r208']);
+$m573r215 = strip_tags($_REQUEST['m573r215']);
+$m573r216 = strip_tags($_REQUEST['m573r216']);
+$m573r217 = strip_tags($_REQUEST['m573r217']);
+$m573r218 = strip_tags($_REQUEST['m573r218']);
+$m573r221 = strip_tags($_REQUEST['m573r221']);
+$m573r222 = strip_tags($_REQUEST['m573r222']);
+$m573r223 = strip_tags($_REQUEST['m573r223']);
+$m573r224 = strip_tags($_REQUEST['m573r224']);
+$m573r225 = strip_tags($_REQUEST['m573r225']);
+$m573r226 = strip_tags($_REQUEST['m573r226']);
+$m573r227 = strip_tags($_REQUEST['m573r227']);
+$m573r228 = strip_tags($_REQUEST['m573r228']);
+$m573r231 = strip_tags($_REQUEST['m573r231']);
+$m573r232 = strip_tags($_REQUEST['m573r232']);
+$m573r233 = strip_tags($_REQUEST['m573r233']);
+$m573r234 = strip_tags($_REQUEST['m573r234']);
+$m573r235 = strip_tags($_REQUEST['m573r235']);
+$m573r236 = strip_tags($_REQUEST['m573r236']);
+$m573r237 = strip_tags($_REQUEST['m573r237']);
+$m573r238 = strip_tags($_REQUEST['m573r238']);
+$m573r245 = strip_tags($_REQUEST['m573r245']);
+$m573r246 = strip_tags($_REQUEST['m573r246']);
+$m573r247 = strip_tags($_REQUEST['m573r247']);
+$m573r248 = strip_tags($_REQUEST['m573r248']);
+$m573r991 = strip_tags($_REQUEST['m573r991']);
+$m573r992 = strip_tags($_REQUEST['m573r992']);
+$m573r993 = strip_tags($_REQUEST['m573r993']);
+$m573r994 = strip_tags($_REQUEST['m573r994']);
+$m573r995 = strip_tags($_REQUEST['m573r995']);
+$m573r996 = strip_tags($_REQUEST['m573r996']);
+$m573r997 = strip_tags($_REQUEST['m573r997']);
+$m573r998 = strip_tags($_REQUEST['m573r998']);
+//12.strana
 $m513r11 = strip_tags($_REQUEST['m513r11']);
 $m513r12 = strip_tags($_REQUEST['m513r12']);
 $m513r13 = strip_tags($_REQUEST['m513r13']);
@@ -4220,7 +4605,7 @@ $m513r996 = strip_tags($_REQUEST['m513r996']);
 $m513r997 = strip_tags($_REQUEST['m513r997']);
 $m513r998 = strip_tags($_REQUEST['m513r998']);
 $m513r999 = strip_tags($_REQUEST['m513r999']);
-//10.strana
+//13.strana
 $m516r11 = strip_tags($_REQUEST['m516r11']);
 $m516r12 = strip_tags($_REQUEST['m516r12']);
 $m516r13 = strip_tags($_REQUEST['m516r13']);
@@ -4372,63 +4757,13 @@ $m516r994 = strip_tags($_REQUEST['m516r994']);
 $m516r995 = strip_tags($_REQUEST['m516r995']);
 $m516r996 = strip_tags($_REQUEST['m516r996']);
 $m516r997 = strip_tags($_REQUEST['m516r997']);
-//11.strana
+//14.strana
 $m100305r1 = strip_tags($_REQUEST['m100305r1']);
 $m100305r2 = strip_tags($_REQUEST['m100305r2']);
 $m100305r3 = strip_tags($_REQUEST['m100305r3']);
-$m586r11 = strip_tags($_REQUEST['m586r11']);
-$m586r12 = strip_tags($_REQUEST['m586r12']);
-$m586r21 = strip_tags($_REQUEST['m586r21']);
-$m586r22 = strip_tags($_REQUEST['m586r22']);
-$m586r31 = strip_tags($_REQUEST['m586r31']);
-$m586r32 = strip_tags($_REQUEST['m586r32']);
-$m586r41 = strip_tags($_REQUEST['m586r41']);
-$m586r42 = strip_tags($_REQUEST['m586r42']);
-$m586r51 = strip_tags($_REQUEST['m586r51']);
-$m586r52 = strip_tags($_REQUEST['m586r52']);
-$m586r61 = strip_tags($_REQUEST['m586r61']);
-$m586r62 = strip_tags($_REQUEST['m586r62']);
-$m586r71 = strip_tags($_REQUEST['m586r71']);
-$m586r72 = strip_tags($_REQUEST['m586r72']);
-$m586r81 = strip_tags($_REQUEST['m586r81']);
-$m586r82 = strip_tags($_REQUEST['m586r82']);
-$m586r91 = strip_tags($_REQUEST['m586r91']);
-$m586r92 = strip_tags($_REQUEST['m586r92']);
-$m586r101 = strip_tags($_REQUEST['m586r101']);
-$m586r102 = strip_tags($_REQUEST['m586r102']);
-$m586r111 = strip_tags($_REQUEST['m586r111']);
-$m586r112 = strip_tags($_REQUEST['m586r112']);
-$m586r121 = strip_tags($_REQUEST['m586r121']);
-$m586r122 = strip_tags($_REQUEST['m586r122']);
-$m586r131 = strip_tags($_REQUEST['m586r131']);
-$m586r132 = strip_tags($_REQUEST['m586r132']);
-$m586r141 = strip_tags($_REQUEST['m586r141']);
-$m586r142 = strip_tags($_REQUEST['m586r142']);
-$m586r151 = strip_tags($_REQUEST['m586r151']);
-$m586r152 = strip_tags($_REQUEST['m586r152']);
-$m586r161 = strip_tags($_REQUEST['m586r161']);
-$m586r162 = strip_tags($_REQUEST['m586r162']);
-$m586r171 = strip_tags($_REQUEST['m586r171']);
-$m586r172 = strip_tags($_REQUEST['m586r172']);
-$m586r181 = strip_tags($_REQUEST['m586r181']);
-$m586r182 = strip_tags($_REQUEST['m586r182']);
-$m586r191 = strip_tags($_REQUEST['m586r191']);
-$m586r192 = strip_tags($_REQUEST['m586r192']);
-$m586r201 = strip_tags($_REQUEST['m586r201']);
-$m586r202 = strip_tags($_REQUEST['m586r202']);
-$m586r211 = strip_tags($_REQUEST['m586r211']);
-$m586r212 = strip_tags($_REQUEST['m586r212']);
-$m586r221 = strip_tags($_REQUEST['m586r221']);
-$m586r222 = strip_tags($_REQUEST['m586r222']);
-$m586r231 = strip_tags($_REQUEST['m586r231']);
-$m586r232 = strip_tags($_REQUEST['m586r232']);
-$m586r241 = strip_tags($_REQUEST['m586r241']);
-$m586r242 = strip_tags($_REQUEST['m586r242']);
-$m586r991 = strip_tags($_REQUEST['m586r991']);
-$m586r992 = strip_tags($_REQUEST['m586r992']);
 $m1527r1a = strip_tags($_REQUEST['m1527r1a']);
 $m1527r1b = strip_tags($_REQUEST['m1527r1b']);
-//12.strana
+//15.strana
 $m527r11 = strip_tags($_REQUEST['m527r11']);
 $m527r12 = strip_tags($_REQUEST['m527r12']);
 $m527r13 = strip_tags($_REQUEST['m527r13']);
@@ -4599,7 +4934,6 @@ $m527r177 = strip_tags($_REQUEST['m527r177']);
 $m527r178 = strip_tags($_REQUEST['m527r178']);
 $m527r179 = strip_tags($_REQUEST['m527r179']);
 $m527r1710 = strip_tags($_REQUEST['m527r1710']);
-//13.strana
 $m527r181 = strip_tags($_REQUEST['m527r181']);
 $m527r182 = strip_tags($_REQUEST['m527r182']);
 $m527r183 = strip_tags($_REQUEST['m527r183']);
@@ -4673,6 +5007,34 @@ $m527r997 = strip_tags($_REQUEST['m527r997']);
 $m527r998 = strip_tags($_REQUEST['m527r998']);
 $m527r999 = strip_tags($_REQUEST['m527r999']);
 $m527r9910 = strip_tags($_REQUEST['m527r9910']);
+//16.strana
+$m474r11 = strip_tags($_REQUEST['m474r11']);
+$m474r12 = strip_tags($_REQUEST['m474r12']);
+$m474r13 = strip_tags($_REQUEST['m474r13']);
+$m474r21 = strip_tags($_REQUEST['m474r21']);
+$m474r22 = strip_tags($_REQUEST['m474r22']);
+$m474r23 = strip_tags($_REQUEST['m474r23']);
+$m474r31 = strip_tags($_REQUEST['m474r31']);
+$m474r32 = strip_tags($_REQUEST['m474r32']);
+$m474r33 = strip_tags($_REQUEST['m474r33']);
+$m474r41 = strip_tags($_REQUEST['m474r41']);
+$m474r42 = strip_tags($_REQUEST['m474r42']);
+$m474r43 = strip_tags($_REQUEST['m474r43']);
+$m474r51 = strip_tags($_REQUEST['m474r51']);
+$m474r52 = strip_tags($_REQUEST['m474r52']);
+$m474r53 = strip_tags($_REQUEST['m474r53']);
+$m474r61 = strip_tags($_REQUEST['m474r61']);
+$m474r62 = strip_tags($_REQUEST['m474r62']);
+$m474r63 = strip_tags($_REQUEST['m474r63']);
+$m474r72 = strip_tags($_REQUEST['m474r72']);
+$m474r73 = strip_tags($_REQUEST['m474r73']);
+$m474r991 = strip_tags($_REQUEST['m474r991']);
+$m474r992 = strip_tags($_REQUEST['m474r992']);
+$m474r993 = strip_tags($_REQUEST['m474r993']);
+$m514r1 = strip_tags($_REQUEST['m514r1']);
+$m514r2 = strip_tags($_REQUEST['m514r2']);
+$m514r3 = strip_tags($_REQUEST['m514r3']);
+$m514r99 = strip_tags($_REQUEST['m514r99']);
 $uprav="NO";
 
 if ( $strana == 1 ) {
@@ -4686,225 +5048,314 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " mod2r01='$mod2r01', mod2r02='$mod2r02',
   mod100041ano='$mod100041ano', mod100041nie='$mod100041nie',
   mod100042ano='$mod100042ano', mod100042nie='$mod100042nie',
-  mod100043ano='$mod100043ano', mod100043nie='$mod100043nie',
-  m1100r4='$m1100r4', m1100r5='$m1100r5', m1100r6='$m1100r6', m1100r7='$m1100r7',
-  m1100r8='$m1100r8', m1100r9='$m1100r9', m1100r10='$m1100r10', m1100r11='$m1100r11',
-  m1100r12='$m1100r12', m1100r13='$m1100r13' ".
+  mod100043ano='$mod100043ano', mod100043nie='$mod100043nie' ".
 " WHERE ico >= 0";
                     }
 
 if ( $strana == 3 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" mod100036kal='$mod100036kal', mod100036hos='$mod100036hos',
-  mod100037='$mod100037', m100214r01='$m100214r01', m100214r02='$m100214r02',
+" m1100r4='$m1100r4', m1100r5='$m1100r5', m1100r6='$m1100r6', m1100r7='$m1100r7',
+m1100r8='$m1100r8', m1100r9='$m1100r9', m1100r10='$m1100r10', m1100r11='$m1100r11',
+m1100r12='$m1100r12', m1100r13='$m1100r13',
+mod100036kal='$mod100036kal', mod100036hos='$mod100036hos',
+  mod100037='$mod100037',
   mod100069ano='$mod100069ano', mod100069nie='$mod100069nie',
-  m1101r2='$m1101r2', m1101r3='$m1101r3', m1101r4a='$m1101r4a', m1101r4b='$m1101r4b',
-  m1101r5a='$m1101r5a', m1101r5b='$m1101r5b' ".
+  m1101r2='$m1101r2' ".
 " WHERE ico >= 0";
                     }
 
 if ( $strana == 4 ) {
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m1101r6a='$m1101r6a', m1101r6b='$m1101r6b',
-  m1101r7a='$m1101r7a', m1101r7b='$m1101r7b',
-  m398r11='$m398r11', m398r12='$m398r12', m398r13='$m398r13', m398r14='$m398r14',
-  m398r21='$m398r21', m398r22='$m398r22', m398r23='$m398r23', m398r24='$m398r24',
-  m398r991='$m398r991', m398r992='$m398r992', m398r993='$m398r993', m398r994='$m398r994',
-  m1005r1a='$m1005r1a', m1005r1b='$m1005r1b' ".
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET".
+" m1101r3='$m1101r3', m1101r4a='$m1101r4a', m1101r4b='$m1101r4b',
+  m1101r5a='$m1101r5a', m1101r5b='$m1101r5b', m1101r6a='$m1101r6a', m1101r6b='$m1101r6b', m1101r7a='$m1101r7a', m1101r7b='$m1101r7b' ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m100417ano='$m100417ano', m100417nie='$m100417nie', m100418='$m100418' ".
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET".
+" m100417ano='$m100417ano', m100417nie='$m100417nie',  m100418='$m100418' ".
 " WHERE ico >= 0";
                     }
 
 if ( $strana == 5 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m405r11='$m405r11', m405r12='$m405r12', m405r21='$m405r21',
+" m398r11='$m398r11', m398r12='$m398r12', m398r13='$m398r13', m398r14='$m398r14',
+  m398r21='$m398r21', m398r22='$m398r22', m398r23='$m398r23', m398r24='$m398r24',
+  m398r991='$m398r991', m398r992='$m398r992', m398r993='$m398r993', m398r994='$m398r994',
+  m1005r1a='$m1005r1a', m1005r1b='$m1005r1b',
+  m405r11='$m405r11', m405r12='$m405r12', m405r21='$m405r21',
   m405r31='$m405r31', m405r32='$m405r32', m405r41='$m405r41',
   m405r51='$m405r51', m405r61='$m405r61', m405r71='$m405r71',
-  m405r81='$m405r81', m405r82='$m405r82', m405r991='$m405r991', m405r992='$m405r992',
-  m406r1='$m406r1', m406r2='$m406r2', m406r3='$m406r3', m406r4='$m406r4', m406r5='$m406r5',
-  m406r6='$m406r6', m406r7='$m406r7', m406r99='$m406r99' ".
+  m405r81='$m405r81', m405r82='$m405r82', m405r991='$m405r991', m405r992='$m405r992' ".
 " WHERE ico >= 0 ";
 $upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m406r8='$m406r8', m406r9='$m406r9' ".
-" WHERE ico >= 0";
 //echo $uprtxt;
                     }
 
 if ( $strana == 6 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m558r1='$m558r1', m558r2='$m558r2', m558r3='$m558r3', m558r4='$m558r4',
+" m406r1='$m406r1', m406r2='$m406r2', m406r3='$m406r3', m406r4='$m406r4', m406r5='$m406r5',
+m406r6='$m406r6', m406r7='$m406r7', m406r99='$m406r99',
+m558r1='$m558r1', m558r2='$m558r2', m558r3='$m558r3', m558r4='$m558r4',
   m558r5='$m558r5', m558r6='$m558r6', m558r7='$m558r7', m558r8='$m558r8',
   m558r9='$m558r9', m558r10='$m558r10', m558r11='$m558r11', m558r12='$m558r12',
   m558r13='$m558r13', m558r14='$m558r14', m558r15='$m558r15', m558r16='$m558r16',
-  m558r17='$m558r17', m558r18='$m558r18', m558r99='$m558r99',
-  m585r01='$m585r01', m585r02='$m585r02', m585r03='$m585r03', m585r04='$m585r04',
-  m585r05='$m585r05', m585r3k='$m585r3k', m585r4k='$m585r4k', m585r5k='$m585r5k' ".
+  m558r17='$m558r17', m558r18='$m558r18', m558r99='$m558r99' ".
 " WHERE ico >= 0 ";
-// $upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m406r8='$m406r8', m406r9='$m406r9' ".
+" WHERE ico >= 0";
                     }
 
 if ( $strana == 7 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m100044ano='$m100044ano', m100044nie='$m100044nie',
-  m571r10='$m571r10', m571r12='$m571r12', m571r13='$m571r13', m571r15='$m571r15',
-  m571r16='$m571r16', m571r17='$m571r17', m571r18='$m571r18',
-  m571r20='$m571r20', m571r22='$m571r22', m571r23='$m571r23', m571r25='$m571r25',
-  m571r26='$m571r26', m571r27='$m571r27', m571r28='$m571r28',
-  m571r30='$m571r30', m571r32='$m571r32', m571r33='$m571r33', m571r35='$m571r35',
-  m571r36='$m571r36', m571r37='$m571r37', m571r38='$m571r38',
-  m571r40='$m571r40', m571r42='$m571r42', m571r43='$m571r43', m571r45='$m571r45',
-  m571r46='$m571r46', m571r47='$m571r47', m571r48='$m571r48',
-  m571r50='$m571r50', m571r52='$m571r52', m571r53='$m571r53', m571r55='$m571r55',
-  m571r56='$m571r56', m571r57='$m571r57', m571r58='$m571r58',
-  m571r60='$m571r60', m571r62='$m571r62', m571r63='$m571r63', m571r65='$m571r65',
-  m571r66='$m571r66', m571r67='$m571r67', m571r68='$m571r68',
-  m571r70='$m571r70', m571r72='$m571r72', m571r73='$m571r73', m571r75='$m571r75',
-  m571r76='$m571r76', m571r77='$m571r77', m571r78='$m571r78',
-  m571r80='$m571r80', m571r82='$m571r82', m571r83='$m571r83', m571r85='$m571r85',
-  m571r86='$m571r86', m571r87='$m571r87', m571r88='$m571r88',
-  m571r90='$m571r90', m571r92='$m571r92', m571r93='$m571r93', m571r95='$m571r95',
-  m571r96='$m571r96', m571r97='$m571r97', m571r98='$m571r98',
-  m581r1='$m581r1', m581r2='$m581r2', m581r3='$m581r3', m581r3='$m581r3',
-  m581r4='$m581r4', m581r5='$m581r5', m581r6='$m581r6', m581r7='$m581r7',
-  m581r8='$m581r8', m581r12='$m581r12', m581r99='$m581r99' ".
+" m586r11='$m586r11', m586r12='$m586r12', m586r21='$m586r21', m586r22='$m586r22',
+m586r131='$m586r131', m586r132='$m586r132', m586r141='$m586r141', m586r142='$m586r142',
+m586r151='$m586r151', m586r152='$m586r152',m586r191='$m586r191', m586r192='$m586r192',
+m586r201='$m586r201', m586r202='$m586r202', m586r991='$m586r991', m586r992='$m586r992',
+m585r01='$m585r01', m585r02='$m585r02', m585r03='$m585r03', m585r04='$m585r04',
+m585r05='$m585r05', m585r3k='$m585r3k', m585r4k='$m585r4k', m585r5k='$m585r5k' ".
 " WHERE ico >= 0 ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m585r06='$m585r06', m585r07='$m585r07', m585r7k='$m585r7k' ".
+" WHERE ico >= 0";
                     }
 
 if ( $strana == 8 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
+" m571r10='$m571r10', m571r12='$m571r12', m571r13='$m571r13', m571r15='$m571r15',
+m571r16='$m571r16', m571r17='$m571r17', m571r18='$m571r18',
+m571r20='$m571r20', m571r22='$m571r22', m571r23='$m571r23', m571r25='$m571r25',
+m571r26='$m571r26', m571r27='$m571r27', m571r28='$m571r28',
+m571r30='$m571r30', m571r32='$m571r32', m571r33='$m571r33', m571r35='$m571r35',
+m571r36='$m571r36', m571r37='$m571r37', m571r38='$m571r38',
+m571r40='$m571r40', m571r42='$m571r42', m571r43='$m571r43', m571r45='$m571r45',
+m571r46='$m571r46', m571r47='$m571r47', m571r48='$m571r48',
+m571r50='$m571r50', m571r52='$m571r52', m571r53='$m571r53', m571r55='$m571r55',
+m571r56='$m571r56', m571r57='$m571r57', m571r58='$m571r58',
+m571r60='$m571r60', m571r62='$m571r62', m571r63='$m571r63', m571r65='$m571r65',
+m571r66='$m571r66', m571r67='$m571r67', m571r68='$m571r68',
+m571r70='$m571r70', m571r72='$m571r72', m571r73='$m571r73', m571r75='$m571r75',
+m571r76='$m571r76', m571r77='$m571r77', m571r78='$m571r78',
+m571r80='$m571r80', m571r82='$m571r82', m571r83='$m571r83', m571r85='$m571r85',
+m571r86='$m571r86', m571r87='$m571r87', m571r88='$m571r88',
+m571r90='$m571r90', m571r92='$m571r92', m571r93='$m571r93', m571r95='$m571r95',
+m571r96='$m571r96', m571r97='$m571r97', m571r98='$m571r98',
+m581r1='$m581r1', m581r2='$m581r2', m581r3='$m581r3', m581r3='$m581r3',
+m581r4='$m581r4', m581r5='$m581r5', m581r6='$m581r6', m581r7='$m581r7',
+m581r8='$m581r8', m581r12='$m581r12', m581r99='$m581r99' ".
+" WHERE ico >= 0 ";
+$upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m100301r1='$m100301r1', m100301r2='$m100301r2',
-  m100303r1='$m100303r1', m100303r2='$m100303r2',
-  m100302='$m100302', m100304='$m100304' ".
+" m571r100='$m571r100', m571r102='$m571r102', m571r103='$m571r103', m571r105='$m571r105', m571r106='$m571r106', m571r107='$m571r107', m571r108='$m571r108',
+m100301r1='$m100301r1', m100301r2='$m100301r2' ".
 " WHERE ico >= 0 ";
                     }
 
 if ( $strana == 9 ) {
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m513r11='$m513r11', m513r12='$m513r12', m513r13='$m513r13', m513r14='$m513r14',
-  m513r15='$m513r15', m513r16='$m513r16', m513r17='$m513r17', m513r18='$m513r18',
-  m513r19='$m513r19', m513r21='$m513r21', m513r22='$m513r22', m513r23='$m513r23',
-  m513r24='$m513r24', m513r25='$m513r25', m513r26='$m513r26', m513r27='$m513r27',
-  m513r28='$m513r28', m513r29='$m513r29', m513r31='$m513r31', m513r32='$m513r32',
-  m513r33='$m513r33', m513r34='$m513r34', m513r35='$m513r35', m513r36='$m513r36',
-  m513r37='$m513r37', m513r38='$m513r38', m513r39='$m513r39', m513r41='$m513r41',
-  m513r42='$m513r42', m513r43='$m513r43', m513r44='$m513r44', m513r45='$m513r45',
-  m513r46='$m513r46', m513r47='$m513r47', m513r48='$m513r48', m513r49='$m513r49',
-  m513r51='$m513r51', m513r52='$m513r52', m513r53='$m513r53', m513r54='$m513r54',
-  m513r55='$m513r55', m513r56='$m513r56', m513r57='$m513r57', m513r58='$m513r58',
-  m513r59='$m513r59', m513r61='$m513r61', m513r62='$m513r62', m513r63='$m513r63',
-  m513r64='$m513r64', m513r65='$m513r65', m513r66='$m513r66', m513r67='$m513r67',
-  m513r68='$m513r68', m513r69='$m513r69', m513r71='$m513r71', m513r72='$m513r72',
-  m513r73='$m513r73', m513r74='$m513r74', m513r75='$m513r75', m513r76='$m513r76',
-  m513r77='$m513r77', m513r78='$m513r78', m513r79='$m513r79', m513r81='$m513r81',
-  m513r82='$m513r82', m513r83='$m513r83', m513r84='$m513r84', m513r85='$m513r85',
-  m513r86='$m513r86', m513r87='$m513r87', m513r88='$m513r88', m513r89='$m513r89',
-  m513r91='$m513r91', m513r92='$m513r92', m513r93='$m513r93', m513r94='$m513r94',
-  m513r95='$m513r95', m513r96='$m513r96', m513r97='$m513r97', m513r98='$m513r98',
-  m513r99='$m513r99', m513r101='$m513r101', m513r102='$m513r102', m513r103='$m513r103',
-  m513r104='$m513r104', m513r105='$m513r105', m513r106='$m513r106', m513r107='$m513r107',
-  m513r108='$m513r108', m513r109='$m513r109', m513r111='$m513r111', m513r112='$m513r112',
-  m513r113='$m513r113', m513r114='$m513r114', m513r115='$m513r115', m513r116='$m513r116',
-  m513r117='$m513r117', m513r118='$m513r118', m513r119='$m513r119', m513r121='$m513r121',
-  m513r122='$m513r122', m513r123='$m513r123', m513r124='$m513r124', m513r125='$m513r125',
-  m513r126='$m513r126', m513r127='$m513r127', m513r128='$m513r128', m513r129='$m513r129',
-  m513r131='$m513r131', m513r132='$m513r132', m513r133='$m513r133', m513r134='$m513r134',
-  m513r135='$m513r135', m513r136='$m513r136', m513r137='$m513r137', m513r138='$m513r138',
-  m513r139='$m513r139', m513r141='$m513r141', m513r142='$m513r142', m513r143='$m513r143',
-  m513r144='$m513r144', m513r145='$m513r145', m513r146='$m513r146', m513r147='$m513r147',
-  m513r148='$m513r148', m513r149='$m513r149', m513r151='$m513r151', m513r152='$m513r152',
-  m513r153='$m513r153', m513r154='$m513r154', m513r155='$m513r155', m513r156='$m513r156',
-  m513r157='$m513r157', m513r158='$m513r158', m513r159='$m513r159', m513r161='$m513r161',
-  m513r162='$m513r162', m513r163='$m513r163', m513r164='$m513r164', m513r165='$m513r165',
-  m513r166='$m513r166', m513r167='$m513r167', m513r168='$m513r168', m513r169='$m513r169',
-  m513r171='$m513r171', m513r173='$m513r173', m513r174='$m513r174', m513r175='$m513r175',
-  m513r176='$m513r176', m513r177='$m513r177', m513r181='$m513r181', m513r183='$m513r183',
-  m513r184='$m513r184', m513r185='$m513r185', m513r186='$m513r186', m513r187='$m513r187',
-  m513r191='$m513r191', m513r193='$m513r193', m513r194='$m513r194', m513r195='$m513r195',
-  m513r196='$m513r196', m513r197='$m513r197', m513r201='$m513r201', m513r203='$m513r203',
-  m513r204='$m513r204', m513r205='$m513r205', m513r206='$m513r206', m513r207='$m513r207',
-  m513r211='$m513r211', m513r213='$m513r213', m513r214='$m513r214', m513r215='$m513r215',
-  m513r216='$m513r216', m513r217='$m513r217', m513r221='$m513r221', m513r222='$m513r222',
-  m513r223='$m513r223', m513r224='$m513r224', m513r225='$m513r225', m513r226='$m513r226',
-  m513r227='$m513r227', m513r228='$m513r228', m513r229='$m513r229', m513r991='$m513r991',
-  m513r992='$m513r992', m513r993='$m513r993', m513r994='$m513r994', m513r995='$m513r995',
-  m513r996='$m513r996', m513r997='$m513r997', m513r998='$m513r998', m513r999='$m513r999' ".
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m100303r1='$m100303r1', m100303r2='$m100303r2',
+  m100302='$m100302', m100304='$m100304' ".
 " WHERE ico >= 0 ";
                     }
 
 if ( $strana == 10 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m516r11='$m516r11', m516r12='$m516r12', m516r13='$m516r13', m516r14='$m516r14',
-  m516r15='$m516r15', m516r16='$m516r16', m516r17='$m516r17', m516r21='$m516r21',
-  m516r22='$m516r22', m516r23='$m516r23', m516r24='$m516r24', m516r25='$m516r25',
-  m516r26='$m516r26', m516r27='$m516r27', m516r31='$m516r31', m516r32='$m516r32',
-  m516r33='$m516r33', m516r34='$m516r34', m516r35='$m516r35', m516r36='$m516r36',
-  m516r37='$m516r37', m516r41='$m516r41', m516r42='$m516r42', m516r43='$m516r43',
-  m516r44='$m516r44', m516r45='$m516r45', m516r46='$m516r46', m516r47='$m516r47',
-  m516r51='$m516r51', m516r53='$m516r53', m516r54='$m516r54', m516r55='$m516r55',
-  m516r57='$m516r57', m516r61='$m516r61', m516r62='$m516r62', m516r63='$m516r63',
-  m516r64='$m516r64', m516r65='$m516r65', m516r66='$m516r66', m516r67='$m516r67',
-  m516r71='$m516r71', m516r72='$m516r72', m516r73='$m516r73', m516r74='$m516r74',
-  m516r75='$m516r75', m516r76='$m516r76', m516r77='$m516r77', m516r81='$m516r81',
-  m516r82='$m516r82', m516r83='$m516r83', m516r84='$m516r84', m516r85='$m516r85',
-  m516r86='$m516r86', m516r87='$m516r87', m516r91='$m516r91', m516r92='$m516r92',
-  m516r93='$m516r93', m516r94='$m516r94', m516r95='$m516r95', m516r96='$m516r96',
-  m516r97='$m516r97', m516r101='$m516r101', m516r102='$m516r102', m516r103='$m516r103',
-  m516r104='$m516r104', m516r105='$m516r105', m516r106='$m516r106', m516r107='$m516r107',
-  m516r111='$m516r111', m516r112='$m516r112', m516r113='$m516r113', m516r114='$m516r114',
-  m516r115='$m516r115', m516r116='$m516r116', m516r117='$m516r117', m516r121='$m516r121',
-  m516r122='$m516r122', m516r123='$m516r123', m516r124='$m516r124', m516r125='$m516r125',
-  m516r126='$m516r126', m516r127='$m516r127', m516r131='$m516r131', m516r132='$m516r132',
-  m516r133='$m516r133', m516r134='$m516r134', m516r135='$m516r135', m516r136='$m516r136',
-  m516r137='$m516r137', m516r141='$m516r141', m516r142='$m516r142', m516r143='$m516r143',
-  m516r144='$m516r144', m516r145='$m516r145', m516r146='$m516r146', m516r147='$m516r147',
-  m516r151='$m516r151', m516r152='$m516r152', m516r153='$m516r153', m516r154='$m516r154',
-  m516r155='$m516r155', m516r156='$m516r156', m516r157='$m516r157', m516r161='$m516r161',
-  m516r162='$m516r162', m516r163='$m516r163', m516r164='$m516r164', m516r165='$m516r165',
-  m516r166='$m516r166', m516r167='$m516r167', m516r171='$m516r171', m516r172='$m516r172',
-  m516r174='$m516r174', m516r175='$m516r175', m516r177='$m516r177', m516r181='$m516r181',
-  m516r182='$m516r182', m516r184='$m516r184', m516r185='$m516r185', m516r187='$m516r187',
-  m516r191='$m516r191', m516r192='$m516r192', m516r194='$m516r194', m516r195='$m516r195',
-  m516r197='$m516r197', m516r201='$m516r201', m516r202='$m516r202', m516r204='$m516r204',
-  m516r205='$m516r205', m516r206='$m516r206', m516r207='$m516r207', m516r211='$m516r211',
-  m516r212='$m516r212', m516r214='$m516r214', m516r215='$m516r215', m516r216='$m516r216',
-  m516r217='$m516r217', m516r221='$m516r221', m516r222='$m516r222', m516r223='$m516r223',
-  m516r224='$m516r224', m516r225='$m516r225', m516r226='$m516r226', m516r227='$m516r227',
-  m516r991='$m516r991', m516r992='$m516r992', m516r993='$m516r993', m516r994='$m516r994',
-  m516r995='$m516r995', m516r996='$m516r996', m516r997='$m516r997' ".
+" m572r11='$m572r11', m572r12='$m572r12', m572r13='$m572r13', m572r14='$m572r14',
+  m572r15='$m572r15', m572r16='$m572r16', m572r17='$m572r17', m572r18='$m572r18',
+  m572r19='$m572r19', m572r110='$m572r110', m572r0111='$m572r0111',
+  m572r21='$m572r21', m572r22='$m572r22', m572r23='$m572r23',
+  m572r25='$m572r25', m572r26='$m572r26', m572r27='$m572r27', m572r28='$m572r28',
+  m572r29='$m572r29', m572r210='$m572r210', m572r0211='$m572r0211',
+  m572r38='$m572r38', m572r39='$m572r39', m572r310='$m572r310', m572r311='$m572r311',
+  m572r48='$m572r48', m572r49='$m572r49', m572r410='$m572r410', m572r411='$m572r411',
+  m572r58='$m572r58', m572r59='$m572r59', m572r510='$m572r510', m572r511='$m572r511',
+  m572r68='$m572r68', m572r69='$m572r69', m572r610='$m572r610', m572r611='$m572r611',
+  m572r78='$m572r78', m572r79='$m572r79', m572r710='$m572r710', m572r711='$m572r711',
+  m572r88='$m572r88', m572r89='$m572r89', m572r810='$m572r810', m572r811='$m572r811',
+  m572r98='$m572r98', m572r99='$m572r99', m572r910='$m572r910', m572r911='$m572r911',
+  m572r108='$m572r108', m572r109='$m572r109', m572r1010='$m572r1010', m572r1011='$m572r1011',
+  m572r111='$m572r111', m572r112='$m572r112', m572r113='$m572r113', m572r114='$m572r114',
+  m572r115='$m572r115', m572r116='$m572r116', m572r117='$m572r117', m572r118='$m572r118',
+  m572r119='$m572r119', m572r1110='$m572r1110', m572r1111='$m572r1111',
+  m572r121='$m572r121', m572r122='$m572r122', m572r123='$m572r123', m572r124='$m572r124',
+  m572r125='$m572r125', m572r126='$m572r126', m572r127='$m572r127', m572r128='$m572r128',
+  m572r129='$m572r129', m572r1210='$m572r1210', m572r1211='$m572r1211',
+  m572r131='$m572r131', m572r132='$m572r132', m572r133='$m572r133', m572r134='$m572r134',
+  m572r135='$m572r135', m572r136='$m572r136', m572r137='$m572r137', m572r138='$m572r138',
+  m572r139='$m572r139', m572r1310='$m572r1310', m572r1311='$m572r1311',
+  m572r141='$m572r141', m572r142='$m572r142', m572r143='$m572r143', m572r144='$m572r144',
+  m572r145='$m572r145', m572r146='$m572r146', m572r147='$m572r147', m572r148='$m572r148',
+  m572r149='$m572r149', m572r1410='$m572r1410', m572r1411='$m572r1411',
+  m572r151='$m572r151', m572r152='$m572r152', m572r153='$m572r153', m572r154='$m572r154',
+  m572r155='$m572r155', m572r156='$m572r156', m572r157='$m572r157', m572r158='$m572r158',
+  m572r159='$m572r159', m572r1510='$m572r1510', m572r1511='$m572r1511',
+  m572r161='$m572r161', m572r162='$m572r162', m572r163='$m572r163',
+  m572r165='$m572r165', m572r166='$m572r166', m572r167='$m572r167', m572r168='$m572r168',
+  m572r169='$m572r169', m572r1610='$m572r1610', m572r1611='$m572r1611',
+  m572r178='$m572r178', m572r179='$m572r179', m572r1710='$m572r1710', m572r1711='$m572r1711',
+  m572r181='$m572r181', m572r182='$m572r182', m572r183='$m572r183',
+  m572r188='$m572r188', m572r189='$m572r189', m572r1810='$m572r1810', m572r1811='$m572r1811',
+  m572r198='$m572r198', m572r199='$m572r199', m572r1910='$m572r1910', m572r1911='$m572r1911',
+  m572r208='$m572r208', m572r209='$m572r209', m572r2010='$m572r2010', m572r2011='$m572r2011',
+  m572r211='$m572r211', m572r212='$m572r212', m572r213='$m572r213',
+  m572r218='$m572r218', m572r219='$m572r219', m572r2110='$m572r2110', m572r2111='$m572r2111',
+  m572r228='$m572r228', m572r229='$m572r229', m572r2210='$m572r2210', m572r2211='$m572r2211',
+  m572r238='$m572r238', m572r239='$m572r239', m572r2310='$m572r2310', m572r2311='$m572r2311',
+  m572r248='$m572r248', m572r249='$m572r249', m572r2410='$m572r2410', m572r2411='$m572r2411',
+  m572r991='$m572r991', m572r992='$m572r992', m572r993='$m572r993', m572r994='$m572r994',
+  m572r995='$m572r995', m572r996='$m572r996', m572r997='$m572r997', m572r998='$m572r998',
+  m572r999='$m572r999', m572r9910='$m572r9910', m572r9911='$m572r9911' ".
 " WHERE ico >= 0 ";
                      }
 
 if ( $strana == 11 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m100305r1='$m100305r1', m100305r2='$m100305r2', m100305r3='$m100305r3',
-  m586r31='$m586r31', m586r32='$m586r32', m586r41='$m586r41', m586r42='$m586r42',
-  m586r51='$m586r51', m586r52='$m586r52', m586r61='$m586r61', m586r62='$m586r62',
-  m586r71='$m586r71', m586r72='$m586r72', m586r81='$m586r81', m586r82='$m586r82',
-  m586r91='$m586r91', m586r92='$m586r92',
-  m586r101='$m586r101', m586r102='$m586r102', m586r111='$m586r111', m586r112='$m586r112',
-  m586r121='$m586r121', m586r122='$m586r122', m586r161='$m586r161', m586r162='$m586r162',
-  m586r171='$m586r171', m586r172='$m586r172', m586r181='$m586r181', m586r182='$m586r182',
-  m586r211='$m586r211', m586r212='$m586r212', m586r221='$m586r221', m586r222='$m586r222',
-  m586r231='$m586r231', m586r232='$m586r232', m586r241='$m586r241', m586r242='$m586r242',
-  m1527r1a='$m1527r1a', m1527r1b='$m1527r1b' ".
-" WHERE ico >= 0 ";
-$upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m586r11='$m586r11', m586r12='$m586r12', m586r21='$m586r21', m586r22='$m586r22',
-  m586r131='$m586r131', m586r132='$m586r132', m586r141='$m586r141', m586r142='$m586r142',
-  m586r151='$m586r151', m586r152='$m586r152',m586r191='$m586r191', m586r192='$m586r192',
-  m586r201='$m586r201', m586r202='$m586r202', m586r991='$m586r991', m586r992='$m586r992' ".
+" m573r11='$m573r11', m573r12='$m573r12', m573r13='$m573r13', m573r14='$m573r14',
+  m573r15='$m573r15', m573r16='$m573r16', m573r17='$m573r17', m573r18='$m573r18',
+  m573r21='$m573r21', m573r22='$m573r22', m573r23='$m573r23', m573r24='$m573r24',
+  m573r25='$m573r25', m573r26='$m573r26', m573r27='$m573r27', m573r28='$m573r28',
+  m573r35='$m573r35', m573r36='$m573r36', m573r37='$m573r37', m573r38='$m573r38',
+  m573r45='$m573r45', m573r46='$m573r46', m573r47='$m573r47', m573r48='$m573r48',
+  m573r55='$m573r55', m573r56='$m573r56', m573r57='$m573r57', m573r58='$m573r58',
+  m573r65='$m573r65', m573r66='$m573r66', m573r67='$m573r67', m573r68='$m573r68',
+  m573r75='$m573r75', m573r76='$m573r76', m573r77='$m573r77', m573r78='$m573r78',
+  m573r81='$m573r81', m573r82='$m573r82', m573r83='$m573r83', m573r84='$m573r84',
+  m573r85='$m573r85', m573r86='$m573r86', m573r87='$m573r87', m573r88='$m573r88',
+  m573r91='$m573r91', m573r92='$m573r92', m573r93='$m573r93', m573r94='$m573r94',
+  m573r95='$m573r95', m573r96='$m573r96', m573r97='$m573r97', m573r98='$m573r98',
+  m573r105='$m573r105', m573r106='$m573r106', m573r107='$m573r107', m573r108='$m573r108',
+  m573r111='$m573r111', m573r112='$m573r112', m573r113='$m573r113', m573r114='$m573r114',
+  m573r115='$m573r115', m573r116='$m573r116', m573r117='$m573r117', m573r118='$m573r118',
+  m573r121='$m573r121', m573r122='$m573r122', m573r123='$m573r123', m573r124='$m573r124',
+  m573r125='$m573r125', m573r126='$m573r126', m573r127='$m573r127', m573r128='$m573r128',
+  m573r131='$m573r131', m573r132='$m573r132', m573r133='$m573r133', m573r134='$m573r134',
+  m573r135='$m573r135', m573r136='$m573r136', m573r137='$m573r137', m573r138='$m573r138',
+  m573r141='$m573r141', m573r142='$m573r142', m573r143='$m573r143', m573r144='$m573r144',
+  m573r145='$m573r145', m573r146='$m573r146', m573r147='$m573r147', m573r148='$m573r148',
+  m573r151='$m573r151', m573r152='$m573r152', m573r153='$m573r153', m573r154='$m573r154',
+  m573r155='$m573r155', m573r156='$m573r156', m573r157='$m573r157', m573r158='$m573r158',
+  m573r161='$m573r161', m573r162='$m573r162', m573r163='$m573r163', m573r164='$m573r164',
+  m573r165='$m573r165', m573r166='$m573r166', m573r167='$m573r167', m573r168='$m573r168',
+  m573r175='$m573r175', m573r176='$m573r176', m573r177='$m573r177', m573r178='$m573r178',
+  m573r185='$m573r185', m573r186='$m573r186', m573r187='$m573r187', m573r188='$m573r188',
+  m573r195='$m573r195', m573r196='$m573r196', m573r197='$m573r197', m573r198='$m573r198',
+  m573r205='$m573r205', m573r206='$m573r206', m573r207='$m573r207', m573r208='$m573r208',
+  m573r215='$m573r215', m573r216='$m573r216', m573r217='$m573r217', m573r218='$m573r218',
+  m573r221='$m573r221', m573r222='$m573r222', m573r223='$m573r223', m573r224='$m573r224',
+  m573r225='$m573r225', m573r226='$m573r226', m573r227='$m573r227', m573r228='$m573r228',
+  m573r231='$m573r231', m573r232='$m573r232', m573r233='$m573r233', m573r234='$m573r234',
+  m573r235='$m573r235', m573r236='$m573r236', m573r237='$m573r237', m573r238='$m573r238',
+  m573r245='$m573r245', m573r246='$m573r246', m573r247='$m573r247', m573r248='$m573r248',
+  m573r991='$m573r991', m573r992='$m573r992', m573r993='$m573r993', m573r994='$m573r994',
+  m573r995='$m573r995', m573r996='$m573r996', m573r997='$m573r997', m573r998='$m573r998' ".
 " WHERE ico >= 0 ";
                      }
 
 if ( $strana == 12 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
+" m513r11='$m513r11', m513r12='$m513r12', m513r13='$m513r13', m513r14='$m513r14',
+m513r15='$m513r15', m513r16='$m513r16', m513r17='$m513r17', m513r18='$m513r18',
+m513r19='$m513r19', m513r21='$m513r21', m513r22='$m513r22', m513r23='$m513r23',
+m513r24='$m513r24', m513r25='$m513r25', m513r26='$m513r26', m513r27='$m513r27',
+m513r28='$m513r28', m513r29='$m513r29', m513r31='$m513r31', m513r32='$m513r32',
+m513r33='$m513r33', m513r34='$m513r34', m513r35='$m513r35', m513r36='$m513r36',
+m513r37='$m513r37', m513r38='$m513r38', m513r39='$m513r39', m513r41='$m513r41',
+m513r42='$m513r42', m513r43='$m513r43', m513r44='$m513r44', m513r45='$m513r45',
+m513r46='$m513r46', m513r47='$m513r47', m513r48='$m513r48', m513r49='$m513r49',
+m513r51='$m513r51', m513r52='$m513r52', m513r53='$m513r53', m513r54='$m513r54',
+m513r55='$m513r55', m513r56='$m513r56', m513r57='$m513r57', m513r58='$m513r58',
+m513r59='$m513r59', m513r61='$m513r61', m513r62='$m513r62', m513r63='$m513r63',
+m513r64='$m513r64', m513r65='$m513r65', m513r66='$m513r66', m513r67='$m513r67',
+m513r68='$m513r68', m513r69='$m513r69', m513r71='$m513r71', m513r72='$m513r72',
+m513r73='$m513r73', m513r74='$m513r74', m513r75='$m513r75', m513r76='$m513r76',
+m513r77='$m513r77', m513r78='$m513r78', m513r79='$m513r79', m513r81='$m513r81',
+m513r82='$m513r82', m513r83='$m513r83', m513r84='$m513r84', m513r85='$m513r85',
+m513r86='$m513r86', m513r87='$m513r87', m513r88='$m513r88', m513r89='$m513r89',
+m513r91='$m513r91', m513r92='$m513r92', m513r93='$m513r93', m513r94='$m513r94',
+m513r95='$m513r95', m513r96='$m513r96', m513r97='$m513r97', m513r98='$m513r98',
+m513r99='$m513r99', m513r101='$m513r101', m513r102='$m513r102', m513r103='$m513r103',
+m513r104='$m513r104', m513r105='$m513r105', m513r106='$m513r106', m513r107='$m513r107',
+m513r108='$m513r108', m513r109='$m513r109', m513r111='$m513r111', m513r112='$m513r112',
+m513r113='$m513r113', m513r114='$m513r114', m513r115='$m513r115', m513r116='$m513r116',
+m513r117='$m513r117', m513r118='$m513r118', m513r119='$m513r119', m513r121='$m513r121',
+m513r122='$m513r122', m513r123='$m513r123', m513r124='$m513r124', m513r125='$m513r125',
+m513r126='$m513r126', m513r127='$m513r127', m513r128='$m513r128', m513r129='$m513r129',
+m513r131='$m513r131', m513r132='$m513r132', m513r133='$m513r133', m513r134='$m513r134',
+m513r135='$m513r135', m513r136='$m513r136', m513r137='$m513r137', m513r138='$m513r138',
+m513r139='$m513r139', m513r141='$m513r141', m513r142='$m513r142', m513r143='$m513r143',
+m513r144='$m513r144', m513r145='$m513r145', m513r146='$m513r146', m513r147='$m513r147',
+m513r148='$m513r148', m513r149='$m513r149', m513r151='$m513r151', m513r152='$m513r152',
+m513r153='$m513r153', m513r154='$m513r154', m513r155='$m513r155', m513r156='$m513r156',
+m513r157='$m513r157', m513r158='$m513r158', m513r159='$m513r159', m513r161='$m513r161',
+m513r162='$m513r162', m513r163='$m513r163', m513r164='$m513r164', m513r165='$m513r165',
+m513r166='$m513r166', m513r167='$m513r167', m513r168='$m513r168', m513r169='$m513r169',
+m513r171='$m513r171', m513r173='$m513r173', m513r174='$m513r174', m513r175='$m513r175',
+m513r176='$m513r176', m513r177='$m513r177', m513r181='$m513r181', m513r183='$m513r183',
+m513r184='$m513r184', m513r185='$m513r185', m513r186='$m513r186', m513r187='$m513r187',
+m513r191='$m513r191', m513r193='$m513r193', m513r194='$m513r194', m513r195='$m513r195',
+m513r196='$m513r196', m513r197='$m513r197', m513r201='$m513r201', m513r203='$m513r203',
+m513r204='$m513r204', m513r205='$m513r205', m513r206='$m513r206', m513r207='$m513r207',
+m513r211='$m513r211', m513r213='$m513r213', m513r214='$m513r214', m513r215='$m513r215',
+m513r216='$m513r216', m513r217='$m513r217', m513r221='$m513r221', m513r222='$m513r222',
+m513r223='$m513r223', m513r224='$m513r224', m513r225='$m513r225', m513r226='$m513r226',
+m513r227='$m513r227', m513r228='$m513r228', m513r229='$m513r229', m513r991='$m513r991',
+m513r992='$m513r992', m513r993='$m513r993', m513r994='$m513r994', m513r995='$m513r995',
+m513r996='$m513r996', m513r997='$m513r997', m513r998='$m513r998', m513r999='$m513r999' ".
+" WHERE ico >= 0 ";
+                     }
+
+if ( $strana == 13 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
+" m516r11='$m516r11', m516r12='$m516r12', m516r13='$m516r13', m516r14='$m516r14',
+m516r15='$m516r15', m516r16='$m516r16', m516r17='$m516r17', m516r21='$m516r21',
+m516r22='$m516r22', m516r23='$m516r23', m516r24='$m516r24', m516r25='$m516r25',
+m516r26='$m516r26', m516r27='$m516r27', m516r31='$m516r31', m516r32='$m516r32',
+m516r33='$m516r33', m516r34='$m516r34', m516r35='$m516r35', m516r36='$m516r36',
+m516r37='$m516r37', m516r41='$m516r41', m516r42='$m516r42', m516r43='$m516r43',
+m516r44='$m516r44', m516r45='$m516r45', m516r46='$m516r46', m516r47='$m516r47',
+m516r51='$m516r51', m516r53='$m516r53', m516r54='$m516r54', m516r55='$m516r55',
+m516r57='$m516r57', m516r61='$m516r61', m516r62='$m516r62', m516r63='$m516r63',
+m516r64='$m516r64', m516r65='$m516r65', m516r66='$m516r66', m516r67='$m516r67',
+m516r71='$m516r71', m516r72='$m516r72', m516r73='$m516r73', m516r74='$m516r74',
+m516r75='$m516r75', m516r76='$m516r76', m516r77='$m516r77', m516r81='$m516r81',
+m516r82='$m516r82', m516r83='$m516r83', m516r84='$m516r84', m516r85='$m516r85',
+m516r86='$m516r86', m516r87='$m516r87', m516r91='$m516r91', m516r92='$m516r92',
+m516r93='$m516r93', m516r94='$m516r94', m516r95='$m516r95', m516r96='$m516r96',
+m516r97='$m516r97', m516r101='$m516r101', m516r102='$m516r102', m516r103='$m516r103',
+m516r104='$m516r104', m516r105='$m516r105', m516r106='$m516r106', m516r107='$m516r107',
+m516r111='$m516r111', m516r112='$m516r112', m516r113='$m516r113', m516r114='$m516r114',
+m516r115='$m516r115', m516r116='$m516r116', m516r117='$m516r117', m516r121='$m516r121',
+m516r122='$m516r122', m516r123='$m516r123', m516r124='$m516r124', m516r125='$m516r125',
+m516r126='$m516r126', m516r127='$m516r127', m516r131='$m516r131', m516r132='$m516r132',
+m516r133='$m516r133', m516r134='$m516r134', m516r135='$m516r135', m516r136='$m516r136',
+m516r137='$m516r137', m516r141='$m516r141', m516r142='$m516r142', m516r143='$m516r143',
+m516r144='$m516r144', m516r145='$m516r145', m516r146='$m516r146', m516r147='$m516r147',
+m516r151='$m516r151', m516r152='$m516r152', m516r153='$m516r153', m516r154='$m516r154',
+m516r155='$m516r155', m516r156='$m516r156', m516r157='$m516r157', m516r161='$m516r161',
+m516r162='$m516r162', m516r163='$m516r163', m516r164='$m516r164', m516r165='$m516r165',
+m516r166='$m516r166', m516r167='$m516r167', m516r171='$m516r171', m516r172='$m516r172',
+m516r174='$m516r174', m516r175='$m516r175', m516r177='$m516r177', m516r181='$m516r181',
+m516r182='$m516r182', m516r184='$m516r184', m516r185='$m516r185', m516r187='$m516r187',
+m516r191='$m516r191', m516r192='$m516r192', m516r194='$m516r194', m516r195='$m516r195',
+m516r197='$m516r197', m516r201='$m516r201', m516r202='$m516r202', m516r204='$m516r204',
+m516r205='$m516r205', m516r206='$m516r206', m516r207='$m516r207', m516r211='$m516r211',
+m516r212='$m516r212', m516r214='$m516r214', m516r215='$m516r215', m516r216='$m516r216',
+m516r217='$m516r217', m516r221='$m516r221', m516r222='$m516r222', m516r223='$m516r223',
+m516r224='$m516r224', m516r225='$m516r225', m516r226='$m516r226', m516r227='$m516r227',
+m516r991='$m516r991', m516r992='$m516r992', m516r993='$m516r993', m516r994='$m516r994',
+m516r995='$m516r995', m516r996='$m516r996', m516r997='$m516r997' ".
+" WHERE ico >= 0 ";
+                     }
+
+if ( $strana == 14 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m100305r1='$m100305r1', m100305r2='$m100305r2', m100305r3='$m100305r3',
+  m1527r1a='$m1527r1a', m1527r1b='$m1527r1b' ".
+" WHERE ico >= 0 ";
+                     }
+
+if ( $strana == 15 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " m527r11='$m527r11', m527r12='$m527r12', m527r13='$m527r13', m527r14='$m527r14',
   m527r15='$m527r15', m527r16='$m527r16', m527r17='$m527r17', m527r18='$m527r18',
@@ -4956,13 +5407,8 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
   m527r169='$m527r169', m527r1610='$m527r1610',
   m527r171='$m527r171', m527r172='$m527r172', m527r173='$m527r173', m527r174='$m527r174',
   m527r175='$m527r175', m527r176='$m527r176', m527r177='$m527r177', m527r178='$m527r178',
-  m527r179='$m527r179', m527r1710='$m527r1710' ".
-" WHERE ico >= 0 ";
-                     }
-
-if ( $strana == 13 ) {
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m527r181='$m527r181', m527r182='$m527r182', m527r183='$m527r183', m527r184='$m527r184',
+  m527r179='$m527r179', m527r1710='$m527r1710',
+  m527r181='$m527r181', m527r182='$m527r182', m527r183='$m527r183', m527r184='$m527r184',
   m527r185='$m527r185', m527r186='$m527r186', m527r187='$m527r187', m527r188='$m527r188',
   m527r1810='$m527r1810',
   m527r191='$m527r191', m527r192='$m527r192', m527r193='$m527r193', m527r194='$m527r194',
@@ -4986,6 +5432,19 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
   m527r991='$m527r991', m527r992='$m527r992', m527r993='$m527r993', m527r994='$m527r994',
   m527r995='$m527r995', m527r996='$m527r996', m527r997='$m527r997', m527r998='$m527r998',
   m527r999='$m527r999', m527r9910='$m527r9910' ".
+" WHERE ico >= 0 ";
+                     }
+if ( $strana == 16 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m474r11='$m474r11', m474r12='$m474r12', m474r13='$m474r13',
+  m474r21='$m474r21', m474r22='$m474r22', m474r23='$m474r23',
+  m474r31='$m474r31', m474r32='$m474r32', m474r33='$m474r33',
+  m474r41='$m474r41', m474r42='$m474r42', m474r43='$m474r43',
+  m474r51='$m474r51', m474r52='$m474r52', m474r53='$m474r53',
+  m474r61='$m474r61', m474r62='$m474r62', m474r63='$m474r63',
+  m474r72='$m474r72', m474r73='$m474r73',
+  m474r991='$m474r991', m474r992='$m474r992', m474r993='$m474r993',
+  m514r1='$m514r1', m514r2='$m514r2', m514r3='$m514r3', m514r99='$m514r99' ".
 " WHERE ico >= 0 ";
                      }
 
@@ -5175,6 +5634,7 @@ $mod100042ano = $fir_riadok->mod100042ano;
 $mod100042nie = $fir_riadok->mod100042nie;
 $mod100043ano = $fir_riadok->mod100043ano;
 $mod100043nie = $fir_riadok->mod100043nie;
+//3.strana
 $m1100r4 = $fir_riadok->m1100r4;
 $m1100r5 = $fir_riadok->m1100r5;
 $m1100r6 = $fir_riadok->m1100r6;
@@ -5185,25 +5645,23 @@ $m1100r10 = $fir_riadok->m1100r10;
 $m1100r11 = $fir_riadok->m1100r11;
 $m1100r12 = $fir_riadok->m1100r12;
 $m1100r13 = $fir_riadok->m1100r13;
-//3.strana
 $mod100036kal = $fir_riadok->mod100036kal;
 $mod100036hos = $fir_riadok->mod100036hos;
 $mod100037 = $fir_riadok->mod100037;
-$m100214r01 = $fir_riadok->m100214r01;
-$m100214r02 = $fir_riadok->m100214r02;
 $mod100069ano = $fir_riadok->mod100069ano;
 $mod100069nie = $fir_riadok->mod100069nie;
 $m1101r2 = $fir_riadok->m1101r2;
+//4.strana
 $m1101r3 = 1*$fir_riadok->m1101r3;
 $m1101r4a = $fir_riadok->m1101r4a;
 $m1101r4b = $fir_riadok->m1101r4b;
 $m1101r5a = $fir_riadok->m1101r5a;
 $m1101r5b = $fir_riadok->m1101r5b;
-//4.strana
 $m1101r6a = $fir_riadok->m1101r6a;
 $m1101r6b = $fir_riadok->m1101r6b;
 $m1101r7a = $fir_riadok->m1101r7a;
 $m1101r7b = $fir_riadok->m1101r7b;
+//5.strana
 $m398r11 = $fir_riadok->m398r11;
 $m398r12 = $fir_riadok->m398r12;
 $m398r13 = $fir_riadok->m398r13;
@@ -5218,7 +5676,6 @@ $m398r993 = $fir_riadok->m398r993;
 $m398r994 = $fir_riadok->m398r994;
 $m1005r1a = $fir_riadok->m1005r1a;
 $m1005r1b = $fir_riadok->m1005r1b;
-//5.strana
 $m405r11 = $fir_riadok->m405r11;
 $m405r12 = $fir_riadok->m405r12;
 $m405r21 = $fir_riadok->m405r21;
@@ -5232,6 +5689,7 @@ $m405r81 = $fir_riadok->m405r81;
 $m405r82 = $fir_riadok->m405r82;
 $m405r991 = $fir_riadok->m405r991;
 $m405r992 = $fir_riadok->m405r992;
+//6.strana
 $m406r1 = $fir_riadok->m406r1;
 $m406r2 = $fir_riadok->m406r2;
 $m406r3 = $fir_riadok->m406r3;
@@ -5240,7 +5698,6 @@ $m406r5 = $fir_riadok->m406r5;
 $m406r6 = $fir_riadok->m406r6;
 $m406r7 = $fir_riadok->m406r7;
 $m406r99 = $fir_riadok->m406r99;
-//6.strana
 $m558r1 = $fir_riadok->m558r1;
 $m558r2 = $fir_riadok->m558r2;
 $m558r3 = $fir_riadok->m558r3;
@@ -5260,6 +5717,23 @@ $m558r16 = $fir_riadok->m558r16;
 $m558r17 = $fir_riadok->m558r17;
 $m558r18 = $fir_riadok->m558r18;
 $m558r99 = $fir_riadok->m558r99;
+//7.strana
+$m586r11 = $fir_riadok->m586r11;
+$m586r12 = $fir_riadok->m586r12;
+$m586r21 = $fir_riadok->m586r21;
+$m586r22 = $fir_riadok->m586r22;
+$m586r131 = $fir_riadok->m586r131;
+$m586r132 = $fir_riadok->m586r132;
+$m586r141 = $fir_riadok->m586r141;
+$m586r142 = $fir_riadok->m586r142;
+$m586r151 = $fir_riadok->m586r151;
+$m586r152 = $fir_riadok->m586r152;
+$m586r191 = $fir_riadok->m586r191;
+$m586r192 = $fir_riadok->m586r192;
+$m586r201 = $fir_riadok->m586r201;
+$m586r202 = $fir_riadok->m586r202;
+$m586r991 = $fir_riadok->m586r991;
+$m586r992 = $fir_riadok->m586r992;
 $m585r01 = $fir_riadok->m585r01;
 $m585r02 = $fir_riadok->m585r02;
 $m585r03 = $fir_riadok->m585r03;
@@ -5268,9 +5742,7 @@ $m585r05 = $fir_riadok->m585r05;
 $m585r3k = $fir_riadok->m585r3k;
 $m585r4k = $fir_riadok->m585r4k;
 $m585r5k = $fir_riadok->m585r5k;
-//7.strana
-$m100044ano = $fir_riadok->m100044ano;
-$m100044nie = $fir_riadok->m100044nie;
+//8.strana
 $m571r10 = $fir_riadok->m571r10;
 $m571r12 = $fir_riadok->m571r12;
 $m571r13 = $fir_riadok->m571r13;
@@ -5344,7 +5816,175 @@ $m581r7 = $fir_riadok->m581r7;
 $m581r8 = $fir_riadok->m581r8;
 $m581r12 = $fir_riadok->m581r12;
 $m581r99 = $fir_riadok->m581r99;
-//9.strana
+//10.strana
+$m572r11 = $fir_riadok->m572r11;
+$m572r12 = $fir_riadok->m572r12;
+$m572r13 = $fir_riadok->m572r13;
+$m572r14 = $fir_riadok->m572r14;
+$m572r15 = $fir_riadok->m572r15;
+$m572r16 = $fir_riadok->m572r16;
+$m572r17 = $fir_riadok->m572r17;
+$m572r18 = $fir_riadok->m572r18;
+$m572r19 = $fir_riadok->m572r19;
+$m572r110 = $fir_riadok->m572r110;
+$m572r0111 = $fir_riadok->m572r0111;
+$m572r21 = $fir_riadok->m572r21;
+$m572r22 = $fir_riadok->m572r22;
+$m572r23 = $fir_riadok->m572r23;
+$m572r25 = $fir_riadok->m572r25;
+$m572r26 = $fir_riadok->m572r26;
+$m572r27 = $fir_riadok->m572r27;
+$m572r28 = $fir_riadok->m572r28;
+$m572r29 = $fir_riadok->m572r29;
+$m572r210 = $fir_riadok->m572r210;
+$m572r0211 = $fir_riadok->m572r0211;
+$m572r38 = $fir_riadok->m572r38;
+$m572r39 = $fir_riadok->m572r39;
+$m572r310 = $fir_riadok->m572r310;
+$m572r311 = $fir_riadok->m572r311;
+$m572r48 = $fir_riadok->m572r48;
+$m572r49 = $fir_riadok->m572r49;
+$m572r410 = $fir_riadok->m572r410;
+$m572r411 = $fir_riadok->m572r411;
+$m572r58 = $fir_riadok->m572r58;
+$m572r59 = $fir_riadok->m572r59;
+$m572r510 = $fir_riadok->m572r510;
+$m572r511 = $fir_riadok->m572r511;
+$m572r68 = $fir_riadok->m572r68;
+$m572r69 = $fir_riadok->m572r69;
+$m572r610 = $fir_riadok->m572r610;
+$m572r611 = $fir_riadok->m572r611;
+$m572r78 = $fir_riadok->m572r78;
+$m572r79 = $fir_riadok->m572r79;
+$m572r710 = $fir_riadok->m572r710;
+$m572r711 = $fir_riadok->m572r711;
+$m572r88 = $fir_riadok->m572r88;
+$m572r89 = $fir_riadok->m572r89;
+$m572r810 = $fir_riadok->m572r810;
+$m572r811 = $fir_riadok->m572r811;
+$m572r98 = $fir_riadok->m572r98;
+$m572r99 = $fir_riadok->m572r99;
+$m572r910 = $fir_riadok->m572r910;
+$m572r911 = $fir_riadok->m572r911;
+$m572r108 = $fir_riadok->m572r108;
+$m572r109 = $fir_riadok->m572r109;
+$m572r1010 = $fir_riadok->m572r1010;
+$m572r1011 = $fir_riadok->m572r1011;
+$m572r111 = $fir_riadok->m572r111;
+$m572r112 = $fir_riadok->m572r112;
+$m572r113 = $fir_riadok->m572r113;
+$m572r114 = $fir_riadok->m572r114;
+$m572r115 = $fir_riadok->m572r115;
+$m572r116 = $fir_riadok->m572r116;
+$m572r117 = $fir_riadok->m572r117;
+$m572r118 = $fir_riadok->m572r118;
+$m572r119 = $fir_riadok->m572r119;
+$m572r1110 = $fir_riadok->m572r1110;
+$m572r1111 = $fir_riadok->m572r1111;
+$m572r121 = $fir_riadok->m572r121;
+$m572r122 = $fir_riadok->m572r122;
+$m572r123 = $fir_riadok->m572r123;
+$m572r124 = $fir_riadok->m572r124;
+$m572r125 = $fir_riadok->m572r125;
+$m572r126 = $fir_riadok->m572r126;
+$m572r127 = $fir_riadok->m572r127;
+$m572r128 = $fir_riadok->m572r128;
+$m572r129 = $fir_riadok->m572r129;
+$m572r1210 = $fir_riadok->m572r1210;
+$m572r1211 = $fir_riadok->m572r1211;
+$m572r131 = $fir_riadok->m572r131;
+$m572r132 = $fir_riadok->m572r132;
+$m572r133 = $fir_riadok->m572r133;
+$m572r134 = $fir_riadok->m572r134;
+$m572r135 = $fir_riadok->m572r135;
+$m572r136 = $fir_riadok->m572r136;
+$m572r137 = $fir_riadok->m572r137;
+$m572r138 = $fir_riadok->m572r138;
+$m572r139 = $fir_riadok->m572r139;
+$m572r1310 = $fir_riadok->m572r1310;
+$m572r1311 = $fir_riadok->m572r1311;
+$m572r141 = $fir_riadok->m572r141;
+$m572r142 = $fir_riadok->m572r142;
+$m572r143 = $fir_riadok->m572r143;
+$m572r144 = $fir_riadok->m572r144;
+$m572r145 = $fir_riadok->m572r145;
+$m572r146 = $fir_riadok->m572r146;
+$m572r147 = $fir_riadok->m572r147;
+$m572r148 = $fir_riadok->m572r148;
+$m572r149 = $fir_riadok->m572r149;
+$m572r1410 = $fir_riadok->m572r1410;
+$m572r1411 = $fir_riadok->m572r1411;
+$m572r151 = $fir_riadok->m572r151;
+$m572r152 = $fir_riadok->m572r152;
+$m572r153 = $fir_riadok->m572r153;
+$m572r154 = $fir_riadok->m572r154;
+$m572r155 = $fir_riadok->m572r155;
+$m572r156 = $fir_riadok->m572r156;
+$m572r157 = $fir_riadok->m572r157;
+$m572r158 = $fir_riadok->m572r158;
+$m572r159 = $fir_riadok->m572r159;
+$m572r1510 = $fir_riadok->m572r1510;
+$m572r1511 = $fir_riadok->m572r1511;
+$m572r161 = $fir_riadok->m572r161;
+$m572r162 = $fir_riadok->m572r162;
+$m572r163 = $fir_riadok->m572r163;
+$m572r165 = $fir_riadok->m572r165;
+$m572r166 = $fir_riadok->m572r166;
+$m572r167 = $fir_riadok->m572r167;
+$m572r168 = $fir_riadok->m572r168;
+$m572r169 = $fir_riadok->m572r169;
+$m572r1610 = $fir_riadok->m572r1610;
+$m572r1611 = $fir_riadok->m572r1611;
+$m572r178 = $fir_riadok->m572r178;
+$m572r179 = $fir_riadok->m572r179;
+$m572r1710 = $fir_riadok->m572r1710;
+$m572r1711 = $fir_riadok->m572r1711;
+$m572r181 = $fir_riadok->m572r181;
+$m572r182 = $fir_riadok->m572r182;
+$m572r183 = $fir_riadok->m572r183;
+$m572r188 = $fir_riadok->m572r188;
+$m572r189 = $fir_riadok->m572r189;
+$m572r1810 = $fir_riadok->m572r1810;
+$m572r1811 = $fir_riadok->m572r1811;
+$m572r198 = $fir_riadok->m572r198;
+$m572r199 = $fir_riadok->m572r199;
+$m572r1910 = $fir_riadok->m572r1910;
+$m572r1911 = $fir_riadok->m572r1911;
+$m572r208 = $fir_riadok->m572r208;
+$m572r209 = $fir_riadok->m572r209;
+$m572r2010 = $fir_riadok->m572r2010;
+$m572r2011 = $fir_riadok->m572r2011;
+$m572r211 = $fir_riadok->m572r211;
+$m572r212 = $fir_riadok->m572r212;
+$m572r213 = $fir_riadok->m572r213;
+$m572r218 = $fir_riadok->m572r218;
+$m572r219 = $fir_riadok->m572r219;
+$m572r2110 = $fir_riadok->m572r2110;
+$m572r2111 = $fir_riadok->m572r2111;
+$m572r228 = $fir_riadok->m572r228;
+$m572r229 = $fir_riadok->m572r229;
+$m572r2210 = $fir_riadok->m572r2210;
+$m572r2211 = $fir_riadok->m572r2211;
+$m572r238 = $fir_riadok->m572r238;
+$m572r239 = $fir_riadok->m572r239;
+$m572r2310 = $fir_riadok->m572r2310;
+$m572r2311 = $fir_riadok->m572r2311;
+$m572r248 = $fir_riadok->m572r248;
+$m572r249 = $fir_riadok->m572r249;
+$m572r2410 = $fir_riadok->m572r2410;
+$m572r2411 = $fir_riadok->m572r2411;
+$m572r991 = $fir_riadok->m572r991;
+$m572r992 = $fir_riadok->m572r992;
+$m572r993 = $fir_riadok->m572r993;
+$m572r994 = $fir_riadok->m572r994;
+$m572r995 = $fir_riadok->m572r995;
+$m572r996 = $fir_riadok->m572r996;
+$m572r997 = $fir_riadok->m572r997;
+$m572r998 = $fir_riadok->m572r998;
+$m572r999 = $fir_riadok->m572r999;
+$m572r9910 = $fir_riadok->m572r9910;
+$m572r9911 = $fir_riadok->m572r9911;
+//12.strana
 $m513r11 = $fir_riadok->m513r11;
 $m513r12 = $fir_riadok->m513r12;
 $m513r13 = $fir_riadok->m513r13;
@@ -5537,7 +6177,7 @@ $m513r996 = $fir_riadok->m513r996;
 $m513r997 = $fir_riadok->m513r997;
 $m513r998 = $fir_riadok->m513r998;
 $m513r999 = $fir_riadok->m513r999;
-//10.strana
+//13.strana
 $m516r11 = $fir_riadok->m516r11;
 $m516r12 = $fir_riadok->m516r12;
 $m516r13 = $fir_riadok->m516r13;
@@ -5689,23 +6329,6 @@ $m516r994 = $fir_riadok->m516r994;
 $m516r995 = $fir_riadok->m516r995;
 $m516r996 = $fir_riadok->m516r996;
 $m516r997 = $fir_riadok->m516r997;
-//11.strana
-$m586r11 = $fir_riadok->m586r11;
-$m586r12 = $fir_riadok->m586r12;
-$m586r21 = $fir_riadok->m586r21;
-$m586r22 = $fir_riadok->m586r22;
-$m586r131 = $fir_riadok->m586r131;
-$m586r132 = $fir_riadok->m586r132;
-$m586r141 = $fir_riadok->m586r141;
-$m586r142 = $fir_riadok->m586r142;
-$m586r151 = $fir_riadok->m586r151;
-$m586r152 = $fir_riadok->m586r152;
-$m586r191 = $fir_riadok->m586r191;
-$m586r192 = $fir_riadok->m586r192;
-$m586r201 = $fir_riadok->m586r201;
-$m586r202 = $fir_riadok->m586r202;
-$m586r991 = $fir_riadok->m586r991;
-$m586r992 = $fir_riadok->m586r992;
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
@@ -5714,57 +6337,189 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 $m100417ano = $fir_riadok->m100417ano;
 $m100417nie = $fir_riadok->m100417nie;
 $m100418 = $fir_riadok->m100418;
-//5.strana
+//6.strana
 $m406r8 = $fir_riadok->m406r8;
 $m406r9 = $fir_riadok->m406r9;
+//7.strana
+$m585r06 = $fir_riadok->m585r06;
+$m585r07 = $fir_riadok->m585r07;
+$m585r7k = $fir_riadok->m585r7k;
 //8.strana
+$m571r100 = $fir_riadok->m571r100;
+$m571r102 = $fir_riadok->m571r102;
+$m571r103 = $fir_riadok->m571r103;
+$m571r104 = $fir_riadok->m571r104;
+$m571r105 = $fir_riadok->m571r105;
+$m571r106 = $fir_riadok->m571r106;
+$m571r107 = $fir_riadok->m571r107;
+$m571r108 = $fir_riadok->m571r108;
 $m100301r1 = $fir_riadok->m100301r1;
 $m100301r2 = $fir_riadok->m100301r2;
+//9.strana
+$m100302 = $fir_riadok->m100302;
 $m100303r1 = $fir_riadok->m100303r1;
 $m100303r2 = $fir_riadok->m100303r2;
-$m100302 = $fir_riadok->m100302;
 $m100304 = $fir_riadok->m100304;
 //11.strana
+$m573r11 = $fir_riadok->m573r11;
+$m573r12 = $fir_riadok->m573r12;
+$m573r13 = $fir_riadok->m573r13;
+$m573r14 = $fir_riadok->m573r14;
+$m573r15 = $fir_riadok->m573r15;
+$m573r16 = $fir_riadok->m573r16;
+$m573r17 = $fir_riadok->m573r17;
+$m573r18 = $fir_riadok->m573r18;
+$m573r21 = $fir_riadok->m573r21;
+$m573r22 = $fir_riadok->m573r22;
+$m573r23 = $fir_riadok->m573r23;
+$m573r24 = $fir_riadok->m573r24;
+$m573r25 = $fir_riadok->m573r25;
+$m573r26 = $fir_riadok->m573r26;
+$m573r27 = $fir_riadok->m573r27;
+$m573r28 = $fir_riadok->m573r28;
+$m573r35 = $fir_riadok->m573r35;
+$m573r36 = $fir_riadok->m573r36;
+$m573r37 = $fir_riadok->m573r37;
+$m573r38 = $fir_riadok->m573r38;
+$m573r45 = $fir_riadok->m573r45;
+$m573r46 = $fir_riadok->m573r46;
+$m573r47 = $fir_riadok->m573r47;
+$m573r48 = $fir_riadok->m573r48;
+$m573r55 = $fir_riadok->m573r55;
+$m573r56 = $fir_riadok->m573r56;
+$m573r57 = $fir_riadok->m573r57;
+$m573r58 = $fir_riadok->m573r58;
+$m573r65 = $fir_riadok->m573r65;
+$m573r66 = $fir_riadok->m573r66;
+$m573r67 = $fir_riadok->m573r67;
+$m573r68 = $fir_riadok->m573r68;
+$m573r75 = $fir_riadok->m573r75;
+$m573r76 = $fir_riadok->m573r76;
+$m573r77 = $fir_riadok->m573r77;
+$m573r78 = $fir_riadok->m573r78;
+$m573r81 = $fir_riadok->m573r81;
+$m573r82 = $fir_riadok->m573r82;
+$m573r83 = $fir_riadok->m573r83;
+$m573r84 = $fir_riadok->m573r84;
+$m573r85 = $fir_riadok->m573r85;
+$m573r86 = $fir_riadok->m573r86;
+$m573r87 = $fir_riadok->m573r87;
+$m573r88 = $fir_riadok->m573r88;
+$m573r91 = $fir_riadok->m573r91;
+$m573r92 = $fir_riadok->m573r92;
+$m573r93 = $fir_riadok->m573r93;
+$m573r94 = $fir_riadok->m573r94;
+$m573r95 = $fir_riadok->m573r95;
+$m573r96 = $fir_riadok->m573r96;
+$m573r97 = $fir_riadok->m573r97;
+$m573r98 = $fir_riadok->m573r98;
+$m573r105 = $fir_riadok->m573r105;
+$m573r106 = $fir_riadok->m573r106;
+$m573r107 = $fir_riadok->m573r107;
+$m573r108 = $fir_riadok->m573r108;
+$m573r111 = $fir_riadok->m573r111;
+$m573r112 = $fir_riadok->m573r112;
+$m573r113 = $fir_riadok->m573r113;
+$m573r114 = $fir_riadok->m573r114;
+$m573r115 = $fir_riadok->m573r115;
+$m573r116 = $fir_riadok->m573r116;
+$m573r117 = $fir_riadok->m573r117;
+$m573r118 = $fir_riadok->m573r118;
+$m573r121 = $fir_riadok->m573r121;
+$m573r122 = $fir_riadok->m573r122;
+$m573r123 = $fir_riadok->m573r123;
+$m573r124 = $fir_riadok->m573r124;
+$m573r125 = $fir_riadok->m573r125;
+$m573r126 = $fir_riadok->m573r126;
+$m573r127 = $fir_riadok->m573r127;
+$m573r128 = $fir_riadok->m573r128;
+$m573r131 = $fir_riadok->m573r131;
+$m573r132 = $fir_riadok->m573r132;
+$m573r133 = $fir_riadok->m573r133;
+$m573r134 = $fir_riadok->m573r134;
+$m573r135 = $fir_riadok->m573r135;
+$m573r136 = $fir_riadok->m573r136;
+$m573r137 = $fir_riadok->m573r137;
+$m573r138 = $fir_riadok->m573r138;
+$m573r141 = $fir_riadok->m573r141;
+$m573r142 = $fir_riadok->m573r142;
+$m573r143 = $fir_riadok->m573r143;
+$m573r144 = $fir_riadok->m573r144;
+$m573r145 = $fir_riadok->m573r145;
+$m573r146 = $fir_riadok->m573r146;
+$m573r147 = $fir_riadok->m573r147;
+$m573r148 = $fir_riadok->m573r148;
+$m573r151 = $fir_riadok->m573r151;
+$m573r152 = $fir_riadok->m573r152;
+$m573r153 = $fir_riadok->m573r153;
+$m573r154 = $fir_riadok->m573r154;
+$m573r155 = $fir_riadok->m573r155;
+$m573r156 = $fir_riadok->m573r156;
+$m573r157 = $fir_riadok->m573r157;
+$m573r158 = $fir_riadok->m573r158;
+$m573r161 = $fir_riadok->m573r161;
+$m573r162 = $fir_riadok->m573r162;
+$m573r163 = $fir_riadok->m573r163;
+$m573r164 = $fir_riadok->m573r164;
+$m573r165 = $fir_riadok->m573r165;
+$m573r166 = $fir_riadok->m573r166;
+$m573r167 = $fir_riadok->m573r167;
+$m573r168 = $fir_riadok->m573r168;
+$m573r175 = $fir_riadok->m573r175;
+$m573r176 = $fir_riadok->m573r176;
+$m573r177 = $fir_riadok->m573r177;
+$m573r178 = $fir_riadok->m573r178;
+$m573r185 = $fir_riadok->m573r185;
+$m573r186 = $fir_riadok->m573r186;
+$m573r187 = $fir_riadok->m573r187;
+$m573r188 = $fir_riadok->m573r188;
+$m573r195 = $fir_riadok->m573r195;
+$m573r196 = $fir_riadok->m573r196;
+$m573r197 = $fir_riadok->m573r197;
+$m573r198 = $fir_riadok->m573r198;
+$m573r205 = $fir_riadok->m573r205;
+$m573r206 = $fir_riadok->m573r206;
+$m573r207 = $fir_riadok->m573r207;
+$m573r208 = $fir_riadok->m573r208;
+$m573r215 = $fir_riadok->m573r215;
+$m573r216 = $fir_riadok->m573r216;
+$m573r217 = $fir_riadok->m573r217;
+$m573r218 = $fir_riadok->m573r218;
+$m573r221 = $fir_riadok->m573r221;
+$m573r222 = $fir_riadok->m573r222;
+$m573r223 = $fir_riadok->m573r223;
+$m573r224 = $fir_riadok->m573r224;
+$m573r225 = $fir_riadok->m573r225;
+$m573r226 = $fir_riadok->m573r226;
+$m573r227 = $fir_riadok->m573r227;
+$m573r228 = $fir_riadok->m573r228;
+$m573r231 = $fir_riadok->m573r231;
+$m573r232 = $fir_riadok->m573r232;
+$m573r233 = $fir_riadok->m573r233;
+$m573r234 = $fir_riadok->m573r234;
+$m573r235 = $fir_riadok->m573r235;
+$m573r236 = $fir_riadok->m573r236;
+$m573r237 = $fir_riadok->m573r237;
+$m573r238 = $fir_riadok->m573r238;
+$m573r245 = $fir_riadok->m573r245;
+$m573r246 = $fir_riadok->m573r246;
+$m573r247 = $fir_riadok->m573r247;
+$m573r248 = $fir_riadok->m573r248;
+$m573r991 = $fir_riadok->m573r991;
+$m573r992 = $fir_riadok->m573r992;
+$m573r993 = $fir_riadok->m573r993;
+$m573r994 = $fir_riadok->m573r994;
+$m573r995 = $fir_riadok->m573r995;
+$m573r996 = $fir_riadok->m573r996;
+$m573r997 = $fir_riadok->m573r997;
+$m573r998 = $fir_riadok->m573r998;
+//14.strana
 $m100305r1 = $fir_riadok->m100305r1;
 $m100305r2 = $fir_riadok->m100305r2;
 $m100305r3 = $fir_riadok->m100305r3;
-$m586r31 = $fir_riadok->m586r31;
-$m586r32 = $fir_riadok->m586r32;
-$m586r41 = $fir_riadok->m586r41;
-$m586r42 = $fir_riadok->m586r42;
-$m586r51 = $fir_riadok->m586r51;
-$m586r52 = $fir_riadok->m586r52;
-$m586r61 = $fir_riadok->m586r61;
-$m586r62 = $fir_riadok->m586r62;
-$m586r71 = $fir_riadok->m586r71;
-$m586r72 = $fir_riadok->m586r72;
-$m586r81 = $fir_riadok->m586r81;
-$m586r82 = $fir_riadok->m586r82;
-$m586r91 = $fir_riadok->m586r91;
-$m586r92 = $fir_riadok->m586r92;
-$m586r101 = $fir_riadok->m586r101;
-$m586r102 = $fir_riadok->m586r102;
-$m586r111 = $fir_riadok->m586r111;
-$m586r112 = $fir_riadok->m586r112;
-$m586r121 = $fir_riadok->m586r121;
-$m586r122 = $fir_riadok->m586r122;
-$m586r161 = $fir_riadok->m586r161;
-$m586r162 = $fir_riadok->m586r162;
-$m586r171 = $fir_riadok->m586r171;
-$m586r172 = $fir_riadok->m586r172;
-$m586r181 = $fir_riadok->m586r181;
-$m586r182 = $fir_riadok->m586r182;
-$m586r211 = $fir_riadok->m586r211;
-$m586r212 = $fir_riadok->m586r212;
-$m586r221 = $fir_riadok->m586r221;
-$m586r222 = $fir_riadok->m586r222;
-$m586r231 = $fir_riadok->m586r231;
-$m586r232 = $fir_riadok->m586r232;
-$m586r241 = $fir_riadok->m586r241;
-$m586r242 = $fir_riadok->m586r242;
 $m1527r1a = $fir_riadok->m1527r1a;
 $m1527r1b = $fir_riadok->m1527r1b;
-//12.strana
+//15.strana
 $m527r11 = $fir_riadok->m527r11;
 $m527r12 = $fir_riadok->m527r12;
 $m527r13 = $fir_riadok->m527r13;
@@ -6009,6 +6764,34 @@ $m527r997 = $fir_riadok->m527r997;
 $m527r998 = $fir_riadok->m527r998;
 $m527r999 = $fir_riadok->m527r999;
 $m527r9910 = $fir_riadok->m527r9910;
+//16.strana
+$m474r11 = $fir_riadok->m474r11;
+$m474r12 = $fir_riadok->m474r12;
+$m474r13 = $fir_riadok->m474r13;
+$m474r21 = $fir_riadok->m474r21;
+$m474r22 = $fir_riadok->m474r22;
+$m474r23 = $fir_riadok->m474r23;
+$m474r31 = $fir_riadok->m474r31;
+$m474r32 = $fir_riadok->m474r32;
+$m474r33 = $fir_riadok->m474r33;
+$m474r41 = $fir_riadok->m474r41;
+$m474r42 = $fir_riadok->m474r42;
+$m474r43 = $fir_riadok->m474r43;
+$m474r51 = $fir_riadok->m474r51;
+$m474r52 = $fir_riadok->m474r52;
+$m474r53 = $fir_riadok->m474r53;
+$m474r61 = $fir_riadok->m474r61;
+$m474r62 = $fir_riadok->m474r62;
+$m474r63 = $fir_riadok->m474r63;
+$m474r72 = $fir_riadok->m474r72;
+$m474r73 = $fir_riadok->m474r73;
+$m474r991 = $fir_riadok->m474r991;
+$m474r992 = $fir_riadok->m474r992;
+$m474r993 = $fir_riadok->m474r993;
+$m514r1 = $fir_riadok->m514r1;
+$m514r2 = $fir_riadok->m514r2;
+$m514r3 = $fir_riadok->m514r3;
+$m514r99 = $fir_riadok->m514r99;
 mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
@@ -6027,17 +6810,44 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 //6-miestne ico
 $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
+
+//2-miestny rok
+$kli_vrokx = substr($kli_vrok,2,2);
 ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link rel="stylesheet" href="../css/reset.css">
- <link rel="stylesheet" href="../css/tlaciva.css">
-<title>EuroSecom - v˝kaz RoË VTS 1-01</title>
+<head>
+<meta charset="cp1250">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>v˝kaz RoË VTS 1-01 | EuroSecom</title>
 <style type="text/css">
-div.navbar > a {
+.content {
+  position: static;
+}
+.navbar {
+  overflow: auto;
+}
+.navbar > a {
   padding: 6px 10px 6px 10px;
   font-size: 12px;
 }
+.form-bg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(100% - 48px);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.form-bg > button {
+  height: 28px;
+  cursor: pointer;
+  padding: 0 8px;
+  position: absolute;
+  right: 4px;
+}
+
+
+
 img.btn-row-tool {
   width: 20px;
   height: 20px;
@@ -6051,1100 +6861,8 @@ form input[type=text] {
   font-size: 14px;
 }
 </style>
-
-<script type="text/javascript">
-<?php
-//uprava
-  if ( $copern == 102 )
-  {
-?>
-  function ObnovUI()
-  {
-<?php if ( $strana == 1 ) { ?>
-   document.formv1.odoslane.value = '<?php echo "$odoslane_sk"; ?>';
-   document.formv1.cinnost.value = '<?php echo "$cinnost"; ?>';
-<?php                     } ?>
-
-<?php if ( $strana == 2 ) { ?>
-   document.formv1.mod2r01.value = '<?php echo "$mod2r01";?>';
-   document.formv1.mod2r02.value = '<?php echo "$mod2r02";?>';
-<?php if ( $mod100041ano == 1 ) { echo "document.formv1.mod100041ano.checked='checked';"; } ?>
-<?php if ( $mod100041nie == 1 ) { echo "document.formv1.mod100041nie.checked='checked';"; } ?>
-<?php if ( $mod100042ano == 1 ) { echo "document.formv1.mod100042ano.checked='checked';"; } ?>
-<?php if ( $mod100042nie == 1 ) { echo "document.formv1.mod100042nie.checked='checked';"; } ?>
-<?php if ( $mod100043ano == 1 ) { echo "document.formv1.mod100043ano.checked='checked';"; } ?>
-<?php if ( $mod100043nie == 1 ) { echo "document.formv1.mod100043nie.checked='checked';"; } ?>
-   document.formv1.m1100r4.value = '<?php echo "$m1100r4";?>';
-   document.formv1.m1100r5.value = '<?php echo "$m1100r5";?>';
-   document.formv1.m1100r6.value = '<?php echo "$m1100r6";?>';
-   document.formv1.m1100r7.value = '<?php echo "$m1100r7";?>';
-   document.formv1.m1100r8.value = '<?php echo "$m1100r8";?>';
-   document.formv1.m1100r9.value = '<?php echo "$m1100r9";?>';
-   document.formv1.m1100r10.value = '<?php echo "$m1100r10";?>';
-   document.formv1.m1100r11.value = '<?php echo "$m1100r11";?>';
-   document.formv1.m1100r12.value = '<?php echo "$m1100r12";?>';
-   document.formv1.m1100r13.value = '<?php echo "$m1100r13";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 3 ) { ?>
-<?php if ( $mod100036kal == 1 ) { echo "document.formv1.mod100036kal.checked='checked';"; } ?>
-<?php if ( $mod100036hos == 1 ) { echo "document.formv1.mod100036hos.checked='checked';"; } ?>
-   document.formv1.mod100037.value = '<?php echo "$mod100037";?>';
-   document.formv1.m100214r01.value = '<?php echo "$m100214r01";?>';
-   document.formv1.m100214r02.value = '<?php echo "$m100214r02";?>';
-<?php if ( $mod100069ano == 1 ) { echo "document.formv1.mod100069ano.checked='checked';"; } ?>
-<?php if ( $mod100069nie == 1 ) { echo "document.formv1.mod100069nie.checked='checked';"; } ?>
-   document.formv1.m1101r2.value = '<?php echo "$m1101r2";?>';
-   document.formv1.m1101r3.value = '<?php echo "$m1101r3";?>';
-<?php if ( $m1101r4a == 1 ) { echo "document.formv1.m1101r4a.checked='checked';"; } ?>
-<?php if ( $m1101r4b == 1 ) { echo "document.formv1.m1101r4b.checked='checked';"; } ?>
-<?php if ( $m1101r5a == 1 ) { echo "document.formv1.m1101r5a.checked='checked';"; } ?>
-<?php if ( $m1101r5b == 1 ) { echo "document.formv1.m1101r5b.checked='checked';"; } ?>
-<?php                     } ?>
-
-<?php if ( $strana == 4 ) { ?>
-<?php if ( $m1101r6a == 1 ) { echo "document.formv1.m1101r6a.checked='checked';"; } ?>
-<?php if ( $m1101r6b == 1 ) { echo "document.formv1.m1101r6b.checked='checked';"; } ?>
-<?php if ( $m1101r7a == 1 ) { echo "document.formv1.m1101r7a.checked='checked';"; } ?>
-<?php if ( $m1101r7b == 1 ) { echo "document.formv1.m1101r7b.checked='checked';"; } ?>
-<?php if ( $m100417ano == 1 ) { echo "document.formv1.m100417ano.checked='checked';"; } ?>
-<?php if ( $m100417nie == 1 ) { echo "document.formv1.m100417nie.checked='checked';"; } ?>
-   document.formv1.m100418.value = '<?php echo "$m100418";?>';
-   document.formv1.m398r11.value = '<?php echo "$m398r11";?>';
-   document.formv1.m398r12.value = '<?php echo "$m398r12";?>';
-   document.formv1.m398r13.value = '<?php echo "$m398r13";?>';
-   document.formv1.m398r14.value = '<?php echo "$m398r14";?>';
-   document.formv1.m398r21.value = '<?php echo "$m398r21";?>';
-   document.formv1.m398r22.value = '<?php echo "$m398r22";?>';
-   document.formv1.m398r23.value = '<?php echo "$m398r23";?>';
-   document.formv1.m398r24.value = '<?php echo "$m398r24";?>';
- //document.formv1.m398r991.value = '<?php echo "$m398r991";?>';
- //document.formv1.m398r992.value = '<?php echo "$m398r992";?>';
- //document.formv1.m398r993.value = '<?php echo "$m398r993";?>';
- //document.formv1.m398r994.value = '<?php echo "$m398r994";?>';
-<?php if ( $m1005r1a == 1 ) { echo "document.formv1.m1005r1a.checked='checked';"; } ?>
-<?php if ( $m1005r1b == 1 ) { echo "document.formv1.m1005r1b.checked='checked';"; } ?>
-<?php                     } ?>
-
-<?php if ( $strana == 5 ) { ?>
-   document.formv1.m405r11.value = '<?php echo "$m405r11";?>';
-   document.formv1.m405r12.value = '<?php echo "$m405r12";?>';
-   document.formv1.m405r21.value = '<?php echo "$m405r21";?>';
-   document.formv1.m405r31.value = '<?php echo "$m405r31";?>';
-   document.formv1.m405r32.value = '<?php echo "$m405r32";?>';
-   document.formv1.m405r41.value = '<?php echo "$m405r41";?>';
-   document.formv1.m405r51.value = '<?php echo "$m405r51";?>';
-   document.formv1.m405r61.value = '<?php echo "$m405r61";?>';
-   document.formv1.m405r71.value = '<?php echo "$m405r71";?>';
-   document.formv1.m405r81.value = '<?php echo "$m405r81";?>';
-   document.formv1.m405r82.value = '<?php echo "$m405r82";?>';
- //document.formv1.m405r991.value = '<?php echo "$m405r991";?>';
- //document.formv1.m405r992.value = '<?php echo "$m405r992";?>';
-   document.formv1.m406r1.value = '<?php echo "$m406r1";?>';
-   document.formv1.m406r2.value = '<?php echo "$m406r2";?>';
-   document.formv1.m406r3.value = '<?php echo "$m406r3";?>';
-   document.formv1.m406r4.value = '<?php echo "$m406r4";?>';
-   document.formv1.m406r5.value = '<?php echo "$m406r5";?>';
-   document.formv1.m406r6.value = '<?php echo "$m406r6";?>';
-   document.formv1.m406r7.value = '<?php echo "$m406r7";?>';
-   document.formv1.m406r8.value = '<?php echo "$m406r8";?>';
-   document.formv1.m406r9.value = '<?php echo "$m406r9";?>';
- //document.formv1.m406r99.value = '<?php echo "$m406r99";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 6 ) { ?>
-   document.formv1.m558r1.value = '<?php echo "$m558r1";?>';
-   document.formv1.m558r2.value = '<?php echo "$m558r2";?>';
-   document.formv1.m558r3.value = '<?php echo "$m558r3";?>';
-   document.formv1.m558r4.value = '<?php echo "$m558r4";?>';
-   document.formv1.m558r5.value = '<?php echo "$m558r5";?>';
-   document.formv1.m558r6.value = '<?php echo "$m558r6";?>';
-   document.formv1.m558r7.value = '<?php echo "$m558r7";?>';
-   document.formv1.m558r8.value = '<?php echo "$m558r8";?>';
-   document.formv1.m558r9.value = '<?php echo "$m558r9";?>';
-   document.formv1.m558r10.value = '<?php echo "$m558r10";?>';
-   document.formv1.m558r11.value = '<?php echo "$m558r11";?>';
-   document.formv1.m558r12.value = '<?php echo "$m558r12";?>';
-   document.formv1.m558r13.value = '<?php echo "$m558r13";?>';
-   document.formv1.m558r14.value = '<?php echo "$m558r14";?>';
-   document.formv1.m558r15.value = '<?php echo "$m558r15";?>';
-   document.formv1.m558r16.value = '<?php echo "$m558r16";?>';
-   document.formv1.m558r17.value = '<?php echo "$m558r17";?>';
-   document.formv1.m558r18.value = '<?php echo "$m558r18";?>';
- //document.formv1.m558r99.value = '<?php echo "$m558r99";?>';
-   document.formv1.m585r01.value = '<?php echo "$m585r01";?>';
-   document.formv1.m585r02.value = '<?php echo "$m585r02";?>';
-   document.formv1.m585r03.value = '<?php echo "$m585r03";?>';
-   document.formv1.m585r04.value = '<?php echo "$m585r04";?>';
-   document.formv1.m585r05.value = '<?php echo "$m585r05";?>';
-   document.formv1.m585r3k.value = '<?php echo "$m585r3k";?>';
-   document.formv1.m585r4k.value = '<?php echo "$m585r4k";?>';
-   document.formv1.m585r5k.value = '<?php echo "$m585r5k";?>';
-<?php                     } ?>
-
-<?php if (  $strana == 7 ) { ?>
-<?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
-<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
-   document.formv1.m571r10.value = '<?php echo "$m571r10";?>';
-   document.formv1.m571r12.value = '<?php echo "$m571r12";?>';
-   document.formv1.m571r13.value = '<?php echo "$m571r13";?>';
-   document.formv1.m571r15.value = '<?php echo "$m571r15";?>';
-   document.formv1.m571r16.value = '<?php echo "$m571r16";?>';
-   document.formv1.m571r17.value = '<?php echo "$m571r17";?>';
-   document.formv1.m571r18.value = '<?php echo "$m571r18";?>';
-   document.formv1.m571r20.value = '<?php echo "$m571r20";?>';
-   document.formv1.m571r22.value = '<?php echo "$m571r22";?>';
-   document.formv1.m571r23.value = '<?php echo "$m571r23";?>';
-   document.formv1.m571r25.value = '<?php echo "$m571r25";?>';
-   document.formv1.m571r26.value = '<?php echo "$m571r26";?>';
-   document.formv1.m571r27.value = '<?php echo "$m571r27";?>';
-   document.formv1.m571r28.value = '<?php echo "$m571r28";?>';
-   document.formv1.m571r30.value = '<?php echo "$m571r30";?>';
-   document.formv1.m571r32.value = '<?php echo "$m571r32";?>';
-   document.formv1.m571r33.value = '<?php echo "$m571r33";?>';
-   document.formv1.m571r35.value = '<?php echo "$m571r35";?>';
-   document.formv1.m571r36.value = '<?php echo "$m571r36";?>';
-   document.formv1.m571r37.value = '<?php echo "$m571r37";?>';
-   document.formv1.m571r38.value = '<?php echo "$m571r38";?>';
-   document.formv1.m571r40.value = '<?php echo "$m571r40";?>';
-   document.formv1.m571r42.value = '<?php echo "$m571r42";?>';
-   document.formv1.m571r43.value = '<?php echo "$m571r43";?>';
-   document.formv1.m571r45.value = '<?php echo "$m571r45";?>';
-   document.formv1.m571r46.value = '<?php echo "$m571r46";?>';
-   document.formv1.m571r47.value = '<?php echo "$m571r47";?>';
-   document.formv1.m571r48.value = '<?php echo "$m571r48";?>';
-   document.formv1.m571r50.value = '<?php echo "$m571r50";?>';
-   document.formv1.m571r52.value = '<?php echo "$m571r52";?>';
-   document.formv1.m571r53.value = '<?php echo "$m571r53";?>';
-   document.formv1.m571r55.value = '<?php echo "$m571r55";?>';
-   document.formv1.m571r56.value = '<?php echo "$m571r56";?>';
-   document.formv1.m571r57.value = '<?php echo "$m571r57";?>';
-   document.formv1.m571r58.value = '<?php echo "$m571r58";?>';
-   document.formv1.m571r60.value = '<?php echo "$m571r60";?>';
-   document.formv1.m571r62.value = '<?php echo "$m571r62";?>';
-   document.formv1.m571r63.value = '<?php echo "$m571r63";?>';
-   document.formv1.m571r65.value = '<?php echo "$m571r65";?>';
-   document.formv1.m571r66.value = '<?php echo "$m571r66";?>';
-   document.formv1.m571r67.value = '<?php echo "$m571r67";?>';
-   document.formv1.m571r68.value = '<?php echo "$m571r68";?>';
-   document.formv1.m571r70.value = '<?php echo "$m571r70";?>';
-   document.formv1.m571r72.value = '<?php echo "$m571r72";?>';
-   document.formv1.m571r73.value = '<?php echo "$m571r73";?>';
-   document.formv1.m571r75.value = '<?php echo "$m571r75";?>';
-   document.formv1.m571r76.value = '<?php echo "$m571r76";?>';
-   document.formv1.m571r77.value = '<?php echo "$m571r77";?>';
-   document.formv1.m571r78.value = '<?php echo "$m571r78";?>';
-   document.formv1.m571r80.value = '<?php echo "$m571r80";?>';
-   document.formv1.m571r82.value = '<?php echo "$m571r82";?>';
-   document.formv1.m571r83.value = '<?php echo "$m571r83";?>';
-   document.formv1.m571r85.value = '<?php echo "$m571r85";?>';
-   document.formv1.m571r86.value = '<?php echo "$m571r86";?>';
-   document.formv1.m571r87.value = '<?php echo "$m571r87";?>';
-   document.formv1.m571r88.value = '<?php echo "$m571r88";?>';
-   document.formv1.m571r90.value = '<?php echo "$m571r90";?>';
-   document.formv1.m571r92.value = '<?php echo "$m571r92";?>';
-   document.formv1.m571r93.value = '<?php echo "$m571r93";?>';
-   document.formv1.m571r95.value = '<?php echo "$m571r95";?>';
-   document.formv1.m571r96.value = '<?php echo "$m571r96";?>';
-   document.formv1.m571r97.value = '<?php echo "$m571r97";?>';
-   document.formv1.m571r98.value = '<?php echo "$m571r98";?>';
-   document.formv1.m581r1.value = '<?php echo "$m581r1";?>';
-   document.formv1.m581r2.value = '<?php echo "$m581r2";?>';
-   document.formv1.m581r3.value = '<?php echo "$m581r3";?>';
-   document.formv1.m581r4.value = '<?php echo "$m581r4";?>';
-   document.formv1.m581r5.value = '<?php echo "$m581r5";?>';
-   document.formv1.m581r6.value = '<?php echo "$m581r6";?>';
-   document.formv1.m581r7.value = '<?php echo "$m581r7";?>';
-   document.formv1.m581r8.value = '<?php echo "$m581r8";?>';
-   document.formv1.m581r12.value = '<?php echo "$m581r12";?>';
- //document.formv1.m581r99.value = '<?php echo "$m581r99";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 8 ) { ?>
-<?php if ( $m100301r1 == 1 ) { echo "document.formv1.m100301r1.checked='checked';"; } ?>
-<?php if ( $m100301r2 == 1 ) { echo "document.formv1.m100301r2.checked='checked';"; } ?>
-   document.formv1.m100302.value = '<?php echo "$m100302"; ?>';
-<?php if ( $m100303r1 == 1 ) { echo "document.formv1.m100303r1.checked='checked';"; } ?>
-<?php if ( $m100303r2 == 1 ) { echo "document.formv1.m100303r2.checked='checked';"; } ?>
-   document.formv1.m100304.value = '<?php echo "$m100304"; ?>';
-<?php                     } ?>
-
-<?php if ( $strana == 9 ) { ?>
-   document.formv1.m513r11.value = '<?php echo "$m513r11";?>';
-   document.formv1.m513r12.value = '<?php echo "$m513r12";?>';
-   document.formv1.m513r13.value = '<?php echo "$m513r13";?>';
-   document.formv1.m513r14.value = '<?php echo "$m513r14";?>';
-   document.formv1.m513r15.value = '<?php echo "$m513r15";?>';
-   document.formv1.m513r16.value = '<?php echo "$m513r16";?>';
-   document.formv1.m513r17.value = '<?php echo "$m513r17";?>';
-   document.formv1.m513r18.value = '<?php echo "$m513r18";?>';
-   document.formv1.m513r19.value = '<?php echo "$m513r19";?>';
-   document.formv1.m513r21.value = '<?php echo "$m513r21";?>';
-   document.formv1.m513r22.value = '<?php echo "$m513r22";?>';
-   document.formv1.m513r23.value = '<?php echo "$m513r23";?>';
-   document.formv1.m513r24.value = '<?php echo "$m513r24";?>';
-   document.formv1.m513r25.value = '<?php echo "$m513r25";?>';
-   document.formv1.m513r26.value = '<?php echo "$m513r26";?>';
-   document.formv1.m513r27.value = '<?php echo "$m513r27";?>';
-   document.formv1.m513r28.value = '<?php echo "$m513r28";?>';
-   document.formv1.m513r29.value = '<?php echo "$m513r29";?>';
-   document.formv1.m513r31.value = '<?php echo "$m513r31";?>';
-   document.formv1.m513r32.value = '<?php echo "$m513r32";?>';
-   document.formv1.m513r33.value = '<?php echo "$m513r33";?>';
-   document.formv1.m513r34.value = '<?php echo "$m513r34";?>';
-   document.formv1.m513r35.value = '<?php echo "$m513r35";?>';
-   document.formv1.m513r36.value = '<?php echo "$m513r36";?>';
-   document.formv1.m513r37.value = '<?php echo "$m513r37";?>';
-   document.formv1.m513r38.value = '<?php echo "$m513r38";?>';
-   document.formv1.m513r39.value = '<?php echo "$m513r39";?>';
-   document.formv1.m513r41.value = '<?php echo "$m513r41";?>';
-   document.formv1.m513r42.value = '<?php echo "$m513r42";?>';
-   document.formv1.m513r43.value = '<?php echo "$m513r43";?>';
-   document.formv1.m513r44.value = '<?php echo "$m513r44";?>';
-   document.formv1.m513r45.value = '<?php echo "$m513r45";?>';
-   document.formv1.m513r46.value = '<?php echo "$m513r46";?>';
-   document.formv1.m513r47.value = '<?php echo "$m513r47";?>';
-   document.formv1.m513r48.value = '<?php echo "$m513r48";?>';
-   document.formv1.m513r49.value = '<?php echo "$m513r49";?>';
-   document.formv1.m513r51.value = '<?php echo "$m513r51";?>';
-   document.formv1.m513r52.value = '<?php echo "$m513r52";?>';
-   document.formv1.m513r53.value = '<?php echo "$m513r53";?>';
-   document.formv1.m513r54.value = '<?php echo "$m513r54";?>';
-   document.formv1.m513r55.value = '<?php echo "$m513r55";?>';
-   document.formv1.m513r56.value = '<?php echo "$m513r56";?>';
-   document.formv1.m513r57.value = '<?php echo "$m513r57";?>';
-   document.formv1.m513r58.value = '<?php echo "$m513r58";?>';
-   document.formv1.m513r59.value = '<?php echo "$m513r59";?>';
-   document.formv1.m513r61.value = '<?php echo "$m513r61";?>';
-   document.formv1.m513r62.value = '<?php echo "$m513r62";?>';
-   document.formv1.m513r63.value = '<?php echo "$m513r63";?>';
-   document.formv1.m513r64.value = '<?php echo "$m513r64";?>';
-   document.formv1.m513r65.value = '<?php echo "$m513r65";?>';
-   document.formv1.m513r66.value = '<?php echo "$m513r66";?>';
-   document.formv1.m513r67.value = '<?php echo "$m513r67";?>';
-   document.formv1.m513r68.value = '<?php echo "$m513r68";?>';
-   document.formv1.m513r69.value = '<?php echo "$m513r69";?>';
-   document.formv1.m513r71.value = '<?php echo "$m513r71";?>';
-   document.formv1.m513r72.value = '<?php echo "$m513r72";?>';
-   document.formv1.m513r73.value = '<?php echo "$m513r73";?>';
-   document.formv1.m513r74.value = '<?php echo "$m513r74";?>';
-   document.formv1.m513r75.value = '<?php echo "$m513r75";?>';
-   document.formv1.m513r76.value = '<?php echo "$m513r76";?>';
-   document.formv1.m513r77.value = '<?php echo "$m513r77";?>';
-   document.formv1.m513r78.value = '<?php echo "$m513r78";?>';
-   document.formv1.m513r79.value = '<?php echo "$m513r79";?>';
-   document.formv1.m513r81.value = '<?php echo "$m513r81";?>';
-   document.formv1.m513r82.value = '<?php echo "$m513r82";?>';
-   document.formv1.m513r83.value = '<?php echo "$m513r83";?>';
-   document.formv1.m513r84.value = '<?php echo "$m513r84";?>';
-   document.formv1.m513r85.value = '<?php echo "$m513r85";?>';
-   document.formv1.m513r86.value = '<?php echo "$m513r86";?>';
-   document.formv1.m513r87.value = '<?php echo "$m513r87";?>';
-   document.formv1.m513r88.value = '<?php echo "$m513r88";?>';
-   document.formv1.m513r89.value = '<?php echo "$m513r89";?>';
-   document.formv1.m513r91.value = '<?php echo "$m513r91";?>';
-   document.formv1.m513r92.value = '<?php echo "$m513r92";?>';
-   document.formv1.m513r93.value = '<?php echo "$m513r93";?>';
-   document.formv1.m513r94.value = '<?php echo "$m513r94";?>';
-   document.formv1.m513r95.value = '<?php echo "$m513r95";?>';
-   document.formv1.m513r96.value = '<?php echo "$m513r96";?>';
-   document.formv1.m513r97.value = '<?php echo "$m513r97";?>';
-   document.formv1.m513r98.value = '<?php echo "$m513r98";?>';
-   document.formv1.m513r99.value = '<?php echo "$m513r99";?>';
-   document.formv1.m513r101.value = '<?php echo "$m513r101";?>';
-   document.formv1.m513r102.value = '<?php echo "$m513r102";?>';
-   document.formv1.m513r103.value = '<?php echo "$m513r103";?>';
-   document.formv1.m513r104.value = '<?php echo "$m513r104";?>';
-   document.formv1.m513r105.value = '<?php echo "$m513r105";?>';
-   document.formv1.m513r106.value = '<?php echo "$m513r106";?>';
-   document.formv1.m513r107.value = '<?php echo "$m513r107";?>';
-   document.formv1.m513r108.value = '<?php echo "$m513r108";?>';
-   document.formv1.m513r109.value = '<?php echo "$m513r109";?>';
-   document.formv1.m513r111.value = '<?php echo "$m513r111";?>';
-   document.formv1.m513r112.value = '<?php echo "$m513r112";?>';
-   document.formv1.m513r113.value = '<?php echo "$m513r113";?>';
-   document.formv1.m513r114.value = '<?php echo "$m513r114";?>';
-   document.formv1.m513r115.value = '<?php echo "$m513r115";?>';
-   document.formv1.m513r116.value = '<?php echo "$m513r116";?>';
-   document.formv1.m513r117.value = '<?php echo "$m513r117";?>';
-   document.formv1.m513r118.value = '<?php echo "$m513r118";?>';
-   document.formv1.m513r119.value = '<?php echo "$m513r119";?>';
-   document.formv1.m513r121.value = '<?php echo "$m513r121";?>';
-   document.formv1.m513r122.value = '<?php echo "$m513r122";?>';
-   document.formv1.m513r123.value = '<?php echo "$m513r123";?>';
-   document.formv1.m513r124.value = '<?php echo "$m513r124";?>';
-   document.formv1.m513r125.value = '<?php echo "$m513r125";?>';
-   document.formv1.m513r126.value = '<?php echo "$m513r126";?>';
-   document.formv1.m513r127.value = '<?php echo "$m513r127";?>';
-   document.formv1.m513r128.value = '<?php echo "$m513r128";?>';
-   document.formv1.m513r129.value = '<?php echo "$m513r129";?>';
-   document.formv1.m513r131.value = '<?php echo "$m513r131";?>';
-   document.formv1.m513r132.value = '<?php echo "$m513r132";?>';
-   document.formv1.m513r133.value = '<?php echo "$m513r133";?>';
-   document.formv1.m513r134.value = '<?php echo "$m513r134";?>';
-   document.formv1.m513r135.value = '<?php echo "$m513r135";?>';
-   document.formv1.m513r136.value = '<?php echo "$m513r136";?>';
-   document.formv1.m513r137.value = '<?php echo "$m513r137";?>';
-   document.formv1.m513r138.value = '<?php echo "$m513r138";?>';
-   document.formv1.m513r139.value = '<?php echo "$m513r139";?>';
-   document.formv1.m513r141.value = '<?php echo "$m513r141";?>';
-   document.formv1.m513r142.value = '<?php echo "$m513r142";?>';
-   document.formv1.m513r143.value = '<?php echo "$m513r143";?>';
-   document.formv1.m513r144.value = '<?php echo "$m513r144";?>';
-   document.formv1.m513r145.value = '<?php echo "$m513r145";?>';
-   document.formv1.m513r146.value = '<?php echo "$m513r146";?>';
-   document.formv1.m513r147.value = '<?php echo "$m513r147";?>';
-   document.formv1.m513r148.value = '<?php echo "$m513r148";?>';
-   document.formv1.m513r149.value = '<?php echo "$m513r149";?>';
-   document.formv1.m513r151.value = '<?php echo "$m513r151";?>';
-   document.formv1.m513r152.value = '<?php echo "$m513r152";?>';
-   document.formv1.m513r153.value = '<?php echo "$m513r153";?>';
-   document.formv1.m513r154.value = '<?php echo "$m513r154";?>';
-   document.formv1.m513r155.value = '<?php echo "$m513r155";?>';
-   document.formv1.m513r156.value = '<?php echo "$m513r156";?>';
-   document.formv1.m513r157.value = '<?php echo "$m513r157";?>';
-   document.formv1.m513r158.value = '<?php echo "$m513r158";?>';
-   document.formv1.m513r159.value = '<?php echo "$m513r159";?>';
-   document.formv1.m513r161.value = '<?php echo "$m513r161";?>';
-   document.formv1.m513r162.value = '<?php echo "$m513r162";?>';
-   document.formv1.m513r163.value = '<?php echo "$m513r163";?>';
-   document.formv1.m513r164.value = '<?php echo "$m513r164";?>';
-   document.formv1.m513r165.value = '<?php echo "$m513r165";?>';
-   document.formv1.m513r166.value = '<?php echo "$m513r166";?>';
-   document.formv1.m513r167.value = '<?php echo "$m513r167";?>';
-   document.formv1.m513r168.value = '<?php echo "$m513r168";?>';
-   document.formv1.m513r169.value = '<?php echo "$m513r169";?>';
-   document.formv1.m513r171.value = '<?php echo "$m513r171";?>';
-   document.formv1.m513r173.value = '<?php echo "$m513r173";?>';
-   document.formv1.m513r174.value = '<?php echo "$m513r174";?>';
-   document.formv1.m513r175.value = '<?php echo "$m513r175";?>';
-   document.formv1.m513r176.value = '<?php echo "$m513r176";?>';
-   document.formv1.m513r177.value = '<?php echo "$m513r177";?>';
-   document.formv1.m513r181.value = '<?php echo "$m513r181";?>';
-   document.formv1.m513r183.value = '<?php echo "$m513r183";?>';
-   document.formv1.m513r184.value = '<?php echo "$m513r184";?>';
-   document.formv1.m513r185.value = '<?php echo "$m513r185";?>';
-   document.formv1.m513r186.value = '<?php echo "$m513r186";?>';
-   document.formv1.m513r187.value = '<?php echo "$m513r187";?>';
-   document.formv1.m513r191.value = '<?php echo "$m513r191";?>';
-   document.formv1.m513r193.value = '<?php echo "$m513r193";?>';
-   document.formv1.m513r194.value = '<?php echo "$m513r194";?>';
-   document.formv1.m513r195.value = '<?php echo "$m513r195";?>';
-   document.formv1.m513r196.value = '<?php echo "$m513r196";?>';
-   document.formv1.m513r197.value = '<?php echo "$m513r197";?>';
-   document.formv1.m513r201.value = '<?php echo "$m513r201";?>';
-   document.formv1.m513r203.value = '<?php echo "$m513r203";?>';
-   document.formv1.m513r204.value = '<?php echo "$m513r204";?>';
-   document.formv1.m513r205.value = '<?php echo "$m513r205";?>';
-   document.formv1.m513r206.value = '<?php echo "$m513r206";?>';
-   document.formv1.m513r207.value = '<?php echo "$m513r207";?>';
-   document.formv1.m513r211.value = '<?php echo "$m513r211";?>';
-   document.formv1.m513r213.value = '<?php echo "$m513r213";?>';
-   document.formv1.m513r214.value = '<?php echo "$m513r214";?>';
-   document.formv1.m513r215.value = '<?php echo "$m513r215";?>';
-   document.formv1.m513r216.value = '<?php echo "$m513r216";?>';
-   document.formv1.m513r217.value = '<?php echo "$m513r217";?>';
-   document.formv1.m513r221.value = '<?php echo "$m513r221";?>';
-   document.formv1.m513r222.value = '<?php echo "$m513r222";?>';
-   document.formv1.m513r223.value = '<?php echo "$m513r223";?>';
-   document.formv1.m513r224.value = '<?php echo "$m513r224";?>';
-   document.formv1.m513r225.value = '<?php echo "$m513r225";?>';
-   document.formv1.m513r226.value = '<?php echo "$m513r226";?>';
-   document.formv1.m513r227.value = '<?php echo "$m513r227";?>';
-   document.formv1.m513r228.value = '<?php echo "$m513r228";?>';
-   document.formv1.m513r229.value = '<?php echo "$m513r229";?>';
- //document.formv1.m513r991.value = '<?php echo "$m513r991";?>';
- //document.formv1.m513r992.value = '<?php echo "$m513r992";?>';
- //document.formv1.m513r993.value = '<?php echo "$m513r993";?>';
- //document.formv1.m513r994.value = '<?php echo "$m513r994";?>';
- //document.formv1.m513r995.value = '<?php echo "$m513r995";?>';
- //document.formv1.m513r996.value = '<?php echo "$m513r996";?>';
- //document.formv1.m513r997.value = '<?php echo "$m513r997";?>';
- //document.formv1.m513r998.value = '<?php echo "$m513r998";?>';
- //document.formv1.m513r999.value = '<?php echo "$m513r999";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 10 ) { ?>
-   document.formv1.m516r11.value = '<?php echo "$m516r11";?>';
-   document.formv1.m516r12.value = '<?php echo "$m516r12";?>';
-   document.formv1.m516r13.value = '<?php echo "$m516r13";?>';
-   document.formv1.m516r14.value = '<?php echo "$m516r14";?>';
-   document.formv1.m516r15.value = '<?php echo "$m516r15";?>';
-   document.formv1.m516r16.value = '<?php echo "$m516r16";?>';
-   document.formv1.m516r17.value = '<?php echo "$m516r17";?>';
-   document.formv1.m516r21.value = '<?php echo "$m516r21";?>';
-   document.formv1.m516r22.value = '<?php echo "$m516r22";?>';
-   document.formv1.m516r23.value = '<?php echo "$m516r23";?>';
-   document.formv1.m516r24.value = '<?php echo "$m516r24";?>';
-   document.formv1.m516r25.value = '<?php echo "$m516r25";?>';
-   document.formv1.m516r26.value = '<?php echo "$m516r26";?>';
-   document.formv1.m516r27.value = '<?php echo "$m516r27";?>';
-   document.formv1.m516r31.value = '<?php echo "$m516r31";?>';
-   document.formv1.m516r32.value = '<?php echo "$m516r32";?>';
-   document.formv1.m516r33.value = '<?php echo "$m516r33";?>';
-   document.formv1.m516r34.value = '<?php echo "$m516r34";?>';
-   document.formv1.m516r35.value = '<?php echo "$m516r35";?>';
-   document.formv1.m516r36.value = '<?php echo "$m516r36";?>';
-   document.formv1.m516r37.value = '<?php echo "$m516r37";?>';
-   document.formv1.m516r41.value = '<?php echo "$m516r41";?>';
-   document.formv1.m516r42.value = '<?php echo "$m516r42";?>';
-   document.formv1.m516r43.value = '<?php echo "$m516r43";?>';
-   document.formv1.m516r44.value = '<?php echo "$m516r44";?>';
-   document.formv1.m516r45.value = '<?php echo "$m516r45";?>';
-   document.formv1.m516r46.value = '<?php echo "$m516r46";?>';
-   document.formv1.m516r47.value = '<?php echo "$m516r47";?>';
-   document.formv1.m516r51.value = '<?php echo "$m516r51";?>';
-   document.formv1.m516r53.value = '<?php echo "$m516r53";?>';
-   document.formv1.m516r54.value = '<?php echo "$m516r54";?>';
-   document.formv1.m516r55.value = '<?php echo "$m516r55";?>';
-   document.formv1.m516r57.value = '<?php echo "$m516r57";?>';
-   document.formv1.m516r61.value = '<?php echo "$m516r61";?>';
-   document.formv1.m516r62.value = '<?php echo "$m516r62";?>';
-   document.formv1.m516r63.value = '<?php echo "$m516r63";?>';
-   document.formv1.m516r64.value = '<?php echo "$m516r64";?>';
-   document.formv1.m516r65.value = '<?php echo "$m516r65";?>';
-   document.formv1.m516r66.value = '<?php echo "$m516r66";?>';
-   document.formv1.m516r67.value = '<?php echo "$m516r67";?>';
-   document.formv1.m516r71.value = '<?php echo "$m516r71";?>';
-   document.formv1.m516r72.value = '<?php echo "$m516r72";?>';
-   document.formv1.m516r73.value = '<?php echo "$m516r73";?>';
-   document.formv1.m516r74.value = '<?php echo "$m516r74";?>';
-   document.formv1.m516r75.value = '<?php echo "$m516r75";?>';
-   document.formv1.m516r76.value = '<?php echo "$m516r76";?>';
-   document.formv1.m516r77.value = '<?php echo "$m516r77";?>';
-   document.formv1.m516r81.value = '<?php echo "$m516r81";?>';
-   document.formv1.m516r82.value = '<?php echo "$m516r82";?>';
-   document.formv1.m516r83.value = '<?php echo "$m516r83";?>';
-   document.formv1.m516r84.value = '<?php echo "$m516r84";?>';
-   document.formv1.m516r85.value = '<?php echo "$m516r85";?>';
-   document.formv1.m516r86.value = '<?php echo "$m516r86";?>';
-   document.formv1.m516r87.value = '<?php echo "$m516r87";?>';
-   document.formv1.m516r91.value = '<?php echo "$m516r91";?>';
-   document.formv1.m516r92.value = '<?php echo "$m516r92";?>';
-   document.formv1.m516r93.value = '<?php echo "$m516r93";?>';
-   document.formv1.m516r94.value = '<?php echo "$m516r94";?>';
-   document.formv1.m516r95.value = '<?php echo "$m516r95";?>';
-   document.formv1.m516r96.value = '<?php echo "$m516r96";?>';
-   document.formv1.m516r97.value = '<?php echo "$m516r97";?>';
-   document.formv1.m516r101.value = '<?php echo "$m516r101";?>';
-   document.formv1.m516r102.value = '<?php echo "$m516r102";?>';
-   document.formv1.m516r103.value = '<?php echo "$m516r103";?>';
-   document.formv1.m516r104.value = '<?php echo "$m516r104";?>';
-   document.formv1.m516r105.value = '<?php echo "$m516r105";?>';
-   document.formv1.m516r106.value = '<?php echo "$m516r106";?>';
-   document.formv1.m516r107.value = '<?php echo "$m516r107";?>';
-   document.formv1.m516r111.value = '<?php echo "$m516r111";?>';
-   document.formv1.m516r112.value = '<?php echo "$m516r112";?>';
-   document.formv1.m516r113.value = '<?php echo "$m516r113";?>';
-   document.formv1.m516r114.value = '<?php echo "$m516r114";?>';
-   document.formv1.m516r115.value = '<?php echo "$m516r115";?>';
-   document.formv1.m516r116.value = '<?php echo "$m516r116";?>';
-   document.formv1.m516r117.value = '<?php echo "$m516r117";?>';
-   document.formv1.m516r121.value = '<?php echo "$m516r121";?>';
-   document.formv1.m516r122.value = '<?php echo "$m516r122";?>';
-   document.formv1.m516r123.value = '<?php echo "$m516r123";?>';
-   document.formv1.m516r124.value = '<?php echo "$m516r124";?>';
-   document.formv1.m516r125.value = '<?php echo "$m516r125";?>';
-   document.formv1.m516r126.value = '<?php echo "$m516r126";?>';
-   document.formv1.m516r127.value = '<?php echo "$m516r127";?>';
-   document.formv1.m516r131.value = '<?php echo "$m516r131";?>';
-   document.formv1.m516r132.value = '<?php echo "$m516r132";?>';
-   document.formv1.m516r133.value = '<?php echo "$m516r133";?>';
-   document.formv1.m516r134.value = '<?php echo "$m516r134";?>';
-   document.formv1.m516r135.value = '<?php echo "$m516r135";?>';
-   document.formv1.m516r136.value = '<?php echo "$m516r136";?>';
-   document.formv1.m516r137.value = '<?php echo "$m516r137";?>';
-   document.formv1.m516r141.value = '<?php echo "$m516r141";?>';
-   document.formv1.m516r142.value = '<?php echo "$m516r142";?>';
-   document.formv1.m516r143.value = '<?php echo "$m516r143";?>';
-   document.formv1.m516r144.value = '<?php echo "$m516r144";?>';
-   document.formv1.m516r145.value = '<?php echo "$m516r145";?>';
-   document.formv1.m516r146.value = '<?php echo "$m516r146";?>';
-   document.formv1.m516r147.value = '<?php echo "$m516r147";?>';
-   document.formv1.m516r151.value = '<?php echo "$m516r151";?>';
-   document.formv1.m516r152.value = '<?php echo "$m516r152";?>';
-   document.formv1.m516r153.value = '<?php echo "$m516r153";?>';
-   document.formv1.m516r154.value = '<?php echo "$m516r154";?>';
-   document.formv1.m516r155.value = '<?php echo "$m516r155";?>';
-   document.formv1.m516r156.value = '<?php echo "$m516r156";?>';
-   document.formv1.m516r157.value = '<?php echo "$m516r157";?>';
-   document.formv1.m516r161.value = '<?php echo "$m516r161";?>';
-   document.formv1.m516r162.value = '<?php echo "$m516r162";?>';
-   document.formv1.m516r163.value = '<?php echo "$m516r163";?>';
-   document.formv1.m516r164.value = '<?php echo "$m516r164";?>';
-   document.formv1.m516r165.value = '<?php echo "$m516r165";?>';
-   document.formv1.m516r166.value = '<?php echo "$m516r166";?>';
-   document.formv1.m516r167.value = '<?php echo "$m516r167";?>';
-   document.formv1.m516r171.value = '<?php echo "$m516r171";?>';
-   document.formv1.m516r172.value = '<?php echo "$m516r172";?>';
-   document.formv1.m516r174.value = '<?php echo "$m516r174";?>';
-   document.formv1.m516r175.value = '<?php echo "$m516r175";?>';
-   document.formv1.m516r177.value = '<?php echo "$m516r177";?>';
-   document.formv1.m516r181.value = '<?php echo "$m516r181";?>';
-   document.formv1.m516r182.value = '<?php echo "$m516r182";?>';
-   document.formv1.m516r184.value = '<?php echo "$m516r184";?>';
-   document.formv1.m516r185.value = '<?php echo "$m516r185";?>';
-   document.formv1.m516r187.value = '<?php echo "$m516r187";?>';
-   document.formv1.m516r191.value = '<?php echo "$m516r191";?>';
-   document.formv1.m516r192.value = '<?php echo "$m516r192";?>';
-   document.formv1.m516r194.value = '<?php echo "$m516r194";?>';
-   document.formv1.m516r195.value = '<?php echo "$m516r195";?>';
-   document.formv1.m516r197.value = '<?php echo "$m516r197";?>';
-   document.formv1.m516r201.value = '<?php echo "$m516r201";?>';
-   document.formv1.m516r202.value = '<?php echo "$m516r202";?>';
-   document.formv1.m516r204.value = '<?php echo "$m516r204";?>';
-   document.formv1.m516r205.value = '<?php echo "$m516r205";?>';
-   document.formv1.m516r206.value = '<?php echo "$m516r206";?>';
-   document.formv1.m516r207.value = '<?php echo "$m516r207";?>';
-   document.formv1.m516r211.value = '<?php echo "$m516r211";?>';
-   document.formv1.m516r212.value = '<?php echo "$m516r212";?>';
-   document.formv1.m516r214.value = '<?php echo "$m516r214";?>';
-   document.formv1.m516r215.value = '<?php echo "$m516r215";?>';
-   document.formv1.m516r216.value = '<?php echo "$m516r216";?>';
-   document.formv1.m516r217.value = '<?php echo "$m516r217";?>';
-   document.formv1.m516r221.value = '<?php echo "$m516r221";?>';
-   document.formv1.m516r222.value = '<?php echo "$m516r222";?>';
-   document.formv1.m516r223.value = '<?php echo "$m516r223";?>';
-   document.formv1.m516r224.value = '<?php echo "$m516r224";?>';
-   document.formv1.m516r225.value = '<?php echo "$m516r225";?>';
-   document.formv1.m516r226.value = '<?php echo "$m516r226";?>';
-   document.formv1.m516r227.value = '<?php echo "$m516r227";?>';
- //document.formv1.m516r991.value = '<?php echo "$m516r991";?>';
- //document.formv1.m516r992.value = '<?php echo "$m516r992";?>';
- //document.formv1.m516r993.value = '<?php echo "$m516r993";?>';
- //document.formv1.m516r994.value = '<?php echo "$m516r994";?>';
- //document.formv1.m516r995.value = '<?php echo "$m516r995";?>';
- //document.formv1.m516r996.value = '<?php echo "$m516r996";?>';
- //document.formv1.m516r997.value = '<?php echo "$m516r997";?>';
-<?php                      } ?>
-
-<?php if ( $strana == 11 ) { ?>
-   document.formv1.m100305r1.value = '<?php echo "$m100305r1";?>';
-   document.formv1.m100305r2.value = '<?php echo "$m100305r2";?>';
-   document.formv1.m100305r3.value = '<?php echo "$m100305r3";?>';
-   document.formv1.m586r11.value = '<?php echo "$m586r11";?>';
-   document.formv1.m586r12.value = '<?php echo "$m586r12";?>';
-   document.formv1.m586r21.value = '<?php echo "$m586r21";?>';
-   document.formv1.m586r22.value = '<?php echo "$m586r22";?>';
-   document.formv1.m586r31.value = '<?php echo "$m586r31";?>';
-   document.formv1.m586r32.value = '<?php echo "$m586r32";?>';
-   document.formv1.m586r41.value = '<?php echo "$m586r41";?>';
-   document.formv1.m586r42.value = '<?php echo "$m586r42";?>';
-   document.formv1.m586r51.value = '<?php echo "$m586r51";?>';
-   document.formv1.m586r52.value = '<?php echo "$m586r52";?>';
-   document.formv1.m586r61.value = '<?php echo "$m586r61";?>';
-   document.formv1.m586r62.value = '<?php echo "$m586r62";?>';
-   document.formv1.m586r71.value = '<?php echo "$m586r71";?>';
-   document.formv1.m586r72.value = '<?php echo "$m586r72";?>';
-   document.formv1.m586r81.value = '<?php echo "$m586r81";?>';
-   document.formv1.m586r82.value = '<?php echo "$m586r82";?>';
-   document.formv1.m586r91.value = '<?php echo "$m586r91";?>';
-   document.formv1.m586r92.value = '<?php echo "$m586r92";?>';
-   document.formv1.m586r101.value = '<?php echo "$m586r101";?>';
-   document.formv1.m586r102.value = '<?php echo "$m586r102";?>';
-   document.formv1.m586r111.value = '<?php echo "$m586r111";?>';
-   document.formv1.m586r112.value = '<?php echo "$m586r112";?>';
-   document.formv1.m586r121.value = '<?php echo "$m586r121";?>';
-   document.formv1.m586r122.value = '<?php echo "$m586r122";?>';
-   document.formv1.m586r131.value = '<?php echo "$m586r131";?>';
-   document.formv1.m586r132.value = '<?php echo "$m586r132";?>';
-   document.formv1.m586r141.value = '<?php echo "$m586r141";?>';
-   document.formv1.m586r142.value = '<?php echo "$m586r142";?>';
-   document.formv1.m586r151.value = '<?php echo "$m586r151";?>';
-   document.formv1.m586r152.value = '<?php echo "$m586r152";?>';
-   document.formv1.m586r161.value = '<?php echo "$m586r161";?>';
-   document.formv1.m586r162.value = '<?php echo "$m586r162";?>';
-   document.formv1.m586r171.value = '<?php echo "$m586r171";?>';
-   document.formv1.m586r172.value = '<?php echo "$m586r172";?>';
-   document.formv1.m586r181.value = '<?php echo "$m586r181";?>';
-   document.formv1.m586r182.value = '<?php echo "$m586r182";?>';
-   document.formv1.m586r191.value = '<?php echo "$m586r191";?>';
-   document.formv1.m586r192.value = '<?php echo "$m586r192";?>';
-   document.formv1.m586r201.value = '<?php echo "$m586r201";?>';
-   document.formv1.m586r202.value = '<?php echo "$m586r202";?>';
-   document.formv1.m586r211.value = '<?php echo "$m586r211";?>';
-   document.formv1.m586r212.value = '<?php echo "$m586r212";?>';
-   document.formv1.m586r221.value = '<?php echo "$m586r221";?>';
-   document.formv1.m586r222.value = '<?php echo "$m586r222";?>';
-   document.formv1.m586r231.value = '<?php echo "$m586r231";?>';
-   document.formv1.m586r232.value = '<?php echo "$m586r232";?>';
-   document.formv1.m586r241.value = '<?php echo "$m586r241";?>';
-   document.formv1.m586r242.value = '<?php echo "$m586r242";?>';
- //document.formv1.m586r991.value = '<?php echo "$m586r991";?>';
- //document.formv1.m586r992.value = '<?php echo "$m586r992";?>';
-<?php if ( $m1527r1a == 1 ) { echo "document.formv1.m1527r1a.checked='checked';"; } ?>
-<?php if ( $m1527r1b == 1 ) { echo "document.formv1.m1527r1b.checked='checked';"; } ?>
-<?php                      } ?>
-
-<?php if ( $strana == 12 ) { ?>
-   document.formv1.m527r11.value = '<?php echo "$m527r11";?>';
-   document.formv1.m527r12.value = '<?php echo "$m527r12";?>';
-   document.formv1.m527r13.value = '<?php echo "$m527r13";?>';
-   document.formv1.m527r14.value = '<?php echo "$m527r14";?>';
-   document.formv1.m527r15.value = '<?php echo "$m527r15";?>';
-   document.formv1.m527r16.value = '<?php echo "$m527r16";?>';
-   document.formv1.m527r17.value = '<?php echo "$m527r17";?>';
-   document.formv1.m527r18.value = '<?php echo "$m527r18";?>';
-   document.formv1.m527r19.value = '<?php echo "$m527r19";?>';
-   document.formv1.m527r110.value = '<?php echo "$m527r110";?>';
-   document.formv1.m527r21.value = '<?php echo "$m527r21";?>';
-   document.formv1.m527r22.value = '<?php echo "$m527r22";?>';
-   document.formv1.m527r23.value = '<?php echo "$m527r23";?>';
-   document.formv1.m527r24.value = '<?php echo "$m527r24";?>';
-   document.formv1.m527r25.value = '<?php echo "$m527r25";?>';
-   document.formv1.m527r26.value = '<?php echo "$m527r26";?>';
-   document.formv1.m527r27.value = '<?php echo "$m527r27";?>';
-   document.formv1.m527r28.value = '<?php echo "$m527r28";?>';
-   document.formv1.m527r29.value = '<?php echo "$m527r29";?>';
-   document.formv1.m527r210.value = '<?php echo "$m527r210";?>';
-   document.formv1.m527r31.value = '<?php echo "$m527r31";?>';
-   document.formv1.m527r32.value = '<?php echo "$m527r32";?>';
-   document.formv1.m527r33.value = '<?php echo "$m527r33";?>';
-   document.formv1.m527r34.value = '<?php echo "$m527r34";?>';
-   document.formv1.m527r35.value = '<?php echo "$m527r35";?>';
-   document.formv1.m527r36.value = '<?php echo "$m527r36";?>';
-   document.formv1.m527r37.value = '<?php echo "$m527r37";?>';
-   document.formv1.m527r38.value = '<?php echo "$m527r38";?>';
-   document.formv1.m527r39.value = '<?php echo "$m527r39";?>';
-   document.formv1.m527r310.value = '<?php echo "$m527r310";?>';
-   document.formv1.m527r41.value = '<?php echo "$m527r41";?>';
-   document.formv1.m527r42.value = '<?php echo "$m527r42";?>';
-   document.formv1.m527r43.value = '<?php echo "$m527r43";?>';
-   document.formv1.m527r44.value = '<?php echo "$m527r44";?>';
-   document.formv1.m527r45.value = '<?php echo "$m527r45";?>';
-   document.formv1.m527r46.value = '<?php echo "$m527r46";?>';
-   document.formv1.m527r47.value = '<?php echo "$m527r47";?>';
-   document.formv1.m527r48.value = '<?php echo "$m527r48";?>';
-   document.formv1.m527r49.value = '<?php echo "$m527r49";?>';
-   document.formv1.m527r410.value = '<?php echo "$m527r410";?>';
-   document.formv1.m527r51.value = '<?php echo "$m527r51";?>';
-   document.formv1.m527r52.value = '<?php echo "$m527r52";?>';
-   document.formv1.m527r53.value = '<?php echo "$m527r53";?>';
-   document.formv1.m527r54.value = '<?php echo "$m527r54";?>';
-   document.formv1.m527r55.value = '<?php echo "$m527r55";?>';
-   document.formv1.m527r56.value = '<?php echo "$m527r56";?>';
-   document.formv1.m527r57.value = '<?php echo "$m527r57";?>';
-   document.formv1.m527r58.value = '<?php echo "$m527r58";?>';
-   document.formv1.m527r59.value = '<?php echo "$m527r59";?>';
-   document.formv1.m527r510.value = '<?php echo "$m527r510";?>';
-   document.formv1.m527r61.value = '<?php echo "$m527r61";?>';
-   document.formv1.m527r62.value = '<?php echo "$m527r62";?>';
-   document.formv1.m527r63.value = '<?php echo "$m527r63";?>';
-   document.formv1.m527r64.value = '<?php echo "$m527r64";?>';
-   document.formv1.m527r65.value = '<?php echo "$m527r65";?>';
-   document.formv1.m527r66.value = '<?php echo "$m527r66";?>';
-   document.formv1.m527r67.value = '<?php echo "$m527r67";?>';
-   document.formv1.m527r68.value = '<?php echo "$m527r68";?>';
-   document.formv1.m527r69.value = '<?php echo "$m527r69";?>';
-   document.formv1.m527r610.value = '<?php echo "$m527r610";?>';
-   document.formv1.m527r71.value = '<?php echo "$m527r71";?>';
-   document.formv1.m527r72.value = '<?php echo "$m527r72";?>';
-   document.formv1.m527r73.value = '<?php echo "$m527r73";?>';
-   document.formv1.m527r74.value = '<?php echo "$m527r74";?>';
-   document.formv1.m527r75.value = '<?php echo "$m527r75";?>';
-   document.formv1.m527r76.value = '<?php echo "$m527r76";?>';
-   document.formv1.m527r77.value = '<?php echo "$m527r77";?>';
-   document.formv1.m527r78.value = '<?php echo "$m527r78";?>';
-   document.formv1.m527r79.value = '<?php echo "$m527r79";?>';
-   document.formv1.m527r710.value = '<?php echo "$m527r710";?>';
-   document.formv1.m527r81.value = '<?php echo "$m527r81";?>';
-   document.formv1.m527r82.value = '<?php echo "$m527r82";?>';
-   document.formv1.m527r83.value = '<?php echo "$m527r83";?>';
-   document.formv1.m527r84.value = '<?php echo "$m527r84";?>';
-   document.formv1.m527r85.value = '<?php echo "$m527r85";?>';
-   document.formv1.m527r86.value = '<?php echo "$m527r86";?>';
-   document.formv1.m527r87.value = '<?php echo "$m527r87";?>';
-   document.formv1.m527r88.value = '<?php echo "$m527r88";?>';
-   document.formv1.m527r89.value = '<?php echo "$m527r89";?>';
-   document.formv1.m527r810.value = '<?php echo "$m527r810";?>';
-   document.formv1.m527r91.value = '<?php echo "$m527r91";?>';
-   document.formv1.m527r92.value = '<?php echo "$m527r92";?>';
-   document.formv1.m527r93.value = '<?php echo "$m527r93";?>';
-   document.formv1.m527r94.value = '<?php echo "$m527r94";?>';
-   document.formv1.m527r95.value = '<?php echo "$m527r95";?>';
-   document.formv1.m527r96.value = '<?php echo "$m527r96";?>';
-   document.formv1.m527r97.value = '<?php echo "$m527r97";?>';
-   document.formv1.m527r98.value = '<?php echo "$m527r98";?>';
-   document.formv1.m527r99.value = '<?php echo "$m527r99";?>';
-   document.formv1.m527r910.value = '<?php echo "$m527r910";?>';
-   document.formv1.m527r101.value = '<?php echo "$m527r101";?>';
-   document.formv1.m527r102.value = '<?php echo "$m527r102";?>';
-   document.formv1.m527r103.value = '<?php echo "$m527r103";?>';
-   document.formv1.m527r104.value = '<?php echo "$m527r104";?>';
-   document.formv1.m527r105.value = '<?php echo "$m527r105";?>';
-   document.formv1.m527r106.value = '<?php echo "$m527r106";?>';
-   document.formv1.m527r107.value = '<?php echo "$m527r107";?>';
-   document.formv1.m527r108.value = '<?php echo "$m527r108";?>';
-   document.formv1.m527r109.value = '<?php echo "$m527r109";?>';
-   document.formv1.m527r1010.value = '<?php echo "$m527r1010";?>';
-   document.formv1.m527r111.value = '<?php echo "$m527r111";?>';
-   document.formv1.m527r112.value = '<?php echo "$m527r112";?>';
-   document.formv1.m527r113.value = '<?php echo "$m527r113";?>';
-   document.formv1.m527r114.value = '<?php echo "$m527r114";?>';
-   document.formv1.m527r115.value = '<?php echo "$m527r115";?>';
-   document.formv1.m527r116.value = '<?php echo "$m527r116";?>';
-   document.formv1.m527r117.value = '<?php echo "$m527r117";?>';
-   document.formv1.m527r118.value = '<?php echo "$m527r118";?>';
-   document.formv1.m527r119.value = '<?php echo "$m527r119";?>';
-   document.formv1.m527r1110.value = '<?php echo "$m527r1110";?>';
-   document.formv1.m527r121.value = '<?php echo "$m527r121";?>';
-   document.formv1.m527r122.value = '<?php echo "$m527r122";?>';
-   document.formv1.m527r123.value = '<?php echo "$m527r123";?>';
-   document.formv1.m527r124.value = '<?php echo "$m527r124";?>';
-   document.formv1.m527r125.value = '<?php echo "$m527r125";?>';
-   document.formv1.m527r126.value = '<?php echo "$m527r126";?>';
-   document.formv1.m527r127.value = '<?php echo "$m527r127";?>';
-   document.formv1.m527r128.value = '<?php echo "$m527r128";?>';
-   document.formv1.m527r129.value = '<?php echo "$m527r129";?>';
-   document.formv1.m527r1210.value = '<?php echo "$m527r1210";?>';
-   document.formv1.m527r131.value = '<?php echo "$m527r131";?>';
-   document.formv1.m527r132.value = '<?php echo "$m527r132";?>';
-   document.formv1.m527r133.value = '<?php echo "$m527r133";?>';
-   document.formv1.m527r134.value = '<?php echo "$m527r134";?>';
-   document.formv1.m527r135.value = '<?php echo "$m527r135";?>';
-   document.formv1.m527r136.value = '<?php echo "$m527r136";?>';
-   document.formv1.m527r137.value = '<?php echo "$m527r137";?>';
-   document.formv1.m527r138.value = '<?php echo "$m527r138";?>';
-   document.formv1.m527r139.value = '<?php echo "$m527r139";?>';
-   document.formv1.m527r1310.value = '<?php echo "$m527r1310";?>';
-   document.formv1.m527r141.value = '<?php echo "$m527r141";?>';
-   document.formv1.m527r142.value = '<?php echo "$m527r142";?>';
-   document.formv1.m527r143.value = '<?php echo "$m527r143";?>';
-   document.formv1.m527r144.value = '<?php echo "$m527r144";?>';
-   document.formv1.m527r145.value = '<?php echo "$m527r145";?>';
-   document.formv1.m527r146.value = '<?php echo "$m527r146";?>';
-   document.formv1.m527r147.value = '<?php echo "$m527r147";?>';
-   document.formv1.m527r148.value = '<?php echo "$m527r148";?>';
-   document.formv1.m527r149.value = '<?php echo "$m527r149";?>';
-   document.formv1.m527r1410.value = '<?php echo "$m527r1410";?>';
-   document.formv1.m527r151.value = '<?php echo "$m527r151";?>';
-   document.formv1.m527r152.value = '<?php echo "$m527r152";?>';
-   document.formv1.m527r153.value = '<?php echo "$m527r153";?>';
-   document.formv1.m527r154.value = '<?php echo "$m527r154";?>';
-   document.formv1.m527r155.value = '<?php echo "$m527r155";?>';
-   document.formv1.m527r156.value = '<?php echo "$m527r156";?>';
-   document.formv1.m527r157.value = '<?php echo "$m527r157";?>';
-   document.formv1.m527r158.value = '<?php echo "$m527r158";?>';
-   document.formv1.m527r159.value = '<?php echo "$m527r159";?>';
-   document.formv1.m527r1510.value = '<?php echo "$m527r1510";?>';
-   document.formv1.m527r161.value = '<?php echo "$m527r161";?>';
-   document.formv1.m527r162.value = '<?php echo "$m527r162";?>';
-   document.formv1.m527r163.value = '<?php echo "$m527r163";?>';
-   document.formv1.m527r164.value = '<?php echo "$m527r164";?>';
-   document.formv1.m527r165.value = '<?php echo "$m527r165";?>';
-   document.formv1.m527r166.value = '<?php echo "$m527r166";?>';
-   document.formv1.m527r167.value = '<?php echo "$m527r167";?>';
-   document.formv1.m527r168.value = '<?php echo "$m527r168";?>';
-   document.formv1.m527r169.value = '<?php echo "$m527r169";?>';
-   document.formv1.m527r1610.value = '<?php echo "$m527r1610";?>';
-   document.formv1.m527r171.value = '<?php echo "$m527r171";?>';
-   document.formv1.m527r172.value = '<?php echo "$m527r172";?>';
-   document.formv1.m527r173.value = '<?php echo "$m527r173";?>';
-   document.formv1.m527r174.value = '<?php echo "$m527r174";?>';
-   document.formv1.m527r175.value = '<?php echo "$m527r175";?>';
-   document.formv1.m527r176.value = '<?php echo "$m527r176";?>';
-   document.formv1.m527r177.value = '<?php echo "$m527r177";?>';
-   document.formv1.m527r178.value = '<?php echo "$m527r178";?>';
-   document.formv1.m527r179.value = '<?php echo "$m527r179";?>';
-   document.formv1.m527r1710.value = '<?php echo "$m527r1710";?>';
-   // document.formv1.m19r1.value = '<?php echo "$m19r1";?>';
-   // document.formv1.m19r2.value = '<?php echo "$m19r2";?>';
-   // document.formv1.m19r3.value = '<?php echo "$m19r3";?>';
-   // document.formv1.m19r4.value = '<?php echo "$m19r4";?>';
-   // document.formv1.m19r5.value = '<?php echo "$m19r5";?>';
-   // document.formv1.m19r6.value = '<?php echo "$m19r6";?>';
-   // document.formv1.m19r7.value = '<?php echo "$m19r7";?>';
-   // document.formv1.m19r8.value = '<?php echo "$m19r8";?>';
-   // document.formv1.m19r9.value = '<?php echo "$m19r9";?>';
-   // document.formv1.m19r10.value = '<?php echo "$m19r10";?>';
-   // document.formv1.m19r11.value = '<?php echo "$m19r11";?>';
-   // document.formv1.m19r12.value = '<?php echo "$m19r12";?>';
- //document.formv1.m19r99.value = '<?php echo "$m19r99";?>';
-<?php                      } ?>
-
-<?php if ( $strana == 13 ) { ?>
-   document.formv1.m527r181.value = '<?php echo "$m527r181";?>';
-   document.formv1.m527r182.value = '<?php echo "$m527r182";?>';
-   document.formv1.m527r183.value = '<?php echo "$m527r183";?>';
-   document.formv1.m527r184.value = '<?php echo "$m527r184";?>';
-   document.formv1.m527r185.value = '<?php echo "$m527r185";?>';
-   document.formv1.m527r186.value = '<?php echo "$m527r186";?>';
-   document.formv1.m527r187.value = '<?php echo "$m527r187";?>';
-   document.formv1.m527r188.value = '<?php echo "$m527r188";?>';
-   document.formv1.m527r1810.value = '<?php echo "$m527r1810";?>';
-   document.formv1.m527r191.value = '<?php echo "$m527r191";?>';
-   document.formv1.m527r192.value = '<?php echo "$m527r192";?>';
-   document.formv1.m527r193.value = '<?php echo "$m527r193";?>';
-   document.formv1.m527r194.value = '<?php echo "$m527r194";?>';
-   document.formv1.m527r195.value = '<?php echo "$m527r195";?>';
-   document.formv1.m527r196.value = '<?php echo "$m527r196";?>';
-   document.formv1.m527r197.value = '<?php echo "$m527r197";?>';
-   document.formv1.m527r198.value = '<?php echo "$m527r198";?>';
-   document.formv1.m527r1910.value = '<?php echo "$m527r1910";?>';
-   document.formv1.m527r201.value = '<?php echo "$m527r201";?>';
-   document.formv1.m527r202.value = '<?php echo "$m527r202";?>';
-   document.formv1.m527r203.value = '<?php echo "$m527r203";?>';
-   document.formv1.m527r204.value = '<?php echo "$m527r204";?>';
-   document.formv1.m527r205.value = '<?php echo "$m527r205";?>';
-   document.formv1.m527r206.value = '<?php echo "$m527r206";?>';
-   document.formv1.m527r207.value = '<?php echo "$m527r207";?>';
-   document.formv1.m527r208.value = '<?php echo "$m527r208";?>';
-   document.formv1.m527r2010.value = '<?php echo "$m527r2010";?>';
-   document.formv1.m527r211.value = '<?php echo "$m527r211";?>';
-   document.formv1.m527r212.value = '<?php echo "$m527r212";?>';
-   document.formv1.m527r213.value = '<?php echo "$m527r213";?>';
-   document.formv1.m527r214.value = '<?php echo "$m527r214";?>';
-   document.formv1.m527r215.value = '<?php echo "$m527r215";?>';
-   document.formv1.m527r216.value = '<?php echo "$m527r216";?>';
-   document.formv1.m527r217.value = '<?php echo "$m527r217";?>';
-   document.formv1.m527r218.value = '<?php echo "$m527r218";?>';
-   document.formv1.m527r2110.value = '<?php echo "$m527r2110";?>';
-   document.formv1.m527r221.value = '<?php echo "$m527r221";?>';
-   document.formv1.m527r222.value = '<?php echo "$m527r222";?>';
-   document.formv1.m527r223.value = '<?php echo "$m527r223";?>';
-   document.formv1.m527r224.value = '<?php echo "$m527r224";?>';
-   document.formv1.m527r225.value = '<?php echo "$m527r225";?>';
-   document.formv1.m527r226.value = '<?php echo "$m527r226";?>';
-   document.formv1.m527r227.value = '<?php echo "$m527r227";?>';
-   document.formv1.m527r228.value = '<?php echo "$m527r228";?>';
-   document.formv1.m527r2210.value = '<?php echo "$m527r2210";?>';
-   document.formv1.m527r231.value = '<?php echo "$m527r231";?>';
-   document.formv1.m527r232.value = '<?php echo "$m527r232";?>';
-   document.formv1.m527r233.value = '<?php echo "$m527r233";?>';
-   document.formv1.m527r234.value = '<?php echo "$m527r234";?>';
-   document.formv1.m527r235.value = '<?php echo "$m527r235";?>';
-   document.formv1.m527r236.value = '<?php echo "$m527r236";?>';
-   document.formv1.m527r237.value = '<?php echo "$m527r237";?>';
-   document.formv1.m527r238.value = '<?php echo "$m527r238";?>';
-   document.formv1.m527r2310.value = '<?php echo "$m527r2310";?>';
-   document.formv1.m527r241.value = '<?php echo "$m527r241";?>';
-   document.formv1.m527r242.value = '<?php echo "$m527r242";?>';
-   document.formv1.m527r243.value = '<?php echo "$m527r243";?>';
-   document.formv1.m527r244.value = '<?php echo "$m527r244";?>';
-   document.formv1.m527r245.value = '<?php echo "$m527r245";?>';
-   document.formv1.m527r246.value = '<?php echo "$m527r246";?>';
-   document.formv1.m527r247.value = '<?php echo "$m527r247";?>';
-   document.formv1.m527r248.value = '<?php echo "$m527r248";?>';
-   document.formv1.m527r2410.value = '<?php echo "$m527r2410";?>';
- //document.formv1.m527r991.value = '<?php echo "$m527r991";?>';
- //document.formv1.m527r992.value = '<?php echo "$m527r992";?>';
- //document.formv1.m527r993.value = '<?php echo "$m527r993";?>';
- //document.formv1.m527r994.value = '<?php echo "$m527r994";?>';
- //document.formv1.m527r995.value = '<?php echo "$m527r995";?>';
- //document.formv1.m527r996.value = '<?php echo "$m527r996";?>';
- //document.formv1.m527r997.value = '<?php echo "$m527r997";?>';
- //document.formv1.m527r998.value = '<?php echo "$m527r998";?>';
- //document.formv1.m527r999.value = '<?php echo "$m527r999";?>';
- //document.formv1.m527r9910.value = '<?php echo "$m527r9910";?>';
-
-   // document.formv1.m474r11.value = '<?php echo "$m474r11";?>';
-   // document.formv1.m474r12.value = '<?php echo "$m474r12";?>';
-   // document.formv1.m474r13.value = '<?php echo "$m474r13";?>';
-   // document.formv1.m474r21.value = '<?php echo "$m474r21";?>';
-   // document.formv1.m474r22.value = '<?php echo "$m474r22";?>';
-   // document.formv1.m474r23.value = '<?php echo "$m474r23";?>';
-   // document.formv1.m474r31.value = '<?php echo "$m474r31";?>';
-   // document.formv1.m474r32.value = '<?php echo "$m474r32";?>';
-   // document.formv1.m474r33.value = '<?php echo "$m474r33";?>';
-   // document.formv1.m474r41.value = '<?php echo "$m474r41";?>';
-   // document.formv1.m474r42.value = '<?php echo "$m474r42";?>';
-   // document.formv1.m474r43.value = '<?php echo "$m474r43";?>';
-   // document.formv1.m474r51.value = '<?php echo "$m474r51";?>';
-   // document.formv1.m474r52.value = '<?php echo "$m474r52";?>';
-   // document.formv1.m474r53.value = '<?php echo "$m474r53";?>';
-   // document.formv1.m474r61.value = '<?php echo "$m474r61";?>';
-   // document.formv1.m474r62.value = '<?php echo "$m474r62";?>';
-   // document.formv1.m474r63.value = '<?php echo "$m474r63";?>';
-   // document.formv1.m474r72.value = '<?php echo "$m474r72";?>';
-   // document.formv1.m474r73.value = '<?php echo "$m474r73";?>';
- //document.formv1.m474r991.value = '<?php echo "$m474r991";?>';
- //document.formv1.m474r992.value = '<?php echo "$m474r992";?>';
- //document.formv1.m474r993.value = '<?php echo "$m474r993";?>';
-   // document.formv1.m514r1.value = '<?php echo "$m514r1";?>';
-   // document.formv1.m514r2.value = '<?php echo "$m514r2";?>';
-   // document.formv1.m514r3.value = '<?php echo "$m514r3";?>';
- //document.formv1.m514r99.value = '<?php echo "$m514r99";?>';
-<?php                      } ?>
-  }
-<?php
-//koniec uprava
-  }
-?>
-
-//Z ciarky na bodku
-  function CiarkaNaBodku(Vstup)
-  {
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-  }
-
-  function CisCPAp1()
-  {
-   window.open('../dokumenty/statistika2016/cpa_ciselnik_pril1_v16.pdf', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
-  }
-  function MetodVypln()
-  {
-   window.open('<?php echo $jpg_cesta; ?>_metodika.pdf',
-'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
-  }
-  function TlacVykaz()
-  {
-   window.open('../ucto/statistika_vts101.php?copern=11&strana=9999', '_blank');
-  }
-  function StatUdajeFirma()
-  {
-   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function NacitajMzdy()
-  {
-   window.open('../ucto/statistika_vts101.php?copern=200&drupoh=1&page=1', '_self');
-  }
-  function NacitajZobratovky(modul)
-  {
-   window.open('../ucto/uobrat.php?modul=' + modul + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=20201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
-  }
-  function NacitajZosuvahy(modul)
-  {
-   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=1&modul=' + modul + '&page=1&typ=PDF&cstat=vts101&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
-  }
-
-//bud alebo checkbox v module 100041
-  function klikm100041ano()
-  {
-   document.formv1.mod100041nie.checked = false;
-  }
-  function klikm100041nie()
-  {
-   document.formv1.mod100041ano.checked = false;
-  }
-//bud alebo checkbox v module 100042
-  function klikm100042ano()
-  {
-   document.formv1.mod100042nie.checked = false;
-  }
-  function klikm100042nie()
-  {
-   document.formv1.mod100042ano.checked = false;
-  }
-//bud alebo checkbox v module 100043
-  function klikm100043ano()
-  {
-   document.formv1.mod100043nie.checked = false;
-  }
-  function klikm100043nie()
-  {
-   document.formv1.mod100043ano.checked = false;
-  }
-//bud alebo checkbox v module 100036
-  function klikm100036kal()
-  {
-   document.formv1.mod100036hos.checked = false;
-  }
-  function klikm100036hos()
-  {
-   document.formv1.mod100036kal.checked = false;
-  }
-//bud alebo checkbox v module 100069
-  function klikm100069ano()
-  {
-   document.formv1.mod100069nie.checked = false;
-  }
-  function klikm100069nie()
-  {
-   document.formv1.mod100069ano.checked = false;
-  }
-//bud alebo checkbox v module 100071
-  function klikm1101r4ano()
-  {
-   document.formv1.m1101r4b.checked = false;
-  }
-  function klikm1101r4nie()
-  {
-   document.formv1.m1101r4a.checked = false;
-  }
-//bud alebo checkbox v module 100075
-  function klikm1101r5ano()
-  {
-   document.formv1.m1101r5b.checked = false;
-  }
-  function klikm1101r5nie()
-  {
-   document.formv1.m1101r5a.checked = false;
-  }
-//bud alebo checkbox v module 100079
-  function klikm1101r6ano()
-  {
-   document.formv1.m1101r6b.checked = false;
-  }
-  function klikm1101r6nie()
-  {
-   document.formv1.m1101r6a.checked = false;
-  }
-//bud alebo checkbox v module 100082
-  function klikm1101r7ano()
-  {
-   document.formv1.m1101r7b.checked = false;
-  }
-  function klikm1101r7nie()
-  {
-   document.formv1.m1101r7a.checked = false;
-  }
-//bud alebo checkbox v module 100131
-  function klikm1005r1ano()
-  {
-   document.formv1.m1005r1b.checked = false;
-  }
-  function klikm1005r1nie()
-  {
-   document.formv1.m1005r1a.checked = false;
-  }
-//bud alebo checkbox v module 100044
-  function klikm100044ano()
-  {
-   document.formv1.m100044nie.checked = false;
-  }
-  function klikm100044nie()
-  {
-   document.formv1.m100044ano.checked = false;
-  }
-//bud alebo checkbox v module 100103
-  function klikm1527r1ano()
-  {
-   document.formv1.m1527r1b.checked = false;
-  }
-  function klikm1527r1nie()
-  {
-   document.formv1.m1527r1a.checked = false;
-  }
-//bud alebo checkbox v module 100301
-  function klikm100301ano()
-  {
-   document.formv1.m100301r2.checked = false;
-  }
-  function klikm100301nie()
-  {
-   document.formv1.m100301r1.checked = false;
-  }
-//bud alebo checkbox v module 100303
-  function klikm100303ano()
-  {
-   document.formv1.m100303r2.checked = false;
-  }
-  function klikm100303nie()
-  {
-   document.formv1.m100303r1.checked = false;
-  }
-//bud alebo checkbox v module 100417
-  function klikm100417ano()
-  {
-   document.formv1.m100417nie.checked = false;
-  }
-  function klikm100417nie()
-  {
-   document.formv1.m100417ano.checked = false;
-  }
-</script>
-</HEAD>
-<BODY onload="ObnovUI();">
+</head>
+<body onload="ObnovUI();">
 <?php
 //uprav udaje
 if ( $copern == 102 )
@@ -7154,18 +6872,15 @@ if ( $copern == 102 )
  <table id="heading">
  <tr>
   <td class="ilogin">EuroSecom</td>
-  <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
+  <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid"; ?></td>
  </tr>
  <tr>
   <td class="header">RoËn˝ v˝kaz produkËn˝ch odvetvÌ vo vybran˝ch trhov˝ch sluûb·ch VTS 1-01</td>
   <td>
    <div class="bar-btn-form-tool">
-    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp1();"
-     title="»ÌselnÌk CPA - prÌloha Ë.1" class="btn-form-tool">
-    <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();"
-     title="MetodickÈ vysvetlivky k obsahu v˝kazu" class="btn-form-tool">
-    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();"
-     title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
+    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp1();" title="»ÌselnÌk CPA - prÌloha Ë.1" class="btn-form-tool">
+    <img src="../obr/ikony/info_blue_icon.png" onclick="FormMetod();" title="MetodickÈ vysvetlivky k obsahu v˝kazu" class="btn-form-tool">
+    <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(9999);" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
  </tr>
@@ -7174,1143 +6889,1487 @@ if ( $copern == 102 )
 <?php
 $sirka=950;
 $vyska=1300;
-if ( $strana == 9 OR $strana == 10 OR $strana == 12 OR $strana == 13 )
+if ( $orientation == 'L' )
 {
 $sirka=1250; $vyska=920;
 }
 ?>
 <div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
-<FORM name="formv1" method="post" action="statistika_vts101.php?copern=103&strana=<?php echo $strana; ?>">
-<?php
-$clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive";
-$clas5="noactive"; $clas6="noactive"; $clas7="noactive"; $clas8="noactive";
-$clas9="noactive"; $clas10="noactive"; $clas11="noactive"; $clas12="noactive";
-$clas13="noactive";
-if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
-if ( $strana == 3 ) $clas3="active"; if ( $strana == 4 ) $clas4="active";
-if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
-if ( $strana == 7 ) $clas7="active"; if ( $strana == 8 ) $clas8="active";
-if ( $strana == 9 ) $clas9="active"; if ( $strana == 10 ) $clas10="active";
-if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
-if ( $strana == 13 ) $clas13="active";
-$source="statistika_vts101.php?";
-?>
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=13', '_self');" class="<?php echo $clas13; ?> toleft">13</a>
-<!--  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=13', '_blank');" class="<?php echo $clas13; ?> toright">13</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6> -->
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="<?php echo $clas4; ?> toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="<?php echo $clas5; ?> toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="<?php echo $clas6; ?> toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="<?php echo $clas7; ?> toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="<?php echo $clas8; ?> toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="<?php echo $clas9; ?> toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
+  <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
+  <a href="#" onclick="editForm(14);" class="<?php echo $clas14; ?> toleft">14</a>
+  <a href="#" onclick="editForm(15);" class="<?php echo $clas15; ?> toleft">15</a>
+  <a href="#" onclick="editForm(16);" class="<?php echo $clas16; ?> toleft">16</a>
+<!-- hidden
+  <a href="#" onclick="FormPDF(16);" class="<?php echo $clas16; ?> toright">16</a>
+  <a href="#" onclick="FormPDF(15);" class="<?php echo $clas15; ?> toright">15</a>
+  <a href="#" onclick="FormPDF(14);" class="<?php echo $clas14; ?> toright">14</a>
+  <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
+  <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
+  <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
+  <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
+  <a href="#" onclick="FormPDF(9);" class="<?php echo $clas9; ?> toright">9</a>
+  <a href="#" onclick="FormPDF(8);" class="<?php echo $clas8; ?> toright">8</a>
+  <a href="#" onclick="FormPDF(7);" class="<?php echo $clas7; ?> toright">7</a>
+  <a href="#" onclick="FormPDF(6);" class="<?php echo $clas6; ?> toright">6</a>
+  <a href="#" onclick="FormPDF(5);" class="<?php echo $clas5; ?> toright">5</a>
+  <a href="#" onclick="FormPDF(4);" class="<?php echo $clas4; ?> toright">4</a>
+  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">3</a>
+  <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
+  <h6 class="toright">TlaËiù:</h6>
+-->
 </div>
-
-
-<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
-
-<span class="text-echo" style="top:359px; left:467px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
-<!-- ORGANIZACIA -->
-<span class="text-echo" style="top:923px; left:55px; line-height: 20px;"><?php echo "$fir_fnaz<br>$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
-<span class="text-echo" style="top:940px; left:806px;"><?php echo $okres; ?></span>
-<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:937px; left:839px;">
-<!-- sknace -->
-<input type="text" name="cinnost" id="cinnost" style="width:380px; top:1000px; left:55px;"/>
-<span class="text-echo" style="top:1004px; left:501px; font-size:18px; letter-spacing:33px;"><?php echo $sknace; ?></span>
-
-<!-- Vyplnil -->
-<span class="text-echo" style="top:1072px; left:55px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="width:499px; top:1082px; left:480px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="width:499px; top:1116px; left:55px;"><?php echo $fir_fem1; ?></span>
-<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1113px; left:390px;"/>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 2.strana 256kB">
-<span class="text-echo" style="top:82px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 100315 -->
-<span class="text-echo" style="top:262px; left:411px;"><?php echo $cinnost; ?></span>
-<?php
-$sknace=str_replace(".", "", $fir_sknace);
+<!-- zahlavie stran -->
+<form name="formv1" method="post" action="statistika_vts101.php?copern=103&strana=<?php echo $strana; ?>" class="form-bg" style="background-image: url(<?php echo $jpg_source.'_str'.$strana.'.jpg'; ?>);">
+<button type="submit" name="uloz" style="top:4px;">Uloûiù zmeny</button>
+<?php if ( $strana != 1 ) {
+if ( $orientation == 'P' ) { $style_ficox='top:45px; left:475px; font-size:16px; letter-spacing:25px;'; }
+if ( $orientation == 'L' ) { $style_ficox='top:31px; left:936px; font-size:12px; letter-spacing:16px;'; }
 ?>
-<span class="text-echo center" style="top:288px; left:630px;"><?php echo $sknace; ?></span>
+<span class="text-echo" style="<?php echo $style_ficox; ?>"><?php echo $fir_ficox; ?></span>
+<?php                     } ?>
 
+<?php if ( $strana == 1 ) { ?>
+<span class="text-echo" style="top:218px; left:480px; font-size:24px; letter-spacing:0.02em;"><?php echo $kli_vrok; ?></span>
+<span class="text-echo" style="top:333px; left:388px; font-size:18px; letter-spacing:34px;"><?php echo $kli_vrokx; ?></span>
+<span class="text-echo" style="top:333px; left:553px; font-size:18px; letter-spacing:31px;"><?php echo $fir_ficox; ?></span>
+<!-- podnik -->
+<span class="text-echo" style="top:865px; left:55px; line-height: 22px;"><?php echo "$fir_fnaz<br>$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:900px; left:806px;"><?php echo $okres; ?></span>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:898px; left:839px;">
+<!-- sknace -->
+<input type="text" name="cinnost" id="cinnost" style="width:380px; top:940px; left:55px;"/>
+<span class="text-echo" style="top:946px; left:493px; font-size:18px; letter-spacing:33px;"><?php echo $sknace; ?></span>
+<!-- vyplnil -->
+<span class="text-echo" style="top:1010px; left:55px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="width:499px; top:1025px; left:387px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="width:499px; top:1073px; left:55px;"><?php echo $fir_fem1; ?></span>
+<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1067px; left:390px;"/>
+<?php                                        } ?>
+
+<?php if ( $strana == 2 ) { ?>
+<!-- modul 100315 -->
+<span class="text-echo" style="top:243px; left:412px;"><?php echo $cinnost; ?></span>
+<span class="text-echo center" style="top:274px; left:630px;"><?php echo $sknace; ?></span>
 <!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:461px; left:730px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:497px; left:730px;"/>
-
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:481px; left:730px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:516px; left:730px;"/>
 <!-- modul 100041 -->
-<input type="checkbox" name="mod100041ano" value="1" onchange="klikm100041ano();" style="top:642px; left:839px;"/>
-<input type="checkbox" name="mod100041nie" value="1" onchange="klikm100041nie();" style="top:663px; left:839px;"/>
-
+<input type="checkbox" name="mod100041ano" value="1" onchange="klikm100041ano();" style="top:664px; left:839px;"/>
+<input type="checkbox" name="mod100041nie" value="1" onchange="klikm100041nie();" style="top:695px; left:839px;"/>
 <!-- modul 100042 -->
-<input type="checkbox" name="mod100042ano" value="1" onchange="klikm100042ano();" style="top:756px; left:839px;"/>
-<input type="checkbox" name="mod100042nie" value="1" onchange="klikm100042nie();" style="top:777px; left:839px;"/>
-
+<input type="checkbox" name="mod100042ano" value="1" onchange="klikm100042ano();" style="top:814px; left:839px;"/>
+<input type="checkbox" name="mod100042nie" value="1" onchange="klikm100042nie();" style="top:847px; left:839px;"/>
 <!-- modul 100043 -->
-<input type="checkbox" name="mod100043ano" value="1" onchange="klikm100043ano();" style="top:870px; left:839px;"/>
-<input type="checkbox" name="mod100043nie" value="1" onchange="klikm100043nie();" style="top:890px; left:839px;"/>
+<input type="checkbox" name="mod100043ano" value="1" onchange="klikm100043ano();" style="top:966px; left:839px;"/>
+<input type="checkbox" name="mod100043nie" value="1" onchange="klikm100043nie();" style="top:998px; left:839px;"/>
+<script>
+  function klikm100041ano()
+  {
+   document.formv1.mod100041nie.checked = false;
+  }
+  function klikm100041nie()
+  {
+   document.formv1.mod100041ano.checked = false;
+  }
+  function klikm100042ano()
+  {
+   document.formv1.mod100042nie.checked = false;
+  }
+  function klikm100042nie()
+  {
+   document.formv1.mod100042ano.checked = false;
+  }
+  function klikm100043ano()
+  {
+   document.formv1.mod100043nie.checked = false;
+  }
+  function klikm100043nie()
+  {
+   document.formv1.mod100043ano.checked = false;
+  }
+</script>
+<?php                                        } ?>
 
+<?php if ( $strana == 3 ) { ?>
 <!-- modul 100008 -->
-<input type="text" name="m1100r4" id="m1100r4" maxlength="8" style="width:100px; top:997px; left:640px;"/>
-<input type="text" name="m1100r5" id="m1100r5" maxlength="8" style="width:100px; top:1025px; left:640px;"/>
-<input type="text" name="m1100r6" id="m1100r6" maxlength="8" style="width:100px; top:1052px; left:640px;"/>
-<input type="text" name="m1100r7" id="m1100r7" maxlength="8" style="width:100px; top:1080px; left:640px;"/>
-<input type="text" name="m1100r8" id="m1100r8" maxlength="8" style="width:100px; top:1107px; left:640px;"/>
-<input type="text" name="m1100r9" id="m1100r9" maxlength="8" style="width:100px; top:1134px; left:640px;"/>
-<input type="text" name="m1100r10" id="m1100r10" maxlength="8" style="width:100px; top:1162px; left:640px;"/>
-<input type="text" name="m1100r11" id="m1100r11" maxlength="8" style="width:100px; top:1190px; left:640px;"/>
-<input type="text" name="m1100r12" id="m1100r12" maxlength="8" style="width:100px; top:1216px; left:640px;"/>
-<input type="text" name="m1100r13" id="m1100r13" maxlength="8" style="width:100px; top:1244px; left:640px;"/>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 3.strana 244kB">
-<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
+<input type="text" name="m1100r4" id="m1100r4" maxlength="8" style="width:100px; top:185px; left:670px;"/>
+<input type="text" name="m1100r5" id="m1100r5" maxlength="8" style="width:100px; top:212px; left:670px;"/>
+<input type="text" name="m1100r6" id="m1100r6" maxlength="8" style="width:100px; top:238px; left:670px;"/>
+<input type="text" name="m1100r7" id="m1100r7" maxlength="8" style="width:100px; top:265px; left:670px;"/>
+<input type="text" name="m1100r8" id="m1100r8" maxlength="8" style="width:100px; top:291px; left:670px;"/>
+<input type="text" name="m1100r9" id="m1100r9" maxlength="8" style="width:100px; top:317px; left:670px;"/>
+<input type="text" name="m1100r10" id="m1100r10" maxlength="8" style="width:100px; top:344px; left:670px;"/>
+<input type="text" name="m1100r11" id="m1100r11" maxlength="8" style="width:100px; top:370px; left:670px;"/>
+<input type="text" name="m1100r12" id="m1100r12" maxlength="8" style="width:100px; top:396px; left:670px;"/>
+<input type="text" name="m1100r13" id="m1100r13" maxlength="8" style="width:100px; top:423px; left:670px;"/>
 <!-- modul 100036 -->
-<input type="checkbox" name="mod100036kal" value="1" onchange="klikm100036kal();" style="top:205px; left:839px;"/>
-<input type="checkbox" name="mod100036hos" value="1" onchange="klikm100036hos();" style="top:225px; left:839px;"/>
-
+<input type="checkbox" name="mod100036kal" value="1" onchange="klikm100036kal();" style="top:525px; left:839px;"/>
+<input type="checkbox" name="mod100036hos" value="1" onchange="klikm100036hos();" style="top:556px; left:839px;"/>
 <!-- modul 100037 -->
-<input type="text" name="mod100037" id="mod100037" style="width:253px; top:333px; left:643px;"/>
-
-<!-- modul 100214 -->
-<input type="text" name="m100214r01" id="m100214r01" style="width:100px; top:486px; left:670px;"/>
-<input type="text" name="m100214r02" id="m100214r02" style="width:100px; top:514px; left:670px;"/>
-
+<input type="text" name="mod100037" id="mod100037" style="width:253px; height:32px; top:687px; left:615px;"/>
 <!-- modul 100069 -->
-<input type="checkbox" name="mod100069ano" value="1" onchange="klikm100069ano();" style="top:670px; left:839px;"/>
-<input type="checkbox" name="mod100069nie" value="1" onchange="klikm100069nie();" style="top:691px; left:839px;"/>
-
+<input type="checkbox" name="mod100069ano" value="1" onchange="klikm100069ano();" style="top:854px; left:839px;"/>
+<input type="checkbox" name="mod100069nie" value="1" onchange="klikm100069nie();" style="top:885px; left:839px;"/>
 <!-- modul 100073 -->
-<input type="text" name="m1101r2" id="m1101r2" onkeyup="CiarkaNaBodku(this);" style="width:253px; top:765px; left:643px;"/>
+<input type="text" name="m1101r2" id="m1101r2" onkeyup="CiarkaNaBodku(this);" style="width:253px; height:32px; top:1016px; left:615px;"/>
+<script>
+  function klikm100036kal()
+  {
+   document.formv1.mod100036hos.checked = false;
+  }
+  function klikm100036hos()
+  {
+   document.formv1.mod100036kal.checked = false;
+  }
+  function klikm100069ano()
+  {
+   document.formv1.mod100069nie.checked = false;
+  }
+  function klikm100069nie()
+  {
+   document.formv1.mod100069ano.checked = false;
+  }
+</script>
+<?php                                        } ?>
 
+<?php if ( $strana == 4 ) { ?>
 <!-- modul 100074 -->
-<input type="text" name="m1101r3" id="m1101r3" style="width:253px; top:972px; left:643px;"/>
-
+<input type="text" name="m1101r3" id="m1101r3" style="width:253px; height:32px; top:152px; left:618px;"/>
 <!-- modul 100071 -->
-<input type="checkbox" name="m1101r4a" value="1" onclick="klikm1101r4ano();" style="top:1053px; left:839px;"/>
-<input type="checkbox" name="m1101r4b" value="1" onclick="klikm1101r4nie();" style="top:1073px; left:839px;"/>
-
+<input type="checkbox" name="m1101r4a" value="1" onclick="klikm1101r4ano();" style="top:263px; left:839px;"/>
+<input type="checkbox" name="m1101r4b" value="1" onclick="klikm1101r4nie();" style="top:291px; left:839px;"/>
 <!-- modul 100075 -->
-<input type="checkbox" name="m1101r5a" value="1" onclick="klikm1101r5ano();" style="top:1195px; left:839px;"/>
-<input type="checkbox" name="m1101r5b" value="1" onclick="klikm1101r5nie();" style="top:1215px; left:839px;"/>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 4.strana 232kB">
-<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
+<input type="checkbox" name="m1101r5a" value="1" onclick="klikm1101r5ano();" style="top:417px; left:839px;"/>
+<input type="checkbox" name="m1101r5b" value="1" onclick="klikm1101r5nie();" style="top:444px; left:839px;"/>
 <!-- modul 100079 -->
-<input type="checkbox" name="m1101r6a" value="1" onclick="klikm1101r6ano();" style="top:195px; left:839px;"/>
-<input type="checkbox" name="m1101r6b" value="1" onclick="klikm1101r6nie();" style="top:215px; left:839px;"/>
-
+<input type="checkbox" name="m1101r6a" value="1" onclick="klikm1101r6ano();" style="top:579px; left:839px;"/>
+<input type="checkbox" name="m1101r6b" value="1" onclick="klikm1101r6nie();" style="top:607px; left:839px;"/>
 <!-- modul 100082 -->
-<input type="checkbox" name="m1101r7a" value="1" onclick="klikm1101r7ano();" style="top:369px; left:839px;"/>
-<input type="checkbox" name="m1101r7b" value="1" onclick="klikm1101r7nie();" style="top:389px; left:839px;"/>
-
+<input type="checkbox" name="m1101r7a" value="1" onclick="klikm1101r7ano();" style="top:771px; left:839px;"/>
+<input type="checkbox" name="m1101r7b" value="1" onclick="klikm1101r7nie();" style="top:799px; left:839px;"/>
 <!-- modul 100417 -->
-<input type="checkbox" name="m100417ano" value="1" onclick="klikm100417ano();" style="top:525px; left:839px;"/>
-<input type="checkbox" name="m100417nie" value="1" onclick="klikm100417nie();" style="top:545px; left:839px;"/>
-
+<input type="checkbox" name="m100417ano" value="1" onclick="klikm100417ano();" style="top:964px; left:839px;"/>
+<input type="checkbox" name="m100417nie" value="1" onclick="klikm100417nie();" style="top:992px; left:839px;"/>
 <!-- modul 100418 -->
-<input type="text" name="m100418" id="m100418" style="width:253px; top:654px; left:643px;"/>
+<input type="text" name="m100418" id="m100418" style="width:253px; height:32px; top:1140px; left:618px;"/>
+<script>
+  function klikm1101r4ano()
+  {
+   document.formv1.m1101r4b.checked = false;
+  }
+  function klikm1101r4nie()
+  {
+   document.formv1.m1101r4a.checked = false;
+  }
+  function klikm1101r5ano()
+  {
+   document.formv1.m1101r5b.checked = false;
+  }
+  function klikm1101r5nie()
+  {
+   document.formv1.m1101r5a.checked = false;
+  }
+  function klikm1101r6ano()
+  {
+   document.formv1.m1101r6b.checked = false;
+  }
+  function klikm1101r6nie()
+  {
+   document.formv1.m1101r6a.checked = false;
+  }
+  function klikm1101r7ano()
+  {
+   document.formv1.m1101r7b.checked = false;
+  }
+  function klikm1101r7nie()
+  {
+   document.formv1.m1101r7a.checked = false;
+  }
+  function klikm100417ano()
+  {
+   document.formv1.m100417nie.checked = false;
+  }
+  function klikm100417nie()
+  {
+   document.formv1.m100417ano.checked = false;
+  }
+</script>
+<?php                     } ?>
 
+<?php if ( $strana == 5 ) { ?>
 <!-- modul 398 -->
-<input type="text" name="m398r11" id="m398r11" style="width:101px; top:933px; left:451px;"/>
-<input type="text" name="m398r12" id="m398r12" style="width:100px; top:933px; left:565px;"/>
-<input type="text" name="m398r13" id="m398r13" style="width:101px; top:933px; left:677px;"/>
-<input type="text" name="m398r14" id="m398r14" style="width:101px; top:933px; left:790px;"/>
-<input type="text" name="m398r21" id="m398r21" style="width:101px; top:961px; left:451px;"/>
-<input type="text" name="m398r22" id="m398r22" style="width:100px; top:961px; left:565px;"/>
-<input type="text" name="m398r23" id="m398r23" style="width:101px; top:961px; left:677px;"/>
-<input type="text" name="m398r24" id="m398r24" style="width:101px; top:961px; left:790px;"/>
-<span class="text-echo" style="top:992px; right:395px;"><?php echo $m398r991; ?></span>
-<span class="text-echo" style="top:992px; right:282px;"><?php echo $m398r992; ?></span>
-<span class="text-echo" style="top:992px; right:170px;"><?php echo $m398r993; ?></span>
-<span class="text-echo" style="top:992px; right:56px;"><?php echo $m398r994; ?></span>
-
+<input type="text" name="m398r11" id="m398r11" style="width:101px; top:307px; left:451px;"/>
+<input type="text" name="m398r12" id="m398r12" style="width:101px; top:307px; left:564px;"/>
+<input type="text" name="m398r13" id="m398r13" style="width:101px; top:307px; left:677px;"/>
+<input type="text" name="m398r14" id="m398r14" style="width:101px; top:307px; left:790px;"/>
+<input type="text" name="m398r21" id="m398r21" style="width:101px; top:334px; left:451px;"/>
+<input type="text" name="m398r22" id="m398r22" style="width:101px; top:334px; left:564px;"/>
+<input type="text" name="m398r23" id="m398r23" style="width:101px; top:334px; left:677px;"/>
+<input type="text" name="m398r24" id="m398r24" style="width:101px; top:334px; left:790px;"/>
+<span class="text-echo" style="top:364px; right:395px;"><?php echo $m398r991; ?></span>
+<span class="text-echo" style="top:364px; right:282px;"><?php echo $m398r992; ?></span>
+<span class="text-echo" style="top:364px; right:170px;"><?php echo $m398r993; ?></span>
+<span class="text-echo" style="top:364px; right:56px;"><?php echo $m398r994; ?></span>
 <!-- modul 100131 -->
-<input type="checkbox" name="m1005r1a" value="1" onclick="klikm1005r1ano();" style="top:1141px; left:839px;"/>
-<input type="checkbox" name="m1005r1b" value="1" onclick="klikm1005r1nie();" style="top:1162px; left:839px;"/>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 5.strana 268kB">
-<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
+<input type="checkbox" name="m1005r1a" value="1" onclick="klikm1005r1ano();" style="top:497px; left:839px;"/>
+<input type="checkbox" name="m1005r1b" value="1" onclick="klikm1005r1nie();" style="top:529px; left:839px;"/>
 <!-- modul 405 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(405);" style="top:157px; left:450px;" class="btn-row-tool">
-<input type="text" name="m405r11" id="m405r11" style="width:100px; top:297px; left:590px;"/>
-<input type="text" name="m405r12" id="m405r12" style="width:100px; top:297px; left:760px;"/>
-<input type="text" name="m405r21" id="m405r21" style="width:100px; top:325px; left:590px;"/>
-<input type="text" name="m405r31" id="m405r31" style="width:100px; top:352px; left:590px;"/>
-<input type="text" name="m405r32" id="m405r32" style="width:100px; top:352px; left:760px;"/>
-<input type="text" name="m405r41" id="m405r41" style="width:100px; top:380px; left:590px;"/>
-<input type="text" name="m405r51" id="m405r51" style="width:100px; top:412px; left:590px;"/>
-<input type="text" name="m405r61" id="m405r61" style="width:100px; top:450px; left:590px;"/>
-<input type="text" name="m405r71" id="m405r71" style="width:100px; top:480px; left:590px;"/>
-<input type="text" name="m405r81" id="m405r81" style="width:100px; top:508px; left:590px;"/>
-<input type="text" name="m405r82" id="m405r82" style="width:100px; top:508px; left:760px;"/>
-<span class="text-echo" style="top:539px; right:255px;"><?php echo $m405r991; ?></span>
-<span class="text-echo" style="top:539px; right:84px;"><?php echo $m405r992; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(405);" style="top:602px; left:450px;" class="btn-row-tool">
+<input type="text" name="m405r11" id="m405r11" style="width:100px; top:732px; left:590px;"/>
+<input type="text" name="m405r12" id="m405r12" style="width:100px; top:732px; left:760px;"/>
+<input type="text" name="m405r21" id="m405r21" style="width:100px; top:757px; left:590px;"/>
+<input type="text" name="m405r31" id="m405r31" style="width:100px; top:782px; left:590px;"/>
+<input type="text" name="m405r32" id="m405r32" style="width:100px; top:782px; left:760px;"/>
+<input type="text" name="m405r41" id="m405r41" style="width:100px; top:807px; left:590px;"/>
+<input type="text" name="m405r51" id="m405r51" style="width:100px; top:837px; left:590px;"/>
+<input type="text" name="m405r61" id="m405r61" style="width:100px; top:873px; left:590px;"/>
+<input type="text" name="m405r71" id="m405r71" style="width:100px; top:903px; left:590px;"/>
+<input type="text" name="m405r81" id="m405r81" style="width:100px; top:927px; left:590px;"/>
+<input type="text" name="m405r82" id="m405r82" style="width:100px; top:927px; left:760px;"/>
+<span class="text-echo" style="top:957px; right:255px;"><?php echo $m405r991; ?></span>
+<span class="text-echo" style="top:957px; right:84px;"><?php echo $m405r992; ?></span>
+<script>
+  function klikm1005r1ano()
+  {
+   document.formv1.m1005r1b.checked = false;
+  }
+  function klikm1005r1nie()
+  {
+   document.formv1.m1005r1a.checked = false;
+  }
+</script>
+<?php                                        } ?>
 
+<?php if ( $strana == 6 ) { ?>
 <!-- modul 406 -->
-<input type="text" name="m406r1" id="m406r1" style="width:100px; top:705px; left:670px;"/>
-<input type="text" name="m406r2" id="m406r2" style="width:100px; top:732px; left:670px;"/>
-<input type="text" name="m406r3" id="m406r3" style="width:100px; top:760px; left:670px;"/>
-<input type="text" name="m406r4" id="m406r4" style="width:100px; top:787px; left:670px;"/>
-<input type="text" name="m406r5" id="m406r5" style="width:100px; top:815px; left:670px;"/>
-<input type="text" name="m406r6" id="m406r6" style="width:100px; top:842px; left:670px;"/>
-<input type="text" name="m406r7" id="m406r7" style="width:100px; top:869px; left:670px;"/>
-<input type="text" name="m406r8" id="m406r8" style="width:100px; top:897px; left:670px;"/>
-<input type="text" name="m406r9" id="m406r9" style="width:100px; top:924px; left:670px;"/>
-<span class="text-echo" style="top:1038px; right:180px;"><?php echo $m406r99; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 6.strana 228kB">
-<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
+<input type="text" name="m406r1" id="m406r1" style="width:100px; top:200px; left:670px;"/>
+<input type="text" name="m406r2" id="m406r2" style="width:100px; top:225px; left:670px;"/>
+<input type="text" name="m406r3" id="m406r3" style="width:100px; top:249px; left:670px;"/>
+<input type="text" name="m406r4" id="m406r4" style="width:100px; top:274px; left:670px;"/>
+<input type="text" name="m406r5" id="m406r5" style="width:100px; top:299px; left:670px;"/>
+<input type="text" name="m406r6" id="m406r6" style="width:100px; top:323px; left:670px;"/>
+<input type="text" name="m406r7" id="m406r7" style="width:100px; top:348px; left:670px;"/>
+<input type="text" name="m406r8" id="m406r8" style="width:100px; top:373px; left:670px;"/>
+<input type="text" name="m406r9" id="m406r9" style="width:100px; top:397px; left:670px;"/>
+<span class="text-echo" style="top:500px; right:180px;"><?php echo $m406r99; ?></span>
 <!-- modul 558 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(558);" style="top:139px; left:387px;" class="btn-row-tool">
-<input type="text" name="m558r1" id="m558r1" style="width:100px; top:233px; left:680px;"/>
-<input type="text" name="m558r2" id="m558r2" style="width:100px; top:265px; left:680px;"/>
-<input type="text" name="m558r3" id="m558r3" style="width:100px; top:296px; left:680px;"/>
-<input type="text" name="m558r4" id="m558r4" style="width:100px; top:321px; left:680px;"/>
-<input type="text" name="m558r5" id="m558r5" style="width:100px; top:347px; left:680px;"/>
-<input type="text" name="m558r6" id="m558r6" style="width:100px; top:373px; left:680px;"/>
-<input type="text" name="m558r7" id="m558r7" style="width:100px; top:399px; left:680px;"/>
-<input type="text" name="m558r8" id="m558r8" style="width:100px; top:424px; left:680px;"/>
-<input type="text" name="m558r9" id="m558r9" style="width:100px; top:450px; left:680px;"/>
-<input type="text" name="m558r10" id="m558r10" style="width:100px; top:475px; left:680px;"/>
-<input type="text" name="m558r11" id="m558r11" style="width:100px; top:501px; left:680px;"/>
-<input type="text" name="m558r12" id="m558r12" style="width:100px; top:526px; left:680px;"/>
-<input type="text" name="m558r13" id="m558r13" style="width:100px; top:552px; left:680px;"/>
-<input type="text" name="m558r14" id="m558r14" style="width:100px; top:578px; left:680px;"/>
-<input type="text" name="m558r15" id="m558r15" style="width:100px; top:604px; left:680px;"/>
-<input type="text" name="m558r16" id="m558r16" style="width:100px; top:629px; left:680px;"/>
-<input type="text" name="m558r17" id="m558r17" style="width:100px; top:655px; left:680px;"/>
-<input type="text" name="m558r18" id="m558r18" style="width:100px; top:680px; left:680px;"/>
-<span class="text-echo" style="top:710px; right:170px;"><?php echo $m558r99; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(558);" style="top:595px; left:387px;" class="btn-row-tool">
+<input type="text" name="m558r1" id="m558r1" style="width:100px; top:686px; left:680px;"/>
+<input type="text" name="m558r2" id="m558r2" style="width:100px; top:716px; left:680px;"/>
+<input type="text" name="m558r3" id="m558r3" style="width:100px; top:746px; left:680px;"/>
+<input type="text" name="m558r4" id="m558r4" style="width:100px; top:771px; left:680px;"/>
+<input type="text" name="m558r5" id="m558r5" style="width:100px; top:796px; left:680px;"/>
+<input type="text" name="m558r6" id="m558r6" style="width:100px; top:820px; left:680px;"/>
+<input type="text" name="m558r7" id="m558r7" style="width:100px; top:845px; left:680px;"/>
+<input type="text" name="m558r8" id="m558r8" style="width:100px; top:869px; left:680px;"/>
+<input type="text" name="m558r9" id="m558r9" style="width:100px; top:894px; left:680px;"/>
+<input type="text" name="m558r10" id="m558r10" style="width:100px; top:919px; left:680px;"/>
+<input type="text" name="m558r11" id="m558r11" style="width:100px; top:944px; left:680px;"/>
+<input type="text" name="m558r12" id="m558r12" style="width:100px; top:968px; left:680px;"/>
+<input type="text" name="m558r13" id="m558r13" style="width:100px; top:993px; left:680px;"/>
+<input type="text" name="m558r14" id="m558r14" style="width:100px; top:1018px; left:680px;"/>
+<input type="text" name="m558r15" id="m558r15" style="width:100px; top:1042px; left:680px;"/>
+<input type="text" name="m558r16" id="m558r16" style="width:100px; top:1067px; left:680px;"/>
+<input type="text" name="m558r17" id="m558r17" style="width:100px; top:1092px; left:680px;"/>
+<input type="text" name="m558r18" id="m558r18" style="width:100px; top:1117px; left:680px;"/>
+<span class="text-echo" style="top:1146px; right:170px;"><?php echo $m558r99; ?></span>
+<?php                                        } ?>
 
+<?php if ( $strana == 7 ) { ?>
+<!-- modul 586 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje zo S˙vahy POD" onclick="NacitajZosuvahy(586);" style="top:93px; left:338px;" class="btn-row-tool">
+<input type="text" name="m586r11" id="m586r11" style="width:100px; top:218px; left:596px;"/>
+<input type="text" name="m586r12" id="m586r12" style="width:100px; top:218px; left:760px;"/>
+<input type="text" name="m586r21" id="m586r21" style="width:100px; top:245px; left:596px;"/>
+<input type="text" name="m586r22" id="m586r22" style="width:100px; top:245px; left:760px;"/>
+<input type="text" name="m586r131" id="m586r131" style="width:100px; top:271px; left:596px;"/>
+<input type="text" name="m586r132" id="m586r132" style="width:100px; top:271px; left:760px;"/>
+<input type="text" name="m586r141" id="m586r141" style="width:100px; top:297px; left:596px;"/>
+<input type="text" name="m586r142" id="m586r142" style="width:100px; top:297px; left:760px;"/>
+<input type="text" name="m586r151" id="m586r151" style="width:100px; top:324px; left:596px;"/>
+<input type="text" name="m586r152" id="m586r152" style="width:100px; top:324px; left:760px;"/>
+<input type="text" name="m586r191" id="m586r191" style="width:100px; top:350px; left:596px;"/>
+<input type="text" name="m586r192" id="m586r192" style="width:100px; top:350px; left:760px;"/>
+<input type="text" name="m586r201" id="m586r201" style="width:100px; top:377px; left:596px;"/>
+<input type="text" name="m586r202" id="m586r202" style="width:100px; top:377px; left:760px;"/>
+<span class="text-echo" style="top:407px; right:250px;"><?php echo $m586r991; ?></span>
+<span class="text-echo" style="top:407px; right:80px;"><?php echo $m586r992; ?></span>
 <!-- modul 585 -->
-<input type="text" name="m585r01" id="m585r01" style="width:100px; top:1097px; left:680px;"/>
-<input type="text" name="m585r02" id="m585r02" style="width:100px; top:1129px; left:680px;"/>
-<input type="text" name="m585r3k" id="m585r3k" style="width:90px; top:1160px; left:420px;"/>
-<input type="text" name="m585r03" id="m585r03" style="width:100px; top:1160px; left:680px;"/>
-<input type="text" name="m585r4k" id="m585r4k" style="width:90px; top:1185px; left:420px;"/>
-<input type="text" name="m585r04" id="m585r04" style="width:100px; top:1185px; left:680px;"/>
-<input type="text" name="m585r5k" id="m585r5k" style="width:90px; top:1211px; left:420px;"/>
-<input type="text" name="m585r05" id="m585r05" style="width:100px; top:1211px; left:680px;"/>
+<input type="text" name="m585r01" id="m585r01" style="width:100px; top:886px; left:740px;"/>
+<input type="text" name="m585r02" id="m585r02" style="width:100px; top:911px; left:740px;"/>
+<input type="text" name="m585r3k" id="m585r3k" style="width:60px; top:936px; left:569px;"/>
+<input type="text" name="m585r03" id="m585r03" style="width:100px; top:936px; left:740px;"/>
+<input type="text" name="m585r4k" id="m585r4k" style="width:60px; top:961px; left:569px;"/>
+<input type="text" name="m585r04" id="m585r04" style="width:100px; top:961px; left:740px;"/>
+<input type="text" name="m585r5k" id="m585r5k" style="width:60px; top:986px; left:569px;"/>
+<input type="text" name="m585r05" id="m585r05" style="width:100px; top:986px; left:740px;"/>
+<input type="text" name="m585r06" id="m585r06" style="width:200px; top:1011px; left:688px;"/>
+<input type="text" name="m585r7k" id="m585r7k" style="width:60px; top:1036px; left:569px;"/>
+<input type="text" name="m585r07" id="m585r07" style="width:100px; top:1036px; left:740px;"/>
 <?php                                        } ?>
 
-
-<?php if ( $strana == 7 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 7.strana 259kB">
-<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 100044 -->
-<input type="checkbox" name="m100044ano" value="1" onchange="klikm100044ano();" style="top:230px; left:839px;"/>
-<input type="checkbox" name="m100044nie" value="1" onchange="klikm100044nie();" style="top:251px; left:839px;"/>
-
+<?php if ( $strana == 8 ) { ?>
 <!-- modul 571 -->
-<input type="text" name="m571r10" id="m571r10" style="width:90px; top:483px; left:51px;"/>
+<input type="text" name="m571r10" id="m571r10" style="width:78px; top:313px; left:50px;"/>
 <?php $cslr="1."; if ( $m571r10 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:487px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r12" id="m571r12" style="width:90px; top:483px; left:266px;"/>
-<input type="text" name="m571r13" id="m571r13" style="width:70px; top:483px; left:368px;"/>
-<input type="text" name="m571r15" id="m571r15" style="width:56px; top:483px; left:515px;"/>
-<input type="text" name="m571r16" id="m571r16" style="width:90px; top:483px; left:583px;"/>
-<input type="text" name="m571r17" id="m571r17" style="width:101px; top:483px; left:685px;"/>
-<input type="text" name="m571r18" id="m571r18" style="width:92px; top:483px; left:798px;"/>
-<input type="text" name="m571r20" id="m571r20" style="width:90px; top:511px; left:51px;"/>
+<span class="text-echo" style="top:317px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r12" id="m571r12" style="width:114px; top:313px; left:254px;"/>
+<input type="text" name="m571r13" id="m571r13" style="width:62px; top:313px; left:378px;"/>
+<input type="text" name="m571r15" id="m571r15" style="width:58px; top:313px; left:514px;"/>
+<input type="text" name="m571r16" id="m571r16" style="width:103px; top:313px; left:582px;"/>
+<input type="text" name="m571r17" id="m571r17" style="width:107px; top:313px; left:695px;"/>
+<input type="text" name="m571r18" id="m571r18" style="width:80px; top:313px; left:811px;"/>
+<input type="text" name="m571r20" id="m571r20" style="width:78px; top:335px; left:50px;"/>
 <?php $cslr="2."; if ( $m571r20 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:515px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r22" id="m571r22" style="width:90px; top:511px; left:266px;"/>
-<input type="text" name="m571r23" id="m571r23" style="width:70px; top:511px; left:368px;"/>
-<input type="text" name="m571r25" id="m571r25" style="width:56px; top:511px; left:515px;"/>
-<input type="text" name="m571r26" id="m571r26" style="width:90px; top:511px; left:583px;"/>
-<input type="text" name="m571r27" id="m571r27" style="width:101px; top:511px; left:685px;"/>
-<input type="text" name="m571r28" id="m571r28" style="width:92px; top:511px; left:798px;"/>
-<input type="text" name="m571r30" id="m571r30" style="width:90px; top:538px; left:51px;"/>
+<span class="text-echo" style="top:338px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r22" id="m571r22" style="width:114px; top:335px; left:254px;"/>
+<input type="text" name="m571r23" id="m571r23" style="width:62px; top:335px; left:378px;"/>
+<input type="text" name="m571r25" id="m571r25" style="width:58px; top:335px; left:514px;"/>
+<input type="text" name="m571r26" id="m571r26" style="width:103px; top:335px; left:582px;"/>
+<input type="text" name="m571r27" id="m571r27" style="width:107px; top:335px; left:695px;"/>
+<input type="text" name="m571r28" id="m571r28" style="width:80px; top:335px; left:811px;"/>
+<input type="text" name="m571r30" id="m571r30" style="width:78px; top:357px; left:50px;"/>
 <?php $cslr="3."; if ( $m571r30 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:543px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r32" id="m571r32" style="width:90px; top:538px; left:266px;"/>
-<input type="text" name="m571r33" id="m571r33" style="width:70px; top:538px; left:368px;"/>
-<input type="text" name="m571r35" id="m571r35" style="width:56px; top:538px; left:515px;"/>
-<input type="text" name="m571r36" id="m571r36" style="width:90px; top:538px; left:583px;"/>
-<input type="text" name="m571r37" id="m571r37" style="width:101px; top:538px; left:685px;"/>
-<input type="text" name="m571r38" id="m571r38" style="width:92px; top:538px; left:798px;"/>
-<input type="text" name="m571r40" id="m571r40" style="width:90px; top:566px; left:51px;"/>
+<span class="text-echo" style="top:361px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r32" id="m571r32" style="width:114px; top:357px; left:254px;"/>
+<input type="text" name="m571r33" id="m571r33" style="width:62px; top:357px; left:378px;"/>
+<input type="text" name="m571r35" id="m571r35" style="width:58px; top:357px; left:514px;"/>
+<input type="text" name="m571r36" id="m571r36" style="width:103px; top:357px; left:582px;"/>
+<input type="text" name="m571r37" id="m571r37" style="width:107px; top:357px; left:695px;"/>
+<input type="text" name="m571r38" id="m571r38" style="width:80px; top:357px; left:811px;"/>
+<input type="text" name="m571r40" id="m571r40" style="width:78px; top:379px; left:50px;"/>
 <?php $cslr="4."; if ( $m571r40 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:571px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r42" id="m571r42" style="width:90px; top:566px; left:266px;"/>
-<input type="text" name="m571r43" id="m571r43" style="width:70px; top:566px; left:368px;"/>
-<input type="text" name="m571r45" id="m571r45" style="width:56px; top:566px; left:515px;"/>
-<input type="text" name="m571r46" id="m571r46" style="width:90px; top:566px; left:583px;"/>
-<input type="text" name="m571r47" id="m571r47" style="width:101px; top:566px; left:685px;"/>
-<input type="text" name="m571r48" id="m571r48" style="width:92px; top:566px; left:798px;"/>
-<input type="text" name="m571r50" id="m571r50" style="width:90px; top:593px; left:51px;"/>
+<span class="text-echo" style="top:384px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r42" id="m571r42" style="width:114px; top:379px; left:254px;"/>
+<input type="text" name="m571r43" id="m571r43" style="width:62px; top:379px; left:378px;"/>
+<input type="text" name="m571r45" id="m571r45" style="width:58px; top:379px; left:514px;"/>
+<input type="text" name="m571r46" id="m571r46" style="width:103px; top:379px; left:582px;"/>
+<input type="text" name="m571r47" id="m571r47" style="width:107px; top:379px; left:695px;"/>
+<input type="text" name="m571r48" id="m571r48" style="width:80px; top:379px; left:811px;"/>
+<input type="text" name="m571r50" id="m571r50" style="width:78px; top:401px; left:50px;"/>
 <?php $cslr="5."; if ( $m571r50 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:598px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r52" id="m571r52" style="width:90px; top:593px; left:266px;"/>
-<input type="text" name="m571r53" id="m571r53" style="width:70px; top:593px; left:368px;"/>
-<input type="text" name="m571r55" id="m571r55" style="width:56px; top:593px; left:515px;"/>
-<input type="text" name="m571r56" id="m571r56" style="width:90px; top:593px; left:583px;"/>
-<input type="text" name="m571r57" id="m571r57" style="width:101px; top:593px; left:685px;"/>
-<input type="text" name="m571r58" id="m571r58" style="width:92px; top:593px; left:798px;"/>
-<input type="text" name="m571r60" id="m571r60" style="width:90px; top:621px; left:51px;"/>
+<span class="text-echo" style="top:405px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r52" id="m571r52" style="width:114px; top:401px; left:254px;"/>
+<input type="text" name="m571r53" id="m571r53" style="width:62px; top:401px; left:378px;"/>
+<input type="text" name="m571r55" id="m571r55" style="width:58px; top:401px; left:514px;"/>
+<input type="text" name="m571r56" id="m571r56" style="width:103px; top:401px; left:582px;"/>
+<input type="text" name="m571r57" id="m571r57" style="width:107px; top:401px; left:695px;"/>
+<input type="text" name="m571r58" id="m571r58" style="width:80px; top:401px; left:811px;"/>
+<input type="text" name="m571r60" id="m571r60" style="width:78px; top:424px; left:50px;"/>
 <?php $cslr="6."; if ( $m571r60 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:625px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r62" id="m571r62" style="width:90px; top:621px; left:266px;"/>
-<input type="text" name="m571r63" id="m571r63" style="width:70px; top:621px; left:368px;"/>
-<input type="text" name="m571r65" id="m571r65" style="width:56px; top:621px; left:515px;"/>
-<input type="text" name="m571r66" id="m571r66" style="width:90px; top:621px; left:583px;"/>
-<input type="text" name="m571r67" id="m571r67" style="width:101px; top:621px; left:685px;"/>
-<input type="text" name="m571r68" id="m571r68" style="width:92px; top:621px; left:798px;"/>
-<input type="text" name="m571r70" id="m571r70" style="width:90px; top:648px; left:51px;"/>
+<span class="text-echo" style="top:428px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r62" id="m571r62" style="width:114px; top:424px; left:254px;"/>
+<input type="text" name="m571r63" id="m571r63" style="width:62px; top:424px; left:378px;"/>
+<input type="text" name="m571r65" id="m571r65" style="width:58px; top:424px; left:514px;"/>
+<input type="text" name="m571r66" id="m571r66" style="width:103px; top:424px; left:582px;"/>
+<input type="text" name="m571r67" id="m571r67" style="width:107px; top:424px; left:695px;"/>
+<input type="text" name="m571r68" id="m571r68" style="width:80px; top:424px; left:811px;"/>
+<input type="text" name="m571r70" id="m571r70" style="width:78px; top:446px; left:50px;"/>
 <?php $cslr="7."; if ( $m571r70 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:652px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r72" id="m571r72" style="width:90px; top:648px; left:266px;"/>
-<input type="text" name="m571r73" id="m571r73" style="width:70px; top:648px; left:368px;"/>
-<input type="text" name="m571r75" id="m571r75" style="width:56px; top:648px; left:515px;"/>
-<input type="text" name="m571r76" id="m571r76" style="width:90px; top:648px; left:583px;"/>
-<input type="text" name="m571r77" id="m571r77" style="width:101px; top:648px; left:685px;"/>
-<input type="text" name="m571r78" id="m571r78" style="width:92px; top:648px; left:798px;"/>
-<input type="text" name="m571r80" id="m571r80" style="width:90px; top:675px; left:51px;"/>
+<span class="text-echo" style="top:450px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r72" id="m571r72" style="width:114px; top:446px; left:254px;"/>
+<input type="text" name="m571r73" id="m571r73" style="width:62px; top:446px; left:378px;"/>
+<input type="text" name="m571r75" id="m571r75" style="width:58px; top:446px; left:514px;"/>
+<input type="text" name="m571r76" id="m571r76" style="width:103px; top:446px; left:582px;"/>
+<input type="text" name="m571r77" id="m571r77" style="width:107px; top:446px; left:695px;"/>
+<input type="text" name="m571r78" id="m571r78" style="width:80px; top:446px; left:811px;"/>
+<input type="text" name="m571r80" id="m571r80" style="width:78px; top:468px; left:50px;"/>
 <?php $cslr="8."; if ( $m571r80 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:680px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r82" id="m571r82" style="width:90px; top:675px; left:266px;"/>
-<input type="text" name="m571r83" id="m571r83" style="width:70px; top:675px; left:368px;"/>
-<input type="text" name="m571r85" id="m571r85" style="width:56px; top:675px; left:515px;"/>
-<input type="text" name="m571r86" id="m571r86" style="width:90px; top:675px; left:583px;"/>
-<input type="text" name="m571r87" id="m571r87" style="width:101px; top:675px; left:685px;"/>
-<input type="text" name="m571r88" id="m571r88" style="width:92px; top:675px; left:798px;"/>
-<input type="text" name="m571r90" id="m571r90" style="width:90px; top:703px; left:51px;"/>
+<span class="text-echo" style="top:472px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r82" id="m571r82" style="width:114px; top:468px; left:254px;"/>
+<input type="text" name="m571r83" id="m571r83" style="width:62px; top:468px; left:378px;"/>
+<input type="text" name="m571r85" id="m571r85" style="width:58px; top:468px; left:514px;"/>
+<input type="text" name="m571r86" id="m571r86" style="width:103px; top:468px; left:582px;"/>
+<input type="text" name="m571r87" id="m571r87" style="width:107px; top:468px; left:695px;"/>
+<input type="text" name="m571r88" id="m571r88" style="width:80px; top:468px; left:811px;"/>
+<input type="text" name="m571r90" id="m571r90" style="width:78px; top:490px; left:50px;"/>
 <?php $cslr="9."; if ( $m571r90 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:707px; left:217px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r92" id="m571r92" style="width:90px; top:703px; left:266px;"/>
-<input type="text" name="m571r93" id="m571r93" style="width:70px; top:703px; left:368px;"/>
-<input type="text" name="m571r95" id="m571r95" style="width:56px; top:703px; left:515px;"/>
-<input type="text" name="m571r96" id="m571r96" style="width:90px; top:703px; left:583px;"/>
-<input type="text" name="m571r97" id="m571r97" style="width:101px; top:703px; left:685px;"/>
-<input type="text" name="m571r98" id="m571r98" style="width:92px; top:703px; left:798px;"/>
-
+<span class="text-echo" style="top:494px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r92" id="m571r92" style="width:114px; top:490px; left:254px;"/>
+<input type="text" name="m571r93" id="m571r93" style="width:62px; top:490px; left:378px;"/>
+<input type="text" name="m571r95" id="m571r95" style="width:58px; top:490px; left:514px;"/>
+<input type="text" name="m571r96" id="m571r96" style="width:103px; top:490px; left:582px;"/>
+<input type="text" name="m571r97" id="m571r97" style="width:107px; top:490px; left:695px;"/>
+<input type="text" name="m571r98" id="m571r98" style="width:80px; top:490px; left:811px;"/>
+<input type="text" name="m571r100" id="m571r100" style="width:78px; top:513px; left:50px;"/>
+<?php $cslr="10."; if ( $m571r100 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:516px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r102" id="m571r102" style="width:114px; top:513px; left:254px;"/>
+<input type="text" name="m571r103" id="m571r103" style="width:62px; top:513px; left:378px;"/>
+<input type="text" name="m571r105" id="m571r105" style="width:58px; top:513px; left:514px;"/>
+<input type="text" name="m571r106" id="m571r106" style="width:103px; top:513px; left:582px;"/>
+<input type="text" name="m571r107" id="m571r107" style="width:107px; top:513px; left:695px;"/>
+<input type="text" name="m571r108" id="m571r108" style="width:80px; top:513px; left:811px;"/>
 <!-- modul 581 -->
-<input type="text" name="m581r1" id="m581r1" style="width:100px; top:978px; left:680px;"/>
-<input type="text" name="m581r2" id="m581r2" style="width:100px; top:1005px; left:680px;"/>
-<input type="text" name="m581r3" id="m581r3" style="width:100px; top:1033px; left:680px;"/>
-<input type="text" name="m581r4" id="m581r4" style="width:100px; top:1060px; left:680px;"/>
-<input type="text" name="m581r5" id="m581r5" style="width:100px; top:1087px; left:680px;"/>
-<input type="text" name="m581r6" id="m581r6" style="width:100px; top:1115px; left:680px;"/>
-<input type="text" name="m581r7" id="m581r7" style="width:100px; top:1142px; left:680px;"/>
-<input type="text" name="m581r8" id="m581r8" style="width:100px; top:1170px; left:680px;"/>
-<input type="text" name="m581r12" id="m581r12" style="width:100px; top:1197px; left:680px;"/>
-<span class="text-echo" style="top:1229px; right:165px;"><?php echo $m581r99; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 8 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 8.strana 245kB">
-<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
+<input type="text" name="m581r1" id="m581r1" style="width:100px; top:764px; left:680px;"/>
+<input type="text" name="m581r2" id="m581r2" style="width:100px; top:790px; left:680px;"/>
+<input type="text" name="m581r3" id="m581r3" style="width:100px; top:817px; left:680px;"/>
+<input type="text" name="m581r4" id="m581r4" style="width:100px; top:843px; left:680px;"/>
+<input type="text" name="m581r5" id="m581r5" style="width:100px; top:870px; left:680px;"/>
+<input type="text" name="m581r6" id="m581r6" style="width:100px; top:897px; left:680px;"/>
+<input type="text" name="m581r7" id="m581r7" style="width:100px; top:923px; left:680px;"/>
+<input type="text" name="m581r8" id="m581r8" style="width:100px; top:949px; left:680px;"/>
+<input type="text" name="m581r12" id="m581r12" style="width:100px; top:975px; left:680px;"/>
+<span class="text-echo" style="top:1006px; right:165px;"><?php echo $m581r99; ?></span>
 <!-- modul 100301 -->
-<input type="checkbox" name="m100301r1" value="1" onchange="klikm100301ano();" style="top:199px; left:839px;"/>
-<input type="checkbox" name="m100301r2" value="1" onchange="klikm100301nie();" style="top:220px; left:839px;"/>
+<input type="checkbox" name="m100301r1" value="1" onchange="klikm100301ano();" style="top:1106px; left:839px;"/>
+<input type="checkbox" name="m100301r2" value="1" onchange="klikm100301nie();" style="top:1134px; left:839px;"/>
+<script>
+  function klikm100301ano()
+  {
+   document.formv1.m100301r2.checked = false;
+  }
+  function klikm100301nie()
+  {
+   document.formv1.m100301r1.checked = false;
+  }
+</script>
+<?php                                        } ?>
 
+<?php if ( $strana == 9 ) { ?>
 <!-- modul 100302 -->
-<input type="text" name="m100302" id="m100302" style="width:253px; top:329px; left:643px;"/>
-
+<input type="text" name="m100302" id="m100302" style="width:253px; height:32px; top:178px; left:618px;"/>
 <!-- modul 100303 -->
-<input type="checkbox" name="m100303r1" value="1" onchange="klikm100303ano();" style="top:424px; left:839px;"/>
-<input type="checkbox" name="m100303r2" value="1" onchange="klikm100303nie();" style="top:445px; left:839px;"/>
-
+<input type="checkbox" name="m100303r1" value="1" onchange="klikm100303ano();" style="top:307px; left:839px;"/>
+<input type="checkbox" name="m100303r2" value="1" onchange="klikm100303nie();" style="top:334px; left:839px;"/>
 <!-- modul 100304 -->
-<input type="text" name="m100304" id="m100304" style="width:253px; top:553px; left:643px;"/>
+<input type="text" name="m100304" id="m100304" style="width:253px; height:32px; top:462px; left:618px;"/>
+<script>
+  function klikm100303ano()
+  {
+   document.formv1.m100303r2.checked = false;
+  }
+  function klikm100303nie()
+  {
+   document.formv1.m100303r1.checked = false;
+  }
+</script>
 <?php                                        } ?>
 
-
-<?php if ( $strana == 9 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 9.strana 237kB" style="width:1250px; height:1000px;">
-<span class="text-echo" style="top:91px; left:944px; font-size:12px; letter-spacing:15px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 513 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(513);" class="btn-row-tool" style="top:115px; left:237px;">
-<input type="text" name="m513r11" id="m513r11" style="width:104px; top:275px; left:391px;"/>
-<input type="text" name="m513r12" id="m513r12" style="width:77px; top:275px; left:505px;"/>
-<input type="text" name="m513r13" id="m513r13" style="width:73px; top:275px; left:591px;"/>
-<input type="text" name="m513r14" id="m513r14" style="width:90px; top:275px; left:673px;"/>
-<input type="text" name="m513r15" id="m513r15" style="width:80px; top:275px; left:772px;"/>
-<input type="text" name="m513r16" id="m513r16" style="width:99px; top:275px; left:862px;"/>
-<input type="text" name="m513r17" id="m513r17" style="width:73px; top:275px; left:970px;"/>
-<input type="text" name="m513r18" id="m513r18" style="width:68px; top:275px; left:1052px;"/>
-<input type="text" name="m513r19" id="m513r19" style="width:80px; top:275px; left:1129px;"/>
-<input type="text" name="m513r21" id="m513r21" style="width:104px; top:300px; left:391px;"/>
-<input type="text" name="m513r22" id="m513r22" style="width:77px; top:300px; left:505px;"/>
-<input type="text" name="m513r23" id="m513r23" style="width:73px; top:300px; left:591px;"/>
-<input type="text" name="m513r24" id="m513r24" style="width:90px; top:300px; left:673px;"/>
-<input type="text" name="m513r25" id="m513r25" style="width:80px; top:300px; left:772px;"/>
-<input type="text" name="m513r26" id="m513r26" style="width:99px; top:300px; left:862px;"/>
-<input type="text" name="m513r27" id="m513r27" style="width:73px; top:300px; left:970px;"/>
-<input type="text" name="m513r28" id="m513r28" style="width:68px; top:300px; left:1052px;"/>
-<input type="text" name="m513r29" id="m513r29" style="width:80px; top:300px; left:1129px;"/>
-<input type="text" name="m513r31" id="m513r31" style="width:104px; top:325px; left:391px;"/>
-<input type="text" name="m513r32" id="m513r32" style="width:77px; top:325px; left:505px;"/>
-<input type="text" name="m513r33" id="m513r33" style="width:73px; top:325px; left:591px;"/>
-<input type="text" name="m513r34" id="m513r34" style="width:90px; top:325px; left:673px;"/>
-<input type="text" name="m513r35" id="m513r35" style="width:80px; top:325px; left:772px;"/>
-<input type="text" name="m513r36" id="m513r36" style="width:99px; top:325px; left:862px;"/>
-<input type="text" name="m513r37" id="m513r37" style="width:73px; top:325px; left:970px;"/>
-<input type="text" name="m513r38" id="m513r38" style="width:68px; top:325px; left:1052px;"/>
-<input type="text" name="m513r39" id="m513r39" style="width:80px; top:325px; left:1129px;"/>
-<input type="text" name="m513r41" id="m513r41" style="width:104px; top:349px; left:391px;"/>
-<input type="text" name="m513r42" id="m513r42" style="width:77px; top:349px; left:505px;"/>
-<input type="text" name="m513r43" id="m513r43" style="width:73px; top:349px; left:591px;"/>
-<input type="text" name="m513r44" id="m513r44" style="width:90px; top:349px; left:673px;"/>
-<input type="text" name="m513r45" id="m513r45" style="width:80px; top:349px; left:772px;"/>
-<input type="text" name="m513r46" id="m513r46" style="width:99px; top:349px; left:862px;"/>
-<input type="text" name="m513r47" id="m513r47" style="width:73px; top:349px; left:970px;"/>
-<input type="text" name="m513r48" id="m513r48" style="width:68px; top:349px; left:1052px;"/>
-<input type="text" name="m513r49" id="m513r49" style="width:80px; top:349px; left:1129px;"/>
-<input type="text" name="m513r51" id="m513r51" style="width:104px; top:374px; left:391px;"/>
-<input type="text" name="m513r52" id="m513r52" style="width:77px; top:374px; left:505px;"/>
-<input type="text" name="m513r53" id="m513r53" style="width:73px; top:374px; left:591px;"/>
-<input type="text" name="m513r54" id="m513r54" style="width:90px; top:374px; left:673px;"/>
-<input type="text" name="m513r55" id="m513r55" style="width:80px; top:374px; left:772px;"/>
-<input type="text" name="m513r56" id="m513r56" style="width:99px; top:374px; left:862px;"/>
-<input type="text" name="m513r57" id="m513r57" style="width:73px; top:374px; left:970px;"/>
-<input type="text" name="m513r58" id="m513r58" style="width:68px; top:374px; left:1052px;"/>
-<input type="text" name="m513r59" id="m513r59" style="width:80px; top:374px; left:1129px;"/>
-<input type="text" name="m513r61" id="m513r61" style="width:104px; top:398px; left:391px;"/>
-<input type="text" name="m513r62" id="m513r62" style="width:77px; top:398px; left:505px;"/>
-<input type="text" name="m513r63" id="m513r63" style="width:73px; top:398px; left:591px;"/>
-<input type="text" name="m513r64" id="m513r64" style="width:90px; top:398px; left:673px;"/>
-<input type="text" name="m513r65" id="m513r65" style="width:80px; top:398px; left:772px;"/>
-<input type="text" name="m513r66" id="m513r66" style="width:99px; top:398px; left:862px;"/>
-<input type="text" name="m513r67" id="m513r67" style="width:73px; top:398px; left:970px;"/>
-<input type="text" name="m513r68" id="m513r68" style="width:68px; top:398px; left:1052px;"/>
-<input type="text" name="m513r69" id="m513r69" style="width:80px; top:398px; left:1129px;"/>
-<input type="text" name="m513r71" id="m513r71" style="width:104px; top:423px; left:391px;"/>
-<input type="text" name="m513r72" id="m513r72" style="width:77px; top:423px; left:505px;"/>
-<input type="text" name="m513r73" id="m513r73" style="width:73px; top:423px; left:591px;"/>
-<input type="text" name="m513r74" id="m513r74" style="width:90px; top:423px; left:673px;"/>
-<input type="text" name="m513r75" id="m513r75" style="width:80px; top:423px; left:772px;"/>
-<input type="text" name="m513r76" id="m513r76" style="width:99px; top:423px; left:862px;"/>
-<input type="text" name="m513r77" id="m513r77" style="width:73px; top:423px; left:970px;"/>
-<input type="text" name="m513r78" id="m513r78" style="width:68px; top:423px; left:1052px;"/>
-<input type="text" name="m513r79" id="m513r79" style="width:80px; top:423px; left:1129px;"/>
-<input type="text" name="m513r81" id="m513r81" style="width:104px; top:447px; left:391px;"/>
-<input type="text" name="m513r82" id="m513r82" style="width:77px; top:447px; left:505px;"/>
-<input type="text" name="m513r83" id="m513r83" style="width:73px; top:447px; left:591px;"/>
-<input type="text" name="m513r84" id="m513r84" style="width:90px; top:447px; left:673px;"/>
-<input type="text" name="m513r85" id="m513r85" style="width:80px; top:447px; left:772px;"/>
-<input type="text" name="m513r86" id="m513r86" style="width:99px; top:447px; left:862px;"/>
-<input type="text" name="m513r87" id="m513r87" style="width:73px; top:447px; left:970px;"/>
-<input type="text" name="m513r88" id="m513r88" style="width:68px; top:447px; left:1052px;"/>
-<input type="text" name="m513r89" id="m513r89" style="width:80px; top:447px; left:1129px;"/>
-<input type="text" name="m513r91" id="m513r91" style="width:104px; top:471px; left:391px;"/>
-<input type="text" name="m513r92" id="m513r92" style="width:77px; top:471px; left:505px;"/>
-<input type="text" name="m513r93" id="m513r93" style="width:73px; top:471px; left:591px;"/>
-<input type="text" name="m513r94" id="m513r94" style="width:90px; top:471px; left:673px;"/>
-<input type="text" name="m513r95" id="m513r95" style="width:80px; top:471px; left:772px;"/>
-<input type="text" name="m513r96" id="m513r96" style="width:99px; top:471px; left:862px;"/>
-<input type="text" name="m513r97" id="m513r97" style="width:73px; top:471px; left:970px;"/>
-<input type="text" name="m513r98" id="m513r98" style="width:68px; top:471px; left:1052px;"/>
-<input type="text" name="m513r99" id="m513r99" style="width:80px; top:471px; left:1129px;"/>
-<input type="text" name="m513r101" id="m513r101" style="width:104px; top:496px; left:391px;"/>
-<input type="text" name="m513r102" id="m513r102" style="width:77px; top:496px; left:505px;"/>
-<input type="text" name="m513r103" id="m513r103" style="width:73px; top:496px; left:591px;"/>
-<input type="text" name="m513r104" id="m513r104" style="width:90px; top:496px; left:673px;"/>
-<input type="text" name="m513r105" id="m513r105" style="width:80px; top:496px; left:772px;"/>
-<input type="text" name="m513r106" id="m513r106" style="width:99px; top:496px; left:862px;"/>
-<input type="text" name="m513r107" id="m513r107" style="width:73px; top:496px; left:970px;"/>
-<input type="text" name="m513r108" id="m513r108" style="width:68px; top:496px; left:1052px;"/>
-<input type="text" name="m513r109" id="m513r109" style="width:80px; top:496px; left:1129px;"/>
-<input type="text" name="m513r111" id="m513r111" style="width:104px; top:520px; left:391px;"/>
-<input type="text" name="m513r112" id="m513r112" style="width:77px; top:520px; left:505px;"/>
-<input type="text" name="m513r113" id="m513r113" style="width:73px; top:520px; left:591px;"/>
-<input type="text" name="m513r114" id="m513r114" style="width:90px; top:520px; left:673px;"/>
-<input type="text" name="m513r115" id="m513r115" style="width:80px; top:520px; left:772px;"/>
-<input type="text" name="m513r116" id="m513r116" style="width:99px; top:520px; left:862px;"/>
-<input type="text" name="m513r117" id="m513r117" style="width:73px; top:520px; left:970px;"/>
-<input type="text" name="m513r118" id="m513r118" style="width:68px; top:520px; left:1052px;"/>
-<input type="text" name="m513r119" id="m513r119" style="width:80px; top:520px; left:1129px;"/>
-<input type="text" name="m513r121" id="m513r121" style="width:104px; top:545px; left:391px;"/>
-<input type="text" name="m513r122" id="m513r122" style="width:77px; top:545px; left:505px;"/>
-<input type="text" name="m513r123" id="m513r123" style="width:73px; top:545px; left:591px;"/>
-<input type="text" name="m513r124" id="m513r124" style="width:90px; top:545px; left:673px;"/>
-<input type="text" name="m513r125" id="m513r125" style="width:80px; top:545px; left:772px;"/>
-<input type="text" name="m513r126" id="m513r126" style="width:99px; top:545px; left:862px;"/>
-<input type="text" name="m513r127" id="m513r127" style="width:73px; top:545px; left:970px;"/>
-<input type="text" name="m513r128" id="m513r128" style="width:68px; top:545px; left:1052px;"/>
-<input type="text" name="m513r129" id="m513r129" style="width:80px; top:545px; left:1129px;"/>
-<input type="text" name="m513r131" id="m513r131" style="width:104px; top:571px; left:391px;"/>
-<input type="text" name="m513r132" id="m513r132" style="width:77px; top:571px; left:505px;"/>
-<input type="text" name="m513r133" id="m513r133" style="width:73px; top:571px; left:591px;"/>
-<input type="text" name="m513r134" id="m513r134" style="width:90px; top:571px; left:673px;"/>
-<input type="text" name="m513r135" id="m513r135" style="width:80px; top:571px; left:772px;"/>
-<input type="text" name="m513r136" id="m513r136" style="width:99px; top:571px; left:862px;"/>
-<input type="text" name="m513r137" id="m513r137" style="width:73px; top:571px; left:970px;"/>
-<input type="text" name="m513r138" id="m513r138" style="width:68px; top:571px; left:1052px;"/>
-<input type="text" name="m513r139" id="m513r139" style="width:80px; top:571px; left:1129px;"/>
-<input type="text" name="m513r141" id="m513r141" style="width:104px; top:598px; left:391px;"/>
-<input type="text" name="m513r142" id="m513r142" style="width:77px; top:598px; left:505px;"/>
-<input type="text" name="m513r143" id="m513r143" style="width:73px; top:598px; left:591px;"/>
-<input type="text" name="m513r144" id="m513r144" style="width:90px; top:598px; left:673px;"/>
-<input type="text" name="m513r145" id="m513r145" style="width:80px; top:598px; left:772px;"/>
-<input type="text" name="m513r146" id="m513r146" style="width:99px; top:598px; left:862px;"/>
-<input type="text" name="m513r147" id="m513r147" style="width:73px; top:598px; left:970px;"/>
-<input type="text" name="m513r148" id="m513r148" style="width:68px; top:598px; left:1052px;"/>
-<input type="text" name="m513r149" id="m513r149" style="width:80px; top:598px; left:1129px;"/>
-<input type="text" name="m513r151" id="m513r151" style="width:104px; top:622px; left:391px;"/>
-<input type="text" name="m513r152" id="m513r152" style="width:77px; top:622px; left:505px;"/>
-<input type="text" name="m513r153" id="m513r153" style="width:73px; top:622px; left:591px;"/>
-<input type="text" name="m513r154" id="m513r154" style="width:90px; top:622px; left:673px;"/>
-<input type="text" name="m513r155" id="m513r155" style="width:80px; top:622px; left:772px;"/>
-<input type="text" name="m513r156" id="m513r156" style="width:99px; top:622px; left:862px;"/>
-<input type="text" name="m513r157" id="m513r157" style="width:73px; top:622px; left:970px;"/>
-<input type="text" name="m513r158" id="m513r158" style="width:68px; top:622px; left:1052px;"/>
-<input type="text" name="m513r159" id="m513r159" style="width:80px; top:622px; left:1129px;"/>
-<input type="text" name="m513r161" id="m513r161" style="width:104px; top:647px; left:391px;"/>
-<input type="text" name="m513r162" id="m513r162" style="width:77px; top:647px; left:505px;"/>
-<input type="text" name="m513r163" id="m513r163" style="width:73px; top:647px; left:591px;"/>
-<input type="text" name="m513r164" id="m513r164" style="width:90px; top:647px; left:673px;"/>
-<input type="text" name="m513r165" id="m513r165" style="width:80px; top:647px; left:772px;"/>
-<input type="text" name="m513r166" id="m513r166" style="width:99px; top:647px; left:862px;"/>
-<input type="text" name="m513r167" id="m513r167" style="width:73px; top:647px; left:970px;"/>
-<input type="text" name="m513r168" id="m513r168" style="width:68px; top:647px; left:1052px;"/>
-<input type="text" name="m513r169" id="m513r169" style="width:80px; top:647px; left:1129px;"/>
-<input type="text" name="m513r171" id="m513r171" style="width:104px; top:671px; left:391px;"/>
-<input type="text" name="m513r173" id="m513r173" style="width:73px; top:671px; left:591px;"/>
-<input type="text" name="m513r174" id="m513r174" style="width:90px; top:671px; left:673px;"/>
-<input type="text" name="m513r175" id="m513r175" style="width:80px; top:671px; left:772px;"/>
-<input type="text" name="m513r176" id="m513r176" style="width:99px; top:671px; left:862px;"/>
-<input type="text" name="m513r177" id="m513r177" style="width:73px; top:671px; left:970px;"/>
-<input type="text" name="m513r181" id="m513r181" style="width:104px; top:695px; left:391px;"/>
-<input type="text" name="m513r183" id="m513r183" style="width:73px; top:695px; left:591px;"/>
-<input type="text" name="m513r184" id="m513r184" style="width:90px; top:695px; left:673px;"/>
-<input type="text" name="m513r185" id="m513r185" style="width:80px; top:695px; left:772px;"/>
-<input type="text" name="m513r186" id="m513r186" style="width:99px; top:695px; left:862px;"/>
-<input type="text" name="m513r187" id="m513r187" style="width:73px; top:695px; left:970px;"/>
-<input type="text" name="m513r191" id="m513r191" style="width:104px; top:720px; left:391px;"/>
-<input type="text" name="m513r193" id="m513r193" style="width:73px; top:720px; left:591px;"/>
-<input type="text" name="m513r194" id="m513r194" style="width:90px; top:720px; left:673px;"/>
-<input type="text" name="m513r195" id="m513r195" style="width:80px; top:720px; left:772px;"/>
-<input type="text" name="m513r196" id="m513r196" style="width:99px; top:720px; left:862px;"/>
-<input type="text" name="m513r197" id="m513r197" style="width:73px; top:720px; left:970px;"/>
-<input type="text" name="m513r201" id="m513r201" style="width:104px; top:744px; left:391px;"/>
-<input type="text" name="m513r203" id="m513r203" style="width:73px; top:744px; left:591px;"/>
-<input type="text" name="m513r204" id="m513r204" style="width:90px; top:744px; left:673px;"/>
-<input type="text" name="m513r205" id="m513r205" style="width:80px; top:744px; left:772px;"/>
-<input type="text" name="m513r206" id="m513r206" style="width:99px; top:744px; left:862px;"/>
-<input type="text" name="m513r207" id="m513r207" style="width:73px; top:744px; left:970px;"/>
-<input type="text" name="m513r211" id="m513r211" style="width:104px; top:768px; left:391px;"/>
-<input type="text" name="m513r213" id="m513r213" style="width:73px; top:768px; left:591px;"/>
-<input type="text" name="m513r214" id="m513r214" style="width:90px; top:768px; left:673px;"/>
-<input type="text" name="m513r215" id="m513r215" style="width:80px; top:768px; left:772px;"/>
-<input type="text" name="m513r216" id="m513r216" style="width:99px; top:768px; left:862px;"/>
-<input type="text" name="m513r217" id="m513r217" style="width:73px; top:768px; left:970px;"/>
-<input type="text" name="m513r221" id="m513r221" style="width:104px; top:793px; left:391px;"/>
-<input type="text" name="m513r222" id="m513r222" style="width:77px; top:793px; left:505px;"/>
-<input type="text" name="m513r223" id="m513r223" style="width:73px; top:793px; left:591px;"/>
-<input type="text" name="m513r224" id="m513r224" style="width:90px; top:793px; left:673px;"/>
-<input type="text" name="m513r225" id="m513r225" style="width:80px; top:793px; left:772px;"/>
-<input type="text" name="m513r226" id="m513r226" style="width:99px; top:793px; left:862px;"/>
-<input type="text" name="m513r227" id="m513r227" style="width:73px; top:793px; left:970px;"/>
-<input type="text" name="m513r228" id="m513r228" style="width:68px; top:793px; left:1052px;"/>
-<input type="text" name="m513r229" id="m513r229" style="width:80px; top:793px; left:1129px;"/>
-<span class="text-echo" style="top:822px; right:754px;"><?php echo $m513r991; ?></span>
-<span class="text-echo" style="top:822px; right:666px;"><?php echo $m513r992; ?></span>
-<span class="text-echo" style="top:822px; right:585px;"><?php echo $m513r993; ?></span>
-<span class="text-echo" style="top:822px; right:485px;"><?php echo $m513r994; ?></span>
-<span class="text-echo" style="top:822px; right:395px;"><?php echo $m513r995; ?></span>
-<span class="text-echo" style="top:822px; right:288px;"><?php echo $m513r996; ?></span>
-<span class="text-echo" style="top:822px; right:205px;"><?php echo $m513r997; ?></span>
-<span class="text-echo" style="top:822px; right:128px;"><?php echo $m513r998; ?></span>
-<span class="text-echo" style="top:822px; right:38px;"><?php echo $m513r999; ?></span>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 10 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 10.strana 237kB" style="width:1250px; height:1000px;">
-<span class="text-echo" style="top:91px; left:944px; font-size:12px; letter-spacing:15px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 516 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(516);" class="btn-row-tool" style="top:112px; left:352px;">
-<input type="text" name="m516r11" id="m516r11" style="width:109px; top:283px; left:386px;"/>
-<input type="text" name="m516r12" id="m516r12" style="width:109px; top:283px; left:505px;"/>
-<input type="text" name="m516r13" id="m516r13" style="width:109px; top:283px; left:624px;"/>
-<input type="text" name="m516r14" id="m516r14" style="width:109px; top:283px; left:743px;"/>
-<input type="text" name="m516r15" id="m516r15" style="width:109px; top:283px; left:862px;"/>
-<input type="text" name="m516r16" id="m516r16" style="width:109px; top:283px; left:981px;"/>
-<input type="text" name="m516r17" id="m516r17" style="width:109px; top:283px; left:1100px;"/>
-<input type="text" name="m516r21" id="m516r21" style="width:109px; top:307px; left:386px;"/>
-<input type="text" name="m516r22" id="m516r22" style="width:109px; top:307px; left:505px;"/>
-<input type="text" name="m516r23" id="m516r23" style="width:109px; top:307px; left:624px;"/>
-<input type="text" name="m516r24" id="m516r24" style="width:109px; top:307px; left:743px;"/>
-<input type="text" name="m516r25" id="m516r25" style="width:109px; top:307px; left:862px;"/>
-<input type="text" name="m516r26" id="m516r26" style="width:109px; top:307px; left:981px;"/>
-<input type="text" name="m516r27" id="m516r27" style="width:109px; top:307px; left:1100px;"/>
-<input type="text" name="m516r31" id="m516r31" style="width:109px; top:332px; left:386px;"/>
-<input type="text" name="m516r32" id="m516r32" style="width:109px; top:332px; left:505px;"/>
-<input type="text" name="m516r33" id="m516r33" style="width:109px; top:332px; left:624px;"/>
-<input type="text" name="m516r34" id="m516r34" style="width:109px; top:332px; left:743px;"/>
-<input type="text" name="m516r35" id="m516r35" style="width:109px; top:332px; left:862px;"/>
-<input type="text" name="m516r36" id="m516r36" style="width:109px; top:332px; left:981px;"/>
-<input type="text" name="m516r37" id="m516r37" style="width:109px; top:332px; left:1100px;"/>
-<input type="text" name="m516r41" id="m516r41" style="width:109px; top:356px; left:386px;"/>
-<input type="text" name="m516r42" id="m516r42" style="width:109px; top:356px; left:505px;"/>
-<input type="text" name="m516r43" id="m516r43" style="width:109px; top:356px; left:624px;"/>
-<input type="text" name="m516r44" id="m516r44" style="width:109px; top:356px; left:743px;"/>
-<input type="text" name="m516r45" id="m516r45" style="width:109px; top:356px; left:862px;"/>
-<input type="text" name="m516r46" id="m516r46" style="width:109px; top:356px; left:981px;"/>
-<input type="text" name="m516r47" id="m516r47" style="width:109px; top:356px; left:1100px;"/>
-<input type="text" name="m516r51" id="m516r51" style="width:109px; top:380px; left:386px;"/>
-<input type="text" name="m516r53" id="m516r53" style="width:109px; top:380px; left:624px;"/>
-<input type="text" name="m516r54" id="m516r54" style="width:109px; top:380px; left:743px;"/>
-<input type="text" name="m516r55" id="m516r55" style="width:109px; top:380px; left:862px;"/>
-<input type="text" name="m516r57" id="m516r57" style="width:109px; top:380px; left:1100px;"/>
-<input type="text" name="m516r61" id="m516r61" style="width:109px; top:405px; left:386px;"/>
-<input type="text" name="m516r62" id="m516r62" style="width:109px; top:405px; left:505px;"/>
-<input type="text" name="m516r63" id="m516r63" style="width:109px; top:405px; left:624px;"/>
-<input type="text" name="m516r64" id="m516r64" style="width:109px; top:405px; left:743px;"/>
-<input type="text" name="m516r65" id="m516r65" style="width:109px; top:405px; left:862px;"/>
-<input type="text" name="m516r66" id="m516r66" style="width:109px; top:405px; left:981px;"/>
-<input type="text" name="m516r67" id="m516r67" style="width:109px; top:405px; left:1100px;"/>
-<input type="text" name="m516r71" id="m516r71" style="width:109px; top:430px; left:386px;"/>
-<input type="text" name="m516r72" id="m516r72" style="width:109px; top:430px; left:505px;"/>
-<input type="text" name="m516r73" id="m516r73" style="width:109px; top:430px; left:624px;"/>
-<input type="text" name="m516r74" id="m516r74" style="width:109px; top:430px; left:743px;"/>
-<input type="text" name="m516r75" id="m516r75" style="width:109px; top:430px; left:862px;"/>
-<input type="text" name="m516r76" id="m516r76" style="width:109px; top:430px; left:981px;"/>
-<input type="text" name="m516r77" id="m516r77" style="width:109px; top:430px; left:1100px;"/>
-<input type="text" name="m516r81" id="m516r81" style="width:109px; top:454px; left:386px;"/>
-<input type="text" name="m516r82" id="m516r82" style="width:109px; top:454px; left:505px;"/>
-<input type="text" name="m516r83" id="m516r83" style="width:109px; top:454px; left:624px;"/>
-<input type="text" name="m516r84" id="m516r84" style="width:109px; top:454px; left:743px;"/>
-<input type="text" name="m516r85" id="m516r85" style="width:109px; top:454px; left:862px;"/>
-<input type="text" name="m516r86" id="m516r86" style="width:109px; top:454px; left:981px;"/>
-<input type="text" name="m516r87" id="m516r87" style="width:109px; top:454px; left:1100px;"/>
-<input type="text" name="m516r91" id="m516r91" style="width:109px; top:478px; left:386px;"/>
-<input type="text" name="m516r92" id="m516r92" style="width:109px; top:478px; left:505px;"/>
-<input type="text" name="m516r93" id="m516r93" style="width:109px; top:478px; left:624px;"/>
-<input type="text" name="m516r94" id="m516r94" style="width:109px; top:478px; left:743px;"/>
-<input type="text" name="m516r95" id="m516r95" style="width:109px; top:478px; left:862px;"/>
-<input type="text" name="m516r96" id="m516r96" style="width:109px; top:478px; left:981px;"/>
-<input type="text" name="m516r97" id="m516r97" style="width:109px; top:478px; left:1100px;"/>
-<input type="text" name="m516r101" id="m516r101" style="width:109px; top:502px; left:386px;"/>
-<input type="text" name="m516r102" id="m516r102" style="width:109px; top:502px; left:505px;"/>
-<input type="text" name="m516r103" id="m516r103" style="width:109px; top:502px; left:624px;"/>
-<input type="text" name="m516r104" id="m516r104" style="width:109px; top:502px; left:743px;"/>
-<input type="text" name="m516r105" id="m516r105" style="width:109px; top:502px; left:862px;"/>
-<input type="text" name="m516r106" id="m516r106" style="width:109px; top:502px; left:981px;"/>
-<input type="text" name="m516r107" id="m516r107" style="width:109px; top:502px; left:1100px;"/>
-<input type="text" name="m516r111" id="m516r111" style="width:109px; top:528px; left:386px;"/>
-<input type="text" name="m516r112" id="m516r112" style="width:109px; top:528px; left:505px;"/>
-<input type="text" name="m516r113" id="m516r113" style="width:109px; top:528px; left:624px;"/>
-<input type="text" name="m516r114" id="m516r114" style="width:109px; top:528px; left:743px;"/>
-<input type="text" name="m516r115" id="m516r115" style="width:109px; top:528px; left:862px;"/>
-<input type="text" name="m516r116" id="m516r116" style="width:109px; top:528px; left:981px;"/>
-<input type="text" name="m516r117" id="m516r117" style="width:109px; top:528px; left:1100px;"/>
-<input type="text" name="m516r121" id="m516r121" style="width:109px; top:552px; left:386px;"/>
-<input type="text" name="m516r122" id="m516r122" style="width:109px; top:552px; left:505px;"/>
-<input type="text" name="m516r123" id="m516r123" style="width:109px; top:552px; left:624px;"/>
-<input type="text" name="m516r124" id="m516r124" style="width:109px; top:552px; left:743px;"/>
-<input type="text" name="m516r125" id="m516r125" style="width:109px; top:552px; left:862px;"/>
-<input type="text" name="m516r126" id="m516r126" style="width:109px; top:552px; left:981px;"/>
-<input type="text" name="m516r127" id="m516r127" style="width:109px; top:552px; left:1100px;"/>
-<input type="text" name="m516r131" id="m516r131" style="width:109px; top:578px; left:386px;"/>
-<input type="text" name="m516r132" id="m516r132" style="width:109px; top:578px; left:505px;"/>
-<input type="text" name="m516r133" id="m516r133" style="width:109px; top:578px; left:624px;"/>
-<input type="text" name="m516r134" id="m516r134" style="width:109px; top:578px; left:743px;"/>
-<input type="text" name="m516r135" id="m516r135" style="width:109px; top:578px; left:862px;"/>
-<input type="text" name="m516r136" id="m516r136" style="width:109px; top:578px; left:981px;"/>
-<input type="text" name="m516r137" id="m516r137" style="width:109px; top:578px; left:1100px;"/>
-<input type="text" name="m516r141" id="m516r141" style="width:109px; top:604px; left:386px;"/>
-<input type="text" name="m516r142" id="m516r142" style="width:109px; top:604px; left:505px;"/>
-<input type="text" name="m516r143" id="m516r143" style="width:109px; top:604px; left:624px;"/>
-<input type="text" name="m516r144" id="m516r144" style="width:109px; top:604px; left:743px;"/>
-<input type="text" name="m516r145" id="m516r145" style="width:109px; top:604px; left:862px;"/>
-<input type="text" name="m516r146" id="m516r146" style="width:109px; top:604px; left:981px;"/>
-<input type="text" name="m516r147" id="m516r147" style="width:109px; top:604px; left:1100px;"/>
-<input type="text" name="m516r151" id="m516r151" style="width:109px; top:629px; left:386px;"/>
-<input type="text" name="m516r152" id="m516r152" style="width:109px; top:629px; left:505px;"/>
-<input type="text" name="m516r153" id="m516r153" style="width:109px; top:629px; left:624px;"/>
-<input type="text" name="m516r154" id="m516r154" style="width:109px; top:629px; left:743px;"/>
-<input type="text" name="m516r155" id="m516r155" style="width:109px; top:629px; left:862px;"/>
-<input type="text" name="m516r156" id="m516r156" style="width:109px; top:629px; left:981px;"/>
-<input type="text" name="m516r157" id="m516r157" style="width:109px; top:629px; left:1100px;"/>
-<input type="text" name="m516r161" id="m516r161" style="width:109px; top:653px; left:386px;"/>
-<input type="text" name="m516r162" id="m516r162" style="width:109px; top:653px; left:505px;"/>
-<input type="text" name="m516r163" id="m516r163" style="width:109px; top:653px; left:624px;"/>
-<input type="text" name="m516r164" id="m516r164" style="width:109px; top:653px; left:743px;"/>
-<input type="text" name="m516r165" id="m516r165" style="width:109px; top:653px; left:862px;"/>
-<input type="text" name="m516r166" id="m516r166" style="width:109px; top:653px; left:981px;"/>
-<input type="text" name="m516r167" id="m516r167" style="width:109px; top:653px; left:1100px;"/>
-<input type="text" name="m516r171" id="m516r171" style="width:109px; top:678px; left:386px;"/>
-<input type="text" name="m516r172" id="m516r172" style="width:109px; top:678px; left:505px;"/>
-<input type="text" name="m516r174" id="m516r174" style="width:109px; top:678px; left:743px;"/>
-<input type="text" name="m516r175" id="m516r175" style="width:109px; top:678px; left:862px;"/>
-<input type="text" name="m516r177" id="m516r177" style="width:109px; top:678px; left:1100px;"/>
-<input type="text" name="m516r181" id="m516r181" style="width:109px; top:702px; left:386px;"/>
-<input type="text" name="m516r182" id="m516r182" style="width:109px; top:702px; left:505px;"/>
-<input type="text" name="m516r184" id="m516r184" style="width:109px; top:702px; left:743px;"/>
-<input type="text" name="m516r185" id="m516r185" style="width:109px; top:702px; left:862px;"/>
-<input type="text" name="m516r187" id="m516r187" style="width:109px; top:702px; left:1100px;"/>
-<input type="text" name="m516r191" id="m516r191" style="width:109px; top:727px; left:386px;"/>
-<input type="text" name="m516r192" id="m516r192" style="width:109px; top:727px; left:505px;"/>
-<input type="text" name="m516r194" id="m516r194" style="width:109px; top:727px; left:743px;"/>
-<input type="text" name="m516r195" id="m516r195" style="width:109px; top:727px; left:862px;"/>
-<input type="text" name="m516r197" id="m516r197" style="width:109px; top:727px; left:1100px;"/>
-<input type="text" name="m516r201" id="m516r201" style="width:109px; top:751px; left:386px;"/>
-<input type="text" name="m516r202" id="m516r202" style="width:109px; top:751px; left:505px;"/>
-<input type="text" name="m516r204" id="m516r204" style="width:109px; top:751px; left:743px;"/>
-<input type="text" name="m516r205" id="m516r205" style="width:109px; top:751px; left:862px;"/>
-<input type="text" name="m516r206" id="m516r206" style="width:109px; top:751px; left:981px;"/>
-<input type="text" name="m516r207" id="m516r207" style="width:109px; top:751px; left:1100px;"/>
-<input type="text" name="m516r211" id="m516r211" style="width:109px; top:776px; left:386px;"/>
-<input type="text" name="m516r212" id="m516r212" style="width:109px; top:776px; left:505px;"/>
-<input type="text" name="m516r214" id="m516r214" style="width:109px; top:776px; left:743px;"/>
-<input type="text" name="m516r215" id="m516r215" style="width:109px; top:776px; left:862px;"/>
-<input type="text" name="m516r216" id="m516r216" style="width:109px; top:776px; left:981px;"/>
-<input type="text" name="m516r217" id="m516r217" style="width:109px; top:776px; left:1100px;"/>
-<input type="text" name="m516r221" id="m516r221" style="width:109px; top:800px; left:386px;"/>
-<input type="text" name="m516r222" id="m516r222" style="width:109px; top:800px; left:505px;"/>
-<input type="text" name="m516r223" id="m516r223" style="width:109px; top:800px; left:624px;"/>
-<input type="text" name="m516r224" id="m516r224" style="width:109px; top:800px; left:743px;"/>
-<input type="text" name="m516r225" id="m516r225" style="width:109px; top:800px; left:862px;"/>
-<input type="text" name="m516r226" id="m516r226" style="width:109px; top:800px; left:981px;"/>
-<input type="text" name="m516r227" id="m516r227" style="width:109px; top:800px; left:1100px;"/>
-<span class="text-echo" style="top:829px; right:753px;"><?php echo $m516r991; ?></span>
-<span class="text-echo" style="top:829px; right:634px;"><?php echo $m516r992; ?></span>
-<span class="text-echo" style="top:829px; right:514px;"><?php echo $m516r993; ?></span>
-<span class="text-echo" style="top:829px; right:395px;"><?php echo $m516r994; ?></span>
-<span class="text-echo" style="top:829px; right:276px;"><?php echo $m516r995; ?></span>
-<span class="text-echo" style="top:829px; right:157px;"><?php echo $m516r996; ?></span>
-<span class="text-echo" style="top:829px; right:39px;"><?php echo $m516r997; ?></span>
+<?php if ( $strana == 10 ) { ?>
+<!-- modul 572 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(572);" style="top:81px; left:222px;" class="btn-row-tool">
+<input type="text" name="m572r12" id="m572r12" style="width:80px; top:214px; left:325px;"/>
+<input type="text" name="m572r11" id="m572r11" style="width:80px; top:214px; left:236px;"/>
+<input type="text" name="m572r13" id="m572r13" style="width:80px; top:214px; left:415px;"/>
+<input type="text" name="m572r14" id="m572r14" style="width:80px; top:214px; left:505px;"/>
+<input type="text" name="m572r15" id="m572r15" style="width:80px; top:214px; left:594px;"/>
+<input type="text" name="m572r16" id="m572r16" style="width:80px; top:214px; left:684px;"/>
+<input type="text" name="m572r17" id="m572r17" style="width:80px; top:214px; left:774px;"/>
+<input type="text" name="m572r18" id="m572r18" style="width:80px; top:214px; left:864px;"/>
+<input type="text" name="m572r19" id="m572r19" style="width:80px; top:214px; left:953px;"/>
+<input type="text" name="m572r110" id="m572r110" style="width:80px; top:214px; left:1043px;"/>
+<input type="text" name="m572r0111" id="m572r0111" style="width:79px; top:214px; left:1133px;"/>
+<input type="text" name="m572r21" id="m572r21" style="width:80px; top:236px; left:236px;"/>
+<input type="text" name="m572r22" id="m572r22" style="width:80px; top:236px; left:325px;"/>
+<input type="text" name="m572r23" id="m572r23" style="width:80px; top:236px; left:415px;"/>
+<input type="text" name="m572r25" id="m572r25" style="width:80px; top:236px; left:594px;"/>
+<input type="text" name="m572r26" id="m572r26" style="width:80px; top:236px; left:684px;"/>
+<input type="text" name="m572r27" id="m572r27" style="width:80px; top:236px; left:774px;"/>
+<input type="text" name="m572r28" id="m572r28" style="width:80px; top:236px; left:864px;"/>
+<input type="text" name="m572r29" id="m572r29" style="width:80px; top:236px; left:953px;"/>
+<input type="text" name="m572r210" id="m572r210" style="width:80px; top:236px; left:1043px;"/>
+<input type="text" name="m572r0211" id="m572r0211" style="width:79px; top:236px; left:1133px;"/>
+<input type="text" name="m572r38" id="m572r38" style="width:80px; top:257px; left:864px;"/>
+<input type="text" name="m572r39" id="m572r39" style="width:80px; top:257px; left:953px;"/>
+<input type="text" name="m572r310" id="m572r310" style="width:80px; top:257px; left:1043px;"/>
+<input type="text" name="m572r311" id="m572r311" style="width:79px; top:257px; left:1133px;"/>
+<input type="text" name="m572r48" id="m572r48" style="width:80px; top:278px; left:864px;"/>
+<input type="text" name="m572r49" id="m572r49" style="width:80px; top:278px; left:953px;"/>
+<input type="text" name="m572r410" id="m572r410" style="width:80px; top:278px; left:1043px;"/>
+<input type="text" name="m572r411" id="m572r411" style="width:79px; top:278px; left:1133px;"/>
+<input type="text" name="m572r58" id="m572r58" style="width:80px; top:302px; left:864px;"/>
+<input type="text" name="m572r59" id="m572r59" style="width:80px; top:302px; left:953px;"/>
+<input type="text" name="m572r510" id="m572r510" style="width:80px; top:302px; left:1043px;"/>
+<input type="text" name="m572r511" id="m572r511" style="width:79px; top:302px; left:1133px;"/>
+<input type="text" name="m572r68" id="m572r68" style="width:80px; top:326px; left:864px;"/>
+<input type="text" name="m572r69" id="m572r69" style="width:80px; top:326px; left:953px;"/>
+<input type="text" name="m572r610" id="m572r610" style="width:80px; top:326px; left:1043px;"/>
+<input type="text" name="m572r611" id="m572r611" style="width:79px; top:326px; left:1133px;"/>
+<input type="text" name="m572r78" id="m572r78" style="width:80px; top:357px; left:864px;"/>
+<input type="text" name="m572r79" id="m572r79" style="width:80px; top:357px; left:953px;"/>
+<input type="text" name="m572r710" id="m572r710" style="width:80px; top:357px; left:1043px;"/>
+<input type="text" name="m572r711" id="m572r711" style="width:79px; top:357px; left:1133px;"/>
+<input type="text" name="m572r88" id="m572r88" style="width:80px; top:385px; left:864px;"/>
+<input type="text" name="m572r89" id="m572r89" style="width:80px; top:385px; left:953px;"/>
+<input type="text" name="m572r810" id="m572r810" style="width:80px; top:385px; left:1043px;"/>
+<input type="text" name="m572r811" id="m572r811" style="width:79px; top:385px; left:1133px;"/>
+<input type="text" name="m572r98" id="m572r98" style="width:80px; top:409px; left:864px;"/>
+<input type="text" name="m572r99" id="m572r99" style="width:80px; top:409px; left:953px;"/>
+<input type="text" name="m572r910" id="m572r910" style="width:80px; top:409px; left:1043px;"/>
+<input type="text" name="m572r911" id="m572r911" style="width:79px; top:409px; left:1133px;"/>
+<input type="text" name="m572r108" id="m572r108" style="width:80px; top:431px; left:864px;"/>
+<input type="text" name="m572r109" id="m572r109" style="width:80px; top:431px; left:953px;"/>
+<input type="text" name="m572r1010" id="m572r1010" style="width:80px; top:431px; left:1043px;"/>
+<input type="text" name="m572r1011" id="m572r1011" style="width:79px; top:431px; left:1133px;"/>
+<input type="text" name="m572r111" id="m572r111" style="width:80px; top:453px; left:236px;"/>
+<input type="text" name="m572r112" id="m572r112" style="width:80px; top:453px; left:325px;"/>
+<input type="text" name="m572r113" id="m572r113" style="width:80px; top:453px; left:415px;"/>
+<input type="text" name="m572r114" id="m572r114" style="width:80px; top:453px; left:505px;"/>
+<input type="text" name="m572r115" id="m572r115" style="width:80px; top:453px; left:594px;"/>
+<input type="text" name="m572r116" id="m572r116" style="width:80px; top:453px; left:684px;"/>
+<input type="text" name="m572r117" id="m572r117" style="width:80px; top:453px; left:774px;"/>
+<input type="text" name="m572r118" id="m572r118" style="width:80px; top:453px; left:864px;"/>
+<input type="text" name="m572r119" id="m572r119" style="width:80px; top:453px; left:953px;"/>
+<input type="text" name="m572r1110" id="m572r1110" style="width:80px; top:453px; left:1043px;"/>
+<input type="text" name="m572r1111" id="m572r1111" style="width:79px; top:453px; left:1133px;"/>
+<input type="text" name="m572r121" id="m572r121" style="width:80px; top:474px; left:236px;"/>
+<input type="text" name="m572r122" id="m572r122" style="width:80px; top:474px; left:325px;"/>
+<input type="text" name="m572r123" id="m572r123" style="width:80px; top:474px; left:415px;"/>
+<input type="text" name="m572r124" id="m572r124" style="width:80px; top:474px; left:505px;"/>
+<input type="text" name="m572r125" id="m572r125" style="width:80px; top:474px; left:594px;"/>
+<input type="text" name="m572r126" id="m572r126" style="width:80px; top:474px; left:684px;"/>
+<input type="text" name="m572r127" id="m572r127" style="width:80px; top:474px; left:774px;"/>
+<input type="text" name="m572r128" id="m572r128" style="width:80px; top:474px; left:864px;"/>
+<input type="text" name="m572r129" id="m572r129" style="width:80px; top:474px; left:953px;"/>
+<input type="text" name="m572r1210" id="m572r1210" style="width:80px; top:474px; left:1043px;"/>
+<input type="text" name="m572r1211" id="m572r1211" style="width:79px; top:474px; left:1133px;"/>
+<input type="text" name="m572r131" id="m572r131" style="width:80px; top:496px; left:236px;"/>
+<input type="text" name="m572r132" id="m572r132" style="width:80px; top:496px; left:325px;"/>
+<input type="text" name="m572r133" id="m572r133" style="width:80px; top:496px; left:415px;"/>
+<input type="text" name="m572r134" id="m572r134" style="width:80px; top:496px; left:505px;"/>
+<input type="text" name="m572r135" id="m572r135" style="width:80px; top:496px; left:594px;"/>
+<input type="text" name="m572r136" id="m572r136" style="width:80px; top:496px; left:684px;"/>
+<input type="text" name="m572r137" id="m572r137" style="width:80px; top:496px; left:774px;"/>
+<input type="text" name="m572r138" id="m572r138" style="width:80px; top:496px; left:864px;"/>
+<input type="text" name="m572r139" id="m572r139" style="width:80px; top:496px; left:953px;"/>
+<input type="text" name="m572r1310" id="m572r1310" style="width:80px; top:496px; left:1043px;"/>
+<input type="text" name="m572r1311" id="m572r1311" style="width:79px; top:496px; left:1133px;"/>
+<input type="text" name="m572r141" id="m572r141" style="width:80px; top:517px; left:236px;"/>
+<input type="text" name="m572r142" id="m572r142" style="width:80px; top:517px; left:325px;"/>
+<input type="text" name="m572r143" id="m572r143" style="width:80px; top:517px; left:415px;"/>
+<input type="text" name="m572r144" id="m572r144" style="width:80px; top:517px; left:505px;"/>
+<input type="text" name="m572r145" id="m572r145" style="width:80px; top:517px; left:594px;"/>
+<input type="text" name="m572r146" id="m572r146" style="width:80px; top:517px; left:684px;"/>
+<input type="text" name="m572r147" id="m572r147" style="width:80px; top:517px; left:774px;"/>
+<input type="text" name="m572r148" id="m572r148" style="width:80px; top:517px; left:864px;"/>
+<input type="text" name="m572r149" id="m572r149" style="width:80px; top:517px; left:953px;"/>
+<input type="text" name="m572r1410" id="m572r1410" style="width:80px; top:517px; left:1043px;"/>
+<input type="text" name="m572r1411" id="m572r1411" style="width:79px; top:517px; left:1133px;"/>
+<input type="text" name="m572r151" id="m572r151" style="width:80px; top:538px; left:236px;"/>
+<input type="text" name="m572r152" id="m572r152" style="width:80px; top:538px; left:325px;"/>
+<input type="text" name="m572r153" id="m572r153" style="width:80px; top:538px; left:415px;"/>
+<input type="text" name="m572r154" id="m572r154" style="width:80px; top:538px; left:505px;"/>
+<input type="text" name="m572r155" id="m572r155" style="width:80px; top:538px; left:594px;"/>
+<input type="text" name="m572r156" id="m572r156" style="width:80px; top:538px; left:684px;"/>
+<input type="text" name="m572r157" id="m572r157" style="width:80px; top:538px; left:774px;"/>
+<input type="text" name="m572r158" id="m572r158" style="width:80px; top:538px; left:864px;"/>
+<input type="text" name="m572r159" id="m572r159" style="width:80px; top:538px; left:953px;"/>
+<input type="text" name="m572r1510" id="m572r1510" style="width:80px; top:538px; left:1043px;"/>
+<input type="text" name="m572r1511" id="m572r1511" style="width:79px; top:538px; left:1133px;"/>
+<input type="text" name="m572r161" id="m572r161" style="width:80px; top:560px; left:236px;"/>
+<input type="text" name="m572r162" id="m572r162" style="width:80px; top:560px; left:325px;"/>
+<input type="text" name="m572r163" id="m572r163" style="width:80px; top:560px; left:415px;"/>
+<input type="text" name="m572r165" id="m572r165" style="width:80px; top:560px; left:594px;"/>
+<input type="text" name="m572r166" id="m572r166" style="width:80px; top:560px; left:684px;"/>
+<input type="text" name="m572r167" id="m572r167" style="width:80px; top:560px; left:774px;"/>
+<input type="text" name="m572r168" id="m572r168" style="width:80px; top:560px; left:864px;"/>
+<input type="text" name="m572r169" id="m572r169" style="width:80px; top:560px; left:953px;"/>
+<input type="text" name="m572r1610" id="m572r1610" style="width:80px; top:560px; left:1043px;"/>
+<input type="text" name="m572r1611" id="m572r1611" style="width:79px; top:560px; left:1133px;"/>
+<input type="text" name="m572r178" id="m572r178" style="width:80px; top:580px; left:864px;"/>
+<input type="text" name="m572r179" id="m572r179" style="width:80px; top:580px; left:953px;"/>
+<input type="text" name="m572r1710" id="m572r1710" style="width:80px; top:580px; left:1043px;"/>
+<input type="text" name="m572r1711" id="m572r1711" style="width:79px; top:580px; left:1133px;"/>
+<input type="text" name="m572r181" id="m572r181" style="width:80px; top:602px; left:236px;"/>
+<input type="text" name="m572r182" id="m572r182" style="width:80px; top:602px; left:325px;"/>
+<input type="text" name="m572r183" id="m572r183" style="width:80px; top:602px; left:415px;"/>
+<input type="text" name="m572r188" id="m572r188" style="width:80px; top:602px; left:864px;"/>
+<input type="text" name="m572r189" id="m572r189" style="width:80px; top:602px; left:953px;"/>
+<input type="text" name="m572r1810" id="m572r1810" style="width:80px; top:602px; left:1043px;"/>
+<input type="text" name="m572r1811" id="m572r1811" style="width:79px; top:602px; left:1133px;"/>
+<input type="text" name="m572r198" id="m572r198" style="width:80px; top:625px; left:864px;"/>
+<input type="text" name="m572r199" id="m572r199" style="width:80px; top:625px; left:953px;"/>
+<input type="text" name="m572r1910" id="m572r1910" style="width:80px; top:625px; left:1043px;"/>
+<input type="text" name="m572r1911" id="m572r1911" style="width:79px; top:625px; left:1133px;"/>
+<input type="text" name="m572r208" id="m572r208" style="width:80px; top:650px; left:864px;"/>
+<input type="text" name="m572r209" id="m572r209" style="width:80px; top:650px; left:953px;"/>
+<input type="text" name="m572r2010" id="m572r2010" style="width:80px; top:650px; left:1043px;"/>
+<input type="text" name="m572r2011" id="m572r2011" style="width:79px; top:650px; left:1133px;"/>
+<input type="text" name="m572r211" id="m572r211" style="width:80px; top:680px; left:236px;"/>
+<input type="text" name="m572r212" id="m572r212" style="width:80px; top:680px; left:325px;"/>
+<input type="text" name="m572r213" id="m572r213" style="width:80px; top:680px; left:415px;"/>
+<input type="text" name="m572r218" id="m572r218" style="width:80px; top:680px; left:864px;"/>
+<input type="text" name="m572r219" id="m572r219" style="width:80px; top:680px; left:953px;"/>
+<input type="text" name="m572r2110" id="m572r2110" style="width:80px; top:680px; left:1043px;"/>
+<input type="text" name="m572r2111" id="m572r2111" style="width:79px; top:680px; left:1133px;"/>
+<input type="text" name="m572r228" id="m572r228" style="width:80px; top:709px; left:864px;"/>
+<input type="text" name="m572r229" id="m572r229" style="width:80px; top:709px; left:953px;"/>
+<input type="text" name="m572r2210" id="m572r2210" style="width:80px; top:709px; left:1043px;"/>
+<input type="text" name="m572r2211" id="m572r2211" style="width:79px; top:709px; left:1133px;"/>
+<input type="text" name="m572r238" id="m572r238" style="width:80px; top:732px; left:864px;"/>
+<input type="text" name="m572r239" id="m572r239" style="width:80px; top:732px; left:953px;"/>
+<input type="text" name="m572r2310" id="m572r2310" style="width:80px; top:732px; left:1043px;"/>
+<input type="text" name="m572r2311" id="m572r2311" style="width:79px; top:732px; left:1133px;"/>
+<input type="text" name="m572r248" id="m572r248" style="width:80px; top:755px; left:864px;"/>
+<input type="text" name="m572r249" id="m572r249" style="width:80px; top:755px; left:953px;"/>
+<input type="text" name="m572r2410" id="m572r2410" style="width:80px; top:755px; left:1043px;"/>
+<input type="text" name="m572r2411" id="m572r2411" style="width:79px; top:755px; left:1133px;"/>
+<span class="text-echo" style="top:781px; right:930px;"><?php echo $m572r991; ?></span>
+<span class="text-echo" style="top:781px; right:841px;"><?php echo $m572r992; ?></span>
+<span class="text-echo" style="top:781px; right:751px;"><?php echo $m572r993; ?></span>
+<span class="text-echo" style="top:781px; right:661px;"><?php echo $m572r994; ?></span>
+<span class="text-echo" style="top:781px; right:572px;"><?php echo $m572r995; ?></span>
+<span class="text-echo" style="top:781px; right:482px;"><?php echo $m572r996; ?></span>
+<span class="text-echo" style="top:781px; right:392px;"><?php echo $m572r997; ?></span>
+<span class="text-echo" style="top:781px; right:302px;"><?php echo $m572r998; ?></span>
+<span class="text-echo" style="top:781px; right:213px;"><?php echo $m572r999; ?></span>
+<span class="text-echo" style="top:781px; right:123px;"><?php echo $m572r9910; ?></span>
+<span class="text-echo" style="top:781px; right:35px;"><?php echo $m572r9911; ?></span>
 <?php                                         } ?>
 
+<?php if ( $strana == 11 ) { ?>
+<!-- modul 573 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(573);" style="top:77px; left:226px;" class="btn-row-tool">
+<input type="text" name="m573r11" id="m573r11" style="width:109px; top:175px; left:267px;"/>
+<input type="text" name="m573r12" id="m573r12" style="width:109px; top:175px; left:386px;"/>
+<input type="text" name="m573r13" id="m573r13" style="width:109px; top:175px; left:505px;"/>
+<input type="text" name="m573r14" id="m573r14" style="width:109px; top:175px; left:624px;"/>
+<input type="text" name="m573r15" id="m573r15" style="width:109px; top:175px; left:743px;"/>
+<input type="text" name="m573r16" id="m573r16" style="width:109px; top:175px; left:862px;"/>
+<input type="text" name="m573r17" id="m573r17" style="width:109px; top:175px; left:981px;"/>
+<input type="text" name="m573r18" id="m573r18" style="width:109px; top:175px; left:1100px;"/>
+<input type="text" name="m573r21" id="m573r21" style="width:109px; top:196px; left:267px;"/>
+<input type="text" name="m573r22" id="m573r22" style="width:109px; top:196px; left:386px;"/>
+<input type="text" name="m573r23" id="m573r23" style="width:109px; top:196px; left:505px;"/>
+<input type="text" name="m573r24" id="m573r24" style="width:109px; top:196px; left:624px;"/>
+<input type="text" name="m573r25" id="m573r25" style="width:109px; top:196px; left:743px;"/>
+<input type="text" name="m573r26" id="m573r26" style="width:109px; top:196px; left:862px;"/>
+<input type="text" name="m573r27" id="m573r27" style="width:109px; top:196px; left:981px;"/>
+<input type="text" name="m573r28" id="m573r28" style="width:109px; top:196px; left:1100px;"/>
+<input type="text" name="m573r35" id="m573r35" style="width:109px; top:217px; left:743px;"/>
+<input type="text" name="m573r36" id="m573r36" style="width:109px; top:217px; left:862px;"/>
+<input type="text" name="m573r37" id="m573r37" style="width:109px; top:217px; left:981px;"/>
+<input type="text" name="m573r38" id="m573r38" style="width:109px; top:217px; left:1100px;"/>
+<input type="text" name="m573r45" id="m573r45" style="width:109px; top:239px; left:743px;"/>
+<input type="text" name="m573r46" id="m573r46" style="width:109px; top:239px; left:862px;"/>
+<input type="text" name="m573r47" id="m573r47" style="width:109px; top:239px; left:981px;"/>
+<input type="text" name="m573r48" id="m573r48" style="width:109px; top:239px; left:1100px;"/>
+<input type="text" name="m573r55" id="m573r55" style="width:109px; top:262px; left:743px;"/>
+<input type="text" name="m573r56" id="m573r56" style="width:109px; top:262px; left:862px;"/>
+<input type="text" name="m573r57" id="m573r57" style="width:109px; top:262px; left:981px;"/>
+<input type="text" name="m573r58" id="m573r58" style="width:109px; top:262px; left:1100px;"/>
+<input type="text" name="m573r65" id="m573r65" style="width:109px; top:284px; left:743px;"/>
+<input type="text" name="m573r66" id="m573r66" style="width:109px; top:284px; left:862px;"/>
+<input type="text" name="m573r67" id="m573r67" style="width:109px; top:284px; left:981px;"/>
+<input type="text" name="m573r68" id="m573r68" style="width:109px; top:284px; left:1100px;"/>
+<input type="text" name="m573r75" id="m573r75" style="width:109px; top:308px; left:743px;"/>
+<input type="text" name="m573r76" id="m573r76" style="width:109px; top:308px; left:862px;"/>
+<input type="text" name="m573r77" id="m573r77" style="width:109px; top:308px; left:981px;"/>
+<input type="text" name="m573r78" id="m573r78" style="width:109px; top:308px; left:1100px;"/>
+<input type="text" name="m573r81" id="m573r81" style="width:109px; top:331px; left:267px;"/>
+<input type="text" name="m573r82" id="m573r82" style="width:109px; top:331px; left:386px;"/>
+<input type="text" name="m573r83" id="m573r83" style="width:109px; top:331px; left:505px;"/>
+<input type="text" name="m573r84" id="m573r84" style="width:109px; top:331px; left:624px;"/>
+<input type="text" name="m573r85" id="m573r85" style="width:109px; top:331px; left:743px;"/>
+<input type="text" name="m573r86" id="m573r86" style="width:109px; top:331px; left:862px;"/>
+<input type="text" name="m573r87" id="m573r87" style="width:109px; top:331px; left:981px;"/>
+<input type="text" name="m573r88" id="m573r88" style="width:109px; top:331px; left:1100px;"/>
+<input type="text" name="m573r91" id="m573r91" style="width:109px; top:354px; left:267px;"/>
+<input type="text" name="m573r92" id="m573r92" style="width:109px; top:354px; left:386px;"/>
+<input type="text" name="m573r93" id="m573r93" style="width:109px; top:354px; left:505px;"/>
+<input type="text" name="m573r94" id="m573r94" style="width:109px; top:354px; left:624px;"/>
+<input type="text" name="m573r95" id="m573r95" style="width:109px; top:354px; left:743px;"/>
+<input type="text" name="m573r96" id="m573r96" style="width:109px; top:354px; left:862px;"/>
+<input type="text" name="m573r97" id="m573r97" style="width:109px; top:354px; left:981px;"/>
+<input type="text" name="m573r98" id="m573r98" style="width:109px; top:354px; left:1100px;"/>
+<input type="text" name="m573r105" id="m573r105" style="width:109px; top:376px; left:743px;"/>
+<input type="text" name="m573r106" id="m573r106" style="width:109px; top:376px; left:862px;"/>
+<input type="text" name="m573r107" id="m573r107" style="width:109px; top:376px; left:981px;"/>
+<input type="text" name="m573r108" id="m573r108" style="width:109px; top:376px; left:1100px;"/>
+<input type="text" name="m573r111" id="m573r111" style="width:109px; top:398px; left:267px;"/>
+<input type="text" name="m573r112" id="m573r112" style="width:109px; top:398px; left:386px;"/>
+<input type="text" name="m573r113" id="m573r113" style="width:109px; top:398px; left:505px;"/>
+<input type="text" name="m573r114" id="m573r114" style="width:109px; top:398px; left:624px;"/>
+<input type="text" name="m573r115" id="m573r115" style="width:109px; top:398px; left:743px;"/>
+<input type="text" name="m573r116" id="m573r116" style="width:109px; top:398px; left:862px;"/>
+<input type="text" name="m573r117" id="m573r117" style="width:109px; top:398px; left:981px;"/>
+<input type="text" name="m573r118" id="m573r118" style="width:109px; top:398px; left:1100px;"/>
+<input type="text" name="m573r121" id="m573r121" style="width:109px; top:420px; left:267px;"/>
+<input type="text" name="m573r122" id="m573r122" style="width:109px; top:420px; left:386px;"/>
+<input type="text" name="m573r123" id="m573r123" style="width:109px; top:420px; left:505px;"/>
+<input type="text" name="m573r124" id="m573r124" style="width:109px; top:420px; left:624px;"/>
+<input type="text" name="m573r125" id="m573r125" style="width:109px; top:420px; left:743px;"/>
+<input type="text" name="m573r126" id="m573r126" style="width:109px; top:420px; left:862px;"/>
+<input type="text" name="m573r127" id="m573r127" style="width:109px; top:420px; left:981px;"/>
+<input type="text" name="m573r128" id="m573r128" style="width:109px; top:420px; left:1100px;"/>
+<input type="text" name="m573r131" id="m573r131" style="width:109px; top:441px; left:267px;"/>
+<input type="text" name="m573r132" id="m573r132" style="width:109px; top:441px; left:386px;"/>
+<input type="text" name="m573r133" id="m573r133" style="width:109px; top:441px; left:505px;"/>
+<input type="text" name="m573r134" id="m573r134" style="width:109px; top:441px; left:624px;"/>
+<input type="text" name="m573r135" id="m573r135" style="width:109px; top:441px; left:743px;"/>
+<input type="text" name="m573r136" id="m573r136" style="width:109px; top:441px; left:862px;"/>
+<input type="text" name="m573r137" id="m573r137" style="width:109px; top:441px; left:981px;"/>
+<input type="text" name="m573r138" id="m573r138" style="width:109px; top:441px; left:1100px;"/>
+<input type="text" name="m573r141" id="m573r141" style="width:109px; top:462px; left:267px;"/>
+<input type="text" name="m573r142" id="m573r142" style="width:109px; top:462px; left:386px;"/>
+<input type="text" name="m573r143" id="m573r143" style="width:109px; top:462px; left:505px;"/>
+<input type="text" name="m573r144" id="m573r144" style="width:109px; top:462px; left:624px;"/>
+<input type="text" name="m573r145" id="m573r145" style="width:109px; top:462px; left:743px;"/>
+<input type="text" name="m573r146" id="m573r146" style="width:109px; top:462px; left:862px;"/>
+<input type="text" name="m573r147" id="m573r147" style="width:109px; top:462px; left:981px;"/>
+<input type="text" name="m573r148" id="m573r148" style="width:109px; top:462px; left:1100px;"/>
+<input type="text" name="m573r151" id="m573r151" style="width:109px; top:484px; left:267px;"/>
+<input type="text" name="m573r152" id="m573r152" style="width:109px; top:484px; left:386px;"/>
+<input type="text" name="m573r153" id="m573r153" style="width:109px; top:484px; left:505px;"/>
+<input type="text" name="m573r154" id="m573r154" style="width:109px; top:484px; left:624px;"/>
+<input type="text" name="m573r155" id="m573r155" style="width:109px; top:484px; left:743px;"/>
+<input type="text" name="m573r156" id="m573r156" style="width:109px; top:484px; left:862px;"/>
+<input type="text" name="m573r157" id="m573r157" style="width:109px; top:484px; left:981px;"/>
+<input type="text" name="m573r158" id="m573r158" style="width:109px; top:484px; left:1100px;"/>
+<input type="text" name="m573r161" id="m573r161" style="width:109px; top:505px; left:267px;"/>
+<input type="text" name="m573r162" id="m573r162" style="width:109px; top:505px; left:386px;"/>
+<input type="text" name="m573r163" id="m573r163" style="width:109px; top:505px; left:505px;"/>
+<input type="text" name="m573r164" id="m573r164" style="width:109px; top:505px; left:624px;"/>
+<input type="text" name="m573r165" id="m573r165" style="width:109px; top:505px; left:743px;"/>
+<input type="text" name="m573r166" id="m573r166" style="width:109px; top:505px; left:862px;"/>
+<input type="text" name="m573r167" id="m573r167" style="width:109px; top:505px; left:981px;"/>
+<input type="text" name="m573r168" id="m573r168" style="width:109px; top:505px; left:1100px;"/>
+<input type="text" name="m573r175" id="m573r175" style="width:109px; top:526px; left:743px;"/>
+<input type="text" name="m573r176" id="m573r176" style="width:109px; top:526px; left:862px;"/>
+<input type="text" name="m573r177" id="m573r177" style="width:109px; top:526px; left:981px;"/>
+<input type="text" name="m573r178" id="m573r178" style="width:109px; top:526px; left:1100px;"/>
+<input type="text" name="m573r185" id="m573r185" style="width:109px; top:548px; left:743px;"/>
+<input type="text" name="m573r186" id="m573r186" style="width:109px; top:548px; left:862px;"/>
+<input type="text" name="m573r187" id="m573r187" style="width:109px; top:548px; left:981px;"/>
+<input type="text" name="m573r188" id="m573r188" style="width:109px; top:548px; left:1100px;"/>
+<input type="text" name="m573r195" id="m573r195" style="width:109px; top:571px; left:743px;"/>
+<input type="text" name="m573r196" id="m573r196" style="width:109px; top:571px; left:862px;"/>
+<input type="text" name="m573r197" id="m573r197" style="width:109px; top:571px; left:981px;"/>
+<input type="text" name="m573r198" id="m573r198" style="width:109px; top:571px; left:1100px;"/>
+<input type="text" name="m573r205" id="m573r205" style="width:109px; top:593px; left:743px;"/>
+<input type="text" name="m573r206" id="m573r206" style="width:109px; top:593px; left:862px;"/>
+<input type="text" name="m573r207" id="m573r207" style="width:109px; top:593px; left:981px;"/>
+<input type="text" name="m573r208" id="m573r208" style="width:109px; top:593px; left:1100px;"/>
+<input type="text" name="m573r215" id="m573r215" style="width:109px; top:617px; left:743px;"/>
+<input type="text" name="m573r216" id="m573r216" style="width:109px; top:617px; left:862px;"/>
+<input type="text" name="m573r217" id="m573r217" style="width:109px; top:617px; left:981px;"/>
+<input type="text" name="m573r218" id="m573r218" style="width:109px; top:617px; left:1100px;"/>
+<input type="text" name="m573r221" id="m573r221" style="width:109px; top:639px; left:267px;"/>
+<input type="text" name="m573r222" id="m573r222" style="width:109px; top:639px; left:386px;"/>
+<input type="text" name="m573r223" id="m573r223" style="width:109px; top:639px; left:505px;"/>
+<input type="text" name="m573r224" id="m573r224" style="width:109px; top:639px; left:624px;"/>
+<input type="text" name="m573r225" id="m573r225" style="width:109px; top:639px; left:743px;"/>
+<input type="text" name="m573r226" id="m573r226" style="width:109px; top:639px; left:862px;"/>
+<input type="text" name="m573r227" id="m573r227" style="width:109px; top:639px; left:981px;"/>
+<input type="text" name="m573r228" id="m573r228" style="width:109px; top:639px; left:1100px;"/>
+<input type="text" name="m573r231" id="m573r231" style="width:109px; top:662px; left:267px;"/>
+<input type="text" name="m573r232" id="m573r232" style="width:109px; top:662px; left:386px;"/>
+<input type="text" name="m573r233" id="m573r233" style="width:109px; top:662px; left:505px;"/>
+<input type="text" name="m573r234" id="m573r234" style="width:109px; top:662px; left:624px;"/>
+<input type="text" name="m573r235" id="m573r235" style="width:109px; top:662px; left:743px;"/>
+<input type="text" name="m573r236" id="m573r236" style="width:109px; top:662px; left:862px;"/>
+<input type="text" name="m573r237" id="m573r237" style="width:109px; top:662px; left:981px;"/>
+<input type="text" name="m573r238" id="m573r238" style="width:109px; top:662px; left:1100px;"/>
+<input type="text" name="m573r245" id="m573r245" style="width:109px; top:685px; left:743px;"/>
+<input type="text" name="m573r246" id="m573r246" style="width:109px; top:685px; left:862px;"/>
+<input type="text" name="m573r247" id="m573r247" style="width:109px; top:685px; left:981px;"/>
+<input type="text" name="m573r248" id="m573r248" style="width:109px; top:685px; left:1100px;"/>
+<span class="text-echo" style="top:711px; right:872px;"><?php echo $m573r991; ?></span>
+<span class="text-echo" style="top:711px; right:752px;"><?php echo $m573r992; ?></span>
+<span class="text-echo" style="top:711px; right:633px;"><?php echo $m573r993; ?></span>
+<span class="text-echo" style="top:711px; right:514px;"><?php echo $m573r994; ?></span>
+<span class="text-echo" style="top:711px; right:395px;"><?php echo $m573r995; ?></span>
+<span class="text-echo" style="top:711px; right:277px;"><?php echo $m573r996; ?></span>
+<span class="text-echo" style="top:711px; right:158px;"><?php echo $m573r997; ?></span>
+<span class="text-echo" style="top:711px; right:40px;"><?php echo $m573r998; ?></span>
+<?php                                        } ?>
 
-<?php if ( $strana == 11 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 11.strana 246kB">
-<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<?php if ( $strana == 12 ) { ?>
+<!-- modul 513 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(513);" class="btn-row-tool" style="top:82px; left:237px;">
+<input type="text" name="m513r11" id="m513r11" style="width:77px; top:234px; left:401px;"/>
+<input type="text" name="m513r12" id="m513r12" style="width:80px; top:234px; left:487px;"/>
+<input type="text" name="m513r13" id="m513r13" style="width:79px; top:234px; left:577px;"/>
+<input type="text" name="m513r14" id="m513r14" style="width:79px; top:234px; left:666px;"/>
+<input type="text" name="m513r15" id="m513r15" style="width:80px; top:234px; left:755px;"/>
+<input type="text" name="m513r16" id="m513r16" style="width:87px; top:234px; left:844px;"/>
+<input type="text" name="m513r17" id="m513r17" style="width:86px; top:234px; left:942px;"/>
+<input type="text" name="m513r18" id="m513r18" style="width:82px; top:234px; left:1038px;"/>
+<input type="text" name="m513r19" id="m513r19" style="width:79px; top:234px; left:1130px;"/>
+<input type="text" name="m513r21" id="m513r21" style="width:77px; top:256px; left:401px;"/>
+<input type="text" name="m513r22" id="m513r22" style="width:80px; top:256px; left:487px;"/>
+<input type="text" name="m513r23" id="m513r23" style="width:79px; top:256px; left:577px;"/>
+<input type="text" name="m513r24" id="m513r24" style="width:79px; top:256px; left:666px;"/>
+<input type="text" name="m513r25" id="m513r25" style="width:80px; top:256px; left:755px;"/>
+<input type="text" name="m513r26" id="m513r26" style="width:87px; top:256px; left:844px;"/>
+<input type="text" name="m513r27" id="m513r27" style="width:86px; top:256px; left:942px;"/>
+<input type="text" name="m513r28" id="m513r28" style="width:82px; top:256px; left:1038px;"/>
+<input type="text" name="m513r29" id="m513r29" style="width:79px; top:256px; left:1130px;"/>
+<input type="text" name="m513r31" id="m513r31" style="width:77px; top:278px; left:401px;"/>
+<input type="text" name="m513r32" id="m513r32" style="width:80px; top:278px; left:487px;"/>
+<input type="text" name="m513r33" id="m513r33" style="width:79px; top:278px; left:577px;"/>
+<input type="text" name="m513r34" id="m513r34" style="width:79px; top:278px; left:666px;"/>
+<input type="text" name="m513r35" id="m513r35" style="width:80px; top:278px; left:755px;"/>
+<input type="text" name="m513r36" id="m513r36" style="width:87px; top:278px; left:844px;"/>
+<input type="text" name="m513r37" id="m513r37" style="width:86px; top:278px; left:942px;"/>
+<input type="text" name="m513r38" id="m513r38" style="width:82px; top:278px; left:1038px;"/>
+<input type="text" name="m513r39" id="m513r39" style="width:79px; top:278px; left:1130px;"/>
+<input type="text" name="m513r41" id="m513r41" style="width:77px; top:299px; left:401px;"/>
+<input type="text" name="m513r42" id="m513r42" style="width:80px; top:299px; left:487px;"/>
+<input type="text" name="m513r43" id="m513r43" style="width:79px; top:299px; left:577px;"/>
+<input type="text" name="m513r44" id="m513r44" style="width:79px; top:299px; left:666px;"/>
+<input type="text" name="m513r45" id="m513r45" style="width:80px; top:299px; left:755px;"/>
+<input type="text" name="m513r46" id="m513r46" style="width:87px; top:299px; left:844px;"/>
+<input type="text" name="m513r47" id="m513r47" style="width:86px; top:299px; left:942px;"/>
+<input type="text" name="m513r48" id="m513r48" style="width:82px; top:299px; left:1038px;"/>
+<input type="text" name="m513r49" id="m513r49" style="width:79px; top:299px; left:1130px;"/>
+<input type="text" name="m513r51" id="m513r51" style="width:77px; top:320px; left:401px;"/>
+<input type="text" name="m513r52" id="m513r52" style="width:80px; top:320px; left:487px;"/>
+<input type="text" name="m513r53" id="m513r53" style="width:79px; top:320px; left:577px;"/>
+<input type="text" name="m513r54" id="m513r54" style="width:79px; top:320px; left:666px;"/>
+<input type="text" name="m513r55" id="m513r55" style="width:80px; top:320px; left:755px;"/>
+<input type="text" name="m513r56" id="m513r56" style="width:87px; top:320px; left:844px;"/>
+<input type="text" name="m513r57" id="m513r57" style="width:86px; top:320px; left:942px;"/>
+<input type="text" name="m513r58" id="m513r58" style="width:82px; top:320px; left:1038px;"/>
+<input type="text" name="m513r59" id="m513r59" style="width:79px; top:320px; left:1130px;"/>
+<input type="text" name="m513r61" id="m513r61" style="width:77px; top:341px; left:401px;"/>
+<input type="text" name="m513r62" id="m513r62" style="width:80px; top:341px; left:487px;"/>
+<input type="text" name="m513r63" id="m513r63" style="width:79px; top:341px; left:577px;"/>
+<input type="text" name="m513r64" id="m513r64" style="width:79px; top:341px; left:666px;"/>
+<input type="text" name="m513r65" id="m513r65" style="width:80px; top:341px; left:755px;"/>
+<input type="text" name="m513r66" id="m513r66" style="width:87px; top:341px; left:844px;"/>
+<input type="text" name="m513r67" id="m513r67" style="width:86px; top:341px; left:942px;"/>
+<input type="text" name="m513r68" id="m513r68" style="width:82px; top:341px; left:1038px;"/>
+<input type="text" name="m513r69" id="m513r69" style="width:79px; top:341px; left:1130px;"/>
+<input type="text" name="m513r71" id="m513r71" style="width:77px; top:363px; left:401px;"/>
+<input type="text" name="m513r72" id="m513r72" style="width:80px; top:363px; left:487px;"/>
+<input type="text" name="m513r73" id="m513r73" style="width:79px; top:363px; left:577px;"/>
+<input type="text" name="m513r74" id="m513r74" style="width:79px; top:363px; left:666px;"/>
+<input type="text" name="m513r75" id="m513r75" style="width:80px; top:363px; left:755px;"/>
+<input type="text" name="m513r76" id="m513r76" style="width:87px; top:363px; left:844px;"/>
+<input type="text" name="m513r77" id="m513r77" style="width:86px; top:363px; left:942px;"/>
+<input type="text" name="m513r78" id="m513r78" style="width:82px; top:363px; left:1038px;"/>
+<input type="text" name="m513r79" id="m513r79" style="width:79px; top:363px; left:1130px;"/>
+<input type="text" name="m513r81" id="m513r81" style="width:77px; top:384px; left:401px;"/>
+<input type="text" name="m513r82" id="m513r82" style="width:80px; top:384px; left:487px;"/>
+<input type="text" name="m513r83" id="m513r83" style="width:79px; top:384px; left:577px;"/>
+<input type="text" name="m513r84" id="m513r84" style="width:79px; top:384px; left:666px;"/>
+<input type="text" name="m513r85" id="m513r85" style="width:80px; top:384px; left:755px;"/>
+<input type="text" name="m513r86" id="m513r86" style="width:87px; top:384px; left:844px;"/>
+<input type="text" name="m513r87" id="m513r87" style="width:86px; top:384px; left:942px;"/>
+<input type="text" name="m513r88" id="m513r88" style="width:82px; top:384px; left:1038px;"/>
+<input type="text" name="m513r89" id="m513r89" style="width:79px; top:384px; left:1130px;"/>
+<input type="text" name="m513r91" id="m513r91" style="width:77px; top:405px; left:401px;"/>
+<input type="text" name="m513r92" id="m513r92" style="width:80px; top:405px; left:487px;"/>
+<input type="text" name="m513r93" id="m513r93" style="width:79px; top:405px; left:577px;"/>
+<input type="text" name="m513r94" id="m513r94" style="width:79px; top:405px; left:666px;"/>
+<input type="text" name="m513r95" id="m513r95" style="width:80px; top:405px; left:755px;"/>
+<input type="text" name="m513r96" id="m513r96" style="width:87px; top:405px; left:844px;"/>
+<input type="text" name="m513r97" id="m513r97" style="width:86px; top:405px; left:942px;"/>
+<input type="text" name="m513r98" id="m513r98" style="width:82px; top:405px; left:1038px;"/>
+<input type="text" name="m513r99" id="m513r99" style="width:79px; top:405px; left:1130px;"/>
+<input type="text" name="m513r101" id="m513r101" style="width:77px; top:427px; left:401px;"/>
+<input type="text" name="m513r102" id="m513r102" style="width:80px; top:427px; left:487px;"/>
+<input type="text" name="m513r103" id="m513r103" style="width:79px; top:427px; left:577px;"/>
+<input type="text" name="m513r104" id="m513r104" style="width:79px; top:427px; left:666px;"/>
+<input type="text" name="m513r105" id="m513r105" style="width:80px; top:427px; left:755px;"/>
+<input type="text" name="m513r106" id="m513r106" style="width:87px; top:427px; left:844px;"/>
+<input type="text" name="m513r107" id="m513r107" style="width:86px; top:427px; left:942px;"/>
+<input type="text" name="m513r108" id="m513r108" style="width:82px; top:427px; left:1038px;"/>
+<input type="text" name="m513r109" id="m513r109" style="width:79px; top:427px; left:1130px;"/>
+<input type="text" name="m513r111" id="m513r111" style="width:77px; top:448px; left:401px;"/>
+<input type="text" name="m513r112" id="m513r112" style="width:80px; top:448px; left:487px;"/>
+<input type="text" name="m513r113" id="m513r113" style="width:79px; top:448px; left:577px;"/>
+<input type="text" name="m513r114" id="m513r114" style="width:79px; top:448px; left:666px;"/>
+<input type="text" name="m513r115" id="m513r115" style="width:80px; top:448px; left:755px;"/>
+<input type="text" name="m513r116" id="m513r116" style="width:87px; top:448px; left:844px;"/>
+<input type="text" name="m513r117" id="m513r117" style="width:86px; top:448px; left:942px;"/>
+<input type="text" name="m513r118" id="m513r118" style="width:82px; top:448px; left:1038px;"/>
+<input type="text" name="m513r119" id="m513r119" style="width:79px; top:448px; left:1130px;"/>
+<input type="text" name="m513r121" id="m513r121" style="width:77px; top:470px; left:401px;"/>
+<input type="text" name="m513r122" id="m513r122" style="width:80px; top:470px; left:487px;"/>
+<input type="text" name="m513r123" id="m513r123" style="width:79px; top:470px; left:577px;"/>
+<input type="text" name="m513r124" id="m513r124" style="width:79px; top:470px; left:666px;"/>
+<input type="text" name="m513r125" id="m513r125" style="width:80px; top:470px; left:755px;"/>
+<input type="text" name="m513r126" id="m513r126" style="width:87px; top:470px; left:844px;"/>
+<input type="text" name="m513r127" id="m513r127" style="width:86px; top:470px; left:942px;"/>
+<input type="text" name="m513r128" id="m513r128" style="width:82px; top:470px; left:1038px;"/>
+<input type="text" name="m513r129" id="m513r129" style="width:79px; top:470px; left:1130px;"/>
+<input type="text" name="m513r131" id="m513r131" style="width:77px; top:493px; left:401px;"/>
+<input type="text" name="m513r132" id="m513r132" style="width:80px; top:493px; left:487px;"/>
+<input type="text" name="m513r133" id="m513r133" style="width:79px; top:493px; left:577px;"/>
+<input type="text" name="m513r134" id="m513r134" style="width:79px; top:493px; left:666px;"/>
+<input type="text" name="m513r135" id="m513r135" style="width:80px; top:493px; left:755px;"/>
+<input type="text" name="m513r136" id="m513r136" style="width:87px; top:493px; left:844px;"/>
+<input type="text" name="m513r137" id="m513r137" style="width:86px; top:493px; left:942px;"/>
+<input type="text" name="m513r138" id="m513r138" style="width:82px; top:493px; left:1038px;"/>
+<input type="text" name="m513r139" id="m513r139" style="width:79px; top:493px; left:1130px;"/>
+<input type="text" name="m513r141" id="m513r141" style="width:77px; top:515px; left:401px;"/>
+<input type="text" name="m513r142" id="m513r142" style="width:80px; top:515px; left:487px;"/>
+<input type="text" name="m513r143" id="m513r143" style="width:79px; top:515px; left:577px;"/>
+<input type="text" name="m513r144" id="m513r144" style="width:79px; top:515px; left:666px;"/>
+<input type="text" name="m513r145" id="m513r145" style="width:80px; top:515px; left:755px;"/>
+<input type="text" name="m513r146" id="m513r146" style="width:87px; top:515px; left:844px;"/>
+<input type="text" name="m513r147" id="m513r147" style="width:86px; top:515px; left:942px;"/>
+<input type="text" name="m513r148" id="m513r148" style="width:82px; top:515px; left:1038px;"/>
+<input type="text" name="m513r149" id="m513r149" style="width:79px; top:515px; left:1130px;"/>
+<input type="text" name="m513r151" id="m513r151" style="width:77px; top:537px; left:401px;"/>
+<input type="text" name="m513r152" id="m513r152" style="width:80px; top:537px; left:487px;"/>
+<input type="text" name="m513r153" id="m513r153" style="width:79px; top:537px; left:577px;"/>
+<input type="text" name="m513r154" id="m513r154" style="width:79px; top:537px; left:666px;"/>
+<input type="text" name="m513r155" id="m513r155" style="width:80px; top:537px; left:755px;"/>
+<input type="text" name="m513r156" id="m513r156" style="width:87px; top:537px; left:844px;"/>
+<input type="text" name="m513r157" id="m513r157" style="width:86px; top:537px; left:942px;"/>
+<input type="text" name="m513r158" id="m513r158" style="width:82px; top:537px; left:1038px;"/>
+<input type="text" name="m513r159" id="m513r159" style="width:79px; top:537px; left:1130px;"/>
+<input type="text" name="m513r161" id="m513r161" style="width:77px; top:558px; left:401px;"/>
+<input type="text" name="m513r162" id="m513r162" style="width:80px; top:558px; left:487px;"/>
+<input type="text" name="m513r163" id="m513r163" style="width:79px; top:558px; left:577px;"/>
+<input type="text" name="m513r164" id="m513r164" style="width:79px; top:558px; left:666px;"/>
+<input type="text" name="m513r165" id="m513r165" style="width:80px; top:558px; left:755px;"/>
+<input type="text" name="m513r166" id="m513r166" style="width:87px; top:558px; left:844px;"/>
+<input type="text" name="m513r167" id="m513r167" style="width:86px; top:558px; left:942px;"/>
+<input type="text" name="m513r168" id="m513r168" style="width:82px; top:558px; left:1038px;"/>
+<input type="text" name="m513r169" id="m513r169" style="width:79px; top:558px; left:1130px;"/>
+<input type="text" name="m513r171" id="m513r171" style="width:77px; top:579px; left:401px;"/>
+<input type="text" name="m513r173" id="m513r173" style="width:79px; top:579px; left:577px;"/>
+<input type="text" name="m513r174" id="m513r174" style="width:79px; top:579px; left:666px;"/>
+<input type="text" name="m513r175" id="m513r175" style="width:80px; top:579px; left:755px;"/>
+<input type="text" name="m513r176" id="m513r176" style="width:87px; top:579px; left:844px;"/>
+<input type="text" name="m513r177" id="m513r177" style="width:86px; top:579px; left:942px;"/>
+<input type="text" name="m513r181" id="m513r181" style="width:77px; top:601px; left:401px;"/>
+<input type="text" name="m513r183" id="m513r183" style="width:79px; top:601px; left:577px;"/>
+<input type="text" name="m513r184" id="m513r184" style="width:79px; top:601px; left:666px;"/>
+<input type="text" name="m513r185" id="m513r185" style="width:80px; top:601px; left:755px;"/>
+<input type="text" name="m513r186" id="m513r186" style="width:87px; top:601px; left:844px;"/>
+<input type="text" name="m513r187" id="m513r187" style="width:86px; top:601px; left:942px;"/>
+<input type="text" name="m513r191" id="m513r191" style="width:77px; top:622px; left:401px;"/>
+<input type="text" name="m513r193" id="m513r193" style="width:79px; top:622px; left:577px;"/>
+<input type="text" name="m513r194" id="m513r194" style="width:79px; top:622px; left:666px;"/>
+<input type="text" name="m513r195" id="m513r195" style="width:80px; top:622px; left:755px;"/>
+<input type="text" name="m513r196" id="m513r196" style="width:87px; top:622px; left:844px;"/>
+<input type="text" name="m513r197" id="m513r197" style="width:86px; top:622px; left:942px;"/>
+<input type="text" name="m513r201" id="m513r201" style="width:77px; top:644px; left:401px;"/>
+<input type="text" name="m513r203" id="m513r203" style="width:79px; top:644px; left:577px;"/>
+<input type="text" name="m513r204" id="m513r204" style="width:79px; top:644px; left:666px;"/>
+<input type="text" name="m513r205" id="m513r205" style="width:80px; top:644px; left:755px;"/>
+<input type="text" name="m513r206" id="m513r206" style="width:87px; top:644px; left:844px;"/>
+<input type="text" name="m513r207" id="m513r207" style="width:86px; top:644px; left:942px;"/>
+<input type="text" name="m513r211" id="m513r211" style="width:77px; top:665px; left:401px;"/>
+<input type="text" name="m513r213" id="m513r213" style="width:79px; top:665px; left:577px;"/>
+<input type="text" name="m513r214" id="m513r214" style="width:79px; top:665px; left:666px;"/>
+<input type="text" name="m513r215" id="m513r215" style="width:80px; top:665px; left:755px;"/>
+<input type="text" name="m513r216" id="m513r216" style="width:87px; top:665px; left:844px;"/>
+<input type="text" name="m513r217" id="m513r217" style="width:86px; top:665px; left:942px;"/>
+<input type="text" name="m513r221" id="m513r221" style="width:77px; top:686px; left:401px;"/>
+<input type="text" name="m513r222" id="m513r222" style="width:80px; top:686px; left:487px;"/>
+<input type="text" name="m513r223" id="m513r223" style="width:79px; top:686px; left:577px;"/>
+<input type="text" name="m513r224" id="m513r224" style="width:79px; top:686px; left:666px;"/>
+<input type="text" name="m513r225" id="m513r225" style="width:80px; top:686px; left:755px;"/>
+<input type="text" name="m513r226" id="m513r226" style="width:87px; top:686px; left:844px;"/>
+<input type="text" name="m513r227" id="m513r227" style="width:86px; top:686px; left:942px;"/>
+<input type="text" name="m513r228" id="m513r228" style="width:82px; top:686px; left:1038px;"/>
+<input type="text" name="m513r229" id="m513r229" style="width:79px; top:686px; left:1130px;"/>
+<span class="text-echo" style="top:712px; right:770px;"><?php echo $m513r991; ?></span>
+<span class="text-echo" style="top:712px; right:679px;"><?php echo $m513r992; ?></span>
+<span class="text-echo" style="top:712px; right:591px;"><?php echo $m513r993; ?></span>
+<span class="text-echo" style="top:712px; right:502px;"><?php echo $m513r994; ?></span>
+<span class="text-echo" style="top:712px; right:412px;"><?php echo $m513r995; ?></span>
+<span class="text-echo" style="top:712px; right:316px;"><?php echo $m513r996; ?></span>
+<span class="text-echo" style="top:712px; right:219px;"><?php echo $m513r997; ?></span>
+<span class="text-echo" style="top:712px; right:127px;"><?php echo $m513r998; ?></span>
+<span class="text-echo" style="top:712px; right:38px;"><?php echo $m513r999; ?></span>
+<?php                                         } ?>
 
+<?php if ( $strana == 13 ) { ?>
+<!-- modul 516 -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(516);" class="btn-row-tool" style="top:76px; left:352px;">
+<input type="text" name="m516r11" id="m516r11" style="width:109px; top:224px; left:386px;"/>
+<input type="text" name="m516r12" id="m516r12" style="width:109px; top:224px; left:505px;"/>
+<input type="text" name="m516r13" id="m516r13" style="width:109px; top:224px; left:624px;"/>
+<input type="text" name="m516r14" id="m516r14" style="width:109px; top:224px; left:743px;"/>
+<input type="text" name="m516r15" id="m516r15" style="width:109px; top:224px; left:862px;"/>
+<input type="text" name="m516r16" id="m516r16" style="width:109px; top:224px; left:981px;"/>
+<input type="text" name="m516r17" id="m516r17" style="width:109px; top:224px; left:1100px;"/>
+<input type="text" name="m516r21" id="m516r21" style="width:109px; top:245px; left:386px;"/>
+<input type="text" name="m516r22" id="m516r22" style="width:109px; top:245px; left:505px;"/>
+<input type="text" name="m516r23" id="m516r23" style="width:109px; top:245px; left:624px;"/>
+<input type="text" name="m516r24" id="m516r24" style="width:109px; top:245px; left:743px;"/>
+<input type="text" name="m516r25" id="m516r25" style="width:109px; top:245px; left:862px;"/>
+<input type="text" name="m516r26" id="m516r26" style="width:109px; top:245px; left:981px;"/>
+<input type="text" name="m516r27" id="m516r27" style="width:109px; top:245px; left:1100px;"/>
+<input type="text" name="m516r31" id="m516r31" style="width:109px; top:266px; left:386px;"/>
+<input type="text" name="m516r32" id="m516r32" style="width:109px; top:266px; left:505px;"/>
+<input type="text" name="m516r33" id="m516r33" style="width:109px; top:266px; left:624px;"/>
+<input type="text" name="m516r34" id="m516r34" style="width:109px; top:266px; left:743px;"/>
+<input type="text" name="m516r35" id="m516r35" style="width:109px; top:266px; left:862px;"/>
+<input type="text" name="m516r36" id="m516r36" style="width:109px; top:266px; left:981px;"/>
+<input type="text" name="m516r37" id="m516r37" style="width:109px; top:266px; left:1100px;"/>
+<input type="text" name="m516r41" id="m516r41" style="width:109px; top:288px; left:386px;"/>
+<input type="text" name="m516r42" id="m516r42" style="width:109px; top:288px; left:505px;"/>
+<input type="text" name="m516r43" id="m516r43" style="width:109px; top:288px; left:624px;"/>
+<input type="text" name="m516r44" id="m516r44" style="width:109px; top:288px; left:743px;"/>
+<input type="text" name="m516r45" id="m516r45" style="width:109px; top:288px; left:862px;"/>
+<input type="text" name="m516r46" id="m516r46" style="width:109px; top:288px; left:981px;"/>
+<input type="text" name="m516r47" id="m516r47" style="width:109px; top:288px; left:1100px;"/>
+<input type="text" name="m516r51" id="m516r51" style="width:109px; top:309px; left:386px;"/>
+<input type="text" name="m516r53" id="m516r53" style="width:109px; top:309px; left:624px;"/>
+<input type="text" name="m516r54" id="m516r54" style="width:109px; top:309px; left:743px;"/>
+<input type="text" name="m516r55" id="m516r55" style="width:109px; top:309px; left:862px;"/>
+<input type="text" name="m516r57" id="m516r57" style="width:109px; top:309px; left:1100px;"/>
+<input type="text" name="m516r61" id="m516r61" style="width:109px; top:331px; left:386px;"/>
+<input type="text" name="m516r62" id="m516r62" style="width:109px; top:331px; left:505px;"/>
+<input type="text" name="m516r63" id="m516r63" style="width:109px; top:331px; left:624px;"/>
+<input type="text" name="m516r64" id="m516r64" style="width:109px; top:331px; left:743px;"/>
+<input type="text" name="m516r65" id="m516r65" style="width:109px; top:331px; left:862px;"/>
+<input type="text" name="m516r66" id="m516r66" style="width:109px; top:331px; left:981px;"/>
+<input type="text" name="m516r67" id="m516r67" style="width:109px; top:331px; left:1100px;"/>
+<input type="text" name="m516r71" id="m516r71" style="width:109px; top:352px; left:386px;"/>
+<input type="text" name="m516r72" id="m516r72" style="width:109px; top:352px; left:505px;"/>
+<input type="text" name="m516r73" id="m516r73" style="width:109px; top:352px; left:624px;"/>
+<input type="text" name="m516r74" id="m516r74" style="width:109px; top:352px; left:743px;"/>
+<input type="text" name="m516r75" id="m516r75" style="width:109px; top:352px; left:862px;"/>
+<input type="text" name="m516r76" id="m516r76" style="width:109px; top:352px; left:981px;"/>
+<input type="text" name="m516r77" id="m516r77" style="width:109px; top:352px; left:1100px;"/>
+<input type="text" name="m516r81" id="m516r81" style="width:109px; top:373px; left:386px;"/>
+<input type="text" name="m516r82" id="m516r82" style="width:109px; top:373px; left:505px;"/>
+<input type="text" name="m516r83" id="m516r83" style="width:109px; top:373px; left:624px;"/>
+<input type="text" name="m516r84" id="m516r84" style="width:109px; top:373px; left:743px;"/>
+<input type="text" name="m516r85" id="m516r85" style="width:109px; top:373px; left:862px;"/>
+<input type="text" name="m516r86" id="m516r86" style="width:109px; top:373px; left:981px;"/>
+<input type="text" name="m516r87" id="m516r87" style="width:109px; top:373px; left:1100px;"/>
+<input type="text" name="m516r91" id="m516r91" style="width:109px; top:394px; left:386px;"/>
+<input type="text" name="m516r92" id="m516r92" style="width:109px; top:394px; left:505px;"/>
+<input type="text" name="m516r93" id="m516r93" style="width:109px; top:394px; left:624px;"/>
+<input type="text" name="m516r94" id="m516r94" style="width:109px; top:394px; left:743px;"/>
+<input type="text" name="m516r95" id="m516r95" style="width:109px; top:394px; left:862px;"/>
+<input type="text" name="m516r96" id="m516r96" style="width:109px; top:394px; left:981px;"/>
+<input type="text" name="m516r97" id="m516r97" style="width:109px; top:394px; left:1100px;"/>
+<input type="text" name="m516r101" id="m516r101" style="width:109px; top:416px; left:386px;"/>
+<input type="text" name="m516r102" id="m516r102" style="width:109px; top:416px; left:505px;"/>
+<input type="text" name="m516r103" id="m516r103" style="width:109px; top:416px; left:624px;"/>
+<input type="text" name="m516r104" id="m516r104" style="width:109px; top:416px; left:743px;"/>
+<input type="text" name="m516r105" id="m516r105" style="width:109px; top:416px; left:862px;"/>
+<input type="text" name="m516r106" id="m516r106" style="width:109px; top:416px; left:981px;"/>
+<input type="text" name="m516r107" id="m516r107" style="width:109px; top:416px; left:1100px;"/>
+<input type="text" name="m516r111" id="m516r111" style="width:109px; top:437px; left:386px;"/>
+<input type="text" name="m516r112" id="m516r112" style="width:109px; top:437px; left:505px;"/>
+<input type="text" name="m516r113" id="m516r113" style="width:109px; top:437px; left:624px;"/>
+<input type="text" name="m516r114" id="m516r114" style="width:109px; top:437px; left:743px;"/>
+<input type="text" name="m516r115" id="m516r115" style="width:109px; top:437px; left:862px;"/>
+<input type="text" name="m516r116" id="m516r116" style="width:109px; top:437px; left:981px;"/>
+<input type="text" name="m516r117" id="m516r117" style="width:109px; top:437px; left:1100px;"/>
+<input type="text" name="m516r121" id="m516r121" style="width:109px; top:459px; left:386px;"/>
+<input type="text" name="m516r122" id="m516r122" style="width:109px; top:459px; left:505px;"/>
+<input type="text" name="m516r123" id="m516r123" style="width:109px; top:459px; left:624px;"/>
+<input type="text" name="m516r124" id="m516r124" style="width:109px; top:459px; left:743px;"/>
+<input type="text" name="m516r125" id="m516r125" style="width:109px; top:459px; left:862px;"/>
+<input type="text" name="m516r126" id="m516r126" style="width:109px; top:459px; left:981px;"/>
+<input type="text" name="m516r127" id="m516r127" style="width:109px; top:459px; left:1100px;"/>
+<input type="text" name="m516r131" id="m516r131" style="width:109px; top:482px; left:386px;"/>
+<input type="text" name="m516r132" id="m516r132" style="width:109px; top:482px; left:505px;"/>
+<input type="text" name="m516r133" id="m516r133" style="width:109px; top:482px; left:624px;"/>
+<input type="text" name="m516r134" id="m516r134" style="width:109px; top:482px; left:743px;"/>
+<input type="text" name="m516r135" id="m516r135" style="width:109px; top:482px; left:862px;"/>
+<input type="text" name="m516r136" id="m516r136" style="width:109px; top:482px; left:981px;"/>
+<input type="text" name="m516r137" id="m516r137" style="width:109px; top:482px; left:1100px;"/>
+<input type="text" name="m516r141" id="m516r141" style="width:109px; top:504px; left:386px;"/>
+<input type="text" name="m516r142" id="m516r142" style="width:109px; top:504px; left:505px;"/>
+<input type="text" name="m516r143" id="m516r143" style="width:109px; top:504px; left:624px;"/>
+<input type="text" name="m516r144" id="m516r144" style="width:109px; top:504px; left:743px;"/>
+<input type="text" name="m516r145" id="m516r145" style="width:109px; top:504px; left:862px;"/>
+<input type="text" name="m516r146" id="m516r146" style="width:109px; top:504px; left:981px;"/>
+<input type="text" name="m516r147" id="m516r147" style="width:109px; top:504px; left:1100px;"/>
+<input type="text" name="m516r151" id="m516r151" style="width:109px; top:526px; left:386px;"/>
+<input type="text" name="m516r152" id="m516r152" style="width:109px; top:526px; left:505px;"/>
+<input type="text" name="m516r153" id="m516r153" style="width:109px; top:526px; left:624px;"/>
+<input type="text" name="m516r154" id="m516r154" style="width:109px; top:526px; left:743px;"/>
+<input type="text" name="m516r155" id="m516r155" style="width:109px; top:526px; left:862px;"/>
+<input type="text" name="m516r156" id="m516r156" style="width:109px; top:526px; left:981px;"/>
+<input type="text" name="m516r157" id="m516r157" style="width:109px; top:526px; left:1100px;"/>
+<input type="text" name="m516r161" id="m516r161" style="width:109px; top:547px; left:386px;"/>
+<input type="text" name="m516r162" id="m516r162" style="width:109px; top:547px; left:505px;"/>
+<input type="text" name="m516r163" id="m516r163" style="width:109px; top:547px; left:624px;"/>
+<input type="text" name="m516r164" id="m516r164" style="width:109px; top:547px; left:743px;"/>
+<input type="text" name="m516r165" id="m516r165" style="width:109px; top:547px; left:862px;"/>
+<input type="text" name="m516r166" id="m516r166" style="width:109px; top:547px; left:981px;"/>
+<input type="text" name="m516r167" id="m516r167" style="width:109px; top:547px; left:1100px;"/>
+<input type="text" name="m516r171" id="m516r171" style="width:109px; top:568px; left:386px;"/>
+<input type="text" name="m516r172" id="m516r172" style="width:109px; top:568px; left:505px;"/>
+<input type="text" name="m516r174" id="m516r174" style="width:109px; top:568px; left:743px;"/>
+<input type="text" name="m516r175" id="m516r175" style="width:109px; top:568px; left:862px;"/>
+<input type="text" name="m516r177" id="m516r177" style="width:109px; top:568px; left:1100px;"/>
+<input type="text" name="m516r181" id="m516r181" style="width:109px; top:590px; left:386px;"/>
+<input type="text" name="m516r182" id="m516r182" style="width:109px; top:590px; left:505px;"/>
+<input type="text" name="m516r184" id="m516r184" style="width:109px; top:590px; left:743px;"/>
+<input type="text" name="m516r185" id="m516r185" style="width:109px; top:590px; left:862px;"/>
+<input type="text" name="m516r187" id="m516r187" style="width:109px; top:590px; left:1100px;"/>
+<input type="text" name="m516r191" id="m516r191" style="width:109px; top:612px; left:386px;"/>
+<input type="text" name="m516r192" id="m516r192" style="width:109px; top:612px; left:505px;"/>
+<input type="text" name="m516r194" id="m516r194" style="width:109px; top:612px; left:743px;"/>
+<input type="text" name="m516r195" id="m516r195" style="width:109px; top:612px; left:862px;"/>
+<input type="text" name="m516r197" id="m516r197" style="width:109px; top:612px; left:1100px;"/>
+<input type="text" name="m516r201" id="m516r201" style="width:109px; top:633px; left:386px;"/>
+<input type="text" name="m516r202" id="m516r202" style="width:109px; top:633px; left:505px;"/>
+<input type="text" name="m516r204" id="m516r204" style="width:109px; top:633px; left:743px;"/>
+<input type="text" name="m516r205" id="m516r205" style="width:109px; top:633px; left:862px;"/>
+<input type="text" name="m516r206" id="m516r206" style="width:109px; top:633px; left:981px;"/>
+<input type="text" name="m516r207" id="m516r207" style="width:109px; top:633px; left:1100px;"/>
+<input type="text" name="m516r211" id="m516r211" style="width:109px; top:653px; left:386px;"/>
+<input type="text" name="m516r212" id="m516r212" style="width:109px; top:653px; left:505px;"/>
+<input type="text" name="m516r214" id="m516r214" style="width:109px; top:653px; left:743px;"/>
+<input type="text" name="m516r215" id="m516r215" style="width:109px; top:653px; left:862px;"/>
+<input type="text" name="m516r216" id="m516r216" style="width:109px; top:653px; left:981px;"/>
+<input type="text" name="m516r217" id="m516r217" style="width:109px; top:653px; left:1100px;"/>
+<input type="text" name="m516r221" id="m516r221" style="width:109px; top:675px; left:386px;"/>
+<input type="text" name="m516r222" id="m516r222" style="width:109px; top:675px; left:505px;"/>
+<input type="text" name="m516r223" id="m516r223" style="width:109px; top:675px; left:624px;"/>
+<input type="text" name="m516r224" id="m516r224" style="width:109px; top:675px; left:743px;"/>
+<input type="text" name="m516r225" id="m516r225" style="width:109px; top:675px; left:862px;"/>
+<input type="text" name="m516r226" id="m516r226" style="width:109px; top:675px; left:981px;"/>
+<input type="text" name="m516r227" id="m516r227" style="width:109px; top:675px; left:1100px;"/>
+<span class="text-echo" style="top:701px; right:752px;"><?php echo $m516r991; ?></span>
+<span class="text-echo" style="top:701px; right:633px;"><?php echo $m516r992; ?></span>
+<span class="text-echo" style="top:701px; right:513px;"><?php echo $m516r993; ?></span>
+<span class="text-echo" style="top:701px; right:394px;"><?php echo $m516r994; ?></span>
+<span class="text-echo" style="top:701px; right:275px;"><?php echo $m516r995; ?></span>
+<span class="text-echo" style="top:701px; right:156px;"><?php echo $m516r996; ?></span>
+<span class="text-echo" style="top:701px; right:38px;"><?php echo $m516r997; ?></span>
+<?php                                         } ?>
+
+<?php if ( $strana == 14 ) { ?>
 <!-- modul 100305 -->
-<input type="text" name="m100305r1" id="m100305r1" style="width:109px; top:224px; left:503px;"/>
-<input type="text" name="m100305r2" id="m100305r2" style="width:109px; top:224px; left:639px;"/>
-<input type="text" name="m100305r3" id="m100305r3" style="width:109px; top:224px; left:775px;"/>
-
-<!-- modul 586 -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje zo S˙vahy POD" onclick="NacitajZosuvahy(586);" style="top:272px; left:338px;" class="btn-row-tool">
-<input type="text" name="m586r11" id="m586r11" style="width:100px; top:366px; left:596px;"/>
-<input type="text" name="m586r12" id="m586r12" style="width:100px; top:366px; left:760px;"/>
-<input type="text" name="m586r21" id="m586r21" style="width:100px; top:392px; left:596px;"/>
-<input type="text" name="m586r22" id="m586r22" style="width:100px; top:392px; left:760px;"/>
-<input type="text" name="m586r31" id="m586r31" style="width:100px; top:418px; left:596px;"/>
-<input type="text" name="m586r32" id="m586r32" style="width:100px; top:418px; left:760px;"/>
-<input type="text" name="m586r41" id="m586r41" style="width:100px; top:444px; left:596px;"/>
-<input type="text" name="m586r42" id="m586r42" style="width:100px; top:444px; left:760px;"/>
-<input type="text" name="m586r51" id="m586r51" style="width:100px; top:470px; left:596px;"/>
-<input type="text" name="m586r52" id="m586r52" style="width:100px; top:470px; left:760px;"/>
-<input type="text" name="m586r61" id="m586r61" style="width:100px; top:496px; left:596px;"/>
-<input type="text" name="m586r62" id="m586r62" style="width:100px; top:496px; left:760px;"/>
-<input type="text" name="m586r71" id="m586r71" style="width:100px; top:522px; left:596px;"/>
-<input type="text" name="m586r72" id="m586r72" style="width:100px; top:522px; left:760px;"/>
-<input type="text" name="m586r81" id="m586r81" style="width:100px; top:548px; left:596px;"/>
-<input type="text" name="m586r82" id="m586r82" style="width:100px; top:548px; left:760px;"/>
-<input type="text" name="m586r91" id="m586r91" style="width:100px; top:573px; left:596px;"/>
-<input type="text" name="m586r92" id="m586r92" style="width:100px; top:573px; left:760px;"/>
-<input type="text" name="m586r101" id="m586r101" style="width:100px; top:599px; left:596px;"/>
-<input type="text" name="m586r102" id="m586r102" style="width:100px; top:599px; left:760px;"/>
-<input type="text" name="m586r111" id="m586r111" style="width:100px; top:625px; left:596px;"/>
-<input type="text" name="m586r112" id="m586r112" style="width:100px; top:625px; left:760px;"/>
-<input type="text" name="m586r121" id="m586r121" style="width:100px; top:656px; left:596px;"/>
-<input type="text" name="m586r122" id="m586r122" style="width:100px; top:656px; left:760px;"/>
-<input type="text" name="m586r131" id="m586r131" style="width:100px; top:688px; left:596px;"/>
-<input type="text" name="m586r132" id="m586r132" style="width:100px; top:688px; left:760px;"/>
-<input type="text" name="m586r141" id="m586r141" style="width:100px; top:714px; left:596px;"/>
-<input type="text" name="m586r142" id="m586r142" style="width:100px; top:714px; left:760px;"/>
-<input type="text" name="m586r151" id="m586r151" style="width:100px; top:739px; left:596px;"/>
-<input type="text" name="m586r152" id="m586r152" style="width:100px; top:739px; left:760px;"/>
-<input type="text" name="m586r161" id="m586r161" style="width:100px; top:765px; left:596px;"/>
-<input type="text" name="m586r162" id="m586r162" style="width:100px; top:765px; left:760px;"/>
-<input type="text" name="m586r171" id="m586r171" style="width:100px; top:791px; left:596px;"/>
-<input type="text" name="m586r172" id="m586r172" style="width:100px; top:791px; left:760px;"/>
-<input type="text" name="m586r181" id="m586r181" style="width:100px; top:817px; left:596px;"/>
-<input type="text" name="m586r182" id="m586r182" style="width:100px; top:817px; left:760px;"/>
-<input type="text" name="m586r191" id="m586r191" style="width:100px; top:843px; left:596px;"/>
-<input type="text" name="m586r192" id="m586r192" style="width:100px; top:843px; left:760px;"/>
-<input type="text" name="m586r201" id="m586r201" style="width:100px; top:869px; left:596px;"/>
-<input type="text" name="m586r202" id="m586r202" style="width:100px; top:869px; left:760px;"/>
-<input type="text" name="m586r211" id="m586r211" style="width:100px; top:894px; left:596px;"/>
-<input type="text" name="m586r212" id="m586r212" style="width:100px; top:894px; left:760px;"/>
-<input type="text" name="m586r221" id="m586r221" style="width:100px; top:920px; left:596px;"/>
-<input type="text" name="m586r222" id="m586r222" style="width:100px; top:920px; left:760px;"/>
-<input type="text" name="m586r231" id="m586r231" style="width:100px; top:946px; left:596px;"/>
-<input type="text" name="m586r232" id="m586r232" style="width:100px; top:946px; left:760px;"/>
-<input type="text" name="m586r241" id="m586r241" style="width:100px; top:972px; left:596px;"/>
-<input type="text" name="m586r242" id="m586r242" style="width:100px; top:972px; left:760px;"/>
-<span class="text-echo" style="top:1003px; right:250px;"><?php echo $m586r991; ?></span>
-<span class="text-echo" style="top:1003px; right:80px;"><?php echo $m586r992; ?></span>
+<input type="text" name="m100305r1" id="m100305r1" style="width:109px; top:240px; left:503px;"/>
+<input type="text" name="m100305r2" id="m100305r2" style="width:109px; top:240px; left:639px;"/>
+<input type="text" name="m100305r3" id="m100305r3" style="width:109px; top:240px; left:775px;"/>
 
 <!-- modul 100103 -->
-<input type="checkbox" name="m1527r1a" value="1" onclick="klikm1527r1ano();" style="top:1192px; left:839px;"/>
-<input type="checkbox" name="m1527r1b" value="1" onclick="klikm1527r1nie();" style="top:1212px; left:839px;"/>
-<?php                                        } ?>
+<input type="checkbox" name="m1527r1a" value="1" onclick="klikm1527r1ano();" style="top:456px; left:839px;"/>
+<input type="checkbox" name="m1527r1b" value="1" onclick="klikm1527r1nie();" style="top:488px; left:839px;"/>
+<script>
+  function klikm1527r1ano()
+  {
+   document.formv1.m1527r1b.checked = false;
+  }
+  function klikm1527r1nie()
+  {
+   document.formv1.m1527r1a.checked = false;
+  }
+</script>
+<?php                                         } ?>
 
-
-<?php if ( $strana == 12 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 256kB" style="width:1250px; height:1000px;">
-<span class="text-echo" style="top:77px; left:810px; font-size:16px; letter-spacing:23px;"><?php echo $fir_ficox; ?></span>
-
+<?php if ( $strana == 15 ) { ?>
 <!-- modul 527 -->
-<input type="text" name="m527r11" id="m527r11" style="width:62px; top:299px; left:319px;"/>
-<input type="text" name="m527r12" id="m527r12" style="width:94px; top:299px; left:392px;"/>
-<input type="text" name="m527r13" id="m527r13" style="width:63px; top:299px; left:497px;"/>
-<input type="text" name="m527r14" id="m527r14" style="width:83px; top:299px; left:571px;"/>
-<input type="text" name="m527r15" id="m527r15" style="width:93px; top:299px; left:666px;"/>
-<input type="text" name="m527r16" id="m527r16" style="width:73px; top:299px; left:771px;"/>
-<input type="text" name="m527r17" id="m527r17" style="width:83px; top:299px; left:855px;"/>
-<input type="text" name="m527r18" id="m527r18" style="width:73px; top:299px; left:950px;"/>
-<input type="text" name="m527r19" id="m527r19" style="width:73px; top:299px; left:1034px;"/>
-<input type="text" name="m527r110" id="m527r110" style="width:62px; top:299px; left:1119px;"/>
-<input type="text" name="m527r21" id="m527r21" style="width:62px; top:332px; left:319px;"/>
-<input type="text" name="m527r22" id="m527r22" style="width:94px; top:332px; left:392px;"/>
-<input type="text" name="m527r23" id="m527r23" style="width:63px; top:332px; left:497px;"/>
-<input type="text" name="m527r24" id="m527r24" style="width:83px; top:332px; left:571px;"/>
-<input type="text" name="m527r25" id="m527r25" style="width:93px; top:332px; left:666px;"/>
-<input type="text" name="m527r26" id="m527r26" style="width:73px; top:332px; left:771px;"/>
-<input type="text" name="m527r27" id="m527r27" style="width:83px; top:332px; left:855px;"/>
-<input type="text" name="m527r28" id="m527r28" style="width:73px; top:332px; left:950px;"/>
-<input type="text" name="m527r29" id="m527r29" style="width:73px; top:332px; left:1034px;"/>
-<input type="text" name="m527r210" id="m527r210" style="width:62px; top:332px; left:1119px;"/>
-<input type="text" name="m527r31" id="m527r31" style="width:62px; top:360px; left:319px;"/>
-<input type="text" name="m527r32" id="m527r32" style="width:94px; top:360px; left:392px;"/>
-<input type="text" name="m527r33" id="m527r33" style="width:63px; top:360px; left:497px;"/>
-<input type="text" name="m527r34" id="m527r34" style="width:83px; top:360px; left:571px;"/>
-<input type="text" name="m527r35" id="m527r35" style="width:93px; top:360px; left:666px;"/>
-<input type="text" name="m527r36" id="m527r36" style="width:73px; top:360px; left:771px;"/>
-<input type="text" name="m527r37" id="m527r37" style="width:83px; top:360px; left:855px;"/>
-<input type="text" name="m527r38" id="m527r38" style="width:73px; top:360px; left:950px;"/>
-<input type="text" name="m527r39" id="m527r39" style="width:73px; top:360px; left:1034px;"/>
-<input type="text" name="m527r310" id="m527r310" style="width:62px; top:360px; left:1119px;"/>
-<input type="text" name="m527r41" id="m527r41" style="width:62px; top:394px; left:319px;"/>
-<input type="text" name="m527r42" id="m527r42" style="width:94px; top:394px; left:392px;"/>
-<input type="text" name="m527r43" id="m527r43" style="width:63px; top:394px; left:497px;"/>
-<input type="text" name="m527r44" id="m527r44" style="width:83px; top:394px; left:571px;"/>
-<input type="text" name="m527r45" id="m527r45" style="width:93px; top:394px; left:666px;"/>
-<input type="text" name="m527r46" id="m527r46" style="width:73px; top:394px; left:771px;"/>
-<input type="text" name="m527r47" id="m527r47" style="width:83px; top:394px; left:855px;"/>
-<input type="text" name="m527r48" id="m527r48" style="width:73px; top:394px; left:950px;"/>
-<input type="text" name="m527r49" id="m527r49" style="width:73px; top:394px; left:1034px;"/>
-<input type="text" name="m527r410" id="m527r410" style="width:62px; top:394px; left:1119px;"/>
-<input type="text" name="m527r51" id="m527r51" style="width:62px; top:435px; left:319px;"/>
-<input type="text" name="m527r52" id="m527r52" style="width:94px; top:435px; left:392px;"/>
-<input type="text" name="m527r53" id="m527r53" style="width:63px; top:435px; left:497px;"/>
-<input type="text" name="m527r54" id="m527r54" style="width:83px; top:435px; left:571px;"/>
-<input type="text" name="m527r55" id="m527r55" style="width:93px; top:435px; left:666px;"/>
-<input type="text" name="m527r56" id="m527r56" style="width:73px; top:435px; left:771px;"/>
-<input type="text" name="m527r57" id="m527r57" style="width:83px; top:435px; left:855px;"/>
-<input type="text" name="m527r58" id="m527r58" style="width:73px; top:435px; left:950px;"/>
-<input type="text" name="m527r59" id="m527r59" style="width:73px; top:435px; left:1034px;"/>
-<input type="text" name="m527r510" id="m527r510" style="width:62px; top:435px; left:1119px;"/>
-<input type="text" name="m527r61" id="m527r61" style="width:62px; top:468px; left:319px;"/>
-<input type="text" name="m527r62" id="m527r62" style="width:94px; top:468px; left:392px;"/>
-<input type="text" name="m527r63" id="m527r63" style="width:63px; top:468px; left:497px;"/>
-<input type="text" name="m527r64" id="m527r64" style="width:83px; top:468px; left:571px;"/>
-<input type="text" name="m527r65" id="m527r65" style="width:93px; top:468px; left:666px;"/>
-<input type="text" name="m527r66" id="m527r66" style="width:73px; top:468px; left:771px;"/>
-<input type="text" name="m527r67" id="m527r67" style="width:83px; top:468px; left:855px;"/>
-<input type="text" name="m527r68" id="m527r68" style="width:73px; top:468px; left:950px;"/>
-<input type="text" name="m527r69" id="m527r69" style="width:73px; top:468px; left:1034px;"/>
-<input type="text" name="m527r610" id="m527r610" style="width:62px; top:468px; left:1119px;"/>
-<input type="text" name="m527r71" id="m527r71" style="width:62px; top:514px; left:319px;"/>
-<input type="text" name="m527r72" id="m527r72" style="width:94px; top:514px; left:392px;"/>
-<input type="text" name="m527r73" id="m527r73" style="width:63px; top:514px; left:497px;"/>
-<input type="text" name="m527r74" id="m527r74" style="width:83px; top:514px; left:571px;"/>
-<input type="text" name="m527r75" id="m527r75" style="width:93px; top:514px; left:666px;"/>
-<input type="text" name="m527r76" id="m527r76" style="width:73px; top:514px; left:771px;"/>
-<input type="text" name="m527r77" id="m527r77" style="width:83px; top:514px; left:855px;"/>
-<input type="text" name="m527r78" id="m527r78" style="width:73px; top:514px; left:950px;"/>
-<input type="text" name="m527r79" id="m527r79" style="width:73px; top:514px; left:1034px;"/>
-<input type="text" name="m527r710" id="m527r710" style="width:62px; top:514px; left:1119px;"/>
-<input type="text" name="m527r81" id="m527r81" style="width:62px; top:562px; left:319px;"/>
-<input type="text" name="m527r82" id="m527r82" style="width:94px; top:562px; left:392px;"/>
-<input type="text" name="m527r83" id="m527r83" style="width:63px; top:562px; left:497px;"/>
-<input type="text" name="m527r84" id="m527r84" style="width:83px; top:562px; left:571px;"/>
-<input type="text" name="m527r85" id="m527r85" style="width:93px; top:562px; left:666px;"/>
-<input type="text" name="m527r86" id="m527r86" style="width:73px; top:562px; left:771px;"/>
-<input type="text" name="m527r87" id="m527r87" style="width:83px; top:562px; left:855px;"/>
-<input type="text" name="m527r88" id="m527r88" style="width:73px; top:562px; left:950px;"/>
-<input type="text" name="m527r89" id="m527r89" style="width:73px; top:562px; left:1034px;"/>
-<input type="text" name="m527r810" id="m527r810" style="width:62px; top:562px; left:1119px;"/>
-<input type="text" name="m527r91" id="m527r91" style="width:62px; top:602px; left:319px;"/>
-<input type="text" name="m527r92" id="m527r92" style="width:94px; top:602px; left:392px;"/>
-<input type="text" name="m527r93" id="m527r93" style="width:63px; top:602px; left:497px;"/>
-<input type="text" name="m527r94" id="m527r94" style="width:83px; top:602px; left:571px;"/>
-<input type="text" name="m527r95" id="m527r95" style="width:93px; top:602px; left:666px;"/>
-<input type="text" name="m527r96" id="m527r96" style="width:73px; top:602px; left:771px;"/>
-<input type="text" name="m527r97" id="m527r97" style="width:83px; top:602px; left:855px;"/>
-<input type="text" name="m527r98" id="m527r98" style="width:73px; top:602px; left:950px;"/>
-<input type="text" name="m527r99" id="m527r99" style="width:73px; top:602px; left:1034px;"/>
-<input type="text" name="m527r910" id="m527r910" style="width:62px; top:602px; left:1119px;"/>
-<input type="text" name="m527r101" id="m527r101" style="width:62px; top:642px; left:319px;"/>
-<input type="text" name="m527r102" id="m527r102" style="width:94px; top:642px; left:392px;"/>
-<input type="text" name="m527r103" id="m527r103" style="width:63px; top:642px; left:497px;"/>
-<input type="text" name="m527r104" id="m527r104" style="width:83px; top:642px; left:571px;"/>
-<input type="text" name="m527r105" id="m527r105" style="width:93px; top:642px; left:666px;"/>
-<input type="text" name="m527r106" id="m527r106" style="width:73px; top:642px; left:771px;"/>
-<input type="text" name="m527r107" id="m527r107" style="width:83px; top:642px; left:855px;"/>
-<input type="text" name="m527r108" id="m527r108" style="width:73px; top:642px; left:950px;"/>
-<input type="text" name="m527r109" id="m527r109" style="width:73px; top:642px; left:1034px;"/>
-<input type="text" name="m527r1010" id="m527r1010" style="width:62px; top:642px; left:1119px;"/>
-<input type="text" name="m527r111" id="m527r111" style="width:62px; top:676px; left:319px;"/>
-<input type="text" name="m527r112" id="m527r112" style="width:94px; top:676px; left:392px;"/>
-<input type="text" name="m527r113" id="m527r113" style="width:63px; top:676px; left:497px;"/>
-<input type="text" name="m527r114" id="m527r114" style="width:83px; top:676px; left:571px;"/>
-<input type="text" name="m527r115" id="m527r115" style="width:93px; top:676px; left:666px;"/>
-<input type="text" name="m527r116" id="m527r116" style="width:73px; top:676px; left:771px;"/>
-<input type="text" name="m527r117" id="m527r117" style="width:83px; top:676px; left:855px;"/>
-<input type="text" name="m527r118" id="m527r118" style="width:73px; top:676px; left:950px;"/>
-<input type="text" name="m527r119" id="m527r119" style="width:73px; top:676px; left:1034px;"/>
-<input type="text" name="m527r1110" id="m527r1110" style="width:62px; top:676px; left:1119px;"/>
-<input type="text" name="m527r121" id="m527r121" style="width:62px; top:704px; left:319px;"/>
-<input type="text" name="m527r122" id="m527r122" style="width:94px; top:704px; left:392px;"/>
-<input type="text" name="m527r123" id="m527r123" style="width:63px; top:704px; left:497px;"/>
-<input type="text" name="m527r124" id="m527r124" style="width:83px; top:704px; left:571px;"/>
-<input type="text" name="m527r125" id="m527r125" style="width:93px; top:704px; left:666px;"/>
-<input type="text" name="m527r126" id="m527r126" style="width:73px; top:704px; left:771px;"/>
-<input type="text" name="m527r127" id="m527r127" style="width:83px; top:704px; left:855px;"/>
-<input type="text" name="m527r128" id="m527r128" style="width:73px; top:704px; left:950px;"/>
-<input type="text" name="m527r129" id="m527r129" style="width:73px; top:704px; left:1034px;"/>
-<input type="text" name="m527r1210" id="m527r1210" style="width:62px; top:704px; left:1119px;"/>
-<input type="text" name="m527r131" id="m527r131" style="width:62px; top:732px; left:319px;"/>
-<input type="text" name="m527r132" id="m527r132" style="width:94px; top:732px; left:392px;"/>
-<input type="text" name="m527r133" id="m527r133" style="width:63px; top:732px; left:497px;"/>
-<input type="text" name="m527r134" id="m527r134" style="width:83px; top:732px; left:571px;"/>
-<input type="text" name="m527r135" id="m527r135" style="width:93px; top:732px; left:666px;"/>
-<input type="text" name="m527r136" id="m527r136" style="width:73px; top:732px; left:771px;"/>
-<input type="text" name="m527r137" id="m527r137" style="width:83px; top:732px; left:855px;"/>
-<input type="text" name="m527r138" id="m527r138" style="width:73px; top:732px; left:950px;"/>
-<input type="text" name="m527r139" id="m527r139" style="width:73px; top:732px; left:1034px;"/>
-<input type="text" name="m527r1310" id="m527r1310" style="width:62px; top:732px; left:1119px;"/>
-<input type="text" name="m527r141" id="m527r141" style="width:62px; top:760px; left:319px;"/>
-<input type="text" name="m527r142" id="m527r142" style="width:94px; top:760px; left:392px;"/>
-<input type="text" name="m527r143" id="m527r143" style="width:63px; top:760px; left:497px;"/>
-<input type="text" name="m527r144" id="m527r144" style="width:83px; top:760px; left:571px;"/>
-<input type="text" name="m527r145" id="m527r145" style="width:93px; top:760px; left:666px;"/>
-<input type="text" name="m527r146" id="m527r146" style="width:73px; top:760px; left:771px;"/>
-<input type="text" name="m527r147" id="m527r147" style="width:83px; top:760px; left:855px;"/>
-<input type="text" name="m527r148" id="m527r148" style="width:73px; top:760px; left:950px;"/>
-<input type="text" name="m527r149" id="m527r149" style="width:73px; top:760px; left:1034px;"/>
-<input type="text" name="m527r1410" id="m527r1410" style="width:62px; top:760px; left:1119px;"/>
-<input type="text" name="m527r151" id="m527r151" style="width:62px; top:794px; left:319px;"/>
-<input type="text" name="m527r152" id="m527r152" style="width:94px; top:794px; left:392px;"/>
-<input type="text" name="m527r153" id="m527r153" style="width:63px; top:794px; left:497px;"/>
-<input type="text" name="m527r154" id="m527r154" style="width:83px; top:794px; left:571px;"/>
-<input type="text" name="m527r155" id="m527r155" style="width:93px; top:794px; left:666px;"/>
-<input type="text" name="m527r156" id="m527r156" style="width:73px; top:794px; left:771px;"/>
-<input type="text" name="m527r157" id="m527r157" style="width:83px; top:794px; left:855px;"/>
-<input type="text" name="m527r158" id="m527r158" style="width:73px; top:794px; left:950px;"/>
-<input type="text" name="m527r159" id="m527r159" style="width:73px; top:794px; left:1034px;"/>
-<input type="text" name="m527r1510" id="m527r1510" style="width:62px; top:794px; left:1119px;"/>
-<input type="text" name="m527r161" id="m527r161" style="width:62px; top:845px; left:319px;"/>
-<input type="text" name="m527r162" id="m527r162" style="width:94px; top:845px; left:392px;"/>
-<input type="text" name="m527r163" id="m527r163" style="width:63px; top:845px; left:497px;"/>
-<input type="text" name="m527r164" id="m527r164" style="width:83px; top:845px; left:571px;"/>
-<input type="text" name="m527r165" id="m527r165" style="width:93px; top:845px; left:666px;"/>
-<input type="text" name="m527r166" id="m527r166" style="width:73px; top:845px; left:771px;"/>
-<input type="text" name="m527r167" id="m527r167" style="width:83px; top:845px; left:855px;"/>
-<input type="text" name="m527r168" id="m527r168" style="width:73px; top:845px; left:950px;"/>
-<input type="text" name="m527r169" id="m527r169" style="width:73px; top:845px; left:1034px;"/>
-<input type="text" name="m527r1610" id="m527r1610" style="width:62px; top:845px; left:1119px;"/>
-<input type="text" name="m527r171" id="m527r171" style="width:62px; top:893px; left:319px;"/>
-<input type="text" name="m527r172" id="m527r172" style="width:94px; top:893px; left:392px;"/>
-<input type="text" name="m527r173" id="m527r173" style="width:63px; top:893px; left:497px;"/>
-<input type="text" name="m527r174" id="m527r174" style="width:83px; top:893px; left:571px;"/>
-<input type="text" name="m527r175" id="m527r175" style="width:93px; top:893px; left:666px;"/>
-<input type="text" name="m527r176" id="m527r176" style="width:73px; top:893px; left:771px;"/>
-<input type="text" name="m527r177" id="m527r177" style="width:83px; top:893px; left:855px;"/>
-<input type="text" name="m527r178" id="m527r178" style="width:73px; top:893px; left:950px;"/>
-<input type="text" name="m527r179" id="m527r179" style="width:73px; top:893px; left:1034px;"/>
-<input type="text" name="m527r1710" id="m527r1710" style="width:62px; top:893px; left:1119px;"/>
+<input type="text" name="m527r11" id="m527r11" style="width:68px; top:200px; left:441px;"/>
+<input type="text" name="m527r12" id="m527r12" style="width:68px; top:200px; left:519px;"/>
+<input type="text" name="m527r13" id="m527r13" style="width:68px; top:200px; left:596px;"/>
+<input type="text" name="m527r14" id="m527r14" style="width:71px; top:200px; left:674px;"/>
+<input type="text" name="m527r15" id="m527r15" style="width:68px; top:200px; left:754px;"/>
+<input type="text" name="m527r16" id="m527r16" style="width:67px; top:200px; left:831px;"/>
+<input type="text" name="m527r17" id="m527r17" style="width:69px; top:200px; left:907px;"/>
+<input type="text" name="m527r18" id="m527r18" style="width:68px; top:200px; left:986px;"/>
+<input type="text" name="m527r19" id="m527r19" style="width:68px; top:200px; left:1063px;"/>
+<input type="text" name="m527r110" id="m527r110" style="width:68px; top:200px; left:1141px;"/>
+<input type="text" name="m527r21" id="m527r21" style="width:68px; top:221px; left:441px;"/>
+<input type="text" name="m527r22" id="m527r22" style="width:68px; top:221px; left:519px;"/>
+<input type="text" name="m527r23" id="m527r23" style="width:68px; top:221px; left:596px;"/>
+<input type="text" name="m527r24" id="m527r24" style="width:71px; top:221px; left:674px;"/>
+<input type="text" name="m527r25" id="m527r25" style="width:68px; top:221px; left:754px;"/>
+<input type="text" name="m527r26" id="m527r26" style="width:67px; top:221px; left:831px;"/>
+<input type="text" name="m527r27" id="m527r27" style="width:69px; top:221px; left:907px;"/>
+<input type="text" name="m527r28" id="m527r28" style="width:68px; top:221px; left:986px;"/>
+<input type="text" name="m527r29" id="m527r29" style="width:68px; top:221px; left:1063px;"/>
+<input type="text" name="m527r210" id="m527r210" style="width:68px; top:221px; left:1141px;"/>
+<input type="text" name="m527r31" id="m527r31" style="width:68px; top:242px; left:441px;"/>
+<input type="text" name="m527r32" id="m527r32" style="width:68px; top:242px; left:519px;"/>
+<input type="text" name="m527r33" id="m527r33" style="width:68px; top:242px; left:596px;"/>
+<input type="text" name="m527r34" id="m527r34" style="width:71px; top:242px; left:674px;"/>
+<input type="text" name="m527r35" id="m527r35" style="width:68px; top:242px; left:754px;"/>
+<input type="text" name="m527r36" id="m527r36" style="width:67px; top:242px; left:831px;"/>
+<input type="text" name="m527r37" id="m527r37" style="width:69px; top:242px; left:907px;"/>
+<input type="text" name="m527r38" id="m527r38" style="width:68px; top:242px; left:986px;"/>
+<input type="text" name="m527r39" id="m527r39" style="width:68px; top:242px; left:1063px;"/>
+<input type="text" name="m527r310" id="m527r310" style="width:68px; top:242px; left:1141px;"/>
+<input type="text" name="m527r41" id="m527r41" style="width:68px; top:264px; left:441px;"/>
+<input type="text" name="m527r42" id="m527r42" style="width:68px; top:264px; left:519px;"/>
+<input type="text" name="m527r43" id="m527r43" style="width:68px; top:264px; left:596px;"/>
+<input type="text" name="m527r44" id="m527r44" style="width:71px; top:264px; left:674px;"/>
+<input type="text" name="m527r45" id="m527r45" style="width:68px; top:264px; left:754px;"/>
+<input type="text" name="m527r46" id="m527r46" style="width:67px; top:264px; left:831px;"/>
+<input type="text" name="m527r47" id="m527r47" style="width:69px; top:264px; left:907px;"/>
+<input type="text" name="m527r48" id="m527r48" style="width:68px; top:264px; left:986px;"/>
+<input type="text" name="m527r49" id="m527r49" style="width:68px; top:264px; left:1063px;"/>
+<input type="text" name="m527r410" id="m527r410" style="width:68px; top:264px; left:1141px;"/>
+<input type="text" name="m527r51" id="m527r51" style="width:68px; top:285px; left:441px;"/>
+<input type="text" name="m527r52" id="m527r52" style="width:68px; top:285px; left:519px;"/>
+<input type="text" name="m527r53" id="m527r53" style="width:68px; top:285px; left:596px;"/>
+<input type="text" name="m527r54" id="m527r54" style="width:71px; top:285px; left:674px;"/>
+<input type="text" name="m527r55" id="m527r55" style="width:68px; top:285px; left:754px;"/>
+<input type="text" name="m527r56" id="m527r56" style="width:67px; top:285px; left:831px;"/>
+<input type="text" name="m527r57" id="m527r57" style="width:69px; top:285px; left:907px;"/>
+<input type="text" name="m527r58" id="m527r58" style="width:68px; top:285px; left:986px;"/>
+<input type="text" name="m527r59" id="m527r59" style="width:68px; top:285px; left:1063px;"/>
+<input type="text" name="m527r510" id="m527r510" style="width:68px; top:285px; left:1141px;"/>
+<input type="text" name="m527r61" id="m527r61" style="width:68px; top:306px; left:441px;"/>
+<input type="text" name="m527r62" id="m527r62" style="width:68px; top:306px; left:519px;"/>
+<input type="text" name="m527r63" id="m527r63" style="width:68px; top:306px; left:596px;"/>
+<input type="text" name="m527r64" id="m527r64" style="width:71px; top:306px; left:674px;"/>
+<input type="text" name="m527r65" id="m527r65" style="width:68px; top:306px; left:754px;"/>
+<input type="text" name="m527r66" id="m527r66" style="width:67px; top:306px; left:831px;"/>
+<input type="text" name="m527r67" id="m527r67" style="width:69px; top:306px; left:907px;"/>
+<input type="text" name="m527r68" id="m527r68" style="width:68px; top:306px; left:986px;"/>
+<input type="text" name="m527r69" id="m527r69" style="width:68px; top:306px; left:1063px;"/>
+<input type="text" name="m527r610" id="m527r610" style="width:68px; top:306px; left:1141px;"/>
+<input type="text" name="m527r71" id="m527r71" style="width:68px; top:328px; left:441px;"/>
+<input type="text" name="m527r72" id="m527r72" style="width:68px; top:328px; left:519px;"/>
+<input type="text" name="m527r73" id="m527r73" style="width:68px; top:328px; left:596px;"/>
+<input type="text" name="m527r74" id="m527r74" style="width:71px; top:328px; left:674px;"/>
+<input type="text" name="m527r75" id="m527r75" style="width:68px; top:328px; left:754px;"/>
+<input type="text" name="m527r76" id="m527r76" style="width:67px; top:328px; left:831px;"/>
+<input type="text" name="m527r77" id="m527r77" style="width:69px; top:328px; left:907px;"/>
+<input type="text" name="m527r78" id="m527r78" style="width:68px; top:328px; left:986px;"/>
+<input type="text" name="m527r79" id="m527r79" style="width:68px; top:328px; left:1063px;"/>
+<input type="text" name="m527r710" id="m527r710" style="width:68px; top:328px; left:1141px;"/>
+<input type="text" name="m527r81" id="m527r81" style="width:68px; top:349px; left:441px;"/>
+<input type="text" name="m527r82" id="m527r82" style="width:68px; top:349px; left:519px;"/>
+<input type="text" name="m527r83" id="m527r83" style="width:68px; top:349px; left:596px;"/>
+<input type="text" name="m527r84" id="m527r84" style="width:71px; top:349px; left:674px;"/>
+<input type="text" name="m527r85" id="m527r85" style="width:68px; top:349px; left:754px;"/>
+<input type="text" name="m527r86" id="m527r86" style="width:67px; top:349px; left:831px;"/>
+<input type="text" name="m527r87" id="m527r87" style="width:69px; top:349px; left:907px;"/>
+<input type="text" name="m527r88" id="m527r88" style="width:68px; top:349px; left:986px;"/>
+<input type="text" name="m527r89" id="m527r89" style="width:68px; top:349px; left:1063px;"/>
+<input type="text" name="m527r810" id="m527r810" style="width:68px; top:349px; left:1141px;"/>
+<input type="text" name="m527r91" id="m527r91" style="width:68px; top:371px; left:441px;"/>
+<input type="text" name="m527r92" id="m527r92" style="width:68px; top:371px; left:519px;"/>
+<input type="text" name="m527r93" id="m527r93" style="width:68px; top:371px; left:596px;"/>
+<input type="text" name="m527r94" id="m527r94" style="width:71px; top:371px; left:674px;"/>
+<input type="text" name="m527r95" id="m527r95" style="width:68px; top:371px; left:754px;"/>
+<input type="text" name="m527r96" id="m527r96" style="width:67px; top:371px; left:831px;"/>
+<input type="text" name="m527r97" id="m527r97" style="width:69px; top:371px; left:907px;"/>
+<input type="text" name="m527r98" id="m527r98" style="width:68px; top:371px; left:986px;"/>
+<input type="text" name="m527r99" id="m527r99" style="width:68px; top:371px; left:1063px;"/>
+<input type="text" name="m527r910" id="m527r910" style="width:68px; top:371px; left:1141px;"/>
+<input type="text" name="m527r101" id="m527r101" style="width:68px; top:392px; left:441px;"/>
+<input type="text" name="m527r102" id="m527r102" style="width:68px; top:392px; left:519px;"/>
+<input type="text" name="m527r103" id="m527r103" style="width:68px; top:392px; left:596px;"/>
+<input type="text" name="m527r104" id="m527r104" style="width:71px; top:392px; left:674px;"/>
+<input type="text" name="m527r105" id="m527r105" style="width:68px; top:392px; left:754px;"/>
+<input type="text" name="m527r106" id="m527r106" style="width:67px; top:392px; left:831px;"/>
+<input type="text" name="m527r107" id="m527r107" style="width:69px; top:392px; left:907px;"/>
+<input type="text" name="m527r108" id="m527r108" style="width:68px; top:392px; left:986px;"/>
+<input type="text" name="m527r109" id="m527r109" style="width:68px; top:392px; left:1063px;"/>
+<input type="text" name="m527r1010" id="m527r1010" style="width:68px; top:392px; left:1141px;"/>
+<input type="text" name="m527r111" id="m527r111" style="width:68px; top:413px; left:441px;"/>
+<input type="text" name="m527r112" id="m527r112" style="width:68px; top:413px; left:519px;"/>
+<input type="text" name="m527r113" id="m527r113" style="width:68px; top:413px; left:596px;"/>
+<input type="text" name="m527r114" id="m527r114" style="width:71px; top:413px; left:674px;"/>
+<input type="text" name="m527r115" id="m527r115" style="width:68px; top:413px; left:754px;"/>
+<input type="text" name="m527r116" id="m527r116" style="width:67px; top:413px; left:831px;"/>
+<input type="text" name="m527r117" id="m527r117" style="width:69px; top:413px; left:907px;"/>
+<input type="text" name="m527r118" id="m527r118" style="width:68px; top:413px; left:986px;"/>
+<input type="text" name="m527r119" id="m527r119" style="width:68px; top:413px; left:1063px;"/>
+<input type="text" name="m527r1110" id="m527r1110" style="width:68px; top:413px; left:1141px;"/>
+<input type="text" name="m527r121" id="m527r121" style="width:68px; top:435px; left:441px;"/>
+<input type="text" name="m527r122" id="m527r122" style="width:68px; top:435px; left:519px;"/>
+<input type="text" name="m527r123" id="m527r123" style="width:68px; top:435px; left:596px;"/>
+<input type="text" name="m527r124" id="m527r124" style="width:71px; top:435px; left:674px;"/>
+<input type="text" name="m527r125" id="m527r125" style="width:68px; top:435px; left:754px;"/>
+<input type="text" name="m527r126" id="m527r126" style="width:67px; top:435px; left:831px;"/>
+<input type="text" name="m527r127" id="m527r127" style="width:69px; top:435px; left:907px;"/>
+<input type="text" name="m527r128" id="m527r128" style="width:68px; top:435px; left:986px;"/>
+<input type="text" name="m527r129" id="m527r129" style="width:68px; top:435px; left:1063px;"/>
+<input type="text" name="m527r1210" id="m527r1210" style="width:68px; top:435px; left:1141px;"/>
+<input type="text" name="m527r131" id="m527r131" style="width:68px; top:456px; left:441px;"/>
+<input type="text" name="m527r132" id="m527r132" style="width:68px; top:456px; left:519px;"/>
+<input type="text" name="m527r133" id="m527r133" style="width:68px; top:456px; left:596px;"/>
+<input type="text" name="m527r134" id="m527r134" style="width:71px; top:456px; left:674px;"/>
+<input type="text" name="m527r135" id="m527r135" style="width:68px; top:456px; left:754px;"/>
+<input type="text" name="m527r136" id="m527r136" style="width:67px; top:456px; left:831px;"/>
+<input type="text" name="m527r137" id="m527r137" style="width:69px; top:456px; left:907px;"/>
+<input type="text" name="m527r138" id="m527r138" style="width:68px; top:456px; left:986px;"/>
+<input type="text" name="m527r139" id="m527r139" style="width:68px; top:456px; left:1063px;"/>
+<input type="text" name="m527r1310" id="m527r1310" style="width:68px; top:456px; left:1141px;"/>
+<input type="text" name="m527r141" id="m527r141" style="width:68px; top:477px; left:441px;"/>
+<input type="text" name="m527r142" id="m527r142" style="width:68px; top:477px; left:519px;"/>
+<input type="text" name="m527r143" id="m527r143" style="width:68px; top:477px; left:596px;"/>
+<input type="text" name="m527r144" id="m527r144" style="width:71px; top:477px; left:674px;"/>
+<input type="text" name="m527r145" id="m527r145" style="width:68px; top:477px; left:754px;"/>
+<input type="text" name="m527r146" id="m527r146" style="width:67px; top:477px; left:831px;"/>
+<input type="text" name="m527r147" id="m527r147" style="width:69px; top:477px; left:907px;"/>
+<input type="text" name="m527r148" id="m527r148" style="width:68px; top:477px; left:986px;"/>
+<input type="text" name="m527r149" id="m527r149" style="width:68px; top:477px; left:1063px;"/>
+<input type="text" name="m527r1410" id="m527r1410" style="width:68px; top:477px; left:1141px;"/>
+<input type="text" name="m527r151" id="m527r151" style="width:68px; top:498px; left:441px;"/>
+<input type="text" name="m527r152" id="m527r152" style="width:68px; top:498px; left:519px;"/>
+<input type="text" name="m527r153" id="m527r153" style="width:68px; top:498px; left:596px;"/>
+<input type="text" name="m527r154" id="m527r154" style="width:71px; top:498px; left:674px;"/>
+<input type="text" name="m527r155" id="m527r155" style="width:68px; top:498px; left:754px;"/>
+<input type="text" name="m527r156" id="m527r156" style="width:67px; top:498px; left:831px;"/>
+<input type="text" name="m527r157" id="m527r157" style="width:69px; top:498px; left:907px;"/>
+<input type="text" name="m527r158" id="m527r158" style="width:68px; top:498px; left:986px;"/>
+<input type="text" name="m527r159" id="m527r159" style="width:68px; top:498px; left:1063px;"/>
+<input type="text" name="m527r1510" id="m527r1510" style="width:68px; top:498px; left:1141px;"/>
+<input type="text" name="m527r161" id="m527r161" style="width:68px; top:520px; left:441px;"/>
+<input type="text" name="m527r162" id="m527r162" style="width:68px; top:520px; left:519px;"/>
+<input type="text" name="m527r163" id="m527r163" style="width:68px; top:520px; left:596px;"/>
+<input type="text" name="m527r164" id="m527r164" style="width:71px; top:520px; left:674px;"/>
+<input type="text" name="m527r165" id="m527r165" style="width:68px; top:520px; left:754px;"/>
+<input type="text" name="m527r166" id="m527r166" style="width:67px; top:520px; left:831px;"/>
+<input type="text" name="m527r167" id="m527r167" style="width:69px; top:520px; left:907px;"/>
+<input type="text" name="m527r168" id="m527r168" style="width:68px; top:520px; left:986px;"/>
+<input type="text" name="m527r169" id="m527r169" style="width:68px; top:520px; left:1063px;"/>
+<input type="text" name="m527r1610" id="m527r1610" style="width:68px; top:520px; left:1141px;"/>
+<input type="text" name="m527r171" id="m527r171" style="width:68px; top:541px; left:441px;"/>
+<input type="text" name="m527r172" id="m527r172" style="width:68px; top:541px; left:519px;"/>
+<input type="text" name="m527r173" id="m527r173" style="width:68px; top:541px; left:596px;"/>
+<input type="text" name="m527r174" id="m527r174" style="width:71px; top:541px; left:674px;"/>
+<input type="text" name="m527r175" id="m527r175" style="width:68px; top:541px; left:754px;"/>
+<input type="text" name="m527r176" id="m527r176" style="width:67px; top:541px; left:831px;"/>
+<input type="text" name="m527r177" id="m527r177" style="width:69px; top:541px; left:907px;"/>
+<input type="text" name="m527r178" id="m527r178" style="width:68px; top:541px; left:986px;"/>
+<input type="text" name="m527r179" id="m527r179" style="width:68px; top:541px; left:1063px;"/>
+<input type="text" name="m527r1710" id="m527r1710" style="width:68px; top:541px; left:1141px;"/>
+<input type="text" name="m527r181" id="m527r181" style="width:68px; top:563px; left:441px;"/>
+<input type="text" name="m527r182" id="m527r182" style="width:68px; top:563px; left:519px;"/>
+<input type="text" name="m527r183" id="m527r183" style="width:68px; top:563px; left:596px;"/>
+<input type="text" name="m527r184" id="m527r184" style="width:71px; top:563px; left:674px;"/>
+<input type="text" name="m527r185" id="m527r185" style="width:68px; top:563px; left:754px;"/>
+<input type="text" name="m527r186" id="m527r186" style="width:67px; top:563px; left:831px;"/>
+<input type="text" name="m527r187" id="m527r187" style="width:69px; top:563px; left:907px;"/>
+<input type="text" name="m527r188" id="m527r188" style="width:68px; top:563px; left:986px;"/>
+<input type="text" name="m527r1810" id="m527r1810" style="width:68px; top:563px; left:1141px;"/>
+<input type="text" name="m527r191" id="m527r191" style="width:68px; top:584px; left:441px;"/>
+<input type="text" name="m527r192" id="m527r192" style="width:68px; top:584px; left:519px;"/>
+<input type="text" name="m527r193" id="m527r193" style="width:68px; top:584px; left:596px;"/>
+<input type="text" name="m527r194" id="m527r194" style="width:71px; top:584px; left:674px;"/>
+<input type="text" name="m527r195" id="m527r195" style="width:68px; top:584px; left:754px;"/>
+<input type="text" name="m527r196" id="m527r196" style="width:67px; top:584px; left:831px;"/>
+<input type="text" name="m527r197" id="m527r197" style="width:69px; top:584px; left:907px;"/>
+<input type="text" name="m527r198" id="m527r198" style="width:68px; top:584px; left:986px;"/>
+<input type="text" name="m527r1910" id="m527r1910" style="width:68px; top:584px; left:1141px;"/>
+<input type="text" name="m527r201" id="m527r201" style="width:68px; top:605px; left:441px;"/>
+<input type="text" name="m527r202" id="m527r202" style="width:68px; top:605px; left:519px;"/>
+<input type="text" name="m527r203" id="m527r203" style="width:68px; top:605px; left:596px;"/>
+<input type="text" name="m527r204" id="m527r204" style="width:71px; top:605px; left:674px;"/>
+<input type="text" name="m527r205" id="m527r205" style="width:68px; top:605px; left:754px;"/>
+<input type="text" name="m527r206" id="m527r206" style="width:67px; top:605px; left:831px;"/>
+<input type="text" name="m527r207" id="m527r207" style="width:69px; top:605px; left:907px;"/>
+<input type="text" name="m527r208" id="m527r208" style="width:68px; top:605px; left:986px;"/>
+<input type="text" name="m527r2010" id="m527r2010" style="width:68px; top:605px; left:1141px;"/>
+<input type="text" name="m527r211" id="m527r211" style="width:68px; top:627px; left:441px;"/>
+<input type="text" name="m527r212" id="m527r212" style="width:68px; top:627px; left:519px;"/>
+<input type="text" name="m527r213" id="m527r213" style="width:68px; top:627px; left:596px;"/>
+<input type="text" name="m527r214" id="m527r214" style="width:71px; top:627px; left:674px;"/>
+<input type="text" name="m527r215" id="m527r215" style="width:68px; top:627px; left:754px;"/>
+<input type="text" name="m527r216" id="m527r216" style="width:67px; top:627px; left:831px;"/>
+<input type="text" name="m527r217" id="m527r217" style="width:69px; top:627px; left:907px;"/>
+<input type="text" name="m527r218" id="m527r218" style="width:68px; top:627px; left:986px;"/>
+<input type="text" name="m527r2110" id="m527r2110" style="width:68px; top:627px; left:1141px;"/>
+<input type="text" name="m527r221" id="m527r221" style="width:68px; top:648px; left:441px;"/>
+<input type="text" name="m527r222" id="m527r222" style="width:68px; top:648px; left:519px;"/>
+<input type="text" name="m527r223" id="m527r223" style="width:68px; top:648px; left:596px;"/>
+<input type="text" name="m527r224" id="m527r224" style="width:71px; top:648px; left:674px;"/>
+<input type="text" name="m527r225" id="m527r225" style="width:68px; top:648px; left:754px;"/>
+<input type="text" name="m527r226" id="m527r226" style="width:67px; top:648px; left:831px;"/>
+<input type="text" name="m527r227" id="m527r227" style="width:69px; top:648px; left:907px;"/>
+<input type="text" name="m527r228" id="m527r228" style="width:68px; top:648px; left:986px;"/>
+<input type="text" name="m527r2210" id="m527r2210" style="width:68px; top:648px; left:1141px;"/>
+<input type="text" name="m527r231" id="m527r231" style="width:68px; top:669px; left:441px;"/>
+<input type="text" name="m527r232" id="m527r232" style="width:68px; top:669px; left:519px;"/>
+<input type="text" name="m527r233" id="m527r233" style="width:68px; top:669px; left:596px;"/>
+<input type="text" name="m527r234" id="m527r234" style="width:71px; top:669px; left:674px;"/>
+<input type="text" name="m527r235" id="m527r235" style="width:68px; top:669px; left:754px;"/>
+<input type="text" name="m527r236" id="m527r236" style="width:67px; top:669px; left:831px;"/>
+<input type="text" name="m527r237" id="m527r237" style="width:69px; top:669px; left:907px;"/>
+<input type="text" name="m527r238" id="m527r238" style="width:68px; top:669px; left:986px;"/>
+<input type="text" name="m527r2310" id="m527r2310" style="width:68px; top:669px; left:1141px;"/>
+<input type="text" name="m527r241" id="m527r241" style="width:68px; top:690px; left:441px;"/>
+<input type="text" name="m527r242" id="m527r242" style="width:68px; top:690px; left:519px;"/>
+<input type="text" name="m527r243" id="m527r243" style="width:68px; top:690px; left:596px;"/>
+<input type="text" name="m527r244" id="m527r244" style="width:71px; top:690px; left:674px;"/>
+<input type="text" name="m527r245" id="m527r245" style="width:68px; top:690px; left:754px;"/>
+<input type="text" name="m527r246" id="m527r246" style="width:67px; top:690px; left:831px;"/>
+<input type="text" name="m527r247" id="m527r247" style="width:69px; top:690px; left:907px;"/>
+<input type="text" name="m527r248" id="m527r248" style="width:68px; top:690px; left:986px;"/>
+<input type="text" name="m527r2410" id="m527r2410" style="width:68px; top:691px; left:1141px;"/>
+<span class="text-echo" style="top:717px; right:739px;"><?php echo $m527r991; ?></span>
+<span class="text-echo" style="top:717px; right:661px;"><?php echo $m527r992; ?></span>
+<span class="text-echo" style="top:717px; right:585px;"><?php echo $m527r993; ?></span>
+<span class="text-echo" style="top:717px; right:504px;"><?php echo $m527r994; ?></span>
+<span class="text-echo" style="top:717px; right:426px;"><?php echo $m527r995; ?></span>
+<span class="text-echo" style="top:717px; right:350px;"><?php echo $m527r996; ?></span>
+<span class="text-echo" style="top:717px; right:272px;"><?php echo $m527r997; ?></span>
+<span class="text-echo" style="top:717px; right:195px;"><?php echo $m527r998; ?></span>
+<span class="text-echo" style="top:717px; right:117px;"><?php echo $m527r999; ?></span>
+<span class="text-echo" style="top:717px; right:40px;"><?php echo $m527r9910; ?></span>
 <?php                                         } ?>
 
-
-<?php if ( $strana == 13 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str13.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 13.strana 237kB" style="width:1250px; height:1000px;">
-<span class="text-echo" style="top:94px; left:810px; font-size:16px; letter-spacing:23px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 527 pokrac. -->
-<input type="text" name="m527r181" id="m527r181" style="width:62px; top:319px; left:319px;"/>
-<input type="text" name="m527r182" id="m527r182" style="width:94px; top:319px; left:392px;"/>
-<input type="text" name="m527r183" id="m527r183" style="width:63px; top:319px; left:497px;"/>
-<input type="text" name="m527r184" id="m527r184" style="width:83px; top:319px; left:571px;"/>
-<input type="text" name="m527r185" id="m527r185" style="width:93px; top:319px; left:666px;"/>
-<input type="text" name="m527r186" id="m527r186" style="width:73px; top:319px; left:771px;"/>
-<input type="text" name="m527r187" id="m527r187" style="width:83px; top:319px; left:855px;"/>
-<input type="text" name="m527r188" id="m527r188" style="width:73px; top:319px; left:950px;"/>
-<input type="text" name="m527r1810" id="m527r1810" style="width:62px; top:319px; left:1119px;"/>
-<input type="text" name="m527r191" id="m527r191" style="width:62px; top:365px; left:319px;"/>
-<input type="text" name="m527r192" id="m527r192" style="width:94px; top:365px; left:392px;"/>
-<input type="text" name="m527r193" id="m527r193" style="width:63px; top:365px; left:497px;"/>
-<input type="text" name="m527r194" id="m527r194" style="width:83px; top:365px; left:571px;"/>
-<input type="text" name="m527r195" id="m527r195" style="width:93px; top:365px; left:666px;"/>
-<input type="text" name="m527r196" id="m527r196" style="width:73px; top:365px; left:771px;"/>
-<input type="text" name="m527r197" id="m527r197" style="width:83px; top:365px; left:855px;"/>
-<input type="text" name="m527r198" id="m527r198" style="width:73px; top:365px; left:950px;"/>
-<input type="text" name="m527r1910" id="m527r1910" style="width:62px; top:365px; left:1119px;"/>
-<input type="text" name="m527r201" id="m527r201" style="width:62px; top:433px; left:319px;"/>
-<input type="text" name="m527r202" id="m527r202" style="width:94px; top:433px; left:392px;"/>
-<input type="text" name="m527r203" id="m527r203" style="width:63px; top:433px; left:497px;"/>
-<input type="text" name="m527r204" id="m527r204" style="width:83px; top:433px; left:571px;"/>
-<input type="text" name="m527r205" id="m527r205" style="width:93px; top:433px; left:666px;"/>
-<input type="text" name="m527r206" id="m527r206" style="width:73px; top:433px; left:771px;"/>
-<input type="text" name="m527r207" id="m527r207" style="width:83px; top:433px; left:855px;"/>
-<input type="text" name="m527r208" id="m527r208" style="width:73px; top:433px; left:950px;"/>
-<input type="text" name="m527r2010" id="m527r2010" style="width:62px; top:433px; left:1119px;"/>
-<input type="text" name="m527r211" id="m527r211" style="width:62px; top:514px; left:319px;"/>
-<input type="text" name="m527r212" id="m527r212" style="width:94px; top:514px; left:392px;"/>
-<input type="text" name="m527r213" id="m527r213" style="width:63px; top:514px; left:497px;"/>
-<input type="text" name="m527r214" id="m527r214" style="width:83px; top:514px; left:571px;"/>
-<input type="text" name="m527r215" id="m527r215" style="width:93px; top:514px; left:666px;"/>
-<input type="text" name="m527r216" id="m527r216" style="width:73px; top:514px; left:771px;"/>
-<input type="text" name="m527r217" id="m527r217" style="width:83px; top:514px; left:855px;"/>
-<input type="text" name="m527r218" id="m527r218" style="width:73px; top:514px; left:950px;"/>
-<input type="text" name="m527r2110" id="m527r2110" style="width:62px; top:514px; left:1119px;"/>
-<input type="text" name="m527r221" id="m527r221" style="width:62px; top:580px; left:319px;"/>
-<input type="text" name="m527r222" id="m527r222" style="width:94px; top:580px; left:392px;"/>
-<input type="text" name="m527r223" id="m527r223" style="width:63px; top:580px; left:497px;"/>
-<input type="text" name="m527r224" id="m527r224" style="width:83px; top:580px; left:571px;"/>
-<input type="text" name="m527r225" id="m527r225" style="width:93px; top:580px; left:666px;"/>
-<input type="text" name="m527r226" id="m527r226" style="width:73px; top:580px; left:771px;"/>
-<input type="text" name="m527r227" id="m527r227" style="width:83px; top:580px; left:855px;"/>
-<input type="text" name="m527r228" id="m527r228" style="width:73px; top:580px; left:950px;"/>
-<input type="text" name="m527r2210" id="m527r2210" style="width:62px; top:580px; left:1119px;"/>
-<input type="text" name="m527r231" id="m527r231" style="width:62px; top:640px; left:319px;"/>
-<input type="text" name="m527r232" id="m527r232" style="width:94px; top:640px; left:392px;"/>
-<input type="text" name="m527r233" id="m527r233" style="width:63px; top:640px; left:497px;"/>
-<input type="text" name="m527r234" id="m527r234" style="width:83px; top:640px; left:571px;"/>
-<input type="text" name="m527r235" id="m527r235" style="width:93px; top:640px; left:666px;"/>
-<input type="text" name="m527r236" id="m527r236" style="width:73px; top:640px; left:771px;"/>
-<input type="text" name="m527r237" id="m527r237" style="width:83px; top:640px; left:855px;"/>
-<input type="text" name="m527r238" id="m527r238" style="width:73px; top:640px; left:950px;"/>
-<input type="text" name="m527r2310" id="m527r2310" style="width:62px; top:640px; left:1119px;"/>
-<input type="text" name="m527r241" id="m527r241" style="width:62px; top:690px; left:319px;"/>
-<input type="text" name="m527r242" id="m527r242" style="width:94px; top:690px; left:392px;"/>
-<input type="text" name="m527r243" id="m527r243" style="width:63px; top:690px; left:497px;"/>
-<input type="text" name="m527r244" id="m527r244" style="width:83px; top:690px; left:571px;"/>
-<input type="text" name="m527r245" id="m527r245" style="width:93px; top:690px; left:666px;"/>
-<input type="text" name="m527r246" id="m527r246" style="width:73px; top:690px; left:771px;"/>
-<input type="text" name="m527r247" id="m527r247" style="width:83px; top:690px; left:855px;"/>
-<input type="text" name="m527r248" id="m527r248" style="width:73px; top:690px; left:950px;"/>
-<input type="text" name="m527r2410" id="m527r2410" style="width:62px; top:690px; left:1119px;"/>
-<span class="text-echo" style="top:728px; right:866px;"><?php echo $m527r991; ?></span>
-<span class="text-echo" style="top:728px; right:760px;"><?php echo $m527r992; ?></span>
-<span class="text-echo" style="top:728px; right:687px;"><?php echo $m527r993; ?></span>
-<span class="text-echo" style="top:728px; right:592px;"><?php echo $m527r994; ?></span>
-<span class="text-echo" style="top:728px; right:486px;"><?php echo $m527r995; ?></span>
-<span class="text-echo" style="top:728px; right:403px;"><?php echo $m527r996; ?></span>
-<span class="text-echo" style="top:728px; right:308px;"><?php echo $m527r997; ?></span>
-<span class="text-echo" style="top:728px; right:223px;"><?php echo $m527r998; ?></span>
-<span class="text-echo" style="top:728px; right:139px;"><?php echo $m527r999; ?></span>
-<span class="text-echo" style="top:728px; right:65px;"><?php echo $m527r9910; ?></span>
-
+<?php if ( $strana == 16 ) { ?>
 <!-- modul 474 -->
-<!-- <input type="text" name="m474r11" id="m474r11" style="width:101px; top:262px; left:559px;"/>
-<input type="text" name="m474r12" id="m474r12" style="width:101px; top:262px; left:673px;"/>
-<input type="text" name="m474r13" id="m474r13" style="width:101px; top:262px; left:787px;"/>
-<input type="text" name="m474r21" id="m474r21" style="width:101px; top:292px; left:559px;"/>
-<input type="text" name="m474r22" id="m474r22" style="width:101px; top:292px; left:673px;"/>
-<input type="text" name="m474r23" id="m474r23" style="width:101px; top:292px; left:787px;"/>
-<input type="text" name="m474r31" id="m474r31" style="width:101px; top:323px; left:559px;"/>
-<input type="text" name="m474r32" id="m474r32" style="width:101px; top:323px; left:673px;"/>
-<input type="text" name="m474r33" id="m474r33" style="width:101px; top:323px; left:787px;"/>
-<input type="text" name="m474r41" id="m474r41" style="width:101px; top:353px; left:559px;"/>
-<input type="text" name="m474r42" id="m474r42" style="width:101px; top:353px; left:673px;"/>
-<input type="text" name="m474r43" id="m474r43" style="width:101px; top:353px; left:787px;"/>
-<input type="text" name="m474r51" id="m474r51" style="width:101px; top:384px; left:559px;"/>
-<input type="text" name="m474r52" id="m474r52" style="width:101px; top:384px; left:673px;"/>
-<input type="text" name="m474r53" id="m474r53" style="width:101px; top:384px; left:787px;"/>
-<input type="text" name="m474r61" id="m474r61" style="width:101px; top:415px; left:559px;"/>
-<input type="text" name="m474r62" id="m474r62" style="width:101px; top:415px; left:673px;"/>
-<input type="text" name="m474r63" id="m474r63" style="width:101px; top:415px; left:787px;"/>
-<input type="text" name="m474r72" id="m474r72" style="width:101px; top:445px; left:673px;"/>
-<input type="text" name="m474r73" id="m474r73" style="width:101px; top:445px; left:787px;"/>
-<span class="text-echo" style="top:480px; right:287px;"><?php echo $m474r991; ?></span>
-<span class="text-echo" style="top:480px; right:172px;"><?php echo $m474r992; ?></span>
-<span class="text-echo" style="top:480px; right:59px;"><?php echo $m474r993; ?></span> -->
-
+<input type="text" name="m474r11" id="m474r11" style="width:104px; top:261px; left:560px;"/>
+<input type="text" name="m474r12" id="m474r12" style="width:104px; top:261px; left:674px;"/>
+<input type="text" name="m474r13" id="m474r13" style="width:103px; top:261px; left:788px;"/>
+<input type="text" name="m474r21" id="m474r21" style="width:104px; top:287px; left:560px;"/>
+<input type="text" name="m474r22" id="m474r22" style="width:104px; top:287px; left:674px;"/>
+<input type="text" name="m474r23" id="m474r23" style="width:103px; top:287px; left:788px;"/>
+<input type="text" name="m474r31" id="m474r31" style="width:104px; top:314px; left:560px;"/>
+<input type="text" name="m474r32" id="m474r32" style="width:104px; top:314px; left:674px;"/>
+<input type="text" name="m474r33" id="m474r33" style="width:103px; top:314px; left:788px;"/>
+<input type="text" name="m474r41" id="m474r41" style="width:104px; top:340px; left:560px;"/>
+<input type="text" name="m474r42" id="m474r42" style="width:104px; top:340px; left:674px;"/>
+<input type="text" name="m474r43" id="m474r43" style="width:103px; top:340px; left:788px;"/>
+<input type="text" name="m474r51" id="m474r51" style="width:104px; top:367px; left:560px;"/>
+<input type="text" name="m474r52" id="m474r52" style="width:104px; top:367px; left:674px;"/>
+<input type="text" name="m474r53" id="m474r53" style="width:103px; top:367px; left:788px;"/>
+<input type="text" name="m474r61" id="m474r61" style="width:104px; top:393px; left:560px;"/>
+<input type="text" name="m474r62" id="m474r62" style="width:104px; top:393px; left:674px;"/>
+<input type="text" name="m474r63" id="m474r63" style="width:103px; top:393px; left:788px;"/>
+<input type="text" name="m474r72" id="m474r72" style="width:104px; top:420px; left:674px;"/>
+<input type="text" name="m474r73" id="m474r73" style="width:103px; top:420px; left:788px;"/>
+<span class="text-echo" style="top:450px; right:285px;"><?php echo $m474r991; ?></span>
+<span class="text-echo" style="top:450px; right:172px;"><?php echo $m474r992; ?></span>
+<span class="text-echo" style="top:450px; right:59px;"><?php echo $m474r993; ?></span>
 <!-- modul 514 -->
-<!-- <img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
-     onclick="NacitajZobratovky(514);" style="top:563px; left:514px;" class="btn-row-tool">
-<input type="text" name="m514r1" id="m514r1" style="width:100px; top:660px; left:720px;"/>
-<input type="text" name="m514r2" id="m514r2" style="width:100px; top:690px; left:720px;"/>
-<input type="text" name="m514r3" id="m514r3" style="width:100px; top:721px; left:720px;"/>
-<span class="text-echo" style="top:756px; right:130px;"><?php echo $m514r99; ?></span> -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(514);" style="top:547px; left:516px;" class="btn-row-tool">
+<input type="text" name="m514r1" id="m514r1" style="width:100px; top:657px; left:720px;"/>
+<input type="text" name="m514r2" id="m514r2" style="width:100px; top:683px; left:720px;"/>
+<input type="text" name="m514r3" id="m514r3" style="width:100px; top:709px; left:720px;"/>
+<span class="text-echo" style="top:740px; right:130px;"><?php echo $m514r99; ?></span>
 <?php                                         } ?>
-
-<div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=13', '_self');" class="<?php echo $clas13; ?> toleft">13</a>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+<button type="submit" name="uloz" style="bottom: -30px;">Uloûiù zmeny</button>
+</form>
+<div class="navbar" style="display: ;">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="<?php echo $clas4; ?> toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="<?php echo $clas5; ?> toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="<?php echo $clas6; ?> toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="<?php echo $clas7; ?> toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="<?php echo $clas8; ?> toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="<?php echo $clas9; ?> toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
+  <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
+  <a href="#" onclick="editForm(14);" class="<?php echo $clas14; ?> toleft">14</a>
+  <a href="#" onclick="editForm(15);" class="<?php echo $clas15; ?> toleft">15</a>
+  <a href="#" onclick="editForm(16);" class="<?php echo $clas16; ?> toleft">16</a>
 </div>
-
-</FORM>
-</div> <!-- koniec #content -->
+</div><!-- #content -->
 <?php
      }
 //koniec uprav
 ?>
 
-
 <?php
-/////////////////////////////////////////////////VYTLAC VYKAZ
+//pdf
 if ( $copern == 11 )
 {
 if ( File_Exists("../tmp/statistika.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/statistika.$kli_uzid.pdf"); }
@@ -8322,6 +8381,10 @@ $velkost_strany = explode(",", $sirka_vyska);
 $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
+
+//ramcek fpdf 1=zap,0=vyp
+$rmc=0;
+$rmc1=0;
 
 //vytlac strana 1 az 9 polozky z tabulky _statistika_vts101s2
 $sqltt2 = "SELECT * FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico >= 0 "."";
@@ -8354,9 +8417,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8412,9 +8475,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str2.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8495,6 +8558,11 @@ $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r10","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r11","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$m1100r12","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r13","$rmc",1,"C");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"2/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 3 OR $strana == 9999 ) {
@@ -8502,9 +8570,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str3.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str3.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str3.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8588,6 +8656,11 @@ if ( $hlavicka->m1101r5b == 1 ) { $m1101r5b="x"; }
 $pdf->Cell(190,23," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1101r5a","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1101r5b","$rmc",1,"C");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"3/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 4 OR $strana == 9999 ) {
@@ -8595,9 +8668,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str4.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str4.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str4.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str4.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8688,6 +8761,11 @@ if ( $hlavicka->m1005r1b == 1 ) { $m1005r1b="x"; }
 $pdf->Cell(190,28," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1005r1a","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1005r1b","$rmc",1,"C");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"4/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 5 OR $strana == 9999 ) {
@@ -8695,9 +8773,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str5.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str5.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str5.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8770,6 +8848,11 @@ $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,6," ","$rmc1",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,6," ","$rmc1",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,6," ","$rmc1",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,7,"$m406r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"5/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 6 OR $strana == 9999 ) {
@@ -8777,9 +8860,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str6.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str6.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str6.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str6.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8859,6 +8942,11 @@ $pdf->Cell(82,6,"","$rmc1",0,"L");$pdf->Cell(23,6,"$m585r4k","$rmc",0,"L");
 $pdf->Cell(9,6,"","$rmc1",0,"L");$pdf->Cell(75,6,"$m585r04","$rmc",1,"R");
 $pdf->Cell(82,6,"","$rmc1",0,"L");$pdf->Cell(23,6,"$m585r5k","$rmc",0,"L");
 $pdf->Cell(9,6,"","$rmc1",0,"L");$pdf->Cell(75,6,"$m585r05","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"6/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 7 OR $strana == 9999 ) {
@@ -8866,9 +8954,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str7.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str7.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str7.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str7.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -9049,6 +9137,11 @@ $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(72,7,"$m581r7","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(72,6,"$m581r8","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(72,6,"$m581r12","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(72,6,"$m581r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"7/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 8 OR $strana == 9999 ) {
@@ -9056,9 +9149,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str8.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str8.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str8.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str8.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -9111,6 +9204,11 @@ if ( $hlavicka2->m100304 == 0 ) $m100304="";
 $pdf->Cell(190,21," ","$rmc1",1,"L");
 $pdf->Cell(133,6," ","$rmc1",0,"L");$pdf->Cell(56,5,"$m100304","$rmc",1,"C");
 $pdf->SetFont('arial','',12);
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"8/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 9 OR $strana == 9999 ) {
@@ -9118,9 +9216,9 @@ $pdf->AddPage(L);
 $pdf->SetFont('arial','',8);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str9.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str9.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str9.jpg',0,0,297,209);
+$pdf->Image($jpg_source.'_str9.jpg',0,0,297,209);
 }
 $pdf->SetY(10);
 
@@ -9481,6 +9579,11 @@ $pdf->Cell(20,5,"$m513r993","$rmc",0,"R");$pdf->Cell(23,5,"$m513r994","$rmc",0,"
 $pdf->Cell(21,5,"$m513r995","$rmc",0,"R");$pdf->Cell(26,5,"$m513r996","$rmc",0,"R");
 $pdf->Cell(20,5,"$m513r997","$rmc",0,"R");$pdf->Cell(18,5,"$m513r998","$rmc",0,"R");
 $pdf->Cell(21,5,"$m513r999","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"9/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 10 OR $strana == 9999 ) {
@@ -9488,9 +9591,9 @@ $pdf->AddPage(L);
 $pdf->SetFont('arial','',8);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str10.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str10.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str10.jpg',0,0,297,209);
+$pdf->Image($jpg_source.'_str10.jpg',0,0,297,209);
 }
 $pdf->SetY(10);
 
@@ -9787,6 +9890,11 @@ $pdf->Cell(29,5,"$m516r991","$rmc",0,"R");$pdf->Cell(28,5,"$m516r992","$rmc",0,"
 $pdf->Cell(28,5,"$m516r993","$rmc",0,"R");$pdf->Cell(28,5,"$m516r994","$rmc",0,"R");
 $pdf->Cell(29,5,"$m516r995","$rmc",0,"R");$pdf->Cell(28,5,"$m516r996","$rmc",0,"R");
 $pdf->Cell(28,5,"$m516r997","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(182);
+$pdf->SetX(265);
+$pdf->Cell(20,6,"10/$total_strana","$rmc",1,"R");
                                        }
 
 if ( $strana == 11 OR $strana == 9999 ) {
@@ -9794,9 +9902,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str11.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str11.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str11.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str11.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -9937,6 +10045,11 @@ if ( $hlavicka2->m1527r1b == 1 ) { $m1527r1b="x"; }
 $pdf->Cell(190,39," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1527r1a","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1527r1b","$rmc",1,"C");
+
+//pagination
+$pdf->SetY(182);
+$pdf->SetX(265);
+$pdf->Cell(20,6,"11/$total_strana","$rmc",1,"R");
                                        }
 }
 $i = $i + 1;
@@ -9964,9 +10077,9 @@ $pdf->AddPage(L);
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str12.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str12.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str12.jpg',0,0,297,209);
+$pdf->Image($jpg_source.'_str12.jpg',0,0,297,209);
 }
 $pdf->SetY(10);
 
@@ -10260,6 +10373,11 @@ $pdf->Cell(17,9,"$m527r173","$rmc",0,"R");$pdf->Cell(23,9,"$m527r174","$rmc",0,"
 $pdf->Cell(25,9,"$m527r175","$rmc",0,"R");$pdf->Cell(20,9,"$m527r176","$rmc",0,"R");
 $pdf->Cell(22,9,"$m527r177","$rmc",0,"R");$pdf->Cell(20,9,"$m527r178","$rmc",0,"R");
 $pdf->Cell(20,9,"$m527r179","$rmc",0,"R");$pdf->Cell(18,9,"$m527r1710","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(182);
+$pdf->SetX(265);
+$pdf->Cell(20,6,"12/$total_strana","$rmc",1,"R");
                                         }
 
 if ( $strana == 13 OR $strana == 9999 ) {
@@ -10267,9 +10385,9 @@ $pdf->AddPage(L);
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str13.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str13.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str13.jpg',0,0,297,209);
+$pdf->Image($jpg_source.'_str13.jpg',0,0,297,209);
 }
 $pdf->SetY(10);
 
@@ -10422,8 +10540,68 @@ $pdf->Cell(17,6,"$m527r993","$rmc",0,"R");$pdf->Cell(23,6,"$m527r994","$rmc",0,"
 $pdf->Cell(25,6,"$m527r995","$rmc",0,"R");$pdf->Cell(20,6,"$m527r996","$rmc",0,"R");
 $pdf->Cell(22,6,"$m527r997","$rmc",0,"R");$pdf->Cell(20,6,"$m527r998","$rmc",0,"R");
 $pdf->Cell(20,6,"$m527r999","$rmc",0,"R");$pdf->Cell(18,6,"$m527r9910","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(182);
+$pdf->SetX(265);
+$pdf->Cell(20,6,"13/$total_strana","$rmc",1,"R");
                                         }
 
+if ( $strana == 14 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str14.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str14.jpg',0,0,210,297);
+}
+$pdf->SetY(9);
+
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"14/$total_strana","$rmc",1,"R");
+                                       }
+
+if ( $strana == 15 OR $strana == 9999 ) {
+$pdf->AddPage(L);
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str15.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str15.jpg',0,0,297,210);
+}
+$pdf->SetY(10);
+
+
+//pagination
+$pdf->SetY(182);
+$pdf->SetX(265);
+$pdf->Cell(20,6,"15/$total_strana","$rmc",1,"R");
+                                       }
+
+
+if ( $strana == 16 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str16.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str16.jpg',0,0,210,297);
+}
+$pdf->SetY(9);
+
+
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"16/$total_strana","$rmc",1,"R");
+                                       }
 }
 $i = $i + 1;
   }
@@ -10440,5 +10618,1257 @@ $cislista = include("uct_lista_norm.php");
 //celkovy koniec
 } while (false);
 ?>
-</BODY>
-</HTML>
+<script type="text/javascript">
+//parameter okna
+var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
+
+<?php
+//uprava
+  if ( $copern == 102 )
+  {
+?>
+  function ObnovUI()
+  {
+<?php if ( $strana == 1 ) { ?>
+   document.formv1.odoslane.value = '<?php echo $odoslane_sk; ?>';
+   document.formv1.cinnost.value = '<?php echo $cinnost; ?>';
+<?php                     } ?>
+
+<?php if ( $strana == 2 ) { ?>
+   document.formv1.mod2r01.value = '<?php echo $mod2r01; ?>';
+   document.formv1.mod2r02.value = '<?php echo $mod2r02; ?>';
+<?php if ( $mod100041ano == 1 ) { echo "document.formv1.mod100041ano.checked='checked';"; } ?>
+<?php if ( $mod100041nie == 1 ) { echo "document.formv1.mod100041nie.checked='checked';"; } ?>
+<?php if ( $mod100042ano == 1 ) { echo "document.formv1.mod100042ano.checked='checked';"; } ?>
+<?php if ( $mod100042nie == 1 ) { echo "document.formv1.mod100042nie.checked='checked';"; } ?>
+<?php if ( $mod100043ano == 1 ) { echo "document.formv1.mod100043ano.checked='checked';"; } ?>
+<?php if ( $mod100043nie == 1 ) { echo "document.formv1.mod100043nie.checked='checked';"; } ?>
+<?php                     } ?>
+
+<?php if ( $strana == 3 ) { ?>
+   document.formv1.m1100r4.value = '<?php echo $m1100r4; ?>';
+   document.formv1.m1100r5.value = '<?php echo $m1100r5; ?>';
+   document.formv1.m1100r6.value = '<?php echo $m1100r6; ?>';
+   document.formv1.m1100r7.value = '<?php echo $m1100r7; ?>';
+   document.formv1.m1100r8.value = '<?php echo $m1100r8; ?>';
+   document.formv1.m1100r9.value = '<?php echo $m1100r9; ?>';
+   document.formv1.m1100r10.value = '<?php echo $m1100r10; ?>';
+   document.formv1.m1100r11.value = '<?php echo $m1100r11; ?>';
+   document.formv1.m1100r12.value = '<?php echo $m1100r12; ?>';
+   document.formv1.m1100r13.value = '<?php echo $m1100r13; ?>';
+<?php if ( $mod100036kal == 1 ) { echo "document.formv1.mod100036kal.checked='checked';"; } ?>
+<?php if ( $mod100036hos == 1 ) { echo "document.formv1.mod100036hos.checked='checked';"; } ?>
+   document.formv1.mod100037.value = '<?php echo $mod100037; ?>';
+<?php if ( $mod100069ano == 1 ) { echo "document.formv1.mod100069ano.checked='checked';"; } ?>
+<?php if ( $mod100069nie == 1 ) { echo "document.formv1.mod100069nie.checked='checked';"; } ?>
+   document.formv1.m1101r2.value = '<?php echo $m1101r2; ?>';
+<?php                     } ?>
+
+<?php if ( $strana == 4 ) { ?>
+  document.formv1.m1101r3.value = '<?php echo $m1101r3; ?>';
+<?php if ( $m1101r4a == 1 ) { echo "document.formv1.m1101r4a.checked='checked';"; } ?>
+<?php if ( $m1101r4b == 1 ) { echo "document.formv1.m1101r4b.checked='checked';"; } ?>
+<?php if ( $m1101r5a == 1 ) { echo "document.formv1.m1101r5a.checked='checked';"; } ?>
+<?php if ( $m1101r5b == 1 ) { echo "document.formv1.m1101r5b.checked='checked';"; } ?>
+<?php if ( $m1101r6a == 1 ) { echo "document.formv1.m1101r6a.checked='checked';"; } ?>
+<?php if ( $m1101r6b == 1 ) { echo "document.formv1.m1101r6b.checked='checked';"; } ?>
+<?php if ( $m1101r7a == 1 ) { echo "document.formv1.m1101r7a.checked='checked';"; } ?>
+<?php if ( $m1101r7b == 1 ) { echo "document.formv1.m1101r7b.checked='checked';"; } ?>
+<?php if ( $m100417ano == 1 ) { echo "document.formv1.m100417ano.checked='checked';"; } ?>
+<?php if ( $m100417nie == 1 ) { echo "document.formv1.m100417nie.checked='checked';"; } ?>
+   document.formv1.m100418.value = '<?php echo "$m100418";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 5 ) { ?>
+  document.formv1.m398r11.value = '<?php echo "$m398r11";?>';
+  document.formv1.m398r12.value = '<?php echo "$m398r12";?>';
+  document.formv1.m398r13.value = '<?php echo "$m398r13";?>';
+  document.formv1.m398r14.value = '<?php echo "$m398r14";?>';
+  document.formv1.m398r21.value = '<?php echo "$m398r21";?>';
+  document.formv1.m398r22.value = '<?php echo "$m398r22";?>';
+  document.formv1.m398r23.value = '<?php echo "$m398r23";?>';
+  document.formv1.m398r24.value = '<?php echo "$m398r24";?>';
+ //document.formv1.m398r991.value = '<?php echo "$m398r991";?>';
+ //document.formv1.m398r992.value = '<?php echo "$m398r992";?>';
+ //document.formv1.m398r993.value = '<?php echo "$m398r993";?>';
+ //document.formv1.m398r994.value = '<?php echo "$m398r994";?>';
+<?php if ( $m1005r1a == 1 ) { echo "document.formv1.m1005r1a.checked='checked';"; } ?>
+<?php if ( $m1005r1b == 1 ) { echo "document.formv1.m1005r1b.checked='checked';"; } ?>
+  document.formv1.m405r11.value = '<?php echo "$m405r11";?>';
+  document.formv1.m405r12.value = '<?php echo "$m405r12";?>';
+  document.formv1.m405r21.value = '<?php echo "$m405r21";?>';
+  document.formv1.m405r31.value = '<?php echo "$m405r31";?>';
+  document.formv1.m405r32.value = '<?php echo "$m405r32";?>';
+  document.formv1.m405r41.value = '<?php echo "$m405r41";?>';
+  document.formv1.m405r51.value = '<?php echo "$m405r51";?>';
+  document.formv1.m405r61.value = '<?php echo "$m405r61";?>';
+  document.formv1.m405r71.value = '<?php echo "$m405r71";?>';
+  document.formv1.m405r81.value = '<?php echo "$m405r81";?>';
+  document.formv1.m405r82.value = '<?php echo "$m405r82";?>';
+ //document.formv1.m405r991.value = '<?php echo "$m405r991";?>';
+ //document.formv1.m405r992.value = '<?php echo "$m405r992";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 6 ) { ?>
+  document.formv1.m406r1.value = '<?php echo "$m406r1";?>';
+  document.formv1.m406r2.value = '<?php echo "$m406r2";?>';
+  document.formv1.m406r3.value = '<?php echo "$m406r3";?>';
+  document.formv1.m406r4.value = '<?php echo "$m406r4";?>';
+  document.formv1.m406r5.value = '<?php echo "$m406r5";?>';
+  document.formv1.m406r6.value = '<?php echo "$m406r6";?>';
+  document.formv1.m406r7.value = '<?php echo "$m406r7";?>';
+  document.formv1.m406r8.value = '<?php echo "$m406r8";?>';
+  document.formv1.m406r9.value = '<?php echo "$m406r9";?>';
+ //document.formv1.m406r99.value = '<?php echo "$m406r99";?>';
+   document.formv1.m558r1.value = '<?php echo "$m558r1";?>';
+   document.formv1.m558r2.value = '<?php echo "$m558r2";?>';
+   document.formv1.m558r3.value = '<?php echo "$m558r3";?>';
+   document.formv1.m558r4.value = '<?php echo "$m558r4";?>';
+   document.formv1.m558r5.value = '<?php echo "$m558r5";?>';
+   document.formv1.m558r6.value = '<?php echo "$m558r6";?>';
+   document.formv1.m558r7.value = '<?php echo "$m558r7";?>';
+   document.formv1.m558r8.value = '<?php echo "$m558r8";?>';
+   document.formv1.m558r9.value = '<?php echo "$m558r9";?>';
+   document.formv1.m558r10.value = '<?php echo "$m558r10";?>';
+   document.formv1.m558r11.value = '<?php echo "$m558r11";?>';
+   document.formv1.m558r12.value = '<?php echo "$m558r12";?>';
+   document.formv1.m558r13.value = '<?php echo "$m558r13";?>';
+   document.formv1.m558r14.value = '<?php echo "$m558r14";?>';
+   document.formv1.m558r15.value = '<?php echo "$m558r15";?>';
+   document.formv1.m558r16.value = '<?php echo "$m558r16";?>';
+   document.formv1.m558r17.value = '<?php echo "$m558r17";?>';
+   document.formv1.m558r18.value = '<?php echo "$m558r18";?>';
+ //document.formv1.m558r99.value = '<?php echo "$m558r99";?>';
+<?php                     } ?>
+
+<?php if (  $strana == 7 ) { ?>
+   document.formv1.m586r11.value = '<?php echo "$m586r11";?>';
+   document.formv1.m586r12.value = '<?php echo "$m586r12";?>';
+   document.formv1.m586r21.value = '<?php echo "$m586r21";?>';
+   document.formv1.m586r22.value = '<?php echo "$m586r22";?>';
+   document.formv1.m586r131.value = '<?php echo "$m586r131";?>';
+   document.formv1.m586r132.value = '<?php echo "$m586r132";?>';
+   document.formv1.m586r141.value = '<?php echo "$m586r141";?>';
+   document.formv1.m586r142.value = '<?php echo "$m586r142";?>';
+   document.formv1.m586r151.value = '<?php echo "$m586r151";?>';
+   document.formv1.m586r152.value = '<?php echo "$m586r152";?>';
+   document.formv1.m586r191.value = '<?php echo "$m586r191";?>';
+   document.formv1.m586r192.value = '<?php echo "$m586r192";?>';
+   document.formv1.m586r201.value = '<?php echo "$m586r201";?>';
+   document.formv1.m586r202.value = '<?php echo "$m586r202";?>';
+//document.formv1.m586r991.value = '<?php echo "$m586r991";?>';
+//document.formv1.m586r992.value = '<?php echo "$m586r992";?>';
+   document.formv1.m585r01.value = '<?php echo "$m585r01";?>';
+   document.formv1.m585r02.value = '<?php echo "$m585r02";?>';
+   document.formv1.m585r03.value = '<?php echo "$m585r03";?>';
+   document.formv1.m585r04.value = '<?php echo "$m585r04";?>';
+   document.formv1.m585r05.value = '<?php echo "$m585r05";?>';
+   document.formv1.m585r3k.value = '<?php echo "$m585r3k";?>';
+   document.formv1.m585r4k.value = '<?php echo "$m585r4k";?>';
+   document.formv1.m585r5k.value = '<?php echo "$m585r5k";?>';
+   document.formv1.m585r06.value = '<?php echo "$m585r06";?>';
+   document.formv1.m585r7k.value = '<?php echo "$m585r7k";?>';
+   document.formv1.m585r07.value = '<?php echo "$m585r07";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 8 ) { ?>
+  <?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
+<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
+   document.formv1.m571r10.value = '<?php echo "$m571r10";?>';
+   document.formv1.m571r12.value = '<?php echo "$m571r12";?>';
+   document.formv1.m571r13.value = '<?php echo "$m571r13";?>';
+   document.formv1.m571r15.value = '<?php echo "$m571r15";?>';
+   document.formv1.m571r16.value = '<?php echo "$m571r16";?>';
+   document.formv1.m571r17.value = '<?php echo "$m571r17";?>';
+   document.formv1.m571r18.value = '<?php echo "$m571r18";?>';
+   document.formv1.m571r20.value = '<?php echo "$m571r20";?>';
+   document.formv1.m571r22.value = '<?php echo "$m571r22";?>';
+   document.formv1.m571r23.value = '<?php echo "$m571r23";?>';
+   document.formv1.m571r25.value = '<?php echo "$m571r25";?>';
+   document.formv1.m571r26.value = '<?php echo "$m571r26";?>';
+   document.formv1.m571r27.value = '<?php echo "$m571r27";?>';
+   document.formv1.m571r28.value = '<?php echo "$m571r28";?>';
+   document.formv1.m571r30.value = '<?php echo "$m571r30";?>';
+   document.formv1.m571r32.value = '<?php echo "$m571r32";?>';
+   document.formv1.m571r33.value = '<?php echo "$m571r33";?>';
+   document.formv1.m571r35.value = '<?php echo "$m571r35";?>';
+   document.formv1.m571r36.value = '<?php echo "$m571r36";?>';
+   document.formv1.m571r37.value = '<?php echo "$m571r37";?>';
+   document.formv1.m571r38.value = '<?php echo "$m571r38";?>';
+   document.formv1.m571r40.value = '<?php echo "$m571r40";?>';
+   document.formv1.m571r42.value = '<?php echo "$m571r42";?>';
+   document.formv1.m571r43.value = '<?php echo "$m571r43";?>';
+   document.formv1.m571r45.value = '<?php echo "$m571r45";?>';
+   document.formv1.m571r46.value = '<?php echo "$m571r46";?>';
+   document.formv1.m571r47.value = '<?php echo "$m571r47";?>';
+   document.formv1.m571r48.value = '<?php echo "$m571r48";?>';
+   document.formv1.m571r50.value = '<?php echo "$m571r50";?>';
+   document.formv1.m571r52.value = '<?php echo "$m571r52";?>';
+   document.formv1.m571r53.value = '<?php echo "$m571r53";?>';
+   document.formv1.m571r55.value = '<?php echo "$m571r55";?>';
+   document.formv1.m571r56.value = '<?php echo "$m571r56";?>';
+   document.formv1.m571r57.value = '<?php echo "$m571r57";?>';
+   document.formv1.m571r58.value = '<?php echo "$m571r58";?>';
+   document.formv1.m571r60.value = '<?php echo "$m571r60";?>';
+   document.formv1.m571r62.value = '<?php echo "$m571r62";?>';
+   document.formv1.m571r63.value = '<?php echo "$m571r63";?>';
+   document.formv1.m571r65.value = '<?php echo "$m571r65";?>';
+   document.formv1.m571r66.value = '<?php echo "$m571r66";?>';
+   document.formv1.m571r67.value = '<?php echo "$m571r67";?>';
+   document.formv1.m571r68.value = '<?php echo "$m571r68";?>';
+   document.formv1.m571r70.value = '<?php echo "$m571r70";?>';
+   document.formv1.m571r72.value = '<?php echo "$m571r72";?>';
+   document.formv1.m571r73.value = '<?php echo "$m571r73";?>';
+   document.formv1.m571r75.value = '<?php echo "$m571r75";?>';
+   document.formv1.m571r76.value = '<?php echo "$m571r76";?>';
+   document.formv1.m571r77.value = '<?php echo "$m571r77";?>';
+   document.formv1.m571r78.value = '<?php echo "$m571r78";?>';
+   document.formv1.m571r80.value = '<?php echo "$m571r80";?>';
+   document.formv1.m571r82.value = '<?php echo "$m571r82";?>';
+   document.formv1.m571r83.value = '<?php echo "$m571r83";?>';
+   document.formv1.m571r85.value = '<?php echo "$m571r85";?>';
+   document.formv1.m571r86.value = '<?php echo "$m571r86";?>';
+   document.formv1.m571r87.value = '<?php echo "$m571r87";?>';
+   document.formv1.m571r88.value = '<?php echo "$m571r88";?>';
+   document.formv1.m571r90.value = '<?php echo "$m571r90";?>';
+   document.formv1.m571r92.value = '<?php echo "$m571r92";?>';
+   document.formv1.m571r93.value = '<?php echo "$m571r93";?>';
+   document.formv1.m571r95.value = '<?php echo "$m571r95";?>';
+   document.formv1.m571r96.value = '<?php echo "$m571r96";?>';
+   document.formv1.m571r97.value = '<?php echo "$m571r97";?>';
+   document.formv1.m571r98.value = '<?php echo "$m571r98";?>';
+   document.formv1.m571r100.value = '<?php echo "$m571r100";?>';
+   document.formv1.m571r102.value = '<?php echo "$m571r102";?>';
+   document.formv1.m571r103.value = '<?php echo "$m571r103";?>';
+   document.formv1.m571r105.value = '<?php echo "$m571r105";?>';
+   document.formv1.m571r106.value = '<?php echo "$m571r106";?>';
+   document.formv1.m571r107.value = '<?php echo "$m571r107";?>';
+   document.formv1.m571r108.value = '<?php echo "$m571r108";?>';
+   document.formv1.m581r1.value = '<?php echo "$m581r1";?>';
+   document.formv1.m581r2.value = '<?php echo "$m581r2";?>';
+   document.formv1.m581r3.value = '<?php echo "$m581r3";?>';
+   document.formv1.m581r4.value = '<?php echo "$m581r4";?>';
+   document.formv1.m581r5.value = '<?php echo "$m581r5";?>';
+   document.formv1.m581r6.value = '<?php echo "$m581r6";?>';
+   document.formv1.m581r7.value = '<?php echo "$m581r7";?>';
+   document.formv1.m581r8.value = '<?php echo "$m581r8";?>';
+   document.formv1.m581r12.value = '<?php echo "$m581r12";?>';
+ //document.formv1.m581r99.value = '<?php echo "$m581r99";?>';
+<?php if ( $m100301r1 == 1 ) { echo "document.formv1.m100301r1.checked='checked';"; } ?>
+<?php if ( $m100301r2 == 1 ) { echo "document.formv1.m100301r2.checked='checked';"; } ?>
+<?php                     } ?>
+
+<?php if ( $strana == 9 ) { ?>
+  document.formv1.m100302.value = '<?php echo "$m100302"; ?>';
+<?php if ( $m100303r1 == 1 ) { echo "document.formv1.m100303r1.checked='checked';"; } ?>
+<?php if ( $m100303r2 == 1 ) { echo "document.formv1.m100303r2.checked='checked';"; } ?>
+   document.formv1.m100304.value = '<?php echo "$m100304"; ?>';
+<?php                     } ?>
+
+<?php if ( $strana == 10 ) { ?>
+  document.formv1.m572r11.value = '<?php echo "$m572r11";?>';
+   document.formv1.m572r12.value = '<?php echo "$m572r12";?>';
+   document.formv1.m572r13.value = '<?php echo "$m572r13";?>';
+   document.formv1.m572r14.value = '<?php echo "$m572r14";?>';
+   document.formv1.m572r15.value = '<?php echo "$m572r15";?>';
+   document.formv1.m572r16.value = '<?php echo "$m572r16";?>';
+   document.formv1.m572r17.value = '<?php echo "$m572r17";?>';
+   document.formv1.m572r18.value = '<?php echo "$m572r18";?>';
+   document.formv1.m572r19.value = '<?php echo "$m572r19";?>';
+   document.formv1.m572r110.value = '<?php echo "$m572r110";?>';
+   document.formv1.m572r0111.value = '<?php echo "$m572r0111";?>';
+   document.formv1.m572r21.value = '<?php echo "$m572r21";?>';
+   document.formv1.m572r22.value = '<?php echo "$m572r22";?>';
+   document.formv1.m572r23.value = '<?php echo "$m572r23";?>';
+   document.formv1.m572r25.value = '<?php echo "$m572r25";?>';
+   document.formv1.m572r26.value = '<?php echo "$m572r26";?>';
+   document.formv1.m572r27.value = '<?php echo "$m572r27";?>';
+   document.formv1.m572r28.value = '<?php echo "$m572r28";?>';
+   document.formv1.m572r29.value = '<?php echo "$m572r29";?>';
+   document.formv1.m572r210.value = '<?php echo "$m572r210";?>';
+   document.formv1.m572r0211.value = '<?php echo "$m572r0211";?>';
+   document.formv1.m572r38.value = '<?php echo "$m572r38";?>';
+   document.formv1.m572r39.value = '<?php echo "$m572r39";?>';
+   document.formv1.m572r310.value = '<?php echo "$m572r310";?>';
+   document.formv1.m572r311.value = '<?php echo "$m572r311";?>';
+   document.formv1.m572r48.value = '<?php echo "$m572r48";?>';
+   document.formv1.m572r49.value = '<?php echo "$m572r49";?>';
+   document.formv1.m572r410.value = '<?php echo "$m572r410";?>';
+   document.formv1.m572r411.value = '<?php echo "$m572r411";?>';
+   document.formv1.m572r58.value = '<?php echo "$m572r58";?>';
+   document.formv1.m572r59.value = '<?php echo "$m572r59";?>';
+   document.formv1.m572r510.value = '<?php echo "$m572r510";?>';
+   document.formv1.m572r511.value = '<?php echo "$m572r511";?>';
+   document.formv1.m572r68.value = '<?php echo "$m572r68";?>';
+   document.formv1.m572r69.value = '<?php echo "$m572r69";?>';
+   document.formv1.m572r610.value = '<?php echo "$m572r610";?>';
+   document.formv1.m572r611.value = '<?php echo "$m572r611";?>';
+   document.formv1.m572r78.value = '<?php echo "$m572r78";?>';
+   document.formv1.m572r79.value = '<?php echo "$m572r79";?>';
+   document.formv1.m572r710.value = '<?php echo "$m572r710";?>';
+   document.formv1.m572r711.value = '<?php echo "$m572r711";?>';
+   document.formv1.m572r88.value = '<?php echo "$m572r88";?>';
+   document.formv1.m572r89.value = '<?php echo "$m572r89";?>';
+   document.formv1.m572r810.value = '<?php echo "$m572r810";?>';
+   document.formv1.m572r811.value = '<?php echo "$m572r811";?>';
+   document.formv1.m572r98.value = '<?php echo "$m572r98";?>';
+   document.formv1.m572r99.value = '<?php echo "$m572r99";?>';
+   document.formv1.m572r910.value = '<?php echo "$m572r910";?>';
+   document.formv1.m572r911.value = '<?php echo "$m572r911";?>';
+   document.formv1.m572r108.value = '<?php echo "$m572r108";?>';
+   document.formv1.m572r109.value = '<?php echo "$m572r109";?>';
+   document.formv1.m572r1010.value = '<?php echo "$m572r1010";?>';
+   document.formv1.m572r1011.value = '<?php echo "$m572r1011";?>';
+   document.formv1.m572r111.value = '<?php echo "$m572r111";?>';
+   document.formv1.m572r112.value = '<?php echo "$m572r112";?>';
+   document.formv1.m572r113.value = '<?php echo "$m572r113";?>';
+   document.formv1.m572r114.value = '<?php echo "$m572r114";?>';
+   document.formv1.m572r115.value = '<?php echo "$m572r115";?>';
+   document.formv1.m572r116.value = '<?php echo "$m572r116";?>';
+   document.formv1.m572r117.value = '<?php echo "$m572r117";?>';
+   document.formv1.m572r118.value = '<?php echo "$m572r118";?>';
+   document.formv1.m572r119.value = '<?php echo "$m572r119";?>';
+   document.formv1.m572r1110.value = '<?php echo "$m572r1110";?>';
+   document.formv1.m572r1111.value = '<?php echo "$m572r1111";?>';
+   document.formv1.m572r121.value = '<?php echo "$m572r121";?>';
+   document.formv1.m572r122.value = '<?php echo "$m572r122";?>';
+   document.formv1.m572r123.value = '<?php echo "$m572r123";?>';
+   document.formv1.m572r124.value = '<?php echo "$m572r124";?>';
+   document.formv1.m572r125.value = '<?php echo "$m572r125";?>';
+   document.formv1.m572r126.value = '<?php echo "$m572r126";?>';
+   document.formv1.m572r127.value = '<?php echo "$m572r127";?>';
+   document.formv1.m572r128.value = '<?php echo "$m572r128";?>';
+   document.formv1.m572r129.value = '<?php echo "$m572r129";?>';
+   document.formv1.m572r1210.value = '<?php echo "$m572r1210";?>';
+   document.formv1.m572r1211.value = '<?php echo "$m572r1211";?>';
+   document.formv1.m572r131.value = '<?php echo "$m572r131";?>';
+   document.formv1.m572r132.value = '<?php echo "$m572r132";?>';
+   document.formv1.m572r133.value = '<?php echo "$m572r133";?>';
+   document.formv1.m572r134.value = '<?php echo "$m572r134";?>';
+   document.formv1.m572r135.value = '<?php echo "$m572r135";?>';
+   document.formv1.m572r136.value = '<?php echo "$m572r136";?>';
+   document.formv1.m572r137.value = '<?php echo "$m572r137";?>';
+   document.formv1.m572r138.value = '<?php echo "$m572r138";?>';
+   document.formv1.m572r139.value = '<?php echo "$m572r139";?>';
+   document.formv1.m572r1310.value = '<?php echo "$m572r1310";?>';
+   document.formv1.m572r1311.value = '<?php echo "$m572r1311";?>';
+   document.formv1.m572r141.value = '<?php echo "$m572r141";?>';
+   document.formv1.m572r142.value = '<?php echo "$m572r142";?>';
+   document.formv1.m572r143.value = '<?php echo "$m572r143";?>';
+   document.formv1.m572r144.value = '<?php echo "$m572r144";?>';
+   document.formv1.m572r145.value = '<?php echo "$m572r145";?>';
+   document.formv1.m572r146.value = '<?php echo "$m572r146";?>';
+   document.formv1.m572r147.value = '<?php echo "$m572r147";?>';
+   document.formv1.m572r148.value = '<?php echo "$m572r148";?>';
+   document.formv1.m572r149.value = '<?php echo "$m572r149";?>';
+   document.formv1.m572r1410.value = '<?php echo "$m572r1410";?>';
+   document.formv1.m572r1411.value = '<?php echo "$m572r1411";?>';
+   document.formv1.m572r151.value = '<?php echo "$m572r151";?>';
+   document.formv1.m572r152.value = '<?php echo "$m572r152";?>';
+   document.formv1.m572r153.value = '<?php echo "$m572r153";?>';
+   document.formv1.m572r154.value = '<?php echo "$m572r154";?>';
+   document.formv1.m572r155.value = '<?php echo "$m572r155";?>';
+   document.formv1.m572r156.value = '<?php echo "$m572r156";?>';
+   document.formv1.m572r157.value = '<?php echo "$m572r157";?>';
+   document.formv1.m572r158.value = '<?php echo "$m572r158";?>';
+   document.formv1.m572r159.value = '<?php echo "$m572r159";?>';
+   document.formv1.m572r1510.value = '<?php echo "$m572r1510";?>';
+   document.formv1.m572r1511.value = '<?php echo "$m572r1511";?>';
+   document.formv1.m572r161.value = '<?php echo "$m572r161";?>';
+   document.formv1.m572r162.value = '<?php echo "$m572r162";?>';
+   document.formv1.m572r163.value = '<?php echo "$m572r163";?>';
+   document.formv1.m572r165.value = '<?php echo "$m572r165";?>';
+   document.formv1.m572r166.value = '<?php echo "$m572r166";?>';
+   document.formv1.m572r167.value = '<?php echo "$m572r167";?>';
+   document.formv1.m572r168.value = '<?php echo "$m572r168";?>';
+   document.formv1.m572r169.value = '<?php echo "$m572r169";?>';
+   document.formv1.m572r1610.value = '<?php echo "$m572r1610";?>';
+   document.formv1.m572r1611.value = '<?php echo "$m572r1611";?>';
+   document.formv1.m572r178.value = '<?php echo "$m572r178";?>';
+   document.formv1.m572r179.value = '<?php echo "$m572r179";?>';
+   document.formv1.m572r1710.value = '<?php echo "$m572r1710";?>';
+   document.formv1.m572r1711.value = '<?php echo "$m572r1711";?>';
+   document.formv1.m572r181.value = '<?php echo "$m572r181";?>';
+   document.formv1.m572r182.value = '<?php echo "$m572r182";?>';
+   document.formv1.m572r183.value = '<?php echo "$m572r183";?>';
+   document.formv1.m572r188.value = '<?php echo "$m572r188";?>';
+   document.formv1.m572r189.value = '<?php echo "$m572r189";?>';
+   document.formv1.m572r1810.value = '<?php echo "$m572r1810";?>';
+   document.formv1.m572r1811.value = '<?php echo "$m572r1811";?>';
+   document.formv1.m572r198.value = '<?php echo "$m572r198";?>';
+   document.formv1.m572r199.value = '<?php echo "$m572r199";?>';
+   document.formv1.m572r1910.value = '<?php echo "$m572r1910";?>';
+   document.formv1.m572r1911.value = '<?php echo "$m572r1911";?>';
+   document.formv1.m572r208.value = '<?php echo "$m572r208";?>';
+   document.formv1.m572r209.value = '<?php echo "$m572r209";?>';
+   document.formv1.m572r2010.value = '<?php echo "$m572r2010";?>';
+   document.formv1.m572r2011.value = '<?php echo "$m572r2011";?>';
+   document.formv1.m572r211.value = '<?php echo "$m572r211";?>';
+   document.formv1.m572r212.value = '<?php echo "$m572r212";?>';
+   document.formv1.m572r213.value = '<?php echo "$m572r213";?>';
+   document.formv1.m572r218.value = '<?php echo "$m572r218";?>';
+   document.formv1.m572r219.value = '<?php echo "$m572r219";?>';
+   document.formv1.m572r2110.value = '<?php echo "$m572r2110";?>';
+   document.formv1.m572r2111.value = '<?php echo "$m572r2111";?>';
+   document.formv1.m572r228.value = '<?php echo "$m572r228";?>';
+   document.formv1.m572r229.value = '<?php echo "$m572r229";?>';
+   document.formv1.m572r2210.value = '<?php echo "$m572r2210";?>';
+   document.formv1.m572r2211.value = '<?php echo "$m572r2211";?>';
+   document.formv1.m572r238.value = '<?php echo "$m572r238";?>';
+   document.formv1.m572r239.value = '<?php echo "$m572r239";?>';
+   document.formv1.m572r2310.value = '<?php echo "$m572r2310";?>';
+   document.formv1.m572r2311.value = '<?php echo "$m572r2311";?>';
+   document.formv1.m572r248.value = '<?php echo "$m572r248";?>';
+   document.formv1.m572r249.value = '<?php echo "$m572r249";?>';
+   document.formv1.m572r2410.value = '<?php echo "$m572r2410";?>';
+   document.formv1.m572r2411.value = '<?php echo "$m572r2411";?>';
+ //document.formv1.m572r991.value = '<?php echo "$m572r991";?>';
+ //document.formv1.m572r992.value = '<?php echo "$m572r992";?>';
+ //document.formv1.m572r993.value = '<?php echo "$m572r993";?>';
+ //document.formv1.m572r994.value = '<?php echo "$m572r994";?>';
+ //document.formv1.m572r995.value = '<?php echo "$m572r995";?>';
+ //document.formv1.m572r996.value = '<?php echo "$m572r996";?>';
+ //document.formv1.m572r997.value = '<?php echo "$m572r997";?>';
+ //document.formv1.m572r998.value = '<?php echo "$m572r998";?>';
+ //document.formv1.m572r999.value = '<?php echo "$m572r999";?>';
+ //document.formv1.m572r9910.value = '<?php echo "$m572r9910";?>';
+ //document.formv1.m572r9911.value = '<?php echo "$m572r9911";?>';
+<?php                      } ?>
+
+<?php if ( $strana == 11 ) { ?>
+  document.formv1.m573r11.value = '<?php echo "$m573r11";?>';
+   document.formv1.m573r12.value = '<?php echo "$m573r12";?>';
+   document.formv1.m573r13.value = '<?php echo "$m573r13";?>';
+   document.formv1.m573r14.value = '<?php echo "$m573r14";?>';
+   document.formv1.m573r15.value = '<?php echo "$m573r15";?>';
+   document.formv1.m573r16.value = '<?php echo "$m573r16";?>';
+   document.formv1.m573r17.value = '<?php echo "$m573r17";?>';
+   document.formv1.m573r18.value = '<?php echo "$m573r18";?>';
+   document.formv1.m573r21.value = '<?php echo "$m573r21";?>';
+   document.formv1.m573r22.value = '<?php echo "$m573r22";?>';
+   document.formv1.m573r23.value = '<?php echo "$m573r23";?>';
+   document.formv1.m573r24.value = '<?php echo "$m573r24";?>';
+   document.formv1.m573r25.value = '<?php echo "$m573r25";?>';
+   document.formv1.m573r26.value = '<?php echo "$m573r26";?>';
+   document.formv1.m573r27.value = '<?php echo "$m573r27";?>';
+   document.formv1.m573r28.value = '<?php echo "$m573r28";?>';
+   document.formv1.m573r35.value = '<?php echo "$m573r35";?>';
+   document.formv1.m573r36.value = '<?php echo "$m573r36";?>';
+   document.formv1.m573r37.value = '<?php echo "$m573r37";?>';
+   document.formv1.m573r38.value = '<?php echo "$m573r38";?>';
+   document.formv1.m573r45.value = '<?php echo "$m573r45";?>';
+   document.formv1.m573r46.value = '<?php echo "$m573r46";?>';
+   document.formv1.m573r47.value = '<?php echo "$m573r47";?>';
+   document.formv1.m573r48.value = '<?php echo "$m573r48";?>';
+   document.formv1.m573r55.value = '<?php echo "$m573r55";?>';
+   document.formv1.m573r56.value = '<?php echo "$m573r56";?>';
+   document.formv1.m573r57.value = '<?php echo "$m573r57";?>';
+   document.formv1.m573r58.value = '<?php echo "$m573r58";?>';
+   document.formv1.m573r65.value = '<?php echo "$m573r65";?>';
+   document.formv1.m573r66.value = '<?php echo "$m573r66";?>';
+   document.formv1.m573r67.value = '<?php echo "$m573r67";?>';
+   document.formv1.m573r68.value = '<?php echo "$m573r68";?>';
+   document.formv1.m573r75.value = '<?php echo "$m573r75";?>';
+   document.formv1.m573r76.value = '<?php echo "$m573r76";?>';
+   document.formv1.m573r77.value = '<?php echo "$m573r77";?>';
+   document.formv1.m573r78.value = '<?php echo "$m573r78";?>';
+   document.formv1.m573r81.value = '<?php echo "$m573r81";?>';
+   document.formv1.m573r82.value = '<?php echo "$m573r82";?>';
+   document.formv1.m573r83.value = '<?php echo "$m573r83";?>';
+   document.formv1.m573r84.value = '<?php echo "$m573r84";?>';
+   document.formv1.m573r85.value = '<?php echo "$m573r85";?>';
+   document.formv1.m573r86.value = '<?php echo "$m573r86";?>';
+   document.formv1.m573r87.value = '<?php echo "$m573r87";?>';
+   document.formv1.m573r88.value = '<?php echo "$m573r88";?>';
+   document.formv1.m573r91.value = '<?php echo "$m573r91";?>';
+   document.formv1.m573r92.value = '<?php echo "$m573r92";?>';
+   document.formv1.m573r93.value = '<?php echo "$m573r93";?>';
+   document.formv1.m573r94.value = '<?php echo "$m573r94";?>';
+   document.formv1.m573r95.value = '<?php echo "$m573r95";?>';
+   document.formv1.m573r96.value = '<?php echo "$m573r96";?>';
+   document.formv1.m573r97.value = '<?php echo "$m573r97";?>';
+   document.formv1.m573r98.value = '<?php echo "$m573r98";?>';
+   document.formv1.m573r105.value = '<?php echo "$m573r105";?>';
+   document.formv1.m573r106.value = '<?php echo "$m573r106";?>';
+   document.formv1.m573r107.value = '<?php echo "$m573r107";?>';
+   document.formv1.m573r108.value = '<?php echo "$m573r108";?>';
+   document.formv1.m573r111.value = '<?php echo "$m573r111";?>';
+   document.formv1.m573r112.value = '<?php echo "$m573r112";?>';
+   document.formv1.m573r113.value = '<?php echo "$m573r113";?>';
+   document.formv1.m573r114.value = '<?php echo "$m573r114";?>';
+   document.formv1.m573r115.value = '<?php echo "$m573r115";?>';
+   document.formv1.m573r116.value = '<?php echo "$m573r116";?>';
+   document.formv1.m573r117.value = '<?php echo "$m573r117";?>';
+   document.formv1.m573r118.value = '<?php echo "$m573r118";?>';
+   document.formv1.m573r121.value = '<?php echo "$m573r121";?>';
+   document.formv1.m573r122.value = '<?php echo "$m573r122";?>';
+   document.formv1.m573r123.value = '<?php echo "$m573r123";?>';
+   document.formv1.m573r124.value = '<?php echo "$m573r124";?>';
+   document.formv1.m573r125.value = '<?php echo "$m573r125";?>';
+   document.formv1.m573r126.value = '<?php echo "$m573r126";?>';
+   document.formv1.m573r127.value = '<?php echo "$m573r127";?>';
+   document.formv1.m573r128.value = '<?php echo "$m573r128";?>';
+   document.formv1.m573r131.value = '<?php echo "$m573r131";?>';
+   document.formv1.m573r132.value = '<?php echo "$m573r132";?>';
+   document.formv1.m573r133.value = '<?php echo "$m573r133";?>';
+   document.formv1.m573r134.value = '<?php echo "$m573r134";?>';
+   document.formv1.m573r135.value = '<?php echo "$m573r135";?>';
+   document.formv1.m573r136.value = '<?php echo "$m573r136";?>';
+   document.formv1.m573r137.value = '<?php echo "$m573r137";?>';
+   document.formv1.m573r138.value = '<?php echo "$m573r138";?>';
+   document.formv1.m573r141.value = '<?php echo "$m573r141";?>';
+   document.formv1.m573r142.value = '<?php echo "$m573r142";?>';
+   document.formv1.m573r143.value = '<?php echo "$m573r143";?>';
+   document.formv1.m573r144.value = '<?php echo "$m573r144";?>';
+   document.formv1.m573r145.value = '<?php echo "$m573r145";?>';
+   document.formv1.m573r146.value = '<?php echo "$m573r146";?>';
+   document.formv1.m573r147.value = '<?php echo "$m573r147";?>';
+   document.formv1.m573r148.value = '<?php echo "$m573r148";?>';
+   document.formv1.m573r151.value = '<?php echo "$m573r151";?>';
+   document.formv1.m573r152.value = '<?php echo "$m573r152";?>';
+   document.formv1.m573r153.value = '<?php echo "$m573r153";?>';
+   document.formv1.m573r154.value = '<?php echo "$m573r154";?>';
+   document.formv1.m573r155.value = '<?php echo "$m573r155";?>';
+   document.formv1.m573r156.value = '<?php echo "$m573r156";?>';
+   document.formv1.m573r157.value = '<?php echo "$m573r157";?>';
+   document.formv1.m573r158.value = '<?php echo "$m573r158";?>';
+   document.formv1.m573r161.value = '<?php echo "$m573r161";?>';
+   document.formv1.m573r162.value = '<?php echo "$m573r162";?>';
+   document.formv1.m573r163.value = '<?php echo "$m573r163";?>';
+   document.formv1.m573r164.value = '<?php echo "$m573r164";?>';
+   document.formv1.m573r165.value = '<?php echo "$m573r165";?>';
+   document.formv1.m573r166.value = '<?php echo "$m573r166";?>';
+   document.formv1.m573r167.value = '<?php echo "$m573r167";?>';
+   document.formv1.m573r168.value = '<?php echo "$m573r168";?>';
+   document.formv1.m573r175.value = '<?php echo "$m573r175";?>';
+   document.formv1.m573r176.value = '<?php echo "$m573r176";?>';
+   document.formv1.m573r177.value = '<?php echo "$m573r177";?>';
+   document.formv1.m573r178.value = '<?php echo "$m573r178";?>';
+   document.formv1.m573r185.value = '<?php echo "$m573r185";?>';
+   document.formv1.m573r186.value = '<?php echo "$m573r186";?>';
+   document.formv1.m573r187.value = '<?php echo "$m573r187";?>';
+   document.formv1.m573r188.value = '<?php echo "$m573r188";?>';
+   document.formv1.m573r195.value = '<?php echo "$m573r195";?>';
+   document.formv1.m573r196.value = '<?php echo "$m573r196";?>';
+   document.formv1.m573r197.value = '<?php echo "$m573r197";?>';
+   document.formv1.m573r198.value = '<?php echo "$m573r198";?>';
+   document.formv1.m573r205.value = '<?php echo "$m573r205";?>';
+   document.formv1.m573r206.value = '<?php echo "$m573r206";?>';
+   document.formv1.m573r207.value = '<?php echo "$m573r207";?>';
+   document.formv1.m573r208.value = '<?php echo "$m573r208";?>';
+   document.formv1.m573r215.value = '<?php echo "$m573r215";?>';
+   document.formv1.m573r216.value = '<?php echo "$m573r216";?>';
+   document.formv1.m573r217.value = '<?php echo "$m573r217";?>';
+   document.formv1.m573r218.value = '<?php echo "$m573r218";?>';
+   document.formv1.m573r221.value = '<?php echo "$m573r221";?>';
+   document.formv1.m573r222.value = '<?php echo "$m573r222";?>';
+   document.formv1.m573r223.value = '<?php echo "$m573r223";?>';
+   document.formv1.m573r224.value = '<?php echo "$m573r224";?>';
+   document.formv1.m573r225.value = '<?php echo "$m573r225";?>';
+   document.formv1.m573r226.value = '<?php echo "$m573r226";?>';
+   document.formv1.m573r227.value = '<?php echo "$m573r227";?>';
+   document.formv1.m573r228.value = '<?php echo "$m573r228";?>';
+   document.formv1.m573r231.value = '<?php echo "$m573r231";?>';
+   document.formv1.m573r232.value = '<?php echo "$m573r232";?>';
+   document.formv1.m573r233.value = '<?php echo "$m573r233";?>';
+   document.formv1.m573r234.value = '<?php echo "$m573r234";?>';
+   document.formv1.m573r235.value = '<?php echo "$m573r235";?>';
+   document.formv1.m573r236.value = '<?php echo "$m573r236";?>';
+   document.formv1.m573r237.value = '<?php echo "$m573r237";?>';
+   document.formv1.m573r238.value = '<?php echo "$m573r238";?>';
+   document.formv1.m573r245.value = '<?php echo "$m573r245";?>';
+   document.formv1.m573r246.value = '<?php echo "$m573r246";?>';
+   document.formv1.m573r247.value = '<?php echo "$m573r247";?>';
+   document.formv1.m573r248.value = '<?php echo "$m573r248";?>';
+ //document.formv1.m573r991.value = '<?php echo "$m573r991";?>';
+ //document.formv1.m573r992.value = '<?php echo "$m573r992";?>';
+ //document.formv1.m573r993.value = '<?php echo "$m573r993";?>';
+ //document.formv1.m573r994.value = '<?php echo "$m573r994";?>';
+ //document.formv1.m573r995.value = '<?php echo "$m573r995";?>';
+ //document.formv1.m573r996.value = '<?php echo "$m573r996";?>';
+ //document.formv1.m573r997.value = '<?php echo "$m573r997";?>';
+ //document.formv1.m573r998.value = '<?php echo "$m573r998";?>';
+<?php                      } ?>
+
+<?php if ( $strana == 12 ) { ?>
+   document.formv1.m513r11.value = '<?php echo "$m513r11";?>';
+   document.formv1.m513r12.value = '<?php echo "$m513r12";?>';
+   document.formv1.m513r13.value = '<?php echo "$m513r13";?>';
+   document.formv1.m513r14.value = '<?php echo "$m513r14";?>';
+   document.formv1.m513r15.value = '<?php echo "$m513r15";?>';
+   document.formv1.m513r16.value = '<?php echo "$m513r16";?>';
+   document.formv1.m513r17.value = '<?php echo "$m513r17";?>';
+   document.formv1.m513r18.value = '<?php echo "$m513r18";?>';
+   document.formv1.m513r19.value = '<?php echo "$m513r19";?>';
+   document.formv1.m513r21.value = '<?php echo "$m513r21";?>';
+   document.formv1.m513r22.value = '<?php echo "$m513r22";?>';
+   document.formv1.m513r23.value = '<?php echo "$m513r23";?>';
+   document.formv1.m513r24.value = '<?php echo "$m513r24";?>';
+   document.formv1.m513r25.value = '<?php echo "$m513r25";?>';
+   document.formv1.m513r26.value = '<?php echo "$m513r26";?>';
+   document.formv1.m513r27.value = '<?php echo "$m513r27";?>';
+   document.formv1.m513r28.value = '<?php echo "$m513r28";?>';
+   document.formv1.m513r29.value = '<?php echo "$m513r29";?>';
+   document.formv1.m513r31.value = '<?php echo "$m513r31";?>';
+   document.formv1.m513r32.value = '<?php echo "$m513r32";?>';
+   document.formv1.m513r33.value = '<?php echo "$m513r33";?>';
+   document.formv1.m513r34.value = '<?php echo "$m513r34";?>';
+   document.formv1.m513r35.value = '<?php echo "$m513r35";?>';
+   document.formv1.m513r36.value = '<?php echo "$m513r36";?>';
+   document.formv1.m513r37.value = '<?php echo "$m513r37";?>';
+   document.formv1.m513r38.value = '<?php echo "$m513r38";?>';
+   document.formv1.m513r39.value = '<?php echo "$m513r39";?>';
+   document.formv1.m513r41.value = '<?php echo "$m513r41";?>';
+   document.formv1.m513r42.value = '<?php echo "$m513r42";?>';
+   document.formv1.m513r43.value = '<?php echo "$m513r43";?>';
+   document.formv1.m513r44.value = '<?php echo "$m513r44";?>';
+   document.formv1.m513r45.value = '<?php echo "$m513r45";?>';
+   document.formv1.m513r46.value = '<?php echo "$m513r46";?>';
+   document.formv1.m513r47.value = '<?php echo "$m513r47";?>';
+   document.formv1.m513r48.value = '<?php echo "$m513r48";?>';
+   document.formv1.m513r49.value = '<?php echo "$m513r49";?>';
+   document.formv1.m513r51.value = '<?php echo "$m513r51";?>';
+   document.formv1.m513r52.value = '<?php echo "$m513r52";?>';
+   document.formv1.m513r53.value = '<?php echo "$m513r53";?>';
+   document.formv1.m513r54.value = '<?php echo "$m513r54";?>';
+   document.formv1.m513r55.value = '<?php echo "$m513r55";?>';
+   document.formv1.m513r56.value = '<?php echo "$m513r56";?>';
+   document.formv1.m513r57.value = '<?php echo "$m513r57";?>';
+   document.formv1.m513r58.value = '<?php echo "$m513r58";?>';
+   document.formv1.m513r59.value = '<?php echo "$m513r59";?>';
+   document.formv1.m513r61.value = '<?php echo "$m513r61";?>';
+   document.formv1.m513r62.value = '<?php echo "$m513r62";?>';
+   document.formv1.m513r63.value = '<?php echo "$m513r63";?>';
+   document.formv1.m513r64.value = '<?php echo "$m513r64";?>';
+   document.formv1.m513r65.value = '<?php echo "$m513r65";?>';
+   document.formv1.m513r66.value = '<?php echo "$m513r66";?>';
+   document.formv1.m513r67.value = '<?php echo "$m513r67";?>';
+   document.formv1.m513r68.value = '<?php echo "$m513r68";?>';
+   document.formv1.m513r69.value = '<?php echo "$m513r69";?>';
+   document.formv1.m513r71.value = '<?php echo "$m513r71";?>';
+   document.formv1.m513r72.value = '<?php echo "$m513r72";?>';
+   document.formv1.m513r73.value = '<?php echo "$m513r73";?>';
+   document.formv1.m513r74.value = '<?php echo "$m513r74";?>';
+   document.formv1.m513r75.value = '<?php echo "$m513r75";?>';
+   document.formv1.m513r76.value = '<?php echo "$m513r76";?>';
+   document.formv1.m513r77.value = '<?php echo "$m513r77";?>';
+   document.formv1.m513r78.value = '<?php echo "$m513r78";?>';
+   document.formv1.m513r79.value = '<?php echo "$m513r79";?>';
+   document.formv1.m513r81.value = '<?php echo "$m513r81";?>';
+   document.formv1.m513r82.value = '<?php echo "$m513r82";?>';
+   document.formv1.m513r83.value = '<?php echo "$m513r83";?>';
+   document.formv1.m513r84.value = '<?php echo "$m513r84";?>';
+   document.formv1.m513r85.value = '<?php echo "$m513r85";?>';
+   document.formv1.m513r86.value = '<?php echo "$m513r86";?>';
+   document.formv1.m513r87.value = '<?php echo "$m513r87";?>';
+   document.formv1.m513r88.value = '<?php echo "$m513r88";?>';
+   document.formv1.m513r89.value = '<?php echo "$m513r89";?>';
+   document.formv1.m513r91.value = '<?php echo "$m513r91";?>';
+   document.formv1.m513r92.value = '<?php echo "$m513r92";?>';
+   document.formv1.m513r93.value = '<?php echo "$m513r93";?>';
+   document.formv1.m513r94.value = '<?php echo "$m513r94";?>';
+   document.formv1.m513r95.value = '<?php echo "$m513r95";?>';
+   document.formv1.m513r96.value = '<?php echo "$m513r96";?>';
+   document.formv1.m513r97.value = '<?php echo "$m513r97";?>';
+   document.formv1.m513r98.value = '<?php echo "$m513r98";?>';
+   document.formv1.m513r99.value = '<?php echo "$m513r99";?>';
+   document.formv1.m513r101.value = '<?php echo "$m513r101";?>';
+   document.formv1.m513r102.value = '<?php echo "$m513r102";?>';
+   document.formv1.m513r103.value = '<?php echo "$m513r103";?>';
+   document.formv1.m513r104.value = '<?php echo "$m513r104";?>';
+   document.formv1.m513r105.value = '<?php echo "$m513r105";?>';
+   document.formv1.m513r106.value = '<?php echo "$m513r106";?>';
+   document.formv1.m513r107.value = '<?php echo "$m513r107";?>';
+   document.formv1.m513r108.value = '<?php echo "$m513r108";?>';
+   document.formv1.m513r109.value = '<?php echo "$m513r109";?>';
+   document.formv1.m513r111.value = '<?php echo "$m513r111";?>';
+   document.formv1.m513r112.value = '<?php echo "$m513r112";?>';
+   document.formv1.m513r113.value = '<?php echo "$m513r113";?>';
+   document.formv1.m513r114.value = '<?php echo "$m513r114";?>';
+   document.formv1.m513r115.value = '<?php echo "$m513r115";?>';
+   document.formv1.m513r116.value = '<?php echo "$m513r116";?>';
+   document.formv1.m513r117.value = '<?php echo "$m513r117";?>';
+   document.formv1.m513r118.value = '<?php echo "$m513r118";?>';
+   document.formv1.m513r119.value = '<?php echo "$m513r119";?>';
+   document.formv1.m513r121.value = '<?php echo "$m513r121";?>';
+   document.formv1.m513r122.value = '<?php echo "$m513r122";?>';
+   document.formv1.m513r123.value = '<?php echo "$m513r123";?>';
+   document.formv1.m513r124.value = '<?php echo "$m513r124";?>';
+   document.formv1.m513r125.value = '<?php echo "$m513r125";?>';
+   document.formv1.m513r126.value = '<?php echo "$m513r126";?>';
+   document.formv1.m513r127.value = '<?php echo "$m513r127";?>';
+   document.formv1.m513r128.value = '<?php echo "$m513r128";?>';
+   document.formv1.m513r129.value = '<?php echo "$m513r129";?>';
+   document.formv1.m513r131.value = '<?php echo "$m513r131";?>';
+   document.formv1.m513r132.value = '<?php echo "$m513r132";?>';
+   document.formv1.m513r133.value = '<?php echo "$m513r133";?>';
+   document.formv1.m513r134.value = '<?php echo "$m513r134";?>';
+   document.formv1.m513r135.value = '<?php echo "$m513r135";?>';
+   document.formv1.m513r136.value = '<?php echo "$m513r136";?>';
+   document.formv1.m513r137.value = '<?php echo "$m513r137";?>';
+   document.formv1.m513r138.value = '<?php echo "$m513r138";?>';
+   document.formv1.m513r139.value = '<?php echo "$m513r139";?>';
+   document.formv1.m513r141.value = '<?php echo "$m513r141";?>';
+   document.formv1.m513r142.value = '<?php echo "$m513r142";?>';
+   document.formv1.m513r143.value = '<?php echo "$m513r143";?>';
+   document.formv1.m513r144.value = '<?php echo "$m513r144";?>';
+   document.formv1.m513r145.value = '<?php echo "$m513r145";?>';
+   document.formv1.m513r146.value = '<?php echo "$m513r146";?>';
+   document.formv1.m513r147.value = '<?php echo "$m513r147";?>';
+   document.formv1.m513r148.value = '<?php echo "$m513r148";?>';
+   document.formv1.m513r149.value = '<?php echo "$m513r149";?>';
+   document.formv1.m513r151.value = '<?php echo "$m513r151";?>';
+   document.formv1.m513r152.value = '<?php echo "$m513r152";?>';
+   document.formv1.m513r153.value = '<?php echo "$m513r153";?>';
+   document.formv1.m513r154.value = '<?php echo "$m513r154";?>';
+   document.formv1.m513r155.value = '<?php echo "$m513r155";?>';
+   document.formv1.m513r156.value = '<?php echo "$m513r156";?>';
+   document.formv1.m513r157.value = '<?php echo "$m513r157";?>';
+   document.formv1.m513r158.value = '<?php echo "$m513r158";?>';
+   document.formv1.m513r159.value = '<?php echo "$m513r159";?>';
+   document.formv1.m513r161.value = '<?php echo "$m513r161";?>';
+   document.formv1.m513r162.value = '<?php echo "$m513r162";?>';
+   document.formv1.m513r163.value = '<?php echo "$m513r163";?>';
+   document.formv1.m513r164.value = '<?php echo "$m513r164";?>';
+   document.formv1.m513r165.value = '<?php echo "$m513r165";?>';
+   document.formv1.m513r166.value = '<?php echo "$m513r166";?>';
+   document.formv1.m513r167.value = '<?php echo "$m513r167";?>';
+   document.formv1.m513r168.value = '<?php echo "$m513r168";?>';
+   document.formv1.m513r169.value = '<?php echo "$m513r169";?>';
+   document.formv1.m513r171.value = '<?php echo "$m513r171";?>';
+   document.formv1.m513r173.value = '<?php echo "$m513r173";?>';
+   document.formv1.m513r174.value = '<?php echo "$m513r174";?>';
+   document.formv1.m513r175.value = '<?php echo "$m513r175";?>';
+   document.formv1.m513r176.value = '<?php echo "$m513r176";?>';
+   document.formv1.m513r177.value = '<?php echo "$m513r177";?>';
+   document.formv1.m513r181.value = '<?php echo "$m513r181";?>';
+   document.formv1.m513r183.value = '<?php echo "$m513r183";?>';
+   document.formv1.m513r184.value = '<?php echo "$m513r184";?>';
+   document.formv1.m513r185.value = '<?php echo "$m513r185";?>';
+   document.formv1.m513r186.value = '<?php echo "$m513r186";?>';
+   document.formv1.m513r187.value = '<?php echo "$m513r187";?>';
+   document.formv1.m513r191.value = '<?php echo "$m513r191";?>';
+   document.formv1.m513r193.value = '<?php echo "$m513r193";?>';
+   document.formv1.m513r194.value = '<?php echo "$m513r194";?>';
+   document.formv1.m513r195.value = '<?php echo "$m513r195";?>';
+   document.formv1.m513r196.value = '<?php echo "$m513r196";?>';
+   document.formv1.m513r197.value = '<?php echo "$m513r197";?>';
+   document.formv1.m513r201.value = '<?php echo "$m513r201";?>';
+   document.formv1.m513r203.value = '<?php echo "$m513r203";?>';
+   document.formv1.m513r204.value = '<?php echo "$m513r204";?>';
+   document.formv1.m513r205.value = '<?php echo "$m513r205";?>';
+   document.formv1.m513r206.value = '<?php echo "$m513r206";?>';
+   document.formv1.m513r207.value = '<?php echo "$m513r207";?>';
+   document.formv1.m513r211.value = '<?php echo "$m513r211";?>';
+   document.formv1.m513r213.value = '<?php echo "$m513r213";?>';
+   document.formv1.m513r214.value = '<?php echo "$m513r214";?>';
+   document.formv1.m513r215.value = '<?php echo "$m513r215";?>';
+   document.formv1.m513r216.value = '<?php echo "$m513r216";?>';
+   document.formv1.m513r217.value = '<?php echo "$m513r217";?>';
+   document.formv1.m513r221.value = '<?php echo "$m513r221";?>';
+   document.formv1.m513r222.value = '<?php echo "$m513r222";?>';
+   document.formv1.m513r223.value = '<?php echo "$m513r223";?>';
+   document.formv1.m513r224.value = '<?php echo "$m513r224";?>';
+   document.formv1.m513r225.value = '<?php echo "$m513r225";?>';
+   document.formv1.m513r226.value = '<?php echo "$m513r226";?>';
+   document.formv1.m513r227.value = '<?php echo "$m513r227";?>';
+   document.formv1.m513r228.value = '<?php echo "$m513r228";?>';
+   document.formv1.m513r229.value = '<?php echo "$m513r229";?>';
+ //document.formv1.m513r991.value = '<?php echo "$m513r991";?>';
+ //document.formv1.m513r992.value = '<?php echo "$m513r992";?>';
+ //document.formv1.m513r993.value = '<?php echo "$m513r993";?>';
+ //document.formv1.m513r994.value = '<?php echo "$m513r994";?>';
+ //document.formv1.m513r995.value = '<?php echo "$m513r995";?>';
+ //document.formv1.m513r996.value = '<?php echo "$m513r996";?>';
+ //document.formv1.m513r997.value = '<?php echo "$m513r997";?>';
+ //document.formv1.m513r998.value = '<?php echo "$m513r998";?>';
+ //document.formv1.m513r999.value = '<?php echo "$m513r999";?>';
+<?php                      } ?>
+
+<?php if ( $strana == 13 ) { ?>
+  document.formv1.m516r11.value = '<?php echo "$m516r11";?>';
+   document.formv1.m516r12.value = '<?php echo "$m516r12";?>';
+   document.formv1.m516r13.value = '<?php echo "$m516r13";?>';
+   document.formv1.m516r14.value = '<?php echo "$m516r14";?>';
+   document.formv1.m516r15.value = '<?php echo "$m516r15";?>';
+   document.formv1.m516r16.value = '<?php echo "$m516r16";?>';
+   document.formv1.m516r17.value = '<?php echo "$m516r17";?>';
+   document.formv1.m516r21.value = '<?php echo "$m516r21";?>';
+   document.formv1.m516r22.value = '<?php echo "$m516r22";?>';
+   document.formv1.m516r23.value = '<?php echo "$m516r23";?>';
+   document.formv1.m516r24.value = '<?php echo "$m516r24";?>';
+   document.formv1.m516r25.value = '<?php echo "$m516r25";?>';
+   document.formv1.m516r26.value = '<?php echo "$m516r26";?>';
+   document.formv1.m516r27.value = '<?php echo "$m516r27";?>';
+   document.formv1.m516r31.value = '<?php echo "$m516r31";?>';
+   document.formv1.m516r32.value = '<?php echo "$m516r32";?>';
+   document.formv1.m516r33.value = '<?php echo "$m516r33";?>';
+   document.formv1.m516r34.value = '<?php echo "$m516r34";?>';
+   document.formv1.m516r35.value = '<?php echo "$m516r35";?>';
+   document.formv1.m516r36.value = '<?php echo "$m516r36";?>';
+   document.formv1.m516r37.value = '<?php echo "$m516r37";?>';
+   document.formv1.m516r41.value = '<?php echo "$m516r41";?>';
+   document.formv1.m516r42.value = '<?php echo "$m516r42";?>';
+   document.formv1.m516r43.value = '<?php echo "$m516r43";?>';
+   document.formv1.m516r44.value = '<?php echo "$m516r44";?>';
+   document.formv1.m516r45.value = '<?php echo "$m516r45";?>';
+   document.formv1.m516r46.value = '<?php echo "$m516r46";?>';
+   document.formv1.m516r47.value = '<?php echo "$m516r47";?>';
+   document.formv1.m516r51.value = '<?php echo "$m516r51";?>';
+   document.formv1.m516r53.value = '<?php echo "$m516r53";?>';
+   document.formv1.m516r54.value = '<?php echo "$m516r54";?>';
+   document.formv1.m516r55.value = '<?php echo "$m516r55";?>';
+   document.formv1.m516r57.value = '<?php echo "$m516r57";?>';
+   document.formv1.m516r61.value = '<?php echo "$m516r61";?>';
+   document.formv1.m516r62.value = '<?php echo "$m516r62";?>';
+   document.formv1.m516r63.value = '<?php echo "$m516r63";?>';
+   document.formv1.m516r64.value = '<?php echo "$m516r64";?>';
+   document.formv1.m516r65.value = '<?php echo "$m516r65";?>';
+   document.formv1.m516r66.value = '<?php echo "$m516r66";?>';
+   document.formv1.m516r67.value = '<?php echo "$m516r67";?>';
+   document.formv1.m516r71.value = '<?php echo "$m516r71";?>';
+   document.formv1.m516r72.value = '<?php echo "$m516r72";?>';
+   document.formv1.m516r73.value = '<?php echo "$m516r73";?>';
+   document.formv1.m516r74.value = '<?php echo "$m516r74";?>';
+   document.formv1.m516r75.value = '<?php echo "$m516r75";?>';
+   document.formv1.m516r76.value = '<?php echo "$m516r76";?>';
+   document.formv1.m516r77.value = '<?php echo "$m516r77";?>';
+   document.formv1.m516r81.value = '<?php echo "$m516r81";?>';
+   document.formv1.m516r82.value = '<?php echo "$m516r82";?>';
+   document.formv1.m516r83.value = '<?php echo "$m516r83";?>';
+   document.formv1.m516r84.value = '<?php echo "$m516r84";?>';
+   document.formv1.m516r85.value = '<?php echo "$m516r85";?>';
+   document.formv1.m516r86.value = '<?php echo "$m516r86";?>';
+   document.formv1.m516r87.value = '<?php echo "$m516r87";?>';
+   document.formv1.m516r91.value = '<?php echo "$m516r91";?>';
+   document.formv1.m516r92.value = '<?php echo "$m516r92";?>';
+   document.formv1.m516r93.value = '<?php echo "$m516r93";?>';
+   document.formv1.m516r94.value = '<?php echo "$m516r94";?>';
+   document.formv1.m516r95.value = '<?php echo "$m516r95";?>';
+   document.formv1.m516r96.value = '<?php echo "$m516r96";?>';
+   document.formv1.m516r97.value = '<?php echo "$m516r97";?>';
+   document.formv1.m516r101.value = '<?php echo "$m516r101";?>';
+   document.formv1.m516r102.value = '<?php echo "$m516r102";?>';
+   document.formv1.m516r103.value = '<?php echo "$m516r103";?>';
+   document.formv1.m516r104.value = '<?php echo "$m516r104";?>';
+   document.formv1.m516r105.value = '<?php echo "$m516r105";?>';
+   document.formv1.m516r106.value = '<?php echo "$m516r106";?>';
+   document.formv1.m516r107.value = '<?php echo "$m516r107";?>';
+   document.formv1.m516r111.value = '<?php echo "$m516r111";?>';
+   document.formv1.m516r112.value = '<?php echo "$m516r112";?>';
+   document.formv1.m516r113.value = '<?php echo "$m516r113";?>';
+   document.formv1.m516r114.value = '<?php echo "$m516r114";?>';
+   document.formv1.m516r115.value = '<?php echo "$m516r115";?>';
+   document.formv1.m516r116.value = '<?php echo "$m516r116";?>';
+   document.formv1.m516r117.value = '<?php echo "$m516r117";?>';
+   document.formv1.m516r121.value = '<?php echo "$m516r121";?>';
+   document.formv1.m516r122.value = '<?php echo "$m516r122";?>';
+   document.formv1.m516r123.value = '<?php echo "$m516r123";?>';
+   document.formv1.m516r124.value = '<?php echo "$m516r124";?>';
+   document.formv1.m516r125.value = '<?php echo "$m516r125";?>';
+   document.formv1.m516r126.value = '<?php echo "$m516r126";?>';
+   document.formv1.m516r127.value = '<?php echo "$m516r127";?>';
+   document.formv1.m516r131.value = '<?php echo "$m516r131";?>';
+   document.formv1.m516r132.value = '<?php echo "$m516r132";?>';
+   document.formv1.m516r133.value = '<?php echo "$m516r133";?>';
+   document.formv1.m516r134.value = '<?php echo "$m516r134";?>';
+   document.formv1.m516r135.value = '<?php echo "$m516r135";?>';
+   document.formv1.m516r136.value = '<?php echo "$m516r136";?>';
+   document.formv1.m516r137.value = '<?php echo "$m516r137";?>';
+   document.formv1.m516r141.value = '<?php echo "$m516r141";?>';
+   document.formv1.m516r142.value = '<?php echo "$m516r142";?>';
+   document.formv1.m516r143.value = '<?php echo "$m516r143";?>';
+   document.formv1.m516r144.value = '<?php echo "$m516r144";?>';
+   document.formv1.m516r145.value = '<?php echo "$m516r145";?>';
+   document.formv1.m516r146.value = '<?php echo "$m516r146";?>';
+   document.formv1.m516r147.value = '<?php echo "$m516r147";?>';
+   document.formv1.m516r151.value = '<?php echo "$m516r151";?>';
+   document.formv1.m516r152.value = '<?php echo "$m516r152";?>';
+   document.formv1.m516r153.value = '<?php echo "$m516r153";?>';
+   document.formv1.m516r154.value = '<?php echo "$m516r154";?>';
+   document.formv1.m516r155.value = '<?php echo "$m516r155";?>';
+   document.formv1.m516r156.value = '<?php echo "$m516r156";?>';
+   document.formv1.m516r157.value = '<?php echo "$m516r157";?>';
+   document.formv1.m516r161.value = '<?php echo "$m516r161";?>';
+   document.formv1.m516r162.value = '<?php echo "$m516r162";?>';
+   document.formv1.m516r163.value = '<?php echo "$m516r163";?>';
+   document.formv1.m516r164.value = '<?php echo "$m516r164";?>';
+   document.formv1.m516r165.value = '<?php echo "$m516r165";?>';
+   document.formv1.m516r166.value = '<?php echo "$m516r166";?>';
+   document.formv1.m516r167.value = '<?php echo "$m516r167";?>';
+   document.formv1.m516r171.value = '<?php echo "$m516r171";?>';
+   document.formv1.m516r172.value = '<?php echo "$m516r172";?>';
+   document.formv1.m516r174.value = '<?php echo "$m516r174";?>';
+   document.formv1.m516r175.value = '<?php echo "$m516r175";?>';
+   document.formv1.m516r177.value = '<?php echo "$m516r177";?>';
+   document.formv1.m516r181.value = '<?php echo "$m516r181";?>';
+   document.formv1.m516r182.value = '<?php echo "$m516r182";?>';
+   document.formv1.m516r184.value = '<?php echo "$m516r184";?>';
+   document.formv1.m516r185.value = '<?php echo "$m516r185";?>';
+   document.formv1.m516r187.value = '<?php echo "$m516r187";?>';
+   document.formv1.m516r191.value = '<?php echo "$m516r191";?>';
+   document.formv1.m516r192.value = '<?php echo "$m516r192";?>';
+   document.formv1.m516r194.value = '<?php echo "$m516r194";?>';
+   document.formv1.m516r195.value = '<?php echo "$m516r195";?>';
+   document.formv1.m516r197.value = '<?php echo "$m516r197";?>';
+   document.formv1.m516r201.value = '<?php echo "$m516r201";?>';
+   document.formv1.m516r202.value = '<?php echo "$m516r202";?>';
+   document.formv1.m516r204.value = '<?php echo "$m516r204";?>';
+   document.formv1.m516r205.value = '<?php echo "$m516r205";?>';
+   document.formv1.m516r206.value = '<?php echo "$m516r206";?>';
+   document.formv1.m516r207.value = '<?php echo "$m516r207";?>';
+   document.formv1.m516r211.value = '<?php echo "$m516r211";?>';
+   document.formv1.m516r212.value = '<?php echo "$m516r212";?>';
+   document.formv1.m516r214.value = '<?php echo "$m516r214";?>';
+   document.formv1.m516r215.value = '<?php echo "$m516r215";?>';
+   document.formv1.m516r216.value = '<?php echo "$m516r216";?>';
+   document.formv1.m516r217.value = '<?php echo "$m516r217";?>';
+   document.formv1.m516r221.value = '<?php echo "$m516r221";?>';
+   document.formv1.m516r222.value = '<?php echo "$m516r222";?>';
+   document.formv1.m516r223.value = '<?php echo "$m516r223";?>';
+   document.formv1.m516r224.value = '<?php echo "$m516r224";?>';
+   document.formv1.m516r225.value = '<?php echo "$m516r225";?>';
+   document.formv1.m516r226.value = '<?php echo "$m516r226";?>';
+   document.formv1.m516r227.value = '<?php echo "$m516r227";?>';
+ //document.formv1.m516r991.value = '<?php echo "$m516r991";?>';
+ //document.formv1.m516r992.value = '<?php echo "$m516r992";?>';
+ //document.formv1.m516r993.value = '<?php echo "$m516r993";?>';
+ //document.formv1.m516r994.value = '<?php echo "$m516r994";?>';
+ //document.formv1.m516r995.value = '<?php echo "$m516r995";?>';
+ //document.formv1.m516r996.value = '<?php echo "$m516r996";?>';
+ //document.formv1.m516r997.value = '<?php echo "$m516r997";?>';
+<?php                      } ?>
+
+<?php if ( $strana == 14 ) { ?>
+   document.formv1.m100305r1.value = '<?php echo "$m100305r1";?>';
+   document.formv1.m100305r2.value = '<?php echo "$m100305r2";?>';
+   document.formv1.m100305r3.value = '<?php echo "$m100305r3";?>';
+<?php if ( $m1527r1a == 1 ) { echo "document.formv1.m1527r1a.checked='checked';"; } ?>
+<?php if ( $m1527r1b == 1 ) { echo "document.formv1.m1527r1b.checked='checked';"; } ?>
+<?php                      } ?>
+
+<?php if ( $strana == 15 ) { ?>
+   document.formv1.m527r11.value = '<?php echo "$m527r11";?>';
+   document.formv1.m527r12.value = '<?php echo "$m527r12";?>';
+   document.formv1.m527r13.value = '<?php echo "$m527r13";?>';
+   document.formv1.m527r14.value = '<?php echo "$m527r14";?>';
+   document.formv1.m527r15.value = '<?php echo "$m527r15";?>';
+   document.formv1.m527r16.value = '<?php echo "$m527r16";?>';
+   document.formv1.m527r17.value = '<?php echo "$m527r17";?>';
+   document.formv1.m527r18.value = '<?php echo "$m527r18";?>';
+   document.formv1.m527r19.value = '<?php echo "$m527r19";?>';
+   document.formv1.m527r110.value = '<?php echo "$m527r110";?>';
+   document.formv1.m527r21.value = '<?php echo "$m527r21";?>';
+   document.formv1.m527r22.value = '<?php echo "$m527r22";?>';
+   document.formv1.m527r23.value = '<?php echo "$m527r23";?>';
+   document.formv1.m527r24.value = '<?php echo "$m527r24";?>';
+   document.formv1.m527r25.value = '<?php echo "$m527r25";?>';
+   document.formv1.m527r26.value = '<?php echo "$m527r26";?>';
+   document.formv1.m527r27.value = '<?php echo "$m527r27";?>';
+   document.formv1.m527r28.value = '<?php echo "$m527r28";?>';
+   document.formv1.m527r29.value = '<?php echo "$m527r29";?>';
+   document.formv1.m527r210.value = '<?php echo "$m527r210";?>';
+   document.formv1.m527r31.value = '<?php echo "$m527r31";?>';
+   document.formv1.m527r32.value = '<?php echo "$m527r32";?>';
+   document.formv1.m527r33.value = '<?php echo "$m527r33";?>';
+   document.formv1.m527r34.value = '<?php echo "$m527r34";?>';
+   document.formv1.m527r35.value = '<?php echo "$m527r35";?>';
+   document.formv1.m527r36.value = '<?php echo "$m527r36";?>';
+   document.formv1.m527r37.value = '<?php echo "$m527r37";?>';
+   document.formv1.m527r38.value = '<?php echo "$m527r38";?>';
+   document.formv1.m527r39.value = '<?php echo "$m527r39";?>';
+   document.formv1.m527r310.value = '<?php echo "$m527r310";?>';
+   document.formv1.m527r41.value = '<?php echo "$m527r41";?>';
+   document.formv1.m527r42.value = '<?php echo "$m527r42";?>';
+   document.formv1.m527r43.value = '<?php echo "$m527r43";?>';
+   document.formv1.m527r44.value = '<?php echo "$m527r44";?>';
+   document.formv1.m527r45.value = '<?php echo "$m527r45";?>';
+   document.formv1.m527r46.value = '<?php echo "$m527r46";?>';
+   document.formv1.m527r47.value = '<?php echo "$m527r47";?>';
+   document.formv1.m527r48.value = '<?php echo "$m527r48";?>';
+   document.formv1.m527r49.value = '<?php echo "$m527r49";?>';
+   document.formv1.m527r410.value = '<?php echo "$m527r410";?>';
+   document.formv1.m527r51.value = '<?php echo "$m527r51";?>';
+   document.formv1.m527r52.value = '<?php echo "$m527r52";?>';
+   document.formv1.m527r53.value = '<?php echo "$m527r53";?>';
+   document.formv1.m527r54.value = '<?php echo "$m527r54";?>';
+   document.formv1.m527r55.value = '<?php echo "$m527r55";?>';
+   document.formv1.m527r56.value = '<?php echo "$m527r56";?>';
+   document.formv1.m527r57.value = '<?php echo "$m527r57";?>';
+   document.formv1.m527r58.value = '<?php echo "$m527r58";?>';
+   document.formv1.m527r59.value = '<?php echo "$m527r59";?>';
+   document.formv1.m527r510.value = '<?php echo "$m527r510";?>';
+   document.formv1.m527r61.value = '<?php echo "$m527r61";?>';
+   document.formv1.m527r62.value = '<?php echo "$m527r62";?>';
+   document.formv1.m527r63.value = '<?php echo "$m527r63";?>';
+   document.formv1.m527r64.value = '<?php echo "$m527r64";?>';
+   document.formv1.m527r65.value = '<?php echo "$m527r65";?>';
+   document.formv1.m527r66.value = '<?php echo "$m527r66";?>';
+   document.formv1.m527r67.value = '<?php echo "$m527r67";?>';
+   document.formv1.m527r68.value = '<?php echo "$m527r68";?>';
+   document.formv1.m527r69.value = '<?php echo "$m527r69";?>';
+   document.formv1.m527r610.value = '<?php echo "$m527r610";?>';
+   document.formv1.m527r71.value = '<?php echo "$m527r71";?>';
+   document.formv1.m527r72.value = '<?php echo "$m527r72";?>';
+   document.formv1.m527r73.value = '<?php echo "$m527r73";?>';
+   document.formv1.m527r74.value = '<?php echo "$m527r74";?>';
+   document.formv1.m527r75.value = '<?php echo "$m527r75";?>';
+   document.formv1.m527r76.value = '<?php echo "$m527r76";?>';
+   document.formv1.m527r77.value = '<?php echo "$m527r77";?>';
+   document.formv1.m527r78.value = '<?php echo "$m527r78";?>';
+   document.formv1.m527r79.value = '<?php echo "$m527r79";?>';
+   document.formv1.m527r710.value = '<?php echo "$m527r710";?>';
+   document.formv1.m527r81.value = '<?php echo "$m527r81";?>';
+   document.formv1.m527r82.value = '<?php echo "$m527r82";?>';
+   document.formv1.m527r83.value = '<?php echo "$m527r83";?>';
+   document.formv1.m527r84.value = '<?php echo "$m527r84";?>';
+   document.formv1.m527r85.value = '<?php echo "$m527r85";?>';
+   document.formv1.m527r86.value = '<?php echo "$m527r86";?>';
+   document.formv1.m527r87.value = '<?php echo "$m527r87";?>';
+   document.formv1.m527r88.value = '<?php echo "$m527r88";?>';
+   document.formv1.m527r89.value = '<?php echo "$m527r89";?>';
+   document.formv1.m527r810.value = '<?php echo "$m527r810";?>';
+   document.formv1.m527r91.value = '<?php echo "$m527r91";?>';
+   document.formv1.m527r92.value = '<?php echo "$m527r92";?>';
+   document.formv1.m527r93.value = '<?php echo "$m527r93";?>';
+   document.formv1.m527r94.value = '<?php echo "$m527r94";?>';
+   document.formv1.m527r95.value = '<?php echo "$m527r95";?>';
+   document.formv1.m527r96.value = '<?php echo "$m527r96";?>';
+   document.formv1.m527r97.value = '<?php echo "$m527r97";?>';
+   document.formv1.m527r98.value = '<?php echo "$m527r98";?>';
+   document.formv1.m527r99.value = '<?php echo "$m527r99";?>';
+   document.formv1.m527r910.value = '<?php echo "$m527r910";?>';
+   document.formv1.m527r101.value = '<?php echo "$m527r101";?>';
+   document.formv1.m527r102.value = '<?php echo "$m527r102";?>';
+   document.formv1.m527r103.value = '<?php echo "$m527r103";?>';
+   document.formv1.m527r104.value = '<?php echo "$m527r104";?>';
+   document.formv1.m527r105.value = '<?php echo "$m527r105";?>';
+   document.formv1.m527r106.value = '<?php echo "$m527r106";?>';
+   document.formv1.m527r107.value = '<?php echo "$m527r107";?>';
+   document.formv1.m527r108.value = '<?php echo "$m527r108";?>';
+   document.formv1.m527r109.value = '<?php echo "$m527r109";?>';
+   document.formv1.m527r1010.value = '<?php echo "$m527r1010";?>';
+   document.formv1.m527r111.value = '<?php echo "$m527r111";?>';
+   document.formv1.m527r112.value = '<?php echo "$m527r112";?>';
+   document.formv1.m527r113.value = '<?php echo "$m527r113";?>';
+   document.formv1.m527r114.value = '<?php echo "$m527r114";?>';
+   document.formv1.m527r115.value = '<?php echo "$m527r115";?>';
+   document.formv1.m527r116.value = '<?php echo "$m527r116";?>';
+   document.formv1.m527r117.value = '<?php echo "$m527r117";?>';
+   document.formv1.m527r118.value = '<?php echo "$m527r118";?>';
+   document.formv1.m527r119.value = '<?php echo "$m527r119";?>';
+   document.formv1.m527r1110.value = '<?php echo "$m527r1110";?>';
+   document.formv1.m527r121.value = '<?php echo "$m527r121";?>';
+   document.formv1.m527r122.value = '<?php echo "$m527r122";?>';
+   document.formv1.m527r123.value = '<?php echo "$m527r123";?>';
+   document.formv1.m527r124.value = '<?php echo "$m527r124";?>';
+   document.formv1.m527r125.value = '<?php echo "$m527r125";?>';
+   document.formv1.m527r126.value = '<?php echo "$m527r126";?>';
+   document.formv1.m527r127.value = '<?php echo "$m527r127";?>';
+   document.formv1.m527r128.value = '<?php echo "$m527r128";?>';
+   document.formv1.m527r129.value = '<?php echo "$m527r129";?>';
+   document.formv1.m527r1210.value = '<?php echo "$m527r1210";?>';
+   document.formv1.m527r131.value = '<?php echo "$m527r131";?>';
+   document.formv1.m527r132.value = '<?php echo "$m527r132";?>';
+   document.formv1.m527r133.value = '<?php echo "$m527r133";?>';
+   document.formv1.m527r134.value = '<?php echo "$m527r134";?>';
+   document.formv1.m527r135.value = '<?php echo "$m527r135";?>';
+   document.formv1.m527r136.value = '<?php echo "$m527r136";?>';
+   document.formv1.m527r137.value = '<?php echo "$m527r137";?>';
+   document.formv1.m527r138.value = '<?php echo "$m527r138";?>';
+   document.formv1.m527r139.value = '<?php echo "$m527r139";?>';
+   document.formv1.m527r1310.value = '<?php echo "$m527r1310";?>';
+   document.formv1.m527r141.value = '<?php echo "$m527r141";?>';
+   document.formv1.m527r142.value = '<?php echo "$m527r142";?>';
+   document.formv1.m527r143.value = '<?php echo "$m527r143";?>';
+   document.formv1.m527r144.value = '<?php echo "$m527r144";?>';
+   document.formv1.m527r145.value = '<?php echo "$m527r145";?>';
+   document.formv1.m527r146.value = '<?php echo "$m527r146";?>';
+   document.formv1.m527r147.value = '<?php echo "$m527r147";?>';
+   document.formv1.m527r148.value = '<?php echo "$m527r148";?>';
+   document.formv1.m527r149.value = '<?php echo "$m527r149";?>';
+   document.formv1.m527r1410.value = '<?php echo "$m527r1410";?>';
+   document.formv1.m527r151.value = '<?php echo "$m527r151";?>';
+   document.formv1.m527r152.value = '<?php echo "$m527r152";?>';
+   document.formv1.m527r153.value = '<?php echo "$m527r153";?>';
+   document.formv1.m527r154.value = '<?php echo "$m527r154";?>';
+   document.formv1.m527r155.value = '<?php echo "$m527r155";?>';
+   document.formv1.m527r156.value = '<?php echo "$m527r156";?>';
+   document.formv1.m527r157.value = '<?php echo "$m527r157";?>';
+   document.formv1.m527r158.value = '<?php echo "$m527r158";?>';
+   document.formv1.m527r159.value = '<?php echo "$m527r159";?>';
+   document.formv1.m527r1510.value = '<?php echo "$m527r1510";?>';
+   document.formv1.m527r161.value = '<?php echo "$m527r161";?>';
+   document.formv1.m527r162.value = '<?php echo "$m527r162";?>';
+   document.formv1.m527r163.value = '<?php echo "$m527r163";?>';
+   document.formv1.m527r164.value = '<?php echo "$m527r164";?>';
+   document.formv1.m527r165.value = '<?php echo "$m527r165";?>';
+   document.formv1.m527r166.value = '<?php echo "$m527r166";?>';
+   document.formv1.m527r167.value = '<?php echo "$m527r167";?>';
+   document.formv1.m527r168.value = '<?php echo "$m527r168";?>';
+   document.formv1.m527r169.value = '<?php echo "$m527r169";?>';
+   document.formv1.m527r1610.value = '<?php echo "$m527r1610";?>';
+   document.formv1.m527r171.value = '<?php echo "$m527r171";?>';
+   document.formv1.m527r172.value = '<?php echo "$m527r172";?>';
+   document.formv1.m527r173.value = '<?php echo "$m527r173";?>';
+   document.formv1.m527r174.value = '<?php echo "$m527r174";?>';
+   document.formv1.m527r175.value = '<?php echo "$m527r175";?>';
+   document.formv1.m527r176.value = '<?php echo "$m527r176";?>';
+   document.formv1.m527r177.value = '<?php echo "$m527r177";?>';
+   document.formv1.m527r178.value = '<?php echo "$m527r178";?>';
+   document.formv1.m527r179.value = '<?php echo "$m527r179";?>';
+   document.formv1.m527r1710.value = '<?php echo "$m527r1710";?>';
+   document.formv1.m527r181.value = '<?php echo "$m527r181";?>';
+   document.formv1.m527r182.value = '<?php echo "$m527r182";?>';
+   document.formv1.m527r183.value = '<?php echo "$m527r183";?>';
+   document.formv1.m527r184.value = '<?php echo "$m527r184";?>';
+   document.formv1.m527r185.value = '<?php echo "$m527r185";?>';
+   document.formv1.m527r186.value = '<?php echo "$m527r186";?>';
+   document.formv1.m527r187.value = '<?php echo "$m527r187";?>';
+   document.formv1.m527r188.value = '<?php echo "$m527r188";?>';
+   document.formv1.m527r1810.value = '<?php echo "$m527r1810";?>';
+   document.formv1.m527r191.value = '<?php echo "$m527r191";?>';
+   document.formv1.m527r192.value = '<?php echo "$m527r192";?>';
+   document.formv1.m527r193.value = '<?php echo "$m527r193";?>';
+   document.formv1.m527r194.value = '<?php echo "$m527r194";?>';
+   document.formv1.m527r195.value = '<?php echo "$m527r195";?>';
+   document.formv1.m527r196.value = '<?php echo "$m527r196";?>';
+   document.formv1.m527r197.value = '<?php echo "$m527r197";?>';
+   document.formv1.m527r198.value = '<?php echo "$m527r198";?>';
+   document.formv1.m527r1910.value = '<?php echo "$m527r1910";?>';
+   document.formv1.m527r201.value = '<?php echo "$m527r201";?>';
+   document.formv1.m527r202.value = '<?php echo "$m527r202";?>';
+   document.formv1.m527r203.value = '<?php echo "$m527r203";?>';
+   document.formv1.m527r204.value = '<?php echo "$m527r204";?>';
+   document.formv1.m527r205.value = '<?php echo "$m527r205";?>';
+   document.formv1.m527r206.value = '<?php echo "$m527r206";?>';
+   document.formv1.m527r207.value = '<?php echo "$m527r207";?>';
+   document.formv1.m527r208.value = '<?php echo "$m527r208";?>';
+   document.formv1.m527r2010.value = '<?php echo "$m527r2010";?>';
+   document.formv1.m527r211.value = '<?php echo "$m527r211";?>';
+   document.formv1.m527r212.value = '<?php echo "$m527r212";?>';
+   document.formv1.m527r213.value = '<?php echo "$m527r213";?>';
+   document.formv1.m527r214.value = '<?php echo "$m527r214";?>';
+   document.formv1.m527r215.value = '<?php echo "$m527r215";?>';
+   document.formv1.m527r216.value = '<?php echo "$m527r216";?>';
+   document.formv1.m527r217.value = '<?php echo "$m527r217";?>';
+   document.formv1.m527r218.value = '<?php echo "$m527r218";?>';
+   document.formv1.m527r2110.value = '<?php echo "$m527r2110";?>';
+   document.formv1.m527r221.value = '<?php echo "$m527r221";?>';
+   document.formv1.m527r222.value = '<?php echo "$m527r222";?>';
+   document.formv1.m527r223.value = '<?php echo "$m527r223";?>';
+   document.formv1.m527r224.value = '<?php echo "$m527r224";?>';
+   document.formv1.m527r225.value = '<?php echo "$m527r225";?>';
+   document.formv1.m527r226.value = '<?php echo "$m527r226";?>';
+   document.formv1.m527r227.value = '<?php echo "$m527r227";?>';
+   document.formv1.m527r228.value = '<?php echo "$m527r228";?>';
+   document.formv1.m527r2210.value = '<?php echo "$m527r2210";?>';
+   document.formv1.m527r231.value = '<?php echo "$m527r231";?>';
+   document.formv1.m527r232.value = '<?php echo "$m527r232";?>';
+   document.formv1.m527r233.value = '<?php echo "$m527r233";?>';
+   document.formv1.m527r234.value = '<?php echo "$m527r234";?>';
+   document.formv1.m527r235.value = '<?php echo "$m527r235";?>';
+   document.formv1.m527r236.value = '<?php echo "$m527r236";?>';
+   document.formv1.m527r237.value = '<?php echo "$m527r237";?>';
+   document.formv1.m527r238.value = '<?php echo "$m527r238";?>';
+   document.formv1.m527r2310.value = '<?php echo "$m527r2310";?>';
+   document.formv1.m527r241.value = '<?php echo "$m527r241";?>';
+   document.formv1.m527r242.value = '<?php echo "$m527r242";?>';
+   document.formv1.m527r243.value = '<?php echo "$m527r243";?>';
+   document.formv1.m527r244.value = '<?php echo "$m527r244";?>';
+   document.formv1.m527r245.value = '<?php echo "$m527r245";?>';
+   document.formv1.m527r246.value = '<?php echo "$m527r246";?>';
+   document.formv1.m527r247.value = '<?php echo "$m527r247";?>';
+   document.formv1.m527r248.value = '<?php echo "$m527r248";?>';
+   document.formv1.m527r2410.value = '<?php echo "$m527r2410";?>';
+ //document.formv1.m527r991.value = '<?php echo "$m527r991";?>';
+ //document.formv1.m527r992.value = '<?php echo "$m527r992";?>';
+ //document.formv1.m527r993.value = '<?php echo "$m527r993";?>';
+ //document.formv1.m527r994.value = '<?php echo "$m527r994";?>';
+ //document.formv1.m527r995.value = '<?php echo "$m527r995";?>';
+ //document.formv1.m527r996.value = '<?php echo "$m527r996";?>';
+ //document.formv1.m527r997.value = '<?php echo "$m527r997";?>';
+ //document.formv1.m527r998.value = '<?php echo "$m527r998";?>';
+ //document.formv1.m527r999.value = '<?php echo "$m527r999";?>';
+ //document.formv1.m527r9910.value = '<?php echo "$m527r9910";?>';
+<?php                      } ?>
+
+<?php if ( $strana == 16 ) { ?>
+  document.formv1.m474r11.value = '<?php echo $m474r11; ?>';
+  document.formv1.m474r12.value = '<?php echo $m474r12; ?>';
+  document.formv1.m474r13.value = '<?php echo $m474r13; ?>';
+  document.formv1.m474r21.value = '<?php echo $m474r21; ?>';
+  document.formv1.m474r22.value = '<?php echo $m474r22; ?>';
+  document.formv1.m474r23.value = '<?php echo $m474r23; ?>';
+  document.formv1.m474r31.value = '<?php echo $m474r31; ?>';
+  document.formv1.m474r32.value = '<?php echo $m474r32; ?>';
+  document.formv1.m474r33.value = '<?php echo $m474r33; ?>';
+  document.formv1.m474r41.value = '<?php echo $m474r41; ?>';
+  document.formv1.m474r42.value = '<?php echo $m474r42; ?>';
+  document.formv1.m474r43.value = '<?php echo $m474r43; ?>';
+  document.formv1.m474r51.value = '<?php echo $m474r51; ?>';
+  document.formv1.m474r52.value = '<?php echo $m474r52; ?>';
+  document.formv1.m474r53.value = '<?php echo $m474r53; ?>';
+  document.formv1.m474r61.value = '<?php echo $m474r61; ?>';
+  document.formv1.m474r62.value = '<?php echo $m474r62; ?>';
+  document.formv1.m474r63.value = '<?php echo $m474r63; ?>';
+  document.formv1.m474r72.value = '<?php echo $m474r72; ?>';
+  document.formv1.m474r73.value = '<?php echo $m474r73; ?>';
+//document.formv1.m474r991.value = '<?php echo $m474r991; ?>';
+//document.formv1.m474r992.value = '<?php echo $m474r992; ?>';
+//document.formv1.m474r993.value = '<?php echo $m474r993; ?>';
+  document.formv1.m514r1.value = '<?php echo $m514r1; ?>';
+  document.formv1.m514r2.value = '<?php echo $m514r2; ?>';
+  document.formv1.m514r3.value = '<?php echo $m514r3; ?>';
+//document.formv1.m514r99.value = '<?php echo $m514r99; ?>';
+<?php                      } ?>
+  }
+<?php
+//koniec uprava
+  }
+?>
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+  function CisCPAp1()
+  {
+   window.open('../dokumenty/statistika2016/cpa_ciselnik_pril1_v16.pdf', '_blank', blank_param);
+  }
+  function FormMetod()
+  {
+   window.open('<?php echo $jpg_source; ?>_metodika.pdf', '_blank', blank_param);
+  }
+
+
+
+
+  function editForm(strana)
+  {
+    window.open('statistika_vts101.php?copern=102&strana=' + strana + '', '_self');
+  }
+  function FormPDF(strana)
+  {
+    window.open('statistika_vts101.php?copern=11&strana=' + strana + '', '_blank', blank_param);
+  }
+  function StatUdajeFirma()
+  {
+   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0', '_blank', blank_param);
+  }
+  function NacitajMzdy()
+  {
+   window.open('../ucto/statistika_vts101.php?copern=200&drupoh=1&page=1', '_self');
+  }
+  function NacitajZobratovky(modul)
+  {
+   window.open('../ucto/uobrat.php?modul=' + modul + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=20201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
+  }
+  function NacitajZosuvahy(modul)
+  {
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=1&modul=' + modul + '&page=1&typ=PDF&cstat=vts101&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
+  }
+</script>
+</body>
+</html>
