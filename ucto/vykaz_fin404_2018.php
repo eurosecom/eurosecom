@@ -27,7 +27,7 @@ $rmc=0;
 $rmc1=0;
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/fin404/fin4-04_v16";
+$jpg_cesta="../dokumenty/tlacivo2018/fin4-04/fin4-04_v18";
 $jpg_popis="Finanèný výkaz o finanèných pasívach pod¾a sektorov subjektu verejnej správy FIN 4-04 za rok ".$kli_vrok;
 
 $pole = explode(".", $kli_vume);
@@ -150,6 +150,24 @@ $pocs09 = 1*$_REQUEST['pocs09'];
 $pocs10 = 1*$_REQUEST['pocs10'];
 $pocs11 = 1*$_REQUEST['pocs11'];
 $pocs12 = 1*$_REQUEST['pocs12'];
+$pocs13 = 1*$_REQUEST['pocs13'];
+$pocs14 = 1*$_REQUEST['pocs14'];
+$pocs15 = 1*$_REQUEST['pocs15'];
+$pocs16 = 1*$_REQUEST['pocs16'];
+$pocs17 = 1*$_REQUEST['pocs17'];
+$pocs18 = 1*$_REQUEST['pocs18'];
+$pocs19 = 1*$_REQUEST['pocs19'];
+$pocs10 = 1*$_REQUEST['pocs20'];
+$pocs21 = 1*$_REQUEST['pocs21'];
+$pocs22 = 1*$_REQUEST['pocs22'];
+$pocs23 = 1*$_REQUEST['pocs23'];
+$pocs24 = 1*$_REQUEST['pocs24'];
+$pocs25 = 1*$_REQUEST['pocs25'];
+$pocs26 = 1*$_REQUEST['pocs26'];
+$pocs27 = 1*$_REQUEST['pocs27'];
+$pocs28 = 1*$_REQUEST['pocs28'];
+
+
 $zvys01 = 1*$_REQUEST['zvys01'];
 $zvys02 = 1*$_REQUEST['zvys02'];
 $zvys03 = 1*$_REQUEST['zvys03'];
@@ -162,17 +180,24 @@ $zvys09 = 1*$_REQUEST['zvys09'];
 $zvys10 = 1*$_REQUEST['zvys10'];
 $zvys11 = 1*$_REQUEST['zvys11'];
 $zvys12 = 1*$_REQUEST['zvys12'];
-$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin404 SET ".
-" pocs01='$pocs01', pocs02='$pocs02', pocs03='$pocs03', pocs04='$pocs04',
-  pocs07='$pocs07', pocs08='$pocs08', pocs09='$pocs09', pocs10='$pocs10',
-  pocs11='$pocs11', pocs12='$pocs12',
-  zvys01='$zvys01', zvys02='$zvys02', zvys03='$zvys03', zvys04='$zvys04',
-  zvys07='$zvys07', zvys08='$zvys08', zvys09='$zvys09', zvys10='$zvys10',
-  zvys11='$zvys11', zvys12='$zvys12' ".
-" WHERE oc = $cislo_oc";
-                    }
+$zvys13 = 1*$_REQUEST['zvys13'];
+$zvys14 = 1*$_REQUEST['zvys14'];
+$zvys15 = 1*$_REQUEST['zvys15'];
+$zvys16 = 1*$_REQUEST['zvys16'];
+$zvys17 = 1*$_REQUEST['zvys17'];
+$zvys18 = 1*$_REQUEST['zvys18'];
+$zvys19 = 1*$_REQUEST['zvys19'];
+$zvys10 = 1*$_REQUEST['zvys20'];
+$zvys21 = 1*$_REQUEST['zvys21'];
+$zvys22 = 1*$_REQUEST['zvys22'];
+$zvys23 = 1*$_REQUEST['zvys23'];
+$zvys24 = 1*$_REQUEST['zvys24'];
+$zvys25 = 1*$_REQUEST['zvys25'];
+$zvys26 = 1*$_REQUEST['zvys26'];
+$zvys27 = 1*$_REQUEST['zvys27'];
+$zvys28 = 1*$_REQUEST['zvys28'];
 
-if ( $strana == 3 ) {
+
 $znis01 = 1*$_REQUEST['znis01'];
 $znis02 = 1*$_REQUEST['znis02'];
 $znis03 = 1*$_REQUEST['znis03'];
@@ -185,6 +210,24 @@ $znis09 = 1*$_REQUEST['znis09'];
 $znis10 = 1*$_REQUEST['znis10'];
 $znis11 = 1*$_REQUEST['znis11'];
 $znis12 = 1*$_REQUEST['znis12'];
+$znis13 = 1*$_REQUEST['znis13'];
+$znis14 = 1*$_REQUEST['znis14'];
+$znis15 = 1*$_REQUEST['znis15'];
+$znis16 = 1*$_REQUEST['znis16'];
+$znis17 = 1*$_REQUEST['znis17'];
+$znis18 = 1*$_REQUEST['znis18'];
+$znis19 = 1*$_REQUEST['znis19'];
+$znis10 = 1*$_REQUEST['znis20'];
+$znis21 = 1*$_REQUEST['znis21'];
+$znis22 = 1*$_REQUEST['znis22'];
+$znis23 = 1*$_REQUEST['znis23'];
+$znis24 = 1*$_REQUEST['znis24'];
+$znis25 = 1*$_REQUEST['znis25'];
+$znis26 = 1*$_REQUEST['znis26'];
+$znis27 = 1*$_REQUEST['znis27'];
+$znis28 = 1*$_REQUEST['znis28'];
+
+
 $oces01 = 1*$_REQUEST['oces01'];
 $oces02 = 1*$_REQUEST['oces02'];
 $oces03 = 1*$_REQUEST['oces03'];
@@ -197,6 +240,24 @@ $oces09 = 1*$_REQUEST['oces09'];
 $oces10 = 1*$_REQUEST['oces10'];
 $oces11 = 1*$_REQUEST['oces11'];
 $oces12 = 1*$_REQUEST['oces12'];
+$oces13 = 1*$_REQUEST['oces13'];
+$oces14 = 1*$_REQUEST['oces14'];
+$oces15 = 1*$_REQUEST['oces15'];
+$oces16 = 1*$_REQUEST['oces16'];
+$oces17 = 1*$_REQUEST['oces17'];
+$oces18 = 1*$_REQUEST['oces18'];
+$oces19 = 1*$_REQUEST['oces19'];
+$oces10 = 1*$_REQUEST['oces20'];
+$oces21 = 1*$_REQUEST['oces21'];
+$oces22 = 1*$_REQUEST['oces22'];
+$oces23 = 1*$_REQUEST['oces23'];
+$oces24 = 1*$_REQUEST['oces24'];
+$oces25 = 1*$_REQUEST['oces25'];
+$oces26 = 1*$_REQUEST['oces26'];
+$oces27 = 1*$_REQUEST['oces27'];
+$oces28 = 1*$_REQUEST['oces28'];
+
+
 $osts01 = 1*$_REQUEST['osts01'];
 $osts02 = 1*$_REQUEST['osts02'];
 $osts03 = 1*$_REQUEST['osts03'];
@@ -209,6 +270,26 @@ $osts09 = 1*$_REQUEST['osts09'];
 $osts10 = 1*$_REQUEST['osts10'];
 $osts11 = 1*$_REQUEST['osts11'];
 $osts12 = 1*$_REQUEST['osts12'];
+$osts13 = 1*$_REQUEST['osts13'];
+$osts14 = 1*$_REQUEST['osts14'];
+$osts15 = 1*$_REQUEST['osts15'];
+$osts16 = 1*$_REQUEST['osts16'];
+$osts17 = 1*$_REQUEST['osts17'];
+$osts18 = 1*$_REQUEST['osts18'];
+$osts19 = 1*$_REQUEST['osts19'];
+$osts10 = 1*$_REQUEST['osts20'];
+$osts21 = 1*$_REQUEST['osts21'];
+$osts22 = 1*$_REQUEST['osts22'];
+$osts23 = 1*$_REQUEST['osts23'];
+$osts24 = 1*$_REQUEST['osts24'];
+$osts25 = 1*$_REQUEST['osts25'];
+$osts26 = 1*$_REQUEST['osts26'];
+$osts27 = 1*$_REQUEST['osts27'];
+$osts28 = 1*$_REQUEST['osts28'];
+
+
+
+
 $zoss01 = 1*$_REQUEST['zoss01'];
 $zoss02 = 1*$_REQUEST['zoss02'];
 $zoss03 = 1*$_REQUEST['zoss03'];
@@ -221,21 +302,70 @@ $zoss09 = 1*$_REQUEST['zoss09'];
 $zoss10 = 1*$_REQUEST['zoss10'];
 $zoss11 = 1*$_REQUEST['zoss11'];
 $zoss12 = 1*$_REQUEST['zoss12'];
+$zoss13 = 1*$_REQUEST['zoss13'];
+$zoss14 = 1*$_REQUEST['zoss14'];
+$zoss15 = 1*$_REQUEST['zoss15'];
+$zoss16 = 1*$_REQUEST['zoss16'];
+$zoss17 = 1*$_REQUEST['zoss17'];
+$zoss18 = 1*$_REQUEST['zoss18'];
+$zoss19 = 1*$_REQUEST['zoss19'];
+$zoss10 = 1*$_REQUEST['zoss20'];
+$zoss21 = 1*$_REQUEST['zoss21'];
+$zoss22 = 1*$_REQUEST['zoss22'];
+$zoss23 = 1*$_REQUEST['zoss23'];
+$zoss24 = 1*$_REQUEST['zoss24'];
+$zoss25 = 1*$_REQUEST['zoss25'];
+$zoss26 = 1*$_REQUEST['zoss26'];
+$zoss27 = 1*$_REQUEST['zoss27'];
+$zoss28 = 1*$_REQUEST['zoss28'];
+
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin404 SET ".
-" znis01='$znis01', znis02='$znis02', znis03='$znis03', znis04='$znis04',
-  znis07='$znis07', znis08='$znis08', znis09='$znis09', znis10='$znis10',
-  znis11='$znis11', znis12='$znis12',
-  oces01='$oces01', oces02='$oces02', oces03='$oces03', oces04='$oces04', oces05='$oces05',
-  oces06='$oces06', oces07='$oces07', oces08='$oces08', oces09='$oces09', oces10='$oces10',
-  oces11='$oces11', oces12='$oces12',
-  osts01='$osts01', osts02='$osts02', osts03='$osts03', osts04='$osts04', osts05='$osts05',
-  osts06='$osts06', osts07='$osts07', osts08='$osts08', osts09='$osts09', osts10='$osts10',
-  osts11='$osts11', osts12='$osts12',
-  zoss01='$zoss01', zoss02='$zoss02', zoss03='$zoss03', zoss04='$zoss04',
-  zoss07='$zoss07', zoss08='$zoss08', zoss09='$zoss09', zoss10='$zoss10',
-  zoss11='$zoss11', zoss12='$zoss12' ".
+" pocs01='$pocs01', pocs02='$pocs02', pocs03='$pocs03', pocs04='$pocs04', pocs05='$pocs05', ".
+" pocs06='$pocs06', pocs07='$pocs07', pocs08='$pocs08', pocs09='$pocs09', pocs10='$pocs10', ".
+" pocs11='$pocs11', pocs12='$pocs12', pocs13='$pocs13', pocs14='$pocs14', ".
+" pocs15='$pocs15', pocs16='$pocs16', pocs17='$pocs17', pocs18='$pocs18', pocs19='$pocs19', pocs20='$pocs20', ".
+" pocs21='$pocs21', pocs22='$pocs22', pocs23='$pocs23', pocs24='$pocs24', pocs25='$pocs25', pocs26='$pocs26', ".
+" pocs27='$pocs27', pocs28='$pocs28', ".
+
+" zvys01='$zvys01', zvys02='$zvys02', zvys03='$zvys03', zvys04='$zvys04', zvys05='$zvys05', ".
+" zvys06='$zvys06', zvys07='$zvys07', zvys08='$zvys08', zvys09='$zvys09', zvys10='$zvys10', ".
+" zvys11='$zvys11', zvys12='$zvys12', zvys13='$zvys13', zvys14='$zvys14', ".
+" zvys15='$zvys15', zvys16='$zvys16', zvys17='$zvys17', zvys18='$zvys18', zvys19='$zvys19', zvys20='$zvys20', ".
+" zvys21='$zvys21', zvys22='$zvys22', zvys23='$zvys23', zvys24='$zvys24', zvys25='$zvys25', zvys26='$zvys26', ".
+" zvys27='$zvys27', zvys28='$zvys28', ".
+
+" znis01='$znis01', znis02='$znis02', znis03='$znis03', znis04='$znis04', znis05='$znis05', ".
+" znis06='$znis06', znis07='$znis07', znis08='$znis08', znis09='$znis09', znis10='$znis10', ".
+" znis11='$znis11', znis12='$znis12', znis13='$znis13', znis14='$znis14', ".
+" znis15='$znis15', znis16='$znis16', znis17='$znis17', znis18='$znis18', znis19='$znis19', znis20='$znis20', ".
+" znis21='$znis21', znis22='$znis22', znis23='$znis23', znis24='$znis24', znis25='$znis25', znis26='$znis26', ".
+" znis27='$znis27', znis28='$znis28', ".
+
+" oces01='$oces01', oces02='$oces02', oces03='$oces03', oces04='$oces04', oces05='$oces05', ".
+" oces06='$oces06', oces07='$oces07', oces08='$oces08', oces09='$oces09', oces10='$oces10', ".
+" oces11='$oces11', oces12='$oces12', oces13='$oces13', oces14='$oces14', ".
+" oces15='$oces15', oces16='$oces16', oces17='$oces17', oces18='$oces18', oces19='$oces19', oces20='$oces20', ".
+" oces21='$oces21', oces22='$oces22', oces23='$oces23', oces24='$oces24', oces25='$oces25', oces26='$oces26', ".
+" oces27='$oces27', oces28='$oces28', ".
+
+" osts01='$osts01', osts02='$osts02', osts03='$osts03', osts04='$osts04', osts05='$osts05', ".
+" osts06='$osts06', osts07='$osts07', osts08='$osts08', osts09='$osts09', osts10='$osts10', ".
+" osts11='$osts11', osts12='$osts12', osts13='$osts13', osts14='$osts14', ".
+" osts15='$osts15', osts16='$osts16', osts17='$osts17', osts18='$osts18', osts19='$osts19', osts20='$osts20', ".
+" osts21='$osts21', osts22='$osts22', osts23='$osts23', osts24='$osts24', osts25='$osts25', osts26='$osts26', ".
+" osts27='$osts27', osts28='$osts28', ".
+
+
+" zoss01='$zoss01', zoss02='$zoss02', zoss03='$zoss03', zoss04='$zoss04', zoss05='$zoss05', ".
+" zoss06='$zoss06', zoss07='$zoss07', zoss08='$zoss08', zoss09='$zoss09', zoss10='$zoss10', ".
+" zoss11='$zoss11', zoss12='$zoss12', zoss13='$zoss13', zoss14='$zoss14', ".
+" zoss15='$zoss15', zoss16='$zoss16', zoss17='$zoss17', zoss18='$zoss18', zoss19='$zoss19', zoss20='$zoss20', ".
+" zoss21='$zoss21', zoss22='$zoss22', zoss23='$zoss23', zoss24='$zoss24', zoss25='$zoss25', zoss26='$zoss26', ".
+" zoss27='$zoss27', zoss28='$zoss28'  ".
 " WHERE oc = $cislo_oc";
                     }
+
+
 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
@@ -805,6 +935,21 @@ $pocs12 = $fir_riadok->pocs12;
 $pocs13 = $fir_riadok->pocs13;
 $pocs14 = $fir_riadok->pocs14;
 
+$pocs15 = $fir_riadok->pocs15;
+$pocs16 = $fir_riadok->pocs16;
+$pocs17 = $fir_riadok->pocs17;
+$pocs18 = $fir_riadok->pocs18;
+$pocs19 = $fir_riadok->pocs19;
+$pocs10 = $fir_riadok->pocs20;
+$pocs21 = $fir_riadok->pocs21;
+$pocs22 = $fir_riadok->pocs22;
+$pocs23 = $fir_riadok->pocs23;
+$pocs24 = $fir_riadok->pocs24;
+$pocs25 = $fir_riadok->pocs25;
+$pocs26 = $fir_riadok->pocs26;
+$pocs27 = $fir_riadok->pocs27;
+$pocs28 = $fir_riadok->pocs28;
+
 $zvys01 = $fir_riadok->zvys01;
 $zvys02 = $fir_riadok->zvys02;
 $zvys03 = $fir_riadok->zvys03;
@@ -819,6 +964,21 @@ $zvys11 = $fir_riadok->zvys11;
 $zvys12 = $fir_riadok->zvys12;
 $zvys13 = $fir_riadok->zvys13;
 $zvys14 = $fir_riadok->zvys14;
+
+$zvys15 = $fir_riadok->zvys15;
+$zvys16 = $fir_riadok->zvys16;
+$zvys17 = $fir_riadok->zvys17;
+$zvys18 = $fir_riadok->zvys18;
+$zvys19 = $fir_riadok->zvys19;
+$zvys10 = $fir_riadok->zvys20;
+$zvys21 = $fir_riadok->zvys21;
+$zvys22 = $fir_riadok->zvys22;
+$zvys23 = $fir_riadok->zvys23;
+$zvys24 = $fir_riadok->zvys24;
+$zvys25 = $fir_riadok->zvys25;
+$zvys26 = $fir_riadok->zvys26;
+$zvys27 = $fir_riadok->zvys27;
+$zvys28 = $fir_riadok->zvys28;
 
 $znis01 = $fir_riadok->znis01;
 $znis02 = $fir_riadok->znis02;
@@ -879,30 +1039,69 @@ $zoss11 = $fir_riadok->zoss11;
 $zoss12 = $fir_riadok->zoss12;
 $zoss13 = $fir_riadok->zoss13;
 $zoss14 = $fir_riadok->zoss14;
+
+$znis15 = $fir_riadok->znis15;
+$znis16 = $fir_riadok->znis16;
+$znis17 = $fir_riadok->znis17;
+$znis18 = $fir_riadok->znis18;
+$znis19 = $fir_riadok->znis19;
+$znis10 = $fir_riadok->znis20;
+$znis21 = $fir_riadok->znis21;
+$znis22 = $fir_riadok->znis22;
+$znis23 = $fir_riadok->znis23;
+$znis24 = $fir_riadok->znis24;
+$znis25 = $fir_riadok->znis25;
+$znis26 = $fir_riadok->znis26;
+$znis27 = $fir_riadok->znis27;
+$znis28 = $fir_riadok->znis28;
+
+$oces15 = $fir_riadok->oces15;
+$oces16 = $fir_riadok->oces16;
+$oces17 = $fir_riadok->oces17;
+$oces18 = $fir_riadok->oces18;
+$oces19 = $fir_riadok->oces19;
+$oces10 = $fir_riadok->oces20;
+$oces21 = $fir_riadok->oces21;
+$oces22 = $fir_riadok->oces22;
+$oces23 = $fir_riadok->oces23;
+$oces24 = $fir_riadok->oces24;
+$oces25 = $fir_riadok->oces25;
+$oces26 = $fir_riadok->oces26;
+$oces27 = $fir_riadok->oces27;
+$oces28 = $fir_riadok->oces28;
+
+$osts15 = $fir_riadok->osts15;
+$osts16 = $fir_riadok->osts16;
+$osts17 = $fir_riadok->osts17;
+$osts18 = $fir_riadok->osts18;
+$osts19 = $fir_riadok->osts19;
+$osts10 = $fir_riadok->osts20;
+$osts21 = $fir_riadok->osts21;
+$osts22 = $fir_riadok->osts22;
+$osts23 = $fir_riadok->osts23;
+$osts24 = $fir_riadok->osts24;
+$osts25 = $fir_riadok->osts25;
+$osts26 = $fir_riadok->osts26;
+$osts27 = $fir_riadok->osts27;
+$osts28 = $fir_riadok->osts28;
+
+$zoss15 = $fir_riadok->zoss15;
+$zoss16 = $fir_riadok->zoss16;
+$zoss17 = $fir_riadok->zoss17;
+$zoss18 = $fir_riadok->zoss18;
+$zoss19 = $fir_riadok->zoss19;
+$zoss10 = $fir_riadok->zoss20;
+$zoss21 = $fir_riadok->zoss21;
+$zoss22 = $fir_riadok->zoss22;
+$zoss23 = $fir_riadok->zoss23;
+$zoss24 = $fir_riadok->zoss24;
+$zoss25 = $fir_riadok->zoss25;
+$zoss26 = $fir_riadok->zoss26;
+$zoss27 = $fir_riadok->zoss27;
+$zoss28 = $fir_riadok->zoss28;
 }
 
-if ( $strana == 3 )
-{
 
-
-$pocs15 = $fir_riadok->pocs15;
-$pocs16 = $fir_riadok->pocs16;
-$pocs17 = $fir_riadok->pocs17;
-$pocs18 = $fir_riadok->pocs18;
-$pocs19 = $fir_riadok->pocs19;
-$pocs10 = $fir_riadok->pocs20;
-$pocs21 = $fir_riadok->pocs21;
-$pocs22 = $fir_riadok->pocs22;
-$pocs23 = $fir_riadok->pocs23;
-$pocs24 = $fir_riadok->pocs24;
-$pocs25 = $fir_riadok->pocs25;
-$pocs26 = $fir_riadok->pocs26;
-$pocs27 = $fir_riadok->pocs27;
-$pocs28 = $fir_riadok->pocs28;
-
-//atd
-
-}
 mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
@@ -985,6 +1184,8 @@ img.btn-form-tool {
    document.formv1.pocs10.value = '<?php echo $pocs10; ?>';
    document.formv1.pocs11.value = '<?php echo $pocs11; ?>';
    document.formv1.pocs12.value = '<?php echo $pocs12; ?>';
+   document.formv1.pocs13.value = '<?php echo $pocs13; ?>';
+   document.formv1.pocs14.value = '<?php echo $pocs14; ?>';
 
    document.formv1.zvys01.value = '<?php echo $zvys01; ?>';
    document.formv1.zvys02.value = '<?php echo $zvys02; ?>';
@@ -998,6 +1199,163 @@ img.btn-form-tool {
    document.formv1.zvys10.value = '<?php echo $zvys10; ?>';
    document.formv1.zvys11.value = '<?php echo $zvys11; ?>';
    document.formv1.zvys12.value = '<?php echo $zvys12; ?>';
+   document.formv1.zvys13.value = '<?php echo $zvys13; ?>';
+   document.formv1.zvys14.value = '<?php echo $zvys14; ?>';
+
+
+   document.formv1.znis01.value = '<?php echo $znis01; ?>';
+   document.formv1.znis02.value = '<?php echo $znis02; ?>';
+   document.formv1.znis03.value = '<?php echo $znis03; ?>';
+   document.formv1.znis04.value = '<?php echo $znis04; ?>';
+//   document.formv1.znis05.value = '<?php echo $znis05; ?>';
+//   document.formv1.znis06.value = '<?php echo $znis06; ?>';
+   document.formv1.znis07.value = '<?php echo $znis07; ?>';
+   document.formv1.znis08.value = '<?php echo $znis08; ?>';
+   document.formv1.znis09.value = '<?php echo $znis09; ?>';
+   document.formv1.znis10.value = '<?php echo $znis10; ?>';
+   document.formv1.znis11.value = '<?php echo $znis11; ?>';
+   document.formv1.znis12.value = '<?php echo $znis12; ?>';
+   document.formv1.znis13.value = '<?php echo $znis13; ?>';
+   document.formv1.znis14.value = '<?php echo $znis14; ?>';
+
+
+   document.formv1.oces01.value = '<?php echo $oces01; ?>';
+   document.formv1.oces02.value = '<?php echo $oces02; ?>';
+   document.formv1.oces03.value = '<?php echo $oces03; ?>';
+   document.formv1.oces04.value = '<?php echo $oces04; ?>';
+   document.formv1.oces05.value = '<?php echo $oces05; ?>';
+   document.formv1.oces06.value = '<?php echo $oces06; ?>';
+   document.formv1.oces07.value = '<?php echo $oces07; ?>';
+   document.formv1.oces08.value = '<?php echo $oces08; ?>';
+   document.formv1.oces09.value = '<?php echo $oces09; ?>';
+   document.formv1.oces10.value = '<?php echo $oces10; ?>';
+   document.formv1.oces11.value = '<?php echo $oces11; ?>';
+   document.formv1.oces12.value = '<?php echo $oces12; ?>';
+   document.formv1.oces13.value = '<?php echo $oces13; ?>';
+   document.formv1.oces14.value = '<?php echo $oces14; ?>';
+
+   document.formv1.osts01.value = '<?php echo $osts01; ?>';
+   document.formv1.osts02.value = '<?php echo $osts02; ?>';
+   document.formv1.osts03.value = '<?php echo $osts03; ?>';
+   document.formv1.osts04.value = '<?php echo $osts04; ?>';
+   document.formv1.osts05.value = '<?php echo $osts05; ?>';
+   document.formv1.osts06.value = '<?php echo $osts06; ?>';
+   document.formv1.osts07.value = '<?php echo $osts07; ?>';
+   document.formv1.osts08.value = '<?php echo $osts08; ?>';
+   document.formv1.osts09.value = '<?php echo $osts09; ?>';
+   document.formv1.osts10.value = '<?php echo $osts10; ?>';
+   document.formv1.osts11.value = '<?php echo $osts11; ?>';
+   document.formv1.osts12.value = '<?php echo $osts12; ?>';
+   document.formv1.osts13.value = '<?php echo $osts13; ?>';
+   document.formv1.osts14.value = '<?php echo $osts14; ?>';
+
+   document.formv1.zoss01.value = '<?php echo $zoss01; ?>';
+   document.formv1.zoss02.value = '<?php echo $zoss02; ?>';
+   document.formv1.zoss03.value = '<?php echo $zoss03; ?>';
+   document.formv1.zoss04.value = '<?php echo $zoss04; ?>';
+//   document.formv1.zoss05.value = '<?php echo $zoss05; ?>';
+//   document.formv1.zoss06.value = '<?php echo $zoss06; ?>';
+   document.formv1.zoss07.value = '<?php echo $zoss07; ?>';
+   document.formv1.zoss08.value = '<?php echo $zoss08; ?>';
+   document.formv1.zoss09.value = '<?php echo $zoss09; ?>';
+   document.formv1.zoss10.value = '<?php echo $zoss10; ?>';
+   document.formv1.zoss11.value = '<?php echo $zoss11; ?>';
+   document.formv1.zoss12.value = '<?php echo $zoss12; ?>';
+   document.formv1.zoss13.value = '<?php echo $zoss13; ?>';
+   document.formv1.zoss14.value = '<?php echo $zoss14; ?>';
+
+
+   document.formv1.pocs15.value = '<?php echo $pocs15; ?>';
+   document.formv1.pocs16.value = '<?php echo $pocs16; ?>';
+   document.formv1.pocs17.value = '<?php echo $pocs17; ?>';
+   document.formv1.pocs18.value = '<?php echo $pocs18; ?>';
+//   document.formv1.pocs19.value = '<?php echo $pocs19; ?>';
+//   document.formv1.pocs20.value = '<?php echo $pocs20; ?>';
+   document.formv1.pocs21.value = '<?php echo $pocs21; ?>';
+   document.formv1.pocs22.value = '<?php echo $pocs22; ?>';
+   document.formv1.pocs23.value = '<?php echo $pocs23; ?>';
+   document.formv1.pocs24.value = '<?php echo $pocs24; ?>';
+   document.formv1.pocs25.value = '<?php echo $pocs25; ?>';
+   document.formv1.pocs26.value = '<?php echo $pocs26; ?>';
+   document.formv1.pocs27.value = '<?php echo $pocs27; ?>';
+   document.formv1.pocs28.value = '<?php echo $pocs28; ?>';
+
+   document.formv1.zvys15.value = '<?php echo $zvys15; ?>';
+   document.formv1.zvys16.value = '<?php echo $zvys16; ?>';
+   document.formv1.zvys17.value = '<?php echo $zvys17; ?>';
+   document.formv1.zvys18.value = '<?php echo $zvys18; ?>';
+//   document.formv1.zvys19.value = '<?php echo $zvys19; ?>';
+//   document.formv1.zvys20.value = '<?php echo $zvys20; ?>';
+   document.formv1.zvys21.value = '<?php echo $zvys21; ?>';
+   document.formv1.zvys22.value = '<?php echo $zvys22; ?>';
+   document.formv1.zvys23.value = '<?php echo $zvys23; ?>';
+   document.formv1.zvys24.value = '<?php echo $zvys24; ?>';
+   document.formv1.zvys25.value = '<?php echo $zvys25; ?>';
+   document.formv1.zvys26.value = '<?php echo $zvys26; ?>';
+   document.formv1.zvys27.value = '<?php echo $zvys27; ?>';
+   document.formv1.zvys28.value = '<?php echo $zvys28; ?>';
+
+   document.formv1.znis15.value = '<?php echo $znis15; ?>';
+   document.formv1.znis16.value = '<?php echo $znis16; ?>';
+   document.formv1.znis17.value = '<?php echo $znis17; ?>';
+   document.formv1.znis18.value = '<?php echo $znis18; ?>';
+//   document.formv1.znis19.value = '<?php echo $znis19; ?>';
+//   document.formv1.znis20.value = '<?php echo $znis20; ?>';
+   document.formv1.znis21.value = '<?php echo $znis21; ?>';
+   document.formv1.znis22.value = '<?php echo $znis22; ?>';
+   document.formv1.znis23.value = '<?php echo $znis23; ?>';
+   document.formv1.znis24.value = '<?php echo $znis24; ?>';
+   document.formv1.znis25.value = '<?php echo $znis25; ?>';
+   document.formv1.znis26.value = '<?php echo $znis26; ?>';
+   document.formv1.znis27.value = '<?php echo $znis27; ?>';
+   document.formv1.znis28.value = '<?php echo $znis28; ?>';
+
+   document.formv1.oces15.value = '<?php echo $oces15; ?>';
+   document.formv1.oces16.value = '<?php echo $oces16; ?>';
+   document.formv1.oces17.value = '<?php echo $oces17; ?>';
+   document.formv1.oces18.value = '<?php echo $oces18; ?>';
+   document.formv1.oces19.value = '<?php echo $oces19; ?>';
+   document.formv1.oces20.value = '<?php echo $oces20; ?>';
+   document.formv1.oces21.value = '<?php echo $oces21; ?>';
+   document.formv1.oces22.value = '<?php echo $oces22; ?>';
+   document.formv1.oces23.value = '<?php echo $oces23; ?>';
+   document.formv1.oces24.value = '<?php echo $oces24; ?>';
+   document.formv1.oces25.value = '<?php echo $oces25; ?>';
+   document.formv1.oces26.value = '<?php echo $oces26; ?>';
+   document.formv1.oces27.value = '<?php echo $oces27; ?>';
+   document.formv1.oces28.value = '<?php echo $oces28; ?>';
+
+   document.formv1.osts15.value = '<?php echo $osts15; ?>';
+   document.formv1.osts16.value = '<?php echo $osts16; ?>';
+   document.formv1.osts17.value = '<?php echo $osts17; ?>';
+   document.formv1.osts18.value = '<?php echo $osts18; ?>';
+   document.formv1.osts19.value = '<?php echo $osts19; ?>';
+   document.formv1.osts20.value = '<?php echo $osts20; ?>';
+   document.formv1.osts21.value = '<?php echo $osts21; ?>';
+   document.formv1.osts22.value = '<?php echo $osts22; ?>';
+   document.formv1.osts23.value = '<?php echo $osts23; ?>';
+   document.formv1.osts24.value = '<?php echo $osts24; ?>';
+   document.formv1.osts25.value = '<?php echo $osts25; ?>';
+   document.formv1.osts26.value = '<?php echo $osts26; ?>';
+   document.formv1.osts27.value = '<?php echo $osts27; ?>';
+   document.formv1.osts28.value = '<?php echo $osts28; ?>';
+
+   document.formv1.zoss15.value = '<?php echo $zoss15; ?>';
+   document.formv1.zoss16.value = '<?php echo $zoss16; ?>';
+   document.formv1.zoss17.value = '<?php echo $zoss17; ?>';
+   document.formv1.zoss18.value = '<?php echo $zoss18; ?>';
+//   document.formv1.zoss19.value = '<?php echo $zoss19; ?>';
+//   document.formv1.zoss20.value = '<?php echo $zoss20; ?>';
+   document.formv1.zoss21.value = '<?php echo $zoss21; ?>';
+   document.formv1.zoss22.value = '<?php echo $zoss22; ?>';
+   document.formv1.zoss23.value = '<?php echo $zoss23; ?>';
+   document.formv1.zoss24.value = '<?php echo $zoss24; ?>';
+   document.formv1.zoss25.value = '<?php echo $zoss25; ?>';
+   document.formv1.zoss26.value = '<?php echo $zoss26; ?>';
+   document.formv1.zoss27.value = '<?php echo $zoss27; ?>';
+   document.formv1.zoss28.value = '<?php echo $zoss28; ?>';
+
+
 <?php                     } ?>
 
 <?php if ( $strana == 3 ) { ?>
@@ -1108,8 +1466,6 @@ $source="vykaz_fin404_2018.php";
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
-
 <?php
 $alertnacitaj="";
 if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! Údaje sú naèítané !!!"; }
@@ -1139,151 +1495,212 @@ if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! Údaje sú naèítané !!!"; }
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
+<img src="<?php echo $jpg_cesta; ?>_str2_form.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 2.strana 265kB" style="width:1250px; height:1000px;">
 
-<!-- 1.STAV k 1.1. -->
-<span class="text-echo" style="top:262px; right:893px;"><?php echo $pocs01; ?></span>
-<span class="text-echo" style="top:262px; right:822px;"><?php echo $pocs02; ?></span>
-<span class="text-echo" style="top:262px; right:738px;"><?php echo $pocs03; ?></span>
-<span class="text-echo" style="top:262px; right:666px;"><?php echo $pocs04; ?></span>
-<span class="text-echo" style="top:262px; right:426px;"><?php echo $pocs07; ?></span>
-<span class="text-echo" style="top:262px; right:354px;"><?php echo $pocs08; ?></span>
-<span class="text-echo" style="top:262px; right:270px;"><?php echo $pocs09; ?></span>
-<span class="text-echo" style="top:262px; right:198px;"><?php echo $pocs10; ?></span>
-<span class="text-echo" style="top:262px; right:114px;"><?php echo $pocs11; ?></span>
-<span class="text-echo" style="top:262px; right:43px;"><?php echo $pocs12; ?></span>
 
-<!-- 8.uzemna samosprava -->
-<?php $top=440; ?>
-<input type="text" name="pocs01" id="pocs01" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:279px;"/>
-<input type="text" name="pocs02" id="pocs02" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:363px;"/>
-<input type="text" name="pocs03" id="pocs03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:435px;"/>
-<input type="text" name="pocs04" id="pocs04" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:519px;"/>
-<input type="text" name="pocs07" id="pocs07" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:746px;"/>
-<input type="text" name="pocs08" id="pocs08" onkeyup="CiarkaNaBodku(this);" style="width:62px; top:<?php echo $top; ?>px; left:830px;"/>
-<input type="text" name="pocs09" id="pocs09" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:902px;"/>
-<input type="text" name="pocs10" id="pocs10" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:986px;"/>
-<input type="text" name="pocs11" id="pocs11" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:1058px;"/>
-<input type="text" name="pocs12" id="pocs12" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:1142px;"/>
+<!-- poc.stav  -->
+<?php $top=270; ?>
+<input type="text" name="pocs01" id="pocs01" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="pocs02" id="pocs02" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="pocs03" id="pocs03" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="pocs04" id="pocs04" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="pocs07" id="pocs07" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="pocs08" id="pocs08" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="pocs09" id="pocs09" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="pocs10" id="pocs10" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="pocs11" id="pocs11" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="pocs12" id="pocs12" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="pocs13" id="pocs13" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="pocs14" id="pocs14" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
 
-<!-- 13.ZVYSENIE -->
-<span class="text-echo" style="top:621px; right:893px;"><?php echo $zvys01; ?></span>
-<span class="text-echo" style="top:621px; right:822px;"><?php echo $zvys02; ?></span>
-<span class="text-echo" style="top:621px; right:738px;"><?php echo $zvys03; ?></span>
-<span class="text-echo" style="top:621px; right:666px;"><?php echo $zvys04; ?></span>
-<span class="text-echo" style="top:621px; right:426px;"><?php echo $zvys07; ?></span>
-<span class="text-echo" style="top:621px; right:354px;"><?php echo $zvys08; ?></span>
-<span class="text-echo" style="top:621px; right:270px;"><?php echo $zvys09; ?></span>
-<span class="text-echo" style="top:621px; right:198px;"><?php echo $zvys10; ?></span>
-<span class="text-echo" style="top:621px; right:114px;"><?php echo $zvys11; ?></span>
-<span class="text-echo" style="top:621px; right:43px;"><?php echo $zvys12; ?></span>
+<!-- zvysenie -->
+<?php $top=339; ?>
+<input type="text" name="zvys01" id="zvys01" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="zvys02" id="zvys02" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="zvys03" id="zvys03" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="zvys04" id="zvys04" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="zvys07" id="zvys07" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="zvys08" id="zvys08" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="zvys09" id="zvys09" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="zvys10" id="zvys10" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="zvys11" id="zvys11" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="zvys12" id="zvys12" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="zvys13" id="zvys13" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="zvys14" id="zvys14" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
 
-<!-- 20.uzemna samosprava -->
-<?php $top=800; ?>
-<input type="text" name="zvys01" id="zvys01" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:279px;"/>
-<input type="text" name="zvys02" id="zvys02" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:363px;"/>
-<input type="text" name="zvys03" id="zvys03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:435px;"/>
-<input type="text" name="zvys04" id="zvys04" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:519px;"/>
-<input type="text" name="zvys07" id="zvys07" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:746px;"/>
-<input type="text" name="zvys08" id="zvys08" onkeyup="CiarkaNaBodku(this);" style="width:62px; top:<?php echo $top; ?>px; left:830px;"/>
-<input type="text" name="zvys09" id="zvys09" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:902px;"/>
-<input type="text" name="zvys10" id="zvys10" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:986px;"/>
-<input type="text" name="zvys11" id="zvys11" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:1058px;"/>
-<input type="text" name="zvys12" id="zvys12" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:1142px;"/>
+<!-- znizenie -->
+<?php $top=377; ?>
+<input type="text" name="znis01" id="znis01" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="znis02" id="znis02" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="znis03" id="znis03" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="znis04" id="znis04" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="znis07" id="znis07" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="znis08" id="znis08" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="znis09" id="znis09" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="znis10" id="znis10" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="znis11" id="znis11" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="znis12" id="znis12" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="znis13" id="znis13" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="znis14" id="znis14" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
 
-<!-- 25.ZNIZENIE -->
-<span class="text-echo" style="top:945px; right:893px;"><?php echo $znis01; ?></span>
-<span class="text-echo" style="top:945px; right:822px;"><?php echo $znis02; ?></span>
-<span class="text-echo" style="top:945px; right:738px;"><?php echo $znis03; ?></span>
-<span class="text-echo" style="top:945px; right:666px;"><?php echo $znis04; ?></span>
-<span class="text-echo" style="top:945px; right:426px;"><?php echo $znis07; ?></span>
-<span class="text-echo" style="top:945px; right:354px;"><?php echo $znis08; ?></span>
-<span class="text-echo" style="top:945px; right:270px;"><?php echo $znis09; ?></span>
-<span class="text-echo" style="top:945px; right:198px;"><?php echo $znis10; ?></span>
-<span class="text-echo" style="top:945px; right:114px;"><?php echo $znis11; ?></span>
-<span class="text-echo" style="top:945px; right:43px;"><?php echo $znis12; ?></span>
+<!-- ocenenie -->
+<?php $top=414; ?>
+<input type="text" name="oces01" id="oces01" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="oces02" id="oces02" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="oces03" id="oces03" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="oces04" id="oces04" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="oces05" id="oces05" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:580px;"/>
+<input type="text" name="oces06" id="oces06" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:650px;"/>
+<input type="text" name="oces07" id="oces07" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="oces08" id="oces08" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="oces09" id="oces09" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="oces10" id="oces10" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="oces11" id="oces11" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="oces12" id="oces12" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="oces13" id="oces13" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="oces14" id="oces14" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+<!-- ostatne -->
+<?php $top=450; ?>
+<input type="text" name="osts01" id="osts01" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="osts02" id="osts02" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="osts03" id="osts03" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="osts04" id="osts04" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="osts05" id="osts05" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:580px;"/>
+<input type="text" name="osts06" id="osts06" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:650px;"/>
+<input type="text" name="osts07" id="osts07" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="osts08" id="osts08" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="osts09" id="osts09" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="osts10" id="osts10" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="osts11" id="osts11" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="osts12" id="osts12" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="osts13" id="osts13" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="osts14" id="osts14" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+<!-- zostatok -->
+<?php $top=487; ?>
+<input type="text" name="zoss01" id="zoss01" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="zoss02" id="zoss02" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="zoss03" id="zoss03" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="zoss04" id="zoss04" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="zoss07" id="zoss07" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="zoss08" id="zoss08" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="zoss09" id="zoss09" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="zoss10" id="zoss10" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="zoss11" id="zoss11" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="zoss12" id="zoss12" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="zoss13" id="zoss13" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="zoss14" id="zoss14" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+
+<!-- stlpce 15 az 28 -->
+
+
+<!-- poc.stav  -->
+<?php $top=724; ?>
+<input type="text" name="pocs15" id="pocs15" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="pocs16" id="pocs16" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="pocs17" id="pocs17" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="pocs18" id="pocs18" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="pocs21" id="pocs21" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="pocs22" id="pocs22" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="pocs23" id="pocs23" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="pocs24" id="pocs24" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="pocs25" id="pocs25" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="pocs26" id="pocs26" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="pocs27" id="pocs27" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="pocs28" id="pocs28" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+<!-- zvysenie -->
+<?php $top=795; ?>
+<input type="text" name="zvys15" id="zvys15" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="zvys16" id="zvys16" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="zvys17" id="zvys17" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="zvys18" id="zvys18" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="zvys21" id="zvys21" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="zvys22" id="zvys22" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="zvys23" id="zvys23" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="zvys24" id="zvys24" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="zvys25" id="zvys25" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="zvys26" id="zvys26" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="zvys27" id="zvys27" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="zvys28" id="zvys28" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+<!-- znizenie -->
+<?php $top=831; ?>
+<input type="text" name="znis15" id="znis15" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="znis16" id="znis16" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="znis17" id="znis17" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="znis18" id="znis18" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="znis21" id="znis21" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="znis22" id="znis22" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="znis23" id="znis23" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="znis24" id="znis24" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="znis25" id="znis25" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="znis26" id="znis26" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="znis27" id="znis27" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="znis28" id="znis28" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+<!-- ocenenie -->
+<?php $top=868; ?>
+<input type="text" name="oces15" id="oces15" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="oces16" id="oces16" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="oces17" id="oces17" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="oces18" id="oces18" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="oces19" id="oces19" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:580px;"/>
+<input type="text" name="oces20" id="oces20" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:650px;"/>
+<input type="text" name="oces21" id="oces21" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="oces22" id="oces22" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="oces23" id="oces23" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="oces24" id="oces24" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="oces25" id="oces25" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="oces26" id="oces26" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="oces27" id="oces27" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="oces28" id="oces28" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+<!-- ostatne -->
+<?php $top=902; ?>
+<input type="text" name="osts15" id="osts15" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="osts16" id="osts16" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="osts17" id="osts17" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="osts18" id="osts18" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="osts19" id="osts19" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:580px;"/>
+<input type="text" name="osts20" id="osts20" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:650px;"/>
+<input type="text" name="osts21" id="osts21" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="osts22" id="osts22" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="osts23" id="osts23" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="osts24" id="osts24" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="osts25" id="osts25" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="osts26" id="osts26" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="osts27" id="osts27" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="osts28" id="osts28" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+<!-- zostatok -->
+<?php $top=936; ?>
+<input type="text" name="zoss15" id="zoss15" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:320px;"/>
+<input type="text" name="zoss16" id="zoss16" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:390px;"/>
+<input type="text" name="zoss17" id="zoss17" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:450px;"/>
+<input type="text" name="zoss18" id="zoss18" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:520px;"/>
+<input type="text" name="zoss21" id="zoss21" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:710px;"/>
+<input type="text" name="zoss22" id="zoss22" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:780px;"/>
+<input type="text" name="zoss23" id="zoss23" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:840px;"/>
+<input type="text" name="zoss24" id="zoss24" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:910px;"/>
+<input type="text" name="zoss25" id="zoss25" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:970px;"/>
+<input type="text" name="zoss26" id="zoss26" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1040px;"/>
+<input type="text" name="zoss27" id="zoss27" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:<?php echo $top; ?>px; left:1100px;"/>
+<input type="text" name="zoss28" id="zoss28" onkeyup="CiarkaNaBodku(this);" style="width:50px; top:<?php echo $top; ?>px; left:1170px;"/>
+
+
+
+
+
 <?php                     } ?>
 
-
-<?php if ( $strana == 3 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 3.strana 265kB" style="width:1250px; height:1000px;">
-
-
-<!-- 32.uzemna samosprava -->
-<?php $top=232; ?>
-<input type="text" name="znis01" id="znis01" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:279px;"/>
-<input type="text" name="znis02" id="znis02" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:363px;"/>
-<input type="text" name="znis03" id="znis03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:435px;"/>
-<input type="text" name="znis04" id="znis04" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:519px;"/>
-<input type="text" name="znis07" id="znis07" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:746px;"/>
-<input type="text" name="znis08" id="znis08" onkeyup="CiarkaNaBodku(this);" style="width:62px; top:<?php echo $top; ?>px; left:830px;"/>
-<input type="text" name="znis09" id="znis09" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:902px;"/>
-<input type="text" name="znis10" id="znis10" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:986px;"/>
-<input type="text" name="znis11" id="znis11" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:1058px;"/>
-<input type="text" name="znis12" id="znis12" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:1142px;"/>
-
-<!-- 37.ZMENY V OCENENI -->
-<?php $top=368; ?>
-<input type="text" name="oces01" id="oces01" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:279px;"/>
-<input type="text" name="oces02" id="oces02" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:363px;"/>
-<input type="text" name="oces03" id="oces03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:435px;"/>
-<input type="text" name="oces04" id="oces04" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:519px;"/>
-<input type="text" name="oces05" id="oces05" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:590px;"/>
-<input type="text" name="oces06" id="oces06" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:675px;"/>
-<input type="text" name="oces07" id="oces07" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:746px;"/>
-<input type="text" name="oces08" id="oces08" onkeyup="CiarkaNaBodku(this);" style="width:62px; top:<?php echo $top; ?>px; left:830px;"/>
-<input type="text" name="oces09" id="oces09" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:902px;"/>
-<input type="text" name="oces10" id="oces10" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:986px;"/>
-<input type="text" name="oces11" id="oces11" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:1058px;"/>
-<input type="text" name="oces12" id="oces12" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:1142px;"/>
-
-<!-- 38.OSTATNE ZMENY -->
-<?php $top=405; ?>
-<input type="text" name="osts01" id="osts01" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:279px;"/>
-<input type="text" name="osts02" id="osts02" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:363px;"/>
-<input type="text" name="osts03" id="osts03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:435px;"/>
-<input type="text" name="osts04" id="osts04" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:519px;"/>
-<input type="text" name="osts05" id="osts05" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:590px;"/>
-<input type="text" name="osts06" id="osts06" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:675px;"/>
-<input type="text" name="osts07" id="osts07" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:746px;"/>
-<input type="text" name="osts08" id="osts08" onkeyup="CiarkaNaBodku(this);" style="width:62px; top:<?php echo $top; ?>px; left:830px;"/>
-<input type="text" name="osts09" id="osts09" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:902px;"/>
-<input type="text" name="osts10" id="osts10" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:986px;"/>
-<input type="text" name="osts11" id="osts11" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:1058px;"/>
-<input type="text" name="osts12" id="osts12" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:1142px;"/>
-
-<!-- 39.STAV k 31.12. -->
-<span class="text-echo" style="top:465px; right:893px;"><?php echo $zoss01; ?></span>
-<span class="text-echo" style="top:465px; right:822px;"><?php echo $zoss02; ?></span>
-<span class="text-echo" style="top:465px; right:738px;"><?php echo $zoss03; ?></span>
-<span class="text-echo" style="top:465px; right:666px;"><?php echo $zoss04; ?></span>
-<span class="text-echo" style="top:465px; right:426px;"><?php echo $zoss07; ?></span>
-<span class="text-echo" style="top:465px; right:354px;"><?php echo $zoss08; ?></span>
-<span class="text-echo" style="top:465px; right:270px;"><?php echo $zoss09; ?></span>
-<span class="text-echo" style="top:465px; right:198px;"><?php echo $zoss10; ?></span>
-<span class="text-echo" style="top:465px; right:114px;"><?php echo $zoss11; ?></span>
-<span class="text-echo" style="top:465px; right:43px;"><?php echo $zoss12; ?></span>
-
-<!-- 46.uzemna samosprava -->
-<?php $top=645; ?>
-<input type="text" name="zoss01" id="zoss01" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:279px;"/>
-<input type="text" name="zoss02" id="zoss02" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:363px;"/>
-<input type="text" name="zoss03" id="zoss03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:435px;"/>
-<input type="text" name="zoss04" id="zoss04" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:519px;"/>
-<input type="text" name="zoss07" id="zoss07" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:746px;"/>
-<input type="text" name="zoss08" id="zoss08" onkeyup="CiarkaNaBodku(this);" style="width:62px; top:<?php echo $top; ?>px; left:830px;"/>
-<input type="text" name="zoss09" id="zoss09" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:902px;"/>
-<input type="text" name="zoss10" id="zoss10" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:986px;"/>
-<input type="text" name="zoss11" id="zoss11" onkeyup="CiarkaNaBodku(this);" style="width:74px; top:<?php echo $top; ?>px; left:1058px;"/>
-<input type="text" name="zoss12" id="zoss12" onkeyup="CiarkaNaBodku(this);" style="width:61px; top:<?php echo $top; ?>px; left:1142px;"/>
-<?php                     } ?>
 
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-bottom-formsave">
 </div>
 

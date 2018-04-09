@@ -224,14 +224,16 @@ $hlavicka=mysql_fetch_object($sql);
   fwrite($soubor, $text);
 
 
-  $text = "\"R6\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = "\"R6\",\"".$hlavicka->pocs01."\",\"".$hlavicka->pocs02."\",\"".$hlavicka->pocs03."\",\"".$hlavicka->pocs04.
+"\",\"".$hlavicka->pocs05."\",\"".$hlavicka->pocs06."\",\"".$hlavicka->pocs07.
+"\",\"".$hlavicka->pocs08."\",\"".$hlavicka->pocs09."\",\"".$hlavicka->pocs10."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = $text."\"".$hlavicka->pocs11."\",\"".$hlavicka->pocs12."\",\"".$hlavicka->pocs13."\",\"".$hlavicka->pocs14.
+"\",\"".$hlavicka->pocs15."\",\"".$hlavicka->pocs16."\",\"".$hlavicka->pocs17.
+"\",\"".$hlavicka->pocs18."\",\"".$hlavicka->pocs19."\",\"".$hlavicka->pocs20."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\"";
+  $text = $text."\"".$hlavicka->pocs21."\",\"".$hlavicka->pocs22."\",\"".$hlavicka->pocs23."\",\"".$hlavicka->pocs24.
+"\",\"".$hlavicka->pocs25."\",".$hlavicka->pocs26."\",\"".$hlavicka->pocs27."\",\"".$hlavicka->pocs28."\"";
 
   $text = $text."\r\n";
 
@@ -396,14 +398,16 @@ $hlavicka=mysql_fetch_object($sql);
   fwrite($soubor, $text);
 
 
-  $text = "\"R18\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = "\"R18\",\"".$hlavicka->zvys01."\",\"".$hlavicka->zvys02."\",\"".$hlavicka->zvys03."\",\"".$hlavicka->zvys04.
+"\",\"".$hlavicka->zvys05."\",\"".$hlavicka->zvys06."\",\"".$hlavicka->zvys07.
+"\",\"".$hlavicka->zvys08."\",\"".$hlavicka->zvys09."\",\"".$hlavicka->zvys10."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = $text."\"".$hlavicka->zvys11."\",\"".$hlavicka->zvys12."\",\"".$hlavicka->zvys13."\",\"".$hlavicka->zvys14.
+"\",\"".$hlavicka->zvys15."\",\"".$hlavicka->zvys16."\",\"".$hlavicka->zvys17.
+"\",\"".$hlavicka->zvys18."\",\"".$hlavicka->zvys19."\",\"".$hlavicka->zvys20."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\"";
+  $text = $text."\"".$hlavicka->zvys21."\",\"".$hlavicka->zvys22."\",\"".$hlavicka->zvys23."\",\"".$hlavicka->zvys24.
+"\",\"".$hlavicka->zvys25."\",".$hlavicka->zvys26."\",\"".$hlavicka->zvys27."\",\"".$hlavicka->zvys28."\"";
 
   $text = $text."\r\n";
 
@@ -568,14 +572,16 @@ $hlavicka=mysql_fetch_object($sql);
   fwrite($soubor, $text);
 
 
-  $text = "\"R30\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = "\"R30\",\"".$hlavicka->znis01."\",\"".$hlavicka->znis02."\",\"".$hlavicka->znis03."\",\"".$hlavicka->znis04.
+"\",\"".$hlavicka->znis05."\",\"".$hlavicka->znis06."\",\"".$hlavicka->znis07.
+"\",\"".$hlavicka->znis08."\",\"".$hlavicka->znis09."\",\"".$hlavicka->znis10."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = $text."\"".$hlavicka->znis11."\",\"".$hlavicka->znis12."\",\"".$hlavicka->znis13."\",\"".$hlavicka->znis14.
+"\",\"".$hlavicka->znis15."\",\"".$hlavicka->znis16."\",\"".$hlavicka->znis17.
+"\",\"".$hlavicka->znis18."\",\"".$hlavicka->znis19."\",\"".$hlavicka->znis20."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\"";
+  $text = $text."\"".$hlavicka->znis21."\",\"".$hlavicka->znis22."\",\"".$hlavicka->znis23."\",\"".$hlavicka->znis24.
+"\",\"".$hlavicka->znis25."\",".$hlavicka->znis26."\",\"".$hlavicka->znis27."\",\"".$hlavicka->znis28."\"";
 
   $text = $text."\r\n";
 
@@ -702,14 +708,16 @@ $hlavicka=mysql_fetch_object($sql);
 
 
 
-  $text = "\"R39\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = "\"R39\",\"".$hlavicka->zoss01."\",\"".$hlavicka->zoss02."\",\"".$hlavicka->zoss03."\",\"".$hlavicka->zoss04.
+"\",\"".$hlavicka->zoss05."\",\"".$hlavicka->zoss06."\",\"".$hlavicka->zoss07.
+"\",\"".$hlavicka->zoss08."\",\"".$hlavicka->zoss09."\",\"".$hlavicka->zoss10."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = $text."\"".$hlavicka->zoss11."\",\"".$hlavicka->zoss12."\",\"".$hlavicka->zoss13."\",\"".$hlavicka->zoss14.
+"\",\"".$hlavicka->zoss15."\",\"".$hlavicka->zoss16."\",\"".$hlavicka->zoss17.
+"\",\"".$hlavicka->zoss18."\",\"".$hlavicka->zoss19."\",\"".$hlavicka->zoss20."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\"";
+  $text = $text."\"".$hlavicka->zoss21."\",\"".$hlavicka->zoss22."\",\"".$hlavicka->zoss23."\",\"".$hlavicka->zoss24.
+"\",\"".$hlavicka->zoss25."\",".$hlavicka->zoss26."\",\"".$hlavicka->zoss27."\",\"".$hlavicka->zoss28."\"";
 
   $text = $text."\r\n";
 
@@ -772,14 +780,16 @@ $hlavicka=mysql_fetch_object($sql);
   fwrite($soubor, $text);
 
 
-  $text = "\"R44\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = "\"R44\",\"".$hlavicka->zoss01."\",\"".$hlavicka->zoss02."\",\"".$hlavicka->zoss03."\",\"".$hlavicka->zoss04.
+"\",\"".$hlavicka->zoss05."\",\"".$hlavicka->zoss06."\",\"".$hlavicka->zoss07.
+"\",\"".$hlavicka->zoss08."\",\"".$hlavicka->zoss09."\",\"".$hlavicka->zoss10."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",";
+  $text = $text."\"".$hlavicka->zoss11."\",\"".$hlavicka->zoss12."\",\"".$hlavicka->zoss13."\",\"".$hlavicka->zoss14.
+"\",\"".$hlavicka->zoss15."\",\"".$hlavicka->zoss16."\",\"".$hlavicka->zoss17.
+"\",\"".$hlavicka->zoss18."\",\"".$hlavicka->zoss19."\",\"".$hlavicka->zoss20."\",";
 
-  $text = $text."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\","."\"0.00\",".
-"\"0.00\","."\"0.00\","."\"0.00\"";
+  $text = $text."\"".$hlavicka->zoss21."\",\"".$hlavicka->zoss22."\",\"".$hlavicka->zoss23."\",\"".$hlavicka->zoss24.
+"\",\"".$hlavicka->zoss25."\",".$hlavicka->zoss26."\",\"".$hlavicka->zoss27."\",\"".$hlavicka->zoss28."\"";
 
   $text = $text."\r\n";
 
