@@ -163,7 +163,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " WHERE ico >= 0 ";
 $upravene = mysql_query("$uprtxt");
 
-$strana=10;
+$strana=11;
+$clas11="active";
+$orientation='L';
 }
 //koniec modul 573
 
@@ -258,7 +260,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 $upravene = mysql_query("$uprtxt");
 
 
-$strana=9;
+$strana=10;
+$clas10="active";
+$orientation='L';
 }
 //koniec modul 572
 
@@ -282,7 +286,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-$strana=13;
+$strana=16;
+$clas16="active";
+$orientation='P';
 }
 //koniec modul 514
 
@@ -341,7 +347,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 $upravene = mysql_query("$uprtxt");
 
 
-$strana=8;
+$strana=13;
+$clas13="active";
+$orientation='L';
 }
 //koniec modul 516
 
@@ -636,7 +644,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-$strana=7;
+$strana=12;
+$clas12="active";
+$orientation='L';
 }
 //koniec modul 513
 
@@ -732,7 +742,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 $upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
 
-$strana=9;
+$strana=7;
+$clas7="active";
+$orientation='P';
 }
 //koniec modul 586
 
@@ -799,7 +811,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 $upravene = mysql_query("$uprtxt");
 
 
-$strana=4;
+$strana=6;
+$clas6="active";
+$orientation='P';
 }
 //koniec modul 558
 
@@ -852,7 +866,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-$strana=4;
+$strana=5;
+$clas5="active";
+$orientation='P';
 }
 //koniec modul 405
 
@@ -3868,6 +3884,8 @@ $upravene = mysql_query("$uprtxt");
 
 $copern=102;
 $strana=10;
+$clas10="active";
+$orientation='L';
 if( $citajvsetkymoduly == 1 ) { $strana=3; }
 }
 //koniec copern=200 nacitaj statistiku z miezd
