@@ -29,6 +29,7 @@ $nickxxx=$poleu[1];
 $usidxxx=1*$poleu[3];
 $pswdxxx=$poleu[5];
 $cislo_dok=1*$poleu[12];
+$keyf=$poleu[8];
 
 $dbcon="../".$adrsxxx."/db_connect.php";
 require_once "$dbcon";
@@ -79,6 +80,25 @@ $sqldok = mysql_query("SELECT * FROM ".$databazaez."klienti WHERE id_klienta = $
     }
 if( $druhid < 20 ) { exit; }
 $kli_uzid=$cuid;
+
+$newfntz=1*$_REQUEST['newfntz'];
+if( $newfntz == 1 )
+  {
+$dajidk=0;
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."idxklizuid WHERE idxx = '".$keyf."' ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $dajidk=$riaddok->kliuzid;
+    }
+$kli_uzid=$dajidk;
+
+//$kli_uzid=17;
+
+require_once("../androidfantozzi/setpdf_charset.php");
+//pdf ÈŒ¼¾šèžýáí
+  }
+
 if( $kli_uzid == 0 ) { exit; }
 
 $zkosika = 0;
@@ -87,6 +107,7 @@ $_REQUEST['h_dobd']=12;
 $kli_vume=$_REQUEST['kli_vume'];
 
 $akoposlatandroid=1*$_REQUEST['akoposlatandroid'];
+
 
   }
 
@@ -237,7 +258,15 @@ $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
 
-if (File_Exists ("../tmp/upom$cislo_dok.$kli_uzid.pdf")) { $soubor = unlink("../tmp/upom$cislo_dok.$kli_uzid.pdf"); }
+$hhmmss = Date ("i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/upen_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/upen_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -992,7 +1021,7 @@ $pdf->SetFont('arial','',10);
 
 
 
-$pdf->Output("../tmp/upom$cislo_dok.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
  
 //////////////////////////////////////////////////////ak nie je email
@@ -1038,7 +1067,7 @@ if ( $posem == 0 )
           {
 ?>
 <script type="text/javascript">
-  var okno = window.open("../tmp/upom<?php echo $cislo_dok; ?>.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
           }
