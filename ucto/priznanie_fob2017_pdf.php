@@ -162,6 +162,22 @@ $namanzelku = 1*$_REQUEST['namanzelku'];
 
 $xml = 1*$_REQUEST['xml'];
 
+//ak neexistuje tabulka chod do upravy
+$prmx="typ=PDF&zandroidu=$zandroidu&anduct=$anduct&kli_vume=".$kli_vume."&serverx=".$serverx."&userhash=".$userhash."&rokx=".$kli_vrok."&firx=".$kli_vxcf."&newfntz=1&uzav=".$uzav;
+
+$sql = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob ";
+$vysledok = mysql_query($sql);
+if ( !$vysledok )
+     {
+?>
+<script type="text/javascript">
+  var okno = window.open("priznanie_fob2017.php?<?php echo $prmx; ?>&cislo_oc=9999&copern=20&drupoh=1&subor=0&prepocitaj=101", "_self");
+</script>
+<?php
+exit;
+     }
+//koniec ak neexistuje tabulka chod do upravy
+
 //.jpg podklad
 $jpg_source="../dokumenty/dan_z_prijmov2017/dpfob/dpfob_v17";
 $jpg_title="tlaèivo Daò z príjmov FO typ B pre rok $kli_vrok $strana.strana";
