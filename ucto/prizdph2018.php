@@ -3829,14 +3829,14 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_fakodb WHERE dok = $hlavicka-
   {
   $riaddok=mysql_fetch_object($sqldok);
   $odbm=1*$riaddok->odbm;
-  $odbmx=1;
+  $odbmx=1*$riaddok->odbm;
   }
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_fakdod WHERE dok = $hlavicka->dok AND odbm > 0 ");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
   $odbm=1*$riaddok->odbm;
-  $odbmx=1;
+  $odbmx=1*$riaddok->odbm;
   }
 if( $odbmx > 0 )
     {
@@ -3846,8 +3846,8 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_icoodbm WHERE ico = $hlavicka
   $riaddok=mysql_fetch_object($sqldok);
   $icdtlac=$riaddok->icd2;
   }
-
     }
+
       }
 //koniec icd podla odbm
 
