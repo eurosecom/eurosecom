@@ -31,6 +31,7 @@ $nickxxx=$poleu[1];
 $usidxxx=1*$poleu[3];
 $pswdxxx=$poleu[5];
 $cislo_dok=1*$poleu[12];
+$keyf=$poleu[8];
 
 //echo $userhash."<br />";
 //echo $userx."<br />";
@@ -87,6 +88,25 @@ $sqldok = mysql_query("SELECT * FROM ".$databazaez."klienti WHERE id_klienta = $
     }
 if( $druhid < 20 ) { exit; }
 $kli_uzid=$cuid;
+
+$newfntz=1*$_REQUEST['newfntz'];
+if( $newfntz == 1 )
+  {
+$dajidk=0;
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."idxklizuid WHERE idxx = '".$keyf."' ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $dajidk=$riaddok->kliuzid;
+    }
+$kli_uzid=$dajidk;
+
+//$kli_uzid=17;
+
+require_once("../androidfantozzi/setpdf_charset.php");
+//pdf ΘΌΎθύαν
+  }
+
 if( $kli_uzid == 0 ) { exit; }
 
 $cislo_dok = $_REQUEST['cislo_dok'];

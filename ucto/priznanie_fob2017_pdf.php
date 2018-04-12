@@ -27,6 +27,7 @@ $nickxxx=$poleu[1];
 $usidxxx=1*$poleu[3];
 $pswdxxx=$poleu[5];
 $cislo_dok=1*$poleu[12];
+$keyf=$poleu[8];
 
 $dbcon="../".$adrsxxx."/db_connect.php";
 require_once "$dbcon";
@@ -77,6 +78,27 @@ $sqldok = mysql_query("SELECT * FROM ".$databazaez."klienti WHERE id_klienta = $
     }
 if( $druhid < 20 ) { exit; }
 $kli_uzid=$cuid;
+
+
+$newfntz=1*$_REQUEST['newfntz'];
+if( $newfntz == 1 )
+  {
+$dajidk=0;
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."idxklizuid WHERE idxx = '".$keyf."' ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $dajidk=$riaddok->kliuzid;
+    }
+$kli_uzid=$dajidk;
+
+//$kli_uzid=17;
+
+require_once("../androidfantozzi/setpdf_charset.php");
+//pdf ČŚĽľščťžýáí
+  }
+
+
 if( $kli_uzid == 0 ) { exit; }
 
 
@@ -8692,7 +8714,30 @@ $i = $i + 1;
   }
 $pdf->Output("$outfilex");
 //koniec form PDF
+?>
 
+<?php if( $zandroidu == 1 ) { ?>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<link type="text/css" rel="stylesheet" href="../css/styl.css">
+<title>FOB</title>
+</HEAD>
+<BODY class="white">
+<br />
+<br />
+<table class="h2" width="100%" >
+<tr>
+<td>
+<?php if( $zandroidu == 1 ) { echo "Zostava PDF prebraná, tlačidlo Späť - do daňových zostáv"; } ?>
+</td>
+<td align="right"> </td>
+</tr>
+</table>
+<br />
+</BODY>
+<?php                       } ?>
+
+<?php 
 //pdf potvrdenie
 if ( File_Exists("../tmp/potvrdfob$kli_vume.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrdfob$kli_vume.$kli_uzid.pdf"); }
      $sirka_vyska="210,320";
