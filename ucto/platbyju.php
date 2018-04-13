@@ -29,6 +29,7 @@ $nickxxx=$poleu[1];
 $usidxxx=1*$poleu[3];
 $pswdxxx=$poleu[5];
 $jazyk=strtolower($poleu[13]);
+$keyf=$poleu[8];
 
 $dbcon="../".$adrsxxx."/db_connect.php";
 require_once "$dbcon";
@@ -80,6 +81,25 @@ $sqldok = mysql_query("SELECT * FROM ".$databazaez."klienti WHERE id_klienta = $
 
 if( $druhid < 20 ) { exit; }
 $kli_uzid=$cuid;
+
+$newfntz=1*$_REQUEST['newfntz'];
+if( $newfntz == 1 )
+  {
+$dajidk=0;
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."idxklizuid WHERE idxx = '".$keyf."' ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $dajidk=$riaddok->kliuzid;
+    }
+$kli_uzid=$dajidk;
+
+//$kli_uzid=17;
+
+require_once("../androidfantozzi/setpdf_charset.php");
+//pdf »åºæöËùû˝·Ì
+  }
+
 if( $kli_uzid == 0 ) { exit; }
 
 $kli_vume=1*$_REQUEST['kli_vume'];
@@ -150,6 +170,7 @@ $sqlt = <<<mzdprc
    zaklad          DECIMAL(10,2) DEFAULT 0,
    danprij         DECIMAL(10,2) DEFAULT 0,
    zaklaf          DECIMAL(10,2) DEFAULT 0,
+   zaklaz          DECIMAL(10,2) DEFAULT 0,
    messp           DECIMAL(10,2) DEFAULT 0,
    meszp           DECIMAL(10,2) DEFAULT 0,
    celkspzp           DECIMAL(10,2) DEFAULT 0,
@@ -166,11 +187,11 @@ $sqldok = mysql_query("$sql");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  $prijmy=$riaddok->t1p9;
-  $vydavky=$riaddok->t1v9;
+  $prijmy=$riaddok->t1p10;
+  $vydavky=$riaddok->t1v10;
   $poistne=$riaddok->psp6;
   $zaklad=$riaddok->r78;
-  $danprij=$riaddok->r92;
+  $danprij=$riaddok->r90;
 
   }
 
@@ -205,9 +226,23 @@ $vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET zaklaf=4025 WHERE ocx = 1 A
 $vytvor = mysql_query("$vsql");
   }
 
+if( $kli_vrok == 2017 )
+  {
+$vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET zaklaf=zaklaf/1.486 WHERE ocx = 1 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET zaklaz=zaklaf WHERE ocx = 1 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET zaklaf=456.00 WHERE ocx = 1 AND zaklaf < 456.00 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET zaklaz=456.00 WHERE ocx = 1 AND zaklaz < 456.00 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET zaklaf=6384 WHERE ocx = 1 AND zaklaf > 6384 ";
+$vytvor = mysql_query("$vsql");
+  }
+
 $vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET messp=zaklaf*35.15/100 WHERE ocx = 1 ";
 $vytvor = mysql_query("$vsql");
-$vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET meszp=zaklaf*14/100 WHERE ocx = 1 ";
+$vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET meszp=zaklaz*14/100 WHERE ocx = 1 ";
 $vytvor = mysql_query("$vsql");
 $vsql = "UPDATE F".$kli_vxcf."_platbyju$kli_uzid SET celkspzp=messp+meszp WHERE ocx = 1 ";
 $vytvor = mysql_query("$vsql");
@@ -219,7 +254,7 @@ if( $zandroidu == 0 )
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>DaÚ z pridanej hodnoty</title>
+<title>Platby SP a ZP</title>
   <style type="text/css">
 td.hvstup_zlte  { background-color:#ffff90; color:black; font-weight:bold;
                   height:12px; font-size:12px; }
@@ -259,7 +294,7 @@ $riadok=mysql_fetch_object($vysledok);
 
 
 <table class="fmenu" width="100%" >
-<tr><td class="bmenu" width="30%"></td><td class="bmenu" width="10%"><td class="bmenu" width="60%"></tr>
+<tr><td class="bmenu" width="40%"></td><td class="bmenu" width="10%"><td class="bmenu" width="50%"></tr>
 
 <tr>
 <td class="bmenu" colspan="1">Prijmy <?php echo $kli_vrok; ?></td><td class="bmenu" colspan="1" align="right"><?php echo $riadok->prijmy; ?></td>
@@ -277,10 +312,13 @@ $riadok=mysql_fetch_object($vysledok);
 <td class="bmenu" colspan="1">ZaplatenÈ poistnÈ <?php echo $kli_vrok; ?></td><td class="bmenu" colspan="1" align="right"><?php echo $riadok->poistne; ?></td>
 </tr>
 <tr>
-<td class="bmenu" colspan="1">MesaËn˝ VymeriavacÌ z·klad odvodov do SP a ZP od 1.7.<?php echo $kli_brok; ?></td><td class="bmenu" colspan="1" align="right"><?php echo $riadok->zaklaf; ?></td>
+<td class="bmenu" colspan="1">MesaËn˝ VymeriavacÌ z·klad odvodov do SP od 1.7.<?php echo $kli_brok; ?></td><td class="bmenu" colspan="1" align="right"><?php echo $riadok->zaklaf; ?></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="1">MesaËnÈ poistnÈ 35,15% do SP od 1.7.<?php echo $kli_brok; ?></td><td class="bmenu" colspan="1" align="right"><?php echo $riadok->messp; ?></td>
+</tr>
+<tr>
+<td class="bmenu" colspan="1">MesaËn˝ VymeriavacÌ z·klad odvodov do ZP od 1.7.<?php echo $kli_brok; ?></td><td class="bmenu" colspan="1" align="right"><?php echo $riadok->zaklaz; ?></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="1">MesaËnÈ poistnÈ 14% do ZP od 1.7.<?php echo $kli_brok; ?></td><td class="bmenu" colspan="1" align="right"><?php echo $riadok->meszp; ?></td>
@@ -314,8 +352,9 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_platbyju".$kli_uzid." ");
     $r10=$riaddok->poistne;
     $r12=$riaddok->zaklaf;
     $r14=$riaddok->messp;
+    $r16=$riaddok->zaklaz;
     $r18=$riaddok->meszp;
-    $r19=$riaddok->celkspzp;
+    $r20=$riaddok->celkspzp;
 
 
     }
@@ -333,10 +372,11 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_platbyju".$kli_uzid." ");
         if( $i ==  3 ) { $name="Z·klad dane"; $price=$r06; $pid = "03.";}
         if( $i ==  4 ) { $name="DaÚ z prÌjmu $kli_vrok"; $price=$r08; $pid = "04.";}
         if( $i ==  5 ) { $name="ZaplatenÈ poistnÈ $kli_vrok"; $price=$r10; $pid = "05.";}
-        if( $i ==  6 ) { $name="MesaËn˝ VymeriavacÌ z·klad odvodov do SP a ZP od 1.7.$kli_brok"; $price=$r12; $pid = "06.";}
+        if( $i ==  6 ) { $name="MesaËn˝ VymeriavacÌ z·klad odvodov do SP od 1.7.$kli_brok"; $price=$r12; $pid = "06.";}
         if( $i ==  7 ) { $name="MesaËnÈ poistnÈ 35,15% do SP od 1.7.$kli_brok"; $price=$r14; $pid = "07.";}
-        if( $i ==  8 ) { $name="MesaËnÈ poistnÈ 14% do ZP od 1.7.$kli_brok"; $price=$r18; $pid = "08.";}
-        if( $i ==  9 ) { $name="CELKOM MESA»N… POISTN… SP a ZP od 1.7.$kli_brok"; $price=$r19; $pid = "09.";}
+        if( $i ==  8 ) { $name="MesaËn˝ VymeriavacÌ z·klad odvodov do ZP od 1.7.$kli_brok"; $price=$r16; $pid = "08.";}
+        if( $i ==  9 ) { $name="MesaËnÈ poistnÈ 14% do ZP od 1.7.$kli_brok"; $price=$r18; $pid = "09.";}
+        if( $i ==  10 ) { $name="CELKOM MESA»N… POISTN… SP a ZP od 1.7.$kli_brok"; $price=$r20; $pid = "10.";}
 
 	if( $jazyk != 'sk' )
             {
@@ -345,10 +385,11 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_platbyju".$kli_uzid." ");
         if( $i ==  3 ) { $name="Tax base"; $price=$r06; $pid = "03.";}
         if( $i ==  4 ) { $name="Income tax $kli_vrok"; $price=$r08; $pid = "04.";}
         if( $i ==  5 ) { $name="Social and health insurance paid $kli_vrok"; $price=$r10; $pid = "05.";}
-        if( $i ==  6 ) { $name="Monthly Basis of assessment for social and health insurance paid from 1.7.$kli_brok"; $price=$r12; $pid = "06.";}
+        if( $i ==  6 ) { $name="Monthly Basis of assessment for social insurance paid from 1.7.$kli_brok"; $price=$r12; $pid = "06.";}
         if( $i ==  7 ) { $name="Monthly social insurance 35,15% from 1.7.$kli_brok"; $price=$r14; $pid = "07.";}
-        if( $i ==  8 ) { $name="Monthly health insurance 14% from 1.7.$kli_brok"; $price=$r18; $pid = "08.";}
-        if( $i ==  9 ) { $name="MONTHLY HEALTH and SOCIAL INSURANCE from 1.7.$kli_brok"; $price=$r19; $pid = "09.";}
+        if( $i ==  8 ) { $name="Monthly Basis of assessment for health insurance paid from 1.7.$kli_brok"; $price=$r16; $pid = "08.";}
+        if( $i ==  9 ) { $name="Monthly health insurance 14% from 1.7.$kli_brok"; $price=$r18; $pid = "09.";}
+        if( $i ==  10 ) { $name="MONTHLY HEALTH and SOCIAL INSURANCE from 1.7.$kli_brok"; $price=$r20; $pid = "10.";}
             }
 
 
