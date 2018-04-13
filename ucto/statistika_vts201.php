@@ -4675,7 +4675,7 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
 <input type="text" name="m571r97" id="m571r97" style="width:107px; top:1156px; left:695px;"/>
 <input type="text" name="m571r98" id="m571r98" style="width:80px; top:1156px; left:811px;"/>
 <input type="text" name="m571r100" id="m571r100" style="width:78px; top:1179px; left:50px;"/>
-<?php $cslr="9."; if ( $m571r100 == '' ) { $cslr=""; } ?>
+<?php $cslr="10."; if ( $m571r100 == '' ) { $cslr=""; } ?>
 <span class="text-echo" style="top:1182px; left:210px;"><?php echo $cslr; ?></span>
 <input type="text" name="m571r102" id="m571r102" style="width:114px; top:1179px; left:254px;"/>
 <input type="text" name="m571r103" id="m571r103" style="width:62px; top:1179px; left:378px;"/>

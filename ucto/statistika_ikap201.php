@@ -3627,7 +3627,7 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
 <input type="text" name="m571r97" id="m571r97" style="width:107px; top:1156px; left:695px;"/>
 <input type="text" name="m571r98" id="m571r98" style="width:80px; top:1156px; left:811px;"/>
 <input type="text" name="m571r100" id="m571r100" style="width:78px; top:1179px; left:50px;"/>
-<?php $cslr="9."; if ( $m571r100 == '' ) { $cslr=""; } ?>
+<?php $cslr="10."; if ( $m571r100 == '' ) { $cslr=""; } ?>
 <span class="text-echo" style="top:1182px; left:210px;"><?php echo $cslr; ?></span>
 <input type="text" name="m571r102" id="m571r102" style="width:114px; top:1179px; left:254px;"/>
 <input type="text" name="m571r103" id="m571r103" style="width:62px; top:1179px; left:378px;"/>
@@ -5822,8 +5822,6 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    document.formv1.m585r4k.value = '<?php echo $m585r4k; ?>';
    document.formv1.m585r5k.value = '<?php echo $m585r5k; ?>';
    document.formv1.m585r7k.value = '<?php echo $m585r7k; ?>';
-//<?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
-//<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
    document.formv1.m571r10.value = '<?php echo $m571r10; ?>';
    document.formv1.m571r12.value = '<?php echo $m571r12; ?>';
    document.formv1.m571r13.value = '<?php echo $m571r13; ?>';
