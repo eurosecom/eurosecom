@@ -1052,46 +1052,12 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Roè IKaP 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch v informáciách, komunikácii...</span></strong>
- <img src="../obr/info.png" title="Roè IKaP 2-01 verzia <?php echo $kli_vrok; ?>">
-</div>
-</div>
-<img src='../obr/zoznam.png' onclick="statikap201();" title="Upravi hodnoty" class="toleft line-box box-green">
-</div> <!-- .line-area -->
-
-<div class="line-area">
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Roè OPU 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch v obchode, pohostinstve ...</span></strong>
- <img src="../obr/info.png" title="Roè OPU 2-01 verzia <?php echo $kli_vrok; ?>">
-</div>
-</div>
-<img src='../obr/zoznam.png' onclick="statopu201();" title="Upravi hodnoty" class="toleft line-box box-green">
-</div> <!-- .line-area -->
-
-<div class="line-area">
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
  <strong>Roè VTS 1-01<span>Roèný výkaz produkèných odvetví vo vybraných trhových službách</span></strong>
  <img src="../obr/info.png" title="Roè VTS 1-01 verzia <?php echo $kli_vrok; ?>">
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="statvts101();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
-
-<div class="line-area">
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Roè VTS 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch vo vybr. trhových službách</span></strong>
- <img src="../obr/info.png" title="Roè VTS 2-01 verzia <?php echo $kli_vrok; ?>">
-</div>
-</div>
-<img src='../obr/zoznam.png' onclick="statvts201();" title="Upravi hodnoty" class="toleft line-box box-green">
-</div> <!-- .line-area -->
-
 <div class="line-area" style="margin-bottom:8px;">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
@@ -1102,6 +1068,39 @@ if ( $dajstatvyk == 1 )
 </div>
 <img src='../obr/zoznam.png' onclick="statzav101();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
+
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Roè IKaP 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch v informáciách, komunikácii...</span></strong>
+ <img src="../obr/info.png" title="Roè IKaP 2-01 verzia <?php echo $kli_vrok; ?>">
+</div>
+</div>
+<img src='../obr/zoznam.png' onclick="statikap201();" title="Upravi hodnoty" class="toleft line-box box-green">
+</div> <!-- .line-area -->
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Roè OPU 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch v obchode, pohostinstve ...</span></strong>
+ <img src="../obr/info.png" title="Roè OPU 2-01 verzia <?php echo $kli_vrok; ?>">
+</div>
+</div>
+<img src='../obr/zoznam.png' onclick="statopu201();" title="Upravi hodnoty" class="toleft line-box box-green">
+</div> <!-- .line-area -->
+<div class="line-area" style="margin-bottom:8px;">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Roè VTS 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch vo vybr. trhových službách</span></strong>
+ <img src="../obr/info.png" title="Roè VTS 2-01 verzia <?php echo $kli_vrok; ?>">
+</div>
+</div>
+<img src='../obr/zoznam.png' onclick="statvts201();" title="Upravi hodnoty" class="toleft line-box box-green">
+</div> <!-- .line-area -->
+
+
 <?php
 }
 ?>
