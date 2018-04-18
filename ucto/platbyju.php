@@ -28,8 +28,12 @@ $poleu = explode("/", $userx);
 $nickxxx=$poleu[1];
 $usidxxx=1*$poleu[3];
 $pswdxxx=$poleu[5];
-$jazyk=strtolower($poleu[13]);
 $keyf=$poleu[8];
+$jazyk="en";
+
+//echo "nickxxx ".$nickxxx."<br />";
+//echo "usidxxx ".$usidxxx."<br />";
+//echo "keyf ".$keyf."<br />";
 
 $dbcon="../".$adrsxxx."/db_connect.php";
 require_once "$dbcon";
@@ -44,8 +48,8 @@ $anduct=1*$_REQUEST['anduct'];
 if( $anduct == 1 )
   {
 //nastav databazu
-$kli_vrok=1*$_REQUEST['rokx'];
-$kli_vxcf=1*$_REQUEST['firx'];
+$kli_vrok=1*$_REQUEST['vyb_rok'];
+$kli_vxcf=1*$_REQUEST['fromfir'];
 $dbsed="../".$adrsxxx."/nastavdbase.php";
 $sDat = include("$dbsed");
 mysql_select_db($databaza);
@@ -93,9 +97,9 @@ $sqldok = mysql_query("SELECT * FROM ".$databazaez."idxklizuid WHERE idxx = '".$
     $dajidk=$riaddok->kliuzid;
     }
 $kli_uzid=$dajidk;
-
 //$kli_uzid=17;
 
+$kli_vrok=1*$_REQUEST['vyb_rok'];
 require_once("../androidfantozzi/setpdf_charset.php");
 //pdf »åºæöËùû˝·Ì
   }
@@ -360,9 +364,8 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_platbyju".$kli_uzid." ");
     }
 
 	$response = array();
-	$response["products"] = array();
 	$i=1;
-	while( $i < 10 )
+	while( $i < 11 )
         {
         $product = array();
 	$price=0; $pid="";
@@ -395,19 +398,16 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_platbyju".$kli_uzid." ");
 
         $name = iconv("CP1250", "UTF-8", $name);
 
-	$product["pid"] = $pid;	
-	$product["name"] = $name;
-        $product["price"] = $price;
-        $product["dat"] = "";
-        $product["minplu"] = $platitdph;
-	$product["kliuzid"] = $kli_uzid;
-        $product["poh"] = 1;
-        array_push($response["products"], $product);
+	$product["drh"] = 1;
+	$product["accnumber"] = $pid;	
+	$product["accname"] = $name;
+        $product["accdoc"] = $price;
+        $product["accdov"] = $platitdph;
+	$product["acctype"] = $kli_uzid;
+        array_push($response, $product);
 	$i=$i+1;
 	}
 
-    	// success
-    	$response["success"] = 1;
  
     	// echoing JSON response
     	echo json_encode($response);
