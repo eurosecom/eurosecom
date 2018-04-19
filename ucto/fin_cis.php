@@ -893,8 +893,10 @@ $source="../ucto/fin_cis.php?copern=308";
 <?php if ( $drupoh >= 91 AND $drupoh <= 98 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=98', '_self');"
     title="Fin 1-12 - generovanie" class="<?php echo $clas7; ?>">Fin 1-12</a>
+<?php if ( $kli_vrok <= 2017 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
     title="Fin 2-04 NO generovanie" class="<?php echo $clas2; ?>">Fin 2-04 NO</a>
+<?php    } ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
     title="Fin 2-04 POD generovanie" class="<?php echo $clas1; ?>">Fin 2-04 POD</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
@@ -903,8 +905,10 @@ $source="../ucto/fin_cis.php?copern=308";
     title="Fin 4-04 - generovanie" class="<?php echo $clas4; ?>">Fin 4-04</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96', '_self');"
     title="Fin 6-04 - generovanie" class="<?php echo $clas5; ?>">Fin 6-04</a>
+<?php if ( $kli_vrok <= 2017 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=97', '_self');"
     title="Fin 7-04 - generovanie" class="<?php echo $clas6; ?>">Fin 7-04</a>
+<?php    } ?>
 <?php                                        } ?>
 </div>
 
