@@ -7621,6 +7621,10 @@ if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' )
 &nbsp&nbsp&nbsp
 <a href="#" onClick="window.open('fak_prendph.php?drupoh=<?php echo $drupoh; ?>&cislo_dok=<?php echo $cislo_dok; ?>&drupoh=<?php echo $drupoh; ?>&copern=900&zlava=1', '_self' )">
 <img src='../obr/vlozit.png' width=15 height=15 border=0 title="Prepoèet Prenosu daòovej povinnosti" ></a>
+
+&nbsp&nbsp&nbsp
+<a href="#" onClick="window.open('uhradfak_erp.php?drupoh=<?php echo $drupoh; ?>&kopia_dok=<?php echo $cislo_dok; ?>&drupoh=<?php echo $drupoh; ?>&copern=20', '_self' )">
+<img src='../obr/banky/euro.jpg' width=15 height=15 border=0 title="Úhrada faktúry <?php echo $cislo_dok; ?> cez ERP" ></a>
 <?php                    } ?>
 <?php
      }
