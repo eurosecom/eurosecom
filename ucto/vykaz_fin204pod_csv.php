@@ -360,7 +360,7 @@ $hlavicka=mysql_fetch_object($sql);
   $text = "\r\n";
   fwrite($soubor, $text);
 
-  $text = "\"pasiva,59\""."\r\n";
+  $text = "\"pasiva,63\""."\r\n";
   fwrite($soubor, $text);
 
   $text = "\"R\","."\"S5\","."\"S6\""."\r\n";
@@ -380,7 +380,7 @@ $hlavicka=mysql_fetch_object($sql);
   $text = "\"R71\",\"".$hlavicka->r71."\",\"".$hlavicka->rm71."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
-  $text = "\"R72\",\"".$hlavicka->r73."\",\"".$hlavicka->rm72."\"";
+  $text = "\"R72\",\"".$hlavicka->r72."\",\"".$hlavicka->rm72."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
   $text = "\"R73\",\"".$hlavicka->r73."\",\"".$hlavicka->rm73."\"";
@@ -411,7 +411,7 @@ $hlavicka=mysql_fetch_object($sql);
   $text = "\"R81\",\"".$hlavicka->r81."\",\"".$hlavicka->rm81."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
-  $text = "\"R82\",\"".$hlavicka->r83."\",\"".$hlavicka->rm82."\"";
+  $text = "\"R82\",\"".$hlavicka->r82."\",\"".$hlavicka->rm82."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
   $text = "\"R83\",\"".$hlavicka->r83."\",\"".$hlavicka->rm83."\"";
@@ -442,7 +442,7 @@ $hlavicka=mysql_fetch_object($sql);
   $text = "\"R91\",\"".$hlavicka->r91."\",\"".$hlavicka->rm91."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
-  $text = "\"R92\",\"".$hlavicka->r93."\",\"".$hlavicka->rm92."\"";
+  $text = "\"R92\",\"".$hlavicka->r92."\",\"".$hlavicka->rm92."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
   $text = "\"R93\",\"".$hlavicka->r93."\",\"".$hlavicka->rm93."\"";
@@ -473,7 +473,7 @@ $hlavicka=mysql_fetch_object($sql);
   $text = "\"R101\",\"".$hlavicka->r101."\",\"".$hlavicka->rm101."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
-  $text = "\"R102\",\"".$hlavicka->r103."\",\"".$hlavicka->rm102."\"";
+  $text = "\"R102\",\"".$hlavicka->r102."\",\"".$hlavicka->rm102."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
   $text = "\"R103\",\"".$hlavicka->r103."\",\"".$hlavicka->rm103."\"";
@@ -504,7 +504,7 @@ $hlavicka=mysql_fetch_object($sql);
   $text = "\"R111\",\"".$hlavicka->r111."\",\"".$hlavicka->rm111."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
-  $text = "\"R112\",\"".$hlavicka->r113."\",\"".$hlavicka->rm112."\"";
+  $text = "\"R112\",\"".$hlavicka->r112."\",\"".$hlavicka->rm112."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
   $text = "\"R113\",\"".$hlavicka->r113."\",\"".$hlavicka->rm113."\"";
@@ -535,7 +535,7 @@ $hlavicka=mysql_fetch_object($sql);
   $text = "\"R121\",\"".$hlavicka->r121."\",\"".$hlavicka->rm121."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
-  $text = "\"R122\",\"".$hlavicka->r123."\",\"".$hlavicka->rm122."\"";
+  $text = "\"R122\",\"".$hlavicka->r122."\",\"".$hlavicka->rm122."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
   $text = "\"R123\",\"".$hlavicka->r123."\",\"".$hlavicka->rm123."\"";
@@ -553,6 +553,18 @@ $hlavicka=mysql_fetch_object($sql);
   $text = "\"R127\",\"".$hlavicka->r127."\",\"".$hlavicka->rm127."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
+  $text = "\"R128\",\"".$hlavicka->r128."\",\"".$hlavicka->rm128."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+  $text = "\"R129\",\"".$hlavicka->r129."\",\"".$hlavicka->rm129."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+  $text = "\"R130\",\"".$hlavicka->r130."\",\"".$hlavicka->rm130."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+  $text = "\"R131\",\"".$hlavicka->r131."\",\"".$hlavicka->rm131."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
 
 
 
@@ -566,7 +578,7 @@ $i = $i + 1;
 
 
 fclose($soubor);
-////////////////////////////////////////////////////////////KONIEC FIN 204
+////////////////////////////////////////////////////////////KONIEC FIN 204pod
 
 
 ?> 
