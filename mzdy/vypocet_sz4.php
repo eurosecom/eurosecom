@@ -99,9 +99,12 @@ $ulozene = mysql_query("$sql");
 
 //dps gbely 36084514
 //dssbrodske 37986830
+//nezabudkano 37986708
 
 $fir_ficoorig=$fir_fico;
 if( $fir_fico == 45741093 ) { $fir_fico=37986830; }
+if( $fir_fico == 37986708 ) { $fir_fico=37986830; }
+
 
 $zdravprac=0;
 if( $fir_fico == 36084514 OR $fir_fico == 37986708 OR $fir_fico == 37986830 OR $kli_nezis == 1 )
@@ -216,7 +219,17 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/141 WHERE oc > 0 AND uva = 6.5
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/130 WHERE oc > 0 AND uva = 6.0  "; $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/119.53 WHERE oc > 0 AND uva = 5.5 "; $dsql = mysql_query("$dsqlt");
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/119.53 WHERE oc > 0 AND uva < 5.5 "; $dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/106.40 WHERE oc > 0 AND uva = 4.9 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/81.50  WHERE oc > 0 AND uva = 3.75 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/65.20  WHERE oc > 0 AND uva = 3.0  "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/48.90  WHERE oc > 0 AND uva = 2.25 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/32.60  WHERE oc > 0 AND uva = 1.5  "; $dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/((163/7.5)*uva)  WHERE oc > 0 AND uva != 8.0 AND ".
+" uva != 7.75 AND uva != 7.5 AND uva != 7.0 AND uva != 6.5 AND uva != 6.0 AND uva != 5.5 AND ".
+" uva != 4.9 AND uva != 3.75 AND uva != 3.0 AND uva != 2.25 AND uva != 1.5 "; 
+$dsql = mysql_query("$dsqlt");
 
 //toto chcem pre dsszavod
 if( $fir_ficoorig == 45741093 ) 
@@ -226,6 +239,12 @@ $dsql = mysql_query("$dsqlt");
 }
 //toto chcem pre dssbrodske
 if( $fir_ficoorig == 37986830 ) 
+{
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz3, sz3=0 WHERE oc > 0 AND uva > 0 ";
+$dsql = mysql_query("$dsqlt");
+}
+//toto chcem pre nezabudkano
+if( $fir_ficoorig == 37986708 ) 
 {
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz3, sz3=0 WHERE oc > 0 AND uva > 0 ";
 $dsql = mysql_query("$dsqlt");

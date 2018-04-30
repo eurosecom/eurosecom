@@ -1725,7 +1725,7 @@ $oznac = mysql_query("$sqtoz");
 
 //exit;
 //v zmin_pn znizeny, v zmin_ip je znizenie zakladu, v zmin_up je povodny
-//koniec tuto vypocitam odvodovu ulavu zp andrejko
+//koniec tuto vypocitam odvodovu ulavu zp
 
 //exit;
 
@@ -1801,7 +1801,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//ak ma odpocitatelnu ZP od 1.1.2018 za zamestnavatela neuplatnuje andrejko
+//ak ma odpocitatelnu ZP od 1.1.2018 za zamestnavatela neuplatnuje
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
 " SET zfir_zp=zmin_up ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1";
@@ -1834,7 +1834,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//znizene odvody do ZP polozka v kun zpno=1 andrejko
+//znizene odvody do ZP polozka v kun zpno=1 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
 " SET des6=($zam_zpn*zzam_zp)/100, des2=999 ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND zpno = 1";
@@ -1864,6 +1864,17 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET des6=0, des2=0, des1=0 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
+
+//ak viac pracovných pomerov odvod do DOVERA je odvod zo suctu zakladov andrejko
+$prepsub=0;
+if( $_SERVER['SERVER_NAME'] == "www.eurorekoplast.sk" ) { $prepsub=1; }
+if( $prepsub == 1 )
+   {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ozam_zp=1.69 WHERE ozam_zp = 1.68 AND oc = 916 AND ume = 3.2018 "; 
+$oznac = mysql_query("$sqtoz");
+
+   }
+//koniec ak viac pracovných pomerov odvod do DOVERA je odvod zo suctu zakladov andrejko
 
 //poistka ak odvod < 0 potom odvod=0
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ozam_zp=0 WHERE ozam_zp < 0 "; $oznac = mysql_query("$sqtoz");
