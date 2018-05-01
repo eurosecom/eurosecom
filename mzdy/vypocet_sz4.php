@@ -246,7 +246,10 @@ $dsql = mysql_query("$dsqlt");
 //toto chcem pre nezabudkano
 if( $fir_ficoorig == 37986708 ) 
 {
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz3, sz3=0 WHERE oc > 0 AND uva > 0 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz2=sz4/($pracsviat*uva) WHERE oc > 0 AND uva > 0 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz3, sz3=sz2, sz2=0 WHERE oc > 0 AND uva > 0 ";
 $dsql = mysql_query("$dsqlt");
 }
 
