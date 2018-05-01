@@ -66,7 +66,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_dopreg WHERE dok > 0 ORDER BY
 $dnes_sql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
 
 
-$cbl=0;
+$cbl=1;
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_dopreg WHERE dok > 0 AND dat = '$dnes_sql' ORDER BY dok DESC LIMIT 1");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
@@ -107,11 +107,15 @@ $dsql = mysql_query("$dsqlt");
 //dok	fak	dol	prf	cpl	slu	nsl	pop	pon	dph	cen	cep	ced	mno	mer	
 //pfak	cfak	dfak	xfak	id	datm   
 
+//fakslu
+//dok	fak	dol	prf	cpl	slu	nsl	pop	pon	dph	cen	cep	ced	mno	mer	
+//pfak	cfak	dfak	id	datm
+
 $nsl="ERP uhrada fa ".$kopia_dok;
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_dopslu "." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_fakslu "." SELECT".
 " $cislo_dok,$cbl,'','',0,103,'$nsl','','',0,hod,hod,hod,1,'',".
-" 0,0,0,0,$kli_uzid,now()  ".
+" 0,0,0,$kli_uzid,now()  ".
 " FROM F$kli_vxcf"."_fakodb ".
 " WHERE F$kli_vxcf"."_fakodb.dok=$kopia_dok ".
 "";
@@ -127,7 +131,7 @@ $dsql = mysql_query("$dsqlt");
 
 ?> 
 <script type="text/javascript">
-  var okno = window.open("../faktury/vstf_u.php?regpok=0&vyroba=0&copern=8&drupoh=42&page=1&cislo_dok=<?php echo $cislo_dok; ?>&hladaj_uce=<?php echo $uce; ?>&h_tltv=1&h_tlsl=0&rozb1=NOT&rozb2=NOT","_self");
+  var okno = window.open("../faktury/vstf_u.php?regpok=1&vyroba=0&copern=8&drupoh=42&page=1&cislo_dok=<?php echo $cislo_dok; ?>&hladaj_uce=<?php echo $uce; ?>&h_tltv=1&h_tlsl=0&rozb1=NOT&rozb2=NOT","_self");
 </script>
 <?php 
 
