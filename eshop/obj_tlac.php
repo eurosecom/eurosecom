@@ -29,6 +29,7 @@ $drupoh = 1*$_REQUEST['drupoh'];
 $html = 1*$_REQUEST['html'];
 $xyid = 1*$_REQUEST['xyid'];
 $xyico = 1*$_REQUEST['xyico'];
+$vybavene = 1*$_REQUEST['vybavene'];
 
 $hladaj_uce = 1*strip_tags($_REQUEST['hladaj_uce']);
 if( $hladaj_uce == 0 ) $hladaj_uce=31100;
@@ -321,6 +322,7 @@ $sqldok = mysql_query("$sqlttt");
  $riaddok=mysql_fetch_object($sqldok);
  $id=1*$riaddok->ez_id;
  }
+if( $id == 0 ) { $id=1*$kli_uzid; }
 
 //andrejko cislo kosikobj+10000
 $novaobj=1;
@@ -387,6 +389,14 @@ var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
 var vyskawic = screen.height;
 var sirkawic = screen.width-10;
+
+function TlacFakturu(dok)
+                {              
+
+window.open('../faktury/vstf_pdf.php?sysx=INE&rozuct=NIE&copern=20&drupoh=1&page=1&cislo_dok=' + dok + '&hladaj_dok=' + dok + '&xcv=1', '_blank'
+, 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
 
 <?php  if( $zmtz == 1 ) { ?>
 
@@ -495,6 +505,13 @@ window.open('../eshop/obj_tlac.php?copern=1&drupoh=1&page=1&zmtz=1&html=1',
  '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function VybavZoznam()
+                {
+
+window.open('../eshop/obj_tlac.php?copern=1&drupoh=1&page=1&zmtz=1&html=1&vybavene=1',
+ '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
     function textObj( objx )
     {
 
@@ -512,7 +529,15 @@ window.open('../eshop/obj_text.php?h_obj=' + h_obj + '&copern=1&drupoh=1&page=1&
 
 <table class="h2" width="100%" >
 <tr>
-<td>EuroSecom  -  Objednávky 
+<?php
+$tnadpis=" - nevybavené";
+if( $xyid  > 0 )  { $tnadpis=" "; }
+if( $xyico > 0 )  { $tnadpis=" - všetky pre iÈO ".$xyico; }
+if( $vybavene == 1 )  { $tnadpis=" - vybavené "; }
+?>
+<td>EuroSecom  -  Objednávky <?php echo $tnadpis; ?> 
+
+
 
 </td>
 </tr>
@@ -574,6 +599,7 @@ $dsql = mysql_query("$dsqlt");
 $podmfak="xfak = 0 ";
 if( $xyid  > 0 )  { $podmfak="xfak >= 0 "; }
 if( $xyico > 0 )  { $podmfak="xfak >= 0 "; }
+if( $vybavene == 1 )  { $podmfak="xfak > 0 "; }
 
 if( $zmtz == 1 ) {
 //zober objednavky vsetky
@@ -637,14 +663,19 @@ if ( $html == 1 )
 ?>
 <table class="h2" width="100%" >
 <tr>
-<td class="bmenu" colspan="2">Objednávky
+<td class="bmenu" colspan="1">Objednávky
 
 <?php if( $zmtz == 1 AND $zinejfir == 0 AND $somvprirskl == 0 ) { ?>
 <a href="#" onClick="NovaOBJ();">
 <img src='../obr/vlozit.png' width=15 height=15 border=1 title='Nová objednávka ' ></a>
 <?php                                     } ?>
-
 </td>
+
+<td class="bmenu" colspan="1" align="right">
+<a href="#" onClick="VybavZoznam();">
+Vybavené OBJ<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazi vybavené objednávky' ></a>
+</td>
+
 <td class="bmenu" colspan="3" align="right">
 <a href="#" onClick="SpatZoznam();">
 Nevybavené OBJ<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazi nevybavené objednávky' ></a>
@@ -698,7 +729,7 @@ if ( $copern == 1 AND $drupoh == 1 AND $html == 1 )  {
 <img src='../obr/zoznam.png' onclick="window.open('../cis/cico.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes' )" width=20 height=20 border=0 title='Èíselník IÈO' >
 </td>
 <td class="bmenu" align="left" width="10%" >Stav obj.
-<?php if( $zmtz == 1 AND $zinejfir == 0 AND $somvprirskl == 0 ) { ?>
+<?php if( $zmtz == 1 AND $zinejfir == 0 AND $somvprirskl == 0 AND $vybavene == 0 ) { ?>
 <a href="#" onClick="StavOBJALL(0, 0);">
 <img src='../obr/naradie.png' width=20 height=20 border=0 title='Stav všetkých objednávok' ></a>
 <?php                                     } ?>
@@ -759,7 +790,7 @@ if( $icoezak == 99999999 ) { $odbx=1*$riadok->xodbm; }
 <td class="hvstup" align="right">
 <?php echo $riadok->xdok; ?>
 
-<?php if( $zmtz == 1 AND $zinejfir == 0 AND $somvprirskl == 0 ) { ?>
+<?php if( $zmtz == 1 AND $zinejfir == 0 AND $somvprirskl == 0 AND $vybavene == 0 ) { ?>
 <a href="#" onClick="SpracujOBJ(<?php echo $riadok->xdok; ?>);">
 <img src='../obr/ok.png' width=20 height=20 border=0 title='Spracova celú objednávku è.<?php echo $riadok->xdok; ?> do Faktúry' ></a>
 <?php                                     } ?>
@@ -813,7 +844,7 @@ echo $poznx;
 $cislodod=1*$riadok->xsx1;
 if( $cislodod > 0 ) { echo "Dod.list".$cislodod; }
 ?>
-<?php if(( $zmtz == 1 AND $zinejfir == 0 ) OR ( $somvprirskl == 1 )) { ?>
+<?php if(( $zmtz == 1 AND $zinejfir == 0 AND $vybavene == 0 ) OR ( $somvprirskl == 1 AND $vybavene == 0 )) { ?>
 <a href="#" onClick="StavOBJ(<?php echo $riadok->xdok; ?>, <?php echo $icox; ?>);">
 <img src='../obr/naradie.png' width=20 height=20 border=0 title='Stav objednávky' ></a>
 <?php                                     } ?>
@@ -824,12 +855,16 @@ if( $cislofak > 0 )
 echo " F".$cislofak;
   }
 ?>
+<?php if( $vybavene == 1 ) { ?>
+<a href="#" onClick="TlacFakturu(<?php echo $riadok->xfak; ?>);">
+<img src='../obr/pdf.png' width=20 height=20 border=0 title='Zobrazi PDF faktúru <?php echo $riadok->xfak; ?> ' ></a>
+<?php                                     } ?>
 </td>
 <td class="hvstup" align="right"><?php echo $riadok->xmno; ?></td>
 <td class="hvstup" align="right">
 <?php echo $riadok->xhdb; ?> / <?php echo $riadok->xhdd; ?>
 
-<?php if( $zmtz == 1 AND $zinejfir == 0 AND $somvprirskl == 0 ) { ?>
+<?php if( $zmtz == 1 AND $zinejfir == 0 AND $somvprirskl == 0 AND $vybavene == 0 ) { ?>
 <a href="#" onClick="ZmazOBJ(<?php echo $riadok->xdok; ?>);">
 <img src='../obr/zmaz.png' width=20 height=15 border=0 title='Zmaza objednávku' ></a>
 <?php                                     } ?>

@@ -884,7 +884,7 @@ window.open('obj_stav.php?copern=44401&h_ncsl=' + h_ncsl + '&cislo_dok=' + dokla
 
 <td class="bmenu" colspan="4" align="right">
 <a href="#" onClick="SpatZoznam();">
-Všetky OBJ<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Naspä do zoznamu objednávok' ></a>
+Nevybavené OBJ<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Naspä do zoznamu objednávok' ></a>
 
 </tr>
 <?php
