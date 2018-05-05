@@ -1867,11 +1867,123 @@ $oznac = mysql_query("$sqtoz");
 
 //ak viac pracovných pomerov odvod do DOVERA je odvod zo suctu zakladov andrejko
 $prepsub=0;
-if( $_SERVER['SERVER_NAME'] == "www.eurorekoplast.sk" ) { $prepsub=1; }
+$podm_hlvn="hlvn > 0";
+if( $all_oc == 0 )
+{
+$podm_hlvn="hlvn = ".$vyb_osc;
+}
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdsubeznepp WHERE $podm_hlvn ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $hlvn=1*$riaddok->hlvn;
+  $sub1=1*$riaddok->sub1;
+  $sub2=1*$riaddok->sub2;
+  if( $hlvn > 0 ) { $prepsub=1; }
+  }
+//if( $_SERVER['SERVER_NAME'] == "www.eurorekoplast.sk" ) { $prepsub=1; }
+if( $all_oc == 0 ) { $prepsub=0; }
 if( $prepsub == 1 )
    {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ozam_zp=1.69 WHERE ozam_zp = 1.68 AND oc = 916 AND ume = 3.2018 "; 
+//$oznac = mysql_query("$sqtoz");
+
+$sql = "DROP TABLE F".$kli_vxcf."_mzdsubodv".$kli_uzid;
+$ulozene = mysql_query("$sql");
+
+$sqlt = <<<uctmzd
+(
+   hlvn        DECIMAL(10,0) DEFAULT 0,
+   zzam        DECIMAL(10,2) DEFAULT 0,
+   zfir        DECIMAL(10,2) DEFAULT 0,
+   ozam        DECIMAL(10,2) DEFAULT 0,
+   ofir        DECIMAL(10,2) DEFAULT 0,
+   ozan        DECIMAL(10,2) DEFAULT 0,
+   ofin        DECIMAL(10,2) DEFAULT 0,
+   ozax        DECIMAL(10,2) DEFAULT 0,
+   ofix        DECIMAL(10,2) DEFAULT 0,
+   des2        DECIMAL(10,2) DEFAULT 0,
+   des6        DECIMAL(13,6) DEFAULT 0
+);
+uctmzd;
+
+
+$sql = "CREATE TABLE F".$kli_vxcf."_mzdsubodv".$kli_uzid.$sqlt;
+$ulozene = mysql_query("$sql");
+
+$tovttt = "SELECT * FROM F$kli_vxcf"."_mzdsubeznepp WHERE $podm_hlvn ";
+$tov = mysql_query("$tovttt");
+$tvpol = mysql_num_rows($tov);
+$i=0;
+  while ($i < $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+{
+$rtov=mysql_fetch_object($tov);
+
+$zdrv=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE oc = $rtov->hlvn ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zdrv=$riaddok->zdrv;
+  }
+
+if( $zdrv >= 2400 AND $zdrv <= 2499 )
+    {
+
+$sql = "TRUNCATE F".$kli_vxcf."_mzdsubodv".$kli_uzid;
+$ulozene = mysql_query("$sql");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdsubodv".$kli_uzid." ".
+" SELECT $rtov->hlvn,sum(zzam_zp),sum(zfir_zp),sum(ozam_zp),sum(ofir_zp),0,0,0,0,0,0 ".
+" FROM F$kli_vxcf"."_mzdprcsum".$kli_uzid.
+" WHERE ( oc = $rtov->hlvn OR oc = $rtov->sub1 OR oc = $rtov->sub2 ) AND oc > 0 GROUP BY ksum2 ";
+//echo $dsqlt."<br />";
+$dsql = mysql_query("$dsqlt");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdsubodv$kli_uzid".
+" SET ".
+" des6=($zam_zp*zzam)/100, des6=des6-0.005, des2=des6, ozan=des2, ".
+" des6=($fir_zp*zfir)/100, des6=des6-0.005, des2=des6, ofin=des2  ".
+" WHERE hlvn > 0 ";
 $oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdsubodv$kli_uzid SET ozax=ozan-ozam, ofix=ofin-ofir WHERE hlvn > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+
+//echo $rtov->hlvn.";".$rtov->sub1.";".$rtov->sub2."<br />";
+
+$ozax=0; $ofix=0;
+$sqldo2 = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdsubodv$kli_uzid ");
+  if (@$zaznam=mysql_data_seek($sqldo2,0))
+  {
+  $riaddo2=mysql_fetch_object($sqldo2);
+  $ozax=1*$riaddo2->ozax;
+  $ofix=1*$riaddo2->ofix;
+  if( $ozax > 0.03 OR $ozax < -0.03 ) { $ozax=0; }
+  if( $ofix > 0.03 OR $ofix < -0.03 ) { $ofix=0; }
+  }
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ozam_zp=ozam_zp+$ozax WHERE oc = $rtov->hlvn ";
+//echo $sqtoz."<br />";
+if( $ozax != 0 ) { $oznac = mysql_query("$sqtoz"); }
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ofir_zp=ofir_zp+$ofix WHERE oc = $rtov->hlvn ";
+if( $ofix != 0 ) { $oznac = mysql_query("$sqtoz"); }
+
+    }
+
+ }
+
+$i=$i+1;
+   }
+
+//exit;
+$sql = "DROP TABLE F".$kli_vxcf."_mzdsubodv".$kli_uzid;
+$ulozene = mysql_query("$sql");
 
    }
 //koniec ak viac pracovných pomerov odvod do DOVERA je odvod zo suctu zakladov andrejko

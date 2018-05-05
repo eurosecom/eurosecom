@@ -2195,7 +2195,12 @@ if ( $copern == 8 )
      {
 echo "   ".$h_oc;
 ?>
-<input type="hidden" name="h_oc" id="h_oc" /></td>
+<input type="hidden" name="h_oc" id="h_oc" />
+
+<a href="#" onClick="window.open('subeznepp.php?copern=1&drupoh=1&cislo_oc=<?php echo $cislo_oc;?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/vlozit.png' width=12 height=12 border=0 title='Nastavenie súbežných PP zamestnanca osè <?php echo $cislo_oc; ?>' ></a>
+
+</td>
 <?php
      }
 ?>
