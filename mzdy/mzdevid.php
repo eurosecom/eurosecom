@@ -1239,6 +1239,7 @@ window.open('../mzdy/evidencny_listxml.php?cislo_oc=' + h_oc + '&copern=10&drupo
 <?php
 $rokzapoct="2014";
 if( $kli_vrok < 2014 ) { $rokzapoct=""; }
+//andrejko
 ?>
 
 function TlacZapoctovy()

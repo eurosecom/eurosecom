@@ -36,6 +36,8 @@ $citfir = include("../cis/citaj_fir.php");
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
 $jedn = 1*$_REQUEST['jedn'];
+$strana = 1*$_REQUEST['strana'];
+if( $strana == 0 ) { $strana = 1; }
 
 //znovu nacitaj
 if ( $copern == 26 )
@@ -94,101 +96,40 @@ $roks = strip_tags($_REQUEST['roks']);
 $dni = strip_tags($_REQUEST['dni']);
 $dnis = strip_tags($_REQUEST['dnis']);
 $dovod = strip_tags($_REQUEST['dovod']);
-
-//$vyl2od2 = strip_tags($_REQUEST['vyl2od2']);
-//$vyl2do2 = strip_tags($_REQUEST['vyl2do2']);
-//$vyl2dv2 = strip_tags($_REQUEST['vyl2dv2']);
-//$vyl2dni2 = strip_tags($_REQUEST['vyl2dni2']);
-//$vyl2od3 = strip_tags($_REQUEST['vyl2od3']);
-//$vyl2do3 = strip_tags($_REQUEST['vyl2do3']);
-//$vyl2dv3 = strip_tags($_REQUEST['vyl2dv3']);
-//$vyl2dni3 = strip_tags($_REQUEST['vyl2dni3']);
-//$vyl2od4 = strip_tags($_REQUEST['vyl2od4']);
-//$vyl2do4 = strip_tags($_REQUEST['vyl2do4']);
-//$vyl2dv4 = strip_tags($_REQUEST['vyl2dv4']);
-//$vyl2dni4 = strip_tags($_REQUEST['vyl2dni4']);
-//$vyl2od5 = strip_tags($_REQUEST['vyl2od5']);
-//$vyl2do5 = strip_tags($_REQUEST['vyl2do5']);
-//$vyl2dv5 = strip_tags($_REQUEST['vyl2dv5']);
-//$vyl2dni5 = strip_tags($_REQUEST['vyl2dni5']);
-//$vyl3od1 = strip_tags($_REQUEST['vyl3od1']);
-//$vyl3do1 = strip_tags($_REQUEST['vyl3do1']);
-//$vyl3dv1 = strip_tags($_REQUEST['vyl3dv1']);
-//$vyl3dni1 = strip_tags($_REQUEST['vyl3dni1']);
-//$vyl3od2 = strip_tags($_REQUEST['vyl3od2']);
-//$vyl3do2 = strip_tags($_REQUEST['vyl3do2']);
-//$vyl3dv2 = strip_tags($_REQUEST['vyl3dv2']);
-//$vyl3dni2 = strip_tags($_REQUEST['vyl3dni2']);
-//$vyl3od3 = strip_tags($_REQUEST['vyl3od3']);
-//$vyl3do3 = strip_tags($_REQUEST['vyl3do3']);
-//$vyl3dv3 = strip_tags($_REQUEST['vyl3dv3']);
-//$vyl3dni3 = strip_tags($_REQUEST['vyl3dni3']);
-//$vyl3od4 = strip_tags($_REQUEST['vyl3od4']);
-//$vyl3do4 = strip_tags($_REQUEST['vyl3do4']);
-//$vyl3dv4 = strip_tags($_REQUEST['vyl3dv4']);
-//$vyl3dni4 = strip_tags($_REQUEST['vyl3dni4']);
-//$vyl3od5 = strip_tags($_REQUEST['vyl3od5']);
-//$vyl3do5 = strip_tags($_REQUEST['vyl3do5']);
-//$vyl3dv5 = strip_tags($_REQUEST['vyl3dv5']);
-//$vyl3dni5 = strip_tags($_REQUEST['vyl3dni5']);
-//$vyl2od2_sql=SqlDatum($vyl2od2);
-//$vyl2do2_sql=SqlDatum($vyl2do2);
-//$vyl2od3_sql=SqlDatum($vyl2od3);
-//$vyl2do3_sql=SqlDatum($vyl2do3);
-//$vyl2od4_sql=SqlDatum($vyl2od4);
-//$vyl2do4_sql=SqlDatum($vyl2do4);
-//$vyl2od5_sql=SqlDatum($vyl2od5);
-//$vyl2do5_sql=SqlDatum($vyl2do5);
-//$vyl3od1_sql=SqlDatum($vyl3od1);
-//$vyl3do1_sql=SqlDatum($vyl3do1);
-//$vyl3od2_sql=SqlDatum($vyl3od2);
-//$vyl3do2_sql=SqlDatum($vyl3do2);
-//$vyl3od3_sql=SqlDatum($vyl3od3);
-//$vyl3do3_sql=SqlDatum($vyl3do3);
-//$vyl3od4_sql=SqlDatum($vyl3od4);
-//$vyl3do4_sql=SqlDatum($vyl3do4);
-//$vyl3od5_sql=SqlDatum($vyl3od5);
-//$vyl3do5_sql=SqlDatum($vyl3do5);
-
-//$por1 = strip_tags($_REQUEST['por1']);
-//$vzv1 = strip_tags($_REQUEST['vzv1']);
-//$vzd1 = strip_tags($_REQUEST['vzd1']);
-//$vzz1 = strip_tags($_REQUEST['vzz1']);
-//$ost1 = strip_tags($_REQUEST['ost1']);
-//$osd1 = strip_tags($_REQUEST['osd1']);
-//$osz1 = strip_tags($_REQUEST['osz1']);
-//$exe1 = strip_tags($_REQUEST['exe1']);
-//$prs1 = strip_tags($_REQUEST['prs1']);
-//$por2 = strip_tags($_REQUEST['por2']);
-//$vzv2 = strip_tags($_REQUEST['vzv2']);
-//$vzd2 = strip_tags($_REQUEST['vzd2']);
-//$vzz2 = strip_tags($_REQUEST['vzz2']);
-//$ost2 = strip_tags($_REQUEST['ost2']);
-//$osd2 = strip_tags($_REQUEST['osd2']);
-//$osz2 = strip_tags($_REQUEST['osz2']);
-//$exe2 = strip_tags($_REQUEST['exe2']);
-//$prs2 = strip_tags($_REQUEST['prs2']);
-//$por3 = strip_tags($_REQUEST['por3']);
-//$vzv3 = strip_tags($_REQUEST['vzv3']);
-//$vzd3 = strip_tags($_REQUEST['vzd3']);
-//$vzz3 = strip_tags($_REQUEST['vzz3']);
-//$ost3 = strip_tags($_REQUEST['ost3']);
-//$osd3 = strip_tags($_REQUEST['osd3']);
-//$osz3 = strip_tags($_REQUEST['osz3']);
-//$exe3 = strip_tags($_REQUEST['exe3']);
-//$prs3 = strip_tags($_REQUEST['prs3']);
-//$pozn = strip_tags($_REQUEST['pozn']);
 $str2 = strip_tags($_REQUEST['str2']);
-//$kval = strip_tags($_REQUEST['kval']);
-//$zps = strip_tags($_REQUEST['zps']);
-//$poist = strip_tags($_REQUEST['poist']);
-//$poisc = strip_tags($_REQUEST['poisc']);
-//$poism = strip_tags($_REQUEST['poism']);
-//$poisa = strip_tags($_REQUEST['poisa']);
-//$poisk = strip_tags($_REQUEST['poisk']);
-//$spor = strip_tags($_REQUEST['spor']);
-//$osta = strip_tags($_REQUEST['osta']);
+
+$por1 = strip_tags($_REQUEST['por1']);
+$vzv1 = strip_tags($_REQUEST['vzv1']);
+$vzd1 = strip_tags($_REQUEST['vzd1']);
+$vzz1 = strip_tags($_REQUEST['vzz1']);
+$ost1 = strip_tags($_REQUEST['ost1']);
+$osd1 = strip_tags($_REQUEST['osd1']);
+$osz1 = strip_tags($_REQUEST['osz1']);
+$exe1 = strip_tags($_REQUEST['exe1']);
+$prs1 = strip_tags($_REQUEST['prs1']);
+$por2 = strip_tags($_REQUEST['por2']);
+$vzv2 = strip_tags($_REQUEST['vzv2']);
+$vzd2 = strip_tags($_REQUEST['vzd2']);
+$vzz2 = strip_tags($_REQUEST['vzz2']);
+$ost2 = strip_tags($_REQUEST['ost2']);
+$osd2 = strip_tags($_REQUEST['osd2']);
+$osz2 = strip_tags($_REQUEST['osz2']);
+$exe2 = strip_tags($_REQUEST['exe2']);
+$prs2 = strip_tags($_REQUEST['prs2']);
+$por3 = strip_tags($_REQUEST['por3']);
+$vzv3 = strip_tags($_REQUEST['vzv3']);
+$vzd3 = strip_tags($_REQUEST['vzd3']);
+$vzz3 = strip_tags($_REQUEST['vzz3']);
+$ost3 = strip_tags($_REQUEST['ost3']);
+$osd3 = strip_tags($_REQUEST['osd3']);
+$osz3 = strip_tags($_REQUEST['osz3']);
+$exe3 = strip_tags($_REQUEST['exe3']);
+$prs3 = strip_tags($_REQUEST['prs3']);
+
 $uprav="NO";
+
+
+if ( $strana == 1 OR $strana == 9999 ) { 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_zapoctovylist SET ".
 " neschop='$neschop', ".
@@ -201,6 +142,20 @@ $uprtxt = "UPDATE F$kli_vxcf"."_zapoctovylist SET ".
 " rok='$rok', roks='$roks', dni='$dni', dnis='$dnis', dovod='$dovod', ".
 " datum='$datum_sql', str2='$str2' ".
 " WHERE oc = $cislo_oc"; 
+
+                                       }
+
+if ( $strana == 2 OR $strana == 9999 ) { 
+
+$uprtxt = "UPDATE F$kli_vxcf"."_zapoctovylist SET ".
+
+" por1='$por1', vzv1='$vzv1', vzd1='$vzd1', vzz1='$vzz1', ost1='$ost1', osd1='$osd1', osz1='$osz1', exe1='$exe1', prs1='$prs1', ".
+" por2='$por2', vzv2='$vzv2', vzd2='$vzd2', vzz2='$vzz2', ost2='$ost2', osd2='$osd2', osz2='$osz2', exe2='$exe2', prs2='$prs2', ".
+" por3='$por3', vzv3='$vzv3', vzd3='$vzd3', vzz3='$vzz3', ost3='$ost3', osd3='$osd3', osz3='$osz3', exe3='$exe3', prs3='$prs3'  ".
+" WHERE oc = $cislo_oc"; 
+
+                                       }
+
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
 
@@ -787,6 +742,36 @@ $vyl3od4_sk=SkDatum($vyl3od4);
 $vyl3do4_sk=SkDatum($vyl3do4);
 $vyl3od5_sk=SkDatum($vyl3od5);
 $vyl3do5_sk=SkDatum($vyl3do5);
+
+
+$por1 = $fir_riadok->por1;
+$vzv1 = $fir_riadok->vzv1;
+$vzd1 = $fir_riadok->vzd1;
+$vzz1 = $fir_riadok->vzz1;
+$ost1 = $fir_riadok->ost1;
+$osd1 = $fir_riadok->osd1;
+$osz1 = $fir_riadok->osz1;
+$exe1 = $fir_riadok->exe1;
+$prs1 = $fir_riadok->prs1;
+$por2 = $fir_riadok->por2;
+$vzv2 = $fir_riadok->vzv2;
+$vzd2 = $fir_riadok->vzd2;
+$vzz2 = $fir_riadok->vzz2;
+$ost2 = $fir_riadok->ost2;
+$osd2 = $fir_riadok->osd2;
+$osz2 = $fir_riadok->osz2;
+$exe2 = $fir_riadok->exe2;
+$prs2 = $fir_riadok->prs2;
+$por3 = $fir_riadok->por3;
+$vzv3 = $fir_riadok->vzv3;
+$vzd3 = $fir_riadok->vzd3;
+$vzz3 = $fir_riadok->vzz3;
+$ost3 = $fir_riadok->ost3;
+$osd3 = $fir_riadok->osd3;
+$osz3 = $fir_riadok->osz3;
+$exe3 = $fir_riadok->exe3;
+$prs3 = $fir_riadok->prs3;
+
      }
 //koniec nacitania
 
@@ -881,6 +866,8 @@ form input[type=text] {
 ?>
   function ObnovUI()
   {
+
+<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
    document.formv1.datum.value = '<?php echo "$datum_sk";?>';
    document.formv1.neschop.value = '<?php echo "$neschop";?>';
    document.formv1.vylod1.value = '<?php echo "$vylod1_sk";?>';
@@ -900,6 +887,38 @@ form input[type=text] {
    document.formv1.dni.value = '<?php echo "$dni";?>';
    document.formv1.dnis.value = '<?php echo "$dnis";?>';
    document.formv1.dovod.value = '<?php echo "$dovod";?>';
+<?php                   } ?>
+
+<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
+    document.formv1.por1.value = '<?php echo "$por1";?>';
+    document.formv1.vzv1.value = '<?php echo "$vzv1";?>';
+    document.formv1.vzd1.value = '<?php echo "$vzd1";?>';
+    document.formv1.vzz1.value = '<?php echo "$vzz1";?>';
+    document.formv1.ost1.value = '<?php echo "$ost1";?>';
+    document.formv1.osd1.value = '<?php echo "$osd1";?>';
+    document.formv1.osz1.value = '<?php echo "$osz1";?>';
+    document.formv1.exe1.value = '<?php echo "$exe1";?>';
+    document.formv1.prs1.value = '<?php echo "$prs1";?>';
+    document.formv1.por2.value = '<?php echo "$por2";?>';
+    document.formv1.vzv2.value = '<?php echo "$vzv2";?>';
+    document.formv1.vzd2.value = '<?php echo "$vzd2";?>';
+    document.formv1.vzz2.value = '<?php echo "$vzz2";?>';
+    document.formv1.ost2.value = '<?php echo "$ost2";?>';
+    document.formv1.osd2.value = '<?php echo "$osd2";?>';
+    document.formv1.osz2.value = '<?php echo "$osz2";?>';
+    document.formv1.exe2.value = '<?php echo "$exe2";?>';
+    document.formv1.prs2.value = '<?php echo "$prs2";?>';
+    document.formv1.por3.value = '<?php echo "$por3";?>';
+    document.formv1.vzv3.value = '<?php echo "$vzv3";?>';
+    document.formv1.vzd3.value = '<?php echo "$vzd3";?>';
+    document.formv1.vzz3.value = '<?php echo "$vzz3";?>';
+    document.formv1.ost3.value = '<?php echo "$ost3";?>';
+    document.formv1.osd3.value = '<?php echo "$osd3";?>';
+    document.formv1.osz3.value = '<?php echo "$osz3";?>';
+    document.formv1.exe3.value = '<?php echo "$exe3";?>';
+    document.formv1.prs3.value = '<?php echo "$prs3";?>';
+<?php                   } ?>
+
   }
 <?php
 //koniec uprava
@@ -933,7 +952,7 @@ form input[type=text] {
   }
   function tlacZapoctovy()
   {
-   window.open('zapoctovy_list2014.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>', '_blank');
+   window.open('zapoctovy_list2014.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
 </script>
 </HEAD>
@@ -967,77 +986,145 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="zapoctovy_list2014.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
+<FORM name="formv1" method="post" action="zapoctovy_list2014.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>">
+
+<?php
+$clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $clas5="noactive"; $clas6="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $strana == 3 ) $clas3="active";
+if ( $strana == 4 ) $clas4="active"; if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
+
+$source="../mzdy/zapoctovy_list2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0";
+?>
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">Zr·ûky zo mzdy</a>
+
+
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+
+<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
 
 <div class="wrap-form-background">
 <img src="../dokumenty/mzdy_potvrdenia/zapoctovy_list_v14.jpg"
  alt="tlaËivo Z·poËtov˝ list pre rok 2014 1.strana 174kB" class="form-background">
 
 <!-- v dna -->
-<span class="text-echo" style="top:55px; right:230px;"><?php echo $fir_fmes; ?></span>
+<span class="text-echo" style="top:72px; right:230px;"><?php echo $fir_fmes; ?></span>
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
- style="width:98px; top:52px; left:768px;"/>
+ style="width:98px; top:69px; left:768px;"/>
 <!-- zamestnavatel -->
-<span class="text-echo" style="top:80px; left:44px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:103px; left:44px;"><?php echo "$fir_fuli $fir_fcdm"; ?></span>
-<span class="text-echo" style="top:126px; left:44px;"><?php echo $fir_fmes; ?></span>
+<span class="text-echo" style="top:105px; left:44px;"><?php echo $fir_fnaz; ?></span>
+<span class="text-echo" style="top:128px; left:44px;"><?php echo "$fir_fuli $fir_fcdm"; ?></span>
+<span class="text-echo" style="top:151px; left:44px;"><?php echo $fir_fmes; ?></span>
 
 <!-- zamestnanec -->
-<span class="text-echo" style="top:215px; left:117px;"><?php echo "$titl $meno $prie"; ?></span>
-<span class="text-echo" style="top:215px; left:752px;"><?php echo $dar; ?></span>
-<span class="text-echo" style="top:265px; left:97px;"><?php echo "$uli $cdm, $psc  $mes"; ?></span>
-<span class="text-echo" style="top:316px; left:275px;"><?php echo $dan; ?></span>
-<span class="text-echo" style="top:316px; left:645px;"><?php echo $dav; ?></span>
+<span class="text-echo" style="top:235px; left:117px;"><?php echo "$titl $meno $prie"; ?></span>
+<span class="text-echo" style="top:235px; left:752px;"><?php echo $dar; ?></span>
+<span class="text-echo" style="top:285px; left:97px;"><?php echo "$uli $cdm, $psc  $mes"; ?></span>
+<span class="text-echo" style="top:336px; left:275px;"><?php echo $dan; ?></span>
+<span class="text-echo" style="top:336px; left:645px;"><?php echo $dav; ?></span>
 
 <!-- I.cast -->
-<input type="text" name="neschop" id="neschop" style="width:344px; top:425px; left:310px;"/>
+<input type="text" name="neschop" id="neschop" style="width:344px; top:445px; left:310px;"/>
 <input type="text" name="vylod1" id="vylod1" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:558px; left:275px;"/>
+ style="width:80px; top:582px; left:275px;"/>
 <input type="text" name="vyldo1" id="vyldo1" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:558px; left:435px;"/>
-<span class="text-echo" style="width:157px; top:562px; left:559px; text-align:center;"><?php echo $vyldni1; ?></span>
+ style="width:80px; top:582px; left:435px;"/>
+<span class="text-echo" style="width:157px; top:582px; left:559px; text-align:center;"><?php echo $vyldni1; ?></span>
+
 <input type="text" name="vylod2" id="vylod2" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:583px; left:275px;"/>
+ style="width:80px; top:607px; left:275px;"/>
 <input type="text" name="vyldo2" id="vyldo2" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:583px; left:435px;"/>
-<span class="text-echo" style="width:157px; top:587px; left:559px; text-align:center;"><?php echo $vyldni2; ?></span>
+ style="width:80px; top:607px; left:435px;"/>
+<span class="text-echo" style="width:157px; top:607px; left:559px; text-align:center;"><?php echo $vyldni2; ?></span>
+
 <input type="text" name="vylod3" id="vylod3" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:608px; left:275px;"/>
-<input type="text" name="vyldo3" id="vyldo3" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:608px; left:435px;"/>
-<span class="text-echo" style="width:157px; top:612px; left:559px; text-align:center;"><?php echo $vyldni3; ?></span>
-<input type="text" name="vylod4" id="vylod4" onkeyup="CiarkaNaBodku(this);"
  style="width:80px; top:632px; left:275px;"/>
-<input type="text" name="vyldo4" id="vyldo4" onkeyup="CiarkaNaBodku(this);"
+<input type="text" name="vyldo3" id="vyldo3" onkeyup="CiarkaNaBodku(this);"
  style="width:80px; top:632px; left:435px;"/>
-<span class="text-echo" style="width:157px; top:636px; left:559px; text-align:center;"><?php echo $vyldni4; ?></span>
+<span class="text-echo" style="width:157px; top:632px; left:559px; text-align:center;"><?php echo $vyldni3; ?></span>
+
+<input type="text" name="vylod4" id="vylod4" onkeyup="CiarkaNaBodku(this);"
+ style="width:80px; top:656px; left:275px;"/>
+<input type="text" name="vyldo4" id="vyldo4" onkeyup="CiarkaNaBodku(this);"
+ style="width:80px; top:656px; left:435px;"/>
+<span class="text-echo" style="width:157px; top:656px; left:559px; text-align:center;"><?php echo $vyldni4; ?></span>
+
 <input type="text" name="vylod5" id="vylod5" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:657px; left:275px;"/>
-<input type="text" name="vyldo5" id="vyldo5" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:657px; left:435px;"/>
-<span class="text-echo" style="width:157px; top:661px; left:559px; text-align:center;"><?php echo $vyldni5; ?></span>
-<input type="text" name="vyl2od1" id="vyl2od1" onkeyup="CiarkaNaBodku(this);"
  style="width:80px; top:681px; left:275px;"/>
-<input type="text" name="vyl2do1" id="vyl2do1" onkeyup="CiarkaNaBodku(this);"
+<input type="text" name="vyldo5" id="vyldo5" onkeyup="CiarkaNaBodku(this);"
  style="width:80px; top:681px; left:435px;"/>
-<span class="text-echo" style="width:157px; top:685px; left:559px; text-align:center;"><?php echo $vyl2dni1; ?></span>
-<span class="text-echo" style="top:715px; left:240px; font-size:12px;">œalöie obdobia mÙûete nahraù cez pozn·mku (niûie uveden·).</span>
+<span class="text-echo" style="width:157px; top:681px; left:559px; text-align:center;"><?php echo $vyldni5; ?></span>
+
+<input type="text" name="vyl2od1" id="vyl2od1" onkeyup="CiarkaNaBodku(this);"
+ style="width:80px; top:705px; left:275px;"/>
+<input type="text" name="vyl2do1" id="vyl2do1" onkeyup="CiarkaNaBodku(this);"
+ style="width:80px; top:705px; left:435px;"/>
+<span class="text-echo" style="width:157px; top:705px; left:559px; text-align:center;"><?php echo $vyl2dni1; ?></span>
+
+<span class="text-echo" style="top:735px; left:240px; font-size:12px;">œalöie obdobia mÙûete nahraù cez pozn·mku (niûie uveden·).</span>
 
 <!-- II.cast -->
-<input type="text" name="rok" id="rok" style="width:92px; top:803px; left:572px;"/>
-<input type="text" name="dni" id="dni" style="width:92px; top:803px; left:725px;"/>
+<input type="text" name="rok" id="rok" style="width:92px; top:823px; left:572px;"/>
+<input type="text" name="dni" id="dni" style="width:92px; top:823px; left:725px;"/>
 <!-- slovami -->
-<input type="text" name="roks" id="roks" style="width:150px; top:854px; left:108px;"/>
-<input type="text" name="dnis" id="dnis" style="width:337px; top:854px; left:270px;"/>
+<input type="text" name="roks" id="roks" style="width:150px; top:874px; left:108px;"/>
+<input type="text" name="dnis" id="dnis" style="width:337px; top:874px; left:270px;"/>
 <!-- dovod -->
-<input type="text" name="dovod" id="dovod" style="width:860px; top:902px; left:43px;"/>
+<input type="text" name="dovod" id="dovod" style="width:860px; top:922px; left:43px;"/>
 
 <!-- poznamka -->
-<label for="str2" style="position:absolute; top:955px; left:43px; font-size:12px; font-weight:bold;">Pozn·mka</label>
+<label for="str2" style="position:absolute; top:975px; left:43px; font-size:12px; font-weight:bold;">Pozn·mka</label>
 <textarea name="str2" id="str2" style="position:absolute; top:970px; left:43px; width:500px; height:180px;"><?php echo $str2; ?></textarea>
 
 </div> <!-- koniec wrap-form-background -->
+
+<?php                                        } ?>
+
+<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
+
+<div class="wrap-form-background">
+<img src="../dokumenty/mzdy_potvrdenia/zapoctovy_list_v14_str2.jpg"
+ alt="tlaËivo Z·poËtov˝ list pre rok 2014 2.strana 174kB" class="form-background">
+
+
+<input type="text" name="por1" id="por1" style="width:20px; top:430px; left:40px;" />
+<input type="text" name="vzv1" id="vzv1" style="width:50px; top:430px; left:72px;" />
+<input type="text" name="vzd1" id="vzd1" style="width:50px; top:430px; left:134px;" />
+<input type="text" name="vzz1" id="vzz1" style="width:50px; top:430px; left:196px;" />
+<input type="text" name="osd1" id="osd1" style="width:55px; top:430px; left:258px;" />
+<input type="text" name="osz1" id="osz1" style="width:55px; top:430px; left:327px;" />
+<input type="text" name="ost1" id="ost1" style="width:55px; top:430px; left:392px;" />
+<input type="text" name="exe1" id="exe1" style="width:200px; top:430px; left:464px;" />
+<input type="text" name="prs1" id="prs1" style="width:210px; top:430px; left:677px;" />
+
+
+<input type="text" name="por2" id="por2" style="width:20px; top:468px; left:40px;" />
+<input type="text" name="vzv2" id="vzv2" style="width:50px; top:468px; left:72px;" />
+<input type="text" name="vzd2" id="vzd2" style="width:50px; top:468px; left:134px;" />
+<input type="text" name="vzz2" id="vzz2" style="width:50px; top:468px; left:196px;" />
+<input type="text" name="osd2" id="osd2" style="width:55px; top:468px; left:258px;" />
+<input type="text" name="osz2" id="osz2" style="width:55px; top:468px; left:327px;" />
+<input type="text" name="ost2" id="ost2" style="width:55px; top:468px; left:392px;" />
+<input type="text" name="exe2" id="exe2" style="width:200px; top:468px; left:464px;" />
+<input type="text" name="prs2" id="prs2" style="width:210px; top:468px; left:677px;" />
+
+
+<input type="text" name="por3" id="por3" style="width:20px; top:516px; left:40px;" />
+<input type="text" name="vzv3" id="vzv3" style="width:50px; top:516px; left:72px;" />
+<input type="text" name="vzd3" id="vzd3" style="width:50px; top:516px; left:134px;" />
+<input type="text" name="vzz3" id="vzz3" style="width:50px; top:516px; left:196px;" />
+<input type="text" name="osd3" id="osd3" style="width:55px; top:516px; left:258px;" />
+<input type="text" name="osz3" id="osz3" style="width:55px; top:516px; left:327px;" />
+<input type="text" name="ost3" id="ost3" style="width:55px; top:516px; left:392px;" />
+<input type="text" name="exe3" id="exe3" style="width:200px; top:516px; left:464px;" />
+<input type="text" name="prs3" id="prs3" style="width:210px; top:516px; left:677px;" />
+
+
+</div> <!-- koniec wrap-form-background -->
+
+<?php                                        } ?>
+
 </FORM>
 </div> <!-- koniec #content -->
 <?php
@@ -1051,7 +1138,17 @@ if ( $copern == 20 )
 /////////////////////////////////////////////////VYTLAC ZAPOCTOVY
 if ( $copern == 10 )
 {
-if ( File_Exists("../tmp/zapoctovy.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/zapoctovy.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("dHis", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/zapoc_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/zapoc_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -1084,6 +1181,9 @@ $hlavicka=mysql_fetch_object($sql);
   $Dozam_np = substr($pole[1],0,1);
 
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+
+//strana 1
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
@@ -1200,14 +1300,121 @@ $pdf->Cell(130,5,"","$rmc1",0,"R");$pdf->Cell(0,8,"OdtlaËok peËiatky a podpis","
 $pdf->Cell(130,5,"","$rmc1",0,"R");$pdf->Cell(0,3,"zamestn·vateæa","$rmc1",1,"C");
 
 
+//koniec strana 1
+
+//strana 2
+//druha strana len ak druhastranan=1
+if( $hlavicka->por1 > 0 ) { $druhastrana=1; }
+
+if( $druhastrana == 1 )
+  {
+
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+
+$pdf->SetLeftMargin(8); 
+$pdf->SetTopMargin(15);
+
+if (File_Exists ('../dokumenty/mzdy_potvrdenia/zapoctovy_list_v14_str2.jpg') AND $i == 0 )
+{
+$pdf->Image('../dokumenty/mzdy_potvrdenia/zapoctovy_list_v14_str2.jpg',9,20,196,210); 
+}
+
+$pdf->SetY(10);
+$pdf->SetFont('arial','',9);
+$obdobie=$kli_vrok;
+$obdobie1b=$kli_vrok-1;
+$obdobie2b=$kli_vrok-2;
+$obdobie3b=$kli_vrok-3;
+$obdobie4b=$kli_vrok-4;
+
+$pdf->SetFont('arial','',7);
+
+$por1=$hlavicka->por1;
+if( $por1 == 0 ) $por1="";
+$vzv1=$hlavicka->vzv1;
+if( $vzv1 == 0 ) $vzv1="";
+$vzd1=$hlavicka->vzd1;
+if( $vzd1 == 0 ) $vzd1="";
+$vzz1=$hlavicka->vzz1;
+if( $vzz1 == 0 ) $vzz1="";
+
+$ost1=$hlavicka->ost1;
+if( $ost1 == 0 ) $ost1="";
+$osd1=$hlavicka->osd1;
+if( $osd1 == 0 ) $osd1="";
+$osz1=$hlavicka->osz1;
+if( $osz1 == 0 ) $osz1="";
+
+$pdf->Cell(190,70,"                          ","0",1,"L");
+$pdf->Cell(10,4,"$por1 ","0",0,"R");$pdf->Cell(13,4,"$vzv1","0",0,"R");$pdf->Cell(13,4,"$vzd1","0",0,"R");$pdf->Cell(14,4,"$vzz1","0",0,"R");
+$pdf->Cell(14,4,"$osd1","0",0,"R");$pdf->Cell(14,4,"$osz1","0",0,"R");$pdf->Cell(15,4,"$ost1","0",0,"R");
+$pdf->Cell(46,4,"$hlavicka->exe1","0",0,"L");$pdf->Cell(40,4,"$hlavicka->prs1","0",0,"L");
+$pdf->Cell(5,4," ","0",1,"L");
+
+
+$por2=$hlavicka->por2;
+if( $por2 == 0 ) $por2="";
+$vzv2=$hlavicka->vzv2;
+if( $vzv2 == 0 ) $vzv2="";
+$vzd2=$hlavicka->vzd2;
+if( $vzd2 == 0 ) $vzd2="";
+$vzz2=$hlavicka->vzz2;
+if( $vzz2 == 0 ) $vzz2="";
+
+$ost2=$hlavicka->ost2;
+if( $ost2 == 0 ) $ost2="";
+$osd2=$hlavicka->osd2;
+if( $osd2 == 0 ) $osd2="";
+$osz2=$hlavicka->osz2;
+if( $osz2 == 0 ) $osz2="";
+
+$pdf->Cell(190,3,"                          ","0",1,"L");
+$pdf->Cell(10,4,"$por2 ","0",0,"R");$pdf->Cell(13,4,"$vzv2","0",0,"R");$pdf->Cell(13,4,"$vzd2","0",0,"R");$pdf->Cell(14,4,"$vzz2","0",0,"R");
+$pdf->Cell(14,4,"$osd2","0",0,"R");$pdf->Cell(14,4,"$osz2","0",0,"R");$pdf->Cell(15,4,"$ost2","0",0,"R");
+$pdf->Cell(46,4,"$hlavicka->exe2","0",0,"L");$pdf->Cell(40,4,"$hlavicka->prs2","0",0,"L");
+$pdf->Cell(5,4," ","0",1,"L");
+
+
+$por3=$hlavicka->por3;
+if( $por3 == 0 ) $por3="";
+$vzv3=$hlavicka->vzv3;
+if( $vzv3 == 0 ) $vzv3="";
+$vzd3=$hlavicka->vzd3;
+if( $vzd3 == 0 ) $vzd3="";
+$vzz3=$hlavicka->vzz3;
+if( $vzz3 == 0 ) $vzz3="";
+
+$ost3=$hlavicka->ost3;
+if( $ost3 == 0 ) $ost3="";
+$osd3=$hlavicka->osd3;
+if( $osd3 == 0 ) $osd3="";
+$osz3=$hlavicka->osz3;
+if( $osz3 == 0 ) $osz3="";
+
+$pdf->Cell(190,3,"                          ","0",1,"L");
+$pdf->Cell(10,4,"$por3 ","0",0,"R");$pdf->Cell(13,4,"$vzv3","0",0,"R");$pdf->Cell(13,4,"$vzd3","0",0,"R");$pdf->Cell(14,4,"$vzz3","0",0,"R");
+$pdf->Cell(14,4,"$osd3","0",0,"R");$pdf->Cell(14,4,"$osz3","0",0,"R");$pdf->Cell(15,4,"$ost3","0",0,"R");
+$pdf->Cell(46,4,"$hlavicka->exe3","0",0,"L");$pdf->Cell(40,4,"$hlavicka->prs3","0",0,"L");
+$pdf->Cell(5,4," ","0",1,"L");
+
+
+
+
+  }
+//koniec ak druhastrana=1
+
+
+
 }
 $i = $i + 1;
   }
-$pdf->Output("../tmp/zapoctovy.$kli_uzid.pdf");
+
+$pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/zapoctovy.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php
