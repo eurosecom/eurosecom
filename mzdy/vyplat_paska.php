@@ -1922,12 +1922,13 @@ $i=0;
 {
 $rtov=mysql_fetch_object($tov);
 
-$zdrv=0;
+$zdrv=0; $zpno=0;
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE oc = $rtov->hlvn ");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
   $zdrv=$riaddok->zdrv;
+  $zpno=1*$riaddok->zpno;
   }
 
 if( $zdrv >= 2400 AND $zdrv <= 2499 )
@@ -1949,6 +1950,18 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdsubodv$kli_uzid".
 " des6=($fir_zp*zfir)/100, des6=des6-0.005, des2=des6, ofin=des2  ".
 " WHERE hlvn > 0 ";
 $oznac = mysql_query("$sqtoz");
+
+if( $zpno == 1 )
+    {
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdsubodv$kli_uzid".
+" SET ".
+" des6=($zam_zpn*zzam)/100, des6=des6-0.005, des2=des6, ozan=des2, ".
+" des6=($fir_zpn*zfir)/100, des6=des6-0.005, des2=des6, ofin=des2  ".
+" WHERE hlvn > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+    }
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdsubodv$kli_uzid SET ozax=ozan-ozam, ofix=ofin-ofir WHERE hlvn > 0 ";
 $oznac = mysql_query("$sqtoz");
