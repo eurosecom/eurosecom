@@ -53,7 +53,9 @@ $copern=1;
   }
 
 $mzdkun="mzdkun";
-if( $_SESSION['newzam'] == 1 ) { $mzdkun="mzdkunnewzam"; }
+$druhmzdkun=0;
+if( $_SESSION['newzam'] == 1 ) { $mzdkun="mzdkunnewzam"; $druhmzdkun=1; }
+$mzdkunnewzam="mzdkunnewzam";
 
 $tlacitkoenter=0;
 //if( $_SESSION['nieie'] == 1 AND $_SESSION['chrome'] == 0 AND $_SESSION['safari'] == 0 ) { $tlacitkoenter=1; }
@@ -165,11 +167,34 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY 
   $new_oc=$riaddok->oc+1;
   }
 
-if( $new_oc == 0 ) $new_oc=1;
+$noakt_oc=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkunnewzam WHERE oc > 0 ORDER BY oc DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $noakt_oc=$riaddok->oc+1;
+  }
+
+if( $new_oc == 0 ) { $new_oc=1; }
+if( $noakt_oc > $new_oc ) { $new_oc=$noakt_oc; }
 
 $uloztt = "INSERT INTO F$kli_vxcf"."_$mzdkun ( oc ) VALUES ( '$new_oc' ); ";  
 //echo $uloztt;
 $ulozene = mysql_query("$uloztt"); 
+
+
+if( $druhmzdkun == 0 ) 
+  { 
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_mzdkunnewzam SELECT * FROM F".$kli_vxcf."_mzdkun WHERE oc < 0 ";
+$vytvor = mysql_query("$vsql");
+$sql = "ALTER TABLE F".$kli_vxcf."_mzdkunnewzam MODIFY oc int(7) PRIMARY KEY auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$uloztt = "INSERT INTO F$kli_vxcf"."_$mzdkunnewzam ( oc ) VALUES ( '$new_oc' ); ";  
+$ulozene = mysql_query("$uloztt"); 
+
+  }
 
 $copern=8;
 $cislo_oc=$new_oc;
@@ -532,6 +557,22 @@ $cislo_oc = strip_tags($_REQUEST['cislo_oc']);
   $dad_sql = SqlDatum($h_dad);
   $dvp_sql = SqlDatum($h_dvp);
   $dsp_sql = SqlDatum($h_dsp);
+
+$upravtt1 = "UPDATE F$kli_vxcf"."_$mzdkunnewzam SET  meno='$h_meno', titl='$h_titl',".
+" prie='$h_prie', rodn='$h_rodn', prbd='$h_prbd', zuli='$h_zuli', zpsc='$h_zpsc', zmes='$h_zmes', ztel='$h_ztel',".
+" zema='$h_zema', rdc='$h_rdc', rdk='$h_rdk', zcdm='$h_zcdm', dar='$dar_sql',".
+" mnr='$h_mnr', cop='$h_cop', dan='$dan_sql', dav='$dav_sql', pom='$h_pom',".
+" uva='$h_uva', uvazn='$h_uvazn', kat='$h_kat', stz='$h_stz', zkz='$h_zkz', pom='$h_pom',".
+" zdrv='$h_zdrv', dvp='$dvp_sql', zpno='$h_zpno', zpnie='$h_zpnie',".
+" znah='$h_znah', nrk='$h_nrk', nev='$h_nev', crp='$h_crp', znem='$h_znem',".
+" cdss='$h_cdss', dsp='$dsp_sql', spno='$h_spno', spnie='$h_spnie', deti_sp='$h_deti_sp',".
+" doch='$h_doch', docv='$h_docv', dad='$dad_sql', dvy='$h_dvy',".
+" deti_dn='$h_deti_dn', ziv_dn='$h_ziv_dn', zrz_dn='$h_zrz_dn',".
+" sz0='$h_sz0', sz1='$h_sz1', sz2='$h_sz2', sz3='$h_sz3', sz4='$h_sz4',".
+" wms='$h_wms', vban='$h_vban', roh='$h_roh'  WHERE oc='$cislo_oc'";
+//echo $upravtt1;
+
+$upraven1 = mysql_query("$upravtt1"); 
 
 $upravttt = "UPDATE F$kli_vxcf"."_$mzdkun SET  meno='$h_meno', titl='$h_titl',".
 " prie='$h_prie', rodn='$h_rodn', prbd='$h_prbd', zuli='$h_zuli', zpsc='$h_zpsc', zmes='$h_zmes', ztel='$h_ztel',".
