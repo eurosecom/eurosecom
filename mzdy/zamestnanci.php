@@ -153,6 +153,48 @@ $h_vsy = strip_tags($_REQUEST['h_vsy']);
 $h_ksy = strip_tags($_REQUEST['h_ksy']);
 $h_ssy = strip_tags($_REQUEST['h_ssy']);
 
+
+//presun osc z mzdkunnewzam do mzdkun
+    if ( $copern == 55001 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Pridaù zamestnanca osË <?php echo $cislo_oc;?> \r do zoznamu aktÌvnych zamestnancov ?") )
+         { location.href='zamestnanci.php?sys=<?php echo $sys; ?>&copern=9998&page=1&drupoh=1'  }
+else
+         { location.href='zamestnanci.php?sys=<?php echo $sys; ?>&copern=55002&page=1&cislo_oc=<?php echo $cislo_oc;?>'  }
+</script>
+<?php
+    }
+    if ( $copern == 55002 )
+    {
+$jeoc=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ORDER BY oc DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $jeoc=1*$riaddok->oc;
+  }
+
+if( $jeoc == 0 )
+    {
+
+echo "Pres˙vam osobnÈ ËÌslo $cislo_oc.";
+$sqlttt = "INSERT INTO F$kli_vxcf"."_mzdkun SELECT * FROM F$kli_vxcf"."_mzdkunnewzam WHERE oc = $cislo_oc ";
+$sqldok = mysql_query("$sqlttt");
+
+    }
+
+
+?>
+<script type="text/javascript">
+  var okno = window.open("zamestnanci.php?sys=<?php echo $sys; ?>&copern=9999&drupoh=1&page=1","_self");
+</script>
+<?php
+exit;
+    }
+//koniec presun osc z mzdkunnewzam do mzdkun
+
 //novy zamestnanec
 $novy=0;
     if ( $copern == 5 )
@@ -1865,7 +1907,7 @@ $konc =($pols*($page-1))+($pols-1);
 <tr>
 <td>EuroSecom  -  Zoznam zamestnancov
 <?php if( $_SESSION['newzam'] == 1 ) { ?>
- - novÌ neaktÌvni zamestnanci
+ - novÌ a neaktÌvni zamestnanci
 <?php                                } ?>
 <?php
   if ( $copern == 5 ) echo "- nov· poloûka";
@@ -2019,7 +2061,13 @@ if ( $kli_uzall > 3500 )
 $riadok=mysql_fetch_object($sql);
 ?>
 <tr>
-<td class="fmenu" width="10%" ><?php echo $riadok->oc;?></td>
+<td class="fmenu" width="10%" ><?php echo $riadok->oc;?>
+<?php if( $_SESSION['newzam'] == 1 ) { ?>
+<a href="#" onClick="window.open('../mzdy/zamestnanci.php?copern=55001&drupoh=1&page=1&cislo_oc=<?php echo $riadok->oc;?>','_self')">
+<img src='../obr/prev.png' width=15 height=15 border=0 title='Pridaù zamestnanca osË <?php echo $riadok->oc;?> do zoznamu aktÌvnych zamestnancov' ></a>
+<?php                                } ?>
+
+</td>
 <td class="fmenu" width="30%" >
 <a href="#" onClick="window.open('zpdavka601.php?sys=<?php echo $sys; ?>&copern=1&cislo_oc=<?php echo $riadok->oc;?>','_blank','<?php echo $tlcuwin; ?>')">
 <img src='../obr/export.png' width=15 height=15 border=0 title='Zmeny ZP, SP elektronicky' ></a>
@@ -2058,7 +2106,7 @@ $i = $i + 1;
  <img src='../obr/vlozit.png' onClick="window.open('zamestnanci.php?copern=9999&drupoh=1&page=1','_self')" width=12 height=12 border=0 title="Sp‰ù na AktÌvnych zamestnancov">
 <?php                                } ?>
 <?php if( $_SESSION['newzam'] == 0 ) { ?>
- <img src='../obr/vlozit.png' onClick="window.open('zamestnanci.php?copern=9998&drupoh=1&page=1','_self')" width=12 height=12 border=0 title="NovÌ zamestnanci, eöte neaktÌvni len prihl·senÌ do SP">
+ <img src='../obr/vlozit.png' onClick="window.open('zamestnanci.php?copern=9998&drupoh=1&page=1','_self')" width=12 height=12 border=0 title="NovÌ zamestnanci a neaktÌvni zamestnanci len prihl·senÌ do SP">
 <?php                                } ?>
 </td>
 </tr>
