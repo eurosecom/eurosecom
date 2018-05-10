@@ -28,6 +28,7 @@ $sDat = include("../funkcie/dat_sk_us.php");
 
 $lenvzs = 1*$_REQUEST['lenvzs'];
 $lensuv = 1*$_REQUEST['lensuv'];
+$jazyk=$_REQUEST['jazyk'];
 
 //konecne odstranili tie kontrolne cisla
 
@@ -1307,7 +1308,7 @@ $h_drp = $_REQUEST['h_drp'];
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/uzavierka_pod2014.php?copern=10&drupoh=1&tis=<?php echo $tis; ?>&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=1&lenvzs=<?php echo $lenvzs; ?>&lensuv=<?php echo $lensuv; ?>', '_self' )
+window.open('../ucto/uzavierka_pod2014.php?copern=10&drupoh=1&jazyk=<?php echo $jazyk; ?>&tis=<?php echo $tis; ?>&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=1&lenvzs=<?php echo $lenvzs; ?>&lensuv=<?php echo $lensuv; ?>', '_self' )
 
 
 </script>
@@ -1326,7 +1327,7 @@ $h_drp = $_REQUEST['h_drp'];
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/uzavierka_pod2014.php?copern=10&drupoh=1&tis=<?php echo $tis; ?>&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=0&lenvzs=<?php echo $lenvzs; ?>&lensuv=<?php echo $lensuv; ?>', '_self' )
+window.open('../ucto/uzavierka_pod2014.php?copern=10&drupoh=1&jazyk=<?php echo $jazyk; ?>&tis=<?php echo $tis; ?>&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=0&lenvzs=<?php echo $lenvzs; ?>&lensuv=<?php echo $lensuv; ?>', '_self' )
 
 
 </script>

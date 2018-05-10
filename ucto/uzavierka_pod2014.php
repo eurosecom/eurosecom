@@ -73,6 +73,8 @@ $tlacvzs=1;
 if ( $lensuv == 0 ) { $tlacsuv=0; }
 if ( $lenvzs == 0 ) { $tlacvzs=0; }
 
+$jazyk=$_REQUEST['jazyk'];
+if( $jazyk == "" ) { $jazyk="sk"; }
 
 //strana 1
 $pdf->AddPage();
@@ -81,7 +83,8 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str1.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str1.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str1.jpg',0,0,210,297); }
 }
 
 $sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
@@ -1381,7 +1384,8 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str2.jpg') )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str2.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str2.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str2.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -2548,7 +2552,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str3.jpg') )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str3.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str3.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str3.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -3715,7 +3720,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str4.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str4.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str4.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str4.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -4881,7 +4887,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str5.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str5.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str5.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str5.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -6048,7 +6055,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str6.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str6.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str6.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str6.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -7215,7 +7223,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str7.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str7.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str7.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str7.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -8354,7 +8363,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str8.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str8.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str8.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str8.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -9549,7 +9559,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str9.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str9.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str9.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str9.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -10921,7 +10932,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str10.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str10.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str10.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str10.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -12075,7 +12087,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str11.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str11.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str11.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str11.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
@@ -13229,7 +13242,8 @@ $pdf->SetTopMargin(10);
 $pdf->SetFont('arial','',12);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str12.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str12.jpg',0,0,210,297);
+if( $jazyk == "sk" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str12.jpg',0,0,210,297); }
+if( $jazyk == "eng" ) { $pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14eng_str12.jpg',0,0,210,297); }
 }
 $pdf->SetY(10);
 
