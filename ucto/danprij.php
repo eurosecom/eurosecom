@@ -330,7 +330,9 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
    var h_zos = document.forms.formuzpod.h_zos.value;
    var h_sch = document.forms.formuzpod.h_sch.value;
    var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
+   var jazyk = "sk"
+   if( document.forms.formuzpod.eng.checked ) { jazyk = "eng"; }
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&jazyk=' + jazyk + '&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function KompletPOD2014len1()
@@ -346,7 +348,9 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
    var h_zos = document.forms.formuzpod.h_zos.value;
    var h_sch = document.forms.formuzpod.h_sch.value;
    var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
+   var jazyk = "sk"
+   if( document.forms.formuzpod.eng.checked ) { jazyk = "eng"; }
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&jazyk=' + jazyk + '&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function KompletPOD2014info()
@@ -424,6 +428,10 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
  <label for="h_sch">Schválená:</label>
  <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
         maxlenght="10" value=""/>
+</div>
+<div>
+ <img src='../obr/flag_gb.png' style='width:20px; height:28px;' title='Ak chcete anglickú verziu Uzávierky, zaškrtnite checkbox a potom kliknite zobrazi v PDF'>
+ <input type="checkbox" name="eng" value="1" style='width:20px; height:28px;' title='Ak chcete anglickú verziu Uzávierky, zaškrtnite checkbox a potom kliknite zobrazi v PDF' />
 </div>
 </div>
 <a href="#" onclick="KompletPOD2014info();" title="Vysvetlivky k úètovnej závierke"

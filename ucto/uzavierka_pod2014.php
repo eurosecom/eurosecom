@@ -73,7 +73,12 @@ $tlacvzs=1;
 if ( $lensuv == 0 ) { $tlacsuv=0; }
 if ( $lenvzs == 0 ) { $tlacvzs=0; }
 
-$jazyk=$_REQUEST['jazyk'];
+$jazyk="";
+$jazykx=$_REQUEST['jazyk'];
+if( $_SERVER['SERVER_NAME'] == "www.euroalchem.sk" AND $jazykx == "eng" ) { $jazyk="eng"; }
+if( $_SERVER['SERVER_NAME'] == "www.ala.sk" AND $jazykx == "eng" ) { $jazyk="eng"; }
+if( $_SERVER['SERVER_NAME'] == "www.edcom.sk" AND $jazykx == "eng" ) { $jazyk="eng"; }
+if( $_SERVER['SERVER_NAME'] == "localhost" AND $jazykx == "eng" ) { $jazyk="eng"; }
 if( $jazyk == "" ) { $jazyk="sk"; }
 
 //strana 1
