@@ -78,6 +78,10 @@ $priemer = include("../sklad/skl_rekonstrukcia.php");
      }
 }
 
+if( $zmtz == 1 )
+  {
+$cit_fir = include("../cis/citaj_fir.php");
+  }
 
 //zmena cisla objednavky
 if( $copern == 44401 )
@@ -316,13 +320,14 @@ $copern=1;
 }
 //koniezmazat polozku z obj docasne
 
-//spracovat obj
+//spracovat obj do fakt
 if( $copern == 8001 )
 {
 $plux = 1*$_REQUEST['plux'];
+$textspr=" do fakt˙ry ";
 ?>
 <script type="text/javascript">
-if( !confirm ("Chcete spracovaù objedn·vku Ë.<?php echo $plux; ?> ?") )
+if( !confirm ("Chcete spracovaù objedn·vku Ë.<?php echo $plux; ?> <?php echo $textspr; ?> ?") )
          {   }
 else
   var okno = window.open("../faktury/vstf_u.php?copern=5&shopdok=1&drupoh=1&page=1sysx=UCT&rozuct=ANO&hladaj_uce=<?php echo $hladaj_uce;?>&cislo_dok=<?php echo $plux; ?>&ttx=1&zprac=1","_self");
@@ -333,7 +338,28 @@ $docasnemazanie=1;
 $html=1;
 $copern=1;
 }
-//koniec spracovat obj
+//koniec spracovat obj do fakt
+
+//spracovat obj do dod
+if( $copern == 9001 )
+{
+$plux = 1*$_REQUEST['plux'];
+$dodod = 1*$_REQUEST['dodod'];
+$textspr=" do dodacieho listu "; 
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete spracovaù objedn·vku Ë.<?php echo $plux; ?> <?php echo $textspr; ?> ?") )
+         {   }
+else
+  var okno = window.open("../eshop/spracuj_objdod.php?copern=2&hladaj_uce=88801&drupoh=11&cislo_dok=<?php echo $plux; ?>&dodaneobj=<?php echo $dodaneobj; ?>&lensklad=<?php echo $lensklad; ?>&zprac=<?php echo $zprac; ?>","_self");
+</script>
+<?php
+$cislo_dok=$plux;
+$docasnemazanie=1;
+$html=1;
+$copern=1;
+}
+//koniec spracovat obj do dod
 
 //spracovat obj len na sklade
 if( $copern == 8901 )
@@ -466,6 +492,15 @@ function SpracujOBJ(plu)
 var plux = plu;
 
 window.open('obj_stav.php?copern=8001&drupoh=1&page=1&plux='+ plux + '&ffd=0&zmtz=1',
+ '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function SpracujOBJdod(plu)
+                {
+var plux = plu;
+
+window.open('obj_stav.php?copern=9001&drupoh=1&page=1&plux='+ plux + '&ffd=0&zmtz=1&dodod=1',
  '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
 
                 }
@@ -1289,6 +1324,13 @@ if( $j > 30 AND $html == 0 ) $j=0;
 <a href="#" onClick="SpracujOBJ(<?php echo $riadok->xdok; ?>);">
 all <img src='../obr/ok.png' width=20 height=20 border=0 title='Spracovaù cel˙ objedn·vku Ë.<?php echo $riadok->xdok; ?> do Fakt˙ry' ></a>
 <?php                    } ?>
+
+
+<?php if( $vseobj == 0 AND $somvprirskl == 0 AND $fir_fico == 46614478 ) { ?>
+&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#" onClick="SpracujOBJdod(<?php echo $riadok->xdok; ?>);">
+ddl <img src='../obr/prev.png' width=20 height=20 border=0 title='Spracovaù cel˙ objedn·vku Ë.<?php echo $riadok->xdok; ?> do Dodacieho listu' ></a>
+<?php                    } ?>
+
 <?php if( $vseobj == 1 AND $vsezaico == 1 ) { ?>
 <?php $xico99=999000000000+$icoxvse; ?>
 <a href="#" onClick="SpracujOBJico(<?php echo $xico99; ?>);">
