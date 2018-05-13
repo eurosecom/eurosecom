@@ -2856,6 +2856,13 @@ document.formv1.h_vban.checked = "checked";
 ?>
 </td>
 
+<td class="fmenu" >
+<?php if( $zana == 0 )    { ?>
+<a href="#" onClick="window.open('povinne_zrazky.php?copern=1&drupoh=1&cislo_oc=<?php echo $cislo_oc;?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/import.png' width=20 height=20 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Povinné zrážky zo mzdy</a>
+<?php                     } ?>
+</td>
+
 </tr>
 <tr></tr>
 

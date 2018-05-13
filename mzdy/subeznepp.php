@@ -439,8 +439,8 @@ div.alert-warning {
    document.formv1.h_sub1.value = '<?php echo "$h_sub1";?>';
    document.formv1.h_sub2.value = '<?php echo "$h_sub2";?>';
    document.formv1.uloz.disabled = true;
-   document.forms.formv1.h_uce.focus();
-   document.forms.formv1.h_uce.select();
+   document.forms.formv1.h_sub1.focus();
+   document.forms.formv1.h_sub1.select();
 <?php                                                         } ?>
   }
 
