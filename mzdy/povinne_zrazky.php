@@ -96,7 +96,7 @@ if ( $copern == 9001 )
 $cislo_cpl = strip_tags($_REQUEST['cislo_cpl']);
 
 $cstmx=0;
-$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcsum$kli_uzid WHERE oc = $cislo_oc  ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcsum$kli_uzid WHERE oc = $cislo_oc AND ume = $kli_vume ";
 //echo $sqltt;
 $sql = mysql_query("$sqltt"); 
   if (@$zaznam=mysql_data_seek($sql,0))
