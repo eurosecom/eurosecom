@@ -76,7 +76,19 @@ uctmzd;
 $sql = "CREATE TABLE F".$kli_vxcf."_".$uctsys.$sqlt;
 $ulozene = mysql_query("$sql");
 
-
+$sql = "SELECT zosr FROM F".$kli_vxcf."_".$uctsys;
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sqlfir = "ALTER TABLE F".$kli_vxcf."_".$uctsys." ADD npcr DECIMAL(10,2) DEFAULT 0 AFTER des2 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F".$kli_vxcf."_".$uctsys." ADD splr DECIMAL(10,2) DEFAULT 0 AFTER des2 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F".$kli_vxcf."_".$uctsys." ADD mmes DECIMAL(10,2) DEFAULT 0 AFTER des2 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F".$kli_vxcf."_".$uctsys." ADD zosr DECIMAL(10,2) DEFAULT 0 AFTER des2 ";
+$sqldok = mysql_query("$sqlfir");
+}
 
 //vymazanie 
 if ( $copern == 316 )
@@ -114,7 +126,6 @@ if ( $copern == 315 AND $uprav != 1 AND $drupoh == 1  )
   $h_hlvn = $_REQUEST['h_hlvn'];
   $dmn = $_REQUEST['dmn'];
   $iban = $_REQUEST['iban'];
-  $celk = $_REQUEST['celk'];
 
   $druh = $_REQUEST['druh'];
   $cstm = $_REQUEST['cstm'];
@@ -129,13 +140,21 @@ if ( $copern == 315 AND $uprav != 1 AND $drupoh == 1  )
   $pctre = $_REQUEST['pctre'];
   $zrazk = $_REQUEST['zrazk'];
 
+  $mmes = $_REQUEST['mmes'];
+  $celk = $_REQUEST['celk'];
+  $npcr = $_REQUEST['npcr'];
+  $splr = $_REQUEST['splr'];
+  $zosr = $_REQUEST['zosr'];
+
+
 
 $ulozttt = "DELETE FROM F$kli_vxcf"."_$uctsys WHERE hlvn = $h_hlvn ";
 $ulozene = mysql_query("$ulozttt");
 
-$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( hlvn, dmn, iban, celk, druh, cstm, zivm, napov, pocvz, navyz, poodp, smnad, zvscs, treti, pctre, zrazk ) ".
-" VALUES ( '$h_hlvn', '$dmn', '$iban', '$celk', '$druh', '$cstm', '$zivm', '$napov', '$pocvz', '$navyz', '$poodp', '$smnad', ".
-" '$zvscs', '$treti', '$pctre', '$zrazk' ); ";
+$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( hlvn, dmn, iban, druh, cstm, zivm, napov, pocvz, navyz, poodp, ".
+" smnad, zvscs, treti, pctre, zrazk, mmes, celk, npcr, splr, zosr ) ".
+" VALUES ( '$h_hlvn', '$dmn', '$iban', '$druh', '$cstm', '$zivm', '$napov', '$pocvz', '$navyz', '$poodp', '$smnad', ".
+" '$zvscs', '$treti', '$pctre', '$zrazk', '$mmes', '$celk', '$npcr', '$splr', '$zosr' ); ";
 $ulozene = mysql_query("$ulozttt"); 
 //echo $ulozttt;
 $copern=308;
@@ -211,7 +230,6 @@ $sql = mysql_query("$sqltt");
   $h_hlvn=1*$riadok->hlvn;
   $dmn=1*$riadok->dmn;
   $iban=$riadok->iban;
-  $celk=1*$riadok->celk;
 
   $druh=1*$riadok->druh;
   $cstm=1*$riadok->cstm;
@@ -225,6 +243,13 @@ $sql = mysql_query("$sqltt");
   $treti=1*$riadok->treti;
   $pctre=1*$riadok->pctre;
   $zrazk=1*$riadok->zrazk;
+
+  $mmes=1*$riadok->mmes;
+  $celk=1*$riadok->celk;
+  $npcr=1*$riadok->npcr;
+  $splr=1*$riadok->splr;
+  $zosr=1*$riadok->zosr;
+
   }
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $h_hlvn  ";
@@ -506,7 +531,6 @@ div.alert-warning {
    document.formv1.h_hlvn.value = '<?php echo "$cislo_oc";?>';
    document.formv1.dmn.value = '<?php echo "$dmn";?>';
    document.formv1.iban.value = '<?php echo "$iban";?>';
-   //document.formv1.celk.value = '<?php echo "$celk";?>';
 
    document.formv1.druh.value = '<?php echo "$druh";?>';
    document.formv1.cstm.value = '<?php echo "$cstm";?>';
@@ -520,6 +544,13 @@ div.alert-warning {
    document.formv1.treti.value = '<?php echo "$treti";?>';
    document.formv1.pctre.value = '<?php echo "$pctre";?>';
    document.formv1.zrazk.value = '<?php echo "$zrazk";?>';
+
+   document.formv1.mmes.value = '<?php echo "$mmes";?>';
+   document.formv1.celk.value = '<?php echo "$celk";?>';
+   document.formv1.npcr.value = '<?php echo "$npcr";?>';
+   document.formv1.splr.value = '<?php echo "$splr";?>';
+   document.formv1.zosr.value = '<?php echo "$zosr";?>';
+
    document.formv1.uloz.disabled = true;
    document.forms.formv1.dmn.focus();
    document.forms.formv1.dmn.select();
@@ -709,6 +740,13 @@ $i = 0;
  </tr>
 
  <tr style="">
+  <td colspan="2"> Maximálna mesaèná zrážka:</td>
+  <td colspan="1" >
+   <input type="text" name="mmes" id="mmes" style="width: 70px;" onkeyup="KontrolaDcisla(this, Cele)"  />
+ </td>
+ </tr>
+
+ <tr style="">
   <td style="" colspan="2"> Druh zrážky:</td>
   <td colspan="1" >
 
@@ -819,6 +857,20 @@ $i = 0;
   <td colspan="1" >
    <input type="text" name="zrazk" id="zrazk" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return ZrazkEnter(event.which)" />
   </td>
+ </tr>
+
+ <tr style="">
+  <td colspan="4">
+ </td>
+ </tr>
+
+ <tr style="">
+  <td colspan="4"> 
+  Celkom poh¾adávka: <input type="text" name="celk" id="celk" style="width: 70px;" onkeyup="KontrolaDcisla(this, Cele)"  />
+  Stav k 1.1.: <input type="text" name="npcr" id="npcr" style="width: 70px;" onkeyup="KontrolaDcisla(this, Cele)"  />
+  Splatené v roku: <input type="text" name="splr" id="splr" style="width: 70px;" onkeyup="KontrolaDcisla(this, Cele)"  />
+  Nesplatený zostatok: <input type="text" name="zosr" id="zosr" style="width: 70px;" onkeyup="KontrolaDcisla(this, Cele)"  />
+ </td>
  </tr>
 
  </thead>
