@@ -3122,7 +3122,7 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcsum'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
+if( $ostre == 1 ){ $vysledok = mysql_query("$sqlt"); }
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcneod'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcneodx'.$kli_uzid;

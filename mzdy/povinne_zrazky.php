@@ -90,6 +90,62 @@ $sqlfir = "ALTER TABLE F".$kli_vxcf."_".$uctsys." ADD zosr DECIMAL(10,2) DEFAULT
 $sqldok = mysql_query("$sqlfir");
 }
 
+//zober cistu mzdu 
+if ( $copern == 9001 )
+    {
+$cislo_cpl = strip_tags($_REQUEST['cislo_cpl']);
+
+$cstmx=0;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcsum$kli_uzid WHERE oc = $cislo_oc  ";
+//echo $sqltt;
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $cstmx=1*$riadok->cista_mzda;
+
+  }
+
+$sqltt = "UPDATE F$kli_vxcf"."_$uctsys SET cstm = $cstmx WHERE cpl = $cislo_cpl  ";
+//echo $sqltt;
+$sql = mysql_query("$sqltt"); 
+
+
+$copern=308;
+
+     }
+//koniec zober cistu mzdu
+
+//nastav do trv 
+if ( $copern == 8001 )
+    {
+$cislo_cpl = strip_tags($_REQUEST['cislo_cpl']);
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl  ";
+//echo $sqltt;
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $hlvnx=1*$riadok->hlvn;
+  $dmnx=1*$riadok->dmn;
+  $ibanx=$riadok->iban;
+  $zrazkx=$riadok->zrazk;
+
+  }
+
+$sqltt = "UPDATE F$kli_vxcf"."_mzdtrn SET kc=$zrazkx WHERE oc = $hlvnx AND dm = $dmnx AND trx4 = '$ibanx'  ";
+//echo $sqltt;
+$sql = mysql_query("$sqltt"); 
+
+
+$copern=308;
+
+     }
+//koniec nastav do trv
+
+
+
 //vymazanie 
 if ( $copern == 316 )
     {
@@ -227,6 +283,7 @@ $sql = mysql_query("$sqltt");
   if (@$zaznam=mysql_data_seek($sql,0))
   {
   $riadok=mysql_fetch_object($sql);
+  $cislo_cpl=1*$riadok->cpl;
   $h_hlvn=1*$riadok->hlvn;
   $dmn=1*$riadok->dmn;
   $iban=$riadok->iban;
@@ -595,6 +652,22 @@ div.alert-warning {
    window.open('../mzdy/povinne_zrazky.php?copern=308&cislo_oc=' + oc + '&page=1&sysx=UCT&uprav_cpl=' + cislo_cpl + '&cislo_cpl=' + cislo_cpl + '&drupoh=1&uprav=1', '_self');
   }
 
+  function doTrv()
+  {
+   window.open('../mzdy/trvale.php?copern=1&drupoh=1&zkun=1&cislo_oc=<?php echo $cislo_oc;?>&page=1'
+, '_blank',  'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
+  function nastavTrv()
+  {
+   window.open('../mzdy/povinne_zrazky.php?copern=8001&cislo_oc=<?php echo $cislo_oc;?>&page=1&sysx=UCT&cislo_cpl=<?php echo $cislo_cpl;?>&drupoh=1&uprav=0', '_self');
+  }
+
+  function nastavCstm()
+  {
+   window.open('../mzdy/povinne_zrazky.php?copern=9001&cislo_oc=<?php echo $cislo_oc;?>&page=1&sysx=UCT&cislo_cpl=<?php echo $cislo_cpl;?>&drupoh=1&uprav=0', '_self');
+  }
+
   function HlvnEnter(e)
                 {
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
@@ -763,6 +836,8 @@ $i = 0;
   <td style="" colspan="2"> Èistá mzda povinného ÈMP:</td>
   <td colspan="1" >
    <input type="text" name="cstm" id="cstm" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return CstmEnter(event.which)" />
+&nbsp&nbsp&nbsp&nbsp&nbsp
+   <img src='../obr/vlozit.png' onclick="nastavCstm();" width=15 height=15 border=0 title="Nastavi Èistú mzdu povinného z neostrého spracovania" >
   </td>
  </tr>
 
@@ -856,6 +931,10 @@ $i = 0;
   <td style="" colspan="2"> Celková zrážka zo mzdy:</td>
   <td colspan="1" >
    <input type="text" name="zrazk" id="zrazk" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return ZrazkEnter(event.which)" />
+&nbsp&nbsp&nbsp&nbsp&nbsp
+   <img src='../obr/import.png' onclick="nastavTrv();" width=15 height=15 border=0 title="Nastavi celkovú zrážku do trvalých mzdových položiek" >
+&nbsp&nbsp&nbsp&nbsp&nbsp
+   <img src='../obr/zoznam.png' onclick="doTrv();" width=15 height=15 border=0 title="Trvalé mzdové položky zamestnanca osè <?php echo $hlvn; ?>" >
   </td>
  </tr>
 
