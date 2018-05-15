@@ -1249,6 +1249,8 @@ if( $riadok->pox == 1 AND $drupoh == 1 )
 $xcis=1*$riadok->xcis;
 $nat=$riadok->nat;
 
+if( $xcis == 0 AND $riadok->xsx3 == 0 ) { $nat=$riadok->xnat; $xcis=0; }
+
 if( $riadok->xsx3 == 1 )
   {
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_sluzby WHERE slu = $xcis ORDER BY slu LIMIT 1";
@@ -1260,7 +1262,11 @@ $sqldok = mysql_query("$sqlttt");
  $xcisx=$riaddok->slu;
  }
 $nat=$natx;
+$xcis=$xcisx;
+
+if( $xcis == 0 ) { $nat=$riadok->xnat; $xcis=0; }
   }
+
 
 ?>
 <tr>
