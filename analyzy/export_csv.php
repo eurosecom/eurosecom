@@ -107,9 +107,18 @@ Export nespárovaného saldokonta aktuálny stav do CSV súboru
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="window.open('export_csv.php?copern=10&drupoh=1&page=1&vsetko=2', '_blank', '<?php echo $tlcswin; ?>' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvori vo formáte CSV' ></a>
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvori vo formáte CSV sumár ièo, faktúra' ></a>
 <td class="bmenu" width="98%">
 Export celého saldokonta za posledne vybrané IÈO v saldokonte z analýz do CSV súboru
+</table>
+
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('export_csv.php?copern=11&drupoh=1&page=1&vsetko=6', '_blank', '<?php echo $tlcswin; ?>' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvori vo formáte CSV položkovité saldo všetko' ></a>
+<td class="bmenu" width="98%">
+Export celého saldokonta položkovitého za posledne vybrané IÈO v saldokonte z analýz do CSV súboru
 </table>
 
 <table class="vstup" width="100%" >
@@ -595,6 +604,106 @@ $vysledok = mysql_query("$sqlt");
 }
 ///////////////////////////////////////////////////KONIEC SUBORU PRE SALDO
 ?>
+
+<?php
+///////////////////////////////////////////////////VYTVORENIE SUBORU SALDOKONTA
+if( $copern == 11 )
+{
+
+$pole = explode(".", $kli_vume);
+$kli_vmes=$pole[0];
+$kli_vrok=$pole[1];
+$kli_vxr=substr($kli_vrok,2,2);;
+if( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
+
+
+$nazsub="saldokontopol";
+
+if (File_Exists ("../tmp/$nazsub.csv")) { $soubor = unlink("../tmp/$nazsub.csv"); }
+
+$soubor = fopen("../tmp/$nazsub.csv", "a+");
+
+
+
+if( $vsetko == 6 )
+{
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_anauceico$kli_uzid");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $h_uce=$riaddok->uce;
+  $h_ico=$riaddok->ico;
+  }
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid".
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_prsaldoicofaknesp".$kli_uzid.".ico=F$kli_vxcf"."_ico.ico".
+" WHERE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid.ico = $h_ico AND uce = $h_uce AND pox = 1 AND pox1 = 0 ".
+" ORDER BY uce,pox2,nai,F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid.ico,pox,fak,pox1,dat,dok";
+//echo $sqltt;
+}
+
+
+
+$sql = mysql_query("$sqltt");
+$pocet = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ( $i <= $pocet )
+  {
+
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$das_sk=SkDatum($hlavicka->das);
+$dat_sk=SkDatum($hlavicka->dat);
+$dau_sk=SkDatum($hlavicka->dau);
+if( $dat_sk == '00.00.0000' ) $dat_sk=$dau_sk;
+
+
+$hod=$hlavicka->hod;
+$ehod=str_replace(".",",",$hod);
+$uhr=$hlavicka->uhr;
+$euhr=str_replace(".",",",$uhr);
+$zos=$hlavicka->zos;
+$ezos=str_replace(".",",",$zos);
+
+if( $i == 0 )
+{
+  $text = "ucet;ico;nazov;mesto;doklad;vystavena;splatna;faktura;hodnota;uhradene"."\r\n";
+  fwrite($soubor, $text);
+}
+
+  $text = $hlavicka->uce.";".$hlavicka->ico.";".$hlavicka->nai.";".$hlavicka->mes.";";
+  $text = $text.$hlavicka->dok.";".$dat_sk.";".$das_sk.";".$hlavicka->fak.";";
+  $text = $text.$ehod.";".$euhr."\r\n";
+  fwrite($soubor, $text);
+
+
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+
+
+fclose($soubor);
+?>
+
+<a href="../tmp/<?php echo $nazsub; ?>.csv">../tmp/<?php echo $nazsub; ?>.csv</a>
+
+
+<?php
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+
+}
+///////////////////////////////////////////////////KONIEC SUBORU PRE SALDO copern 11
+?>
+
 
 <?php
 ///////////////////////////////////////////////////VYTVORENIE SUBORU VYKAZZISKOV

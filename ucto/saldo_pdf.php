@@ -1276,6 +1276,24 @@ if( $h_ico > 0 ) { $podmicoy="F$kli_vxcf"."_$uctpol.ico = $h_ico AND "; }
 $trdico="nai,";
 if( $slovakiaplay == 1 ) { $trdico=""; }
 
+if( $analyzy == 1) 
+     {
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_anauceico'.$kli_uzid;
+$sql = mysql_query("$sqlt");
+
+$sqlt = <<<anal
+(
+   uce         VARCHAR(30),
+   ico         VARCHAR(30)
+);
+anal;
+$sqlt = 'CREATE TABLE F'.$kli_vxcf.'_anauceico'.$kli_uzid.$sqlt;
+$sql = mysql_query("$sqlt");
+
+$ttvv = "INSERT INTO F$kli_vxcf"."_anauceico".$kli_uzid." ( uce,ico ) VALUES ( '$h_uce', '$h_ico' )";
+$ttqq = mysql_query("$ttvv");
+     }
+
 $tovtt = "SELECT * FROM F$kli_vxcf"."_$uctpol".
 " LEFT JOIN F$kli_vxcf"."_ico".
 " ON F$kli_vxcf"."_$uctpol.ico=F$kli_vxcf"."_ico.ico".
@@ -1283,6 +1301,8 @@ $tovtt = "SELECT * FROM F$kli_vxcf"."_$uctpol".
 " ORDER BY uce,pox2,".$trdico."F$kli_vxcf"."_$uctpol.ico,pox,fak,pox1,dat,dok";
 
 //echo $tovtt;
+//exit;
+//_anauceico andrejko
 
 $tov = mysql_query("$tovtt");
 $tvpol = mysql_num_rows($tov);
