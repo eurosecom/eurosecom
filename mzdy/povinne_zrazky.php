@@ -273,6 +273,9 @@ $ulozene = mysql_query("$ulozttt");
 $ulozttt = "UPDATE F$kli_vxcf"."_$uctsys SET zrazk=(pctre*treti)+zvscs ";
 $ulozene = mysql_query("$ulozttt");
 
+$ulozttt = "UPDATE F$kli_vxcf"."_$uctsys SET zrazk=mmes WHERE mmes > 0 AND mmes < zrazk ";
+$ulozene = mysql_query("$ulozttt");
+
 //koniec vypocty
 
 
@@ -696,8 +699,51 @@ div.alert-warning {
 
                 }
 
+  function IbanEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
- function ZrazkEnter(e)
+  if(k == 13 ){
+        document.forms.formv1.druh.focus();
+        document.forms.formv1.druh.select();
+              }
+
+                }
+
+  function DruhEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv1.cstm.focus();
+        document.forms.formv1.cstm.select();
+              }
+
+                }
+
+  function CstmEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv1.pocvz.focus();
+        document.forms.formv1.pocvz.select();
+              }
+
+                }
+
+  function PocvzEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv1.pctre.focus();
+        document.forms.formv1.pctre.select();
+              }
+
+                }
+
+ function PctreEnter(e)
                 {
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
@@ -712,7 +758,6 @@ div.alert-warning {
        else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
               }
                 }
-
 
 </script>
 </HEAD>
@@ -851,7 +896,7 @@ $i = 0;
  <tr style="">
   <td style="" colspan="2"> Èistá mzda povinného ÈMP:</td>
   <td colspan="1" >
-   <input type="text" name="cstm" id="cstm" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return CstmEnter(event.which)" />
+   <input type="text" name="cstm" id="cstm" style="width: 80px;" onkeyup="KontrolaDcisla(this, Desc)" onKeyDown="return CstmEnter(event.which)" />
 &nbsp&nbsp&nbsp&nbsp&nbsp
    <img src='../obr/vlozit.png' onclick="nastavCstm();" width=15 height=15 border=0 title="Nastavi Èistú mzdu povinného z neostrého spracovania" >
   </td>
