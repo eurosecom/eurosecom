@@ -1084,6 +1084,18 @@ var cislo_ocx=1*document.forms1.h_ico.value;
 window.open('vloz_dmn.php?copern=1&cislo_oc=' + cislo_ocx + '&xx=1', '_self' )
                     }
 
+
+function zrazkyZoMzdy()
+                {
+
+var drupohx = 2;
+var cislo_oc = 0;
+cislo_oc=1*document.forms.forms1.h_ico.value;
+if( cislo_oc > 0 ) { drupohx = 1; }
+
+window.open('povinne_zrazky.php?copern=1&drupoh=' + drupohx + '&cislo_oc=' + cislo_oc + '&tt=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
   </script>
 <script type="text/javascript" src="vlozdmn_citaj.js"></script>
 </HEAD>
@@ -1560,6 +1572,7 @@ $hvstup="hvstuz";
 <?php if( $_SESSION['nieie'] == 0 )  { ?>
        <td colspan="1" align="left">
 <button id="uloz" onclick="Ulozit(); ">Uloûiù</button>
+
        </td>
 
        <td colspan="7" align="left">
@@ -1575,6 +1588,9 @@ $hvstup="hvstuz";
        </td>
 
        <td colspan="2" align="left">
+<a href="#" onClick="zrazkyZoMzdy();">
+<img src='../obr/import.png' width=15 height=15 border=0 title='Nastavenie zr·ûok zo mzdy pri v˝kone rozhodnutia' >Zr·ûky zo mzdy</a>
+
        <td colspan="5" align="left">
 
 <?php if( $tlacitkoenter == 1 ) {  ?>

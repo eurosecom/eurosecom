@@ -591,16 +591,16 @@ div.alert-warning {
 
    document.formv1.druh.value = '<?php echo "$druh";?>';
    document.formv1.cstm.value = '<?php echo "$cstm";?>';
-   document.formv1.zivm.value = '<?php echo "$zivm";?>';
-   document.formv1.napov.value = '<?php echo "$napov";?>';
+   //document.formv1.zivm.value = '<?php echo "$zivm";?>';
+   //document.formv1.napov.value = '<?php echo "$napov";?>';
    document.formv1.pocvz.value = '<?php echo "$pocvz";?>';
-   document.formv1.navyz.value = '<?php echo "$navyz";?>';
-   document.formv1.poodp.value = '<?php echo "$poodp";?>';
-   document.formv1.smnad.value = '<?php echo "$smnad";?>';
-   document.formv1.zvscs.value = '<?php echo "$zvscs";?>';
-   document.formv1.treti.value = '<?php echo "$treti";?>';
+   //document.formv1.navyz.value = '<?php echo "$navyz";?>';
+   //document.formv1.poodp.value = '<?php echo "$poodp";?>';
+   //document.formv1.smnad.value = '<?php echo "$smnad";?>';
+   //document.formv1.zvscs.value = '<?php echo "$zvscs";?>';
+   //document.formv1.treti.value = '<?php echo "$treti";?>';
    document.formv1.pctre.value = '<?php echo "$pctre";?>';
-   document.formv1.zrazk.value = '<?php echo "$zrazk";?>';
+   //document.formv1.zrazk.value = '<?php echo "$zrazk";?>';
 
    document.formv1.mmes.value = '<?php echo "$mmes";?>';
    document.formv1.celk.value = '<?php echo "$celk";?>';
@@ -655,7 +655,13 @@ div.alert-warning {
   function doTrv()
   {
    window.open('../mzdy/trvale.php?copern=1&drupoh=1&zkun=1&cislo_oc=<?php echo $cislo_oc;?>&page=1'
-, '_blank',  'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+, '_self',  'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
+  function doTrvAll()
+  {
+   window.open('../mzdy/trvale.php?copern=1&drupoh=1&zkun=0&cislo_oc=0&page=1'
+, '_self',  'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
   function nastavTrv()
@@ -757,6 +763,16 @@ if ( $drupoh == 1 OR $drupoh == 191 ) { echo "Zr·ûky zo mzdy"; }
 if ( $drupoh == 2 OR $drupoh == 192 ) { echo "Zoznam zr·ûkok zo mzdy"; }
 ?>
    <img src='../obr/info.png' title="EnterNext = kl·vesou ENTER prejdete na Ôalöiu poloûku">
+
+<?php
+if ( $drupoh == 2 OR $drupoh == 192 ) { 
+?>
+&nbsp&nbsp&nbsp&nbsp&nbsp
+   <img src='../obr/zoznam.png' onclick="doTrvAll();" width=15 height=15 border=0 title="TrvalÈ mzdovÈ poloûky zamestnancov" >
+<?php
+                                      } 
+?>
+
   </h2>
  </div>
 <?php
@@ -844,7 +860,8 @@ $i = 0;
  <tr style="">
   <td style="" colspan="2"> èivotnÈ minimum:</td>
   <td colspan="1" >
-   <input type="text" name="zivm" id="zivm" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return ZivmEnter(event.which)" />
+  <?php echo $zivm; ?>
+
   </td>
  </tr>
 
@@ -866,7 +883,8 @@ $i = 0;
   <td style="" colspan="2"> a) na povinnÈho ( 100% éM ):</td>
 <?php                  } ?>
   <td colspan="1" >
-   <input type="text" name="napov" id="napov" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return NapovEnter(event.which)" />
+  <?php echo $napov; ?>
+
   </td>
  </tr>
 
@@ -881,7 +899,8 @@ $i = 0;
   <td style="" colspan="2"> b) na vyûivovan˙ osobu ( 50% zo éM ):</td>
 <?php                  } ?>
   <td colspan="1" >
-   <input type="text" name="navyz" id="navyz" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return NavyzEnter(event.which)" />
+  <?php echo $navyz; ?>
+
   </td>
  </tr>
 
@@ -895,28 +914,32 @@ $i = 0;
  <tr style="">
   <td style="" colspan="2"> Po odpoËÌtanÌ:</td>
   <td colspan="1" >
-   <input type="text" name="poodp" id="poodp" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return PoodpEnter(event.which)" />
+  <?php echo $poodp; ?>
+
   </td>
  </tr>
 
  <tr style="">
   <td style="" colspan="2"> Suma, nad ktor˙ sa zvyöok »MP zrazÌ bez obmedzenia (150 % zo éM)</td>
   <td colspan="1" >
-   <input type="text" name="smnad" id="smnad" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return SmnadEnter(event.which)" />
+  <?php echo $smnad; ?>
+
   </td>
  </tr>
 
  <tr style="">
   <td style="" colspan="2"> Zvyöok »MP, ktor· sa zrazÌ bez obmedzenia:</td>
   <td colspan="1" >
-   <input type="text" name="zvscs" id="zvscs" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return ZvscsEnter(event.which)" />
+  <?php echo $zvscs; ?>
+
   </td>
  </tr>
 
  <tr style="">
   <td style="" colspan="2"> 1/3 na zr·ûku</td>
   <td colspan="1" >
-   <input type="text" name="treti" id="treti" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return TretiEnter(event.which)" />
+  <?php echo $treti; ?>
+
   </td>
  </tr>
 
@@ -930,7 +953,8 @@ $i = 0;
  <tr style="">
   <td style="" colspan="2"> Celkov· zr·ûka zo mzdy:</td>
   <td colspan="1" >
-   <input type="text" name="zrazk" id="zrazk" style="width: 80px;" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return ZrazkEnter(event.which)" />
+  <?php echo $zrazk; ?>
+
 &nbsp&nbsp&nbsp&nbsp&nbsp
    <img src='../obr/import.png' onclick="nastavTrv();" width=15 height=15 border=0 title="Nastaviù celkov˙ zr·ûku do trval˝ch mzdov˝ch poloûiek" >
 &nbsp&nbsp&nbsp&nbsp&nbsp

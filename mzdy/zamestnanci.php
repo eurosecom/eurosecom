@@ -1995,6 +1995,13 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 <td class="hmenu" align="left">
 <a href="#" onclick="zamsodpoc();">
 odpoèet ZP <img src='../obr/tlac.png' width=20 height=15 border=0 title="Zamestnanci s nastaveným odpoètom ZP"></a>
+
+<?php if( $zana == 0 )    { ?>
+&nbsp&nbsp&nbsp
+<a href="#" onClick="window.open('povinne_zrazky.php?copern=308&drupoh=2&cislo_oc=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/import.png' width=20 height=20 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Zrážky zo mzdy</a>
+<?php                     } ?>
+
 </td>
 <td class="hmenu" ></td>
 <td class="hmenu" ></td>
@@ -2859,7 +2866,7 @@ document.formv1.h_vban.checked = "checked";
 <td class="fmenu" >
 <?php if( $zana == 0 )    { ?>
 <a href="#" onClick="window.open('povinne_zrazky.php?copern=1&drupoh=1&cislo_oc=<?php echo $cislo_oc;?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/import.png' width=20 height=20 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Povinné zrážky zo mzdy</a>
+<img src='../obr/import.png' width=20 height=20 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Zrážky zo mzdy</a>
 <?php                     } ?>
 </td>
 

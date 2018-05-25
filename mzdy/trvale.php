@@ -401,6 +401,17 @@ $cislo_oc = strip_tags($_REQUEST['cislo_oc']);
   }
 ?>
 
+function zrazkyZoMzdy()
+                {
+
+var drupohx = 2;
+var cislo_oc = 0;
+cislo_oc=1*<?php echo $cislo_oc; ?>;
+if( cislo_oc > 0 ) { drupohx = 1; }
+
+window.open('povinne_zrazky.php?copern=1&drupoh=' + drupohx + '&cislo_oc=' + cislo_oc + '&tt=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
   </script>
 </HEAD>
 
@@ -430,6 +441,7 @@ $konc =($pols*($page-1))+($pols-1);
 <td>EuroSecom  -  Trvalé mzdové položky
  <a href="#" onClick="window.open('mesacnadavka_tlac.php?&copern=2&page=1','_blank','<?php echo $tlcswin; ?>')">
 <img src='../obr/tlac.png' width=15 height=15 border=0 title='Tlaè trvalých mzdových zložiek za <?php echo $kli_vume; ?> pod¾a zamestnancov ' ></a>
+&nbsp&nbsp&nbsp
  <a href="#" onClick="window.open('mesacnadavka_tlac.php?&copern=12&page=1','_blank','<?php echo $tlcswin; ?>')">
 <img src='../obr/tlac.png' width=15 height=15 border=0 title='Tlaè trvalých mzdových zložiek za <?php echo $kli_vume; ?> pod¾a zložiek mzdy ' ></a>
 
@@ -553,7 +565,12 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 <tr>
 <FORM name="formhl1" class="hmenu" method="post" action="trvale.php?cislo_oc=<?php echo $cislo_oc; ?>&zkun=<?php echo $zkun; ?>&sys=<?php echo $sys; ?>&page=1&copern=9" >
 <td class="hmenu" ><img src='../obr/hladaj.png' width=20 height=12 border=0>
-<td class="hmenu" ></td>
+<td class="hmenu" >
+
+<a href="#" onClick="zrazkyZoMzdy();">
+<img src='../obr/import.png' width=15 height=15 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Zrážky zo mzdy</a>
+
+</td>
 <td class="hmenu" ></td>
 <td class="hmenu" ></td>
 </tr>
