@@ -25,6 +25,14 @@ if (!$vysledok):
 $vtvall = include("../cis/vtvall.php");
 endif;
 
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zzvys7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zkoep7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zkoed7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD rdoba7_dan DECIMAL(10,0) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
 
 // cislo operacie
 $copern = 1*strip_tags($_REQUEST['copern']);
@@ -119,7 +127,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_majsodp SET rdoba1='$rdoba1', rdoba2='$rdoba2', 
 " zkoed1_dan='$zkoed1_dan', zkoed2_dan='$zkoed2_dan', zkoed3_dan='$zkoed3_dan', zkoed4_dan='$zkoed4_dan', zkoed5_dan='$zkoed5_dan', zkoed6_dan='$zkoed6_dan', zkoed7_dan='$zkoed7_dan',".
 " zzvys1_dan='$zzvys1_dan', zzvys2_dan='$zzvys2_dan', zzvys3_dan='$zzvys3_dan', zzvys4_dan='$zzvys4_dan', zzvys5_dan='$zzvys5_dan', zzvys6_dan='$zzvys6_dan', zzvys7_dan='$zzvys7_dan' ".
 " WHERE cpl=1"; 
-
+//echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
 $copern=1;
 if (!$upravene):
