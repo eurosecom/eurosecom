@@ -133,7 +133,7 @@ if( !$uziv ) exit;
   $verzia = $_SESSION['verzia'];
 
 
-$sql = "SELECT rok2018 FROM $mysqldb2017.kalendar";
+$sql = "SELECT m122018 FROM $mysqldb2018.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok):
 $kalend = include("cis/kalendar.php");
@@ -597,7 +597,7 @@ $akehttp="https:";
 <img border=2 src="obr/ikony/hodiny.jpg" width=30 height=30 border=1 title="Dochádzkový systém"/></A>
 <A Href="<?php echo $akehttp; ?>//<?php echo $webnaz; ?>/dopr.php?copern=1&newmenu=1&kjazd=1" target='_blank'>
 <img border=2 src="obr/ikony/volant.jpg" width=30 height=30 border=1 title="Kniha jázd"/></A>
-<?php if( ( $_SERVER['SERVER_NAME'] == "www.edcom.sk" OR $_SERVER['SERVER_NAME'] == "localhost" ) AND $kli_uzid != 53 ) { ?>
+<?php if(  $_SERVER['SERVER_NAME'] == "www.ala.sk" OR $_SERVER['SERVER_NAME'] == "localhost" ) { ?>
 <A Href="<?php echo $akehttp; ?>//<?php echo $webnaz; ?>/secom/servis.php?copern=1&druhzoznamu=1" target='_blank'>
 <img border=2 src="obr/banky/euro.jpg" width=30 height=30 border=1 title="Užívatelia Reg.pokladnice Secom,Edcom,Eurosecom..."/></A>
 <?php                                                                     } ?>
