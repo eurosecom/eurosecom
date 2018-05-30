@@ -214,7 +214,7 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/174 WHERE oc > 0 AND uva = 8.0
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/168 WHERE oc > 0 AND uva = 7.75 "; $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/163 WHERE oc > 0 AND uva = 7.5  "; $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/152 WHERE oc > 0 AND uva = 7.0  "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/153 WHERE oc > 0 AND uva = 7.0  "; $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/141 WHERE oc > 0 AND uva = 6.5  "; $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/130 WHERE oc > 0 AND uva = 6.0  "; $dsql = mysql_query("$dsqlt");
 

@@ -611,8 +611,8 @@ if ( $kli_vrok > 2017 )
   {
 ?>
 <img src='../obr/zoznam.png' onclick="window.open('drmiezd_export.php?sys=<?php echo $sys; ?>&copern=1519&page=1&dopln=2', '_self');" 
-width=20 height=15 border=0 title="Doplni èíselník mzdovıch zloiek z ../import/pomer<?php echo $kli_vrok; ?>doplnpripl.csv o príplatky 201, 202, 203, 204, 223" >
-Príplatky 2018
+width=20 height=15 border=0 title="Doplni èíselník mzdovıch zloiek z ../import/pomer<?php echo $kli_vrok; ?>doplnpripl.csv o príplatky 201, 202, 203, 204, 223 a 13.plat" >
+Príplatky a 13.plat 2018
 <?php
   }
 ?>
