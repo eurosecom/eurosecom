@@ -31,6 +31,7 @@ if( $copern == 1519 )
 $textx="Naèíta štandartný";
 $subx="";
 if( $dopln == 1 ) { $textx="Doplni"; $subx="dopln"; }
+if( $dopln == 2 ) { $textx="Doplni"; $subx="doplnpripl"; }
 ?>
 <script type="text/javascript">
 if( !confirm ("Chcete <?php echo $textx; ?> èíselník mzdových zložiek z ../import/dmn<?php echo $kli_vrok; ?><?php echo $subx; ?>.csv ?") )
@@ -59,6 +60,21 @@ $uloz = mysql_query("$sqult");
 $sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 955 ";
 $uloz = mysql_query("$sqult");
 $sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 968 ";
+$uloz = mysql_query("$sqult");
+}
+if( $dopln == 2 ) 
+{ 
+$nazov="../import/dmn".$kli_vrok."doplnpripl.csv"; 
+
+$sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 201 ";
+$uloz = mysql_query("$sqult");
+$sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 202 ";
+$uloz = mysql_query("$sqult");
+$sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 203 ";
+$uloz = mysql_query("$sqult");
+$sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 204 ";
+$uloz = mysql_query("$sqult");
+$sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 223 ";
 $uloz = mysql_query("$sqult");
 }
 
@@ -109,14 +125,7 @@ $vysledek = mysql_query("$sql");
 
 if( $kli_vrok == 2018 )
 {
-$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018";
-$vysledek = mysql_query("$sql");
-$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018a";
-$vysledek = mysql_query("$sql");
-$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018b";
-$vysledek = mysql_query("$sql");
-$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018c";
-$vysledek = mysql_query("$sql");
+
 }
 
 $subor = fopen("$nazov", "r");
