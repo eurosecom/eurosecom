@@ -967,6 +967,12 @@ function vykonajDm(dm,dmtext,sa,ko,sax)
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 2 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz2.value/100; }
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 3 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz3.value/100; }
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 4 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz4.value/100; }
+<?php if( $fir_mzdx08 != 0 AND $kli_vrok > 2017 AND $kli_nezis == 1 ) { ?>
+         if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.6898 ) { document.formv1.h_sa.value = 0.6898; }
+         if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.3795 ) { document.formv1.h_sa.value = 1.3795; }
+         if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < document.formv1.znah.value ) { document.formv1.h_sa.value = document.formv1.znah.value; }
+         if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8277 ) { document.formv1.h_sa.value = 0.8277; }
+<?php                                                                 } ?>
          if ( document.formv1.dm_ko.value == 40 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value; }
          if ( document.formv1.dm_ko.value == 60 )
             { var vypsa=document.formv1.dm_sa.value*document.formv1.znem.value/100; document.formv1.h_sa.value = vypsa.toFixed(4); }
@@ -993,6 +999,12 @@ function Len1Dm(dm,sa,ko,sax)
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 2 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz2.value/100; }
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 3 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz3.value/100; }
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 4 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz4.value/100; }
+<?php if( $fir_mzdx08 != 0 AND $kli_vrok > 2017 AND $kli_nezis == 1 ) { ?>
+         if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.6898 ) { document.formv1.h_sa.value = 0.6898; }
+         if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.3795 ) { document.formv1.h_sa.value = 1.3795; }
+         if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < document.formv1.znah.value ) { document.formv1.h_sa.value = document.formv1.znah.value; }
+         if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8277 ) { document.formv1.h_sa.value = 0.8277; }
+<?php                                                                 } ?>
          if ( document.formv1.dm_ko.value == 40 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value; }
          if ( document.formv1.dm_ko.value == 60 )
             { var vypsa=document.formv1.dm_sa.value*document.formv1.znem.value/100; document.formv1.h_sa.value = vypsa.toFixed(4); }
@@ -1611,7 +1623,7 @@ $hvstup="hvstuz";
 <img src='../obr/import.png' width=15 height=15 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Zrážky zo mzdy</a>
 &nbsp&nbsp&nbsp
 <a href="#" onClick="UpravDochOC();">
-<img src='../obr/hodiny.jpg' width=15 height=15 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Dochádzka</a>
+<img src='../obr/hodiny.jpg' width=15 height=15 border=0 title='Dochádzka zamestnanca' >Dochádzka</a>
 
 
        <td colspan="5" align="left">
