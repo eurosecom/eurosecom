@@ -31,6 +31,7 @@ if (!$vysledok):
 $vtvall = include("../cis/vtvall.php");
 endif;
 
+$citfir = include("../cis/citaj_fir.php");
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -607,12 +608,22 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 <td class="hmenu" ></td>
 <td class="hmenu" >
 <?php
-if ( $kli_vrok > 2017 )
+if ( $kli_vrok > 2017 AND $fir_mzdx08 == 0 )
   {
 ?>
 <img src='../obr/zoznam.png' onclick="window.open('drmiezd_export.php?sys=<?php echo $sys; ?>&copern=1519&page=1&dopln=2', '_self');" 
 width=20 height=15 border=0 title="Doplni èíselník mzdovıch zloiek z ../import/pomer<?php echo $kli_vrok; ?>doplnpripl.csv o príplatky 201, 202, 203, 204, 223 a 13.plat" >
 Príplatky a 13.plat 2018
+<?php
+  }
+?>
+<?php
+if ( $kli_vrok > 2017 AND $fir_mzdx08 != 0 )
+  {
+?>
+<img src='../obr/zoznam.png' onclick="window.open('drmiezd_export.php?sys=<?php echo $sys; ?>&copern=1519&page=1&dopln=3', '_self');" 
+width=20 height=15 border=0 title="Doplni èíselník mzdovıch zloiek z ../import/pomer<?php echo $kli_vrok; ?>doplnnopripl.csv o príplatky 201, 202, 203, 204, 223 a 13.plat" >
+NUJ Príplatky a 13.plat 2018
 <?php
   }
 ?>

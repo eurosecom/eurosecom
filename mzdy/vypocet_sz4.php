@@ -105,6 +105,43 @@ $fir_ficoorig=$fir_fico;
 if( $fir_fico == 45741093 ) { $fir_fico=37986830; }
 if( $fir_fico == 37986708 ) { $fir_fico=37986830; }
 
+//priplatky NUJ 2018
+if( $fir_mzdx08 != 0 AND $kli_vrok > 2017 AND $kli_nezis == 1 ) 
+{
+//echo "idem";
+//prepne sposob vypoctu na fir_fico=37986830 a fir_ficoorig 37986708
+$fir_fico=37986830;
+$fir_ficoorig=37986708;
+
+//jeden krat nastav sposob vypoctu nahrad, priplatky musi doplnit z csv pre no
+$sql = "SELECT konx FROM F".$kli_vxcf."_mzdnujpripl2018 ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+  {
+
+echo "NUJ Úprava výpoètu náhrad 100/30/4 na 100/30/3 ";
+
+$sqltt = "UPDATE F".$kli_vxcf."_mzddmn SET sax=3 WHERE dm > 500 AND dm < 600 AND sax = 4 AND ko = 30 ";
+$tov = mysql_query("$sqltt");
+//echo $sqltt.$tvpol."<br />";
+
+$sqlt = <<<uctmzd
+(
+   cpl         decimal(2,0) default 0,
+   datm        date,
+   konx        decimal(2,0) default 0,
+   PRIMARY KEY(cpl)
+);
+uctmzd;
+
+$sql = "CREATE TABLE F".$kli_vxcf."_mzdnujpripl2018 ".$sqlt;
+$ulozene = mysql_query("$sql");
+
+  }
+//jeden krat nastav sposob vypoctu nahrad, priplatky musi doplnit z csv pre no
+
+}
+//koniec priplatky NUJ 2018
 
 $zdravprac=0;
 if( $fir_fico == 36084514 OR $fir_fico == 37986708 OR $fir_fico == 37986830 OR $kli_nezis == 1 )

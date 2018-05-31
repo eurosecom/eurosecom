@@ -1184,6 +1184,25 @@ if( document.enast.vsdn.checked ) { vsdn=1; }
 window.open('vlozdmn_setuloz.php?cislo_oc=<?php echo $cislo_oc; ?>&vsdn=' + vsdn + '&minm=' + minm + '&ajstravne=' + ajstravne + '&premie=' + premie + '&eurl=' + eurl +  '&ajsv=' + ajsv +  '&ajdv=' + ajdv +  '&ajnh=' + ajnh + '&copern=900', '_self' );
                 }
 
+
+function UpravDochOC()
+                {
+
+var cislo_oc = 0;
+var drupoh = 2;
+cislo_oc=1*document.forms.forms1.h_ico.value;
+
+if( cislo_oc != 0 ) 
+  { 
+window.open('../mzdy/dochadzka_detail.php?cislo_oc=' + cislo_oc + '&copern=20&drupoh=2&page=1&subor=0', '_self' );
+  }
+else
+  {
+window.open('../mzdy/dochadzka.php?cislo_oc=&copern=1&drupoh=1&page=1&subor=0', '_self' );
+  }
+
+                }
+
 </script>
 <?php
      }
@@ -1590,6 +1609,10 @@ $hvstup="hvstuz";
        <td colspan="2" align="left">
 <a href="#" onClick="zrazkyZoMzdy();">
 <img src='../obr/import.png' width=15 height=15 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Zrážky zo mzdy</a>
+&nbsp&nbsp&nbsp
+<a href="#" onClick="UpravDochOC();">
+<img src='../obr/hodiny.jpg' width=15 height=15 border=0 title='Nastavenie zrážok zo mzdy pri výkone rozhodnutia' >Dochádzka</a>
+
 
        <td colspan="5" align="left">
 

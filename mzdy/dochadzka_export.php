@@ -94,6 +94,27 @@ $ned1=$ned2-7; if( $ned1 < 0 ) $ned1=0;
 //echo $ned5." ".$ned4." ".$ned3." ".$ned2." ".$ned1." ";
 
 
+//udaje o priplatkoch
+$dm_nad=201; $dm_so=202; $dm_ne=203; $dm_sv=204; $dm_nc=223; 
+$den12_od="06:00"; $noc12_od="18:00"; $rano8_od="06:00"; $poob8_od="14:00"; $nocn8_od="22:00";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddochadzkasetpripl ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $dm_nad=1*$riaddok->dm_nad;
+  $dm_so=1*$riaddok->dm_so;
+  $dm_ne=1*$riaddok->dm_ne;
+  $dm_sv=1*$riaddok->dm_sv;
+  $dm_nc=1*$riaddok->dm_nc;
+  $den12_od=$riaddok->den12_od;
+  $noc12_od=$riaddok->noc12_od;
+
+  $rano8_od=$riaddok->rano8_od;
+  $poob8_od=$riaddok->poob8_od;
+  $nocn8_od=$riaddok->nocn8_od;
+  }
+
+
 //posli do mzdmes ak cislo_oc=0 tak vsetci
 if( $copern == 26 )
 {
@@ -121,6 +142,8 @@ exit;
      }
 
 $cislo_oc = 1*$_REQUEST['cislo_oc'];
+$zdetailu = 1*$_REQUEST['zdetailu'];
+
 $vsetci=0;
 if( $cislo_oc == 0 ) $vsetci=1;
 
@@ -147,6 +170,9 @@ $vytvor = mysql_query("$vsql");
 
 $daod1_sk="1.".$kli_vume;
 $daod1_sql=SqlDatum($daod1_sk);
+
+$dado31b_sk=$pocetdni.".".$kli_vume;
+$dado31b_sql=SqlDatum($dado31b_sk);
 
 $dado31_sk=$pocetdnim.".".$kli_mume;
 $dado31_sql=SqlDatum($dado31_sk);
@@ -476,6 +502,183 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdmes SET ".
 $oznac = mysql_query("$sqtoz");
 }
   }
+//koniec aj nadcas
+
+if( $zdetailu == 1 )
+{
+//echo "idem"; 
+//exit;
+
+$sumhod=0; $sumpndc=0; $sumpsob=0; $sumpned=0; $sumpsvt=0; $sumpnoc=0;
+$sqlttz = "SELECT oc, dmxa, SUM(hodxb) AS sumhodxb, SUM(pndc) AS sumpndc, SUM(psob) AS sumpsob, SUM(pned) AS sumpned, SUM(psvt) AS sumpsvt, ".
+" SUM(pnoc) AS sumpnoc FROM F$kli_vxcf"."_mzddochadzkap".$kli_uzid." WHERE oc = $cislo_oc AND dmxa = 1 GROUP BY oc ";
+//echo $sqlttz;
+$sqlz = mysql_query("$sqlttz"); 
+  if (@$zaznam=mysql_data_seek($sqlz,0))
+  {
+  $riadok=mysql_fetch_object($sqlz);
+  $sumhod=$riadok->sumhodxb;
+  $sumpndc=$riadok->sumpndc;
+  $sumpsob=$riadok->sumpsob;
+  $sumpned=$riadok->sumpned;
+  $sumpsvt=$riadok->sumpsvt;
+  $sumpnoc=$riadok->sumpnoc;
+
+  }
+
+if( $dm_so > 0 AND $sumpsob > 0 )
+{
+$sqty = "INSERT INTO F$kli_vxcf"."_mzdmes SELECT ".
+"0,$dok,'$dado31b_sql','$kli_vume',oc,'$dm_so','0000-00-00','0000-00-00',0,'$sumpsob',0,0,0,0,0,0,0,0,0,0,'','$kli_uzid',now() ".
+" FROM F$kli_vxcf"."_mzddochadzkap".$kli_uzid." WHERE oc = $cislo_oc AND dmxa = 1 GROUP BY oc";
+//echo $sqty;
+//exit;
+$ulozene = mysql_query("$sqty");
+
+$kolkox=25; $sadzba="znah";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddmn WHERE dm = $dm_so LIMIT 1 ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $kolkox=1*$riaddok->sa;
+  $sadzbax=1*$riaddok->ko;
+  $sax=1*$riaddok->sax;
+  if( $sadzbax == 20 ) { $sadzba="znah"; }
+  if( $sadzbax == 30 AND sax == 0 ) { $sadzba="sz0"; }
+  if( $sadzbax == 30 AND sax == 1 ) { $sadzba="sz1"; }
+  if( $sadzbax == 30 AND sax == 2 ) { $sadzba="sz2"; }
+  if( $sadzbax == 30 AND sax == 3 ) { $sadzba="sz3"; }
+  if( $sadzbax == 30 AND sax == 4 ) { $sadzba="sz4"; }
+  if( $sadzbax == 40 ) { $sadzba=100; }
+  }
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmes,F$kli_vxcf"."_mzdkun SET ".
+" saz=$kolkox*$sadzba/100, str=stz, zak=zkz ".
+"WHERE $podm2oc F$kli_vxcf"."_mzdmes.oc=F$kli_vxcf"."_mzdkun.oc AND F$kli_vxcf"."_mzdmes.dok = $dok AND ( dm = $dm_so )";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmes SET kc=hod*saz WHERE $podm2oc dok = $dok AND ( dm = $dm_so )";
+$oznac = mysql_query("$sqtoz");
+}
+//koniec dm sobota
+
+if( $dm_ne > 0 AND $sumpned > 0 )
+{
+$sqty = "INSERT INTO F$kli_vxcf"."_mzdmes SELECT ".
+"0,$dok,'$dado31b_sql','$kli_vume',oc,'$dm_ne','0000-00-00','0000-00-00',0,'$sumpned',0,0,0,0,0,0,0,0,0,0,'','$kli_uzid',now() ".
+" FROM F$kli_vxcf"."_mzddochadzkap".$kli_uzid." WHERE oc = $cislo_oc AND dmxa = 1 GROUP BY oc";
+//echo $sqty;
+//exit;
+$ulozene = mysql_query("$sqty");
+
+$kolkox=25; $sadzba="znah";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddmn WHERE dm = $dm_ne LIMIT 1 ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $kolkox=1*$riaddok->sa;
+  $sadzbax=1*$riaddok->ko;
+  $sax=1*$riaddok->sax;
+  if( $sadzbax == 20 ) { $sadzba="znah"; }
+  if( $sadzbax == 30 AND sax == 0 ) { $sadzba="sz0"; }
+  if( $sadzbax == 30 AND sax == 1 ) { $sadzba="sz1"; }
+  if( $sadzbax == 30 AND sax == 2 ) { $sadzba="sz2"; }
+  if( $sadzbax == 30 AND sax == 3 ) { $sadzba="sz3"; }
+  if( $sadzbax == 30 AND sax == 4 ) { $sadzba="sz4"; }
+  if( $sadzbax == 40 ) { $sadzba=100; }
+  }
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmes,F$kli_vxcf"."_mzdkun SET ".
+" saz=$kolkox*$sadzba/100, str=stz, zak=zkz ".
+"WHERE $podm2oc F$kli_vxcf"."_mzdmes.oc=F$kli_vxcf"."_mzdkun.oc AND F$kli_vxcf"."_mzdmes.dok = $dok AND ( dm = $dm_ne )";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmes SET kc=hod*saz WHERE $podm2oc dok = $dok AND ( dm = $dm_ne )";
+$oznac = mysql_query("$sqtoz");
+}
+//koniec dm nedela
+
+if( $dm_sv > 0 AND $sumpsvt > 0 )
+{
+$sqty = "INSERT INTO F$kli_vxcf"."_mzdmes SELECT ".
+"0,$dok,'$dado31b_sql','$kli_vume',oc,'$dm_sv','0000-00-00','0000-00-00',0,'$sumpsvt',0,0,0,0,0,0,0,0,0,0,'','$kli_uzid',now() ".
+" FROM F$kli_vxcf"."_mzddochadzkap".$kli_uzid." WHERE oc = $cislo_oc AND dmxa = 1 GROUP BY oc";
+//echo $sqty;
+//exit;
+$ulozene = mysql_query("$sqty");
+
+$kolkox=25; $sadzba="znah";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddmn WHERE dm = $dm_sv LIMIT 1 ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $kolkox=1*$riaddok->sa;
+  $sadzbax=1*$riaddok->ko;
+  $sax=1*$riaddok->sax;
+  if( $sadzbax == 20 ) { $sadzba="znah"; }
+  if( $sadzbax == 30 AND sax == 0 ) { $sadzba="sz0"; }
+  if( $sadzbax == 30 AND sax == 1 ) { $sadzba="sz1"; }
+  if( $sadzbax == 30 AND sax == 2 ) { $sadzba="sz2"; }
+  if( $sadzbax == 30 AND sax == 3 ) { $sadzba="sz3"; }
+  if( $sadzbax == 30 AND sax == 4 ) { $sadzba="sz4"; }
+  if( $sadzbax == 40 ) { $sadzba=100; }
+  }
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmes,F$kli_vxcf"."_mzdkun SET ".
+" saz=$kolkox*$sadzba/100, str=stz, zak=zkz ".
+"WHERE $podm2oc F$kli_vxcf"."_mzdmes.oc=F$kli_vxcf"."_mzdkun.oc AND F$kli_vxcf"."_mzdmes.dok = $dok AND ( dm = $dm_sv )";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmes SET kc=hod*saz WHERE $podm2oc dok = $dok AND ( dm = $dm_sv )";
+$oznac = mysql_query("$sqtoz");
+}
+//koniec dm sviatok
+
+if( $dm_nc > 0 AND $sumpnoc > 0 )
+{
+$sqty = "INSERT INTO F$kli_vxcf"."_mzdmes SELECT ".
+"0,$dok,'$dado31b_sql','$kli_vume',oc,'$dm_nc','0000-00-00','0000-00-00',0,'$sumpnoc',0,0,0,0,0,0,0,0,0,0,'','$kli_uzid',now() ".
+" FROM F$kli_vxcf"."_mzddochadzkap".$kli_uzid." WHERE oc = $cislo_oc AND dmxa = 1 GROUP BY oc";
+//echo $sqty;
+//exit;
+$ulozene = mysql_query("$sqty");
+
+$kolkox=25; $sadzba="znah";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddmn WHERE dm = $dm_nc LIMIT 1 ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $kolkox=1*$riaddok->sa;
+  $sadzbax=1*$riaddok->ko;
+  $sax=1*$riaddok->sax;
+  if( $sadzbax == 20 ) { $sadzba="znah"; }
+  if( $sadzbax == 30 AND sax == 0 ) { $sadzba="sz0"; }
+  if( $sadzbax == 30 AND sax == 1 ) { $sadzba="sz1"; }
+  if( $sadzbax == 30 AND sax == 2 ) { $sadzba="sz2"; }
+  if( $sadzbax == 30 AND sax == 3 ) { $sadzba="sz3"; }
+  if( $sadzbax == 30 AND sax == 4 ) { $sadzba="sz4"; }
+  if( $sadzbax == 40 ) { $sadzba=100; }
+  }
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmes,F$kli_vxcf"."_mzdkun SET ".
+" saz=$kolkox*$sadzba/100, str=stz, zak=zkz ".
+"WHERE $podm2oc F$kli_vxcf"."_mzdmes.oc=F$kli_vxcf"."_mzdkun.oc AND F$kli_vxcf"."_mzdmes.dok = $dok AND ( dm = $dm_nc )";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmes SET kc=hod*saz WHERE $podm2oc dok = $dok AND ( dm = $dm_nc )";
+$oznac = mysql_query("$sqtoz");
+}
+//koniec dm noc
+
+//exit;
+
+
+}
+//koniec z detailu
 
     }
 ?>

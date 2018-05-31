@@ -572,11 +572,12 @@ $fir_mzdx04 = strip_tags($_REQUEST['fir_mzdx04']);
 $fir_mzdx05 = strip_tags($_REQUEST['fir_mzdx05']);
 $fir_mzdx06 = strip_tags($_REQUEST['fir_mzdx06']);
 $fir_mzdx07 = strip_tags($_REQUEST['fir_mzdx07']);
+$fir_mzdx08 = strip_tags($_REQUEST['fir_mzdx08']);
 $uprav="NO";
 
 $upravttt = "UPDATE F$kli_vxcf"."_ufir SET dph1='$fir_dph1', dph2='$fir_dph2', dph3='$fir_dph3', dph4='$fir_dph4', mzdx04='$fir_mzdx04',  
  mena1='$fir_mena1', mena2='$fir_mena2', kurz12='$fir_kurz12', mzdx01='$fir_mzdx01', mzdx02='$fir_mzdx02', mzdx03='$fir_mzdx03', mzdx06='$fir_mzdx06'
- , mzdx07='$fir_mzdx07' WHERE udaje=1";  
+ , mzdx07='$fir_mzdx07', mzdx08='$fir_mzdx08' WHERE udaje=1";  
 //echo $upravttt;
 $upravene = mysql_query("$upravttt"); 
 $copern=191;
@@ -1132,6 +1133,7 @@ $vysledek = mysql_query("$sql");
     document.formv1.fir_mzdx04.value = '<?php echo "$fir_mzdx04";?>';
     document.formv1.fir_mzdx06.value = '<?php echo "$fir_mzdx06";?>';
     document.formv1.fir_mzdx07.value = '<?php echo "$fir_mzdx07";?>';
+    document.formv1.fir_mzdx08.value = '<?php echo "$fir_mzdx08";?>';
     }
 <?php
 //koniec uprava
@@ -2892,7 +2894,10 @@ $riadok=mysql_fetch_object($vysledok);
 <td class="fmenu" width="10%" colspan="2">Triediù p·sky a v˝platn˙ listinu podæa v˝platnÈho miesta:</td>
 <td class="fmenu" ><?php echo $riadok->mzdx07;?></td><td class="bmenu" >0=nie,1=·no</td>
 </tr>
-
+<tr>
+<td class="fmenu" width="10%" colspan="2">NUJ verzia 2018 prepoËet prÌplatkov a n·hrad:</td>
+<td class="fmenu" ><?php echo $riadok->mzdx08;?></td><td class="bmenu" >0=nie,1=·no</td>
+</tr>
 
 <tr></tr><tr></tr>
 <tr>
@@ -2973,6 +2978,11 @@ if ( $copern == 192 )
 <td class="fmenu" width="10%" colspan="2">Triediù p·sky a v˝platn˙ listinu podæa v˝platnÈho miesta:</td>
 <td class="fmenu" ><input type="text" name="fir_mzdx07" id="fir_mzdx07" /></td><td class="bmenu" >0=nie,1=·no</td>
 </tr>
+<tr>
+<td class="fmenu" width="10%" colspan="2">NUJ verzia 2018 prepoËet prÌplatkov a n·hrad:</td>
+<td class="fmenu" ><input type="text" name="fir_mzdx08" id="fir_mzdx08" /></td><td class="bmenu" >0=nie,1=·no</td>
+</tr>
+
 <tr>
 <td></td>
 <td class="obyc"><INPUT type="submit" id="uloz" name="uloz" value="Uloûiù ˙pravy"></td>

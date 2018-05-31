@@ -140,6 +140,7 @@ $fir_mzdx04 = $fir_riadok->mzdx04;
 $fir_mzdx05 = $fir_riadok->mzdx05;
 $fir_mzdx06 = $fir_riadok->mzdx06;
 $fir_mzdx07 = 1*$fir_riadok->mzdx07;
+$fir_mzdx08 = 1*$fir_riadok->mzdx08;
 
 $fir_mzdt04 = $fir_riadok->mzdt04;
 $fir_mzdt05 = $fir_riadok->mzdt05;

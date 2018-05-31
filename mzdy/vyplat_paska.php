@@ -2621,6 +2621,7 @@ $pdf->Cell(100,3,"$textlekdop","0",1,"R");
 
 $texthl2x="Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah";
 if( $fir_fico == 37986830 ) { $texthl2x="Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah FP: $hlavicka->sz4"; }
+if( $kli_nezis != 0 ) { $texthl2x="Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah FP: $hlavicka->sz4"; }
 
 $pdf->SetFont('arial','',8);
 $pdf->Cell(80,4,"$texthl2x","0",0,"L");

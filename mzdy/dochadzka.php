@@ -40,6 +40,11 @@ $kli_nxcf=$vyb_naz;
 $kli_vume=$vyb_ume;
 $kli_vrok=$vyb_rok;
 
+if( $_SERVER['SERVER_NAME'] == "www.ala.sk" AND $kli_vrok == 2017 ) { $mysqldb=$mysqldb2017; }
+if( $_SERVER['SERVER_NAME'] == "www.ala.sk" AND $kli_vrok == 2018 ) { $mysqldb=$mysqldb2018; }
+if( $_SERVER['SERVER_NAME'] == "www.ala.sk" AND $kli_vrok == 2019 ) { $mysqldb=$mysqldb2019; }
+mysql_select_db($mysqldb);
+
 $cislooc=0;
 $sqlttt = "SELECT * FROM klienti WHERE id_klienta = $kli_uzid ";
 $sqldok = mysql_query("$sqlttt");
@@ -520,7 +525,7 @@ window.open('../mzdy/dochadzka_pdf.php?cislo_oc=' + h_oc + '&copern=30&drupoh=1&
 function UpravDochOC( h_oc )
                 {
 
-window.open('../mzdy/dochadzka.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0',
+window.open('../mzdy/dochadzka_detail.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0',
  '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -1713,12 +1718,13 @@ $riadok=$i+1;
 <td class="<?php echo $hvstupz; ?>" align="right">
 <a href="#" onClick="ZmazDochOc(<?php echo $polozka->oc;?>);">
 <img src='../obr/zmazuplne.png' width=15 height=15 border=0 title='Zmazaù z·znamy zamestnanca Ë. <?php echo $polozka->oc;?> v obdobÌ <?php echo $kli_vume;?>' ></a>
+&nbsp
 </td>
 <td class="<?php echo $hvstup; ?>">
 
 <a href="#" onClick="UpravDochOC(<?php echo $polozka->oc;?>);">
 <img src='../obr/zoznam.png' width=15 height=15 border=0 title='Upraviù doch·dzku zamestnanca Ë.<?php echo $polozka->oc;?>' ></a>
-
+&nbsp
 <img src='../obr/naradie.png'  onClick="zobraz_upravmail(<?php echo $polozka->oc;?>, '<?php echo $polozka->prie; ?> <?php echo $polozka->meno; ?>',
  <?php echo $riadok;?>, '<?php echo $polozka->mail;?>', '<?php echo $polozka->dovv;?>', '<?php echo $polozka->mdov;?>', '<?php echo $polozka->csv;?>', '<?php echo $polozka->ndc;?>');" width=15 height=15 border=0 title='Nastaviù mailovÈ ˙daje zamestnanca Ë.<?php echo $polozka->oc;?> vo form·te PDF' >
 
