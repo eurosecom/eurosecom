@@ -970,7 +970,7 @@ function vykonajDm(dm,dmtext,sa,ko,sax)
 <?php if( $fir_mzdx08 != 0 AND $kli_vrok > 2017 AND $kli_nezis == 1 ) { ?>
          if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.6898 ) { document.formv1.h_sa.value = 0.6898; }
          if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.3795 ) { document.formv1.h_sa.value = 1.3795; }
-         if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < document.formv1.znah.value ) { document.formv1.h_sa.value = document.formv1.znah.value; }
+         if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < 2.7590 ) { document.formv1.h_sa.value = 2.7590; }
          if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8277 ) { document.formv1.h_sa.value = 0.8277; }
 <?php                                                                 } ?>
          if ( document.formv1.dm_ko.value == 40 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value; }
@@ -1002,7 +1002,7 @@ function Len1Dm(dm,sa,ko,sax)
 <?php if( $fir_mzdx08 != 0 AND $kli_vrok > 2017 AND $kli_nezis == 1 ) { ?>
          if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.6898 ) { document.formv1.h_sa.value = 0.6898; }
          if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.3795 ) { document.formv1.h_sa.value = 1.3795; }
-         if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < document.formv1.znah.value ) { document.formv1.h_sa.value = document.formv1.znah.value; }
+         if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < 2.7590 ) { document.formv1.h_sa.value = 2.7590; }
          if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8277 ) { document.formv1.h_sa.value = 0.8277; }
 <?php                                                                 } ?>
          if ( document.formv1.dm_ko.value == 40 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value; }
