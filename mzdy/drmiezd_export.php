@@ -81,6 +81,8 @@ $sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 223 ";
 $uloz = mysql_query("$sqult");
 $sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 313 ";
 $uloz = mysql_query("$sqult");
+$sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 323 ";
+$uloz = mysql_query("$sqult");
 }
 if( $dopln == 3 ) 
 { 
@@ -97,6 +99,8 @@ $uloz = mysql_query("$sqult");
 $sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 223 ";
 $uloz = mysql_query("$sqult");
 $sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 313 ";
+$uloz = mysql_query("$sqult");
+$sqult = "DELETE FROM F$kli_vxcf"."_mzddmn WHERE dm = 323 ";
 $uloz = mysql_query("$sqult");
 }
 

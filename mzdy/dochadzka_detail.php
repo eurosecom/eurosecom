@@ -130,11 +130,13 @@ $rano8_od=str_replace(".", ":", $rano8_od);
 $poob8_od=str_replace(".", ":", $poob8_od);
 $nocn8_od=str_replace(".", ":", $nocn8_od);
 
+$rz24=1*trim($_REQUEST['rz24']);
+
 $sqty = "DELETE FROM F$kli_vxcf"."_mzddochadzkasetpripl ";
 $ulozene = mysql_query("$sqty");
 
-$sqty = "INSERT INTO F$kli_vxcf"."_mzddochadzkasetpripl ( dm_nad, dm_so, dm_ne, dm_sv, dm_nc, den12_od, noc12_od, rano8_od, poob8_od, nocn8_od )".
-" VALUES ( '$dm_nad', '$dm_so', '$dm_ne', '$dm_sv', '$dm_nc', '$den12_od', '$noc12_od', '$rano8_od', '$poob8_od', '$nocn8_od'  );"; 
+$sqty = "INSERT INTO F$kli_vxcf"."_mzddochadzkasetpripl ( dm_nad, dm_so, dm_ne, dm_sv, dm_nc, den12_od, noc12_od, rano8_od, poob8_od, nocn8_od, rz24 )".
+" VALUES ( '$dm_nad', '$dm_so', '$dm_ne', '$dm_sv', '$dm_nc', '$den12_od', '$noc12_od', '$rano8_od', '$poob8_od', '$nocn8_od', '$rz24'  );"; 
 $ulozene = mysql_query("$sqty");
 
 $copern=20;
@@ -179,7 +181,14 @@ $sql = "ALTER TABLE F".$kli_vxcf."_mzddochadzkasetpripl ADD den12_od VARCHAR(10)
 $vysledek = mysql_query("$sql");
                }
 
-$dm_nad=201; $dm_so=202; $dm_ne=203; $dm_sv=204; $dm_nc=223; 
+$sql = "SELECT rz24 FROM F".$kli_vxcf."_mzddochadzkasetpripl ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F".$kli_vxcf."_mzddochadzkasetpripl ADD rz24 DECIMAL(2,0) DEFAULT 0 AFTER dm_nc";
+$vysledek = mysql_query("$sql");
+               }
+
+$dm_nad=201; $dm_so=202; $dm_ne=203; $dm_sv=204; $dm_nc=223; $rz24=0; 
 $den12_od="06:00"; $noc12_od="18:00"; $rano8_od="06:00"; $poob8_od="14:00"; $nocn8_od="22:00";
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddochadzkasetpripl ");
   if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -196,6 +205,8 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddochadzkasetpripl ");
   $rano8_od=$riaddok->rano8_od;
   $poob8_od=$riaddok->poob8_od;
   $nocn8_od=$riaddok->nocn8_od;
+
+  $rz24=1*$riaddok->rz24;
   }
 
 
@@ -273,6 +284,11 @@ if( $uvatypx == 8 AND $generx == 812 ) { $cas=$poob8_od; $kolkyden=2; }
 if( $uvatypx == 8 AND $generx == 813 ) { $cas=$nocn8_od; $kolkyden=2; }
 if( $uvatypx == 8 AND $generx == 814 ) { $cas=0; $kolkyden=2; }
 
+if( $uvatypx == 12 AND $generx == 1201 ) { $cas=$den12_od; $kolkyden=1; }
+if( $uvatypx == 12 AND $generx == 1202 ) { $cas=$noc12_od; $kolkyden=1; }
+if( $uvatypx == 12 AND $generx == 1203 ) { $cas=0; $kolkyden=1; }
+if( $uvatypx == 12 AND $generx == 1204 ) { $cas=0; $kolkyden=2; }
+
 $i=$den1;
   while ($i <= $pocetdni )
   {
@@ -290,6 +306,11 @@ if( $uvatypx == 8 AND $kolkyden == 3 AND $cas == $rano8_od ) { $cas=$poob8_od; $
 if( $uvatypx == 8 AND $kolkyden == 3 AND $cas == $poob8_od ) { $cas=$nocn8_od; $kolkyden=1; }
 if( $uvatypx == 8 AND $kolkyden == 3 AND $cas == $nocn8_od ) { $cas=0; $kolkyden=1; }
 if( $uvatypx == 8 AND $kolkyden == 3 AND $cas == 0 ) { $cas=$rano8_od; $kolkyden=1; }
+
+if( $uvatypx == 12 AND $kolkyden == 2 AND $cas == $den12_od ) { $cas=$noc12_od; $kolkyden=1; }
+if( $uvatypx == 12 AND $kolkyden == 2 AND $cas == $noc12_od ) { $cas=0; $kolkyden=1; }
+if( $uvatypx == 12 AND $kolkyden == 2 AND $cas == 0 ) { $cas=0; $kolkyden=2; }
+if( $uvatypx == 12 AND $kolkyden == 3 AND $cas == 0 ) { $cas=$den12_od; $kolkyden=1; }
 
 
   $i=$i+1;
@@ -1103,6 +1124,11 @@ Menu EkoRobot - Doch·dzkov˝ systÈm - Nastavenie prÌplatkov</td>
 </td></tr>
 
 <tr>
+<td class='ponuka' colspan='4'>Rozdelovanie So, Ne, Sv
+<td class='ponuka' colspan='6'><input type='checkbox' name='rz24' value='1' > nezaökrtnutÈ=od rannej zmeny do konca noËnej zmeny, zaökrtnutÈ=od r·na 00 hod. do noci 24.00 hod. s rozdelenÌm noËnej zmeny
+</td></tr>
+
+<tr>
 <td class='ponuka' colspan='4'>ZaËiatok dennej zmeny 12 hod.˙v‰zok
 <td class='ponuka' colspan='6'><input type='text' name='den12_od' id='den12_od' size='8' maxlenght='6' value="" > 
 </td></tr>
@@ -1136,7 +1162,7 @@ Menu EkoRobot - Doch·dzkov˝ systÈm - Nastavenie prÌplatkov</td>
 
 </div>
 <script type="text/javascript">
-  function zobraz_upravpripl(dm_nad, dm_so, dm_ne, dm_sv, dm_nc, den12_od, noc12_od, rano8_od, poob8_od, nocn8_od)
+  function zobraz_upravpripl(dm_nad, dm_so, dm_ne, dm_sv, dm_nc, den12_od, noc12_od, rano8_od, poob8_od, nocn8_od, rz24)
   { 
   nastavpriplx.style.display='';
 
@@ -1155,6 +1181,8 @@ Menu EkoRobot - Doch·dzkov˝ systÈm - Nastavenie prÌplatkov</td>
     document.forms.fkoef3.rano8_od.value=rano8_od;
     document.forms.fkoef3.poob8_od.value=poob8_od;
     document.forms.fkoef3.nocn8_od.value=nocn8_od;
+
+    if( rz24 == 1 ) { document.fkoef3.rz24.checked = 'checked'; }
 
 
   myRobotmenu3 = document.getElementById("nastavpriplx");
@@ -1179,8 +1207,11 @@ Menu EkoRobot - Doch·dzkov˝ systÈm - Nastavenie prÌplatkov</td>
   var poob8_od = document.forms.fkoef3.poob8_od.value;
   var nocn8_od = document.forms.fkoef3.nocn8_od.value;
 
+  var rz24 = 0;
+  if( document.fkoef3.rz24.checked ) rz24=1;
+
   window.open('../mzdy/dochadzka_detail.php?cislo_oc=<?php echo $cislo_oc;?>&dm_nad=' +dm_nad + '&dm_so=' + dm_so 
-+ '&dm_ne=' + dm_ne + '&dm_sv=' + dm_sv + '&dm_nc=' + dm_nc 
++ '&dm_ne=' + dm_ne + '&dm_sv=' + dm_sv + '&dm_nc=' + dm_nc + '&rz24=' + rz24 
 + '&den12_od=' + den12_od + '&noc12_od=' + noc12_od + '&rano8_od=' + rano8_od + '&poob8_od=' + poob8_od + '&nocn8_od=' + nocn8_od
 + '&copern=1069&drupoh=1&page=1&subor=0', '_self');
 
@@ -1200,7 +1231,7 @@ Menu EkoRobot - Doch·dzkov˝ systÈm - Nastavenie prÌplatkov</td>
 <tr>
 <td colspan='8'>
 <img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick="nastavgenerx.style.display='none';" title='Zhasni menu' >  
-Menu EkoRobot - Doch·dzkov˝ systÈm - Generovanie</td>
+Menu EkoRobot - Doch·dzkov˝ systÈm - Generovanie R=rann·, O=odpoludÚajöia, N=noËn·, -=voæno</td>
 <td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick="nastavgenerx.style.display='none';" title='Zhasni menu' >
 </td></tr>  
 
@@ -1231,6 +1262,18 @@ if ( $uvatyp == 8 )
      }
 ?>
 
+<?php
+if ( $uvatyp == 12 )
+     {
+?>
+
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1201);">Generovaù R O - - R O - - </a></td></tr>
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1202);">Generovaù O - - R O - - R </a></td></tr>
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1203);">Generovaù - - R O - - R O </a></td></tr>
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1204);">Generovaù - R O - - R O - </a></td></tr>
+<?php
+     }
+?>
 <tr><td></td></FORM></tr></table> 
 
 </div>
@@ -1365,6 +1408,15 @@ $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid.",kalendar ".
 " WHERE dmxa = 1 AND F".$kli_vxcf."_mzddochadzkap".$kli_uzid.".daod2=kalendar.dat ";
 $vysledek = mysql_query("$sql");
 
+//echo $rz24;
+if( $rz24 == 0 )
+  {
+
+$sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET akyden2=akyden, svt2=svt  WHERE dmxa = 1 ";
+$vysledek = mysql_query("$sql");
+
+  }
+
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET ".
 " tomid=time_to_sec(timediff(datm, datn )) / 3600 WHERE dmxa = 1 ";
 $vysledek = mysql_query("$sql");
@@ -1391,12 +1443,25 @@ $vysledek = mysql_query("$sql");
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET pnoc=6+rozd1 WHERE dmxa = 1 AND rozd2 > 0 AND rozd2 > 6 AND rozd1 < 2 ";
 $vysledek = mysql_query("$sql");
 
+if( $rz24 == 1 )
+  {
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET psob=rozd2 WHERE rozd2 > 0 AND dmxa = 1 AND akyden2 = 6 AND svt2 = 0 ";
 $vysledek = mysql_query("$sql");
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET pned=rozd2 WHERE rozd2 > 0 AND dmxa = 1 AND akyden2 = 7 AND svt2 = 0 ";
 $vysledek = mysql_query("$sql");
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET psvt=rozd2 WHERE rozd2 > 0 AND dmxa = 1 AND svt2 = 1 ";
 $vysledek = mysql_query("$sql");
+  }
+
+if( $rz24 == 0 )
+  {
+$sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET psob=psob+rozd2 WHERE rozd2 > 0 AND dmxa = 1 AND akyden2 = 6 AND svt2 = 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET pned=pned+rozd2 WHERE rozd2 > 0 AND dmxa = 1 AND akyden2 = 7 AND svt2 = 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET psvt=psvt+rozd2 WHERE rozd2 > 0 AND dmxa = 1 AND svt2 = 1 ";
+$vysledek = mysql_query("$sql");
+  }
 
 //koniec vypocet priplatkov
 
@@ -1456,7 +1521,9 @@ Nepretrûit· prev·dzka typ <?php echo $uvatyp;?> r·no <?php echo $rano8_od;?> - o
 Nepretrûit· prev·dzka typ <?php echo $uvatyp;?> deÚ <?php echo $den12_od;?> - noc <?php echo $noc12_od;?>
 <?php                     } ?>
 
-<img src='../obr/naradie.png'  width=15 height=15 border=1 onClick="zobraz_upravpripl('<?php echo $dm_nad;?>', '<?php echo $dm_so;?>', '<?php echo $dm_ne;?>', '<?php echo $dm_sv;?>', '<?php echo $dm_nc;?>', '<?php echo $den12_od;?>', '<?php echo $noc12_od;?>', '<?php echo $rano8_od;?>', '<?php echo $poob8_od;?>', '<?php echo $nocn8_od;?>' );" width=15 height=15 border=0 title='Nastaviù druhy prÌplatkov' >
+<img src='../obr/naradie.png'  width=15 height=15 border=1 onClick="zobraz_upravpripl('<?php echo $dm_nad;?>', '<?php echo $dm_so;?>'
+, '<?php echo $dm_ne;?>', '<?php echo $dm_sv;?>', '<?php echo $dm_nc;?>', '<?php echo $den12_od;?>', '<?php echo $noc12_od;?>'
+, '<?php echo $rano8_od;?>', '<?php echo $poob8_od;?>', '<?php echo $nocn8_od;?>', '<?php echo $rz24;?>' );" width=15 height=15 border=0 title='Nastaviù druhy prÌplatkov' >
 
 </td>
 
