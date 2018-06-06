@@ -1,3 +1,95 @@
+05.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY oslobodenie 13.platu len do 500 Eur ten sa nahr· na DM 313, zvyöok nahraù na DM 323
+
+02.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY pre NUJ poËÌtam prÌplatok za sviatok 204 ako 100% FP hodinovÈho. Ak je menöÌ ako 2.759 tak d·m priemer 2.759
+
+01.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY NUJ koeficient pre ˙v˙zok 4.9 hodÌn zmenen˝ na 107.1
+
+31.05.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY NUJ prÌplatky od 1.5.2018 dm 201, 202, 203, 204 a 223 a 13.plat 313 doplnenie v ËÌselnÌku mzdov˝ch zloûiek pre rok 2018
+  a kontrola z·kona 553 proti ZP a pouûiù vyööiu sadzbu
+
+30.05.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MAJ ˙prava sadzieb odpisov majetku aj keÔ je star· definÌcia
+- CIS kalend·r nastavenie So a Ne od 7.2018 do 12.2018
+- MZDY prÌplatky od 1.5.2018 dm 201, 202, 203, 204 a 223 a 13.plat 313 doplnenie v ËÌselnÌku mzdov˝ch zloûiek pre rok 2018
+- CIS verzia 2018_05
+
+25.05.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- CIS lipovec.sk podæa iËa zaraden˝ do polno=1 v nastavenÌ, aby mohli pren·öaù stav zvierat
+- UCTO ponuka BU v nahr·vanÌ bankov˝ch v˝pisov ochrana proti cache
+- ANA export poloûkovitÈho saldokonta z anal˝z do CSV
+- MZDY prÌstup do povinn˝ch zr·ûok v ˙dajoch o zamestnancovi, trval˝ch aj mesaËnej d·vke
+
+14.05.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY prenos tabulky _mzdsubeznepp v poËiatoËnom stave do novÈho roka.
+- UCTO anglick· verzia Uz·vierky POD v2014
+- MZDY nastavenie s˙beûn˝ch pracovn˝ch pomerov a prepoËet ZP pre DÙver˙ ak s˙ s˙beûnÈ PP
+- MZDY prÌprava na nastavenie povinn˝ch zr·ûok v ˙dajoch o zamestnancovi
+
+06.05.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY pre nezabudkano.sk do sz3 priemer FP deleno poËet dnÌ a sviatkov * ˙v‰zok, a z toho poËÌtaj˙ n·hrady
+- MZDY pre nezabudkano.sk do sz4 priemer FP deleno priemern˝ poËet dni 21.74 * ˙v‰zok, a z toho poËÌtaj˙ prÌplatky
+- MZDY Z·poËtov˝ list 2. strana so zr·ûkami vyplÚacia
+
+30.04.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- FAKT nov· ikonka presun fakt˙ry do ERP na ˙hradu
+- MZDY nastavenie poËÌtania priemernÈho FP pre nez·budkano.sk
+- CIS ˙drûba prepojenia FB id a klienti uzid
+- MZDY prÌprava na v˝poËet odvodov ZP pre s˙beûnÈ PP do DÙvera ZP
+- UCTO ˙pravy ötrukt˙ry CSV pre FIN 204 a 404
+
+23.04.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO FIN204 komplet skript aj tlaË do PDF
+
+18.04.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO FIN404 komplet skript aj tlaË do PDF
+
+17.04.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Upomienky a penalizaËnÈ fakt˙ry - ochrana proti cache
+- UCTO icdph na fakt˙rach podla odbernÈho miesta aû do 10 odbern˝ch miest
+- UCTO ochrana proti cache zostavy JU
+- UCTO FOB 2017 PDF - ak neexistuje mysql tabulka skoËÌ nasp‰ù do ˙pravy
+- UCTO RoËn· ötatistika vts201, opu201, ikap201 oprava modulu 571
+- UCTO ötatistika RoË VTS101 kompletn˝ skript
+
+10.04.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO FIN404 ˙prava exportu do CSV a nov˝ formul·r 28 stÂpcov
+- UCTO ötatistika RoË VTS101 novÈ JPG, skript eöte nie
+
+06.04.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO FIN2,3,4,5,6 v˝kazy novÈ JPG 
+- UCTO FIN2,3,4,5,6 blokovanie exportu do DBF od 2018 
+
+05.04.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY TlaË Mzdov˝ch listov pre vöetk˝ch zamestnancov, ak nen·jde v mzdovom liste dm 101 aû 999 tak ho navytlaËÌ
+
+03.04.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Knihy fakt˙r ochrana proti cache
+- UCTO JU Prehæad ˙Ëtovn˝ch pohybov ochrana proti cache
+- UCTO v riadku s pozn·mkami pod, m˙j a n˙j ned·va defaultne d·tum schv·lenia dneön˝ d·tum
+- MZDY RoËnÈ Hl·senie o vy˙ËtovanÌ dane, ˙hrne prÌjmov, zrazen˝ch preddavkoch... v zozname ikonka 
+  "NaËÌtaù a vymazaù vöetky ostatnÈ prÌlohy s rodn˝m ËÌslom XXXXXX YYYY",
+  napoËÌta ostatnÈ dohody pre rovnakÈ rodnÈ ËÌslo do hlavnÈho prÌjmu, na ktor˝ uûÌvateæ klikne. 
+
+29.03.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO samozdaÚovacie druhy DPH aj pre riadky 13, 14 a 21 - prepoËÌtanie z·kladu a smerovanie do Priznania a KVDPH
+- UCTO ⁄Ëtovn· z·vierka JU ochrana proti cache
+
+27.03.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Penazny dennik druh 1 a verzia pre rok 2013 ochrana proti cache
+
+21.03.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MAJ Opraven˝ prevod ˙Ëtovania majetku pre ˙Ëty 031 v polno=1 firm·ch
+
+20.03.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO FOB ˙prava poziciovania a minim·lny poËet prÌloh 3
+
+19.03.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Pozn·mky POD export odkaz na link s ochranou proti cache, pokyn pre pod·vanie CashFlow 
+
 16.03.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - UCTO Pozn·mky NO ötandardnÈ texty 2017, 2018, ochrana proti cache PDF a prenos textov z minulÈho roka v oddelen˝ch datab·zach
 - MZDY RoËnÈ hl·senie, pouËenie PDF
