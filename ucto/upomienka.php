@@ -1003,7 +1003,7 @@ $pdf->Cell(0,6,"  ","0",1,"R");
 $pdf->Cell(180,6,"     ","0",1,"L");
 if( $h_pen != 1 )
      {
-$pdf->Cell(90,6,"$fir_fmes dòa: $dnes ","0",0,"L");$pdf->Cell(90,6,"Vybavuje: $kli_uzmeno $kli_uzprie, èíslo upomienky: $rtov->cupo ","0",1,"L");
+$pdf->Cell(90,6,"$fir_fmes dòa: $dnes ","0",0,"L");$pdf->Cell(90,6,"Vybavuje: $kli_uzmeno $kli_uzprie, id upomienky: $rtov->cupo ","0",1,"L");
      }
 if( $h_pen == 1 )
      {
@@ -1157,7 +1157,7 @@ $sprava=$sprava."Prosíme o Vašu kontrolu nezaplatených faktúr po lehote splatnos
 $sprava=$sprava."Pokia¾ ste uvedené faktúry po lehote splatnosti doposia¾ nezaplatili, urobte tak prosím ihneï na náš"."\n";
 $sprava=$sprava."bankový úèet ".$fir_fuc1." / ".$fir_fnm1." . "."\n";
 $sprava=$sprava."V prípade, že ste uvedené faktúry po lehote splatnosti uhradili, považujte prosím túto upomienku za bezpredmetnú . "."\n"."\n";
-$sprava=$sprava."Vybavuje: $kli_uzmeno $kli_uzprie, èíslo upomienky: $rtov->cupo "."\n";
+$sprava=$sprava."Vybavuje: $kli_uzmeno $kli_uzprie, id upomienky: $rtov->cupo "."\n";
 
 
 
