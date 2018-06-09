@@ -4838,9 +4838,26 @@ $sqldou = mysql_query("$sqlttu");
   $fir_uc3fk=$riaddou->u3f;
   }
 
-
 //koniec fir_uc1fk az fir_uc3fk z _fakodbucb ak existuje
 
+$dokladico=0;
+$sqlttu = "SELECT * FROM F$kli_vxcf"."_$tabl WHERE dok = $cislo_dok ";
+$sqldou = mysql_query("$sqlttu");
+  if (@$zaznam=mysql_data_seek($sqldou,0))
+  {
+  $riaddou=mysql_fetch_object($sqldou);
+  $dokladico=1*$riaddou->ico;
+  }
+
+$defpercento=0; $jedefpercento=0;
+$sqlttu = "SELECT * FROM F$kli_vxcf"."_icorozsirenie WHERE ico = $dokladico ";
+$sqldou = mysql_query("$sqlttu");
+  if (@$zaznam=mysql_data_seek($sqldou,0))
+  {
+  $riaddou=mysql_fetch_object($sqldou);
+  $defpercento=1*$riaddou->pico2;
+  }
+if( $defpercento != 0 ) { $jedefpercento=1; }
 ?>
 <div id="nastavfakx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 300px; left: 10px; width:600px; height:100px;">
 <table  class='ponuka' width='100%'>
@@ -4870,10 +4887,15 @@ $sqldou = mysql_query("$sqlttu");
 
 <tr><td class='ponuka' colspan='5'> 
 maxim·lny poËet znakov v n·zve poloûky <input type='text' name='h_ucm5' id='h_ucm5' size='4' maxlenght='4' value='' >(minim·lne 40 znakov, max.80 znakov) 
+</tr>
 
-<tr><td class='ponuka' colspan='5'> 
+<tr><td class='ponuka' colspan='4'> 
 Zæava % <input type='text' name='h_ico5' id='h_ico5' size='4' maxlenght='4' value='' >
-<a href="#" onClick="ZlavaPol(<?php echo $kli_uzid; ?>);"> VypoËÌtaù zæavu z fakt˙ry</a></td></tr>  
+<?php if( $jedefpercento == 1 ) { echo " *** "; } ?>
+<a href="#" onClick="ZlavaPol(<?php echo $kli_uzid; ?>);"> VypoËÌtaù zæavu z fakt˙ry</a></td>
+<td class='ponuka' colspan='1' align="right"> 
+<img border=0 src='../obr/ok.png' style='width:12px; height:12px;' onClick='IcoZlava();' title='Uloûiù percento zæavy pre I∆O <?php echo $riadok->ico;?> ako defaultnÈ percento' > </td>
+</tr>  
 
 <tr><td class='ponuka' colspan='5'> | Text nad poloûkou <input type='checkbox' name='omd' value='1' > / pod poloûkou <input type='checkbox' name='pdl' value='1' >
  | zahraniËn· fakt˙ra <input type='checkbox' name='odl' value='1' > </td></tr>
@@ -4938,7 +4960,7 @@ if( document.enast.u2f.checked ) u2f=1;
 var u3f = 0;
 if( document.enast.u3f.checked ) u3f=1;
 
-window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&u1f=' + u1f + '&u2f=' + u2f + '&u3f=' + u3f + '&cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900', '_self' );
+window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&jedefpercento=0&u1f=' + u1f + '&u2f=' + u2f + '&u3f=' + u3f + '&cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900', '_self' );
                 }
 
 //zlava
@@ -4970,8 +4992,30 @@ if( document.enast.pmd.checked ) pmd=1;
 var pdl = 0;
 if( document.enast.pdl.checked ) pdl=1;
 
-window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900&zlava=1', '_self' );
+window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&jedefpercento=<?php echo $jedefpercento; ?>&cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900&zlava=1', '_self' );
                 }
+
+//zapis percento zlavy ako default pre ico
+function IcoZlava()
+                {
+var doklad = document.forms.forms1.h_dok.value;
+var ico5 = document.forms.enast.h_ico5.value;
+
+window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&icox=<?php echo $dokladico;?>&cislo_dok=' + doklad + '&ico5=' + ico5 + '&copern=600&zlava=0', '_self' );
+                }
+
+function SetIcoZlava()
+                {
+<?php
+if( $defpercento != 0 ) 
+  {
+?>
+document.forms.enast.h_ico5.value="<?php echo $defpercento;?>";
+<?php
+  }
+?>
+                }
+
 </script>
 <?php
      }

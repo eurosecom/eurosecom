@@ -38,6 +38,7 @@ $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resiz
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 $zlava = 1*$_REQUEST['zlava'];
+$jedefpercento = 1*$_REQUEST['jedefpercento'];
 
 //copern=900 uloz nastavenie fak
 if( $copern == 900 )
@@ -74,6 +75,9 @@ $vysledek = mysql_query("$sql");
 }
 if( $longslu == 1 ) { $sql = "ALTER TABLE F$kli_vxcf"."_sluzby MODIFY nsl VARCHAR(100) NOT NULL"; $vysledek = mysql_query("$sql"); }
 
+if( $jedefpercento == 0 )
+      {
+
 $ttvv = "DELETE FROM F$kli_vxcf"."_fakturaset$kli_uzid ";
 $ttqq = mysql_query("$ttvv");
 $ttvv = "DELETE FROM F$kli_vxcf"."_fakturaset ";
@@ -89,6 +93,8 @@ $ttvv = "INSERT INTO F$kli_vxcf"."_fakturaset$kli_uzid ( polozka,ucm1,ucm2,ucm3,
 " '$zmd', '$zdl', '$omd', '$odl', '$pmd', '$pdl' )";
 $ttqq = mysql_query("$ttvv");
 
+      }
+
 $ttvv = "DELETE FROM F$kli_vxcf"."_fakodbucb WHERE dok = $cislo_dok ";
 $ttqq = mysql_query("$ttvv");
 $vsql = "INSERT INTO F".$kli_vxcf."_fakodbucb ( dok, u1f, u2f, u3f ) VALUES ('$cislo_dok', '$u1f', '$u2f', '$u3f') ";
@@ -96,6 +102,7 @@ $vytvor = mysql_query("$vsql");
 
 }
 //koniec copern=900 uloz nastavenie fak
+
 
 //zlava faktura
 if( $zlava == 1 AND $drupoh != 42 )
@@ -199,6 +206,24 @@ $upravene = mysql_query("$sqtz");
 //exit;
 }
 //koniec zlava ERP
+
+
+//copern=600 uloz default zlava
+if( $copern == 600 )
+{
+$ico5 = 1*$_REQUEST['ico5'];
+$icox = 1*$_REQUEST['icox'];
+
+$sqty = "INSERT INTO F$kli_vxcf"."_icorozsirenie ( ico ) VALUES ( '$icox' );"; 
+$ulozene = mysql_query("$sqty");
+$sqty = "UPDATE F$kli_vxcf"."_icorozsirenie SET pico2='$ico5' WHERE ico = $icox "; 
+$ulozene = mysql_query("$sqty");
+//echo $sqty;
+//exit;
+
+$zlava=0;
+}
+//koniec copern=600 uloz default zlava
 
 ?>
 <HEAD>

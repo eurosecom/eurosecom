@@ -216,5 +216,6 @@ if( u3f == 1 ) { document.enast.u3f.checked = 'checked'; }
 
 document.forms.enast.h_ucm1.focus();
 document.forms.enast.h_ucm1.select();
+SetIcoZlava();
 
 }
