@@ -1129,7 +1129,7 @@ Menu EkoRobot - Dochádzkovı systém - Nastavenie príplatkov</td>
 </td></tr>
 
 <tr>
-<td class='ponuka' colspan='4'>Zaèiatok dennej zmeny 12 hod.úväzok
+<td class='ponuka' colspan='4'>Zaèiatok rannej zmeny 12 hod.úväzok
 <td class='ponuka' colspan='6'><input type='text' name='den12_od' id='den12_od' size='8' maxlenght='6' value="" > 
 </td></tr>
 
@@ -1144,7 +1144,7 @@ Menu EkoRobot - Dochádzkovı systém - Nastavenie príplatkov</td>
 </td></tr>
 
 <tr>
-<td class='ponuka' colspan='4'>Zaèiatok poobednej zmeny 8 hod.úväzok
+<td class='ponuka' colspan='4'>Zaèiatok odpoludòajšej zmeny 8 hod.úväzok
 <td class='ponuka' colspan='6'><input type='text' name='poob8_od' id='poob8_od' size='8' maxlenght='6' value="" > 
 </td></tr>
 
@@ -1267,10 +1267,10 @@ if ( $uvatyp == 12 )
      {
 ?>
 
-<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1201);">Generova R O - - R O - - </a></td></tr>
-<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1202);">Generova O - - R O - - R </a></td></tr>
-<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1203);">Generova - - R O - - R O </a></td></tr>
-<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1204);">Generova - R O - - R O - </a></td></tr>
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1201);">Generova R N - - R N - - </a></td></tr>
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1202);">Generova N - - R N - - R </a></td></tr>
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1203);">Generova - - R N - - R N </a></td></tr>
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(12, 1204);">Generova - R N - - R N - </a></td></tr>
 <?php
      }
 ?>
@@ -1434,6 +1434,8 @@ $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET pned=rozd1 WHERE dm
 $vysledek = mysql_query("$sql");
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET psvt=rozd1 WHERE dmxa = 1 AND svt = 1 ";
 $vysledek = mysql_query("$sql");
+
+//vyriesit zmenu ak zacina po 22.00 a len do 24.00
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET pnoc=rozd2+2 WHERE dmxa = 1 AND rozd2 > 0 AND rozd2 <= 6 AND rozd1 >= 2 ";
 $vysledek = mysql_query("$sql");
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET pnoc=rozd2+rozd1 WHERE dmxa = 1 AND rozd2 > 0 AND rozd2 <= 6 AND rozd1 < 2 ";
