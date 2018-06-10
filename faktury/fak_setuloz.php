@@ -109,17 +109,21 @@ if( $zlava == 1 AND $drupoh != 42 )
 {
 $h_cep=0;
 $h_ced=0;
-$zaklad2s=0;
-$sqlttt = "SELECT zk2 FROM F$kli_vxcf"."_fakodb WHERE dok = $cislo_dok ";
+$zaklad2s=0; $zaklad0s=0;
+$sqlttt = "SELECT zk2, zk0 FROM F$kli_vxcf"."_fakodb WHERE dok = $cislo_dok ";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
   $zaklad2s=1*$riaddok->zk2;
+  $zaklad0s=1*$riaddok->zk0;
   }
 
 $h_cep=$ico5*$zaklad2s/100;
 $h_ced=(100+$fir_dph2)*$h_cep/100;
+
+$h_ce0=$ico5*$zaklad0s/100;
+$h_ce0=$h_ce0;
 
 $textzlavy="Z¾ava ".$ico5."%"; 
 
@@ -128,13 +132,23 @@ $sqty = "INSERT INTO F$kli_vxcf"."_fakslu ( dok,fak,dol,prf,slu,nsl,pop,dph,cep,
 " '-1', '', 0, 0, 0, '$kli_uzid', '' );"; 
 $ulozene = mysql_query("$sqty");
 
+if( $zaklad0s > 0 )
+  {
+
+$sqty = "INSERT INTO F$kli_vxcf"."_fakslu ( dok,fak,dol,prf,slu,nsl,pop,dph,cep,ced,mno,mer,dfak,cfak,pfak,id,pon )". 
+" VALUES ('$cislo_dok', '0', '', '', '0', '$textzlavy', '', '0', '$h_ce0', '$h_ce0',".
+" '-1', '', 0, 0, 0, '$kli_uzid', '' );"; 
+$ulozene = mysql_query("$sqty");
+
+  }
+
 $h_cep2=$h_cep;
 $h_ced2=$h_ced;
 $h_cep0=0;
 
 $sqtz = "UPDATE F$kli_vxcf"."_fakodb SET ".
 " zk2=zk2-('$h_cep2'), sp2=sp2-('$h_ced2'), dn2=sp2-zk2,  ".
-" zk0=zk0-('$h_cep0'), hod=sp1+sp2+zk0 ".
+" zk0=zk0-('$h_cep0')-('$h_ce0'), hod=sp1+sp2+zk0 ".
 " WHERE dok='$cislo_dok'";
 
 //echo $sqtz;
