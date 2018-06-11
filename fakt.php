@@ -731,6 +731,12 @@ htmlmenu += " <a href=\"#\" onClick=\"window.open('../faktury/vstfak.php?copern=
     htmlmenu += " ?</td></tr>";
 
 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/fakt_kontrol.php?copern=1&drupoh=1&page=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )\">" +
+"Chcete skontrolovaù doklady v Odbyte ?</a>";
+    htmlmenu += "</td></tr>";
+
+
 </script>
 </HEAD>
 <BODY class="white" <?php if( $copern != 22 AND $copern != 23 AND $copern != 24 ) { echo "onload='ukazrobot();'"; } ?> >
