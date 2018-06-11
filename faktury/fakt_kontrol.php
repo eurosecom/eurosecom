@@ -40,6 +40,7 @@ $sqlt = <<<prcprizdphs
 (
    er1          INT,
    psys         INT,
+   uce          DECIMAL(10,0),
    ume          FLOAT(8,4),
    dat          DATE,
    dok          INT,
@@ -127,15 +128,15 @@ $oznac = mysql_query("$sqtoz");
 //er1	psys	ume	dat	dok	hod	fak ico	fic
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
-" 0,1,ume,dat,dok,0,0,ico,0 FROM F$kli_vxcf"."_fakodb WHERE dok >= 0 ";
+" 0,1,uce,ume,dat,dok,0,0,ico,0 FROM F$kli_vxcf"."_fakodb WHERE dok >= 0 ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
-" 0,11,ume,dat,0,0,dok,ico,0 FROM F$kli_vxcf"."_fakdol WHERE dok >= 0 ";
+" 0,11,0,ume,dat,0,0,dok,ico,0 FROM F$kli_vxcf"."_fakdol WHERE dok >= 0 ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
-" 0,1,MAX(ume),MAX(dat),MAX(dok),hod,MAX(fak),ico,99 FROM F$kli_vxcf"."_prcprizdphs$kli_uzid"." WHERE dok >= 0 GROUP BY ico";
+" 0,1,MAX(uce),MAX(ume),MAX(dat),MAX(dok),hod,MAX(fak),ico,99 FROM F$kli_vxcf"."_prcprizdphs$kli_uzid"." WHERE dok >= 0 GROUP BY ico";
 $dsql = mysql_query("$dsqlt");
 
 //nastav eror ak je fak aj dod za ico
@@ -185,10 +186,10 @@ td.hvstup_bred { background-color:#ff6c6c; color:black; font-weight:normal;
 //<a href='vstf_u.php?regpok=0&vyroba=0&copern=8&drupoh=1&page=1&hladaj_uce=31100&h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT
 //&cislo_dok=780007&h_fak=780007&h_dol=0&h_prf=0'>
 
-function upravFakt( dok )
+function upravFakt( uce, dok )
                 {              
 
-window.open('vstf_u.php?regpok=0&vyroba=0&copern=8&drupoh=1&page=1&hladaj_uce=31100&h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT&cislo_dok=' + dok + '&h_dol=0&h_prf=0'
+window.open('vstf_u.php?regpok=0&vyroba=0&copern=8&drupoh=1&page=1&hladaj_uce=' + uce + '&h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT&cislo_dok=' + dok + '&h_dol=0&h_prf=0'
 , '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
                 }
@@ -287,7 +288,7 @@ if( $hlavicka->er1 > 0 ) { $hvstup="hvstup_bred"; }
 <td class="<?php echo $hvstup; ?>" align="right" >
 
 <?php echo $hlavicka->dok; ?>
-<img src='../obr/uprav.png' width=15 height=15 onClick="upravFakt(<?php echo $hlavicka->dok; ?>);" border=1 title="Úprava faktúry" >
+<img src='../obr/uprav.png' width=15 height=15 onClick="upravFakt(<?php echo $hlavicka->uce; ?>, <?php echo $hlavicka->dok; ?>);" border=1 title="Úprava faktúry" >
 
 </td>
 
