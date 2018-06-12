@@ -3112,6 +3112,31 @@ $sqlt = 'DELETE FROM F'.$kli_vxcf.'_mzdmesacnyprehladdaneoc WHERE umex = '.$kli_
 $vysledok = mysql_query("$sqlt");
 //echo $sqlt; 
 //exit;
+
+//uloz log ostre spracovanie
+$sql = "SELECT osneos FROM F".$kli_vxcf."_mzdsprclog ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+
+$sql = "DROP TABLE F".$kli_vxcf."_mzdsprclog ";
+$vysledok = mysql_query($sql);
+
+$sqlt = <<<uctcrv
+(
+   kliuzid          DECIMAL(10,0) DEFAULT 0,
+   ume              DECIMAL(7,4) DEFAULT 0,
+   osneos           DECIMAL(10,0) DEFAULT 0,
+   datm             TIMESTAMP(14)
+);
+uctcrv;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_mzdsprclog ".$sqlt;
+$vytvor = mysql_query("$vsql");
+}
+$vsql = "INSERT INTO F".$kli_vxcf."_mzdsprclog ( kliuzid, ume, osneos ) VALUES ( '$kli_uzid', '$kli_vume', '1' )";
+$vytvor = mysql_query("$vsql");
+
+
      }
 //koniec zalohovania databaz pri ostrom
 

@@ -1794,6 +1794,11 @@ function zamsodpoc()
 window.open('ktomaodpocetzp.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
                     }
 
+function histSprac()
+                    {
+window.open('histsprac.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+                    }
+
 function dajIBAN(cislo)
                 {
 var cislox = cislo;
@@ -2011,8 +2016,12 @@ odpoèet ZP <img src='../obr/tlac.png' width=20 height=15 border=0 title="Zamestn
 if ( $kli_uzall > 3500 )
   {
 ?>
+<?php if( $_SESSION['newzam'] == 1 ) { ?>
+ <img src='../obr/pdf.png' onClick="histSprac();" width=15 height=15 border=1 title="História ostrých spracovaní">
+<?php                                } ?>
+&nbsp&nbsp&nbsp
 <a href='zamestnanci.php?sys=<?php echo $sys; ?>&copern=67&page=1'>
-<img src='../obr/kos.png' width=20 height=15 border=0 title="Vymazanie všetkých položiek"></a>
+<img src='../obr/kos.png' width=15 height=15 border=1 title="Vymazanie všetkých položiek"></a>
 <?php
   }
 ?>
@@ -2022,7 +2031,7 @@ if ( $kli_uzall > 3500 )
 if ( $kli_uzall > 3500 )
   {
 ?>
-<img src='../obr/import.png' width=20 height=15 border=0 title="Import údajov"></a>
+<img src='../obr/import.png' width=15 height=15 border=1 title="Import údajov"></a>
 <?php
   }
 ?>

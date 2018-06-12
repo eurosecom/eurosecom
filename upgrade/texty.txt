@@ -1,3 +1,10 @@
+12.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- FAKT nastavenie percenta zæavy pre vybranÈ iËo na fakt˙re
+- MZDY doch·dzka, v nepretrûitej 2 zmennej 12hod prev·dzke premenovan· O zmena na N zmenu
+- FAKT poËÌtanie zliav zvl·öù pre sadzbu dph 0 a 20
+- FAKT kontrola duplicity FAK a DOL za iËo
+- MZDY histÛria spracovania v zozname neaktÌvnych zamestnancov
+
 05.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - MZDY oslobodenie 13.platu len do 500 Eur ten sa nahr· na DM 313, zvyöok nahraù na DM 323
 

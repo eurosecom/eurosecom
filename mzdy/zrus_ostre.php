@@ -250,6 +250,9 @@ $dsql = mysql_query("$dsqlt");
 $sqlt = "DROP TABLE F".$kli_vxcf."_mzdnemzakb ";
 $vysledok = mysql_query("$sqlt");
 
+$vsql = "INSERT INTO F".$kli_vxcf."_mzdsprclog ( kliuzid, ume, osneos ) VALUES ( '$kli_uzid', '$kli_vume', '2' )";
+$vytvor = mysql_query("$vsql");
+
 ?>
 <script type="text/javascript">
 alert ("Ostré spracovanie za obdobie <?php echo $kli_vume; ?> \r bolo zrušené !");
