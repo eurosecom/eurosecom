@@ -1384,7 +1384,7 @@ if( $dajhlaodpad == 1 ) {
 <?php                         } ?>
 <div class="toleft line-box-text" style="width:900px;">
 <div>
- <strong>Hlásenie<span>o objeme výroby, dovozu, vývozu a reexportu</span></strong>
+ <strong>Výkaz<span>o objeme výroby, dovozu, vývozu a reexportu</span></strong>
  <img src="../obr/info.png" title="">
 </div>
 <div>

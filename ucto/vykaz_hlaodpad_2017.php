@@ -1,7 +1,7 @@
 <HTML>
 <?php
 
-//skript pre rok 2018 a vyššie
+//skript pre rok 2016 a 2017
 do
 {
 $sys = 'UCT';
@@ -37,8 +37,8 @@ $kli_vrok=$pole[1];
 $citfir = include("../cis/citaj_fir.php");
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/tlacivo2018/hlasenie_vyroba/hlasenie_vyroba_v18";
-$jpg_popis="tlaèivo Výkaz o objeme výroby ... ".$kli_vrok;
+$jpg_cesta="../dokumenty/statistika2016/hlasenie_vyroba/hlasenie_vyroba_v16";
+$jpg_popis="tlaèivo Ohlásenie o objeme výroby ... ".$kli_vrok;
 
 $tlacodpady=1;
 
@@ -350,15 +350,7 @@ if( $copern == 10 )
 {
 
 
-$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-
- $outfilexdel="../tmp/vykfin_".$kli_uzid."_*.*";
- foreach (glob("$outfilexdel") as $filename) {
-    unlink($filename);
- }
-
-$outfilex="../tmp/vykfin_".$kli_uzid."_".$hhmmss.".pdf";
-if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+if (File_Exists ("../tmp/vykazfin.$kli_uzid.pdf")) { $soubor = unlink("../tmp/vykazfin.$kli_uzid.pdf"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -840,14 +832,14 @@ $j = $j + 1;
 
   }
 
-$pdf->Output("$outfilex");
+$pdf->Output("../tmp/vykazfin.$kli_uzid.pdf");
 
 
 
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("<?php echo $outfilex; ?>","_self");
+  var okno = window.open("../tmp/vykazfin.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
 
 
@@ -882,9 +874,9 @@ mysql_free_result($fir_vysledok);
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Výkaz</title>
+<title>Hlásenie</title>
   <style type="text/css">
 
   </style>
@@ -1430,7 +1422,7 @@ function kontrola_datum(vstup, Oznam, x1, errflag)
 <table class="h2" width="100%" >
 <tr>
 
-<td>EuroSecom  -  Výkaz o objeme výroby, dovozu, vývozu a reexportu
+<td>EuroSecom  -  HLÁSENIE o objeme výroby, dovozu, vývozu a reexportu
 
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
