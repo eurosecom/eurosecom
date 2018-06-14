@@ -1,17 +1,132 @@
 <HTML>
 <?php
+$zandroidu=1*$_REQUEST['zandroidu'];
 
-do
-{
+if( $zandroidu == 1 )
+  {
+//server
+if (isset($_REQUEST['serverx'])) { $serverx = $_REQUEST['serverx']; }
+
+$poles = explode("/", $serverx);
+$servxxx=$poles[0];
+$adrsxxx=$poles[1];
+
+//userhash
+$userhash = $_REQUEST['userhash'];
+
+require_once('../androidfanti/MCrypt.php');
+$mcrypt = new MCrypt();
+//#Encrypt
+//$encrypted = $mcrypt->encrypt("Text to encrypt");
+$encrypted=$userhash;
+#Decrypt
+$userxplus = $mcrypt->decrypt($encrypted);
+
+//user
+$userx=$userxplus;
+$poleu = explode("/", $userx);
+$nickxxx=$poleu[1];
+$usidxxx=1*$poleu[3];
+$pswdxxx=$poleu[5];
+$cislo_dok=1*$poleu[12];
+$keyf=$poleu[8];
+
+$dbcon="../".$adrsxxx."/db_connect.php";
+require_once "$dbcon";
+$db = new DB_CONNECT();
+
+$kli_vxcf=DB_FIR;
+$kli_uzid=$usidxxx;
+$kli_vxcfez=DB_FIR;
+$databazaez=DB_DATABASETOP.".";
+
+$anduct=1*$_REQUEST['anduct'];
+if( $anduct == 1 )
+  {
+//nastav databazu
+$kli_vrok=1*$_REQUEST['rokx'];
+$kli_vxcf=1*$_REQUEST['firx'];
+$dbsed="../".$adrsxxx."/nastavdbase.php";
+$sDat = include("$dbsed");
+mysql_select_db($databaza);
+$kli_vxcfez=DB_FIR;
+$databazaez=DB_DATABASETOP.".";
+  }
+
+if( AKY_CHARSET == "utf8" ) { mysql_query("SET NAMES cp1250"); }
+
+
+$druhid=0;
+$cuid=0;
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."F".$kli_vxcfez."_ezak WHERE ez_id = $usidxxx ORDER BY ez_id DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $druhid=10;
+    $cuid=1*$riaddok->cuid;
+    }
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."F".$kli_vxcfez."_ezak WHERE ez_id = $usidxxx AND ez_heslo = '$pswdxxx' ORDER BY ez_id DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $cuid=1*$riaddok->cuid;
+    $druhid=20;
+    }
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."klienti WHERE id_klienta = $cuid AND all_prav > 20000 ORDER BY id_klienta DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $druhid=99;
+    }
+if( $druhid < 20 ) { exit; }
+$kli_uzid=$cuid;
+
+$newfntz=1*$_REQUEST['newfntz'];
+if( $newfntz == 1 )
+  {
+$dajidk=0;
+$sqldok = mysql_query("SELECT * FROM ".$databazaez."idxklizuid WHERE idxx = '".$keyf."' ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $dajidk=$riaddok->kliuzid;
+    }
+$kli_uzid=$dajidk;
+
+//$kli_uzid=17;
+
+require_once("../androidfantozzi/setpdf_charset.php");
+//pdf »åºæöËùû˝·Ì
+  }
+
+if( $kli_uzid == 0 ) { exit; }
+
+$_REQUEST['h_obdp'] = 1;
+$_REQUEST['h_obdk'] = 12;
+$kli_vume=$_REQUEST['kli_vume'];
+$poleo = explode(".", $kli_vume);
+$_REQUEST['h_obdk'] = 1*$poleo[0];
+$copern = $_REQUEST['copern'];
+$drupoh = $_REQUEST['drupoh'];
+$typ = "PDF";
+  }
+//koniec zandroidu=1
+
+if( $zandroidu == 0 )
+  {
 $sys = 'UCT';
 $urov = 1000;
 $copern = $_REQUEST['copern'];
 $drupoh = $_REQUEST['drupoh'];
 $typ = $_REQUEST['typ'];
-
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
+  }
 
+do
+{
+if( $zandroidu == 0 )
+  {
 require_once("../pswd/password.php");
 @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
   if (!$spojeni):
@@ -19,6 +134,8 @@ require_once("../pswd/password.php");
     exit;
   endif;
   mysql_select_db($mysqldb);
+  }
+
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -36,7 +153,16 @@ $cit_fir = include("../cis/citaj_fir.php");
 $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
-if (File_Exists ("../tmp/hlkniha.$kli_uzid.pdf")) { $soubor = unlink("../tmp/hlkniha.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/hlkni_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/hlkni_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -397,6 +523,19 @@ var sirkawic = screen.width-10;
 </HEAD>
 <BODY class="white" >
 
+<?php if( $zandroidu == 1 ) 
+    { 
+?> 
+<table class="h2" width="100%" >
+<tr>
+<td>Zostava PDF prebran·, tlaËidlo Sp‰ù - do ˙Ëtovn˝ch zost·v </td>
+<td align="right"> </td>
+</tr>
+</table>
+<?php 
+    } 
+?>
+
 <?php
 if( $typ == 'HTML' )
 {
@@ -628,10 +767,10 @@ $j=0;
 if( $typ == 'PDF' )
 {
 
-$pdf->Output("../tmp/hlkniha.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?> 
 <script type="text/javascript">
-  var okno = window.open("../tmp/hlkniha.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
 }
