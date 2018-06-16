@@ -3,6 +3,7 @@ $pdfand=200;
 $zandroidu=1*$_REQUEST['zandroidu'];
 if( $zandroidu == 1 )
   {
+error_reporting(0);
 //server
 if (isset($_REQUEST['serverx'])) { $serverx = $_REQUEST['serverx']; }
 
