@@ -132,7 +132,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
-" 0,11,0,ume,dat,0,0,dok,ico,0 FROM F$kli_vxcf"."_fakdol WHERE dok >= 0 ";
+" 0,11,0,ume,dat,0,0,dok,ico,0 FROM F$kli_vxcf"."_fakdol WHERE dok >= 0 AND fak = 0 ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
