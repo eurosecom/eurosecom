@@ -1369,7 +1369,20 @@ var h_oc = document.forms.formsoc2.h_oc.value;
 window.open('../mzdy/oznamenie_student.php?cislo_oc=' + h_oc + '&strana=1&copern=20&drupoh=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+//oznamenie a cestne vyhlasenie doch
+function TlacOznameniaDoch()
+                {
+var h_oc = document.forms.formsoc3.h_oc.value;
 
+window.open('../mzdy/oznamenie_doch.php?cislo_oc=' + h_oc + '&strana=9999&copern=10&drupoh=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function UpravaOznameniaDoch()
+                {
+var h_oc = document.forms.formsoc3.h_oc.value;
+
+window.open('../mzdy/oznamenie_doch.php?cislo_oc=' + h_oc + '&strana=1&copern=20&drupoh=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
   
 </script>
 </HEAD>
@@ -1622,6 +1635,36 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 </td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="UpravaOznamenia();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
+</td>
+
+</tr>
+</FORM>
+</table>
+
+
+<table class="vstup" width="100%" >
+<FORM name="formsoc3" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacOznameniaDoch();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+
+<td class="bmenu" width="96%">
+<?php
+$sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY prie,meno");
+?>
+<select size="1" name="h_oc" id="h_oc" >
+<?php while($zaznam=mysql_fetch_array($sql)):?>
+<option value="<?php echo $zaznam["oc"];?>" >
+<?php echo $zaznam["prie"];?> <?php echo $zaznam["meno"];?> osè <?php echo $zaznam["oc"];?></option>
+<?php endwhile;?>
+</select>
+<a href="#" onClick="TlacOznameniaDoch();">Oznámenie a èestné vyhlásenie odvodová ú¾ava – DÔCHODCOVIA </a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravaOznameniaDoch();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
 </td>
 
