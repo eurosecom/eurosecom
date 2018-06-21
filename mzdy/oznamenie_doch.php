@@ -59,9 +59,11 @@ $da1 = strip_tags($_REQUEST['da1']);
 $da1sql=SqlDatum($da1);
 $da2 = strip_tags($_REQUEST['da2']);
 $da2sql=SqlDatum($da2);
+$doh=1*$_REQUEST['doh'];
+$obd=$_REQUEST['obd'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznam_doch SET ".
-" da1='$da1sql', da2='$da2sql' ".
+" da1='$da1sql', da2='$da2sql', doh='$doh', obd='$obd' ".
 " WHERE oc = $cislo_oc"; 
 
 $upravene = mysql_query("$uprtxt");  
@@ -99,6 +101,8 @@ $sqlt = <<<mzdprc
    druh         DECIMAL(10,0) DEFAULT 0,
    da1          DATE,
    da2          DATE,
+   doh          DECIMAL(2,0) DEFAULT 0,
+   obd          VARCHAR(25) NOT NULL,
    konx1        DECIMAL(10,0) DEFAULT 0
 );
 mzdprc;
@@ -156,7 +160,7 @@ $prepoc=1;
 
 
 //nacitaj udaje pre upravu
-if ( $copern == 20 )
+if ( $copern == 10 OR $copern == 20 )
     {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznam_doch".
 " LEFT JOIN F$kli_vxcf"."_mzdkun".
@@ -174,11 +178,21 @@ $rodne = $fir_riadok->rdc."/".$fir_riadok->rdk;
 $h_rdc = $fir_riadok->rdc;
 $h_rdk = $fir_riadok->rdk;
 $zuli = $fir_riadok->zuli." ".$fir_riadok->zcdm." ".$fir_riadok->zmes;
+$dansk=SkDatum($fir_riadok->dan);
 
 $da1 = $fir_riadok->da1;
 $da1sk=SkDatum($da1);
 $da2 = $fir_riadok->da2;
 $da2sk=SkDatum($da2);
+
+$dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));  
+$dnessql=SqlDatum($dnes);
+//if( $da1sk == '00.00.0000' ) { $da1sk=$dnes; }
+if( $da2sk == '00.00.0000' ) { $da2sk=$dansk; }
+
+$doh = 1*$fir_riadok->doh;
+$obd = $fir_riadok->obd;
+
     }
 //koniec nacitania
 
@@ -217,7 +231,7 @@ $dfax = $riadokc->dfax;
 if ( $fir_uctt03 != 999 ) {
 $fnazov = $fir_fnaz;
 $dadresa = "";
-$fadresa = $fir_fuli." ".$fir_fcdm." ".$fir_fmes;
+$fadresa = $fir_fuli." ".$fir_fcdm.", ".$fir_fmes;
                           }
 if ( $fir_uctt03 == 999 ) {
 $fnazov = $fir_fnaz;
@@ -256,6 +270,8 @@ var sirkawic = screen.width-10;
 
    document.formv1.da1.value = '<?php echo "$da1sk";?>';
    document.formv1.da2.value = '<?php echo "$da2sk";?>';
+   document.formv1.doh.value = '<?php echo "$doh";?>';
+   document.formv1.obd.value = '<?php echo "$obd";?>';
 
   }
 <?php
@@ -292,10 +308,7 @@ var sirkawic = screen.width-10;
   {
    window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>', '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
-  function Poucenie()
-  {
-   window.open('../dokumenty/tlacivo2018/oznamenie_dochodca_v18/oznamenie_dochodca_v18_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
-  }
+
   function tlacpdf(oc)
   {
    window.open('../mzdy/oznamenie_doch.php?cislo_oc=' + oc + '&copern=10&drupoh=1&page=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
@@ -398,16 +411,26 @@ if ( $copern == 20 )
 
 <!-- zamestnavatel -->
 <span class="text-echo" style="top:429px; left:170px;"><?php echo $fnazov; ?></span>
-<span class="text-echo" style="top:455px; left:545px;"><?php echo $dadresa; ?></span>
-<span class="text-echo" style="top:482px; left:505px;"><?php echo $fadresa; ?></span>
+<span class="text-echo" style="top:455px; left:290px;"><?php echo $dadresa; ?></span>
+<span class="text-echo" style="top:482px; left:290px;"><?php echo $fadresa; ?></span>
 
-<!-- oznamujem -->
+<!-- aka dohoda -->
+<select size="1" name="doh" id="doh" style="top:510px; left:333px; width:417px;" >
+<option value="0" >dohodu o vykonaní práce</option>
+<option value="1" >dohodu o pracovnej èinnosti</option>
+</select>
+
+<!-- uzatvorena -->
 <input type="text" name="da2" id="da2" onkeyup="CiarkaNaBodku(this);"
- style="top:542px; left:160px; width:90px;"/>
+ style="top:542px; left:320px; width:100px;"/>
+
+<!-- obdobie -->
+<input type="text" name="obd" id="obd" 
+ style="top:560px; left:130px; width:140px;"/>
 
 <!-- dna -->
 <input type="text" name="da1" id="da1" onkeyup="CiarkaNaBodku(this);"
- style="top:862px; left:160px; width:90px;"/>
+ style="top:870px; left:160px; width:100px;"/>
 
 </FORM>
 </div> <!-- koniec #content -->
@@ -484,19 +507,47 @@ $pdf->Cell(55,6," ","$rmc1",0,"R");$pdf->Cell(135,5,"$hlavicka->zuli $hlavicka->
 //zamestnavatel
 $pdf->Cell(190,13," ","$rmc1",1,"L");
 $pdf->Cell(29,6," ","$rmc1",0,"R");$pdf->Cell(161,5,"$fnazov","$rmc",1,"L");
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(112,6," ","$rmc1",0,"R");$pdf->Cell(78,5,"$dadresa","$rmc",1,"L");
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(103,6," ","$rmc1",0,"R");$pdf->Cell(87,6,"$fadresa","$rmc",1,"L");
+$pdf->Cell(130,1," ","$rmc1",1,"L");
+$pdf->Cell(50,6," ","$rmc1",0,"R");$pdf->Cell(78,5,"$dadresa","$rmc",1,"L");
+$pdf->Cell(130,1," ","$rmc1",1,"L");
+$pdf->Cell(50,6," ","$rmc1",0,"R");$pdf->Cell(87,6,"$fadresa","$rmc",1,"L");
+
+//akadohoda
+$vykprac="xxxxxxxxxxxxxxxxxxxxxxxx";
+$praccin="xxxxxxxxxxxxxxxxxxxxxxxxxx";
+if( $doh == 0 ) { $vykprac=""; }
+if( $doh == 1 ) { $praccin=""; }
+$pdf->Cell(50,5," ","$rmc1",1,"R");
+$pdf->Cell(67,3," ","$rmc1",0,"R");$pdf->Cell(42,3,"$vykprac","0",0,"L");$pdf->Cell(1,3," ","0",0,"L");$pdf->Cell(46,3,"$praccin","0",1,"L");
 
 //uzatvoril dna
-$pdf->Cell(190,9," ","$rmc1",1,"L");
 $text=SKDatum($hlavicka->da2);
 if ( $text =='00.00.0000' ) $text="";
-$pdf->Cell(25,6," ","$rmc1",0,"R");$pdf->Cell(33,5,"$text","$rmc",1,"C");
+$pdf->Cell(55,5," ","$rmc1",0,"R");$pdf->Cell(33,5,"$text","$rmc",1,"C");
+
+//obdobie
+$pdf->Cell(20,4," ","$rmc1",0,"R");$pdf->Cell(35,4,"$obd","$rmc",1,"L");
+
+//akadohoda2
+$vykprac2="xxxxxxxxxxxxxxxxxxxxxxxxx";
+$praccin2="xxxxxxxxxxxxxxxxxxxxxxxxxx";
+if( $doh == 0 ) { $vykprac2=""; }
+if( $doh == 1 ) { $praccin2=""; }
+$pdf->Cell(83,4," ","$rmc1",0,"R");$pdf->Cell(44,4,"$vykprac2","0",0,"L");$pdf->Cell(1,4," ","0",0,"L");$pdf->Cell(46,4,"$praccin2","0",1,"L");
+
+
+//akadohoda3
+$vykprac3="xxxxxxxxxxxxxxxxxxxxxxxxxx";
+$praccin3="xxxxxxx";
+$praccin4="xxxxxxxxxxxxxxxxxxxx";
+if( $doh == 0 ) { $vykprac3=""; }
+if( $doh == 1 ) { $praccin3=""; $praccin4=""; }
+$pdf->Cell(190,12," ","$rmc1",1,"L");
+$pdf->Cell(115,4," ","$rmc1",0,"R");$pdf->Cell(48,4,"$vykprac3","0",0,"L");$pdf->Cell(1,4," ","0",0,"L");$pdf->Cell(20,4,"$praccin3","0",1,"L");
+$pdf->Cell(16,4," ","$rmc1",0,"R");$pdf->Cell(34,4,"$praccin4","0",1,"L");
 
 //dna
-$pdf->Cell(190,67," ","$rmc1",1,"L");
+$pdf->Cell(190,42," ","$rmc1",1,"L");
 $text=SKDatum($hlavicka->da1);
 if ( $text =='00.00.0000' ) $text="";
 $pdf->Cell(26,6," ","$rmc1",0,"R");$pdf->Cell(28,7,"$text","$rmc",1,"C");
