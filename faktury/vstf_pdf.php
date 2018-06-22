@@ -5,6 +5,7 @@ $zandroidu=1*$_REQUEST['zandroidu'];
 $anduct=1*$_REQUEST['anduct'];
 if( $zandroidu == 1 AND $anduct == 0 )
   {
+error_reporting(0);
 //server
 if (isset($_REQUEST['serverx'])) { $serverx = $_REQUEST['serverx']; }
 //$serverx="www.ala.sk/androideshop";
