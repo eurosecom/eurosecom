@@ -1409,7 +1409,7 @@ $vysledek = mysql_query("$sql");
 
 $kli_vmesnext=$kli_vmes + 1;
 $kli_vroknext=$kli_vrok;
-if( $klivmes == 12 ) { $kli_vroknext=$kli_vrok + 1; }
+if( $klivmes == 12 ) { $kli_vroknext=$kli_vrok + 1; $kli_vmesnext=1; }
 $kli_vmesnext01=$kli_vroknext."-".$kli_vmesnext."-01";
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET datm='$kli_vmesnext01' WHERE dmxa = 1 AND datm = '0000-00-00' ";
 //echo $sql;
