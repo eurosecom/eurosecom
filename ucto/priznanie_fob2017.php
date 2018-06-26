@@ -4047,6 +4047,7 @@ $kli_nxcf10=trim(str_replace(" ","",$kli_nxcf10));
 $kli_nxcf10=trim(str_replace(".","",$kli_nxcf10));
 $kli_nxcf10=trim(str_replace(",","",$kli_nxcf10));
 $kli_nxcf10=trim(str_replace("-","",$kli_nxcf10));
+$kli_nxcf10=trim(str_replace("%","",$kli_nxcf10));
 $kli_nxcf10 = StrTr($kli_nxcf10, "áäèïéìëí¾òôóöàøšúùüıÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜİ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 
 $nazsub="../tmp/dpfob".$kli_vrok."_id".$kli_uzid."_".$kli_nxcf10."_".$hhmm.".xml";

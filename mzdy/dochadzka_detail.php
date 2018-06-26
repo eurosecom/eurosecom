@@ -679,7 +679,7 @@ Menu EkoRobot - Doch·dzkov˝ systÈm
 <td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick="document.forms.fhiden.ocold.value=0; nastavfakx.style.display='none';" title='Zhasni menu' ></td></tr>  
 
 <tr><FORM name='fkoef' method='post' action='#' >
-<td colspan='8' align="left">Zamestnanec osË <input type='text' readonly name='h_oscx' id='h_oscx' size='10' maxlenght='10' value="" readonly="readonly" >
+<td colspan='8' align="left"> osË <input type='text' readonly name='h_oscx' id='h_oscx' size='10' maxlenght='10' value="" readonly="readonly" >
 <input type='text' readonly name='h_priex' id='h_priex size='20' maxlenght='20' value="" >
 <td colspan='2' align='right'></td></tr>  
 
@@ -1317,7 +1317,7 @@ if ( $uvatyp == 12 )
 
 <table class="h2" width="100%" >
 <tr>
-<td>EuroSecom  -  Doch·dzkov˝ systÈm zamestnanec <?php echo " osË $cislo_oc $prie $meno ";?>
+<td>EuroSecom  -  Doch·dzkov˝ systÈm <?php echo " osË $cislo_oc $prie $meno ";?>
 
 <img src='../obr/naradie.png'  width=15 height=15 border=1 onClick="zobraz_upravmail(<?php echo $cislo_oc;?>, '<?php echo $prie; ?> <?php echo $meno; ?>', '0', '<?php echo $mail;?>', '<?php echo $dovv;?>', '<?php echo $mdov;?>', '<?php echo $csv;?>', '<?php echo $ndc;?>');" width=15 height=15 border=0 title='Nastaviù mailovÈ ˙daje zamestnanca Ë.<?php echo $cislo_oc;?>' >
 
@@ -1396,8 +1396,26 @@ $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid.",kalendar ".
 " WHERE dmxa = 1 AND F".$kli_vxcf."_mzddochadzkap".$kli_uzid.".daod=kalendar.dat ";
 $vysledek = mysql_query("$sql");
 
+$sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET datm=datn WHERE dmxa = 1 ";
+$vysledek = mysql_query("$sql");
+
+//exit;
+
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET datm=timestamp(daod + 1) WHERE dmxa = 1 ";
 $vysledek = mysql_query("$sql");
+
+$sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET datm='0000-00-00' WHERE dmxa = 1 AND datm < datn ";
+$vysledek = mysql_query("$sql");
+
+$kli_vmesnext=$kli_vmes + 1;
+$kli_vroknext=$kli_vrok;
+if( $klivmes == 12 ) { $kli_vroknext=$kli_vrok + 1; }
+$kli_vmesnext01=$kli_vroknext."-".$kli_vmesnext."-01";
+$sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET datm='$kli_vmesnext01' WHERE dmxa = 1 AND datm = '0000-00-00' ";
+//echo $sql;
+$vysledek = mysql_query("$sql");
+
+//exit;
 
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET daod2=datm WHERE dmxa = 1 ";
 $vysledek = mysql_query("$sql");
@@ -1418,7 +1436,10 @@ $vysledek = mysql_query("$sql");
   }
 
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET ".
-" tomid=time_to_sec(timediff(datm, datn )) / 3600 WHERE dmxa = 1 ";
+" tomid=time_to_sec(timediff(datm, datn )) / 3600 WHERE dmxa = 1 AND datm != '0000-00-00' ";
+$vysledek = mysql_query("$sql");
+
+$sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET tomid=0 WHERE dmxa = 1 AND tomid < 0 ";
 $vysledek = mysql_query("$sql");
 
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET rozd1=hodxb WHERE dmxa = 1 AND hodxb <= tomid ";
@@ -1426,7 +1447,6 @@ $vysledek = mysql_query("$sql");
 
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET rozd1=tomid, rozd2=hodxb-tomid WHERE dmxa = 1 AND hodxb > tomid ";
 $vysledek = mysql_query("$sql");
-
 
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." SET psob=rozd1 WHERE dmxa = 1 AND akyden = 6 AND svt = 0 ";
 $vysledek = mysql_query("$sql");
@@ -1628,9 +1648,12 @@ $polozkax=mysql_fetch_object($sqlx);
   list ($cashod, $casmin, $cassek) = split ('[:]', $cas, 3);
   $cashodmin = sprintf("%02d:%02d", $cashod, $casmin);
 
+
+//andrejko
 ?>
 
-zaË. <?php echo $cashodmin;?> - <?php echo $polozkax->hodxb;?> hod.
+zaË. <?php echo $cashodmin;?> - <?php echo $polozkax->hodxb;?> hod. 
+
 
 <?php
 }
