@@ -1439,7 +1439,6 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zmax_gf=$max_gf, zmin_gf=z
 " WHERE spom = 41 AND zzam_gf <= 200 AND zzam_gf < $max_gf ";
 $oznac = mysql_query("$sqtoz"); 
 
-
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdpomer SET zmax_up=$max_up, zmin_up=zzam_up ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.spom = F$kli_vxcf"."_mzdpomer.pm AND pm_doh = 1 AND zzam_up < $max_up";
 $oznac = mysql_query("$sqtoz");
@@ -1493,6 +1492,19 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
 " SET des6=0, des3=0, des6=2, des1=0 ";
 $oznac = mysql_query("$sqtoz");
 //koniec uprava zakladov SP,IP,RF pre pomer=41  
+
+
+//uprava zakladu zp pre zrz_dn=1 dochodca odvodova ulava DP od 1.7.2018
+if( $kli_vmes >= 7 OR $kli_vrok > 2018 )
+  {
+//andrejko
+
+
+//exit;
+   
+
+  }
+//koniec uprava zakladu zp pre zrz_dn=1 dochodca odvodova ulava DP od 1.7.2018
 
 //uprav zaklad podla max a min od 1.2012 do zmin_up ulozim neupraveny zzam_zp
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zmin_up=zzam_zp WHERE oc > 0 ";
@@ -1865,7 +1877,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET des6=0, des2=0, des1=0 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//ak viac pracovných pomerov odvod do DOVERA je odvod zo suctu zakladov andrejko
+//ak viac pracovných pomerov odvod do DOVERA je odvod zo suctu zakladov 
 $prepsub=0;
 $podm_hlvn="hlvn > 0";
 if( $all_oc == 0 )
@@ -1999,7 +2011,7 @@ $sql = "DROP TABLE F".$kli_vxcf."_mzdsubodv".$kli_uzid;
 $ulozene = mysql_query("$sql");
 
    }
-//koniec ak viac pracovných pomerov odvod do DOVERA je odvod zo suctu zakladov andrejko
+//koniec ak viac pracovných pomerov odvod do DOVERA je odvod zo suctu zakladov 
 
 //poistka ak odvod < 0 potom odvod=0
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ozam_zp=0 WHERE ozam_zp < 0 "; $oznac = mysql_query("$sqtoz");

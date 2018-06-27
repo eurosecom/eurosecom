@@ -2827,7 +2827,7 @@ document.formv1.h_roh.checked = "checked";
 <INPUT type="hidden" name="err_detidn" value="0">
 </td>
 
-<td class="fmenu" colspan="4">NIE odpoèet na daòovníka:
+<td class="fmenu" colspan="2">NIE odpoèet na daòovníka:
  <input type="checkbox" name="h_ziv_dn" value="1"  />
 <?php
 if ( $h_ziv_dn == 1 )
@@ -2839,8 +2839,8 @@ document.formv1.h_ziv_dn.checked = "checked";
 <?php
    }
 ?>
-
-NIE zrážková daò:
+</td>
+<td class="fmenu" colspan="2">Odvodová ú¾ava DP dôchodca:
  <input type="checkbox" name="h_zrz_dn" value="1"  />
 <?php
 if ( $h_zrz_dn == 1 )
