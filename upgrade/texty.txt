@@ -1,3 +1,15 @@
+27.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO error_reporting(0) faktura a pokladnica PDF
+- UCTO DPPO a FOB export do XML ošetrené percento v názve firmy
+- MZDY dochádzka generovaná, výpoèet noèných príplatkov na rozhraní mesiaca
+- MZDY odvodová ú¾ava DP dôchodca-dohodár do 200 Eur od 1.7.2018
+
+21.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO ochrana proti cache obratovka, dennik, hlavna kniha položkovitá, výsledovka a suvaha malá
+- UCTO Priznanie DPH 2018 nastavený error reporting 0
+- UCTO obratovka, hlavná kniha položkovitá, denník, súvaha malá, výsledovka malá - nastavený error reporting 0
+- MZDY Oznamenie o odvodovej ulave dochodcov
+
 12.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - FAKT nastavenie percenta z¾avy pre vybrané ièo na faktúre
 - MZDY dochádzka, v nepretržitej 2 zmennej 12hod prevádzke premenovaná O zmena na N zmenu
