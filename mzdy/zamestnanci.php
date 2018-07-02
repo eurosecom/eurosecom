@@ -2827,7 +2827,7 @@ document.formv1.h_roh.checked = "checked";
 <INPUT type="hidden" name="err_detidn" value="0">
 </td>
 
-<td class="fmenu" colspan="2">NIE odpoèet na daòovníka:
+<td class="fmenu" colspan="4">NIE odpoèet na daòovníka:
  <input type="checkbox" name="h_ziv_dn" value="1"  />
 <?php
 if ( $h_ziv_dn == 1 )
@@ -2839,8 +2839,7 @@ document.formv1.h_ziv_dn.checked = "checked";
 <?php
    }
 ?>
-</td>
-<td class="fmenu" colspan="2">Odvodová ú¾ava DP dôchodca:
+ &nbsp&nbsp | &nbsp&nbsp&nbsp&nbspOdv.ú¾ava DP dôch.-doh.:
  <input type="checkbox" name="h_zrz_dn" value="1"  />
 <?php
 if ( $h_zrz_dn == 1 )
@@ -2936,7 +2935,7 @@ document.formv1.h_vban.checked = "checked";
 <INPUT type="submit" id="uloz" name="uloz" value="Uloži položku" onclick="Zapis_COOK();" ><SPAN id="uvolni" onmouseover="return Povol_uloz();">&nbsp;</SPAN></td>
 <?php                     } ?>
 <td class="obyc" align="right">
-<?php if( $tlacitkoenter == 1 AND $zana == 0 ) {  ?>
+<?php if( $tlacitkoenter >= 0 AND $zana == 0 ) {  ?>
 <img border=0 src='../obr/ok.png' style='width:15; height:15;' onClick="return Povol_uloz();"
  title='Uvolni tlaèítko Uloži položku' >
 <?php                                          }  ?>
