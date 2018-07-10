@@ -1,6 +1,6 @@
 <HTML>
 <?php
-//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "CHEMIA" rok 2017
+//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "CHEMIA" rok 2018
 $sys = 'UCT';
 $urov = 1000;
 $analyzy = 1*$_REQUEST['analyzy']; 
@@ -171,11 +171,12 @@ $datpod ="AND ( ( dat != '0000-00-00' AND dat <= '".$h_damk."' ) OR ( dau >= '".
 if ( $h_obd == 0 ) { 
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prsaldoicofakp$kli_uzid".
-" SELECT drupoh,uce,0,ume,dat,das,daz,dok,ico,fak,".
+" SELECT drupoh,31100,0,ume,dat,das,daz,dok,ico,fak,".
 "poz,ksy,ssy,SUM(hdp),SUM(hdu),SUM(hod),SUM(uhr),SUM(zos),dau".
 " FROM F$kli_vxcf"."_prsaldoicofak$kli_uzid".
-" WHERE uce = $h_uce ".
+" WHERE uce = $h_uce OR uce = 31500 ".
 " GROUP BY uce,ico,fak";
+//echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
                    }
@@ -220,74 +221,77 @@ $uctpol="prsaldoicofaknesp".$kli_uzid;
 }
 //koniec zober vsetky
 
-//ikona CHEM  1. polrok 2016 agrochemikálie, osivá
-//platia èísla faktúr 3275..., 3277..., 3274..., 3270.... a 427...
+//ikona CHEM  1. polrok 2018 agrochemikálie, osivá
+//platia èísla faktúr 3285..., 3287..., 3284..., 3280.... a 428...
 
 
 $dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=99 ";
 $dsql = mysql_query("$dsqlt");
 
-//rok 2016
+//rok 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET puc=TO_DAYS(das)-TO_DAYS(dat) WHERE fak >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 32600001 AND fak <= 32609999 AND puc >= 180 ";
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 32700001 AND fak <= 32709999 AND puc >= 180 ";
+//$dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3269001 AND fak <= 3269999 AND puc >= 180 ";
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3279001 AND fak <= 3279999 AND puc >= 180 ";
+//$dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3264001 AND fak <= 3264999 AND puc >= 180 ";
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3274001 AND fak <= 3274999 AND puc >= 180 ";
+//$dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3267001 AND fak <= 3267999 AND puc >= 180 ";
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3277001 AND fak <= 3277999 AND puc >= 180 ";
+//$dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3265001 AND fak <= 3265999 AND puc >= 180 ";
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3275001 AND fak <= 3275999 AND puc >= 180 ";
+//$dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 426001 AND fak <= 426999 AND puc >= 180 ";
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 427001 AND fak <= 427999 AND puc >= 180 ";
+//$dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 826001 AND fak <= 826999 AND puc >= 180 ";
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 827001 AND fak <= 827999 AND puc >= 180 ";
+//$dsql = mysql_query("$dsqlt");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET puc=0 WHERE fak >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//rok 2017
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 32700001 AND fak <= 32709999 ";
+//rok 2018
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 32800001 AND fak <= 32809999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3279001 AND fak <= 3279999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3289001 AND fak <= 3289999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3274001 AND fak <= 3274999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3284001 AND fak <= 3284999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3277001 AND fak <= 3277999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3287001 AND fak <= 3287999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3275001 AND fak <= 3275999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3285001 AND fak <= 3285999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 427001 AND fak <= 427999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 428001 AND fak <= 428999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 827001 AND fak <= 827999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 828001 AND fak <= 828999 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 5118000001 AND fak <= 5118999999 ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE pox1 != 0 ";
 $dsql = mysql_query("$dsqlt");
 
-$datvymaz="2017-07-01";
-if( $h_obd ==  9 ) { $datvymaz="2017-10-01"; }
-if( $h_obd == 12 ) { $datvymaz="2018-01-01"; }
+$datvymaz="2018-07-01";
+if( $h_obd ==  9 ) { $datvymaz="2018-10-01"; }
+if( $h_obd == 12 ) { $datvymaz="2019-01-01"; }
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat >= '$datvymaz' ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE das < '2017-01-01' ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE das < '2018-01-01' ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 31328962 ) OR ( ico = 36219975 ) OR ( ico = 17333130 ) ".
@@ -383,9 +387,9 @@ if( $psys <= 14 )
 
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_pruhrady$kli_uzid".
-" SELECT 0,ucd,ucm,dat,F$kli_vxcf"."_$uctovanie.dok,F$kli_vxcf"."_$uctovanie.ico,fak,F$kli_vxcf"."_$uctovanie.hod,'0000-00-00',0,0 ".
+" SELECT 0,31100,ucm,dat,F$kli_vxcf"."_$uctovanie.dok,F$kli_vxcf"."_$uctovanie.ico,fak,F$kli_vxcf"."_$uctovanie.hod,'0000-00-00',0,0 ".
 " ,0,0,0,0,0,0,0,0,0,0,0,'0000-00-00' FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
-" WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ucd = $h_uce ";
+" WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ( ucd = $h_uce OR ucd = 31500 ) ";
 $dsql = mysql_query("$dsqlt");
 
 }
@@ -395,15 +399,15 @@ $psys=$psys+1;
   }
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_pruhrady$kli_uzid".
-" SELECT 0,ucd,ucm,dat,dok,ico,fak,hod,'0000-00-00',0,0 ".
+" SELECT 0,31100,ucm,dat,dok,ico,fak,hod,'0000-00-00',0,0 ".
 " ,0,0,0,0,0,0,0,0,0,0,0,'0000-00-00' FROM F$kli_vxcf"."_uctsklsaldo".
-" WHERE ucd = $h_uce ";
+" WHERE ucd = $h_uce OR ucd = 31500 ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_pruhrady$kli_uzid".
-" SELECT 0,ucd,ucm,dat,dok,ico,fak,hod,'0000-00-00',0,0 ".
+" SELECT 0,31100,ucm,dat,dok,ico,fak,hod,'0000-00-00',0,0 ".
 " ,0,0,0,0,0,0,0,0,0,0,0,'0000-00-00' FROM F$kli_vxcf"."_uctuhradpoc".
-" WHERE ucd = $h_uce ";
+" WHERE ucd = $h_uce OR ucd = 31500 ";
 $dsql = mysql_query("$dsqlt");
 
 
@@ -493,6 +497,11 @@ $sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=7 ".
 " ( ( ufak > 3292001 AND ufak < 3292999 ) OR ( ufak > 3296001 AND ufak < 3296999 ) OR ( ufak > 3298001 AND ufak < 3298999 ) )";
 $oznac = mysql_query("$sqtoz");
 
+//fak >= 5118000001 AND fak <= 5118999999 
+//drh1=4
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=4 ".
+" WHERE udru > 0 AND ( LEFT(upuc,3) = 211 OR LEFT(upuc,3) = 221 ) AND upos <= 365 AND ufak > 5118000001 AND ufak < 5118999999 ";
+$oznac = mysql_query("$sqtoz");
 
 ///////////////////////////////////////////////////////////koniec rozdelenia do druhov
 

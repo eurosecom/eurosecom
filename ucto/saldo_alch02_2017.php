@@ -1,6 +1,6 @@
 <HTML>
 <?php
-//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "HNOJIVA" 2018
+//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "CHEMIA" rok 2017
 $sys = 'UCT';
 $urov = 1000;
 $analyzy = 1*$_REQUEST['analyzy']; 
@@ -43,8 +43,6 @@ $uhr = 1*$_REQUEST['uhr'];
 $h_datp = $_REQUEST['h_datp'];
 $h_datk = $_REQUEST['h_datk'];
 
-$h_jar = 1*$_REQUEST['h_jar'];
-
 $vsetko=1;
 
 $citnas = include("../cis/citaj_nas.php");
@@ -56,16 +54,7 @@ $kurz12 = $fir_kurz12;
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-
-$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-
- $outfilexdel="../tmp/saldo_".$kli_uzid."_*.*";
- foreach (glob("$outfilexdel") as $filename) {
-    unlink($filename);
- }
-
-$outfilex="../tmp/saldo_".$kli_uzid."_".$hhmmss.".pdf";
-if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+if (File_Exists ("../tmp/saldo.$kli_uzid.pdf")) { $soubor = unlink("../tmp/saldo.$kli_uzid.pdf"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -231,59 +220,106 @@ $uctpol="prsaldoicofaknesp".$kli_uzid;
 }
 //koniec zober vsetky
 
-//ikony JARH,JESH  hnojivá 2018
-//platia èísla faktúr 3288...
-//ikona JSOH – hnojivá odklad 2017, platia èísla 3278...
+//ikona CHEM  1. polrok 2016 agrochemikálie, osivá
+//platia èísla faktúr 3275..., 3277..., 3274..., 3270.... a 427...
 
 
-//zober len faktury
 $dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=99 ";
 $dsql = mysql_query("$dsqlt");
 
+//rok 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET puc=TO_DAYS(das)-TO_DAYS(dat) WHERE fak >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
-if( $h_jar != 3 )
-{
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3288001 AND fak <= 3288999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 32600001 AND fak <= 32609999 AND puc >= 180 ";
 $dsql = mysql_query("$dsqlt");
 
-}
-
-if( $h_jar == 3 )
-{
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3278001 AND fak <= 3278999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3269001 AND fak <= 3269999 AND puc >= 180 ";
 $dsql = mysql_query("$dsqlt");
 
-}
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3264001 AND fak <= 3264999 AND puc >= 180 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3267001 AND fak <= 3267999 AND puc >= 180 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3265001 AND fak <= 3265999 AND puc >= 180 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 426001 AND fak <= 426999 AND puc >= 180 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 826001 AND fak <= 826999 AND puc >= 180 ";
+$dsql = mysql_query("$dsqlt");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET puc=0 WHERE fak >= 0 ";
+$oznac = mysql_query("$sqtoz");
+
+//rok 2017
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 32700001 AND fak <= 32709999 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3279001 AND fak <= 3279999 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3274001 AND fak <= 3274999 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3277001 AND fak <= 3277999 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3275001 AND fak <= 3275999 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 427001 AND fak <= 427999 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 827001 AND fak <= 827999 ";
+$dsql = mysql_query("$dsqlt");
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE pox1 != 0 ";
 $dsql = mysql_query("$dsqlt");
 
+$datvymaz="2017-07-01";
+if( $h_obd ==  9 ) { $datvymaz="2017-10-01"; }
+if( $h_obd == 12 ) { $datvymaz="2018-01-01"; }
 
-
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE uce < 31100 AND uce > 31199 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat >= '$datvymaz' ";
 $dsql = mysql_query("$dsqlt");
 
-
-
-if( $h_jar == 1 )
-{
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2018-01-01' OR dat > '2018-06-30'";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE das < '2017-01-01' ";
 $dsql = mysql_query("$dsqlt");
-}
-if( $h_jar == 2 )
-{
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2018-07-01' OR dat > '2018-12-31' OR das > '2019-03-31' ";
-$dsql = mysql_query("$dsqlt");
-}
-if( $h_jar == 3 )
-{
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2017-01-01' OR dat > '2017-12-31' OR das <= '2018-01-31' ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 31328962 ) OR ( ico = 36219975 ) OR ( ico = 17333130 ) ".
+"  OR ( ico = 156582 ) OR ( ico = 30414351 ) ";
 $dsql = mysql_query("$dsqlt");
-}
 
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 31676901 ) OR ( ico = 31692346 ) OR ( ico = 31586724 ) ".
+"  OR ( ico = 61 ) OR ( ico = 30873576 ) OR ( ico = 31349463 ) OR ( ico = 31103391 ) ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 17328560 ) OR ( ico = 203840 ) OR ( ico = 31187757 ) ".
+"  OR ( ico = 31413315 ) ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 34100377 ) OR ( ico = 35681098 ) OR ( ico = 35681098 ) ".
+"  OR ( ico = 360982 ) OR ( ico = 31363831 ) OR ( ico = 31352332 ) OR ( ico = 31752314 ) ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 36526894 ) ".
+"  OR ( ico = 32585926 ) OR ( ico = 30804981 ) OR ( ico = 31397719 ) OR ( ico = 36184187 ) ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 31562736 ) OR ( ico = 33516243 ) OR ( ico = 31729533 ) ".
+"  OR ( ico = 33559775 ) OR ( ico = 31419631 ) ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 34099344 ) OR ( ico = 31412459 ) OR ( ico = 17548511 ) ".
+"  OR ( ico = 35770961 ) OR ( ico = 677990 ) OR ( ico = 31443265 ) ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE ( ico = 35728833 ) OR ( ico = 194794 ) OR ( ico = 31602193 ) ";
+$dsql = mysql_query("$dsqlt");
 
 
 //ak je zadane ico vymaz ostatne
@@ -371,6 +407,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_pruhrady$kli_uzid".
 $dsql = mysql_query("$dsqlt");
 
 
+$dsqlt = "DELETE FROM F$kli_vxcf"."_pruhrady$kli_uzid WHERE uduh >= '$datvymaz' ";
+$dsql = mysql_query("$dsqlt");
+
 $sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid,F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid".
 " SET F$kli_vxcf"."_pruhrady$kli_uzid.udas=F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid.das, udru=99, ".
 "     F$kli_vxcf"."_pruhrady$kli_uzid.ussy=F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid.ssy, ".
@@ -387,18 +426,73 @@ $oznac = mysql_query("$sqtoz");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_pruhrady$kli_uzid WHERE udru != 99 ";
 $dsql = mysql_query("$dsqlt");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET upos=TO_DAYS(uduh)-TO_DAYS(udas), udru=3 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET upos=TO_DAYS(uduh)-TO_DAYS(udas) ";
 $oznac = mysql_query("$sqtoz");
 
 //rozdel uhrady do druhov
 
-$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=1 WHERE upos <= 5 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udph=$fir_dph2*uhod/120, roz1=udph-uuhr, roz2=uhod-uuhr, roz3=TO_DAYS(udas)-TO_DAYS(udat) ";
 $oznac = mysql_query("$sqtoz");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_pruhrady$kli_uzid WHERE udru != 1 ";
-$dsql = mysql_query("$dsqlt");
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET uzdp=1 WHERE roz1 < 0.02 ";
+$oznac = mysql_query("$sqtoz");
 
-//exit;
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET uzcl=1 WHERE roz2 < 0.02 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET uodk=1 WHERE roz3 > 31 ";
+$oznac = mysql_query("$sqtoz");
+
+//puc1:0:3 211 puc1- 21190/21198 qf:2(cele uhradene) <= 5 drh1 0 pospl1 <= 0 odkl 0 & puc1 21199,39500 ;
+//drh1=1
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=1 ".
+" WHERE ( LEFT(upuc,3) = 211 AND upuc < 21190 AND upuc > 21198 AND uzcl = 1 AND upos <= 0 AND uodk = 0 ) OR ( upuc = 21199 OR upuc = 39500 )";
+$oznac = mysql_query("$sqtoz");
+
+//puc1:0:3 211,221 qf:2 <= 5 drh1 0 pospl1 <= 20 odkl 0 ;
+//drh1=2
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=2 ".
+" WHERE udru = 99 AND ( LEFT(upuc,3) = 211 OR LEFT(upuc,3) = 221 ) AND uzcl = 1 AND upos <= 20 AND uodk = 0 ";
+$oznac = mysql_query("$sqtoz");
+
+//puc1:0:3 211,221 qe:2(uhradena dan) <= 5 drh1 0 pospl1 <= 20 odkl 0 ;
+//drh1=3
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=3 ".
+" WHERE udru = 99 AND ( LEFT(upuc,3) = 211 OR LEFT(upuc,3) = 221 ) AND uzdp = 1 AND upos <= 20 AND uodk = 0 AND uzcl = 0 ";
+$oznac = mysql_query("$sqtoz");
+
+//puc1:0:3 211,221 drh1 0 odkl 1 pospl1 <= 365 ;
+//drh1=4
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=4 ".
+" WHERE udru = 99 AND ( LEFT(upuc,3) = 211 OR LEFT(upuc,3) = 221 ) AND upos <= 365 AND uodk = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//puc1:0:3 211,221 qe:2 <= 5 drh1 0 pospl1 21/30 ;
+//drh1=5
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=5 ".
+" WHERE udru = 99 AND ( LEFT(upuc,3) = 211 OR LEFT(upuc,3) = 221 ) AND uzdp = 1 AND upos >= 21 AND upos <= 30 ";
+$oznac = mysql_query("$sqtoz");
+
+//puc1:0:3 211,221 qe:2 <= 5 drh1 0 pospl1 31/60 ;
+//drh1=6
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=6 ".
+" WHERE udru = 99 AND ( LEFT(upuc,3) = 211 OR LEFT(upuc,3) = 221 ) AND uzdp = 1 AND upos >= 31 AND upos <= 60 ";
+$oznac = mysql_query("$sqtoz");
+
+//fak 3292001/3292999,3296000/3296999,3298000/3298999 drh1 1 ;
+//drh1=7
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=7 ".
+" WHERE udru = 1 AND ( LEFT(upuc,3) = 211 OR LEFT(upuc,3) = 221 OR LEFT(upuc,3) = 395 ) AND ".
+" ( ( ufak > 3292001 AND ufak < 3292999 ) OR ( ufak > 3296001 AND ufak < 3296999 ) OR ( ufak > 3298001 AND ufak < 3298999 ) )";
+$oznac = mysql_query("$sqtoz");
+
+//fak 3292001/3292999,3296000/3296999,3298000/3298999 drh1- 0,1,2,3,7 ;
+//drh1=8
+$sqtoz = "UPDATE F$kli_vxcf"."_pruhrady$kli_uzid SET udru=7 ".
+" WHERE udru > 3 AND udru < 7 AND ( LEFT(upuc,3) = 211 OR LEFT(upuc,3) = 221 OR LEFT(upuc,3) = 395 ) AND ".
+" ( ( ufak > 3292001 AND ufak < 3292999 ) OR ( ufak > 3296001 AND ufak < 3296999 ) OR ( ufak > 3298001 AND ufak < 3298999 ) )";
+$oznac = mysql_query("$sqtoz");
+
 
 ///////////////////////////////////////////////////////////koniec rozdelenia do druhov
 
@@ -413,6 +507,7 @@ $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET puc=0 WHERE puc < 0 ";
 $oznac = mysql_query("$sqtoz");
+
 
 $nulovazostava=1;
 
@@ -467,10 +562,6 @@ $dsql = mysql_query("$dsqlt");
 }
 
 //exit;
-//vypocet bez dph a dph
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET hdp=hod/120*100, hdu=hod-hdp ";
-$dsql = mysql_query("$dsqlt");
-
 
 ///////////////////////////////////////////////////////////////////////////////pre vsetky ICO
 if ( $copern == 10 AND $drupoh == 1 AND $h_ico == 0 )
@@ -503,7 +594,6 @@ if( $jetovar == 1 )
            {
 $i=0;
 $j=0;
-$noveico=1;
   while ($i <= $tvpol )
   {
 
@@ -523,10 +613,7 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 $pdf->SetRightMargin(10);
 
-if( $h_jar == 1 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JAR 2018","0",0,"L"); }
-if( $h_jar == 2 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2018","0",0,"L"); }
-if( $h_jar == 3 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2017 odkladové","0",0,"L"); }
-
+$pdf->Cell(90,5,"Vyhodnotenie úhrad faktúr CHÉMIA za dealerov","0",0,"L");
 $pdf->Cell(0,5,"FIR$kli_vxcf $kli_nxcf strana $strana","0",1,"R");
 
 $pdf->Cell(180,2," ","0",1,"R");
@@ -540,18 +627,18 @@ if( $h_obd == 100 ) $h_obdn="Poèiatoèný stav";
 $pdf->SetFont('arial','',8);
 
 
-$pdf->Cell(20,5,"Úèet: $h_uce","0",0,"L");
-$pdf->Cell(25,5,"Obdobie: $h_obdn Dealer: $rtov->ssy $rtov->ndea","0",0,"L");
-$pdf->Cell(0,5," ","0",1,"L");
+$pdf->Cell(20,4,"Úèet: $h_uce","0",0,"L");
+$pdf->Cell(25,4,"Obdobie: $h_obdn","0",0,"L");
+if( $dea > 0 ) { $pdf->Cell(20,4,"Dealer: $rtov->ssy $rtov->ndea","0",0,"L"); }
+$pdf->Cell(0,4," ","0",1,"L");
 
-$pdf->Cell(6,5,"D","B",0,"L");
-$pdf->Cell(20,5,"Fak/VS","B",0,"R");
-$pdf->Cell(17,5,"Vystavená","B",0,"L");$pdf->Cell(17,5,"Splatná","B",0,"L");
-$pdf->Cell(20,5,"Hodnota","B",0,"R");$pdf->Cell(20,5,"BezDPH","B",0,"R");$pdf->Cell(20,5,"DPH","B",0,"R");
-$pdf->Cell(20,5,"Zaplatené","B",0,"R");
-$pdf->Cell(20,5,"Nezaplatené","B",0,"R");$pdf->Cell(0,5,"Zaplatené v lehote","B",1,"R");
+$pdf->Cell(6,4,"D","B",0,"L");
+$pdf->Cell(20,4,"Fak/VS","B",0,"R");
+$pdf->Cell(17,4,"Splatná","B",0,"L");$pdf->Cell(17,4,"Zaplatená","B",0,"L");$pdf->Cell(18,4,"Doklad","B",0,"R");
+$pdf->Cell(47,4,"Firma  ","B",0,"L");
+$pdf->Cell(20,4,"Faktúra","B",0,"R");$pdf->Cell(20,4,"Uhradené","B",0,"R");$pdf->Cell(0,4,"Zostatok","B",1,"R");
 
-$j=1;
+
       }
 //koniec j=0
 
@@ -586,34 +673,24 @@ if( $rtov->pox == 1 )
            {
 if( $rtov->pox3 == 0 )
 {
-if( $noveico == 1 ) {
-$pdf->Cell(0,5,"ODBERATE¼: $rtov->ico, $rtov->nai, $rtov->mes","0",1,"L");
-$noveico=0;
-$j = $j + 1; 
-                   }
-$pdf->Cell(6,5," ","0",0,"L");
+$pdf->Cell(6,4," ","0",0,"L");
 $pdf->Cell(20,5,"$rtov->fak","0",0,"R");
-$pdf->Cell(17,5,"$dat_sk","0",0,"L");$pdf->Cell(17,5,"$das_sk","0",0,"L");
-
-$pdf->Cell(20,5,"$rtov->hod","0",0,"R");$pdf->Cell(20,5,"$rtov->hdp","0",0,"R");$pdf->Cell(20,5,"$rtov->hdu","0",0,"R");
-$pdf->Cell(20,5,"$rtov->uhr","0",0,"R");
-$pdf->Cell(20,5,"$rtov->zos","0",0,"R");$pdf->Cell(0,5,"$rtov->leh","0",1,"R");
-$j = $j + 1; 
+$pdf->Cell(17,5,"$das_sk","0",0,"L");$pdf->Cell(17,4,"$dau_sk","0",0,"L");$pdf->Cell(18,4,"$rtov->dok","0",0,"R");
+$pdf->Cell(47,5,"$rtov->nai","0",0,"L");
+$pdf->Cell(20,5,"$rtov->hod","0",0,"R");$pdf->Cell(20,4,"$rtov->uhr","0",0,"R");$pdf->Cell(0,4,"$rtov->zos","0",1,"R");
 }
 
-$tlac3=0;
-
-if( $rtov->pox3 == 1 AND $tlac3 == 1 )
+if( $rtov->pox3 == 1 )
            {
-$pdf->Cell(6,5,"$rtov->ksy","0",0,"L");$pdf->Cell(20,5,"$rtov->fak","0",0,"R");$pdf->Cell(17,5," ","0",0,"L");
-$pdf->Cell(17,5,"$dat_sk","0",0,"L");$pdf->Cell(17,5,"$rtov->dok","0",0,"R");
-$pdf->Cell(66,5,"Po splatnosti $pospl dní","0",0,"L");$pdf->Cell(20,5,"$rtov->hod","0",1,"R");
+$pdf->Cell(6,4,"$rtov->ksy","0",0,"L");$pdf->Cell(20,5,"$rtov->fak","0",0,"R");$pdf->Cell(17,4," ","0",0,"L");
+$pdf->Cell(17,4,"$dat_sk","0",0,"L");$pdf->Cell(17,4,"$rtov->dok","0",0,"R");
+$pdf->Cell(66,4,"Po splatnosti $pospl dní","0",0,"L");$pdf->Cell(20,5,"$rtov->hod","0",1,"R");
            }
 
 if( $rtov->pox3 == 1) { 
      $druhuhr=1*$rtov->ksy;
 
-     if( $druhuhr == 1 ) { $stlp1=$stlp1+$rtov->hod; $stlp1d=$stlp1d+$rtov->hod; }
+     if( $druhuhr == 1 ) $stlp1=$stlp1+$rtov->hod;
      if( $druhuhr == 2 ) $stlp2=$stlp2+$rtov->hod;
      if( $druhuhr == 3 ) $stlp3=$stlp3+$rtov->hod;
      if( $druhuhr == 4 ) $stlp4=$stlp4+$rtov->hod;
@@ -625,53 +702,158 @@ if( $rtov->pox3 == 1) {
      if( $druhuhr == 99 ) $stlp10=$stlp10+$rtov->hod;
      if( $druhuhr != '' ) $stlp11=$stlp11+$rtov->hod;
 
-                      }
+     if( $druhuhr == 1 ) $prem1=$prem1+$rtov->hdp;
+     if( $druhuhr == 2 ) $prem2=$prem2+$rtov->hdp;
+     if( $druhuhr == 3 ) $prem3=$prem3+$rtov->hdp;
+     if( $druhuhr == 4 ) $prem4=$prem4+$rtov->hdp;
+     if( $druhuhr == 5 ) $prem5=$prem5+$rtov->hdp;
+     if( $druhuhr == 6 ) $prem6=$prem6+$rtov->hdp;
+     if( $druhuhr == 7 ) $prem7=$prem7+$rtov->hdp;
+     if( $druhuhr == 8 ) $prem8=$prem8+$rtov->hdp;
+     if( $druhuhr == 9 ) $prem9=$prem9+$rtov->hdp;
+     if( $druhuhr == 99 ) $prem10=$prem10+$rtov->hdp;
+     if( $druhuhr != '' ) $prem11=$prem11+$rtov->hdp;
+                  }
 
            }
 
 if( $rtov->pox == 991 )
            {
-$Cislo=$stlp1+"";
-$Sstlp1=sprintf("%0.2f", $Cislo);
-
-$pdf->Cell(60,5,"spolu za IÈO: $rtov->ico","T",0,"L");
-$pdf->Cell(20,5,"$rtov->hod","T",0,"R");$pdf->Cell(20,5,"$rtov->hdp","T",0,"R");$pdf->Cell(20,5,"$rtov->hdu","T",0,"R");
-$pdf->Cell(20,5,"$rtov->uhr","T",0,"R");
-$pdf->Cell(20,5,"$rtov->zos","T",0,"R");$pdf->Cell(0,5,"$Sstlp1","T",1,"R");
-$noveico=1;
-$j = $j + 1; 
-$stlp1=0;
+if( $sumico == 0 AND $uhr == 0 )
+{
+$pdf->Cell(25,4,"spolu za IÈO:","T",0,"L");$pdf->Cell(100,4,"$rtov->ico, $rtov->nai, $rtov->mes","0",0,"L");
+$pdf->Cell(20,4,"$rtov->hod","T",0,"R");$pdf->Cell(20,4,"$rtov->uhr","T",0,"R");$pdf->Cell(0,4,"$rtov->zos","T",1,"R");
+$pdf->Cell(90,1," ","0",1,"L");
+}
+if( $sumico == 1 AND $uhr == 0 )
+{
+$pdf->Cell(25,4,"spolu za IÈO:","T",0,"L");$pdf->Cell(100,4,"$rtov->ico, $rtov->nai, $rtov->mes","0",0,"L");
+$pdf->Cell(20,4,"$rtov->hod","T",0,"R");$pdf->Cell(20,4,"$rtov->uhr","T",0,"R");$pdf->Cell(0,4,"$rtov->zos","T",1,"R");
+$pdf->Cell(90,1," ","0",1,"L");
+}
            }
 
 if( $rtov->pox == 995 )
            {
-$Cislo=$stlp1d+"";
-$Sstlp1d=sprintf("%0.2f", $Cislo);
+if( $sumico == 0 AND $uhr == 0 )
+{
+$pdf->Cell(25,4,"SPOLU DEALER $rtov->ssy $rtov->ndea ","T",0,"L");$pdf->Cell(100,4," ","T",0,"L");
+$pdf->Cell(20,4,"$rtov->hod","T",0,"R");$pdf->Cell(20,4,"$rtov->uhr","T",0,"R");$pdf->Cell(0,4,"$rtov->zos","T",1,"R");
+$pdf->Cell(90,1,"","0",1,"L");
+}
+if( $sumico == 1 AND $uhr == 0 )
+{
+$pdf->Cell(25,4,"SPOLU DEALER $rtov->ssy $rtov->ndea ","T",0,"L");$pdf->Cell(100,4," ","T",0,"L");
+$pdf->Cell(20,4,"$rtov->hod","T",0,"R");$pdf->Cell(20,4,"$rtov->uhr","T",0,"R");$pdf->Cell(0,4,"$rtov->zos","T",1,"R");
+$pdf->Cell(90,1,"","0",1,"L");
+}
 
-$pdf->Cell(60,5,"SPOLU DEALER $rtov->ssy $rtov->ndea ","1",0,"L");
-$pdf->Cell(20,5,"$rtov->hod","1",0,"R");$pdf->Cell(20,5,"$rtov->hdp","1",0,"R");$pdf->Cell(20,5,"$rtov->hdu","1",0,"R");
-$pdf->Cell(20,5,"$rtov->uhr","1",0,"R");
-$pdf->Cell(20,5,"$rtov->zos","1",0,"R");$pdf->Cell(0,5,"$Sstlp1d","1",1,"R");
-$j=0;
-$stlp1d=0;
+$prem1=2*$stlp1/100;
+$prem2=1*$stlp2/100;
+$prem3=0.25*$stlp3/100;
+$prem4=0.5*$stlp4/100;
+$prem5=-1*$stlp5/100;
+$prem6=-2*$stlp6/100;
+$prem7=1*$stlp7/100;
+$prem8=-1*$stlp8/100;
+$prem9=0;
+
+$prem11=$prem1+$prem2+$prem3+$prem4+$prem5+$prem6+$prem7+$prem8+$prem9;
+
+$Cislo=$stlp1+"";
+$Sstlp1=sprintf("%0.2f", $Cislo);
+$Cislo=$prem1+"";
+$Sprem1=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp2+"";
+$Sstlp2=sprintf("%0.2f", $Cislo);
+$Cislo=$prem2+"";
+$Sprem2=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp3+"";
+$Sstlp3=sprintf("%0.2f", $Cislo);
+$Cislo=$prem3+"";
+$Sprem3=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp4+"";
+$Sstlp4=sprintf("%0.2f", $Cislo);
+$Cislo=$prem4+"";
+$Sprem4=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp5+"";
+$Sstlp5=sprintf("%0.2f", $Cislo);
+$Cislo=$prem5+"";
+$Sprem5=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp6+"";
+$Sstlp6=sprintf("%0.2f", $Cislo);
+$Cislo=$prem6+"";
+$Sprem6=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp7+"";
+$Sstlp7=sprintf("%0.2f", $Cislo);
+$Cislo=$prem7+"";
+$Sprem7=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp8+"";
+$Sstlp8=sprintf("%0.2f", $Cislo);
+$Cislo=$prem8+"";
+$Sprem8=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp10+"";
+$Sstlp10=sprintf("%0.2f", $Cislo);
+$Cislo=$prem10+"";
+$Sprem10=sprintf("%0.2f", $Cislo);
+
+$Cislo=$stlp11+"";
+$Sstlp11=sprintf("%0.2f", $Cislo);
+$Cislo=$prem11+"";
+$Sprem11=sprintf("%0.2f", $Cislo);
+
+$pdf->Cell(100,4," ","0",1,"L");
+$pdf->Cell(60,4,"Druh","B",0,"L");$pdf->Cell(15,4,"%prem","B",0,"R");$pdf->Cell(40,4,"Uhradené","B",0,"R");$pdf->Cell(40,4,"Prémia","B",1,"R");
+
+$pdf->Cell(60,4,"01 Predfaktúry, hotovos","T",0,"L");$pdf->Cell(15,4,"2.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp1","0",0,"R");$pdf->Cell(40,4,"$Sprem1","0",1,"R");
+$pdf->Cell(60,4,"02 Zaplatená celé","T",0,"L");$pdf->Cell(15,4,"1.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp2","T",0,"R");$pdf->Cell(40,4,"$Sprem2","T",1,"R");
+$pdf->Cell(60,4,"03 Zaplatená len DPH","T",0,"L");$pdf->Cell(15,4,"0.25","B",0,"R");$pdf->Cell(40,4,"$Sstlp3","T",0,"R");$pdf->Cell(40,4,"$Sprem3","T",1,"R");
+$pdf->Cell(60,4,"04 Zaplatená odkladová celá","T",0,"L");$pdf->Cell(15,4,"0.50","B",0,"R");$pdf->Cell(40,4,"$Sstlp4","T",0,"R");$pdf->Cell(40,4,"$Sprem4","T",1,"R");
+$pdf->Cell(60,4,"05 Zaplatená do 30dní","T",0,"L");$pdf->Cell(15,4,"-1.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp5","T",0,"R");$pdf->Cell(40,4,"$Sprem5","T",1,"R");
+$pdf->Cell(60,4,"06 Zaplatená do 60dní","T",0,"L");$pdf->Cell(15,4,"-2.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp6","T",0,"R");$pdf->Cell(40,4,"$Sprem6","T",1,"R");
+$pdf->Cell(60,4,"07 Priemyselné predf.,hotovos","T",0,"L");$pdf->Cell(15,4,"1.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp7","T",0,"R");$pdf->Cell(40,4,"$Sprem7","T",1,"R");
+$pdf->Cell(60,4,"08 Priemyselné ostatné","T",0,"L");$pdf->Cell(15,4,"-1.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp8","T",0,"R");$pdf->Cell(40,4,"$Sprem8","T",1,"R");
+$pdf->Cell(60,4,"10 Ostatné","T",0,"L");$pdf->Cell(15,4,"0.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp10","T",0,"R");$pdf->Cell(40,4,"$Sprem10","T",1,"R");
+
+$pdf->Cell(60,4,"Spolu","T",0,"L");$pdf->Cell(15,4," ","T",0,"R");$pdf->Cell(40,4,"$Sstlp11","T",0,"R");$pdf->Cell(40,4,"$Sprem11","T",1,"R");
+
+
+$stlp1=0; $stlp2=0; $stlp3=0; $stlp4=0; $stlp5=0; $stlp6=0; $stlp7=0; $stlp8=0; $stlp9=0; $stlp10=0; $stlp11=0; 
+$prem1=0; $prem2=0; $prem3=0; $prem4=0; $prem5=0; $prem6=0; $prem7=0; $prem8=0; $prem9=0; $prem10=0; $prem11=0; 
+$j=-1;
            }
 
 
 if( $rtov->pox == 999 )
            {
-
-$pdf->Cell(60,5,"SPOLU všetky IÈO:","T",0,"L");
-$pdf->Cell(20,5,"$rtov->hod","T",0,"R");$pdf->Cell(20,5,"$rtov->hdp","T",0,"R");$pdf->Cell(20,5,"$rtov->hdu","T",0,"R");
-$pdf->Cell(20,5,"$rtov->uhr","T",0,"R");
-$pdf->Cell(20,5,"$rtov->zos","T",0,"R");$pdf->Cell(0,5,"$rtov->leh","T",1,"R");
-
+if( $sumico == 0 AND $uhr == 0 )
+{
+$pdf->Cell(25,4,"SPOLU všetky IÈO:","T",0,"L");$pdf->Cell(100,4," ","T",0,"L");
+$pdf->Cell(20,4,"$rtov->hod","T",0,"R");$pdf->Cell(20,4,"$rtov->uhr","T",0,"R");$pdf->Cell(0,4,"$rtov->zos","T",1,"R");
+$pdf->Cell(90,1,"","0",1,"L");
+}
+if( $sumico == 1 AND $uhr == 0 )
+{
+$pdf->Cell(25,4,"SPOLU všetky IÈO:","T",0,"L");$pdf->Cell(100,4," ","T",0,"L");
+$pdf->Cell(20,4,"$rtov->hod","T",0,"R");$pdf->Cell(20,4,"$rtov->uhr","T",0,"R");$pdf->Cell(0,4,"$rtov->zos","T",1,"R");
+$pdf->Cell(90,1,"","0",1,"L");
+}
 
            }
 
 $rtovpox=$rtov->pox;
 }
 $i = $i + 1;
-if( $j >= 45 ) { $j=0; }
+$j = $j + 1; 
+if( $j >= 54 ) { $j=0; }
   }
 
            }
@@ -714,21 +896,22 @@ $pdf->Cell(0,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 
 $pdf->Cell(180,2," ","0",1,"R");
 
-$pdf->Cell(105,5,"Prázdna zostava","0",1,"R");
+$pdf->Cell(105,4,"Prázdna zostava","0",1,"R");
 
 }
 
 
-$pdf->Output("$outfilex");
+
+$pdf->Output("../tmp/saldo.$kli_uzid.pdf")
 
 
 ?> 
 
 <script type="text/javascript">
-  var okno = window.open("<?php echo $outfilex; ?>","_self");
+  var okno = window.open("../tmp/saldo.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Saldo PDF</title>
   <style type="text/css">
