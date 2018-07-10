@@ -1499,6 +1499,33 @@ if( $kli_vmes >= 7 OR $kli_vrok > 2018 )
   {
 //andrejko
 
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE zrz_dn = 1 ";
+$tov = mysql_query("$sqltt");
+$tvpol = mysql_num_rows($tov);
+//echo $sqltt.$tvpol."<br />";
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+ {
+$rtov=mysql_fetch_object($tov);
+
+//echo $rtov->oc." ".$tvpol."<br />";
+
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
+" SET zzam_sp=0, zzam_ip=0, zfir_sp=0, zfir_ip=0 WHERE oc = $rtov->oc AND zzam_sp <= 200 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
+" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200, zfir_sp=zfir_sp-200, zfir_ip=zfir_ip-200 WHERE oc = $rtov->oc AND zzam_sp > 200 ";
+$oznac = mysql_query("$sqtoz");
+
+ }
+
+$i=$i+1;
+   }
 
 //exit;
    
