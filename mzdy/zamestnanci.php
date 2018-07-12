@@ -1794,6 +1794,11 @@ function zamsodpoc()
 window.open('ktomaodpocetzp.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
                     }
 
+function dochdoh()
+                    {
+window.open('ktomaulavudp.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+                    }
+
 function histSprac()
                     {
 window.open('histsprac.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
@@ -2000,6 +2005,9 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 <td class="hmenu" align="left">
 <a href="#" onclick="zamsodpoc();">
 odpoèet ZP <img src='../obr/tlac.png' width=20 height=15 border=0 title="Zamestnanci s nastaveným odpoètom ZP"></a>
+
+<a href="#" onclick="dochdoh();">
+ú¾ava DP doch. <img src='../obr/tlac.png' width=20 height=15 border=0 title="Zamestnanci s nastavenou odvodovou ú¾avou DP pre dôchodcov-dohodárov"></a>
 
 <?php if( $zana == 0 )    { ?>
 &nbsp&nbsp&nbsp
