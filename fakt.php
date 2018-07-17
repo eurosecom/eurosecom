@@ -22,7 +22,7 @@ if ( $copern !== 99 )
 $sys = 'FAK';
 $cslm=1;
 $urov = 1000;
-if( $_SESSION['kli_vxcf'] == 9999 ) 
+if( $_SESSION['kli_vxcf'] == 9999 )
 { echo "Vypnite vöetky okn· v prehliadaËi IE a prihl·ste sa znovu prosÌm do IS, ak ste pouûÌvali CestovnÈ prÌkazy"; exit; }
 $uziv = include("uziv.php");
 if( !$uziv ) exit;
@@ -36,7 +36,7 @@ if( !$uziv ) exit;
 $mysqldbfir=$mysqldb;
 $mysqldbdata=$mysqldb;
 $oddelnew=0;
-if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano"))
           {
 $dtb2 = include("oddel_dtb1new.php");
 $oddelnew=1;
@@ -74,11 +74,11 @@ $sqlmax = mysql_query("SELECT * FROM $mysqldbfir.fir WHERE xcf=$firs");
   }
      }
 
-$query="START TRANSACTION;"; 
+$query="START TRANSACTION;";
 $trans = mysql_query($query);
 
 $zmazane = mysql_query("DELETE FROM $mysqldbfir.nas_id WHERE id='$kli_uzid'");
-$ulozene = mysql_query("INSERT INTO $mysqldbfir.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$ulozene = mysql_query("INSERT INTO $mysqldbfir.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
 if ( $ulozene )
 {
 $query="COMMIT;";
@@ -93,15 +93,15 @@ $trans = mysql_query($query);
 if( $oddelnew == 1 )
   {
 $zmazane = mysql_query("DELETE FROM $mysqldb2010.nas_id WHERE id='$kli_uzid'");
-$ulozene = mysql_query("INSERT INTO $mysqldb2010.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$ulozene = mysql_query("INSERT INTO $mysqldb2010.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
 $zmazane = mysql_query("DELETE FROM $mysqldb2011.nas_id WHERE id='$kli_uzid'");
-$ulozene = mysql_query("INSERT INTO $mysqldb2011.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$ulozene = mysql_query("INSERT INTO $mysqldb2011.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
 $zmazane = mysql_query("DELETE FROM $mysqldb2012.nas_id WHERE id='$kli_uzid'");
-$ulozene = mysql_query("INSERT INTO $mysqldb2012.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$ulozene = mysql_query("INSERT INTO $mysqldb2012.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
 $zmazane = mysql_query("DELETE FROM $mysqldb2013.nas_id WHERE id='$kli_uzid'");
-$ulozene = mysql_query("INSERT INTO $mysqldb2013.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$ulozene = mysql_query("INSERT INTO $mysqldb2013.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
 $zmazane = mysql_query("DELETE FROM $mysqldb2014.nas_id WHERE id='$kli_uzid'");
-$ulozene = mysql_query("INSERT INTO $mysqldb2014.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$ulozene = mysql_query("INSERT INTO $mysqldb2014.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
 $zmazane = mysql_query("DELETE FROM $mysqldb2015.nas_id WHERE id='$kli_uzid'");
 $ulozene = mysql_query("INSERT INTO $mysqldb2015.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
 $zmazane = mysql_query("DELETE FROM $mysqldb2016.nas_id WHERE id='$kli_uzid'");
@@ -135,14 +135,14 @@ setcookie("kli_nxcf", $vyb_naz, time() + (7 * 24 * 60 * 60));
 setcookie("kli_vume", $vyb_ume, time() + (7 * 24 * 60 * 60));
 setcookie("kli_vrok", $vyb_rok, time() + (7 * 24 * 60 * 60));
     }
-session_start();    
+session_start();
 $_SESSION['kli_vxcf'] = $vyb_xcf;
 $_SESSION['kli_nxcf'] = $vyb_naz;
 $_SESSION['kli_vume'] = $vyb_ume;
 $_SESSION['kli_vrok'] = $vyb_rok;
 $_SESSION['kli_vduj'] = $vyb_duj;
 
-if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano"))
           {
 $dtb2 = include("oddel_dtb2new.php");
           }
@@ -169,7 +169,7 @@ $sqlmax = mysql_query("SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_hoteluzid WHE
 if( $xfak == 0 )
 {
 ?>
-<script type="text/javascript" > 
+<script type="text/javascript" >
 alert ("ºutujem , nem·te dostatoËnÈ prÌstupovÈ pr·va .");
 window.close();
 </script>
@@ -182,7 +182,7 @@ exit;
 $datdnessql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $jeclean=0;
 $poslhh = "SELECT * FROM ".$mysqldbdata.".cleaningtmp WHERE dat='$datdnessql' ";
-$posl = mysql_query("$poslhh"); 
+$posl = mysql_query("$poslhh");
 if( $posl ) { $jeclean = 1*mysql_num_rows($posl); }
 if( $jeclean == 0 )
 {
@@ -414,54 +414,54 @@ var vyskawin = screen.height-90;
 
 
   function OtvorCstr()
-  { 
+  {
   var okno = window.open("../cis/cstr.php?copern=1&page=1","_blank");
   }
 
 
   function OtvorCsku()
-  { 
+  {
   var okno = window.open("../cis/csku.php?copern=1&page=1","_blank");
   }
 
 
   function OtvorCsta()
-  { 
+  {
   var okno = window.open("../cis/csta.php?copern=1&page=1","_blank");
   }
 
   function OtvorCzak()
-  { 
+  {
   var okno = window.open("../cis/czak.php?copern=1&page=1","_blank");
   }
 
   function OtvorUfir1()
-  { 
+  {
   var okno = window.open("../cis/ufir.php?copern=1","_blank");
   }
 
   function OtvorUfir21()
-  { 
+  {
   var okno = window.open("../cis/ufir.php?copern=21","_blank");
   }
 
   function OtvorCico()
-  { 
+  {
   var okno = window.open("../cis/cico.php?copern=1&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function ZmnPrih()
-  { 
+  {
   var okno = window.open("../cis/zmnprih.php?copern=1&page=1","_blank");
   }
 
   function ZalDat()
-  { 
+  {
   var okno = window.open("../cis/zaldat.php?copern=1&page=1","_blank");
   }
 
   function ObnDat()
-  { 
+  {
   var okno = window.open("../cis/obndat.php?copern=1&page=1","_blank");
   }
 
@@ -469,122 +469,122 @@ var vyskawin = screen.height-90;
 
 
   function Upomienka()
-  { 
+  {
   var okno = window.open("../ucto/saldo.php?copern=1&drupoh=1&page=1&sysx=UCT&typhtml=1&cinnost=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function OtvorOdber()
-  { 
+  {
   var okno = window.open('../faktury/vstfak.php?copern=1&drupoh=1&page=1&pocstav=0','_blank','<?php echo $parwin; ?>');
   }
 
   function OtvorDodav()
-  { 
+  {
   var okno = window.open("../faktury/vstfak.php?copern=1&drupoh=2&page=1&pocstav=0","_blank",'<?php echo $parwin; ?>');
   }
 
   function OtvorDodl()
-  { 
+  {
   var okno = window.open("../faktury/vstfak.php?copern=1&drupoh=11&page=1&pocstav=0","_blank",'<?php echo $parwin; ?>');
   }
 
   function OtvorKvnp()
-  { 
+  {
   var okno = window.open("../faktury/vstfak.php?copern=1&drupoh=21&page=1&pocstav=0","_blank",'<?php echo $parwin; ?>');
   }
 
   function Otvorppri()
-  { 
+  {
   var okno = window.open("../ucto/vstpok.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function Otvorpvyd()
-  { 
+  {
   var okno = window.open("../ucto/vstpok.php?copern=1&drupoh=2&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function PrehOdber()
-  { 
+  {
   var okno = window.open("../faktury/vstfak.php?copern=10&drupoh=1&page=1&pocstav=0","_blank",'<?php echo $parwin; ?>');
   }
 
   function PrehDodav()
-  { 
+  {
   var okno = window.open("../faktury/vstfak.php?copern=10&drupoh=2&page=1&pocstav=0","_blank",'<?php echo $parwin; ?>');
   }
 
   function ZozOdb()
-  { 
+  {
   var okno = window.open("../ucto/zozdok.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function ZozVnp()
-  { 
+  {
   var okno = window.open("../ucto/zozdok.php?copern=9&drupoh=31&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function ZozDod()
-  { 
+  {
   var okno = window.open("../ucto/zozdok.php?copern=2&drupoh=2&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function ZozPri()
-  { 
+  {
   var okno = window.open("../ucto/zozdok.php?copern=3&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function ZozVyd()
-  { 
+  {
   var okno = window.open("../ucto/zozdok.php?copern=4&drupoh=2&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function OtvorCcis()
-  { 
+  {
   var okno = window.open("../sklad/ccis.php?copern=1&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function OtvorDodb()
-  { 
+  {
   var okno = window.open("../faktury/dodb.php?copern=1&drupoh=1&page=1","_blank");
   }
 
   function OtvorDdod()
-  { 
+  {
   var okno = window.open("../faktury/ddod.php?copern=1&drupoh=1&page=1","_blank");
   }
 
   function OtvorDpok()
-  { 
+  {
   var okno = window.open("../ucto/dpok.php?copern=1&drupoh=1&page=1","_blank");
   }
 
   function OtvorPslu()
-  { 
+  {
   var okno = window.open("../faktury/cslu.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function Ezakaznik()
-  { 
+  {
   var okno = window.open("../cis/ezak.php?copern=1&page=1","_blank");
   }
 
   function saldo()
-  { 
+  {
   var okno = window.open("../ucto/saldo.php?copern=1&drupoh=1&page=1&sysx=UCT","_blank",'<?php echo $parwin; ?>');
   }
 
   function Priku()
-  { 
+  {
   var okno = window.open("../ucto/vstpru.php?copern=1&drupoh=1&page=1&sysx=UCT","_blank",'<?php echo $parwin; ?>');
   }
 
   function OtvorFtext()
-  { 
+  {
   var okno = window.open("../faktury/ftexty.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
   }
 
   function ukazrobot()
-  { 
+  {
   <?php if( $kli_vduj >= 0 AND $vyb_robot == 1 ) { echo "robotokno.style.display=''; robotmenu.style.display='none';"; } ?>
   myRobot = document.getElementById("robotokno");
   myRobotmenu = document.getElementById("robotmenu");
@@ -595,20 +595,20 @@ var vyskawin = screen.height-90;
   }
 
   function zhasnirobot()
-  { 
+  {
   robotokno.style.display='none';
   robotmenu.style.display='none';
   }
 
   function zobraz_robotmenu()
-  { 
+  {
   myRobotmenu.style.width = widthrobotmenu;
   myRobotmenu.innerHTML = htmlmenu;
   robotmenu.style.display='';
   }
 
   function zhasni_menurobot()
-  { 
+  {
   robotmenu.style.display='none';
   }
 
@@ -619,7 +619,7 @@ var vyskawin = screen.height-90;
     var widthrobotmenu = 400;
 
     var htmlmenu = "<table  class='ponuka' width='100%'><tr><td width='90%'>Menu EkoRobot</td>" +
-    "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick='zhasni_menurobot();' alt='Zhasni menu' ></td></tr>";  
+    "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick='zhasni_menurobot();' alt='Zhasni menu' ></td></tr>";
 
   <?php
   $sql = mysql_query("SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_dodb WHERE drod = 1");
@@ -630,7 +630,7 @@ var vyskawin = screen.height-90;
   }
   ?>
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/vstf_u.php?pocstav=0&copern=5&drupoh=1&page=1&rozuct=ANO&sysx=UCT&hladaj_uce=<?php echo $uceodb; ?>', '_blank','<?php echo $parwin; ?>' )\">" +
 "Chcete nahraù nov˙ Odberateæsk˙ fakt˙ru ?</a>";
     htmlmenu += "</td></tr>";
@@ -649,7 +649,7 @@ if( $vyb_xcf == 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregis
   }
   ?>
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/vstfak.php?copern=1&drupoh=42&page=1&hladaj_uce=<?php echo $ucepok; ?>&pocstav=0&regpok=1', '_blank','<?php echo $parwin; ?>' )\">" +
 "Chcete zaregistrovaù platbu do registraËnej pokladnice ?</a>";
     htmlmenu += "</td></tr>";
@@ -660,12 +660,12 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/vstfak.php?copern=1
 
   if( $ajeshop == 1 )       { ?>
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../eshop/obj_tlac.php?copern=1&drupoh=1&page=1&zmtz=1&html=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )\">" +
 "Chcete spracovaù objedn·vky z E-SHOPu ?</a>";
     htmlmenu += "</td></tr>";
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../eshop/infotovar.php?copern=1&drupoh=1&page=1&zmtz=1&html=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )\">" +
 "Chcete vyhodnotiù predaj tovaru a sluûieb ?</a>";
     htmlmenu += "</td></tr>";
@@ -676,7 +676,7 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../eshop/infotovar.php?copern=
 
   if( $ajnajom == 1 )       { ?>
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../secomnajom/najom.php?copern=1&drupoh=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )\">" +
 "Chcete spracovaù n·jomnÈ zmluvy za nebytovÈ priestory ?</a>";
     htmlmenu += "</td></tr>";
@@ -699,7 +699,7 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../secomnajom/najom.php?copern
   if (File_Exists ("dodobj/index.php")) { $ajdodobj=1; }
   if( $ajdodobj == 1 )       { ?>
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../dodobj/dodobj.php?copern=1&drupoh=1&page=1&zmtz=1&html=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )\">" +
 "Chcete vytvoriù dod·vateæsk˙ OBJedn·vku ?</a>";
     htmlmenu += "</td></tr>";
@@ -707,14 +707,14 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../dodobj/dodobj.php?copern=1&
 
 <?php                        } ?>
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/vstf_u.php?pocstav=0&copern=5&drupoh=2&page=1&rozuct=ANO&sysx=UCT&hladaj_uce=<?php echo $uceodb; ?>', '_blank','<?php echo $parwin; ?>' )\">" +
 "Chcete nahraù nov˙ Dod·vateæsk˙ fakt˙ru ?</a>";
     htmlmenu += "</td></tr>";
 
 
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>Chcete zoznam "; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>Chcete zoznam ";
 
 htmlmenu += " <a href=\"#\" onClick=\"window.open('../faktury/vstfak.php?copern=1&drupoh=1&page=1&vyroba=0', '_blank','<?php echo $parwin; ?>' )\">" +
 "ODB.Fakt˙r </a> , ";
@@ -731,12 +731,17 @@ htmlmenu += " <a href=\"#\" onClick=\"window.open('../faktury/vstfak.php?copern=
     htmlmenu += " ?</td></tr>";
 
 
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
+    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/fakt_kontrol.php?copern=1&drupoh=1&page=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )\">" +
 "Chcete skontrolovaù doklady v Odbyte ?</a>";
     htmlmenu += "</td></tr>";
 
-
+<?php if( $_SERVER['SERVER_NAME'] == "localhost" ) { ?>
+    htmlmenu += "<tr style='height:48px;'><td width='100%' class='ponuka' colspan='2'>";
+htmlmenu += "<a href=\"#\" onClick=\"window.open('../odbobj/odbobj.php?copern=1', '_blank')\">" +
+"Prejsù do odberateæsk˝ch objedn·vok</a>";
+    htmlmenu += "</td></tr>";
+<?php } ?>
 </script>
 </HEAD>
 <BODY class="white" <?php if( $copern != 22 AND $copern != 23 AND $copern != 24 ) { echo "onload='ukazrobot();'"; } ?> >
@@ -761,10 +766,10 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/fakt_kontrol.php?co
 </tr>
 </table>
 
-<?php 
+<?php
 $klepnutie=".Klepnuti";
-if( $newmenu == 1 ) 
-{ 
+if( $newmenu == 1 )
+{
 ?>
 <script type="text/javascript">
 
@@ -821,7 +826,7 @@ if( $newmenu == 1 )
 <FORM name='znew' method='post' action='#' >
 <tr><td width='90%' onClick='M1ZhasniMenu();'>Menu Vstup d·t</td>
 <td width='10%' align='right' onClick='M1ZhasniMenu();'>
-<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M1ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
+<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M1ZhasniMenu();' alt='Zhasni menu' ></td></tr>
 
 <tr><td width='100%' colspan='2' onClick="OtvorOdber();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s1-r1.jpg' style='width:98%; height:20;' alt='Kniha odberateæsk˝ch fakt˙r' ></a></center></td></tr>
@@ -850,7 +855,7 @@ if( $newmenu == 1 )
 <FORM name='znew' method='post' action='#' >
 <tr><td width='90%' onClick='M2ZhasniMenu();'>Menu MesaËnÈ spracovanie</td>
 <td width='10%' align='right' onClick='M2ZhasniMenu();'>
-<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M2ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
+<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M2ZhasniMenu();' alt='Zhasni menu' ></td></tr>
 
 <tr><td width='100%' colspan='2' onClick="ZozOdb();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s2-r1.jpg' style='width:98%; height:20;' alt='Zoznam odberateæsk˝ch fakt˙r - mesaËn˝' ></a></center></td></tr>
@@ -874,7 +879,7 @@ if( $newmenu == 1 )
 <FORM name='znew' method='post' action='#' >
 <tr><td width='90%' onClick='M3ZhasniMenu();'>Menu Inform·cie a v˝stupy</td>
 <td width='10%' align='right' onClick='M3ZhasniMenu();'>
-<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M3ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
+<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M3ZhasniMenu();' alt='Zhasni menu' ></td></tr>
 
 <tr><td width='100%' colspan='2' onClick="saldo();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s3-r1.jpg' style='width:98%; height:20;' alt='OdberateæskÈ a dod·vateæskÈ Saldokonto' ></a></center></td></tr>
@@ -893,7 +898,7 @@ if( $newmenu == 1 )
 <FORM name='znew' method='post' action='#' >
 <tr><td width='90%' onClick='M4ZhasniMenu();'>Menu Nastavenia a sluûby</td>
 <td width='10%' align='right' onClick='M4ZhasniMenu();'>
-<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M4ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
+<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M4ZhasniMenu();' alt='Zhasni menu' ></td></tr>
 
 <tr><td width='100%' colspan='2' onClick="OtvorUfir21();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s4-r1.jpg' style='width:98%; height:20;' alt='Parametre programu faktur·cia' ></a></center></td></tr>
@@ -919,7 +924,7 @@ if( $newmenu == 1 )
 <FORM name='znew' method='post' action='#' >
 <tr><td width='90%' onClick='M5ZhasniMenu();'>Menu »ÌselnÌky a ˙drûba</td>
 <td width='10%' align='right' onClick='M5ZhasniMenu();'>
-<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M5ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
+<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M5ZhasniMenu();' alt='Zhasni menu' ></td></tr>
 
 <tr><td width='100%' colspan='2' onClick="OtvorUfir1();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s5-r1.jpg' style='width:98%; height:20;' alt='⁄daje o firme' ></a></center></td></tr>
@@ -952,13 +957,13 @@ if( $newmenu == 1 )
 </div>
 
 <?php
-} 
+}
 ?>
 
 
 <?php
-if( $newmenu == 0 ) 
-{ 
+if( $newmenu == 0 )
+{
 ?>
 <span style="position:absolute; top:70; ">
 <table class="pmenu" width="100%" border=1 >
@@ -986,7 +991,7 @@ if( $newmenu == 0 )
 </table>
 </span>
 <?php
-} 
+}
 ?>
 
 <br />
@@ -998,7 +1003,7 @@ if( $newmenu == 0 )
 <br />
 
 
-<?php 
+<?php
 // zmena ume
 if ( $copern == 23 OR $copern == 24 )
      {
@@ -1152,7 +1157,7 @@ if ( $zaznam["xcf"] == $vyb_xcf ) echo " selected='selected'";
 mysql_close();
 mysql_free_result($sql);
 
-// toto je koniec zmeny firmy 
+// toto je koniec zmeny firmy
      }
 
 $akyrobot = include("akyrobot.php");
