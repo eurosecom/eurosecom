@@ -159,7 +159,7 @@ $dsql = mysql_query("$dsqlt");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcprizdphsy".$kli_uzid.
 " LEFT JOIN F$kli_vxcf"."_ico".
 " ON F$kli_vxcf"."_prcprizdphsy$kli_uzid".".ico=F$kli_vxcf"."_ico.ico".
-" WHERE er1 > 0 ORDER BY er1,dok";
+" WHERE er1 > 0 ORDER BY er1,ume,dok";
 //echo $sqltt;
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
