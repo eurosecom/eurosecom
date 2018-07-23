@@ -1358,10 +1358,33 @@ $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"."\r\n";
   fwrite($soubor, $text);
 
+$verzia2018=0;
+if( $kli_vrok > 2018 ) { $verzia2018=1; }
+if( $kli_vrok == 2018 AND $kli_vmes >= 7 ) { $verzia2018=1; }
+if( $z_umezuc == 1 ) 
+{ 
+$verzia2018=0;
+$poled = explode(".", $h_umezuc); 
+$kli_vmesxy=$poled[0]; 
+$kli_vrokxy=$poled[1];
+if( $kli_vrokxy > 2018 ) { $verzia2018=1; }
+if( $kli_vrokxy == 2018 AND $kli_vmesxy >= 7 ) { $verzia2018=1; } 
+}
+
+if( $verzia2018 == 0 )
+   {
   $text = "<vpp xmlns=\"http://socpoist.sk/xsd/vpp2014\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""."\r\n";
   fwrite($soubor, $text);
   $text = "xsi:schemaLocation=\"http://socpoist.sk/xsd/vpp2014 VPP-v2014.xsd\" >"."\r\n";
   fwrite($soubor, $text);
+   }
+if( $verzia2018 == 1 )
+   {
+  $text = "<vpp xmlns=\"http://socpoist.sk/xsd/vpp2018\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""."\r\n";
+  fwrite($soubor, $text);
+  $text = "xsi:schemaLocation=\"http://socpoist.sk/xsd/vpp2018 VPP-v2018.xsd\" >"."\r\n";
+  fwrite($soubor, $text);
+   }
 
   $text = "<typDoc>VPP00001</typDoc>"."\r\n";
   fwrite($soubor, $text);
