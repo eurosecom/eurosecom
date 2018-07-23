@@ -693,6 +693,62 @@ $id=$id+1;
      }
 //koniec tu vlozim prepocet alikvotnej casti
 
+//odvodova ulava dochodca-dohodar od 1.7.2018
+if( $ixx >= 7 OR $kli_vrok > 2018 )
+  {
+//andrejko
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE zrz_dn = 1 ";
+$tov = mysql_query("$sqltt");
+$tvpol = mysql_num_rows($tov);
+//echo $sqltt.$tvpol."<br />";
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+ {
+$rtov=mysql_fetch_object($tov);
+
+//echo $rtov->oc." ".$tvpol."<br />";
+
+
+if( $kli_vrok == 2018 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid ".
+" SET zzam_sp=0, zzam_ip=0 WHERE ocx = $rtov->oc AND zzam_sp <= 200 AND ocx = $rtov->oc AND umeo >= 7.2018 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid ".
+" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200 WHERE ocx = $rtov->oc AND zzam_sp > 200 AND ocx = $rtov->oc AND umeo >= 7.2018 ";
+$oznac = mysql_query("$sqtoz");
+  }
+if( $kli_vrok > 2018 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid ".
+" SET zzam_sp=0, zzam_ip=0 WHERE ocx = $rtov->oc AND zzam_sp <= 200 AND ocx = $rtov->oc ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid ".
+" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200 WHERE ocx = $rtov->oc AND zzam_sp > 200 AND ocx = $rtov->oc ";
+$oznac = mysql_query("$sqtoz");
+  }
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid SET zfir_sp=zzam_sp, zfir_ip=zzam_ip WHERE ocx = $rtov->oc ";
+$dsql = mysql_query("$dsqlt");
+
+ }
+
+$i=$i+1;
+   }
+
+//exit;
+   
+
+  }
+//if( $ixx == 7 ) { exit; }
+//koniec odvodova ulava dochodca-dohodar od 1.7.2018
+
 //vypocet odvody
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid".
 " SET ".
@@ -785,6 +841,8 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdneprav$kli_uzid WHERE konx != 20 ";
 $dsql = mysql_query("$dsqlt");
+
+//exit;
 
 //suma za zamestnanca
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdneprav$kli_uzid SELECT ".
