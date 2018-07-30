@@ -1499,7 +1499,7 @@ if( $kli_vmes >= 7 OR $kli_vrok > 2018 )
   {
 //andrejko
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE zrz_dn = 1 ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE zrz_dn = 1 AND pom != 1 ";
 $tov = mysql_query("$sqltt");
 $tvpol = mysql_num_rows($tov);
 //echo $sqltt.$tvpol."<br />";
