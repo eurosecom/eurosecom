@@ -520,6 +520,12 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
 " WHERE dm=1";
 $oznac = mysql_query("$sqtoz");
 
+//ak ssyp = 0 daj 1992018
+$ssypnew=$kli_vmes."99".$kli_vrok;
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET ssyp=$ssypnew WHERE ( ssyp = 0 OR ssyp = '' ) AND dm = 1 ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
    }
 
 //dopln zdrv z kun
