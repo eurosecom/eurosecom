@@ -1,8 +1,18 @@
+30.07.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY odvodová ú¾ava DP dôchodca-dohodár do 200 Eur od 1.7.2018 ochrana proti uplatneniu na pomer 1 zamestnanec
+- MZDY Životné minimum plnoletej fyzickej osoby 205,07 € od 1.7.2018 vo výpoète exekuèných zrážok.
+
+23.07.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY odvodová ú¾ava DP dôchodca-dohodár do 200 Eur od 1.7.2018 výpoèet vo výplatnej páske
+- MZDY odvodová ú¾ava DP dôchodca-dohodár do 200 Eur od 1.7.2018 zoznam zamestnancov s odvodovou ú¾avou
+- MZDY odvodová ú¾ava DP dôchodca-dohodár do 200 Eur od 1.7.2018 výpoèet v nepravidelných príjmoch
+- MZDY od 7.2018 nová štruktúra XML súboru mesaèného výkazu a Výkazu SocPoist - zmena Hlavièky ešte nie zmena TypZec
+
 27.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - UCTO error_reporting(0) faktura a pokladnica PDF
 - UCTO DPPO a FOB export do XML ošetrené percento v názve firmy
 - MZDY dochádzka generovaná, výpoèet noèných príplatkov na rozhraní mesiaca
-- MZDY odvodová ú¾ava DP dôchodca-dohodár do 200 Eur od 1.7.2018
+- MZDY odvodová ú¾ava DP dôchodca-dohodár do 200 Eur od 1.7.2018 nastavenie v údajoch o zamestnancovi
 
 21.06.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - UCTO ochrana proti cache obratovka, dennik, hlavna kniha položkovitá, výsledovka a suvaha malá
