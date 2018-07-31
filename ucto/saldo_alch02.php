@@ -185,12 +185,13 @@ $dsql = mysql_query("$dsqlt");
 if ( $h_obd != 0 ) { 
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prsaldoicofakp$kli_uzid".
-" SELECT drupoh,uce,0,ume,dat,das,daz,dok,ico,fak,".
+" SELECT drupoh,31100,0,ume,dat,das,daz,dok,ico,fak,".
 "poz,ksy,ssy,SUM(hdp),SUM(hdu),SUM(hod),SUM(uhr),SUM(zos),dau".
 " FROM F$kli_vxcf"."_prsaldo$kli_uzid".
-" WHERE uce = $h_uce ".$datpod." ".
+" WHERE ( uce = $h_uce OR uce = 31500 ) ".$datpod." ".
 " GROUP BY uce,ico,fak";
 //echo $dsqlt;
+//exit;
 $dsql = mysql_query("$dsqlt");
 
                    }
