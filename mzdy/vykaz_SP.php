@@ -1984,6 +1984,14 @@ if( $typZec == "ZECD3" AND $hlavicka->zzam_sp == 0 AND $hlavicka->zzam_ip == 0 A
 
 //od 1.1.2013 vynimkaVZ len 0 a 1=ak viac dohod a prekroci maxVZ zamestnavatel plati vsetko zamestnanec len z rozdielu
 
+//od 1.7.2018 vynimka DP dochodca dohodar, prepisujem ak ma vynimku
+$vynimkaDP=1*$hlavicka->zrz_dn;
+if( $typZec == "ZECD1" AND $vynimkaDP == 1 AND $hlavicka->ozam_sp == 0 ) { $typZec="ZECD1B"; }
+if( $typZec == "ZECD1" AND $vynimkaDP == 1 AND $hlavicka->ozam_sp >  0 ) { $typZec="ZECD1V"; }
+if( $typZec == "ZECD2" AND $vynimkaDP == 1 AND $hlavicka->ozam_sp == 0 ) { $typZec="ZECD2B"; }
+if( $typZec == "ZECD2" AND $vynimkaDP == 1 AND $hlavicka->ozam_sp >  0 ) { $typZec="ZECD2V"; }
+
+
 $rozsahSPnp="1";
 if( $hlavicka->zzam_np == 0 ) $rozsahSPnp="0";
 $rozsahSPsp="1";

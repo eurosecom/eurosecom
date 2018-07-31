@@ -1671,6 +1671,13 @@ if( $typZec == "" ) { $typZec="ZEC"; }
 //ak dohoda o brig.praci studenta a presiahne hranize pre platenie DOCH.POISTENIA prepis ZECD3 na ZECD3V a daj vynimka=1 takto mi to bralo socpoist.sk 30.1.2013
 if( $typZec == "ZECD3" AND $hlavicka->zzam_sp > 0 ) { $typZec="ZECD3V"; $vynimkaVZ="1"; }
 
+//od 1.7.2018 vynimka DP dochodca dohodar, prepisujem ak ma vynimku
+$vynimkaDP=1*$hlavicka->zrz_dn;
+if( $typZec == "ZECD1N" AND $vynimkaDP == 1 AND $hlavicka->ozam_sp == 0 ) { $typZec="ZECD1NB"; }
+if( $typZec == "ZECD1N" AND $vynimkaDP == 1 AND $hlavicka->ozam_sp >  0 ) { $typZec="ZECD1NV"; }
+if( $typZec == "ZECD2N" AND $vynimkaDP == 1 AND $hlavicka->ozam_sp == 0 ) { $typZec="ZECD2NB"; }
+if( $typZec == "ZECD2N" AND $vynimkaDP == 1 AND $hlavicka->ozam_sp >  0 ) { $typZec="ZECD2NV"; }
+
 
 $sqlttxx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET pocdni=0 WHERE ".
 " zfir_np = 0 AND zfir_sp = 0 AND  zfir_ip = 0 AND  zfir_pn = 0 AND  zfir_up = 0 AND  zfir_gf = 0 AND  zfir_rf = 0 ";
