@@ -412,7 +412,11 @@ $dsql = mysql_query("$dsqlt");
 
 
 $wyplmiesto = 1*$_REQUEST['wyplmiesto'];
-if( $wyplmiesto > 0 AND $_SERVER['SERVER_NAME'] == "www.dssbrodske.sk" )
+$rozdelwm=0;
+if( $wyplmiesto > 0 AND $_SERVER['SERVER_NAME'] == "www.dssbrodske.sk" ) { $rozdelwm=1; }
+if( $wyplmiesto > 0 AND $_SERVER['SERVER_NAME'] == "localhost" ) { $rozdelwm=1; }
+if( $wyplmiesto > 0 ) { $rozdelwm=1; }
+if( $rozdelwm == 1 )
   {
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl$kli_uzid ADD wmm DECIMAL(10,0) AFTER konx";
 $vysledek = mysql_query("$sql");
