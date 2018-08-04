@@ -785,7 +785,7 @@ Hodiny  <img src='../obr/info.png' width=12 height=12 border=0 title='Hodiny'>
   var h_ddo = document.forms.fkoef.h_ddo.value;
   var h_hdo = document.forms.fkoef.h_hdo.value;
 
-window.open('../mzdy/dochadzka_listkypdf.php?cislo_oc=' + h_oc + '&h_dod=' + h_dod + '&h_ddo=' + h_ddo + '&h_hdo=' + h_hdo + '&copern=10&drupoh=1&page=1&subor=0',
+window.open('../mzdy/dochadzka_listkypdf.php?zdetailu=1&cislo_oc=' + h_oc + '&h_dod=' + h_dod + '&h_ddo=' + h_ddo + '&h_hdo=' + h_hdo + '&copern=10&drupoh=1&page=1&subor=0',
  '_blank', 'width=1050, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
   }
@@ -797,7 +797,7 @@ window.open('../mzdy/dochadzka_listkypdf.php?cislo_oc=' + h_oc + '&h_dod=' + h_d
   var h_ddo = document.forms.fkoef.h_ddo.value;
   var h_hdo = document.forms.fkoef.h_hdo.value;
 
-window.open('../mzdy/dochadzka_listkypdf.php?cislo_oc=' + h_oc + '&h_dod=' + h_dod + '&h_ddo=' + h_ddo + '&h_hdo=' + h_hdo + '&copern=10&drupoh=2&page=1&subor=0',
+window.open('../mzdy/dochadzka_listkypdf.php?zdetailu=1&cislo_oc=' + h_oc + '&h_dod=' + h_dod + '&h_ddo=' + h_ddo + '&h_hdo=' + h_hdo + '&copern=10&drupoh=2&page=1&subor=0',
  '_blank', 'width=1050, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
   }
@@ -809,7 +809,7 @@ window.open('../mzdy/dochadzka_listkypdf.php?cislo_oc=' + h_oc + '&h_dod=' + h_d
   var h_ddo = document.forms.fkoef.h_ddo.value;
   var h_hdo = document.forms.fkoef.h_hdo.value;
 
-window.open('../mzdy/dochadzka_listkypdf.php?cislo_oc=' + h_oc + '&h_dod=' + h_dod + '&h_ddo=' + h_ddo + '&h_hdo=' + h_hdo + '&copern=10&drupoh=3&page=1&subor=0',
+window.open('../mzdy/dochadzka_listkypdf.php?zdetailu=1&cislo_oc=' + h_oc + '&h_dod=' + h_dod + '&h_ddo=' + h_ddo + '&h_hdo=' + h_hdo + '&copern=10&drupoh=3&page=1&subor=0',
  '_blank', 'width=1050, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
   }
@@ -821,7 +821,7 @@ window.open('../mzdy/dochadzka_listkypdf.php?cislo_oc=' + h_oc + '&h_dod=' + h_d
   var h_ddo = document.forms.fkoef.h_ddo.value;
   var h_hdo = document.forms.fkoef.h_hdo.value;
 
-window.open('../mzdy/dochadzka_listkypdf.php?cislo_oc=' + h_oc + '&h_dod=' + h_dod + '&h_ddo=' + h_ddo + '&h_hdo=' + h_hdo + '&copern=10&drupoh=4&page=1&subor=0',
+window.open('../mzdy/dochadzka_listkypdf.php?zdetailu=1&cislo_oc=' + h_oc + '&h_dod=' + h_dod + '&h_ddo=' + h_ddo + '&h_hdo=' + h_hdo + '&copern=10&drupoh=4&page=1&subor=0',
  '_blank', 'width=1050, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
   }

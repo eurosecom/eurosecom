@@ -16,6 +16,7 @@ $drupoh = 1*$_REQUEST['drupoh'];
 
 $cislo_oc = 1*$_REQUEST['cislo_oc'];
 $mail = 1*$_REQUEST['mail'];
+$zdetailu = 1*$_REQUEST['zdetailu'];
 
 //echo $mail;
 
@@ -90,6 +91,11 @@ $vsql = 'INSERT INTO F'.$kli_vxcf.'_dochprc'.$kli_uzid." ".
 $vytvor = mysql_query("$vsql");
 }
 
+if( $zdetailu == 1 )
+{
+$vsql = "UPDATE F$kli_vxcf"."_dochprc$kli_uzid SET dnixa=1 WHERE dnixa = 0 AND dmxa > 500 AND dmxa < 599 ";
+$vytvor = mysql_query("$vsql");
+}
 
 if( $drupoh == 1 OR $drupoh == 2 )
 {
@@ -107,7 +113,7 @@ $vytvor = mysql_query("$vsql");
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Dochádzka PDF</title>
   <style type="text/css">
@@ -295,8 +301,23 @@ if( $dlzkamail2 > 8 ) email( $mail2, $predmet, $text, $riadok->zema  );
 if( $dlzkamail3 > 8 ) email( $mail3, $predmet, $text, $riadok->zema  );
 if( $dlzkamail4 > 8 ) email( $mail4, $predmet, $text, $riadok->zema  );
 
+//send fcm notify
+if( $kli_uzall > 1000 AND $_SERVER['SERVER_NAME'] == "www.eshoptest.sk" ) 
+{
+$fcm = include("fcm_eshoptest.php");
+}
+//koniec send fcm notify
+//send fcm notify
+if( $kli_uzall > 1000 AND $_SERVER['SERVER_NAME'] == "www.edcom.sk" ) 
+{
+//$fcm = include("fcm_edcom.php");
+}
+//koniec send fcm notify
+
                  }
 //koniec odmailovat
+
+
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
@@ -423,12 +444,13 @@ $pdf->Cell(6,5," ","0",0,"L");
 
 }
 
-
+if( $zdetailu == 0 )
+    {
 
 if( $mail == 0 ) { $pdf->Cell(160,5,"Odmailova z $riadok->zema na $riadok->mail","1",1,"L",0,$odkaz); }
 if( $mail == 1 ) { $pdf->Cell(130,5,"Odmailované $dat_dat z $riadok->zema na $riadok->mail","0",1,"L",0,$odkaz); }
 
-
+    }
 
 
 
