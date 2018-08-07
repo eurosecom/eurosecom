@@ -764,25 +764,25 @@ $rtov=mysql_fetch_object($tov);
 if( $kli_vrok == 2018 )
   {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid ".
-" SET zzam_sp=0, zzam_ip=0 WHERE zzam_sp <= 200 AND ocx = $rtov->oc AND umeo >= 7.2018 ";
+" SET zzam_sp=0, zzam_ip=0, zzam_rf=0 WHERE zzam_sp <= 200 AND ocx = $rtov->oc AND umeo >= 7.2018 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid ".
-" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200 WHERE zzam_sp > 200 AND ocx = $rtov->oc AND umeo >= 7.2018 ";
+" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200, zzam_rf=zzam_rf-200 WHERE zzam_sp > 200 AND ocx = $rtov->oc AND umeo >= 7.2018 ";
 $oznac = mysql_query("$sqtoz");
   }
 if( $kli_vrok > 2018 )
   {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid ".
-" SET zzam_sp=0, zzam_ip=0 WHERE zzam_sp <= 200 AND ocx = $rtov->oc ";
+" SET zzam_sp=0, zzam_ip=0, zzam_rf=0 WHERE zzam_sp <= 200 AND ocx = $rtov->oc ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid ".
-" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200 WHERE zzam_sp > 200 AND ocx = $rtov->oc ";
+" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200, zzam_rf=zzam_rf-200 WHERE zzam_sp > 200 AND ocx = $rtov->oc ";
 $oznac = mysql_query("$sqtoz");
   }
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid SET zfir_sp=zzam_sp, zfir_ip=zzam_ip WHERE ocx = $rtov->oc ";
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdneprav$kli_uzid SET zfir_sp=zzam_sp, zfir_ip=zzam_ip, zfir_rf=zzam_rf WHERE ocx = $rtov->oc ";
 $dsql = mysql_query("$dsqlt");
 
  }
