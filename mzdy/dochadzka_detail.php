@@ -289,12 +289,28 @@ if( $uvatypx == 12 AND $generx == 1202 ) { $cas=$noc12_od; $kolkyden=1; }
 if( $uvatypx == 12 AND $generx == 1203 ) { $cas=0; $kolkyden=1; }
 if( $uvatypx == 12 AND $generx == 1204 ) { $cas=0; $kolkyden=2; }
 
+if( $uvatypx == 8 AND $generx == 821 ) { $cas=$rano8_od; $kolkyden=1; }
+
 $i=$den1;
   while ($i <= $pocetdni )
   {
 
 $h_dod_sql=$kli_vrok."-".$kli_vmes."-".$i;
 $h_datn=$h_dod_sql." ".$cas;
+
+if( $uvatypx == 8 AND $generx == 821 ) 
+{
+//andrejko
+
+$sqlttt = "SELECT * FROM kalendar WHERE dat = '$h_dod_sql' AND akyden >= 6 ORDER BY dat DESC";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $cas=0;
+  }
+
+}
 
 $sqty = "INSERT INTO F$kli_vxcf"."_mzddochadzka ( ume,oc,dmxa,dmxb,daod,dado,dnixa,dnixb,hodxa,hodxb,xtxt,datn )".
 " VALUES ( '$kli_vume', '$cislo_oc', '1', '0', '$h_dod_sql', '$h_dod_sql', '0', '0', '0', '$uva', '', '$h_datn' );"; 
@@ -311,6 +327,8 @@ if( $uvatypx == 12 AND $kolkyden == 2 AND $cas == $den12_od ) { $cas=$noc12_od; 
 if( $uvatypx == 12 AND $kolkyden == 2 AND $cas == $noc12_od ) { $cas=0; $kolkyden=1; }
 if( $uvatypx == 12 AND $kolkyden == 2 AND $cas == 0 ) { $cas=0; $kolkyden=2; }
 if( $uvatypx == 12 AND $kolkyden == 3 AND $cas == 0 ) { $cas=$den12_od; $kolkyden=1; }
+
+if( $uvatypx == 8 AND $generx == 821 ) { $cas=$rano8_od; $kolkyden=1; }
 
 
   $i=$i+1;
@@ -1258,6 +1276,8 @@ if ( $uvatyp == 8 )
 <tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(8, 812);">Generovaù O N N - - R R O </a></td></tr>
 <tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(8, 813);">Generovaù N - - R R O O N </a></td></tr>
 <tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(8, 814);">Generovaù - R R O O N N - </a></td></tr>
+
+<tr><td class='ponuka' colspan='10'  ><a href="#" onClick="uloz_upravgener(8, 821);">Generovaù R Po - Pia </a></td></tr>
 <?php
      }
 ?>
@@ -1389,7 +1409,6 @@ $sql = "ALTER TABLE F".$kli_vxcf."_mzddochadzkap".$kli_uzid." ADD pndc DECIMAL(1
 $vysledek = mysql_query("$sql");
 
 //vypocet priplatkov
-//andrejko
 $sql = "UPDATE F".$kli_vxcf."_mzddochadzkap".$kli_uzid.",kalendar ".
 " SET F".$kli_vxcf."_mzddochadzkap".$kli_uzid.".akyden=kalendar.akyden, ".
 "     F".$kli_vxcf."_mzddochadzkap".$kli_uzid.".svt=kalendar.svt  ".
@@ -1649,7 +1668,6 @@ $polozkax=mysql_fetch_object($sqlx);
   $cashodmin = sprintf("%02d:%02d", $cashod, $casmin);
 
 
-//andrejko
 ?>
 
 zaË. <?php echo $cashodmin;?> - <?php echo $polozkax->hodxb;?> hod. 
