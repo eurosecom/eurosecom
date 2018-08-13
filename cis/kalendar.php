@@ -3748,7 +3748,7 @@ $sqldok = mysql_query("$sqlttt");
 // koniec $sql = "SELECT m122017 FROM kalendar";
      }
 
-echo "Kalendar 2018"."<br />";
+//echo "Kalendar 2018"."<br />";
 
 //OD TADETO LEN JEDEN RAZ rok 2018
 $sql = "SELECT rok2018 FROM $mysqldb2017.kalendar";
@@ -3952,6 +3952,134 @@ $sqldok = mysql_query("$sqlttt");
 
 // koniec $sql = "SELECT m122018 FROM kalendar";
      }
+
+echo "Kalendar 2019"."<br />";
+
+//OD TADETO LEN JEDEN RAZ rok 2019
+$sql = "SELECT rok2019 FROM $mysqldb2018.kalendar";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+     {
+
+echo "Vytvaram Kalendar 2019"."<br />";
+
+$den=1;
+$i=0;
+  while ($i <= 364 )
+  {
+
+$datum = Date ("Y-m-d", MkTime (0,0,0,1,$den+$i,2019)); 
+//echo $datum;
+$pole = explode("-", $datum);
+$h_ume = $pole[1].".".$pole[0];
+
+$ttvv = "INSERT INTO $mysqldb2018.kalendar ( dat,ume,akyden,svt ) VALUES ( '$datum', '$h_ume', '0', '0' )";
+$ttqq = mysql_query("$ttvv");
+
+$i = $i + 1;
+  }
+
+//sviatky 2019
+$uprt = "UPDATE $mysqldb2018.kalendar SET svt=1".
+" WHERE dat = '2019-01-01' OR dat = '2019-01-06' OR dat = '2019-04-19' OR dat = '2019-04-22' ".
+" OR dat = '2019-05-01' OR dat = '2019-05-08' OR dat = '2019-07-05' ".
+" OR dat = '2019-08-29' OR dat = '2019-09-01' OR dat = '2019-09-15' ".
+" OR dat = '2019-11-01' OR dat = '2019-11-17' ".
+" OR dat = '2019-12-24' OR dat = '2019-12-25' OR dat = '2019-12-26' ";
+$upravene = mysql_query("$uprt");
+
+
+$uprt = "UPDATE $mysqldb2018.kalendar SET akyden=DAYOFWEEK(dat) WHERE ume > 0 ";
+$upravene = mysql_query("$uprt");
+$uprt = "UPDATE $mysqldb2018.kalendar SET akyden=8 WHERE akyden = 1 ";
+$upravene = mysql_query("$uprt");
+$uprt = "UPDATE $mysqldb2018.kalendar SET akyden=akyden-1 WHERE akyden > 0 ";
+$upravene = mysql_query("$uprt");
+
+$sql = "ALTER TABLE $mysqldb2018.kalendar ADD rok2019 DECIMAL(4,0) DEFAULT 2018 AFTER svt";
+$vysledek = mysql_query("$sql");
+
+     }
+//koniec OD TADETO LEN JEDEN RAZ rok 2019
+
+$sql = "SELECT m062019 FROM $mysqldb2018.kalendar";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+     {
+echo "So a Ne 01-06.2019"."<br />";
+
+$i=1;
+while ($i <= 6 )
+ {
+
+if( $i == 1 ) { $kli_vumeabc="01.2019"; }
+if( $i == 2 ) { $kli_vumeabc="02.2019"; }
+if( $i == 3 ) { $kli_vumeabc="03.2019"; }
+if( $i == 4 ) { $kli_vumeabc="04.2019"; }
+if( $i == 5 ) { $kli_vumeabc="05.2019"; }
+if( $i == 6 ) { $kli_vumeabc="06.2019"; }
+
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET m092012=WEEK(dat) WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET m092012=m092012-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "SELECT * FROM $mysqldb2018.kalendar WHERE ume = $kli_vumeabc ORDER BY dat";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $akyden=1*$riaddok->akyden;
+  $tyzden=1*$riaddok->m092012;
+  }
+
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET m082012=m092012-$tyzden WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "SELECT * FROM $mysqldb2018.kalendar WHERE ume = $kli_vumeabc AND akyden = 6 ";
+$sqldok = mysql_query("$sqlttt"); $pocetsobot = 1*mysql_num_rows($sqldok);
+
+$sqlttt = "SELECT * FROM $mysqldb2018.kalendar WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqldok = mysql_query("$sqlttt"); $pocetnedel = 1*mysql_num_rows($sqldok);
+
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET sodo=$pocetsobot-m082012 WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET nedo=$pocetnedel-m082012 WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET sodo=sodo-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET neod=nedo, sood=sodo WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET sood=sood-1 WHERE ume = $kli_vumeabc AND akyden = 6 ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET neod=neod-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET m082012=0, m092012=0 WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$pole = explode(".", $kli_vumeabc);
+$kli_vmes=$pole[0];
+$kli_vrok=$pole[1];
+$pridaj="m".$kli_vmes.$kli_vrok;
+
+$sql = "ALTER TABLE $mysqldb2018.kalendar ADD $pridaj INT(2) DEFAULT 0 AFTER sood";
+$vysledek = mysql_query("$sql");
+
+$i=$i+1;
+ }
+
+//pozor ak je prva nedela v mesiaci zmen datum na posledny den mesiaca 30, 31
+$sqlttt = "UPDATE $mysqldb2018.kalendar SET sood=sood+1, sodo=sodo+1 WHERE ume = 04.2018 AND dat <= '2018-04-30' ";
+$sqldok = mysql_query("$sqlttt");
+
+// koniec $sql = "SELECT m062019 FROM kalendar";
+     }
+
 
 $vtvkal = 1;
 return $vtvkal;
