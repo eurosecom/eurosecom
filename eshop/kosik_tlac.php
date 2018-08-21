@@ -626,9 +626,9 @@ $pdf->SetFont('arial','',10);
 $nat=$riadok->nat;
 $xcis=1*$riadok->xcis;
 
-if( $xcis == 0 AND $riadok->xsx3 == 0 ) { $nat=$riadok->xnat; $xcis=0; }
+if( $riadok->xsx3 == 0 AND $xcis == 0 ) { $nat=$riadok->xnat; $xcis=0; }
 
-if( $riadok->xsx3 == 1 )
+if( $riadok->xsx3 == 1 AND $riadok->xcis > 0 )
   {
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_sluzby WHERE slu = $xcis ORDER BY slu LIMIT 1";
 $sqldok = mysql_query("$sqlttt");
@@ -643,6 +643,8 @@ $xcis=$xcisx;
 
 if( $xcis == 0 ) { $nat=$riadok->xnat; $xcis=0; }
   }
+
+if( $riadok->xsx3 == 1 AND $xcis == 0 ) { $nat=$riadok->xnat; $xcis=0; }
 
 $xcistlac=$xcis;
 if( $xcis == 0 ) { $xcistlac=""; }

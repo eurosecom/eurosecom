@@ -332,6 +332,17 @@ var h_cis = document.forms.forms1.h_slu.value;
 window.open('../sklad/sklkarta_pdf.php?copern=20&h_skl=' + h_skl + '&h_cis=' + h_cis + '&h_min=' + h_min + '&drupoh=<?php echo $drupoh; ?>', '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes'  );
                 }
 
+function hladajMat()
+                {
+
+var h_cis = document.forms.forms1.h_slu.value;
+
+if( h_cis > 0 ) {
+window.open('../sklad/cisobj.php?copern=9&hladaj_cis=' + h_cis + '&page=1', '_blank', 'width=950, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes'  );
+                }
+
+                }
+
   </script>
 </HEAD>
 <BODY class="white" id="white" onload="VyberVstup();" >
@@ -361,16 +372,21 @@ window.open('../sklad/sklkarta_pdf.php?copern=20&h_skl=' + h_skl + '&h_cis=' + h
 <tr>
 <td class="hmenu" width="20%">Sklad
 <td class="hmenu" width="10%">»Ìslo materi·lu
-<td class="hmenu" width="30%">N·zov materi·lu
+<td class="hmenu" width="35%">N·zov materi·lu
 
 <input type='image' src='../obr/orig.png' width=15 height=15 border=0 title='»ÌselnÌk materi·lu pre vybran˝ materi·l'
  onclick="CisJednejKarty();" >
 <td class="hmenu" width="10%">N·kupn· cena
-<td class="hmenu" width="30%">
+<td class="hmenu" width="25%">
 <input type='image' src='../obr/tlac.png' width=15 height=15 border=0 title='TlaË skladovej karty pre vybran˝ materi·l'
  onclick="TlacJednejKarty();" >
 <input type='image' src='../obr/tlac.png' width=20 height=20 border=0 title='TlaË vöetky skladovÈ karty'
  onclick="TlacVsetkyKarty();" >
+
+&nbsp&nbsp&nbsp&nbsp
+<input type='image' src='../obr/kosik.gif' width=20 height=20 border=0 title='Vybran˝ materi·l na nevybaven˝ch objedn·vkach z e-shopu'
+ onclick="hladajMat();" >
+
 
 </tr>
 <FORM name="forms1" class="obyc" method="post" action="#" >

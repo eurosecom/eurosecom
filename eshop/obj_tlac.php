@@ -522,6 +522,15 @@ window.open('../eshop/obj_text.php?h_obj=' + h_obj + '&copern=1&drupoh=1&page=1&
 
     }
 
+function hladajMat()
+                {
+
+
+window.open('../sklad/cisobj.php?copern=1&page=1', '_blank', 'width=950, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes'  );
+
+
+                }
+
 </script>
 </HEAD>
 <BODY class="white" >
@@ -727,6 +736,11 @@ if ( $copern == 1 AND $drupoh == 1 AND $html == 1 )  {
 <td class="bmenu" align="right" width="10%" >Èíslo obj.</td>
 <td class="bmenu" align="left" width="60%" >Zákazník
 <img src='../obr/zoznam.png' onclick="window.open('../cis/cico.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes' )" width=20 height=20 border=0 title='Èíselník IÈO' >
+
+&nbsp&nbsp&nbsp
+<input type='image' src='../obr/kosik.gif' width=20 height=20 border=0 title='Vybraný materiál na nevybavených objednávkach z e-shopu'
+ onclick="hladajMat();" >
+
 </td>
 <td class="bmenu" align="left" width="10%" >Stav obj.
 <?php if( $zmtz == 1 AND $zinejfir == 0 AND $somvprirskl == 0 AND $vybavene == 0 ) { ?>
@@ -834,7 +848,16 @@ Poznámka <img src='../obr/orig.png' width=20 height=15 border=1 onclick="textObj
 $poznx="";
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_kosiktext WHERE invt = $riadok->xdok ";
 $fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); $poznx = $fir_riadok->itxt; }
+if ($fir_vysledok) { 
+$fir_riadok=mysql_fetch_object($fir_vysledok); 
+$poznx = $fir_riadok->itxt; 
+$eobj = 1*$fir_riadok->eobj;
+$akod = 1*$fir_riadok->akod;
+$datd_sk = SkDatum($fir_riadok->datd);
+
+if( $eobj > 0 ) { $poznx=$poznx." eshopOBJ: ".$eobj; }
+if( $datd_sk != "00.00.0000" ) { $poznx=$poznx." doda: ".$datd_sk; }
+}
 echo $poznx;
 ?>
 

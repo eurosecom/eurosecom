@@ -1099,7 +1099,16 @@ Poznámka <img src='../obr/orig.png' width=20 height=15 border=1 onclick="textObj
 $poznx="";
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_kosiktext WHERE invt = $cislo_dok ";
 $fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); $poznx = $fir_riadok->itxt; }
+if ($fir_vysledok) { 
+$fir_riadok=mysql_fetch_object($fir_vysledok); 
+$poznx = $fir_riadok->itxt;  
+$eobj = 1*$fir_riadok->eobj;
+$akod = 1*$fir_riadok->akod;
+$datd_sk = SkDatum($fir_riadok->datd);
+
+if( $eobj > 0 ) { $poznx=$poznx." eshopOBJ: ".$eobj; }
+if( $datd_sk != "00.00.0000" ) { $poznx=$poznx." doda: ".$datd_sk; }
+}
 echo $poznx;
 ?>
 
@@ -1237,7 +1246,6 @@ function CepEnter(e)
 
 </script>
 <?php
-//andrejko tuto robi
      }
 //koniec hlavicky j=0
 
@@ -1249,9 +1257,9 @@ if( $riadok->pox == 1 AND $drupoh == 1 )
 $xcis=1*$riadok->xcis;
 $nat=$riadok->nat;
 
-if( $xcis == 0 AND $riadok->xsx3 == 0 ) { $nat=$riadok->xnat; $xcis=0; }
+if( $riadok->xsx3 == 0 AND $xcis == 0 ) { $nat=$riadok->xnat; $xcis=0; }
 
-if( $riadok->xsx3 == 1 )
+if( $riadok->xsx3 == 1 AND $riadok->xcis > 0 )
   {
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_sluzby WHERE slu = $xcis ORDER BY slu LIMIT 1";
 $sqldok = mysql_query("$sqlttt");
@@ -1266,6 +1274,8 @@ $xcis=$xcisx;
 
 if( $xcis == 0 ) { $nat=$riadok->xnat; $xcis=0; }
   }
+
+if( $riadok->xsx3 == 1 AND $xcis == 0 ) { $nat=$riadok->xnat; $xcis=0; }
 
 
 ?>
