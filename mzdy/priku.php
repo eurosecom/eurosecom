@@ -525,13 +525,50 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
 $oznac = mysql_query("$sqtoz");
 
 //ak ssyp = 0 daj 1992018 pre nezabudkano fir_fico = 37986708
-$ssypnew=$kli_vmes."".$kli_vrok;
-if( $fir_fico == 37986708 ) { $ssypnew=$kli_vmes."99".$kli_vrok; }
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET ssyp=$ssypnew WHERE ( ssyp = 0 OR ssyp = '' ) AND dm = 1 ";
+$kli_vmessp=$kli_vmes;
+if( $kli_vmessp < 10 ) { $kli_vmessp="0".$kli_vmessp; }
+$ssypnew=$kli_vmessp."".$kli_vrok;
+$ssypnewnep=$kli_vmessp."99".$kli_vrok;
+//zrusene if( $fir_fico == 37986708 ) { $ssypnew=$kli_vmessp."99".$kli_vrok; }
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET ssyp='$ssypnew' WHERE ( ssyp = 0 OR ssyp = '' ) AND dm = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
+//exit;
+//ak je nepravidelny prijem, ak je v ciselniku pomerov pm4=1, daj ssy pre nepravidelny
+if ( $fir_mzdx03 == 1 )
+     {
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdkun".
+" LEFT JOIN F$kli_vxcf"."_mzdpomer".
+" ON F$kli_vxcf"."_mzdkun.pom=F$kli_vxcf"."_mzdpomer.pm".
+" WHERE F$kli_vxcf"."_mzdkun.oc >= 0 AND pm4 = 1 ORDER BY oc ";
+//echo $sqlttt;
+$sqldok = mysql_query("$sqlttt");
+$polk = mysql_num_rows($sqldok);
+$ik=0;
+$jk=1;
+
+  while ($ik <= $polk )
+  {
+  if (@$zaznam=mysql_data_seek($sqldok,$ik))
+{
+$hlavickadok=mysql_fetch_object($sqldok);
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET ssyp='$ssypnewnep' WHERE ssyp = $ssypnew AND dm = 1 AND oc = $hlavickadok->oc ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+}
+$ik = $ik + 1;
+  }
+
+     }
+//ak je nepravidelny prijem, ak je v ciselniku pomerov pm4=1, daj ssy pre nepravidelny
+
+//exit;
    }
+//koniec sp
 
 //dopln zdrv z kun
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
@@ -701,7 +738,6 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
 $dsql = mysql_query("$dsqlt");
 
 //uloz do prikazov
-
 
 $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid"." WHERE oc >= 0 ORDER BY ucep,sum_ban");
 $cpol = mysql_num_rows($sql);
