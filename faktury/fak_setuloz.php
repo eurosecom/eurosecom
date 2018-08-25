@@ -239,6 +239,21 @@ $zlava=0;
 }
 //koniec copern=600 uloz default zlava
 
+//copern=707 ERP platba kartou
+if( $copern == 707 )
+{
+
+$sqty = "DELETE FROM F$kli_vxcf"."_fakslu WHERE dok = $cislo_dok AND slu = 104 "; 
+$ulozene = mysql_query("$sqty");
+
+$sqty = "INSERT INTO F$kli_vxcf"."_fakslu ( dok,fak,dol,prf,slu,nsl,pop,dph,cep,ced,mno,mer,dfak,cfak,pfak,id,pon )". 
+" VALUES ('$cislo_dok', '0', '', '', '104', 'ERP platba kartou', '', '0', '1', '1',".
+" '0', '-', 0, 0, 0, '$kli_uzid', '' );"; 
+$ulozene = mysql_query("$sqty");
+
+}
+//koniec copern=707 ERP platba kartou
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">

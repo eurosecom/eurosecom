@@ -7650,6 +7650,12 @@ if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' )
 , 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/export.png' width=15 height=15 border=0 title="Export faktúry do XML" ></a>
 <?php                    } ?>
+<?php if( $drupoh == 42 ) { ?>
+&nbsp&nbsp&nbsp
+<a href="#" onClick="window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&cislo_dok=<?php echo $cislo_dok; ?>&copern=707', '_self' );">
+<img src='../obr/banky/euro.jpg' width=15 height=15 border=0 title="Platba kartou" ></a>
+&nbsp&nbsp&nbsp
+<?php                    } ?>
 <?php
      }
 ?>
