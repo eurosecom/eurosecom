@@ -1455,6 +1455,12 @@ window.open('../faktury/int_fakt.php?copern=55&page=1&h_sys=85&h_obdp=<?php echo
 
                 }
 
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+
   </script>
 </HEAD>
 <BODY class="white" onload="ObnovUI(); VyberVstup();" >
@@ -1834,7 +1840,7 @@ $poltxt = SubStr($polmen,0,20);
 
 
 <td class="hmenu"><input type="text" name="hladaj_dok" id="hladaj_dok" size="15" value="<?php echo $hladaj_dok;?>" />
-<td class="hmenu"><input type="text" name="hladaj_dat" id="hladaj_dat" size="8" value="<?php echo $hladaj_dat;?>" />
+<td class="hmenu"><input type="text" name="hladaj_dat" id="hladaj_dat" size="8" value="<?php echo $hladaj_dat;?>" onkeyup="CiarkaNaBodku(this);" />
 <td class="hmenu"><input type="text" name="hladaj_nai" id="hladaj_nai" size="30" value="<?php echo $hladaj_nai;?>" /> 
 <td class="obyc" align="left"><INPUT type="submit" id="hlad1" name="hlad1" value="H¾ada" ></td>
 </FORM>
