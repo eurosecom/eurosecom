@@ -80,8 +80,13 @@ $vytvor = mysql_query("$vsql");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_kosprcx".$kli_uzid.
 " SELECT 1,xdok,xice,xodbm,xsx3,xcpo,xcis,xnat,xdph,xcep,xced,xmno,xhdb,xhdd,xid,xdatm,0,0,0,0 FROM F$kli_vxcf"."_kosikobj ".
-" WHERE xfak = 0 ".
-"";
+" WHERE xfak = 0 ";
+$dsql = mysql_query("$dsqlt");
+
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_kosprcx".$kli_uzid.
+" SELECT 10,xdok,xice,xodbm,xsx3,xcpl,xcis,xnat,xdph,xcep,xced,SUM(xmno),xhdb,xhdd,xid,xdatm,0,0,0,0 FROM F$kli_vxcf"."_kosprcx".$kli_uzid." ".
+" WHERE xcis >= 0 GROUP BY xnat ";
 $dsql = mysql_query("$dsqlt");
 
 
@@ -147,8 +152,8 @@ $hladaj_nat = strip_tags($_REQUEST['hladaj_nat']);
 $hladaj_cis = strip_tags($_REQUEST['hladaj_cis']);
 
 
-if ( $hladaj_nat != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_kosprcx$kli_uzid WHERE ( xnat LIKE '%$hladaj_nat%' ) ORDER BY xcis, xdok");
-if ( $hladaj_cis != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_kosprcx$kli_uzid WHERE ( xcis = '$hladaj_cis' ) ORDER BY xcis, xdok");
+if ( $hladaj_nat != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_kosprcx$kli_uzid WHERE ( xnat LIKE '%$hladaj_nat%' ) ORDER BY xnat, pox");
+if ( $hladaj_cis != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_kosprcx$kli_uzid WHERE ( xcis = '$hladaj_cis' ) ORDER BY xnat, pox");
   }
 
 // zobraz 
@@ -209,7 +214,7 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
   if (@$zaznam=mysql_data_seek($sql,$i))
   {
 $riadok=mysql_fetch_object($sql);
-  if ($riadok->xcis != 0 )
+  if ( $riadok->xcis >= 0 AND $riadok->pox == 1 )
        {
 
 //ico
@@ -246,6 +251,16 @@ $fax = $fir_riado2->fax; $em1 = $fir_riado2->em1;
 </tr>
 <?php
        }
+
+  if ( $riadok->pox == 10 )
+       {
+?>
+<tr>
+<th class="hmenu" colspan="2">Celkom tovar
+<th class="hmenu" ><?php echo $riadok->xmno;?>
+<?php
+       }
+
   }
 $i = $i + 1;
    }
