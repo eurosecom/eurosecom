@@ -664,6 +664,7 @@ $dsql = mysql_query("$dsqlt");
 }
 
 //vyplata na ucet 
+if( $_SERVER['SERVER_NAME'] == "www.lipovecsro.sk" ) { $polno=0; }
 if( $polno == 1 )
 {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprc3".
