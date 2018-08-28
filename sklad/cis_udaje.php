@@ -783,7 +783,18 @@ onclick="Fx.style.display='none';" />
 
  Dod.ièo <input type="text" name="idod" id="idod" size="10" maxlength="10" onKeyDown=" "
 onclick="Fx.style.display='none';" />
-<img src='../obr/info.png' width=15 height=15 border=0 title="IÈO dodávate¾a" onclick="" >
+<?php
+$sqldo2 = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $idod ";
+$sqldok = mysql_query("$sqldo2");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ico=$riaddok->ico;
+  $nai=$riaddok->nai;
+  $mes=$riaddok->mes;
+  }
+?>
+<img src='../obr/info.png' width=15 height=15 border=0 title="IÈO dodávate¾a <?php echo $ico.' '.$nai.' '.$mes; ?>" onclick="" >
 
  Dod.cena <input type="text" name="pdod" id="pdod" size="12" maxlength="10" onKeyDown=" "
 onclick="Fx.style.display='none';" />
