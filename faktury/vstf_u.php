@@ -1268,11 +1268,14 @@ $dsql = mysql_query("$faktt");
   {
 $friadok=mysql_fetch_object($dsql);
 
+$fakxx=$friadok->fak;
+if( $fir_fico == 46614478 ) { $fakxx=0; }
+
  $uprt = "UPDATE F$kli_vxcf"."_fakdol SET  uce='$hladaj_uce', dat='$friadok->dat', ume='$friadok->ume',".
 " daz='$friadok->daz', das='$friadok->das', poh='$friadok->poh', skl='$friadok->skl', ico='$friadok->ico',".
 " ksy='$friadok->ksy', ssy='$friadok->ssy',".
 " poz='$friadok->poz', str='$friadok->str', zak='$friadok->zak', txp='$friadok->txp', txz='$friadok->txz',".
-" fak='$friadok->fak', prf='$friadok->prf',".
+" fak='$fakxx', prf='$friadok->prf',".
 " hod='$friadok->hod', zk0='$friadok->zk0', zk1='$friadok->zk1', zk2='$friadok->zk2', dn1='$friadok->dn1',".
 " dn2='$friadok->dn2', sz1='$friadok->sz1', sz2='$friadok->sz2',".
 " zk3='$friadok->zk3', zk4='$friadok->zk4', dn3='$friadok->dn3', dn4='$friadok->dn4', sz3='$friadok->sz3',".
