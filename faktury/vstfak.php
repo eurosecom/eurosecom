@@ -1567,6 +1567,7 @@ if( $pocstav == 1 ) { $akeume="> 0 "; $order="F".$kli_vxcf."_".$tabl.".ume,dok";
 $chodu="";
 if( $sysx == 'UCT' ) $chodu="hodu,poh,";
 if( $drupoh == 42 ) $chodu="ruc,";
+if( $drupoh == 11 ) $chodu="unk,";
 
 $sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
 " fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl. 
@@ -1594,6 +1595,28 @@ $hladaj_nai = strip_tags($_REQUEST['hladaj_nai']);
 $hladaj_dok = strip_tags($_REQUEST['hladaj_dok']);
 $hladaj_dat = strip_tags($_REQUEST['hladaj_dat']);
 $hladaj_uce = strip_tags($_REQUEST['hladaj_uce']);
+$hladaj_unk = 1*$_REQUEST['hladaj_unk'];
+
+if ( $hladaj_unk == 1 ) {
+
+if( $drupoh == 11 )
+{
+$sqltx = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai, unk, ".
+" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl. 
+" FROM F$kli_vxcf"."_$tabl".
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
+" LEFT JOIN F$kli_vxcf"."_dodb".
+" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
+" WHERE F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND unk = 1 ".
+" ORDER BY dok DESC".
+"";
+
+}
+
+$sql = mysql_query("$sqltx");
+
+                        }
 
 if ( $hladaj_nai != "" ) {
 
@@ -1695,6 +1718,17 @@ if ( $rozuct == 'ANO' ) $hdrupoh=1*1000+$drupoh;
 <FORM name="formhl1" class="hmenu" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh;?>&page=1&copern=9
 &rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>" >
 <td class="hmenu" ><img src='../obr/hladaj.png' width=15 height=10 border=0 alt="Vyh¾adávanie" title="Vyh¾adávanie" >
+<?php
+  if ( $drupoh == 11 )
+  {
+?>
+<td class="hmenu" >
+<a href="#" onClick="window.open('vstfak.php?copern=9&page=1&drupoh=11&hladaj_unk=1', '_self')">
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="Dodacie listy unk 1" ></a>
+</td>
+<?php
+     }
+?>
 <?php
   if ( $drupoh == 42 )
   {
@@ -2058,7 +2092,16 @@ $uctminusdok=$riadok->hodu-$riadok->hod;
   if ( $drupoh == 11 OR $drupoh == 12 )
   {
 ?>
-<td class="fmenu" width="15%" ><?php echo $riadok->dok;?> - <?php echo $riadok->dol;?></td>
+<td class="fmenu" width="15%" ><?php echo $riadok->dok;?> - <?php echo $riadok->dol;?>
+
+<?php 
+if( $drupoh == 11 AND $riadok->unk == "1" ) 
+  {
+ echo " <img src='../obr/pozor.png' width=12 height=12 border=0 title='Dodací list unk=1' >";
+  }
+?>
+
+</td>
 <?php
   }
 ?>
