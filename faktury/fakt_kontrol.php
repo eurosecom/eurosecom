@@ -312,7 +312,7 @@ if( $hlavicka->er1 > 0 ) { $hvstup="hvstup_bred"; }
 <td class="<?php echo $hvstup; ?>" align="right" >
 
 <?php echo $hlavicka->dol; ?>
-<img src='../obr/orig.png' width=15 height=15 onClick="upravDod(<?php echo $hlavicka->fak; ?>);" border=1 title="Úprava dodacieho listu" >
+<img src='../obr/orig.png' width=15 height=15 onClick="upravDod(<?php echo $hlavicka->dol; ?>);" border=1 title="Úprava dodacieho listu" >
 
 <td class="<?php echo $hvstup; ?>" ><?php echo $hlavicka->dni; ?></td>
 
