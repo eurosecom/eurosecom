@@ -232,6 +232,16 @@ $h_sp3 = strip_tags($_REQUEST['h_sp3']);
 $h_sp4 = strip_tags($_REQUEST['h_sp4']);
 $h_obj = strip_tags($_REQUEST['h_obj']);
 $h_unk = strip_tags($_REQUEST['h_unk']);
+
+//andrejko
+$unkcheck=0;
+if( $fir_fico == 46614478 AND $drupoh == 11 ) { $unkcheck=1; }
+if( $unkcheck == 1 )
+  {
+$h_unk = 1*$_REQUEST['h_unkcheck'];
+  }
+
+
 $h_dpr = strip_tags($_REQUEST['h_dpr']);
 $h_uhr = strip_tags($_REQUEST['h_uhr']);
 
@@ -5678,8 +5688,39 @@ if ( $copern == 7 )
 <td class="hvstup" >
 <input class="hvstup" type="text" name="h_obj" id="h_obj" size="15" maxlength="15" value="<?php echo $h_obj;?>" onclick="HlvOnClick()"
  onKeyDown="return ObjEnter(event.which)"  onfocus="onObj();" />
+<?php
+//andrejko
+$h_unkcheck=1*$cislo_unk;
+
+$unkcheck=0;
+if( $fir_fico == 46614478 AND $drupoh == 11 ) { $unkcheck=1; }
+if( $unkcheck == 0 )
+  {
+?>
 <input class="hvstup" type="text" name="h_unk" id="h_unk" size="15" maxlength="15" value="<?php echo $h_unk;?>" onclick="HlvOnClick()"
  onKeyDown="return UnkEnter(event.which)"  onfocus="onUnk();"/>
+<?php
+  }
+?>
+<?php
+if( $unkcheck == 1 )
+  {
+?>
+<input type="checkbox" name="h_unkcheck" id="h_unkcheck" value="1" /> NEVYSPORIADANÝ
+<input class="hvstup" type="hidden" id="h_unk" name="h_unk" value="<?php echo $h_unk;?>">
+<?php
+if ( $h_unkcheck == 1 )
+ {
+?>
+<script type="text/javascript">
+document.fhlv1.h_unkcheck.checked = "checked";
+</script>
+<?php
+ }
+?> 
+<?php
+  }
+?>
 <input class="hvstup" type="hidden" name="err_unk" value="0">
 <input class="hvstup" type="hidden" name="uctovat" value="0">
 </td>
@@ -6458,7 +6499,20 @@ if( $copern == 7 AND $drupoh == 1 AND $sys == 'FAK' )
 ?>
 
 - UNIkód:</td>
-<td class="hvstup"><?php echo $riadok->obj; ?> - <?php echo $riadok->unk; ?></td>
+
+<?php
+//andrejko
+$unkcheck=0;
+if( $fir_fico == 46614478 AND $drupoh == 11 ) { $unkcheck=1; }
+$textunk=$riadok->unk;
+if( $unkcheck == 1 )
+  {
+$textunk="VYSPORIADANÝ";
+if( $cislo_unk == 1 ) { $textunk="NEVYSPORIADANÝ"; }  
+  }
+?>
+
+<td class="hvstup"><?php echo $riadok->obj; ?> - <?php echo $textunk; ?></td>
 <?php
 if( $copern == 7 OR $copern == 17 )
 {
@@ -7730,7 +7784,6 @@ if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
 <?php
      }
 
-//andrejko
 ?>
 
 <?php
@@ -7743,7 +7796,6 @@ if ( $copern == 7 AND $drupoh == 31 AND $sysx != 'UCT' )
 <?php
      }
 
-//andrejko
 ?>
 
 </td>
