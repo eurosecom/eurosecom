@@ -6502,6 +6502,7 @@ if( $copern == 7 AND $drupoh == 1 AND $sys == 'FAK' )
 
 <?php
 //andrejko
+$cislo_unk=1*$riadok->unk;
 $unkcheck=0;
 if( $fir_fico == 46614478 AND $drupoh == 11 ) { $unkcheck=1; }
 $textunk=$riadok->unk;

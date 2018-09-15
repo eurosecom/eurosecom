@@ -70,6 +70,10 @@ $tovxc = mysql_query("$sqlttxc");
 $tvpolxc = mysql_num_rows($tovxc);
 if( $tvpolxc > 0 )
   {
+
+$dsqlt = "DROP TABLE F$kli_vxcfskl"."_sklfakx".$kli_uzid." ";
+$dsql = mysql_query("$dsqlt");
+
 $dsqlt = "CREATE TABLE F$kli_vxcfskl"."_sklfakx".$kli_uzid." SELECT * FROM F$kli_vxcfskl"."_sklfak WHERE cen = 0 ";
 $dsql = mysql_query("$dsqlt");
 
@@ -77,6 +81,9 @@ $dsqlt = "UPDATE F$kli_vxcfskl"."_sklzaspriemer,F$kli_vxcfskl"."_sklfakx$kli_uzi
 " SET zas=zas-mno WHERE F$kli_vxcfskl"."_sklzaspriemer.skl=F$kli_vxcfskl"."_sklfakx$kli_uzid.skl AND ".
 " F$kli_vxcfskl"."_sklzaspriemer.cis=F$kli_vxcfskl"."_sklfakx$kli_uzid.cis ";
 $dsql = mysql_query("$dsqlt");
+
+//echo $dsqlt."<br />";
+
   }
 
      }

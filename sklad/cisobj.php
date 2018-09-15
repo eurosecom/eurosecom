@@ -131,7 +131,7 @@ $konc =($pols*($page-1))+($pols-1);
 
 <table class="h2" width="100%" >
 <tr>
-<td>EuroSecom  -  Vybraný materiál na nevybavených objednávkach z e-shopu</td>
+<td>EuroSecom - Vybraný materiál na nevybavených objednávkach v e-shope</td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>

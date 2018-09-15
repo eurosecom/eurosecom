@@ -21,6 +21,12 @@ if( $dnes == '25.12.'.$aky_rok ) $robot3="robot3_vianoce";
 if( $dnes == '26.12.'.$aky_rok ) $robot3="robot3_vianoce";
 if( $dnes == '31.12.'.$aky_rok ) $robot3="robot3_silvester";
 
+//2019
+if( $dnes == '19.04.2019' ) $robot3="robot3_velkanoc";
+if( $dnes == '20.04.2019' ) $robot3="robot3_velkanoc";
+if( $dnes == '21.04.2019' ) $robot3="robot3_velkanoc";
+if( $dnes == '22.04.2019' ) $robot3="robot3_velkanoc";
+
 //2018
 if( $dnes == '30.03.2018' ) $robot3="robot3_velkanoc";
 if( $dnes == '31.03.2018' ) $robot3="robot3_velkanoc";
