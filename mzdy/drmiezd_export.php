@@ -723,7 +723,7 @@ if( $dopln == 27 )
 { 
 $nazov="../import/druhdph".$kli_vrok."dopln27.csv"; 
 
-$sqult = "DELETE FROM F$kli_vxcf"."_uctdrdp WHERE rdp = 27 OR rdp = 32 OR rdp = 82 OR rdp = 371 OR rdp = 471 ";
+$sqult = "DELETE FROM F$kli_vxcf"."_uctdrdp WHERE rdp = 27 OR rdp = 32 OR rdp = 82 OR rdp = 371 OR rdp = 471 OR rdp = 227 OR rdp = 328 OR rdp = 337 OR rdp = 387 ";
 $uloz = mysql_query("$sqult");
 
 }
