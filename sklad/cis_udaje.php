@@ -163,6 +163,7 @@ $h_tl3 = strip_tags($_REQUEST['h_tl3']);
 
 
 $cxc01 = strip_tags($_REQUEST['cxc01']);
+$cxc02 = strip_tags($_REQUEST['cxc02']);
 
 $cep01 = strip_tags($_REQUEST['cep01']);
 $ced01 = strip_tags($_REQUEST['ced01']);
@@ -204,7 +205,7 @@ $upravene = mysql_query("UPDATE F$kli_vxcf"."_sklcis SET dph='$h_dph', cis='$h_c
 $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_sklcisudaje WHERE xcis='$h_cis'"); 
 $vlozene = mysql_query("INSERT INTO F$kli_vxcf"."_sklcisudaje (xcis) VALUES ( '$h_cis' )"); 
 $upravene = mysql_query("UPDATE F$kli_vxcf"."_sklcisudaje SET xmerx='$xmerx', xmer2='$xmer2', xmerk='$xmerk', xrcx='$xrcx', xrcp='$xrcp' 
-, cxc01='$cxc01', idod='$idod', pdod='$pdod' 
+, cxc01='$cxc01', cxc02='$cxc02', idod='$idod', pdod='$pdod' 
 , cep01='$cep01', ced01='$ced01', cep02='$cep02', ced02='$ced02', cep03='$cep03', ced03='$ced03', cep04='$cep04', ced04='$ced04', xnat3='$xnat3', xtxt5='$xtxt5'
 , xzvr='$xzvr', xkrd='$xkrd', xzkz='$xzkz', xstz='$xstz', xdr3='$xdr3', xdr4='$xdr4', xdr2='$xdr2', xdr1='$xdr1', xnat='$xnat', xnat5='$xnat5', xnat4='$xnat4'
  WHERE xcis='$h_cis'"); 
@@ -252,6 +253,7 @@ $xrcp = $fir_riadok->xrcp;
 $xrcx = 1*$fir_riadok->xrcx;
 
 $cxc01 = $fir_riadok->cxc01;
+$cxc02 = $fir_riadok->cxc02;
 
 $cep01 = $fir_riadok->cep01;
 $ced01 = $fir_riadok->ced01;
@@ -472,6 +474,7 @@ function Ced01Enter(e)
     document.formv1.xdr4.value = '<?php echo "$xdr4";?>';
 
     document.formv1.cxc01.value = '<?php echo "$cxc01";?>';
+    document.formv1.cxc02.value = '<?php echo "$cxc02";?>';
 
     document.formv1.cep01.value = '<?php echo "$cep01";?>';
     document.formv1.ced01.value = '<?php echo "$ced01";?>';
@@ -817,6 +820,8 @@ document.formv1.xnat3.checked = "checked";
 Spol.col.sadzobník <input type="text" name="xtxt5" id="xtxt5" size="20" maxlength="20" onKeyDown=" "
 onclick="Fx.style.display='none';" />
 <img src='../obr/info.png' width=15 height=15 border=0 title="Spoloèný colný sadzobník" onclick="ColnySadzobnik();" >
+&nbsp&nbsp Váha MJ(kg) <input type="text" name="cxc02" id="cxc02" size="13" maxlength="13" onKeyDown=" "
+onclick="Fx.style.display='none';" />
 </tr>
 
 
