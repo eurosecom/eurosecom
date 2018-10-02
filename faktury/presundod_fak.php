@@ -165,7 +165,7 @@ if( $i == 9 ) { $kopia_dok=$tl19; }
 if( $kopia_dok > 0 )
           {
 
-//sklfak  cpl  ume  dat  dok  doq  skl  poh  ico  fak  unk  dol  prf  poz  str  zak  cis  nat  dph  mer  pop  mno  cen  cep  ced  id  sk2  datm  me2  mn2   
+//sklfak  cpl  ume  dat  dok  doq  skl  poh  ico  fak  unk  dol  prf  poz  str  zak  cis  nat  dph  mer  pop  mno  cen  cep  ced  id  sk2  datm  me2  mn2 
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_sklfak "." SELECT".
 " 0,$ume,'$dnes_sql',$cislo_dok,$cislo_dok,skl,51,ico,$cislo_dok,cpl,$kopia_dok,'',poz,str,zak,cis,nat,dph,mer,pop,mno,cen,cep,ced,$kli_uzid,0,now(),me2,mn2  ".
@@ -214,6 +214,17 @@ $dsql = mysql_query("$dsqlt");
 
      }
 
+//fakslu  dok	fak	dol	prf	cpl	slu	nsl	pop	pon	dph	cen	cep	ced	mno	mer pfak cfak dfak id datm  
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_fakslu "." SELECT".
+" $cislo_dok,$cislo_dok,$kopia_dok,'',0,slu,nsl,pop,pon,dph,cen,cep,ced,mno,mer,0,0,0,id,now() ".
+" FROM F$kli_vxcf"."_fakslu ".
+" WHERE F$kli_vxcf"."_fakslu.dok=$kopia_dok ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+//exit;
+
           }
 
 $i = $i + 1;
@@ -225,6 +236,11 @@ $sqlttt = "DROP TABLE F$kli_vxcf"."_faksluprc$kli_uzid  ";
 $sqldok = mysql_query("$sqlttt");
 
 $sqlttt = "CREATE TABLE F$kli_vxcf"."_faksluprc$kli_uzid SELECT * FROM F$kli_vxcf"."_sklfak WHERE dok = $cislo_dok ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "INSERT INTO F$kli_vxcf"."_faksluprc$kli_uzid SELECT ".
+" 0, 0, '', dok, dok, 0, 0, 0, 0, '', 0, 0, '', 0, 0, slu, nsl, dph, mer, '', mno, cen, cep, ced, id, 0, datm, 0, 0 ".
+" FROM F$kli_vxcf"."_fakslu WHERE dok = $cislo_dok ";
 $sqldok = mysql_query("$sqlttt");
 
 $sqlttt = "ALTER TABLE F$kli_vxcf"."_faksluprc$kli_uzid ADD hodb DECIMAL(10,2) DEFAULT 0 AFTER datm ";
