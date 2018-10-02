@@ -366,6 +366,11 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 $dsql = mysql_query("$dsqlt");
 //exit;
 
+$dnessql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET datvys='$dnessql' WHERE oc = $cislo_oc AND datvys = '0000-00-00' "; 
+$oznac = mysql_query("$sqtoz");
+
 //vypocitaj pocet rokov a dni
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid." WHERE oc = $cislo_oc");
   if (@$zaznam=mysql_data_seek($sqldok,0))

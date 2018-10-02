@@ -85,7 +85,7 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = "DROP TABLE F".$kli_vxcf."_zakpovodne";
 $vysledok = mysql_query("$sqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_zak WHERE str = 10 AND zak < 170000";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_zak WHERE str = 10 AND zak < 170000 AND zak > 1 ";
 $dsql = mysql_query("$dsqlt");
      }
 
