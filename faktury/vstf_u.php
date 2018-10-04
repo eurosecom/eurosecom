@@ -233,7 +233,6 @@ $h_sp4 = strip_tags($_REQUEST['h_sp4']);
 $h_obj = strip_tags($_REQUEST['h_obj']);
 $h_unk = strip_tags($_REQUEST['h_unk']);
 
-//andrejko
 $unkcheck=0;
 if( $fir_fico == 46614478 AND $drupoh == 11 ) { $unkcheck=1; }
 if( $unkcheck == 1 )
@@ -5689,7 +5688,6 @@ if ( $copern == 7 )
 <input class="hvstup" type="text" name="h_obj" id="h_obj" size="15" maxlength="15" value="<?php echo $h_obj;?>" onclick="HlvOnClick()"
  onKeyDown="return ObjEnter(event.which)"  onfocus="onObj();" />
 <?php
-//andrejko
 $h_unkcheck=1*$cislo_unk;
 
 $unkcheck=0;
@@ -6422,7 +6420,7 @@ if ( $copern != 6 AND $copern != 87 AND $copern != 8 )
 <?php if( $tlaclenpdf == 1 AND $drupoh != 42 )  { ?>
 <a href="#" onClick="TlacPdf();">
 <img src='../obr/tlac.png' width=15 height=10 border=0 alt="VytlaËiù doklad" title="VytlaËiù doklad PDF" >TlaËiù</a>
-<?php                                } ?>
+<?php                                           } ?>
 <?php
      }
 ?>
@@ -6431,6 +6429,22 @@ if ( $copern != 6 AND $copern != 87 AND $copern != 8 )
 <tr>
 <td class="pvstup" >&nbsp;D·tum vyhotovenia:</td>
 <td class="hvstup"><?php echo $riadok->dat; ?></td>
+
+<?php 
+//echo "sysx ".$sysx;
+if( $drupoh == 1 AND $sysx != 'UCT' AND $plotyskala == 1 )  { 
+//andrejko
+$jeskicd="";
+$skicd=trim($riadok->icd);
+$jeskicd=substr($skicd,0,2);
+?>
+<?php if( $jeskicd == "SK" )  { ?>
+<td class="pvstup">
+<span style="width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">SK Pl·tca DPH !!!</span>
+</td>
+<?php                       } ?>
+<?php                                      } ?>
+
 </tr>
 
 <?php if( $drupoh != 2 ) { ?>
@@ -6501,7 +6515,6 @@ if( $copern == 7 AND $drupoh == 1 AND $sys == 'FAK' )
 - UNIkÛd:</td>
 
 <?php
-//andrejko
 $cislo_unk=1*$riadok->unk;
 $unkcheck=0;
 if( $fir_fico == 46614478 AND $drupoh == 11 ) { $unkcheck=1; }

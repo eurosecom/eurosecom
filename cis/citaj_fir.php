@@ -232,7 +232,8 @@ $longslu=0;
 if ( $fir_fico == 46529233 ) { $longslu=1; }
 $hosprok=0;
 if ( $fir_fico == 50608738 OR $fir_fico == 50610040 ) { $hosprok=1; }
-
+$plotyskala=0;
+if ( $fir_fico == 46614478 ) { $plotyskala=1; }
 
 
 return $citfir;

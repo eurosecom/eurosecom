@@ -127,10 +127,15 @@ $h_ce0=$h_ce0;
 
 $textzlavy="Z¾ava ".$ico5."%"; 
 
+if( $zaklad2s > 0 )
+  {
+
 $sqty = "INSERT INTO F$kli_vxcf"."_fakslu ( dok,fak,dol,prf,slu,nsl,pop,dph,cep,ced,mno,mer,dfak,cfak,pfak,id,pon )". 
 " VALUES ('$cislo_dok', '0', '', '', '0', '$textzlavy', '', '20', '$h_cep', '$h_ced',".
 " '-1', '', 0, 0, 0, '$kli_uzid', '' );"; 
 $ulozene = mysql_query("$sqty");
+
+  }
 
 if( $zaklad0s > 0 )
   {
