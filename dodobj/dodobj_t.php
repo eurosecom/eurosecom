@@ -76,14 +76,39 @@ var sirkawic = screen.width-10;
 <br />
 
 <?php
-$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$hhmmss = Date ("dmY_Hi", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$xnai="";
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok ORDER BY xdok DESC LIMIT 1"; 
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+$xice = $riaddok->xice;
+ }
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $xice ORDER BY ico DESC LIMIT 1"; 
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $xnai = $riaddok->nai;
+ }
+
+$kli_nxcf10 = substr($xnai,0,10);
+$kli_nxcf10=trim(str_replace(" ","",$kli_nxcf10));
+$kli_nxcf10=trim(str_replace(".","",$kli_nxcf10));
+$kli_nxcf10=trim(str_replace(",","",$kli_nxcf10));
+$kli_nxcf10=trim(str_replace("-","",$kli_nxcf10));
+$kli_nxcf10=trim(str_replace("%","",$kli_nxcf10));
+$kli_nxcf10 = StrTr($kli_nxcf10, "áäèïéìëí¾òôóöàøšúùüıÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜİ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 
  $outfilexdel="../tmp/dodobj_".$kli_uzid."_*.*";
  foreach (glob("$outfilexdel") as $filename) {
     unlink($filename);
  }
 
-$outfilex="../tmp/dodobj_".$kli_uzid."_".$hhmmss.".pdf";
+$outfilex="../tmp/dodobj_".$kli_uzid."_".$kli_nxcf10."_".$cislo_dok."_".$hhmmss.".pdf";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');

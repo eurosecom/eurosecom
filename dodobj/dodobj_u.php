@@ -958,6 +958,11 @@ Vstup.value=Vstup.value.replace(",",".");
 
     }
 
+<?php
+//koniec uprava
+  }
+?>
+
 function NacitajMin(dok, ico)
                 {
 
@@ -966,11 +971,6 @@ var akeicox = ico;
 
 window.open('dodobj_u.php?copern=191918&drupoh=1&page=1&cislo_dok='+ dokx + '&akeico='+ akeicox + '&zmtz=<?php echo $zmtz; ?>', '_self' );
                 }
-
-<?php
-//koniec uprava
-  }
-?>
 </script>
 </HEAD>
 
