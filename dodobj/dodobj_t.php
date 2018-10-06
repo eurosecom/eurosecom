@@ -154,8 +154,8 @@ $sqlt = <<<mzdprc
    xdatm        TIMESTAMP(14),
    xskm         decimal(10,3) DEFAULT 0,
    xobm         decimal(10,3) DEFAULT 0,
-   xrzd         decimal(10,3) DEFAULT 0,
-   xpsk         decimal(10,3) DEFAULT 0
+   xrzd         decimal(10,4) DEFAULT 0,
+   xpsk         decimal(10,4) DEFAULT 0
 );
 mzdprc;
 
@@ -191,6 +191,13 @@ $dsql = mysql_query("$dsqlt");
 //echo $dsqlt;
 //exit;
 
+//zober vahu z cisudaje
+$sqlttt = "UPDATE F".$kli_vxcf."_mzdprcx$kli_uzid, F".$kli_vxcf."_sklcisudaje SET xrzd=cxc02 ".
+" WHERE F".$kli_vxcf."_mzdprcx$kli_uzid.xcis=F".$kli_vxcf."_sklcisudaje.xcis "; 
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F".$kli_vxcf."_mzdprcx$kli_uzid SET xpsk=xrzd*xmno "; 
+$sqldok = mysql_query("$sqlttt");
 
 //group vsetko
 $podmgrp=" xdok";
@@ -341,10 +348,10 @@ $pdf->Cell(185,15,"                          ","$rmc",1,"L");
 $pdf->SetFont('arial','',14);
 $pdf->Cell(185,15,"Objednávame si u Vás:","$rmc",1,"L");
 
-$pdf->SetFont('arial','',8);
+$pdf->SetFont('arial','',7);
 $pdf->SetLineWidth(0.3);
-$pdf->Cell(1,4,"","B",0,"L");$pdf->Cell(115,4,"Položka","B",0,"L");$pdf->Cell(25,4,"Jednotková cena","B",0,"R");$pdf->Cell(20,4,"Množstvo","B",0,"R");
-$pdf->Cell(24,4,"Hodnota","B",1,"R");
+$pdf->Cell(1,4,"","B",0,"L");$pdf->Cell(105,4,"Položka","B",0,"L");$pdf->Cell(20,4,"Jednotková cena","B",0,"R");$pdf->Cell(20,4,"Množstvo","B",0,"R");
+$pdf->Cell(20,4,"Hodnota","B",0,"R");$pdf->Cell(20,4,"Váha","B",1,"R");
 $pdf->Cell(185,1,"                          ","$rmc",1,"L");
 
 if( $odbx > 0 ) { //toto asi preè
@@ -360,7 +367,7 @@ $opsc = $fir_riadok->opsc; $omes = $fir_riadok->omes;
 
 if( $riadok->pox == 1 AND $drupoh == 1 )
 {
-$pdf->SetFont('arial','',9);
+$pdf->SetFont('arial','',8);
 
 $nat=$riadok->nat;
 $xcis=1*$riadok->xcis;
@@ -396,9 +403,10 @@ if( $riadok->xmno == 0 ) { $mnotlac=""; }
 $hodnotatlac=$riadok->xhdd;
 if( $riadok->xhdd == 0 ) { $hodnotatlac=""; }
 if( $noprice == 1 ) { $hodnotatlac="_ . _"; }
+$vahatlac=$riadok->xpsk;
 
-$pdf->Cell(1,5,"","$rmc",0,"L");$pdf->Cell(115,5,"$xcistlac $nat","$rmc",0,"L");$pdf->Cell(25,5,"$cenatlac","0",0,"R");$pdf->Cell(16,5,"$mnotlac","0",0,"R");
-$pdf->Cell(4,5,"$riadok->mer","0",0,"R");$pdf->Cell(24,5,"$hodnotatlac","0",1,"R");
+$pdf->Cell(1,5,"","$rmc",0,"L");$pdf->Cell(105,5,"$xcistlac $nat","$rmc",0,"L");$pdf->Cell(20,5,"$cenatlac","0",0,"R");$pdf->Cell(16,5,"$mnotlac","0",0,"R");
+$pdf->Cell(4,5,"$riadok->mer","0",0,"R");$pdf->Cell(20,5,"$hodnotatlac","0",0,"R");$pdf->Cell(20,5,"$vahatlac","0",1,"R");
 }
 if( $riadok->pox == 10 AND $drupoh == 1 )
 {
@@ -406,17 +414,22 @@ $pdf->Cell(185,1,"                          ","$rmc",1,"L");
 $pdf->Cell(185,2," ","T",1,"R");
 $pdf->SetFont('arial','',12);
 if ( $fir_fico == '36268399' ) {
-$pdf->Cell(140,7,"Celkom s dph","$rmc",0,"L");
+$pdf->Cell(120,7,"Celkom s dph","$rmc",0,"L");
                                 }
 if ( $fir_fico != '36268399' ) {
-$pdf->Cell(140,7,"Celkom","$rmc",0,"L");
+$pdf->Cell(120,7,"Celkom","$rmc",0,"L");
                                 }
 $pdf->SetFont('arial','B',12);
 
 $celkomeur=$riadok->xhdd." EUR";
 if( $noprice == 1 ) { $celkomeur="_ . _ EUR"; }
+$celkomkg=$riadok->xpsk." kg";
 
-$pdf->Cell(45,7,"$celkomeur","0",1,"R");
+$pdf->Cell(45,7,"$celkomeur","0",0,"R");
+$pdf->SetFont('arial','',8);
+$pdf->Cell(20,7,"$celkomkg","0",1,"R");
+$pdf->SetFont('arial','B',12);
+
 $pdf->Cell(140,1," ","$rmc",0,"L");$pdf->Cell(45,1," ","T",1,"R");
 $pdf->Cell(140,1," ","$rmc",0,"L");$pdf->Cell(45,1," ","T",1,"R");
 
