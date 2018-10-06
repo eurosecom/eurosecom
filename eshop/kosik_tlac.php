@@ -392,9 +392,22 @@ $dsql = mysql_query("$dsqlt");
 //exit;
   }
 
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid ADD xpsk decimal(10,4) DEFAULT 0 AFTER xdatm "; 
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid ADD xrzd decimal(10,4) DEFAULT 0 AFTER xdatm "; 
+$sqldok = mysql_query("$sqlttt");
+
+//zober vahu z cisudaje
+$sqlttt = "UPDATE F".$kli_vxcf."_mzdprcx$kli_uzid, F".$kli_vxcf."_sklcisudaje SET xrzd=cxc02 ".
+" WHERE F".$kli_vxcf."_mzdprcx$kli_uzid.xcis=F".$kli_vxcf."_sklcisudaje.xcis "; 
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F".$kli_vxcf."_mzdprcx$kli_uzid SET xpsk=xrzd*xmno "; 
+$sqldok = mysql_query("$sqlttt");
+
 //group vsetko
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcx".$kli_uzid.
-" SELECT 10,xdok,xice,xodbm,0,xcpl,xcis,xnat,xdx3,xdph,xcep,xced,SUM(xmno),SUM(xhdb),SUM(xhdd),xid,xdatm  FROM F$kli_vxcf"."_mzdprcx".$kli_uzid." ".
+" SELECT 10,xdok,xice,xodbm,0,xcpl,xcis,xnat,xdx3,xdph,xcep,xced,SUM(xmno),SUM(xhdb),SUM(xhdd),xid,xdatm,SUM(xrzd),SUM(xpsk)  FROM F$kli_vxcf"."_mzdprcx".$kli_uzid." ".
 " WHERE xdok > 0 GROUP BY xdok".
 "";
 $dsql = mysql_query("$dsqlt");
@@ -570,14 +583,15 @@ $pdf->Cell(0,5,"$platbax ","0",1,"L");
 
 $pdf->Cell(0,2," ","0",1,"R");
 
-$pdf->SetFont('arial','',10);
+$pdf->SetFont('arial','',8);
 
 if ( $copern == 1 AND $drupoh == 1 )  {
 
-if( $riadok->xhdb != 0 )
+//andrejko
+if( $riadok->xhdd != 0 )
      {
 $pdf->Cell(80,5,"Položka","1",0,"L");$pdf->Cell(30,5,"Množstvo","1",0,"R");$pdf->Cell(30,5,"Cena bez/s DPH","1",0,"R");
-$pdf->Cell(0,5,"Hodnota bez/s DPH","1",1,"R");
+$pdf->Cell(30,5,"Hodnota bez/s DPH","1",0,"R");$pdf->Cell(0,5,"Váha","1",1,"R");
      }
                                       }
 
@@ -621,7 +635,7 @@ if ( $copern == 1 AND $drupoh == 1 AND $html == 1 )  {
 if( $riadok->pox == 1 AND $drupoh == 1 )
 {
 
-$pdf->SetFont('arial','',10);
+$pdf->SetFont('arial','',8);
 
 $nat=$riadok->nat;
 $xcis=1*$riadok->xcis;
@@ -655,13 +669,16 @@ $cenatlac=$riadok->xcep." / ".$riadok->xced;
 if( $riadok->xcep == 0 ) { $cenatlac=""; }
 $hodnotatlac=$riadok->xhdb." / ".$riadok->xhdd;
 if( $riadok->xhdb == 0 ) { $hodnotatlac=""; }
+$vahatlac=$riadok->xpsk;
+if( $riadok->xpsk == 0 ) { $vahatlac=""; }
 
 $textdopln=$riadok->xdx3;
 if( $textdopln == '0000-00-00' ) { $textdopln=""; }
 
 $pdf->Cell(80,5,"$xcistlac $nat $textdopln","B",0,"L");$pdf->Cell(30,5,"$mnotlac","B",0,"R");$pdf->Cell(30,5,"$cenatlac","B",0,"R");
-$pdf->Cell(0,5,"$hodnotatlac","B",1,"R");
-
+$pdf->Cell(30,5,"$hodnotatlac","B",0,"R");
+$pdf->SetFont('arial','',6);
+$pdf->Cell(0,5,"$vahatlac","B",1,"R");
 $pdf->SetFont('arial','',10);
 
 if( $html == 1 )
@@ -690,8 +707,11 @@ $pdf->SetFont('arial','',10);
 
 if( $riadok->xhdb != 0 )
      {
-$pdf->Cell(140,5,"Celkom bez/s DPH","1",0,"L");
-$pdf->Cell(0,5,"$riadok->xhdb / $riadok->xhdd EUR","1",1,"R");
+$pdf->Cell(120,5,"Celkom bez/s DPH","1",0,"L");
+$pdf->Cell(50,5,"$riadok->xhdb / $riadok->xhdd EUR","1",0,"R");
+$pdf->SetFont('arial','',6);
+$pdf->Cell(0,5,"$riadok->xpsk kg","1",1,"R");
+$pdf->SetFont('arial','',10);
      }
 
 if( $html == 1 )
