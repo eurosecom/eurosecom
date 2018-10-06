@@ -76,7 +76,7 @@ var sirkawic = screen.width-10;
 <br />
 
 <?php
-$hhmmss = Date ("dmY_Hi", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$dnessk = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
 $xnai="";
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok ORDER BY xdok DESC LIMIT 1"; 
@@ -85,7 +85,15 @@ $sqldok = mysql_query("$sqlttt");
  {
  $riaddok=mysql_fetch_object($sqldok);
 $xice = $riaddok->xice;
+$xdatm = $riaddok->xdatm;
  }
+
+$pole1 = explode(" ", $xdatm);
+$datx=$pole1[0];
+$casx=$pole1[1];
+$pole2 = explode("-", $datx);
+$hhmmss = $pole2[2].$pole2[1].$pole2[0];
+$hhmmss = $hhmmss."_".$dnessk;
 
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $xice ORDER BY ico DESC LIMIT 1"; 
 $sqldok = mysql_query("$sqlttt");
@@ -108,7 +116,7 @@ $kli_nxcf10 = StrTr($kli_nxcf10, "áäèïéìëí¾òôóöàøšúùüıÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜİ",
     unlink($filename);
  }
 
-$outfilex="../tmp/dodobj_".$kli_uzid."_".$kli_nxcf10."_".$cislo_dok."_".$hhmmss.".pdf";
+$outfilex="../tmp/dodobj_".$kli_uzid."_".$kli_nxcf10."_dok".$cislo_dok."_".$hhmmss.".pdf";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
