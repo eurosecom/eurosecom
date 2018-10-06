@@ -85,10 +85,10 @@ $sqldok = mysql_query("$sqlttt");
  {
  $riaddok=mysql_fetch_object($sqldok);
 $xice = $riaddok->xice;
-$xdatm = $riaddok->xdatm;
+$xdatv = $riaddok->xdatv;
  }
 
-$pole1 = explode(" ", $xdatm);
+$pole1 = explode(" ", $xdatv);
 $datx=$pole1[0];
 $casx=$pole1[1];
 $pole2 = explode("-", $datx);
