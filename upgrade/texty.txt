@@ -1,3 +1,50 @@
+08.10.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- FAKT ERP poloûka Platba kartou jedn˝m kliknutÌm
+- FAKT ERP zoznam vyhæad·vanie podæa d·tumu auto Ëiarka na bodku
+- UBYT ˙prava pre medo s.r.o. ceny a rozdelenie faktur·cie
+- SKLAD Po uloûenÌ iËo dod·vateæa v doplÚuj˙cich ˙dajoch o materi·lovej poloûke v info ikone aj n·zov dod·vateæa
+- FAKT v dodacÌch listoch v z·hlavÌ poloûka unk=1 oznaËuje kategÛriu dodacÌch listov, ktor· sa d· vyhæad·vaù v zozname
+  ako nevybavenÈ, öpeci·lne...
+- FAKT pre Ploty Skala pri presune fakt˙ra -> dodacÌ list, nevyplnÌ ËÌslo fakt˙ry v hlaviËke dodacieho 
+- FAKT PlotySkala fico Checkbox Dodacie listy VysporiadanÈ/NevysporiadanÈ
+- CIS akyrobot 2019
+- SKL bug rozdielu zostatku skladov˝ch kart·ch a eshop zostatku 
+- CIS naËÌtanie kurzovÈho lÌstka z ECB presmerovali http na https
+- UCTO novÈ druhy DPH 227 opravn· dod a neodpoËÌtan· DPH
+- UCTO novÈ druhy DPH 328, 337, 387 dod fakt˙ra na samozdanenie a z·roveÚ pauöalne v˝davky 20 a 80 percent
+- SKLAD v·ha MJ v kg v doplÚuj˙cich ˙dajoch o materi·lovej poloûke
+- SKLAD naËÌtanie v·hy 1 mj v kg do doplnujucich udajov o materiale z CSV
+- FAKT ak je nulova 20dph zlava ned· poloûku na fakt˙ru
+- FAKT alert ak je Sk dph pl·tca
+- FAKT dod·vateæskÈ objedn·vky zmena n·zvu PDF
+
+25.08.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY öpecifick˝ symbol na prÌkaze na ˙hradu odvodov do Soc.poisùovne vo form·te MMRRRR pre pravideln˝ prÌjem a 
+  MM99RRRR pre nepravideln˝ prÌjem.
+
+14.08.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- odvod nad 200 eur RF DoBPä a DÙchodca-dohod·r
+
+13.08.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY doch·dzka - generovanie pondelok aû piatok rann·
+- CIS verzia 2018_09
+- CIS kalend·r 2019
+- CIS So a Ne 01.2019 aû 06.2019
+
+08.08.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY rozdelenie prÌkazu na ˙hradu odvodov podæa v˝platnÈho miesta zadanÈho do UNIkÛdu pre vöetky domÈny
+- MZDY tlaË dovolenkov˝ch lÌstkov z detailu doch·dzky, soboty a nedele daj dni
+- MZDY Pomer 55 DOBPå I.dohoda nepravideln˝ PP - poËÌtaj odvod SP,IP,RF nad 200Eur, v ËÌselnÌku pomerov 
+  nastav SP=1 a IP=1 zamestnanec aj zamestn·vateæ
+- MZDY odvodov· ˙æava DP dÙchodca-dohod·r do 200 Eur uplatnen· aj na odvod do RFS
+
+02.08.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY odvodov· ˙æava DP dÙchodca-dohod·r do 200 Eur od 1.7.2018 zmena typZec v VP len pre obdobie od 1.7.2018
+
+31.07.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY öpecifick˝ symbol v prÌkaze na ˙hradu soci·lneho poistenia v tvare MM99RRRR
+- MZDY odvodov· ˙æava DP dÙchodca-dohod·r do 200 Eur od 1.7.2018 zmena typZec v MVP a VP podæa typu v˝nimky do 200eur a nad 200eur
+
 30.07.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - MZDY odvodov· ˙æava DP dÙchodca-dohod·r do 200 Eur od 1.7.2018 ochrana proti uplatneniu na pomer 1 zamestnanec
 - MZDY éivotnÈ minimum plnoletej fyzickej osoby 205,07 Ä od 1.7.2018 vo v˝poËte exekuËn˝ch zr·ûok.
