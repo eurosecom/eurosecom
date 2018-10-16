@@ -68,7 +68,7 @@ $samodph=0;
 $ceskadph=0;
 $samodph10=0;
 if( ( $rdp_zk2 == 37 OR $rdp_zk2 == 39 ) AND $kli_vrok <  2011 ) { $samodph=1; }
-if( ( $rdp_zk2 == 34 OR $rdp_zk2 == 35 OR $rdp_zk2 == 335 ) AND $kli_vrok >= 2011 ) { $samodph=1; }
+if( ( $rdp_zk2 == 34 OR $rdp_zk2 == 35 OR $rdp_zk2 == 335 OR $rdp_zk2 == 337 ) AND $kli_vrok >= 2011 ) { $samodph=1; }
 if( $rdp_zk1 == 40 AND $rdp_zk2 == 1 AND $kli_vrok >= 2012 ) { $samodph=1; $samodph10=1; }
 
 if( $alchem == 1 AND ( $rdp_zk1 == 33 OR $rdp_zk2 == 46 ) AND $h_pohyb == 2094 ) { $samodph=1; $ceskadph=1; }
@@ -277,7 +277,7 @@ $h_odkial=0;
      }
 //koniec odberatelska faktura z poloziek
 
-
+//andrejko
 //dodavatelska faktura zo zahlavia
 if( $h_drupoh == 12 AND $h_odkial == 0 )
 {
@@ -323,6 +323,7 @@ $h_dao = SqlDatum($h_dao);
   $h_ume = $pole[1].".".$pole[0];
 
 $pau80 = 1*$_GET['pau80'];
+$h_zk0c=$h_zk0;
 
 //doklad hlavicka
 $h_zk0u=$h_zk0; $h_zk1u=$h_zk1; $h_zk2u=$h_zk2; $h_dn1u=$h_dn1; $h_dn2u=$h_dn2;
@@ -346,6 +347,7 @@ if( $pau80 == 1 )
 
 $uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET xzk='$h_zk2', xdp='$h_dn2', xzk0='$h_zk0' ";
 $upravene = mysql_query("$uprt");
+//echo $uprt;
 
 $uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET mzk=0.8*xzk, mdp=0.8*xdp, mzk0=0.8*xzk0 ";
 $upravene = mysql_query("$uprt");
@@ -353,7 +355,7 @@ $upravene = mysql_query("$uprt");
 $uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET nzk=xzk-mzk, ndp=xdp-mdp, nzk0=xzk0-mzk0 ";
 $upravene = mysql_query("$uprt");
 
-$h_zk0n=0; $h_zk2n=0;$h_dn2n=0;
+$h_zk0n=0; $h_zk2n=0; $h_dn2n=0;
 
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_autopausal$kli_uzid WHERE id > 0 ORDER BY id DESC LIMIT 1");
   if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -374,10 +376,15 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_autopausal$kli_uzid WHERE id 
   $h_zk2n=1*$riaddok->nzk;
   $h_dn2n=1*$riaddok->ndp;
 
+//smzd plus pausal 80/20
+if( $rdp_zk2 == 337 ) { $h_zk0=$h_zk0c; $pau80=0; }
+
     }
+
 
   }
 //end if pau80=1
+
 
 //doklad polozky
 if( $h_zk0 != 0 )
@@ -426,6 +433,7 @@ if( $udp > 0 ) { $ucet_dn2=$udp; }
 if( $azk > 0 ) { $ucet_zk0=substr($ucet_zk0,0,3).$azk; $ucet_zk2=substr($ucet_zk2,0,3).$azk; }
 if( $adp > 0 ) { $ucet_dn2=substr($ucet_dn2,0,3).$adp; }
 
+$paudrh=27;
 if( $h_zk0n != 0 )
 {
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
@@ -435,13 +443,13 @@ $ulozene = mysql_query("$sqty");
 if( $h_zk2n != 0 )
 {
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk2', '$h_uce', '27', 0, '$h_zk2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk2', '$h_uce', '$paudrh', 0, '$h_zk2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_dn2n != 0 )
 {
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '27', 0, '$h_dn2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '$paudrh', 0, '$h_dn2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $ajo == 1 AND $aju > 0 AND $h_dn2n != 0 )
@@ -470,6 +478,7 @@ if( $alchem == 1 ) $ucetszd="39501";
 if( $alchem == 1 AND $ceskadph == 1 ) $ucetszd="39502";
 if( $autovalas == 1 ) $ucetszd="379019";
 
+
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
 " VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$ucetszd', '$rdp_zk2', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
@@ -481,6 +490,84 @@ if( $alchem == 1 AND $ceskadph == 1 ) $ucet_dn2="34366";
 $sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
 " VALUES ('$h_dok', '$h_drupoh', '$ucetszd', '$ucet_dn2', '$rdp_zk2s', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty");
+
+//smzd 337 plus pausal 80/20
+if( $rdp_zk2 == 337 )
+    {
+
+$sqty = "UPDATE F$kli_vxcf"."_uctdod SET rdp='$rdp_zk2' WHERE dok = $h_dok AND rdp = 1 "; 
+$ulozene = mysql_query("$sqty");
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$h_drupoh', '$ucetszd', '$ucetszd', '$rdp_zk2s', 0, '$h_zk0c', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+$ulozene = mysql_query("$sqty");
+//echo $sqty;
+
+    }
+
+//smzd 337 plus pausal 80/20
+if( $rdp_zk2 == 337 AND $_GET['pau80'] == 1 )
+    {
+$paudrh=328;
+$sadzbaDPH=$fir_dph2;
+$prac_dn2x337=$h_zk0c*$sadzbaDPH; $h_dn2x337=$prac_dn2x337/100;
+
+$uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET xzk='$h_zk0c', xdp='$h_dn2x337',  xzk0=0 ";
+$upravene = mysql_query("$uprt");
+//echo $uprt;
+
+$uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET mzk=0.8*xzk, mdp=0.8*xdp, mzk0=0.8*xzk0 ";
+$upravene = mysql_query("$uprt");
+
+$uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET nzk=xzk-mzk, ndp=xdp-mdp, nzk0=xzk0-mzk0 ";
+$upravene = mysql_query("$uprt");
+
+$h_zk0n=0; $h_zk2n=0; $h_dn2n=0;
+
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_autopausal$kli_uzid WHERE id > 0 ORDER BY id DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+  $riaddok=mysql_fetch_object($sqldok);
+  $udp=$riaddok->udp;
+  $adp=$riaddok->adp;
+  $uzk=$riaddok->uzk;
+  $azk=$riaddok->azk;
+  $ajo=$riaddok->ajo;
+  $aju=$riaddok->aju;
+
+  $h_zk0=1*$riaddok->mzk0;
+  $h_zk2=1*$riaddok->mzk;
+  $h_dn2=1*$riaddok->mdp;
+
+  $h_zk0n=1*$riaddok->nzk0;
+  $h_zk2n=1*$riaddok->nzk;
+  $h_dn2n=1*$riaddok->ndp;
+
+
+    }
+
+if( $uzk > 0 ) { $ucet_zk0=$uzk; $ucet_zk2=$uzk; } 
+if( $udp > 0 ) { $ucet_dn2=$udp; }
+if( $azk > 0 ) { $ucet_zk0=substr($ucet_zk0,0,3).$azk; $ucet_zk2=substr($ucet_zk2,0,3).$azk; }
+if( $adp > 0 ) { $ucet_dn2=substr($ucet_dn2,0,3).$adp; }
+
+$sqty = "UPDATE F$kli_vxcf"."_uctdod SET hod='$h_zk2' WHERE dok = $h_dok AND rdp = 337 AND LEFT(ucm,3) != 343 "; 
+$ulozene = mysql_query("$sqty");
+
+$sqty = "UPDATE F$kli_vxcf"."_uctdod SET hod='$h_dn2' WHERE dok = $h_dok AND rdp = 337 AND LEFT(ucm,3) = 343 "; 
+$ulozene = mysql_query("$sqty");
+
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_zk2', '$h_uce', '$paudrh', 0, '$h_zk2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+$ulozene = mysql_query("$sqty");
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$ucetszd', '$paudrh', 0, '$h_dn2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+$ulozene = mysql_query("$sqty");
+
+    }
+
 }
 
      }

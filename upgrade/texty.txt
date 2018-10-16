@@ -1,3 +1,5 @@
+- UCTO auto pohyb pre dovoz tovaru z EU samozdanenie plus paušál 80/20 DRD 337,387 a 328
+
 08.10.2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - FAKT ERP položka Platba kartou jedným kliknutím
 - FAKT ERP zoznam vyh¾adávanie pod¾a dátumu auto èiarka na bodku
