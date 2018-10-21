@@ -4080,6 +4080,22 @@ $sqldok = mysql_query("$sqlttt");
 // koniec $sql = "SELECT m062019 FROM kalendar";
      }
 
+$sql = "SELECT m062019a FROM $mysqldb2018.kalendar";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+     {
+echo "Statny sviatok 30.10.2018"."<br />";
+
+$sql = "UPDATE $mysqldb2018.kalendar SEt svt=1 WHERE dat = '2018-10-30' AND ume = 10.2018 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE $mysqldb2018.kalendar ADD m062019a INT(2) DEFAULT 0 AFTER sood";
+$vysledek = mysql_query("$sql");
+
+
+// koniec $sql = "SELECT m062019a FROM kalendar";
+     }
+
 
 $vtvkal = 1;
 return $vtvkal;
