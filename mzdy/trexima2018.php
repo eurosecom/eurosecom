@@ -1371,6 +1371,8 @@ $oznac = mysql_query("$sqtoz");
 //vek
 $sqtoz = "UPDATE F$kli_vxcf"."_treximaprac,F$kli_vxcf"."_mzdkun SET vek=$kli_vrok-1900-LEFT(rdc,2) WHERE F$kli_vxcf"."_treximaprac.idec=F$kli_vxcf"."_mzdkun.oc"; 
 $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_treximaprac SET vek=vek-100 WHERE vek >= 100 "; 
+$oznac = mysql_query("$sqtoz");
 
 //pohlavie
 $sqtoz = "UPDATE F$kli_vxcf"."_treximaprac SET pohlavie=1 "; 
@@ -1726,7 +1728,11 @@ if( $postihnutie == 0 ) { $postihnutie=3; }
 $pracpozicia = iconv("CP1250", "UTF-8", $hlavicka->pracpozicia);
 
   $text = "<idec>".$hlavicka->idec."</idec>"."\r\n";  fwrite($soubor, $text); 
-  $text = "<vek>".$hlavicka->vek."</vek>"."\r\n";  fwrite($soubor, $text);
+
+$vek=1*$hlavicka->vek;
+if( $vek >= 100 ){ $vek=$vek-100; }
+
+  $text = "<vek>".$vek."</vek>"."\r\n";  fwrite($soubor, $text);
 //od 1.1.2018 zrusene
 //$text = "<zamest>".$hlavicka->zamest."</zamest>"."\r\n";  fwrite($soubor, $text); 
   $text = "<skisco08>".$hlavicka->skisco08."</skisco08>"."\r\n";  fwrite($soubor, $text); 
