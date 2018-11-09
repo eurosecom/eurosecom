@@ -1790,6 +1790,15 @@ function DduEnter(e)
 function UcmOnfocus(e)
                 {
 
+<?php
+if ( $drupoh == 4 ) 
+{
+?>
+        if ( document.forms1.h_ucm.value != '<?php echo $h_uce; ?>' && document.forms1.h_ucd.value != '<?php echo $h_uce; ?>' ) document.forms.forms1.h_ucm.value = '<?php echo $h_uce; ?>';
+<?php
+}
+?>
+
         if ( document.forms1.h_ucm.value == '' ) document.forms1.h_ucm.value = '0';
         document.forms.forms1.h_ucm.focus();
         document.forms.forms1.h_ucm.select();
@@ -1861,6 +1870,22 @@ function Len0Ucm()
                     }
 
 
+function UcdOnfocus(e)
+                {
+
+<?php
+if ( $drupoh == 4 ) 
+{
+?>
+        if ( document.forms1.h_ucm.value != '<?php echo $h_uce; ?>' && document.forms1.h_ucd.value != '<?php echo $h_uce; ?>' ) document.forms.forms1.h_ucd.value = '<?php echo $h_uce; ?>';
+        document.forms.forms1.h_ucd.focus();
+        document.forms.forms1.h_ucd.select();
+<?php
+}
+?>
+
+
+                }
 
 function UcdEnter(e)
                 {
@@ -5524,7 +5549,7 @@ if ( $copern == 87 )
 <a href="#" onClick="myUcdelement.style.display=''; volajUcd(<?php echo $slpol;?>,1);">
 <img src='../obr/hladaj.png' width=12 height=12 border=0 alt="H¾ada úèet" title="H¾ada úèet" ></a>
 <input type="text" name="h_ucd" id="h_ucd" size="7" 
- onchange="return intg(this,0,999999,Uce,document.forms1.err_ucd)" onfocus="onUcd();"
+ onchange="return intg(this,0,999999,Uce,document.forms1.err_ucd)" onfocus="return UcdOnfocus(event.which); onUcd();"
  onclick="ZhasniSP(); "
  onkeyup="KontrolaCisla(this, Uce)" onKeyDown="return UcdEnter(event.which)"/>
 <INPUT type="hidden" name="err_ucm" value="0"></td>

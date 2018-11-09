@@ -323,9 +323,20 @@ $sqtoz = "UPDATE F$kli_vxcf"."_treximaoc SET zamest='214209' WHERE idec = 57 OR 
 " OR idec = 97 OR idec = 194 OR idec = 206 OR idec = 214 OR idec = 3582 ";
 $oznac = mysql_query("$sqtoz");
     }
+
 }
 //koniec zaktualizuj podla kun
 
+//oprava treximaoc
+$sql = "SELECT * FROM F$kli_vxcf"."_treximaoc ";
+$vysledok = mysql_query("$sql");
+$polp = 1*mysql_num_rows($vysledok);
+if ( $polp == 0 )
+  {
+$sqltt = "DROP TABLE F$kli_vxcf"."_treximaoc ";
+$tov = mysql_query("$sqltt");
+  }
+//koniec oprava treximaoc
 
 // zapis upravene udaje strana 1
 if ( $copern == 3 )

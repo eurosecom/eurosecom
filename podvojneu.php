@@ -1230,7 +1230,7 @@ if( $akefirmy == "( xcf >= 0 AND xcf <= 0 )" ) { $setuzfir = include("cis/vybuzf
 
 $setuzrok = include("cis/citajrok.php");
 
-$sql = mysql_query("SELECT xcf,naz,rok FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND SUBSTRING(prav,$kli_uzid,1) != 'n' AND rok > $citajrok ORDER BY xcf");
+$sql = mysql_query("SELECT xcf,naz,rok,duj FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND SUBSTRING(prav,$kli_uzid,1) != 'n' AND rok > $citajrok ORDER BY xcf");
 // celkom poloziek
 // $cpol = mysql_num_rows($sql);
 ?>
@@ -1240,10 +1240,13 @@ $sql = mysql_query("SELECT xcf,naz,rok FROM $mysqldbfir.fir WHERE ( $akefirmy ) 
 <FORM name="fir1" class="obyc" method="post" action="podvojneu.php?copern=23&newmenu=<?php echo "$newmenu";?>" >
 <tr>
 <td class="obyc">
-<select size="10" name="firs" id="firs" >
+<select size="10" name="firs" id="firs">
 <?php while($zaznam=mysql_fetch_array($sql)):?>
-
-<option value="<?php echo $zaznam["xcf"];?>"
+<?php
+$coloritem="FFFFFF";
+//if( $zaznam["xcf"] == 1 ) { $coloritem="c8e6c9"; }
+?>
+<option value="<?php echo $zaznam["xcf"];?>" style="background-color: #<?php echo $coloritem;?>" 
 <?php
 
 if ( $zaznam["xcf"] == $vyb_xcf ) echo " selected='selected'";

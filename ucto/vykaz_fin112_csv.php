@@ -382,6 +382,7 @@ $dotaz = "select * from vyddbf where cast = 1 order by cast,zdroj,oddiel,polozka
 
 $sql = mysql_query("$dotaz");
 $pol = mysql_num_rows($sql);
+//echo $pol;
 //exit;
 
 $sumschvaleny=0;
@@ -454,7 +455,7 @@ $dotaz = "select * from vyddbf where cast = 4 order by cast,zdroj,oddiel,polozka
 
 $sql = mysql_query("$dotaz");
 $pol = mysql_num_rows($sql);
-$pol = 0;
+//$pol = 0;
 //exit;
 
 $sumschvaleny=0;
@@ -471,10 +472,10 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-//$sumschvaleny=$sumschvaleny+$hlavicka->schvaleny;
-//$sumzmeneny=$sumzmeneny+$hlavicka->zmeneny;
-//$sumpredpoklad=$sumpredpoklad+$hlavicka->predpoklad;
-//$sumskutocnost=$sumskutocnost+$hlavicka->skutocnost;
+$sumschvaleny=$sumschvaleny+$hlavicka->schvaleny;
+$sumzmeneny=$sumzmeneny+$hlavicka->zmeneny;
+$sumpredpoklad=$sumpredpoklad+$hlavicka->predpoklad;
+$sumskutocnost=$sumskutocnost+$hlavicka->skutocnost;
 
 //hlavicka
 if( $i == 0 )
@@ -498,7 +499,7 @@ $oddiel5=str_replace(".", "", $hlavicka->oddiel);
   $text = $text.$hlavicka->predpoklad."\",\"".$hlavicka->skutocnost."\"";
   $text = $text."\r\n";
 
-  //fwrite($soubor, $text);
+  fwrite($soubor, $text);
 
 }
 $i = $i + 1;

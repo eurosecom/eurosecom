@@ -250,6 +250,16 @@ if( $ucet3 == 311 ) { $ulozene = mysql_query("$sqult"); }
 //tvrde upravy odb.miesta pre alchem
 if( $fir_fico == 31424317 )
   {
+if( $kli_vume == 5.2018 )
+    {
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 628014 ";
+$oprvx = mysql_query("$squlop");
+    }
+if( $kli_vume == 7.2018 )
+    {
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 628040 ";
+$oprvx = mysql_query("$squlop");
+    }
 if( $kli_vume == 9.2018 )
     {
 $squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 628084 OR dok = 628088 OR dok = 628098 ";

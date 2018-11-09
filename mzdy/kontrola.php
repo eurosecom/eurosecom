@@ -152,17 +152,20 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 $pociatok=$kli_vrok."-".$kli_vmes."-01";
 $koniec=$kli_vrok."-".$kli_vmes."-31";
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_kontrolasy$kli_uzid"." SELECT".
 " 0,oc,0,0,0,hod,0,0,1,0,'' ".
 " FROM F$kli_vxcf"."_mzdmes".
 " WHERE oc >= 0 AND dp != '0000-00-00' AND ( dp < '$pociatok' OR dp > '$koniec' )";
 $dsql = mysql_query("$dsqlt");
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_kontrolasy$kli_uzid"." SELECT".
 " 0,oc,0,0,0,hod,0,0,1,0,'' ".
 " FROM F$kli_vxcf"."_mzdmes".
 " WHERE oc >= 0 AND dk != '0000-00-00' AND ( dk < '$pociatok' OR dk > '$koniec' )";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_kontrolasy$kli_uzid"." SELECT".
 " 0,oc,0,0,0,hod,0,0,1,0,'' ".
 " FROM F$kli_vxcf"."_mzdmes".
@@ -174,11 +177,11 @@ $dsql = mysql_query("$dsqlt");
 
 //kontrola je prijem a ziadne odvody sum_hru, ozam_zp, ozam_np, ozam_sp, ozam_ip, ozam_pn
 $dsqlt = "INSERT INTO F$kli_vxcf"."_kontrolasy$kli_uzid"." SELECT".
-" 0,oc,sum_dni,sum_hod,(sum_hru),0,0,0,200,0,'' ".
+" 0,oc,0,0,0,0,0,0,200,0,'' ".
 " FROM F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " WHERE oc >= 0 AND sum_hru != 0 AND ozam_zp = 0 AND ozam_np = 0 AND ozam_sp = 0 AND ozam_ip = 0 AND ozam_pn = 0 ";
 $dsql = mysql_query("$dsqlt");
-
+//exit;
 
 //kontrola minimalnej mzdy NUJ
 if( $fir_fico == '37986708' )
