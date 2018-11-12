@@ -1981,6 +1981,14 @@ if( $typZec == "" ) { $typZec="ZEC"; }
 //v reakciach poslednych SP napr. z 8.2.2013 sa uvadza aj riesenie ZECD4 bez poistenia a ak vyssi prijem nez hranica tak ZECD3 TAKTO TO PRESLO p.TRCKOVA
 if( $typZec == "ZECD3" AND $hlavicka->zzam_sp == 0 AND $hlavicka->zzam_ip == 0 AND $hlavicka->porc != 42 ) { $typZec="ZECD4"; }
 
+//ak je DOBPŠ a presiahne základy tak chcú namiesto ZECD3 typZec ZECD3V vo výkaze od 10.2018
+$uroboper1=0;
+if( $kli_vrok == 2018 AND $kli_vmes >= 10 ) { $uroboper1=1; }
+if( $kli_vrok > 2018 ) { $uroboper1=1; }
+if( $uroboper1 == 1 ) 
+  { 
+if( $typZec == "ZECD3" AND $hlavicka->zzam_sp != 0 AND $hlavicka->zzam_ip != 0 ) { $typZec="ZECD3V"; }
+  }
 
 //od 1.1.2013 vynimkaVZ len 0 a 1=ak viac dohod a prekroci maxVZ zamestnavatel plati vsetko zamestnanec len z rozdielu
 
