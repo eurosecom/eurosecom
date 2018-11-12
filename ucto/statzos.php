@@ -45,6 +45,8 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
+if ( $_SERVER['SERVER_NAME'] == "www.eszalohy.sk" AND $_SESSION['eszalohy'] == 'enposro' ) { $_SERVER['SERVER_NAME'] = "www.enposro.sk"; }
+
 $dajstatvyk=1;
 if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) { $dajstatvyk=0; }
 
@@ -60,6 +62,7 @@ if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) { $dajhlaodpad=1; }
 if ( $_SERVER['SERVER_NAME'] == "www.zerotax.sk" ) { $dajhlaodpad=1; }
 if ( $_SERVER['SERVER_NAME'] == "www.ekorobot.sk" ) { $dajhlaodpad=1; }
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajhlaodpad=1; }
+
 
 $tlacodpady=1;
 if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" )
