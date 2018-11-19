@@ -295,6 +295,161 @@ if( $rozuct == 'ANO' ) { $uctpok="uctpokuct"; }
 if( $drupoh == 4 ) { $uctpok="uctban"; }
 if( $drupoh == 5 ) { $uctpok="uctvsdp"; }
 
+
+
+//samoopravna tlac zakladov, dph a celkom len DPH 20%
+if( $viacdokladov == 0 AND $rozuct == "ANO" AND ( $drupoh == 1 OR $drupoh == 2 ) )
+{ 
+
+//echo "rozuct ".$rozuct;
+//exit;
+//andrej
+
+$podmdph="";
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_uctdrdp WHERE szd = $fir_dph2 ";
+$tov = mysql_query("$sqlttt");
+$tvpol = mysql_num_rows($tov);
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+{
+$riadok=mysql_fetch_object($tov);
+
+if( $i == 0 )
+  {
+$podmdph=$podmdph." rdp = ".$riadok->rdp;
+  }else
+  {
+$podmdph=$podmdph." OR rdp = ".$riadok->rdp;
+  }
+
+}
+$i = $i + 1;
+  }
+if( $podmdph != "" ) { $podmdph=" AND ( ".$podmdph." ) "; }
+
+$zk2=0; $zk1=0; $zk0=0;
+if( $drupoh == 1 )
+     {
+$sqlttt = "SELECT zk0, zk2, zk1, uce FROM F$kli_vxcf"."_pokpri WHERE dok = $cislo_dok ";
+     }else
+     {
+$sqlttt = "SELECT zk0u, zk2u, dn2u, uce FROM F$kli_vxcf"."_pokvyd WHERE dok = $cislo_dok ";
+     }
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zk2=1*$riaddok->zk2u;
+  $zk0=1*$riaddok->zk0u;
+  $dn2=1*$riaddok->dn2u;
+  $ucepok=$riaddok->uce;
+  }
+
+//echo "idem";
+$zaklad0s=0;
+if( $drupoh == 1 )
+     {
+$sqlttt = "SELECT SUM(hod) AS hod FROM F$kli_vxcf"."_uctpokuct WHERE dok = $cislo_dok ".
+" AND ( rdp = 0 OR rdp = 1 OR rdp = 10 ) AND ucm = $ucepok GROUP BY dok ";
+     }else
+     {
+$sqlttt = "SELECT SUM(hod) AS hod FROM F$kli_vxcf"."_uctpokuct WHERE dok = $cislo_dok ".
+" AND ( rdp = 0 OR rdp = 1 OR rdp = 10 ) AND ucd = $ucepok GROUP BY dok ";
+     }
+//echo $sqlttt;
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zaklad0s=1*$riaddok->hod;
+  }
+
+
+$zaklad2s=0;
+if( $drupoh == 1 )
+     {
+$sqlttt = "SELECT SUM(hod) AS hod FROM F$kli_vxcf"."_uctpokuct WHERE dok = $cislo_dok ".
+" $podmdph AND LEFT(ucd,3) != 343 AND ucm = $ucepok GROUP BY dok ";
+     }else
+     {
+$sqlttt = "SELECT SUM(hod) AS hod FROM F$kli_vxcf"."_uctpokuct WHERE dok = $cislo_dok ".
+" $podmdph AND LEFT(ucm,3) != 343 AND ucd = $ucepok GROUP BY dok ";
+     }
+//echo $sqlttt;
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zaklad2s=1*$riaddok->hod;
+  }
+
+$dph2s=0;
+if( $drupoh == 1 )
+     {
+$sqlttt = "SELECT SUM(hod) AS hod FROM F$kli_vxcf"."_uctpokuct WHERE dok = $cislo_dok ".
+" $podmdph AND LEFT(ucd,3) = 343 AND ucm = $ucepok GROUP BY dok ";
+     }else
+     {
+$sqlttt = "SELECT SUM(hod) AS hod FROM F$kli_vxcf"."_uctpokuct WHERE dok = $cislo_dok ".
+" $podmdph AND LEFT(ucm,3) = 343 AND ucd = $ucepok GROUP BY dok ";
+     }
+$sqldok = mysql_query("$sqlttt");
+//echo $sqlttt;
+//exit;
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $dph2s=1*$riaddok->hod;
+  }
+
+$dph20poh=$zaklad2s+$dph2s+$zaklad0s;
+$rozdiel=$zk2+dn2+$zk0-($zaklads2-$dph2s-$zaklad0s);
+//echo "dph20poh ".$dph20poh."  rozdiel ".$rozdiel."  podmdph ".$podmdph."<br />";
+//exit;
+
+if( $rozdiel != 0 AND $dph20poh != 0 AND $podmdph != "" AND $drupoh == 1 )
+ {
+$sqlttt = "UPDATE F$kli_vxcf"."_pokpri SET zk2u=($zaklad2s), dn2u=($dph2s), zk0u=($zaklad0s) WHERE dok = $cislo_dok ";
+//echo $sqlttt."<br />";
+$sqldok = mysql_query("$sqlttt"); 
+
+$sqlttt = "UPDATE F$kli_vxcf"."_pokpri SET hodu=zk0u+zk1u+zk2u+dn2u+dn1u, sp2u=zk2u+dn2u WHERE dok = $cislo_dok ";
+//echo $sqlttt."<br />";
+$sqldok = mysql_query("$sqlttt"); 
+
+$sqlttt = "UPDATE F$kli_vxcf"."_pokpri SET hodu=zk0u+zk1u+zk2u+dn2u+dn1u, zk2=zk2u, dn2=dn2u, hod=hodu, sp2=sp2u WHERE dok = $cislo_dok ";
+//echo $sqlttt."<br />";
+$sqldok = mysql_query("$sqlttt"); 
+//exit;
+ }
+
+if( $rozdiel != 0 AND $dph20poh != 0 AND $podmdph != "" AND $drupoh == 2 )
+ {
+$sqlttt = "UPDATE F$kli_vxcf"."_pokvyd SET zk2u=($zaklad2s), dn2u=($dph2s), zk0u=($zaklad0s) WHERE dok = $cislo_dok ";
+//echo $sqlttt."<br />";
+$sqldok = mysql_query("$sqlttt"); 
+
+$sqlttt = "UPDATE F$kli_vxcf"."_pokvyd SET hodu=zk0u+zk1u+zk2u+dn2u+dn1u, sp2u=zk2u+dn2u WHERE dok = $cislo_dok ";
+//echo $sqlttt."<br />";
+$sqldok = mysql_query("$sqlttt"); 
+
+$sqlttt = "UPDATE F$kli_vxcf"."_pokvyd SET hodu=zk0u+zk1u+zk2u+dn2u+dn1u, zk2=zk2u, dn2=dn2u, hod=hodu, sp2=sp2u WHERE dok = $cislo_dok ";
+//echo $sqlttt."<br />";
+$sqldok = mysql_query("$sqlttt"); 
+//exit;
+ }
+
+
+
+
+}
+//koniec samoopravna tlac zakladov, dph a celkom len DPH 20%
+
+
+
 if( $drupoh == 1 )
 {
 $tabl = "pokpri";
@@ -573,6 +728,7 @@ var vyskawin = screen.height-175;
 <br />
 
 <?php
+
 // nastavenie vzhladu stranky v IE zahlavie= &d &t &b Strana è. &p z &P pata=prazdna
 // na vysku okraje vl=15 vp=15 hr=15 dl=15 poloziek 43 
 
