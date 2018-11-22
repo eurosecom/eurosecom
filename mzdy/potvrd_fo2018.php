@@ -53,6 +53,8 @@ $jpg_cesta18="../dokumenty/tlacivo2018/dan_zo_zavislej_v18/potvrdeniefo/potvrden
 
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
+$strana = 1*$_REQUEST['strana'];
+if ( $strana == 0 ) $strana=1;
 
 //nazov/priezvisko,meno,titul, bydlisko,/sidlo
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
@@ -169,15 +171,26 @@ $oslo1 = 1*$_REQUEST['oslo1'];
 $oslo2 = 1*$_REQUEST['oslo2'];
 $uprav="NO";
 
+if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET ".
 " obmedz='$obmedz', dovca='$dovca', chris='$chris', oslo1='$oslo1', oslo2='$oslo2', r12a='$r12a', r12b='$r12b', r11='$r11', r11m='$r11m', r04c='$r04c', ".
 " konx1='$konx1', r01='$r01', r13='$r13', r02='$r02', r03a='$r03a', r09='$r09', r03b='$r03b', r04='$r04', r05='$r05', r06sum='$r06sum', r10dds='$r10dds', ".
-" r07det1='$r07det1', r07det2='$r07det2', r07det3='$r07det3', r07det4='$r07det4', r07det5='$r07det5', r07det6='$r07det6', r07det7='$r07det7', ".
-" r07rod1='$r07rod1', r07rod2='$r07rod2', r07rod3='$r07rod3', r07rod4='$r07rod4', r07rod5='$r07rod5', r07rod6='$r07rod6', r07rod7='$r07rod7', ".
-" r07mes1='$r07mes1', r07mes2='$r07mes2', r07mes3='$r07mes3', r07mes4='$r07mes4', r07mes5='$r07mes5', r07mes6='$r07mes6', r07mes7='$r07mes7', ".
-" r07sum1='$r07sum1', r07sum2='$r07sum2', r07sum3='$r07sum3', r07sum4='$r07sum4', r07sum5='$r07sum5', r07sum6='$r07sum6', r07sum7='$r07sum7', r08='$r08', ".
+" r07det1='$r07det1', r07det2='$r07det2', r07det3='$r07det3', r07det4='$r07det4', ".
+" r07rod1='$r07rod1', r07rod2='$r07rod2', r07rod3='$r07rod3', r07rod4='$r07rod4', ".
+" r07mes1='$r07mes1', r07mes2='$r07mes2', r07mes3='$r07mes3', r07mes4='$r07mes4', ".
+" r07sum1='$r07sum1', r07sum2='$r07sum2', r07sum3='$r07sum3', r07sum4='$r07sum4', ".
 " datv='$datvsql', pozn='$pozn' ".
 " WHERE oc = $cislo_oc";
+                    }
+if ( $strana == 2 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET ".
+" r07det5='$r07det5', r07det6='$r07det6', r07det7='$r07det7', ".
+" r07rod5='$r07rod5', r07rod6='$r07rod6', r07rod7='$r07rod7', ".
+" r07mes5='$r07mes5', r07mes6='$r07mes6', r07mes7='$r07mes7', ".
+" r07sum5='$r07sum5', r07sum6='$r07sum6', r07sum7='$r07sum7'  ".
+" WHERE oc = $cislo_oc";
+                    }
+
 $upravene = mysql_query("$uprtxt");
 $copern=20;
 
@@ -1101,6 +1114,8 @@ img.form-background_pfo {
   width: 950px;
   height: 1500px;
 }
+
+
 </style>
 
 <script type="text/javascript">
@@ -1114,6 +1129,9 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 ?>
   function ObnovUI()
   {
+
+
+<?php if ( $strana == 1 ) { ?>
 <?php if ( $konx1 == 1 ) { ?> document.formv1.konx1.checked = "checked"; <?php } ?>
 <?php if ( $obmedz == 1 ) { ?> document.formv1.obmedz.checked = "checked"; <?php } ?>
    document.formv1.r01.value = '<?php echo "$r01";?>';
@@ -1160,6 +1178,25 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    document.formv1.chris.value = '<?php echo "$chris";?>';
    document.formv1.oslo1.value = '<?php echo "$oslo1";?>';
    document.formv1.oslo2.value = '<?php echo "$oslo2";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 2 ) { ?>
+   document.formv1.r07det5.value = '<?php echo "$r07det5";?>';
+   document.formv1.r07det6.value = '<?php echo "$r07det6";?>';
+   document.formv1.r07det7.value = '<?php echo "$r07det7";?>';
+
+   document.formv1.r07mes5.value = '<?php echo "$r07mes5";?>';
+   document.formv1.r07mes6.value = '<?php echo "$r07mes6";?>';
+   document.formv1.r07mes7.value = '<?php echo "$r07mes7";?>';
+
+   document.formv1.r07sum5.value = '<?php echo "$r07sum5";?>';
+   document.formv1.r07sum6.value = '<?php echo "$r07sum6";?>';
+   document.formv1.r07sum7.value = '<?php echo "$r07sum7";?>';
+
+   document.formv1.r07rod5.value = '<?php echo "$r07rod5";?>';
+   document.formv1.r07rod6.value = '<?php echo "$r07rod6";?>';
+   document.formv1.r07rod7.value = '<?php echo "$r07rod7";?>';
+<?php                     } ?>
   }
 <?php
 //koniec uprava
@@ -1205,6 +1242,16 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>',
 '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
+
+  function editForm(strana)
+  {
+    window.open('potvrd_fo2018.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=20&strana=' + strana + '&drupoh=1&subor=0', '_self');
+  }
+  function FormPDF(strana)
+  {
+    window.open('potvrd_fo2018.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&strana=' + strana + '&drupoh=1&subor=0', '_blank', blank_param);
+  }
+
   function DetiZamestnanca()
   {
    window.open('../mzdy/deti.php?copern=1&drupoh=1&page=1&zkun=1&cislo_oc=<?php echo $cislo_oc;?>',
@@ -1250,118 +1297,166 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="potvrd_fo2018.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
+<FORM name="formv1" method="post" action="potvrd_fo2018.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>">
+<?php
+$clas1="noactive"; $clas2="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+?>
+<div class="navbar" >
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
 
-<div class="navbar">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" >
 </div>
-<img src="<?php echo $jpg_cesta; ?>.jpg" alt="<?php echo $jpg_popis; ?> 1.strana" class="form-background_pfo">
-<input type="checkbox" name="konx1" value="1" style="top:159px; left:835px;"/>
 
-<div class="input-echo" style="width:91px; top:112px; left:763px; height:23px;"><?php echo $kli_vrok; ?></div>
+<?php if ( $strana == 1 ) { ?>
+
+<img src="<?php echo $jpg_cesta; ?>.jpg" alt="<?php echo $jpg_popis; ?> 1.strana" class="form-background_pfo">
+
+<input type="checkbox" name="konx1" value="1" style="top:183px; left:835px;"/>
+
+<div class="input-echo" style="width:91px; top:136px; left:763px; height:23px;"><?php echo $kli_vrok; ?></div>
 
 
 <!-- I.ZAMESTNANEC -->
 <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
      title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool"
-     style="top:240px; left:380px; width:14px; height:14px;">
-<span class="text-echo" style="top:240px; left:122px;"><?php echo $prie; ?></span>
-<span class="text-echo" style="top:240px; left:420px;"><?php echo $meno; ?></span>
-<span class="text-echo" style="top:240px; left:750px;"><?php echo $rodne; ?></span>
+     style="top:264px; left:380px; width:14px; height:14px;">
+<span class="text-echo" style="top:264px; left:122px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:264px; left:420px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:264px; left:750px;"><?php echo $rodne; ?></span>
 
-<span class="text-echo" style="top:270px; left:260px;"><?php echo $ptitl; ?></span>
-<span class="text-echo" style="top:270px; left:660px;"><?php echo $ztitz; ?></span>
+<span class="text-echo" style="top:294px; left:260px;"><?php echo $ptitl; ?></span>
+<span class="text-echo" style="top:294px; left:660px;"><?php echo $ztitz; ?></span>
 
-<span class="text-echo" style="top:314px; left:160px;"><?php echo $uli; ?></span>
-<span class="text-echo" style="top:314px; left:575px;"><?php echo $cdm; ?></span>
-<span class="text-echo" style="top:314px; left:740px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:338px; left:160px;"><?php echo $uli; ?></span>
+<span class="text-echo" style="top:338px; left:575px;"><?php echo $cdm; ?></span>
+<span class="text-echo" style="top:338px; left:740px;"><?php echo $psc; ?></span>
 
-<span class="text-echo" style="top:334px; left:159px;"><?php echo $mes; ?></span>
-<span class="text-echo" style="top:334px; left:535px;"><?php echo $zstat; ?></span>
-<input type="checkbox" name="obmedz" value="1" style="top:364px; left:820px;"/>
+<span class="text-echo" style="top:358px; left:159px;"><?php echo $mes; ?></span>
+<span class="text-echo" style="top:358px; left:535px;"><?php echo $zstat; ?></span>
+<input type="checkbox" name="obmedz" value="1" style="top:388px; left:820px;"/>
 
 <!-- PRIJMY -->
-<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:440px; left:805px;" title="r01"/>
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:480px; left:805px;" title="r01a"/>
-<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:515px; left:805px; height:21px;" title="r01b"/>
-<input type="text" name="r12b" id="r12b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:539px; left:805px; height:21px;" title="r01c"/>
+<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:464px; left:805px;" title="r01"/>
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:504px; left:805px;" title="r01a"/>
+<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:539px; left:805px; height:21px;" title="r01b"/>
+<input type="text" name="r12b" id="r12b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:563px; left:805px; height:21px;" title="r01c"/>
 <!-- 2x new 2018 -->
-<input type="text" name="dovca" id="dovca" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:567px; left:805px; height:21px;" title="r01d"/>
-<input type="text" name="chris" id="chris" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:594px; left:805px; height:21px;" title="r01e"/>
+<input type="text" name="dovca" id="dovca" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:591px; left:805px; height:21px;" title="r01d"/>
+<input type="text" name="chris" id="chris" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:618px; left:805px; height:21px;" title="r01e"/>
 
 <!-- Postne -->
-<div class="input-echo" style="width:91px; top:622px; left:805px; height:25px; background-color:#d1d1d1;" title="r02 VypoËÌtan· hodnota po uloûenÌ"><?php echo $r03a; ?></div>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:650px; left:805px; height:18px;" title="r02a"/>
-<input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:674px; left:805px; height:18px;" title="r02b"/>
-<input type="text" name="r04c" id="r04c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:698px; left:805px; height:18px;" title="r02c"/>
+<div class="input-echo" style="width:91px; top:646px; left:805px; height:25px; background-color:#d1d1d1;" title="r02 VypoËÌtan· hodnota po uloûenÌ"><?php echo $r03a; ?></div>
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:674px; left:805px; height:18px;" title="r02a"/>
+<input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:698px; left:805px; height:18px;" title="r02b"/>
+<input type="text" name="r04c" id="r04c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:722px; left:805px; height:18px;" title="r02c"/>
 
 <!-- CZD -->
-<div class="input-echo" style="width:91px; top:720px; left:805px; height:23px; background-color:#d1d1d1;" title="r03 VypoËÌtan· hodnota po uloûenÌ"><?php echo $r04; ?></div>
+<div class="input-echo" style="width:91px; top:744px; left:805px; height:23px; background-color:#d1d1d1;" title="r03 VypoËÌtan· hodnota po uloûenÌ"><?php echo $r04; ?></div>
 
 <!-- Uhrn preddavkov -->
-<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:743px; left:805px; height:18px;" title="r04"/>
+<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:767px; left:805px; height:18px;" title="r04"/>
 
 <!-- Ine prijmy -->
-<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:766px; left:805px; height:18px;" title="r05"/>
-<input type="text" name="r11m" id="r11m" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:788px; left:805px; height:18px;" title="r06"/>
+<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:790px; left:805px; height:18px;" title="r05"/>
+<input type="text" name="r11m" id="r11m" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:812px; left:805px; height:18px;" title="r06"/>
 
 <!-- 2x new 2018 -->
-<input type="text" name="oslo1" id="oslo1" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:810px; left:805px; height:18px;" title="r07"/>
-<input type="text" name="oslo2" id="oslo2" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:832px; left:805px; height:18px;" title="r08"/>
+<input type="text" name="oslo1" id="oslo1" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:834px; left:805px; height:18px;" title="r07"/>
+<input type="text" name="oslo2" id="oslo2" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:856px; left:805px; height:18px;" title="r08"/>
 
 <!-- NCZD -->
-<input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:852px; left:805px; height:18px;" title="r09"/>
-<input type="text" name="r10dds" id="r10dds" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:872px; left:805px; height:18px;" title="r10"/>
+<input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:876px; left:805px; height:18px;" title="r09"/>
+<input type="text" name="r10dds" id="r10dds" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:896px; left:805px; height:18px;" title="r10"/>
 
 <!-- zuct v mes. -->
-<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:241px; top:893px; left:655px; height:18px;" title="r11"/>
+<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:241px; top:917px; left:655px; height:18px;" title="r11"/>
 
 <!-- DAN.BONUS -->
-<input type="text" name="r07det1" id="r07det1" style="width:409px; top:1029px; left:158px; height:18px;"/>
-<input type="text" name="r07rod1" id="r07rod1" style="width:93px; top:1029px; left:577px; height:18px;"/>
-<input type="text" name="r07mes1" id="r07mes1" style="width:102px; top:1029px; left:680px; height:18px;"/>
-<input type="text" name="r07sum1" id="r07sum1" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:1029px; left:792px; height:18px;"/>
+<input type="text" name="r07det1" id="r07det1" style="width:409px; top:1053px; left:158px; height:18px;"/>
+<input type="text" name="r07rod1" id="r07rod1" style="width:93px; top:1053px; left:577px; height:18px;"/>
+<input type="text" name="r07mes1" id="r07mes1" style="width:102px; top:1053px; left:680px; height:18px;"/>
+<input type="text" name="r07sum1" id="r07sum1" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:1053px; left:792px; height:18px;"/>
 
-<input type="text" name="r07det2" id="r07det2" style="width:409px; top:1050px; left:158px; height:18px;"/>
-<input type="text" name="r07rod2" id="r07rod2" style="width:93px; top:1050px; left:577px; height:18px;"/>
-<input type="text" name="r07mes2" id="r07mes2" style="width:102px; top:1050px; left:680px; height:18px;"/>
-<input type="text" name="r07sum2" id="r07sum2" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:1050px; left:792px; height:18px;"/>
+<input type="text" name="r07det2" id="r07det2" style="width:409px; top:1074px; left:158px; height:18px;"/>
+<input type="text" name="r07rod2" id="r07rod2" style="width:93px; top:1074px; left:577px; height:18px;"/>
+<input type="text" name="r07mes2" id="r07mes2" style="width:102px; top:1074px; left:680px; height:18px;"/>
+<input type="text" name="r07sum2" id="r07sum2" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:1074px; left:792px; height:18px;"/>
 
-<input type="text" name="r07det3" id="r07det3" style="width:409px; top:1071px; left:158px; height:18px;"/>
-<input type="text" name="r07rod3" id="r07rod3" style="width:93px; top:1071px; left:577px; height:18px;"/>
-<input type="text" name="r07mes3" id="r07mes3" style="width:102px; top:1071px; left:680px; height:18px;"/>
-<input type="text" name="r07sum3" id="r07sum3" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:1071px; left:792px; height:18px;"/>
+<input type="text" name="r07det3" id="r07det3" style="width:409px; top:1095px; left:158px; height:18px;"/>
+<input type="text" name="r07rod3" id="r07rod3" style="width:93px; top:1095px; left:577px; height:18px;"/>
+<input type="text" name="r07mes3" id="r07mes3" style="width:102px; top:1095px; left:680px; height:18px;"/>
+<input type="text" name="r07sum3" id="r07sum3" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:1095px; left:792px; height:18px;"/>
 
-<input type="text" name="r07det4" id="r07det4" style="width:409px; top:1092px; left:158px; height:18px;"/>
-<input type="text" name="r07rod4" id="r07rod4" style="width:93px; top:1092px; left:577px; height:18px;"/>
-<input type="text" name="r07mes4" id="r07mes4" style="width:102px; top:1092px; left:680px; height:18px;"/>
-<input type="text" name="r07sum4" id="r07sum4" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:1092px; left:792px; height:18px;"/>
+<input type="text" name="r07det4" id="r07det4" style="width:409px; top:1116px; left:158px; height:18px;"/>
+<input type="text" name="r07rod4" id="r07rod4" style="width:93px; top:1116px; left:577px; height:18px;"/>
+<input type="text" name="r07mes4" id="r07mes4" style="width:102px; top:1116px; left:680px; height:18px;"/>
+<input type="text" name="r07sum4" id="r07sum4" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:1116px; left:792px; height:18px;"/>
 
-<div class="input-echo" style="width:76px; top:1117px; left:790px; height:20px; background-color:#d1d1d1;" title="r10 VypoËÌtan· hodnota po uloûenÌ">
+<div class="input-echo" style="width:76px; top:1141px; left:790px; height:20px; background-color:#d1d1d1;" title="r10 VypoËÌtan· hodnota po uloûenÌ">
 <?php echo $r08; ?></div>
 
 
 <!-- III.ZAMESTNAVATEL -->
-<span class="text-echo" style="top:1200px; left:119px;"><?php echo "$zamestnavatel / $fir_fdic"; ?></span>
-<span class="text-echo" style="top:1235px; left:119px;"><?php echo $bydliskosidlo; ?></span>
+<span class="text-echo" style="top:1224px; left:119px;"><?php echo "$zamestnavatel / $fir_fdic"; ?></span>
+<span class="text-echo" style="top:1259px; left:119px;"><?php echo $bydliskosidlo; ?></span>
 
 <!-- Kde a dna -->
-<span class="text-echo" style="top:1273px; left:119px;"><?php echo $fir_fmes; ?></span>
-<input type="text" name="datv" id="datv" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1260px; left:350px;"/>
+<span class="text-echo" style="top:1297px; left:119px;"><?php echo $fir_fmes; ?></span>
+<input type="text" name="datv" id="datv" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1284px; left:350px;"/>
 
 <!-- Vypracoval, tel -->
-<span class="text-echo" style="top:1312px; left:200px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:1312px; left:450px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="top:1336px; left:200px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="top:1336px; left:450px;"><?php echo $fir_mzdt04; ?></span>
 
 <!-- Poznamka -->
-<span class="text-echo" style="top:1344px; left:119px;">Pozn·mka:</span>
-<input type="text" name="pozn" id="pozn" style="width:300px; top:1339px; left:206px;"/>
+<span class="text-echo" style="top:1368px; left:119px;">Pozn·mka:</span>
+<input type="text" name="pozn" id="pozn" style="width:300px; top:1363px; left:206px;"/>
 
+<?php                     } ?>
+
+<?php if ( $strana == 2 ) { ?>
+
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" alt="<?php echo $jpg_popis; ?> 1.strana" class="form-background_pfo">
+
+<div class="input-echo" style="width:200px; top:184px; left:600px; height:15px;" >- dieùa 5. aû 7.</div>
+
+
+<!-- DAN.BONUS -->
+<input type="text" name="r07det5" id="r07det5" style="width:409px; top:249px; left:158px; height:17px;"/>
+<input type="text" name="r07rod5" id="r07rod5" style="width:93px; top:249px; left:577px; height:17px;"/>
+<input type="text" name="r07mes5" id="r07mes5" style="width:102px; top:249px; left:680px; height:17px;"/>
+<input type="text" name="r07sum5" id="r07sum5" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:249px; left:792px; height:17px;"/>
+
+<input type="text" name="r07det6" id="r07det6" style="width:409px; top:270px; left:158px; height:17px;"/>
+<input type="text" name="r07rod6" id="r07rod6" style="width:93px; top:270px; left:577px; height:17px;"/>
+<input type="text" name="r07mes6" id="r07mes6" style="width:102px; top:270px; left:680px; height:17px;"/>
+<input type="text" name="r07sum6" id="r07sum6" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:270px; left:792px; height:17px;"/>
+
+<input type="text" name="r07det7" id="r07det7" style="width:409px; top:291px; left:158px; height:17px;"/>
+<input type="text" name="r07rod7" id="r07rod7" style="width:93px; top:291px; left:577px; height:17px;"/>
+<input type="text" name="r07mes7" id="r07mes7" style="width:102px; top:291px; left:680px; height:17px;"/>
+<input type="text" name="r07sum7" id="r07sum7" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:291px; left:792px; height:17px;"/>
+
+
+<!-- Kde a dna -->
+<span class="text-echo" style="top:385px; left:119px;"><?php echo $fir_fmes; ?></span>
+<span class="text-echo" style="top:385px; left:355px;"><?php echo "$datvsk";?></span>
+
+
+
+<!-- Vypracoval, tel -->
+<span class="text-echo" style="top:423px; left:200px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="top:423px; left:450px;"><?php echo $fir_mzdt04; ?></span>
+
+<?php                     } ?>
 
 <div class="navbar">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
-
 </FORM>
 </div> <!-- koniec #content -->
 <?php
