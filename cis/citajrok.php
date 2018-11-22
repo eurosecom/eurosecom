@@ -5,5 +5,5 @@ $citajrok=0;
 if( $_SERVER['SERVER_NAME'] == "localhost" ) { $citajrok=2014; }
 if( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) { $citajrok=2016; }
 if( $_SERVER['SERVER_NAME'] == "www.eurosecom.sk" ) { $citajrok=2014; }
-
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) { $citajrok=2015; }
 ?>
