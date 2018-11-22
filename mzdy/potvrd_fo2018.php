@@ -163,10 +163,14 @@ $datvsql=SqlDatum($datv);
 $pozn = strip_tags($_REQUEST['pozn']);
 //$r07 = strip_tags($_REQUEST['r07']);
 $obmedz = 1*$_REQUEST['obmedz'];
+$dovca = 1*$_REQUEST['dovca'];
+$chris = 1*$_REQUEST['chris'];
+$oslo1 = 1*$_REQUEST['oslo1'];
+$oslo2 = 1*$_REQUEST['oslo2'];
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET ".
-" obmedz='$obmedz', r12a='$r12a', r12b='$r12b', r11='$r11', r11m='$r11m', r04c='$r04c', ".
+" obmedz='$obmedz', dovca='$dovca', chris='$chris', oslo1='$oslo1', oslo2='$oslo2', r12a='$r12a', r12b='$r12b', r11='$r11', r11m='$r11m', r04c='$r04c', ".
 " konx1='$konx1', r01='$r01', r13='$r13', r02='$r02', r03a='$r03a', r09='$r09', r03b='$r03b', r04='$r04', r05='$r05', r06sum='$r06sum', r10dds='$r10dds', ".
 " r07det1='$r07det1', r07det2='$r07det2', r07det3='$r07det3', r07det4='$r07det4', r07det5='$r07det5', r07det6='$r07det6', r07det7='$r07det7', ".
 " r07rod1='$r07rod1', r07rod2='$r07rod2', r07rod3='$r07rod3', r07rod4='$r07rod4', r07rod5='$r07rod5', r07rod6='$r07rod6', r07rod7='$r07rod7', ".
@@ -409,6 +413,23 @@ if (!$vysledok)
 {
 //echo "idem";
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD ume DECIMAL(7,4) DEFAULT 0 AFTER oc";
+$vysledek = mysql_query("$sql");
+//exit;
+}
+//zmeny2018
+$sql = "SELECT oslo2 FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD new2018 DECIMAL(2,0) DEFAULT 0 AFTER obmedz";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD dovca DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD chris DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD oslo1 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD oslo2 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
 $vysledek = mysql_query("$sql");
 //exit;
 }
@@ -858,7 +879,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpotvrdenieFO".
 "0,0,0,0,0,0,0,0,0,0,0,0,1,".
 "podpa,podpn,0,1,0,'$dat_dat', ".
 "0,0,0, ". //new2015
-"0,0,0 ".  //new2016
+"0,0,0, ".  //new2016
+"0,0,0,0,0 ".  //new2018
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
 "";
@@ -977,6 +999,11 @@ $r07rod5 = $fir_riadok->r07rod5;
 $r07rod6 = $fir_riadok->r07rod6;
 $r07rod7 = $fir_riadok->r07rod7;
 $r08 = $fir_riadok->r08;
+$dovca = $fir_riadok->dovca;
+$chris = $fir_riadok->chris;
+$oslo1 = $fir_riadok->oslo1;
+$oslo2 = $fir_riadok->oslo2;
+
 $datvsk = SkDatum($fir_riadok->datv);
 $pozn = $fir_riadok->pozn;
 mysql_free_result($fir_vysledok);
@@ -1128,6 +1155,11 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 //   document.formv1.r08.value = '<?php echo "$r08";?>';
    document.formv1.datv.value = '<?php echo "$datvsk";?>';
    document.formv1.pozn.value = '<?php echo "$pozn";?>';
+
+   document.formv1.dovca.value = '<?php echo "$dovca";?>';
+   document.formv1.chris.value = '<?php echo "$chris";?>';
+   document.formv1.oslo1.value = '<?php echo "$oslo1";?>';
+   document.formv1.oslo2.value = '<?php echo "$oslo2";?>';
   }
 <?php
 //koniec uprava
@@ -1273,6 +1305,10 @@ if ( $copern == 20 )
 <input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:766px; left:805px; height:18px;" title="r05"/>
 <input type="text" name="r11m" id="r11m" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:788px; left:805px; height:18px;" title="r06"/>
 
+<!-- 2x new 2018 -->
+<input type="text" name="oslo1" id="oslo1" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:810px; left:805px; height:18px;" title="r07"/>
+<input type="text" name="oslo2" id="oslo2" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:832px; left:805px; height:18px;" title="r08"/>
+
 <!-- NCZD -->
 <input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:852px; left:805px; height:18px;" title="r09"/>
 <input type="text" name="r10dds" id="r10dds" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:872px; left:805px; height:18px;" title="r10"/>
@@ -1414,6 +1450,12 @@ $r07sum5=$hlavicka->r07sum5; if ( $hlavicka->r07sum5 == 0 ) $r07sum5="";
 $r07sum6=$hlavicka->r07sum6; if ( $hlavicka->r07sum6 == 0 ) $r07sum6="";
 $r07sum7=$hlavicka->r07sum7; if ( $hlavicka->r07sum7 == 0 ) $r07sum7="";
 
+
+$dovca=$hlavicka->dovca; if ( $hlavicka->dovca == 0 ) $dovca="";
+$chris=$hlavicka->chris; if ( $hlavicka->chris == 0 ) $chris="";
+$oslo1=$hlavicka->oslo1; if ( $hlavicka->oslo1 == 0 ) $oslo1="";
+$oslo2=$hlavicka->oslo2; if ( $hlavicka->oslo2 == 0 ) $oslo2="";
+
 //obdobie
 $pdf->Cell(190,13," ","$rmc1",1,"L");
 $pdf->Cell(190,9," ","$rmc1",1,"L");
@@ -1455,9 +1497,9 @@ $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,6,"$r13","$rmc",1,"R");
 $pdf->Cell(169,1," ","$rmc1",1,"L");
 $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r12a","$rmc",1,"R");
 $pdf->Cell(169,6," ","$rmc1",0,"L");$pdf->Cell(16,6,"$r12b","$rmc",1,"R");
+$pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$dovca","$rmc",1,"R");
+$pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$chris","$rmc",1,"R");
 
-//nove2018
-$pdf->Cell(190,10," ","$rmc1",1,"L");
 
 //poistne
 $pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,6,"$r03a","$rmc",1,"R");
@@ -1470,9 +1512,10 @@ $pdf->Cell(169,6," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r05","$rmc",1,"R");
 //ine prijmy
 $pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r11","$rmc",1,"R");
 $pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r11m","$rmc",1,"R");
+$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$oslo1","$rmc",1,"R");
+$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$oslo2","$rmc",1,"R");
 
 //nczd
-$pdf->Cell(190,8," ","$rmc1",1,"L");
 $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r06sum","$rmc",1,"R");
 $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r10dds","$rmc",1,"R");
 
