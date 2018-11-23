@@ -265,6 +265,11 @@ if( $kli_vume == 9.2018 )
 $squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 628084 OR dok = 628088 OR dok = 628098 ";
 $oprvx = mysql_query("$squlop");
     }
+if( $kli_vume == 10.2018 )
+    {
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 628121 ";
+$oprvx = mysql_query("$squlop");
+    }
   }
 //koniec tvrde upravy odb.miesta pre alchem
 

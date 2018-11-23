@@ -169,10 +169,17 @@ $dovca = 1*$_REQUEST['dovca'];
 $chris = 1*$_REQUEST['chris'];
 $oslo1 = 1*$_REQUEST['oslo1'];
 $oslo2 = 1*$_REQUEST['oslo2'];
+
+$prie1 = 1*$_REQUEST['prie1'];
+$prie2 = 1*$_REQUEST['prie2'];
+
+$pmes1 = 1*$_REQUEST['pmes1'];
+$pmes2 = 1*$_REQUEST['pmes2'];
 $uprav="NO";
 
 if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET ".
+" prie1='$prie1', prie2='$prie2', pmes1='$pmes1', pmes2='$pmes2', ".
 " obmedz='$obmedz', dovca='$dovca', chris='$chris', oslo1='$oslo1', oslo2='$oslo2', r12a='$r12a', r12b='$r12b', r11='$r11', r11m='$r11m', r04c='$r04c', ".
 " konx1='$konx1', r01='$r01', r13='$r13', r02='$r02', r03a='$r03a', r09='$r09', r03b='$r03b', r04='$r04', r05='$r05', r06sum='$r06sum', r10dds='$r10dds', ".
 " r07det1='$r07det1', r07det2='$r07det2', r07det3='$r07det3', r07det4='$r07det4', ".
@@ -430,7 +437,7 @@ $vysledek = mysql_query("$sql");
 //exit;
 }
 //zmeny2018
-$sql = "SELECT oslo2 FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
+$sql = "SELECT pmes2 FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -443,6 +450,14 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD oslo1 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD oslo2 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD prie1 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD prie2 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD pmes1 DECIMAL(5,0) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD pmes2 DECIMAL(5,0) DEFAULT 0 AFTER new2018";
 $vysledek = mysql_query("$sql");
 //exit;
 }
@@ -893,7 +908,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpotvrdenieFO".
 "podpa,podpn,0,1,0,'$dat_dat', ".
 "0,0,0, ". //new2015
 "0,0,0, ".  //new2016
-"0,0,0,0,0 ".  //new2018
+"0,0,0,0,0,0,0,0,0 ".  //new2018
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
 "";
@@ -1016,6 +1031,11 @@ $dovca = $fir_riadok->dovca;
 $chris = $fir_riadok->chris;
 $oslo1 = $fir_riadok->oslo1;
 $oslo2 = $fir_riadok->oslo2;
+
+$pmes1 = $fir_riadok->pmes1;
+$pmes2 = $fir_riadok->pmes2;
+$prie1 = $fir_riadok->prie1;
+$prie2 = $fir_riadok->prie2;
 
 $datvsk = SkDatum($fir_riadok->datv);
 $pozn = $fir_riadok->pozn;
@@ -1178,6 +1198,11 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    document.formv1.chris.value = '<?php echo "$chris";?>';
    document.formv1.oslo1.value = '<?php echo "$oslo1";?>';
    document.formv1.oslo2.value = '<?php echo "$oslo2";?>';
+
+   document.formv1.prie1.value = '<?php echo "$prie1";?>';
+   document.formv1.prie2.value = '<?php echo "$prie2";?>';
+   document.formv1.pmes1.value = '<?php echo "$pmes1";?>';
+   document.formv1.pmes2.value = '<?php echo "$pmes2";?>';
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
@@ -1373,6 +1398,13 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 <!-- zuct v mes. -->
 <input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:241px; top:917px; left:655px; height:18px;" title="r11"/>
 
+<!-- 4x new 2018 -->
+<input type="text" name="prie1" id="prie1" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:957px; left:237px; height:17px;" title="r12"/>
+<input type="text" name="prie2" id="prie2" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:957px; left:700px; height:17px;" title="r12"/>
+
+<input type="text" name="pmes1" id="pmes1" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:978px; left:422px; height:17px;" title="r12"/>
+<input type="text" name="pmes2" id="pmes2" onkeyup="CiarkaNaBodku(this);" style="width:60px; top:978px; left:679px; height:17px;" title="r12"/>
+
 <!-- DAN.BONUS -->
 <input type="text" name="r07det1" id="r07det1" style="width:409px; top:1053px; left:158px; height:18px;"/>
 <input type="text" name="r07rod1" id="r07rod1" style="width:93px; top:1053px; left:577px; height:18px;"/>
@@ -1424,26 +1456,25 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 
 
 <!-- DAN.BONUS -->
-<input type="text" name="r07det5" id="r07det5" style="width:409px; top:249px; left:158px; height:17px;"/>
-<input type="text" name="r07rod5" id="r07rod5" style="width:93px; top:249px; left:577px; height:17px;"/>
-<input type="text" name="r07mes5" id="r07mes5" style="width:102px; top:249px; left:680px; height:17px;"/>
-<input type="text" name="r07sum5" id="r07sum5" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:249px; left:792px; height:17px;"/>
+<input type="text" name="r07det5" id="r07det5" style="width:409px; top:230px; left:158px; height:21px;"/>
+<input type="text" name="r07rod5" id="r07rod5" style="width:93px; top:230px; left:577px; height:21px;"/>
+<input type="text" name="r07mes5" id="r07mes5" style="width:102px; top:230px; left:680px; height:21px;"/>
+<input type="text" name="r07sum5" id="r07sum5" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:230px; left:792px; height:21px;"/>
 
-<input type="text" name="r07det6" id="r07det6" style="width:409px; top:270px; left:158px; height:17px;"/>
-<input type="text" name="r07rod6" id="r07rod6" style="width:93px; top:270px; left:577px; height:17px;"/>
-<input type="text" name="r07mes6" id="r07mes6" style="width:102px; top:270px; left:680px; height:17px;"/>
-<input type="text" name="r07sum6" id="r07sum6" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:270px; left:792px; height:17px;"/>
+<input type="text" name="r07det6" id="r07det6" style="width:409px; top:257px; left:158px; height:21px;"/>
+<input type="text" name="r07rod6" id="r07rod6" style="width:93px; top:257px; left:577px; height:21px;"/>
+<input type="text" name="r07mes6" id="r07mes6" style="width:102px; top:257px; left:680px; height:21px;"/>
+<input type="text" name="r07sum6" id="r07sum6" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:257px; left:792px; height:21px;"/>
 
-<input type="text" name="r07det7" id="r07det7" style="width:409px; top:291px; left:158px; height:17px;"/>
-<input type="text" name="r07rod7" id="r07rod7" style="width:93px; top:291px; left:577px; height:17px;"/>
-<input type="text" name="r07mes7" id="r07mes7" style="width:102px; top:291px; left:680px; height:17px;"/>
-<input type="text" name="r07sum7" id="r07sum7" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:291px; left:792px; height:17px;"/>
+<input type="text" name="r07det7" id="r07det7" style="width:409px; top:282px; left:158px; height:21px;"/>
+<input type="text" name="r07rod7" id="r07rod7" style="width:93px; top:282px; left:577px; height:21px;"/>
+<input type="text" name="r07mes7" id="r07mes7" style="width:102px; top:282px; left:680px; height:21px;"/>
+<input type="text" name="r07sum7" id="r07sum7" onkeyup="CiarkaNaBodku(this);" style="width:70px; top:282px; left:792px; height:21px;"/>
 
 
 <!-- Kde a dna -->
 <span class="text-echo" style="top:385px; left:119px;"><?php echo $fir_fmes; ?></span>
 <span class="text-echo" style="top:385px; left:355px;"><?php echo "$datvsk";?></span>
-
 
 
 <!-- Vypracoval, tel -->
@@ -1551,6 +1582,11 @@ $chris=$hlavicka->chris; if ( $hlavicka->chris == 0 ) $chris="";
 $oslo1=$hlavicka->oslo1; if ( $hlavicka->oslo1 == 0 ) $oslo1="";
 $oslo2=$hlavicka->oslo2; if ( $hlavicka->oslo2 == 0 ) $oslo2="";
 
+$prie1=$hlavicka->prie1; if ( $hlavicka->prie1 == 0 ) $prie1="";
+$prie2=$hlavicka->prie2; if ( $hlavicka->prie2 == 0 ) $prie2="";
+$pmes1=$hlavicka->pmes1; if ( $hlavicka->pmes1 == 0 ) $pmes1="";
+$pmes2=$hlavicka->pmes2; if ( $hlavicka->pmes2 == 0 ) $pmes2="";
+
 //obdobie
 $pdf->Cell(190,13," ","$rmc1",1,"L");
 $pdf->Cell(190,9," ","$rmc1",1,"L");
@@ -1617,9 +1653,17 @@ $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r10dds","$rmc",1,"R");
 //v mesiacoch
 $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r02","$rmc",1,"R");
 
+
+//priemer, poc.mes
+$pdf->Cell(169,4," ","$rmc1",1,"L");
+$pdf->Cell(55,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$prie1","$rmc",0,"R");$pdf->Cell(85,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$prie2","$rmc",1,"R");
+$pdf->Cell(86,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$pmes1","$rmc",0,"R");$pdf->Cell(44,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$pmes2","$rmc",1,"R");
+
+
+
 //dan.bonus
 $pdf->SetFont('arial','',9);
-$pdf->Cell(190,23," ","$rmc1",1,"L");
+$pdf->Cell(190,11," ","$rmc1",1,"L");
 $pdf->Cell(27,4," ","$rmc1",0,"L");
 $pdf->Cell(93,5,"$hlavicka->r07det1","$rmc",0,"L");$pdf->Cell(22,5,"$hlavicka->r07rod1","$rmc",0,"C");
 $pdf->Cell(25,5,"$hlavicka->r07mes1","$rmc",0,"C");$pdf->Cell(18,5,"$r07sum1","$rmc",1,"R");
@@ -1660,6 +1704,61 @@ $pdf->SetFont('arial','',10);
 $pdf->Cell(190,8," ","$rmc1",1,"L");
 if ( $copern == 10 ) $pozn=$hlavicka->pozn;
 $pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(170,5,"$pozn","$rmc",1,"L");
+
+
+if( trim($hlavicka->r07det5) != "" )
+      {
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(8);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_cesta.'.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str2.jpg',0,10,210,297);
+}
+$pdf->SetY(10);
+
+//obdobie
+$pdf->Cell(190,13," ","$rmc1",1,"L");
+$pdf->Cell(190,9," ","$rmc1",1,"L");
+$pdf->Cell(160,6," ","$rmc1",0,"L");$pdf->Cell(10,5,"$kli_vrok","$rmc",1,"L");
+
+//dan.bonus
+$pdf->SetFont('arial','',9);
+$pdf->Cell(190,4," ","$rmc1",1,"L");
+$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(18,6,"- diea 5. až 7.","$rmc",1,"L");
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+
+$pdf->Cell(27,5," ","$rmc1",0,"L");
+$pdf->Cell(93,5,"$hlavicka->r07det5","$rmc",0,"L");$pdf->Cell(22,5,"$hlavicka->r07rod5","$rmc",0,"C");
+$pdf->Cell(25,5,"$hlavicka->r07mes5","$rmc",0,"C");$pdf->Cell(18,5,"$r07sum5","$rmc",1,"R");
+$pdf->Cell(27,5," ","$rmc1",0,"L");
+$pdf->Cell(93,4,"$hlavicka->r07det6","$rmc",0,"L");$pdf->Cell(22,4,"$hlavicka->r07rod6","$rmc",0,"C");
+$pdf->Cell(25,4,"$hlavicka->r07mes6","$rmc",0,"C");$pdf->Cell(18,4,"$r07sum6","$rmc",1,"R");
+$pdf->Cell(27,4," ","$rmc1",0,"L");
+$pdf->Cell(93,4,"$hlavicka->r07det7","$rmc",0,"L");$pdf->Cell(22,4,"$hlavicka->r07rod7","$rmc",0,"C");
+$pdf->Cell(25,4,"$hlavicka->r07mes7","$rmc",0,"C");$pdf->Cell(18,4,"$r07sum7","$rmc",1,"R");
+$pdf->Cell(27,4," ","$rmc1",0,"L");
+
+$pdf->SetFont('arial','',10);
+
+//VYPRACOVAL
+//V a Dna
+$pdf->Cell(190,17.5," ","$rmc1",1,"L");
+$datvsk=SkDatum($hlavicka->datv);
+$dat_dat=$datvsk; if ( $dat_dat == '00.00.0000' ) $dat_dat="";
+$pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(45,5,"$fir_fmes","$rmc",0,"L");
+$pdf->Cell(7,5," ","$rmc1",0,"L");$pdf->Cell(20,5,"$dat_dat","$rmc",1,"C");
+//Osoba, tel.
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->SetFont('arial','',8);
+$pdf->Cell(35,5," ","$rmc1",0,"L");$pdf->Cell(32,4,"$fir_mzdt05","$rmc",0,"L");
+$pdf->Cell(23,5," ","$rmc1",0,"L");$pdf->Cell(25,4,"$fir_mzdt04","$rmc",1,"L");
+$pdf->SetFont('arial','',10);
+
+//if( trim($hlavicka->r07det5) != "" )
+      }
+
 
 }
 $i = $i + 1;
