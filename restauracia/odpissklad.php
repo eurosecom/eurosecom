@@ -109,6 +109,12 @@ $h_doknew15="9".$kli_vxcf4."0000";
 $h_doknew16="9".$kli_vxcf4."9999"; 
 $h_doknew17="8".$kli_vxcf4."0000"; 
 $h_doknew18="8".$kli_vxcf4."9999";
+//v roku 2016,2017 cislujeme od 1 v penzionskalica.sk
+$h_doknew21="1"; 
+$h_doknew22="500000"; 
+//od 11.2018 cislujeme od 7800001 v penzionskalica.sk
+$h_doknew31="7800001"; 
+$h_doknew32="7899999";
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_sklvyd WHERE dat >= '$h_datpsql' AND dat <= '$h_datksql' AND dok >= $h_doknew1 AND dok <= $h_doknew2 AND poh = 12 ";
 $dsql = mysql_query("$dsqlt");
@@ -133,6 +139,17 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_sklvyd WHERE dok >= $h_doknew17 AND dok <= $h_doknew18 AND poh = 12 ";
 $dsql = mysql_query("$dsqlt");
+
+if( $kli_vrok >= 2016 AND $_SERVER['SERVER_NAME'] == "www.penzionskalica.sk" )
+  {
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_sklvyd WHERE dat >= '$h_datpsql' AND dat <= '$h_datksql' AND dok >= $h_doknew21 AND dok <= $h_doknew22 AND poh = 12 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_sklvyd WHERE dat >= '$h_datpsql' AND dat <= '$h_datksql' AND dok >= $h_doknew31 AND dok <= $h_doknew32 AND poh = 12 ";
+$dsql = mysql_query("$dsqlt");
+
+  } 
 
 //vypocitaj priemerne ceny
 $sqlpr = 'DROP TABLE F'.$kli_vxcf.'_sklzaspriemer';

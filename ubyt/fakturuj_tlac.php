@@ -453,11 +453,35 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=8.50 WHERE izba < 1
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=8.50 WHERE izba < 100 AND ico = 51413001 "; $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET ico=51413002 WHERE izba > 100 AND ico = 51413001 "; $dsql = mysql_query("$dsqlt");
+
     }
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=dnm*cena, sdph=(1+$fir_dph2)*spolu WHERE dnm > 0 "; $dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=dnm*cena  WHERE dnm > 0 "; $dsql = mysql_query("$dsqlt");
+
+if( $kli_vrok > 2018 OR ( $kli_vrok == 2018 AND $kli_vmes >= 11 ) )
+          {
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=183.33, cena=0  WHERE dnm > 16 AND ico = 36428001 AND izba < 100 "; 
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=183.33, cena=0  WHERE dnm > 16 AND ico = 50911082 AND izba < 100 "; 
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=183.33, cena=0  WHERE dnm > 16 AND ico = 46872078 AND izba < 100 "; 
+$dsql = mysql_query("$dsqlt");
+
+//echo $dsqlt;
+//exit;
+          }
+
 
   }
+//koniec 2018
+
+//group ico
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcx".$kli_uzid." WHERE dnm = 0 ";
+$dsql = mysql_query("$dsqlt");
 
 //group ico
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcx".$kli_uzid.
@@ -678,9 +702,12 @@ $pdf->Cell(0,4," ","0",1,"L");
 if( $ajceny == 1 )
   {
 
+$cenatlac=$riadok->cena;
+if( $riadok->cena == 0 ) { $cenatlac=""; }
+
 if( $ubytovani == 1 ) { $pdf->Cell(40,4,"$dap1_sk - $dak1_sk","0",0,"L"); }
 $pdf->Cell(15,4,"$riadok->dnm","0",0,"R");
-if( $ubytovani == 1 ) { $pdf->Cell(20,4,"$riadok->cena","0",0,"R"); }
+if( $ubytovani == 1 ) { $pdf->Cell(20,4,"$cenatlac","0",0,"R"); }
 if( $ubytovani == 1 ) { $pdf->Cell(30,4,"$riadok->spolu","0",0,"R"); }
 $pdf->Cell(0,4," ","0",1,"L");
   }
