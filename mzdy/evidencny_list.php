@@ -31,12 +31,13 @@ $kli_vrok=$pole[1];
 $citfir = include("../cis/citaj_fir.php");
 
 $setuzrok = include("../cis/citajrok.php");
+if( $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $citajrok=0; }
+if( $_SERVER['SERVER_NAME'] == "www.ekorobot.sk" ) { $citajrok=0; }
 //echo $citajrok;
 
 //ramcek fpdf 1=zap,0=vyp
 $rmc=0;
 $rmc1=0;
-
 
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
