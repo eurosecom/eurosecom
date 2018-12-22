@@ -193,7 +193,8 @@ if( $rokrocnezuc == 2013 ) { $rokrocnezuc="2013";  }
 if( $rokrocnezuc == 2014 ) { $rokrocnezuc="2014";  }
 if( $rokrocnezuc == 2015 ) { $rokrocnezuc="2015";  }
 if( $rokrocnezuc == 2016 ) { $rokrocnezuc="2016";  }
-if( $rokrocnezuc >= 2017 ) { $rokrocnezuc="2017";  }
+if( $rokrocnezuc == 2017 ) { $rokrocnezuc="2017";  }
+if( $rokrocnezuc >= 2018 ) { $rokrocnezuc="2018";  }
 ?>
 
 function TlacRocnezucto()
@@ -277,7 +278,8 @@ if( $rokziadosti == 2013 ) { $rokziadosti="2013";  }
 if( $rokziadosti == 2014 ) { $rokziadosti="2014";  }
 if( $rokziadosti == 2015 ) { $rokziadosti="2015";  }
 if( $rokziadosti == 2016 ) { $rokziadosti="2015";  }
-if( $rokziadosti >= 2017 ) { $rokziadosti="2017";  }
+if( $rokziadosti == 2017 ) { $rokziadosti="2017";  }
+if( $rokziadosti >= 2018 ) { $rokziadosti="2018";  }
 ?>
 
 function TlacRocneziadost()
