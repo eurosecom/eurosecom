@@ -22,7 +22,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 $zablokovane=1;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
      {
 ?>
@@ -52,7 +52,7 @@ $vsetkyprepocty=0;
 
 //.jpg podklad
 if ( $strana <= 2 OR $strana == 9999 ) {
-$jpg_source="../dokumenty/dan_z_prijmov2017/dan_zo_zavislej2017/rz/rzfo_v17";
+$jpg_source="../dokumenty/tlacivo2018/dan_zo_zavislej_v18/rz/rzfo_v18";
 $jpg_title="tlaËivo RoËnÈ z˙Ëtovanie preddavkov na daÚ z prÌjmov FO zo z·vislej Ëinnosti pre rok ".$kli_vrok;
                     }
 if ( $strana == 3 ) {
@@ -290,8 +290,14 @@ $pozn = trim(strip_tags($_REQUEST['pozn']));
 //$da2 = strip_tags($_REQUEST['da2']);
 //$da2sql=SqlDatum($da2);
 
+$znikup = 1*$_REQUEST['znikup'];
+$z17 = 1*$_REQUEST['z17'];
+$uro01 = 1*$_REQUEST['uro01'];
+$uro02 = 1*$_REQUEST['uro02'];
+$uro03 = 1*$_REQUEST['uro03'];
+
 if ( $strana == 1 ) {
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdrocnedane SET ".
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdrocnedane SET znikup='$znikup', z17='$z17', uro01='$uro01', uro02='$uro02', uro03='$uro03', ".
 " vyk='$vyk', r00z1='$r00z1', r00z2='$r00z2', r00d1='$r00d1', r00d2='$r00d2', r00a1='$r00a1', r00a2='$r00a2', ".
 " r00b1='$r00b1', r00b2='$r00b2', r00c1='$r00c1', r00c2='$r00c2', ".
 " r04='$r04', r04a1='$r04a1', r04a2='$r04a2', r04b='$r04b', r04d='$r04d', r06='$r06', r07='$r07', r08='$r08', ".
@@ -335,10 +341,15 @@ $zost7 = 1*$_REQUEST['zost7'];
 $da2ked = strip_tags($_REQUEST['da2ked']);
 $da2kedsql=SqlDatum($da2ked);
 
+$datm8 = strip_tags($_REQUEST['datm8']);
+$datm8sql=SqlDatum($datm8);
+$suma8 = 1*$_REQUEST['suma8'];
+$zost8 = 1*$_REQUEST['zost8'];
+
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdrocnedane2strana SET ".
 " da2str='$da2strsql', suma1='$suma1', zost1='$zost1', datm2='$datm2sql', suma2='$suma2', zost2='$zost2', datm3='$datm3sql', suma3='$suma3', zost3='$zost3',".
 " suma4='$suma4', zost4='$zost4', datm5='$datm5sql', suma5='$suma5', zost5='$zost5', datm6='$datm6sql', suma6='$suma6', zost6='$zost6',".
-" datm7='$datm7sql', suma7='$suma7', zost7='$zost7', da2ked='$da2kedsql' ".
+" datm7='$datm7sql', suma7='$suma7', zost7='$zost7', datm8='$datm8sql', suma8='$suma8', zost8='$zost8', da2ked='$da2kedsql' ".
 " WHERE oc = $cislo_oc";
                     }
 
@@ -432,6 +443,18 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane2strana ADD zp2dak DATE NOT NULL AFTER da2ked";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane2strana ADD zp2dat DATE NOT NULL AFTER da2ked";
+$vysledek = mysql_query("$sql");
+}
+
+$sql = "SELECT zost8 FROM F$kli_vxcf"."_mzdrocnedane2strana ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane2strana ADD datm8 DATE NOT NULL AFTER zost7";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane2strana ADD suma8 DECIMAL(10,2) DEFAULT 0 AFTER datm8";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane2strana ADD zost8 DECIMAL(10,2) DEFAULT 0 AFTER suma8";
 $vysledek = mysql_query("$sql");
 }
 
@@ -544,6 +567,19 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane ADD r00d DECIMAL(10,2) DEFAULT 0 AFTER r00c2";
 $vysledek = mysql_query("$sql");
 }
+$sql = "SELECT uro01 FROM F$kli_vxcf"."_mzdrocnedane ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane ADD znikup DECIMAL(10,2) DEFAULT 0 AFTER px4";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane ADD uro03 DECIMAL(10,2) DEFAULT 0 AFTER znikup";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane ADD uro02 DECIMAL(10,2) DEFAULT 0 AFTER znikup";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnedane ADD uro01 DECIMAL(10,2) DEFAULT 0 AFTER znikup";
+$vysledek = mysql_query("$sql");
+}
 //koniec vytvorenie rocnedane
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdrocnedane";
@@ -607,7 +643,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,".
 "'','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdkun".
 " WHERE F$kli_vxcf"."_mzdkun.oc = $cislo_oc ".
 "";
@@ -628,7 +664,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,".
 "'','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,ume,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,ume,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdzalsum".
 " WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc ".
 "";
@@ -648,7 +684,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "-(kc),-(kc),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,".
 "'','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdzalvy".
 " WHERE F$kli_vxcf"."_mzdzalvy.oc = $cislo_oc AND dm = 902".
 "";
@@ -668,7 +704,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "0,0,0,0,0,0,0,kc,0,0,0,0,0,0,0,0,0,".
 "0,".
 "'','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdzalvy".
 " WHERE F$kli_vxcf"."_mzdzalvy.oc = $cislo_oc AND dm = 901".
 "";
@@ -688,7 +724,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "0,0,0,0,0,0,0,kc,0,0,0,0,0,0,0,0,0,".
 "0,".
 "'','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdzalvy".
 " WHERE F$kli_vxcf"."_mzdzalvy.oc = $cislo_oc AND dm = 951".
 "";
@@ -708,7 +744,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,".
 "'','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdzalvy".
 " WHERE F$kli_vxcf"."_mzdzalvy.oc = $cislo_oc AND dm = 954 AND kc > 0".
 "";
@@ -728,7 +764,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,".
 "'','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdzalvy".
 " WHERE F$kli_vxcf"."_mzdzalvy.oc = $cislo_oc AND dm = 954 AND kc < 0 ".
 "";
@@ -746,7 +782,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "sum(r11),sum(r11a),sum(r11b),".
 "sum(r12),sum(r12a),sum(r13),sum(r14),sum(r14a),sum(r14b),sum(r15),sum(r15a),sum(r15b),sum(r16),sum(r17n),sum(r17p),sum(r18n),sum(r18p),0,'',".
 "'0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc,po6".
 "";
@@ -770,7 +806,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "sum(r11),sum(r11a),sum(r11b),".
 "sum(r12),sum(r12a),sum(r13),sum(r14),sum(r14a),sum(r14b),sum(r15),sum(r15a),sum(r15b),sum(r16),sum(r17n),sum(r17p),sum(r18n),sum(r18p),0,'',".
 "'0000-00-00','$dat_sprsql','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid." WHERE konx1 = 9 ".
 " GROUP BY oc".
 "";
@@ -815,7 +851,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdrocnedane".
 "sum(r11),sum(r11a),sum(r11b),".
 "sum(r12),sum(r12a),sum(r13),sum(r14),sum(r14a),sum(r14b),sum(r15),sum(r15a),sum(r15b),sum(r16),sum(r17n),sum(r17p),sum(r18n),sum(r18p),0,'',".
 "'0000-00-00','$dat_sprsql','0000-00-00','0000-00-00','0000-00-00','0000-00-00', ".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid." WHERE oc = $cislo_oc ".
 " GROUP BY oc".
 "";
@@ -833,11 +869,11 @@ $oznac = mysql_query("$sqtoz");
 //koniec pracovneho suboru pre rocne
 
 //vypocty
-//vsetky vypocty su aktualizovane na rok 2017
+//vsetky vypocty su aktualizovane na rok 2018
 $nepocitaj=0;
 if ( ( $copern == 10 OR $copern == 20 ) AND $nepocitaj == 0 )
 {
-//vypocitaj 2017
+//vypocitaj 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r00=r00z1+r00z2, r00a=r00a1+r00a2, r00b=r00b1+r00b2, r00c=r00c1+r00c2, r00d=r00d1+r00d2, r01=r00-r00a, r03=r01+r02, r04a=r04a1+r04a2 ".
 "  WHERE oc = $cislo_oc";
@@ -845,12 +881,12 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
 
 //len vynulujem nepouzivane 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04c=0, r04c1=0, r04c2=0, r04e=0, r04f=0 WHERE oc = $cislo_oc";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04c=0, r04c1=0, r04c2=0, r04e=0, r04f=0, z17=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
-//nezdanitelna cast na danovnika za 2017 rovnako ako v 2016
+//nezdanitelna cast na danovnika za 2018 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET r04a1=3803.33, r04a2=0   WHERE oc = $cislo_oc AND r04a1 != 0 AND r04a2 >= 0 AND r01 <= 19809.00 ";
+" SET r04a1=3830.02, r04a2=0   WHERE oc = $cislo_oc AND r04a1 != 0 AND r04a2 >= 0 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -860,11 +896,11 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
 
 
-//milionarska dan za 2017 rovnako ako v 2016
+//milionarska dan za 2018
 if ( $vsetkyprepocty == 1 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET po6=8755.578-(r01/4) WHERE oc = $cislo_oc AND r01 > 19809.00 ";
+" SET po6=8817.016-(r01/4) WHERE oc = $cislo_oc AND r01 > 19948.00 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
@@ -872,18 +908,18 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET px4=po6*100, px4=ceil(px4), r04a1=px4/100, r04a=r04a1+r04a2 WHERE oc = $cislo_oc AND r01 > 19809.00 ";
+" SET px4=po6*100, px4=ceil(px4), r04a1=px4/100, r04a=r04a1+r04a2 WHERE oc = $cislo_oc AND r01 > 19948.00 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04a=0, r04a1=0, r04a2=0 WHERE oc = $cislo_oc AND r01 >= 35022.32 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04a=0, r04a1=0, r04a2=0 WHERE oc = $cislo_oc AND r01 >= 35268.06 ";
 $oznac = mysql_query("$sqtoz");
      }
-//koniec milionarska dan za 2017
+//koniec milionarska dan za 2018
 
-//rok 2017
+//rok 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET po6=0, px4=0, r04x=r04a+r04b+r04c+r04d, r05=r03-r04x  WHERE oc = $cislo_oc";
+" SET po6=0, px4=0, r04x=r04a+r04b+r04c+r04d+znikup, r05=r03-r04x  WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -891,75 +927,38 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r05=0  WHERE oc = $cislo_oc AND 
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//dan z prijmu 2017
+//dan z prijmu 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=0, px4=0, r06=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=r05*19/100 WHERE oc = $cislo_oc AND r05 <= 35022.31 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=r05*19/100 WHERE oc = $cislo_oc AND r05 <= 35268.06 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET px4=po6*100, r06=floor(px4), r06=r06/100 WHERE oc = $cislo_oc AND r05 <= 35022.31 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET px4=po6*100, r06=floor(px4), r06=r06/100 WHERE oc = $cislo_oc AND r05 <= 35268.06 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=(35022.31*19/100)+((r05-35022.31)*25/100) WHERE oc = $cislo_oc AND r05 > 35022.31 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=(35268.06*19/100)+((r05-35268.06)*25/100) WHERE oc = $cislo_oc AND r05 > 35268.06 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET px4=po6*100, r06=floor(px4), r06=r06/100 WHERE oc = $cislo_oc AND r05 > 35022.31 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET px4=po6*100, r06=floor(px4), r06=r06/100 WHERE oc = $cislo_oc AND r05 > 35268.06 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r06=0 WHERE oc = $cislo_oc AND r06 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
 
-//zam.premia 2017
-//2013	2026.20		2014	2112.00 6nasobok min.mzdy
-//2013	4052.40		2014	4224.00 12nasobok min.mzdy
-//2013	3509.76		2014	3658.08 zaklad dane zo sumy 12nasobku min.mzdy
-
-//2014	2112.00		2015	2280.00
-//2014	4224.00		2015	4560.00
-//2014	3658.08
-if ( $vsetkyprepocty == 1 AND $kli_vrok >= 2017 )
+//zam.premia 2018 ziadna
+if ( $vsetkyprepocty == 1 AND $kli_vrok >= 2018 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET r07=r01, px4=0, po6=0 WHERE oc = $cislo_oc";
-//echo $sqtoz;
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=r01 WHERE oc = $cislo_oc AND r00 >= 5220.00 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=0, r08=0 WHERE oc = $cislo_oc AND r00 < 5220.00 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=0, r09=0 WHERE oc = $cislo_oc AND r08 = 0 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r08=12 WHERE oc = $cislo_oc AND r08 > 12 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=((r04a-r07)*0.19)*r08/12 WHERE oc = $cislo_oc ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET px4=po6*100, r09=ceil(px4), r09=r09/100 WHERE oc = $cislo_oc";
-//echo $sqtoz;
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r09=0  WHERE oc = $cislo_oc AND r09 < 0";
-//echo $sqtoz;
-$oznac = mysql_query("$sqtoz");
-
-//max zam.premia na rok 2015 nie je stanovena lebo vraj vsetci musia mat nulu a tak dam to co bolo 2014
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r09=27.60  WHERE oc = $cislo_oc AND r09 > 27.60";
-//echo $sqtoz;
+" SET r07=0, r08=0, r09=0, px4=0, po6=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
      }
-//koniec zam.premia 2017
+//koniec zam.premia 2018
 
 
-//dan.bonus 2017 max. 256.92 na rok na 1 dieta
+//dan.bonus na deti 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r12=0, r13=0, r11=r11a+r11b, r12=r10-r11 WHERE oc = $cislo_oc";
 //echo $sqtoz;
@@ -978,6 +977,39 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r12a=0 WHERE oc = $cislo_oc AND r12a < 0";
 $oznac = mysql_query("$sqtoz");
+
+//r14 dan znizena o dan.bonus par.33
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
+" SET z17=r06-r10 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
+" SET z17=0 WHERE oc = $cislo_oc AND z17 < 0 ";
+$oznac = mysql_query("$sqtoz");
+
+
+
+
+//riadok 16 dan.bonus par.33a
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
+" SET uro02=uro01-z17 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
+" SET uro02=0 WHERE oc = $cislo_oc AND uro02 < 0 ";
+$oznac = mysql_query("$sqtoz");
+
+
+//riadok 17 dan znizena o dan.bonus par.33a
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
+" SET uro03=z17-uro01 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
+" SET uro03=0 WHERE oc = $cislo_oc AND uro03 < 0 ";
+$oznac = mysql_query("$sqtoz");
+
+
 
 //uhrn preddavkov
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
@@ -998,7 +1030,7 @@ $oznac = mysql_query("$sqtoz");
 
 //preplatok,nedoplatok upraveny
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET r17p=0, r17n=r06-r10+r11+r12a-r14+r09a WHERE oc = $cislo_oc";
+" SET r17p=0, r17n=r06-r10+r11+r12a-r14+r09a-uro01+uro02 WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -1011,7 +1043,7 @@ if ( $vsetkyprepocty == 1 )
      {
 //vybrat od zamestnanca alebo vyplatit
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET r18p=0, r18n=r15+r13-r16-r09-r12+r09a WHERE oc = $cislo_oc";
+" SET r18p=0, r18n=r15+r13-r16-r09-r12+r09a-uro01 WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -1021,7 +1053,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
      }
 }
-//koniec vypocty 2017
+//koniec vypocty 2018
 
 
 
@@ -1108,6 +1140,12 @@ $da21 = $fir_riadok->da21;
 $da21=SkDatum($da21);
 $pozn = $fir_riadok->pozn;
 
+$znikup = $fir_riadok->znikup;
+$z17 = $fir_riadok->z17;
+$uro01 = $fir_riadok->uro01;
+$uro02 = $fir_riadok->uro02;
+$uro03 = $fir_riadok->uro03;
+
 mysql_free_result($fir_vysledok);
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdrocnedaneprenos";
@@ -1161,6 +1199,12 @@ $suma7 = $fir_riadok->suma7;
 $zost7 = $fir_riadok->zost7;
 $da2ked = $fir_riadok->da2ked;
 $da2kedsk =SkDatum($da2ked);
+
+$datm8 = $fir_riadok->datm8;
+$datm8sk=SkDatum($datm8);
+$suma8 = $fir_riadok->suma8;
+$zost8 = $fir_riadok->zost8;
+
 mysql_free_result($fir_vysledok);
                     }
 
@@ -1317,10 +1361,12 @@ $fir_fnaz=""; $fir_uctt03tlac="";
 $nazov = $dprie." ".$dmeno;
 }
 
-//vypocet r23 v potvrdeni
-$zpr03=$r06-$r10;
-if ( $zpr03 <= 0 ) { $zpr03=""; }
-$zpr03=sprintf("%0.2f", $zpr03)
+
+//vypocet r24 v potvrdeni
+$potr24=$r06-$r10-$uro01;
+if ( $potr24 <= 0 ) { $potr24=""; }
+$potr24=sprintf("%0.2f", $potr24)
+
 ?>
 <head>
 <meta charset="cp1250">
@@ -1378,7 +1424,7 @@ div.leg-pozn {
 }
 div.input-echo {
   position: absolute;
-  font-size: 16px;
+  font-size: 15px;
   background-color: #fff;
   text-align: right;
   font-weight: bold;
@@ -1456,114 +1502,152 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $
 <?php $nepoc=0; ?>
 <input type="checkbox" name="nepoc" value="1" class="btn-prepocet"/>
 <?php if ( $nepoc == 1 ) { ?> <script type="text/javascript">document.formv1.nepoc.checked = "checked";</script> <?php } ?>
-<h5 class="btn-prepocet-title"><strong>NeprepoËÌtaù</strong> zam.prÈmiu, "milion·rsku daÚ" a r.18</h5>
-<select size="1" name="vyk" id="vyk" class="btn-zrobrz" style="top: 57px; left: 125px;">
+<h5 class="btn-prepocet-title"><strong>NeprepoËÌtaù</strong> zam.prÈmiu, "milion·rsku daÚ" a r.22</h5>
+<select size="1" name="vyk" id="vyk" class="btn-zrobrz" style="top: 65px; left: 75px;">
   <option value="0">Nevykonaù</option>
   <option value="1">Vykonaù</option>
 </select>
-<div class="input-echo" style="top:88px; left:573px; font-size:18px;"><?php echo $kli_vrok; ?></div>
+<div class="input-echo" style="top:94px; left:725px; font-size:18px;"><?php echo $kli_vrok; ?></div>
 
 <!-- zamestnanec -->
-<div class="input-echo" style="top:136px; left:302px; font-size: 18px;"><?php echo "$ztitlp $zmeno $zprie $ztitlz"; ?></div>
-<div class="input-echo" style="top:136px; left:667px; font-size: 18px;"><?php echo $rodne; ?></div>
-<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:138px; left:785px; width:20px; height:20px;">
-<div class="input-echo" style="top:163px; left:247px; font-size: 18px;"><?php echo "$zuli $zcdm $zmes"; ?></div>
-<div class="input-echo" style="top:163px; left:672px; font-size: 18px;"><?php echo $zpsc; ?></div>
+<div class="input-echo" style="top:149px; left:260px; font-size: 18px;"><?php echo "$ztitlp $zmeno $zprie $ztitlz"; ?></div>
+<div class="input-echo" style="top:149px; left:637px; font-size: 18px;"><?php echo $rodne; ?></div>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:150px; left:770px; width:20px; height:20px;">
+<div class="input-echo" style="top:195px; left:200px; font-size: 18px;"><?php echo "$zuli $zcdm $zmes"; ?></div>
+<div class="input-echo" style="top:195px; left:692px; font-size: 18px;"><?php echo $zpsc; ?></div>
 
 <!-- I.CAST -->
-<div class="input-echo" style="width:80px; top:259px; left:661px;"><?php echo $r00; ?></div>
-<input type="text" name="r00z1" id="r00z1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:257px; left:754px;"/>
-<input type="text" name="r00z2" id="r00z2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:257px; left:841px;"/>
-<div class="input-echo" style="width:80px; top:314px; left:661px;"><?php echo $r00d; ?></div>
-<input type="text" name="r00d1" id="r00d1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:311px; left:754px;"/>
-<input type="text" name="r00d2" id="r00d2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:311px; left:841px;"/>
+<div class="input-echo" style="width:67px; top:237px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ">spolu</div>
+<div class="input-echo" style="width:67px; top:237px; left:850px;">t·to fir.</div>
+<div class="input-echo" style="width:68px; top:237px; left:926px;">od in˝ch </div>
+
+<div class="input-echo" style="width:67px; top:259px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r00; ?></div>
+<input type="text" name="r00z1" id="r00z1" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:257px; left:850px;"/>
+<input type="text" name="r00z2" id="r00z2" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:257px; left:926px;"/>
+
+<div class="input-echo" style="height:22px; width:67px; top:315px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r00d; ?></div>
+<input type="text" name="r00d1" id="r00d1" onkeyup="CiarkaNaBodku(this);" style="height:19px; width:67px; top:315px; left:850px;"/>
+<input type="text" name="r00d2" id="r00d2" onkeyup="CiarkaNaBodku(this);" style="height:19px; width:67px; top:315px; left:926px;"/>
+
 <!-- r02 -->
-<div class="input-echo" style="width:80px; top:346px; left:661px;"><?php echo $r00a; ?></div>
-<input type="text" name="r00a1" id="r00a1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:344px; left:754px;"/>
-<input type="text" name="r00a2" id="r00a2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:344px; left:841px;"/>
-<div class="input-echo" style="width:80px; top:378px; left:661px;"><?php echo $r00b; ?></div>
-<input type="text" name="r00b1" id="r00b1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:376px; left:754px;"/>
-<input type="text" name="r00b2" id="r00b2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:376px; left:841px;"/>
-<div class="input-echo" style="width:80px; top:411px; left:661px;"><?php echo $r00c; ?></div>
-<input type="text" name="r00c1" id="r00c1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:409px; left:754px;"/>
-<input type="text" name="r00c2" id="r00c2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:409px; left:841px;"/>
+<div class="input-echo" style="height:21px; width:67px; top:342px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r00a; ?></div>
+<input type="text" name="r00a1" id="r00a1" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:341px; left:850px;"/>
+<input type="text" name="r00a2" id="r00a2" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:341px; left:926px;"/>
+
+<div class="input-echo" style="height:21px; width:67px; top:365px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r00b; ?></div>
+<input type="text" name="r00b1" id="r00b1" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:364px; left:850px;"/>
+<input type="text" name="r00b2" id="r00b2" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:364px; left:926px;"/>
+
+<div class="input-echo" style="height:21px; width:67px; top:387px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r00c; ?></div>
+<input type="text" name="r00c1" id="r00c1" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:386px; left:850px;"/>
+<input type="text" name="r00c2" id="r00c2" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:386px; left:926px;"/>
+
 <!-- r03 -->
-<div class="input-echo" style="width:80px; top:444px; left:661px;"><?php echo $r01; ?></div>
+<div class="input-echo" style="height:21px; width:67px; top:410px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r01; ?></div>
+
 <!-- r04 -->
-<div class="input-echo" style="width:80px; top:476px; left:661px;"><?php echo $r04a; ?></div>
-<input type="text" name="r04a1" id="r04a1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:474px; left:754px;"/>
-<input type="text" name="r04a2" id="r04a2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:474px; left:841px;"/>
-<input type="text" name="r04b" id="r04b" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:506px; left:661px;"/>
-<input type="text" name="r04d" id="r04d" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:538px; left:661px;"/>
-<div class="input-echo" style="width:80px; top:572px; left:661px;"><?php echo $r04x; ?></div>
+<div class="input-echo" style="height:21px; width:67px; top:432px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r04a; ?></div>
+<input type="text" name="r04a1" id="r04a1" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:432px; left:850px;"/>
+<input type="text" name="r04a2" id="r04a2" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:432px; left:926px;"/>
+<input type="text" name="r04b" id="r04b" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:453px; left:774px;"/>
+<input type="text" name="r04d" id="r04d" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:475px; left:774px;"/>
+<input type="text" name="znikup" id="znikup" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:495px; left:774px;"/>
+<div class="input-echo" style="height:21px; width:67px; top:517px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r04x; ?></div>
+
 <!-- r05 -->
-<div class="input-echo" style="width:80px; top:605px; left:661px;"><?php echo $r05; ?></div>
-<input type="text" name="r06" id="r06" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:635px; left:661px;"/>
-<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:668px; left:661px;"/>
-<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" maxlength="2" style="width:80px; top:700px; left:661px;"/>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:733px; left:661px;"/>
-<input type="text" name="r09a" id="r09a" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:765px; left:661px;"/>
-<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:798px; left:661px;"/>
-<!-- r11 -->
-<div class="input-echo" style="width:80px; top:835px; left:661px;"><?php echo $r11; ?></div>
-<input type="text" name="r11a" id="r11a" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:833px; left:754px;"/>
-<input type="text" name="r11b" id="r11b" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:833px; left:841px;"/>
-<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:869px; left:661px;"/>
-<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:901px; left:661px;"/>
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:933px; left:661px;"/>
-<!-- r14 -->
-<div class="input-echo" style="width:80px; top:972px; left:661px;"><?php echo $r14; ?></div>
-<input type="text" name="r14a" id="r14a" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:969px; left:754px;"/>
-<input type="text" name="r14b" id="r14b" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:969px; left:841px;"/>
-<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1005px; left:661px;"/>
-<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1037px; left:661px;"/>
-<!-- r17 -->
-<input type="text" name="r17n" id="r17n" onkeyup="CiarkaNaBodku(this);" style="width:71px; top:1070px; left:670px;"/>
-<input type="text" name="r17p" id="r17p" onkeyup="CiarkaNaBodku(this);" style="width:71px; top:1102px; left:670px;"/>
-<!-- r18 -->
-<input type="text" name="r18n" id="r18n" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1135px; left:661px;"/>
-<input type="text" name="r18p" id="r18p" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1167px; left:661px;"/>
+<div class="input-echo" style="height:21px; width:67px; top:539px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r05; ?></div>
+
+<!-- r06 -->
+<input type="text" name="r06" id="r06" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:564px; left:774px;"/>
+
+<!-- r07,08 zam.premia stare rz r09,09a -->
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:585px; left:774px;"/>
+<input type="text" name="r09a" id="r09a" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:608px; left:774px;"/>
+
+<!-- r09-r13 danovy bonus old rz r10,11,12,12a,13 -->
+<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:631px; left:774px;"/>
+<div class="input-echo" style="width:67px; top:660px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r11; ?></div>
+<input type="text" name="r11a" id="r11a" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:660px; left:850px;"/>
+<input type="text" name="r11b" id="r11b" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:660px; left:926px;"/>
+<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:695px; left:774px;"/>
+<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:727px; left:774px;"/>
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:755px; left:774px;"/>
+
+<!-- r14 az r17 db na uroky -->
+<input type="text" name="z17" id="z17" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:785px; left:774px;"/>
+<input type="text" name="uro01" id="uro01" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:810px; left:774px;"/>
+<input type="text" name="uro02" id="uro02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:836px; left:774px;"/>
+<input type="text" name="uro03" id="uro03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:871px; left:774px;"/>
+
+<!-- r18 preddavky-->
+<div class="input-echo" style="width:67px; top:910px; left:774px; background-color:#d1d1d1;" title="VypoËÌtan· hodnota po uloûenÌ"><?php echo $r14; ?></div>
+<input type="text" name="r14a" id="r14a" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:910px; left:850px;"/>
+<input type="text" name="r14b" id="r14b" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:910px; left:926px;"/>
+
+<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:944px; left:774px;"/>
+<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:969px; left:774px;"/>
+
+<input type="text" name="r17n" id="r17n" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:994px; left:774px;"/>
+<input type="text" name="r17p" id="r17p" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:1016px; left:774px;"/>
+
+<input type="text" name="r18n" id="r18n" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:1039px; left:774px;"/>
+<input type="text" name="r18p" id="r18p" onkeyup="CiarkaNaBodku(this);" style="height:18px; width:67px; top:1064px; left:774px;"/>
+
 <!-- Vykonal a pozn -->
-<div class="input-echo" style="top:1220px; left:74px; font-size: 18px;"><?php echo $kli_uzprie; ?></div>
-<input type="text" name="da21" id="da21" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:118px; top:1220px; left:383px;"/>
-<input type="text" name="pozn" id="pozn" style="width:300px; top:1220px; left:610px;"/>
-<div class="leg-pozn" style="top:1250px; left:610px;">Pozn·mka</div>
+<div class="input-echo" style="top:1134px; left:50px; font-size: 16px;"><?php echo $fir_fdic; ?></div>
+<div class="input-echo" style="top:1134px; left:530px; font-size: 16px;"><?php echo $nazov.", ".$fir_fuli." ".$fir_fcdm.", ".$fir_fmes; ?></div>
+<div class="input-echo" style="top:1162px; left:10px; font-size: 16px;"><?php echo $zrobil; ?></div>
+<div class="input-echo" style="top:1162px; left:335px; font-size: 16px;"><?php echo $fir_ftel; ?></div>
+<input type="text" name="da21" id="da21" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:90px; top:1158px; left:223px;"/>
+
+<input type="text" name="pozn" id="pozn" style="width:300px; top:1158px; left:600px;"/>
+<div class="leg-pozn" style="top:1185px; left:600px;">Pozn·mka</div>
 <?php                     } ?>
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="<?php echo $jpg_source; ?>_str2_form.jpg" alt="<?php echo $jpg_title; ?> 2.strana" class="form-background">
+<img src="<?php echo $jpg_source; ?>_str2.jpg" alt="<?php echo $jpg_title; ?> 2.strana" class="form-background">
 
 <!-- II.CAST -->
-<input type="text" name="da2str" id="da2str" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:90px; top:142px; left:440px;"/>
-<div class="input-echo" style="top:176px; left:465px; "><?php echo $kli_vrok; ?></div>
+<input type="text" name="da2str" id="da2str" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:90px; top:192px; left:464px;"/>
+<div class="input-echo" style="top:226px; left:534px; "><?php echo $kli_vrok; ?></div>
 <!-- tabulka -->
-<div class="input-echo" style="top:241px; left:86px; font-size: 18px;"><?php echo "$ztitlp $zmeno $zprie $ztitlz"; ?></div>
+<div class="input-echo" style="top:285px; left:86px; font-size: 18px;"><?php echo "$ztitlp $zmeno $zprie $ztitlz"; ?></div>
 <!-- zrazene -->
-<input type="text" name="suma1" id="suma1" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:276px; left:606px;"/>
-<input type="text" name="zost1" id="zost1" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:276px; left:741px;"/>
-<input type="text" name="datm2" id="datm2" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:98px; top:311px; left:494px;"/>
-<input type="text" name="suma2" id="suma2" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:311px; left:606px;"/>
-<input type="text" name="zost2" id="zost2" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:311px; left:741px;"/>
-<input type="text" name="datm3" id="datm3" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:98px; top:346px; left:494px;"/>
-<input type="text" name="suma3" id="suma3" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:346px; left:606px;"/>
-<input type="text" name="zost3" id="zost3" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:346px; left:741px;"/>
-<!-- vratene -->
-<input type="text" name="suma4" id="suma4" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:381px; left:606px;"/>
-<input type="text" name="zost4" id="zost4" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:381px; left:741px;"/>
-<input type="text" name="datm5" id="datm5" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:98px; top:416px; left:494px;"/>
-<input type="text" name="suma5" id="suma5" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:416px; left:606px;"/>
-<input type="text" name="zost5" id="zost5" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:416px; left:741px;"/>
-<input type="text" name="datm6" id="datm6" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:98px; top:451px; left:494px;"/>
-<input type="text" name="suma6" id="suma6" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:451px; left:606px;"/>
-<input type="text" name="zost6" id="zost6" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:451px; left:741px;"/>
-<input type="text" name="datm7" id="datm7" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:98px; top:486px; left:494px;"/>
-<input type="text" name="suma7" id="suma7" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:486px; left:606px;"/>
-<input type="text" name="zost7" id="zost7" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:486px; left:741px;"/>
+<input type="text" name="suma1" id="suma1" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:313px; left:610px;"/>
+<input type="text" name="zost1" id="zost1" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:313px; left:741px;"/>
 
-<div class="input-echo" style="top:621px; left:75px; font-size: 18px;"><?php echo $fir_fmes; ?></div>
+<input type="text" name="datm2" id="datm2" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:93px; top:343px; left:509px;"/>
+<input type="text" name="suma2" id="suma2" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:343px; left:610px;"/>
+<input type="text" name="zost2" id="zost2" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:343px; left:741px;"/>
+
+<input type="text" name="datm3" id="datm3" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:93px; top:373px; left:509px;"/>
+<input type="text" name="suma3" id="suma3" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:373px; left:610px;"/>
+<input type="text" name="zost3" id="zost3" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:373px; left:741px;"/>
+
+<!-- vratene -->
+<input type="text" name="suma4" id="suma4" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:423px; left:610px;"/>
+<input type="text" name="zost4" id="zost4" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:423px; left:741px;"/>
+
+<input type="text" name="datm5" id="datm5" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:93px; top:451px; left:509px;"/>
+<input type="text" name="suma5" id="suma5" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:451px; left:610px;"/>
+<input type="text" name="zost5" id="zost5" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:451px; left:741px;"/>
+
+<input type="text" name="datm6" id="datm6" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:93px; top:479px; left:509px;"/>
+<input type="text" name="suma6" id="suma6" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:479px; left:610px;"/>
+<input type="text" name="zost6" id="zost6" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:479px; left:741px;"/>
+
+<input type="text" name="datm7" id="datm7" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:93px; top:508px; left:509px;"/>
+<input type="text" name="suma7" id="suma7" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:508px; left:610px;"/>
+<input type="text" name="zost7" id="zost7" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:508px; left:741px;"/>
+
+<input type="text" name="datm8" id="datm8" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:93px; top:538px; left:509px;"/>
+<input type="text" name="suma8" id="suma8" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:538px; left:610px;"/>
+<input type="text" name="zost8" id="zost8" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:538px; left:741px;"/>
+
+<div class="input-echo" style="top:640px; left:85px; font-size: 18px;"><?php echo $fir_fmes; ?></div>
 <!-- Dna -->
-<input type="text" name="da2ked" id="da2ked" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:117px; top:620px; left:354px;"/>
+<input type="text" name="da2ked" id="da2ked" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:117px; top:640px; left:364px;"/>
 <?php                     } ?>
 
 
@@ -1609,9 +1693,9 @@ $narodenyrok = substr($narodeny,6,9);
 
 <!-- III.Zaplatenie -->
 <div class="input-echo" style="width:244px; top:849px; left:498px; font-size:18px;"><?php echo $r06; ?>&nbsp;</div>
-<div class="input-echo" style="width:152px; top:889px; left:580px; font-size:18px;"><?php echo $r10; ?>&nbsp;</div>
-<div class="input-echo" style="width:244px; top:928px; left:498px; font-size:18px;"><?php echo $zpr03; ?>&nbsp;</div>
-<div class="input-echo" style="width:244px; top:968px; left:498px; font-size:18px;"><?php echo $r17n; ?>&nbsp;</div>
+<div class="input-echo" style="width:152px; top:889px; left:590px; font-size:18px;"><?php echo $r10; ?>&nbsp;</div>
+<div class="input-echo" style="width:244px; top:928px; left:498px; font-size:18px;"><?php echo $uro01; ?>&nbsp;</div>
+<div class="input-echo" style="width:244px; top:968px; left:498px; font-size:18px;"><?php echo $potr24; ?>&nbsp;</div>
 <div class="input-echo" style="width:244px; top:1007px; left:498px; font-size:18px;"><?php echo $r17n; ?>&nbsp;</div>
 <input type="text" name="zp2hod" id="zp2hod" onkeyup="CiarkaNaBodku(this);" style="width:247px; top:1046px; left:498px;"/>
 
@@ -1701,17 +1785,19 @@ $pdf->Image($jpg_source.'_str1.jpg',0,0,210,297);
 
 //za zdanovacie obdobie
 $pdf->SetFont('arial','',12);
-$pdf->Cell(190,12," ","$rmc1",1,"L");
+$pdf->Cell(190,6," ","$rmc1",1,"L");
 $obdobie=$kli_vrok;
-$pdf->Cell(120,4," ","$rmc1",0,"L");$pdf->Cell(12,6,"$kli_vrok","$rmc",1,"C");
+$pdf->Cell(153,4," ","$rmc1",0,"L");$pdf->Cell(12,6,"$kli_vrok","$rmc",1,"C");
 $pdf->SetFont('arial','',10);
 
 //ZAMESTNANEC
-$pdf->Cell(190,9," ","$rmc1",1,"L");
-$pdf->Cell(60,6," ","$rmc1",0,"L");$pdf->Cell(56,5,"$ztitlp $zmeno $zprie $ztitlz","$rmc",0,"L");
+$pdf->Cell(186,8," ","$rmc1",1,"L");
+$pdf->Cell(57,6," ","$rmc1",0,"L");$pdf->Cell(56,5,"$ztitlp $zmeno $zprie $ztitlz","$rmc",0,"L");
 $pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(42,5,"$rodne","$rmc",1,"L");
-$pdf->Cell(47,7," ","$rmc1",0,"L");$pdf->Cell(78,6.5,"$zuli $zcdm $zmes","$rmc",0,"L");
-$pdf->Cell(15,7," ","$rmc1",0,"L");$pdf->Cell(20,6.5,"$hlavicka->zpsc","$rmc",1,"L");
+
+$pdf->Cell(186,4," ","$rmc1",1,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(78,6.5,"$zuli $zcdm $zmes","$rmc",0,"L");
+$pdf->Cell(20,7," ","$rmc1",0,"L");$pdf->Cell(20,6.5,"$hlavicka->zpsc","$rmc",1,"L");
 
 //I.CAST
 $r00 = $hlavicka->r00; if ( $hlavicka->r00 == 0 ) $r00="";
@@ -1742,56 +1828,84 @@ $r17n = $hlavicka->r17n; if ( $hlavicka->r17n == 0 ) $r17n="";
 $r17p = $hlavicka->r17p; if ( $hlavicka->r17p == 0 ) $r17p="";
 $r18n = $hlavicka->r18n; if ( $hlavicka->r18n == 0 ) $r18n="";
 $r18p = $hlavicka->r18p; if ( $hlavicka->r18p == 0 ) $r18p="";
-$pdf->Cell(190,6," ","$rmc1",1,"L");
+
+if ( $uro01 == 0 ) $uro01="";
+if ( $uro02 == 0 ) $uro02="";
+if ( $uro03 == 0 ) $uro03="";
+
+$pdf->Cell(190,0.5," ","$rmc1",1,"L");
 $pdf->Cell(161,22," ","$rmc1",0,"L");$pdf->Cell(25,22,"$r00","$rmc",1,"R");
 $pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r00d","$rmc",1,"R");
 $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r00a","$rmc",1,"R");
 $pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r00b","$rmc",1,"R");
 $pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r00c","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,4,"$r01","$rmc",1,"R");
-if ( $r09 > 0 ) { $r04a="";  $r04b=""; $r04d=""; $r04x=""; }
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,7,"$r04a","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04b","$rmc",1,"R");
+$pdf->Cell(161,3," ","$rmc1",0,"L");$pdf->Cell(25,3,"$r01","$rmc",1,"R");
+
+//nczd
+$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04a","$rmc",1,"R");
+$pdf->Cell(161,4," ","$rmc1",0,"L");$pdf->Cell(25,4,"$r04b","$rmc",1,"R");
 $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04d","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04x","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r05","$rmc",1,"R");
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$znikup","$rmc",1,"R");
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r04x","$rmc",1,"R");
+
+//zdan.mzda
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r05","$rmc",1,"R");
+
+//dan
 $pdf->Cell(161,7," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r06","$rmc",1,"R");
-$pdf->Cell(161,7," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r07","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r08","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r09","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r09a","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r10","$rmc",1,"R");
-$pdf->Cell(161,9," ","$rmc1",0,"L");$pdf->Cell(25,8,"$r11","$rmc",1,"R");
-$pdf->Cell(161,8," ","$rmc1",0,"L");$pdf->Cell(25,5.5,"$r12","$rmc",1,"R");
-$pdf->Cell(161,4," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r12a","$rmc",1,"R");
-$pdf->Cell(161,7," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r13","$rmc",1,"R");
-$pdf->Cell(161,9," ","$rmc1",0,"L");$pdf->Cell(25,8,"$r14","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6.5,"$r15","$rmc",1,"R");
-$pdf->Cell(161,7," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r16","$rmc",1,"R");
+
+//zam.pr
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r09","$rmc",1,"R");
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r09a","$rmc",1,"R");
+
+//dan.bonus deti
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r10","$rmc",1,"R");
+$pdf->Cell(161,8," ","$rmc1",0,"L");$pdf->Cell(25,8,"$r11","$rmc",1,"R");
+$pdf->Cell(161,7," ","$rmc1",0,"L");$pdf->Cell(25,7,"$r12","$rmc",1,"R");
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r12a","$rmc",1,"R");
+$pdf->Cell(161,10," ","$rmc1",0,"L");$pdf->Cell(25,10,"$r13","$rmc",1,"R");
+
+//new 2018 dan-bonus r14
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$z17","$rmc",1,"R");
+
+//new 2018 bonus na uroky
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$uro01","$rmc",1,"R");
+$pdf->Cell(161,8," ","$rmc1",0,"L");$pdf->Cell(25,8,"$uro02","$rmc",1,"R");
+$pdf->Cell(161,8," ","$rmc1",0,"L");$pdf->Cell(25,8,"$uro03","$rmc",1,"R");
+
+$pdf->Cell(161,2," ","$rmc1",0,"L");$pdf->Cell(25,2," ","$rmc",1,"R");
+
+
+//preddavky
+$pdf->Cell(161,7," ","$rmc1",0,"L");$pdf->Cell(25,7,"$r14","$rmc",1,"R");
+
+//nedoplatky, preplatky
+$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r15","$rmc",1,"R");
+$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r16","$rmc",1,"R");
 $pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r17n","$rmc",1,"R");
-$pdf->Cell(161,7," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r17p","$rmc",1,"R");
-$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,4,"$r18n","$rmc",1,"R");
-$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5.5,"$r18p","$rmc",1,"R");
+$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r17p","$rmc",1,"R");
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r18n","$rmc",1,"R");
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r18p","$rmc",1,"R");
 
 //ZAMESTNAVATEL
-$pdf->Cell(190,10," ","$rmc1",1,"L");
-$pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(35,5,"$fir_fdic","$rmc",0,"L");
+$pdf->Cell(190,11," ","$rmc1",1,"L");
+$pdf->Cell(19,3," ","$rmc1",0,"L");$pdf->Cell(35,5,"$fir_fdic","$rmc",0,"L");
 $pdf->SetFont('arial','',9);
-$pdf->Cell(64,5," ","$rmc1",0,"L");$pdf->Cell(80,5,"$nazov, $fir_fuli $fir_fcdm, $fir_fmes","$rmc",1,"L");
+$pdf->Cell(60,5," ","$rmc1",0,"L");$pdf->Cell(80,5,"$nazov, $fir_fuli $fir_fcdm, $fir_fmes","$rmc",1,"L");
 $pdf->SetFont('arial','',10);
 
 //Vypracoval
-$pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(42,4,"$zrobil","$rmc",0,"L");
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(6,7," ","$rmc1",0,"L");$pdf->Cell(42,4,"$zrobil","$rmc",0,"L");
 $dat_dat = SkDatum($hlavicka->da21);
 if ( $dat_dat == '00.00.0000' ) $dat_dat="";
-$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(20,4,"$dat_dat","$rmc",0,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(20,4,"$dat_dat","$rmc",0,"L");
 $pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(60,4,"$fir_ftel","$rmc",1,"L");
 
 //Poznamka
-$pdf->Cell(190,11," ","$rmc1",1,"L");
+$pdf->Cell(190,12," ","$rmc1",1,"L");
 $pozn=$hlavicka->pozn;
-$pdf->Cell(11,5," ","$rmc1",0,"L");$pdf->Cell(160,5,"$pozn","$rmc",1,"L");
+$pdf->Cell(6,5," ","$rmc1",0,"L");$pdf->Cell(160,5,"$pozn","$rmc",1,"L");
 }
 $i = $i + 1;
   }
@@ -1808,6 +1922,9 @@ $i2=0;
   if (@$zaznam2=mysql_data_seek($sql2,$i2))
 {
 $hlavicka2=mysql_fetch_object($sql2);
+
+if ( $hlavicka2->da2str != "0000-00-00" OR $strana == 2 ) {
+
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
@@ -1818,7 +1935,7 @@ $pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
 }
 
 //II.CAST
-$pdf->Cell(190,28," ","$rmc1",1,"L");
+$pdf->Cell(190,33," ","$rmc1",1,"L");
 $da2str = $hlavicka2->da2str;
 $da2strsk=SkDatum($da2str);
 if ( $hlavicka2->da2str == '0000-00-00' ) $da2strsk="";
@@ -1835,6 +1952,7 @@ $suma4 = $hlavicka2->suma4;
 $suma5 = $hlavicka2->suma5;
 $suma6 = $hlavicka2->suma6;
 $suma7 = $hlavicka2->suma7;
+$suma8 = $hlavicka2->suma8;
 if ( $hlavicka2->suma1 == 0 ) $suma1="";
 if ( $hlavicka2->suma2 == 0 ) $suma2="";
 if ( $hlavicka2->suma3 == 0 ) $suma3="";
@@ -1842,6 +1960,7 @@ if ( $hlavicka2->suma4 == 0 ) $suma4="";
 if ( $hlavicka2->suma5 == 0 ) $suma5="";
 if ( $hlavicka2->suma6 == 0 ) $suma6="";
 if ( $hlavicka2->suma7 == 0 ) $suma7="";
+if ( $hlavicka2->suma8 == 0 ) $suma8="";
 $zost1 = $hlavicka2->zost1;
 $zost2 = $hlavicka2->zost2;
 $zost3 = $hlavicka2->zost3;
@@ -1849,6 +1968,7 @@ $zost4 = $hlavicka2->zost4;
 $zost5 = $hlavicka2->zost5;
 $zost6 = $hlavicka2->zost6;
 $zost7 = $hlavicka2->zost7;
+$zost8 = $hlavicka2->zost8;
 if ( $hlavicka2->zost1 == 0 ) $zost1="";
 if ( $hlavicka2->zost2 == 0 ) $zost2="";
 if ( $hlavicka2->zost3 == 0 ) $zost3="";
@@ -1856,6 +1976,7 @@ if ( $hlavicka2->zost4 == 0 ) $zost4="";
 if ( $hlavicka2->zost5 == 0 ) $zost5="";
 if ( $hlavicka2->zost6 == 0 ) $zost6="";
 if ( $hlavicka2->zost7 == 0 ) $zost7="";
+if ( $hlavicka2->zost8 == 0 ) $zost8="";
 $datm2 = $hlavicka2->datm2;
 $datm2sk=SkDatum($datm2);
 if ( $hlavicka2->datm2 == '0000-00-00' ) $datm2sk="";
@@ -1871,23 +1992,36 @@ if ( $hlavicka2->datm6 == '0000-00-00' ) $datm6sk="";
 $datm7 = $hlavicka2->datm7;
 $datm7sk=SkDatum($datm7);
 if ( $hlavicka2->datm7 == '0000-00-00' ) $datm7sk="";
+$datm8 = $hlavicka2->datm8;
+$datm8sk=SkDatum($datm8);
+if ( $hlavicka2->datm8 == '0000-00-00' ) $datm8sk="";
 
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,5," ","$rmc1",0,"R");$pdf->Cell(32,6,"$suma1","$rmc",0,"R");$pdf->Cell(28,6,"$zost1","$rmc",1,"R");
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,6,"$datm2sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma2","$rmc",0,"R");$pdf->Cell(28,6,"$zost2","$rmc",1,"R");
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,7,"$datm3sk","$rmc",0,"C");$pdf->Cell(32,7,"$suma3","$rmc",0,"R");$pdf->Cell(28,7,"$zost3","$rmc",1,"R");
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,5," ","$rmc1",0,"R");$pdf->Cell(32,6,"$suma4","$rmc",0,"R");$pdf->Cell(28,6,"$zost4","$rmc",1,"R");
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,6,"$datm5sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma5","$rmc",0,"R");$pdf->Cell(28,6,"$zost5","$rmc",1,"R");
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,6,"$datm6sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma6","$rmc",0,"R");$pdf->Cell(28,6,"$zost6","$rmc",1,"R");
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,7,"$datm7sk","$rmc",0,"C");$pdf->Cell(32,7,"$suma7","$rmc",0,"R");$pdf->Cell(28,7,"$zost7","$rmc",1,"R");
+$pdf->Cell(107,5," ","$rmc1",0,"L");$pdf->Cell(16,5," ","$rmc1",0,"R");$pdf->Cell(32,6,"$suma1","$rmc",0,"R");$pdf->Cell(28,6,"$zost1","$rmc",1,"R");
+$pdf->Cell(107,5," ","$rmc1",0,"L");$pdf->Cell(16,6,"$datm2sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma2","$rmc",0,"R");$pdf->Cell(28,6,"$zost2","$rmc",1,"R");
+$pdf->Cell(107,5," ","$rmc1",0,"L");$pdf->Cell(16,7,"$datm3sk","$rmc",0,"C");$pdf->Cell(32,7,"$suma3","$rmc",0,"R");$pdf->Cell(28,7,"$zost3","$rmc",1,"R");
+
+$pdf->Cell(190,6.5," ","$rmc1",1,"L");
+
+$pdf->Cell(107,5," ","$rmc1",0,"L");$pdf->Cell(16,5," ","$rmc1",0,"R");$pdf->Cell(32,6,"$suma4","$rmc",0,"R");$pdf->Cell(28,6,"$zost4","$rmc",1,"R");
+$pdf->Cell(107,5," ","$rmc1",0,"L");$pdf->Cell(16,6,"$datm5sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma5","$rmc",0,"R");$pdf->Cell(28,6,"$zost5","$rmc",1,"R");
+$pdf->Cell(107,5," ","$rmc1",0,"L");$pdf->Cell(16,6,"$datm6sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma6","$rmc",0,"R");$pdf->Cell(28,6,"$zost6","$rmc",1,"R");
+$pdf->Cell(107,5," ","$rmc1",0,"L");$pdf->Cell(16,7,"$datm7sk","$rmc",0,"C");$pdf->Cell(32,7,"$suma7","$rmc",0,"R");$pdf->Cell(28,7,"$zost7","$rmc",1,"R");
+$pdf->Cell(107,5," ","$rmc1",0,"L");$pdf->Cell(16,7,"$datm8sk","$rmc",0,"C");$pdf->Cell(32,7,"$suma8","$rmc",0,"R");$pdf->Cell(28,7,"$zost8","$rmc",1,"R");
 
 //Vystavene
-$pdf->Cell(190,18," ","$rmc1",1,"L");
+$pdf->Cell(190,16," ","$rmc1",1,"L");
 $da2ked = $hlavicka2->da2ked;
 $da2kedsk =SkDatum($da2ked);
 if ( $hlavicka2->da2ked == '0000-00-00' ) $da2kedsk="";
-$pdf->Cell(15,5," ","$rmc1",0,"L");$pdf->Cell(48,6,"$fir_fmes","$rmc",0,"L");
+$pdf->Cell(12,5," ","$rmc1",0,"L");$pdf->Cell(48,6,"$fir_fmes","$rmc",0,"L");
 $pdf->Cell(10,5," ","$rmc1",0,"R");$pdf->Cell(27,6,"$da2kedsk","$rmc",1,"C");
+
+
+//if ( $hlavicka2->da2str != "0000-00-00" OR $strana == 2 ) {
+                                                            }
+
 }
+
 $i2 = $i2 + 1;
   }
                                        } //$strana == 2 OR $strana == 9999
@@ -2425,6 +2559,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
+
 //r22
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $hodx=100*$r10;
@@ -2446,9 +2581,10 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
+
 //r23
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$hodx=100*$zpr03;
+$hodx=100*$uro01;
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf('% 10s',$hodx);
 $A=substr($text,0,1);
@@ -2467,9 +2603,10 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
+
 //r24
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$hodx=$r17n;
+$hodx=$potr24;
 $hodx=str_replace(".","",$hodx);
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf('% 10s',$hodx);
@@ -2732,8 +2869,8 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
 //   document.formv1.r04c.value = '<?php echo "$r04c";?>';
    document.formv1.r04d.value = '<?php echo "$r04d";?>';
    document.formv1.r06.value = '<?php echo "$r06";?>';
-   document.formv1.r07.value = '<?php echo "$r07";?>';
-   document.formv1.r08.value = '<?php echo "$r08";?>';
+//   document.formv1.r07.value = '<?php echo "$r07";?>';
+//   document.formv1.r08.value = '<?php echo "$r08";?>';
    document.formv1.r09.value = '<?php echo "$r09";?>';
    document.formv1.r09a.value = '<?php echo "$r09a";?>';
    document.formv1.r10.value = '<?php echo "$r10";?>';
@@ -2752,6 +2889,12 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
    document.formv1.r18p.value = '<?php echo "$r18p";?>';
    document.formv1.da21.value = '<?php echo "$da21";?>';
    document.formv1.pozn.value = '<?php echo "$pozn";?>';
+
+   document.formv1.znikup.value = '<?php echo "$znikup";?>';
+   document.formv1.z17.value = '<?php echo "$z17";?>';
+   document.formv1.uro01.value = '<?php echo "$uro01";?>';
+   document.formv1.uro02.value = '<?php echo "$uro02";?>';
+   document.formv1.uro03.value = '<?php echo "$uro03";?>';
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
@@ -2775,6 +2918,9 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
    document.formv1.datm7.value = '<?php echo "$datm7sk";?>';
    document.formv1.suma7.value = '<?php echo "$suma7";?>';
    document.formv1.zost7.value = '<?php echo "$zost7";?>';
+   document.formv1.datm8.value = '<?php echo "$datm8sk";?>';
+   document.formv1.suma8.value = '<?php echo "$suma8";?>';
+   document.formv1.zost8.value = '<?php echo "$zost8";?>';
    document.formv1.da2ked.value = '<?php echo "$da2kedsk";?>';
 <?php                     } ?>
 
