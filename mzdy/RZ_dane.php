@@ -499,7 +499,10 @@ window.open('../mzdy/priznanie_foa<?php echo $rokfoa; ?>.php?cislo_oc=' + h_oc +
 
 function TlacPotvrdFOA()
                 {
-  var okno = window.open("../tmp/potvrdfoa<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', '<?php echo $tlcswin; ?>' );
+var h_oc = document.forms.formfa1.h_oc.value;
+
+window.open('../mzdy/priznanie_foa<?php echo $rokfoa; ?>.php?cislo_oc=' + h_oc + '&strana=7&copern=10&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function FOAdoXML()

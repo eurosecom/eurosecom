@@ -2342,7 +2342,9 @@ $pdf->AddFont('arial','','arial.php');
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_foa".
 " WHERE F$kli_vxcf"."_mzdpriznanie_foa.oc = $cislo_oc AND konx1 = 0 ORDER BY oc";
-
+//echo $sqltt;
+//echo $strana;
+//exit;
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 
@@ -5258,30 +5260,18 @@ $ipole=$ipole+1;
                                  }
      }
                                        } //koniec 6.strany
-  }
-$i = $i + 1;
-  }
-$pdf->Output("$outfilex");
 
-//potvrdenie o podani
-if ( $copern == 10 )
-     {
-if ( File_Exists("../tmp/potvrdfoa$kli_vume.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrdfoa$kli_vume.$kli_uzid.pdf"); }
-$sirka_vyska="210,320";
-$velkost_strany = explode(",", $sirka_vyska);
-$pdf=new FPDF("P","mm", $velkost_strany );
 
-$pdf->Open();
-$pdf->AddFont('arial','','arial.php');
+//potvrdenie
+if ( $strana == 7  ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(13);
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists($jpg_cesta.'_potvrdenie.jpg') )
 {
 $pdf->Image($jpg_cesta.'_potvrdenie.jpg',0,0,210,297);
 }
-$pdf->SetY(10);
 
 //za rok
 $pdf->Cell(190,25," ","$rmc1",1,"L");
@@ -5290,12 +5280,12 @@ $pdf->Cell(82,6," ","$rmc1",0,"C");$pdf->Cell(34,6,"$kli_vrok","$rmc",1,"C");
 //priezvisko
 $pdf->Cell(190,30," ","$rmc1",1,"L");
 $text=$hlavicka->dprie;
-$pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(141,6,"$text","$rmc",1,"L");
+$pdf->Cell(16,7," ","$rmc1",0,"L");$pdf->Cell(141,6,"$text","$rmc",1,"L");
 
 //meno
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text=$hlavicka->dmeno;
-$pdf->Cell(11,7," ","$rmc1",0,"R");$pdf->Cell(46,7,"$text","$rmc",0,"L");
+$pdf->Cell(16,7," ","$rmc1",0,"R");$pdf->Cell(46,7,"$text","$rmc",0,"L");
 
 //rodne cislo
 $text=$hlavicka->fdic;
@@ -5315,38 +5305,42 @@ $pdf->Cell(7,7,"$H","$rmc",0,"C");$pdf->Cell(7,7,"$I","$rmc",0,"C");$pdf->Cell(7
 
 //ulica
 $pdf->Cell(190,13," ","$rmc1",1,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(141,7,"$hlavicka->duli $hlavicka->dcdm","$rmc",1,"L");
+$pdf->Cell(16,6," ","$rmc1",0,"L");$pdf->Cell(141,7,"$hlavicka->duli $hlavicka->dcdm","$rmc",1,"L");
 
 //psc a obec
 $pdf->Cell(190,7," ","$rmc1",1,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(26,5,"$hlavicka->dpsc","$rmc",0,"L");$pdf->Cell(20,6," ","$rmc1",0,"L");$pdf->Cell(95,5,"$hlavicka->dmes","$rmc",1,"L");
+$pdf->Cell(16,6," ","$rmc1",0,"L");$pdf->Cell(26,5,"$hlavicka->dpsc","$rmc",0,"L");$pdf->Cell(20,6," ","$rmc1",0,"L");$pdf->Cell(95,5,"$hlavicka->dmes","$rmc",1,"L");
 
 //stat
 $pdf->Cell(190,7," ","$rmc1",1,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(46,6,"SR","$rmc",1,"L");
+$pdf->Cell(16,6," ","$rmc1",0,"L");$pdf->Cell(46,6,"SR","$rmc",1,"L");
 
 //udaje o danovom priznani
 $pdf->Cell(190,30," ","$rmc1",1,"L");
-$r42=$hlavicka->r42; if ( $r42 == 0 ) $r42="";
+$r44=$hlavicka->r44; if ( $r44 == 0 ) $r44="";
 $r46=$hlavicka->r46; if ( $r46 == 0 ) $r46="";
-$r65=$hlavicka->r65;
-$r66=$hlavicka->r66;
-if ( $r65 == 0 AND $r66 == 0 ) { $r65="0"; $r66=""; }
-if ( $r65 != 0 AND $r66 == 0 ) { $r66=""; }
-if ( $r65 == 0 AND $r66 != 0 ) { $r65=""; }
-$pdf->Cell(122,6," ","$rmc1",0,"L");$pdf->Cell(50,6,"$r42","$rmc",1,"R");
+$r71=$hlavicka->r71;
+$r72=$hlavicka->r72;
+if ( $r71 == 0 AND $r72 == 0 ) { $r71="0"; $r72=""; }
+if ( $r71 != 0 AND $r72 == 0 ) { $r72=""; }
+if ( $r71 == 0 AND $r72 != 0 ) { $r71=""; }
+$pdf->Cell(122,6," ","$rmc1",0,"L");$pdf->Cell(50,6,"$r44","$rmc",1,"R");
 $pdf->Cell(190,1," ","$rmc1",1,"L");
 $pdf->Cell(122,6," ","$rmc1",0,"L");$pdf->Cell(50,6,"$r46","$rmc",1,"R");
 $pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(122,6," ","$rmc1",0,"L");$pdf->Cell(50,6,"$r65","$rmc",1,"R");
+$pdf->Cell(122,6," ","$rmc1",0,"L");$pdf->Cell(50,6,"$r71","$rmc",1,"R");
 $pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(122,6," ","$rmc1",0,"L");$pdf->Cell(50,7,"$r66","$rmc",1,"R");
+$pdf->Cell(122,6," ","$rmc1",0,"L");$pdf->Cell(50,7,"$r72","$rmc",1,"R");
 
-$pdf->Output("../tmp/potvrdfoa$kli_vxcf.$kli_uzid.pdf");
-     }
-//koniec potvrdenie o podani
+
+                     } //koniec potvrdenie
+
+  }
+$i = $i + 1;
+  }
+$pdf->Output("$outfilex");
+
 ?>
-
 <script type="text/javascript">
   var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
