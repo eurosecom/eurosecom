@@ -767,7 +767,7 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 <span class="text-echo" style="top:139px; left:485px;"><?php echo $kli_vrok; ?></span>
 
 <!-- I.ZAMESTNANEC -->
-<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-row-tool" style="top:196px; left:360px; width:16px; height:16px;">
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-row-tool" style="top:246px; left:360px; width:16px; height:16px;">
 <span class="text-echo" style="top:273px; left:120px;"><?php echo $zprie; ?></span>
 <span class="text-echo" style="top:273px; left:410px;"><?php echo $zmeno; ?></span>
 <span class="text-echo" style="top:273px; left:591px;"><?php echo $zrodne; ?></span>
