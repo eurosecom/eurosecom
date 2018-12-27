@@ -135,7 +135,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa,".$databaza."F$h_ycf"."_mzdpriz
 " WHERE F$kli_vxcf"."_mzdpriznanie_foa.oc=".$databaza."F$h_ycf"."_mzdpriznanie_foa.oc ";
 
 $upravene = mysql_query("$uprtxt");
-echo $uprtxt;
+//echo $uprtxt;
 $copern=20;
 //koniec nacitania celeho minuleho roka do FOA
     }
@@ -158,14 +158,16 @@ $sqldok = mysql_query("$sqlttt");
   {
   $riaddok=mysql_fetch_object($sqldok);
   $r01=1*$riaddok->r01;
+  $r09=1*$riaddok->r09;
   $r03a=1*$riaddok->r03a;
   $r03b=1*$riaddok->r03b;
   $r03c=1*$riaddok->r09;
   $r05=1*$riaddok->r05;
   $r08=1*$riaddok->r08;
+  $r13=1*$riaddok->r13;
   }
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r32=$r01, r33=$r03a, r33a=$r03c, r33b=$r03b, r62=$r05, r57=$r08  WHERE oc = $cislo_oc";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r36=$r01, r36a=$r13, r37a=$r09, r37b=$r03b, r68=$r05, r59=$r08, r57=$r08  WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 //echo $sqtoz;
 $copern=20;
