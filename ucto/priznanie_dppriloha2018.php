@@ -77,6 +77,18 @@ $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctpriznanie_dpprilpro'.$sqlt;
 $vytvor = mysql_query("$vsql");
 //echo $vsql;
 }
+//zmeny 2018
+$sql = "SELECT prpodv2 FROM F".$kli_vxcf."_uctpriznanie_dpprilpro";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dpprilpro ADD new2018 DECIMAL(1,0) DEFAULT 0 AFTER prppp";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dpprilpro ADD prpodv1 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dpprilpro ADD prpodv2 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+}
 
 $sql = "SELECT pcsum FROM F$kli_vxcf"."_uctpriznanie_dppriloha WHERE ico=0";
 $vysledok = mysql_query("$sql");
@@ -118,6 +130,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dppriloha ADD alla2017 DECIMAL(1,0) DEFAULT 0 AFTER ico";
 $vysledek = mysql_query("$sql");
 }
+
 
 //cislo operacie
 $copern = 1*strip_tags($_REQUEST['copern']);
@@ -201,6 +214,9 @@ $prpod3 = 1*$_REQUEST['prpod3'];
 $prpod4 = 1*$_REQUEST['prpod4'];
 $prpod5 = 1*$_REQUEST['prpod5'];
 
+$prpodv1 = 1*$_REQUEST['prpodv1'];
+$prpodv2 = 1*$_REQUEST['prpodv2'];
+
 $prptxt = strip_tags($_REQUEST['prptxt']);
 
 $uprav="NO";
@@ -209,7 +225,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET ".
 " prpzo1='$prpzo1sql', prpzo2='$prpzo2sql', prpzo3='$prpzo3sql', prpzo4='$prpzo4sql', prpzo5='$prpzo5sql', ".
 " prpzd1='$prpzd1sql', prpzd2='$prpzd2sql', prpzd3='$prpzd3sql', prpzd4='$prpzd4sql', prpzd5='$prpzd5sql', ".
 " prpvz1='$prpvz1', prpvz2='$prpvz2', prpvz3='$prpvz3', prpvz4='$prpvz4', prpvz5='$prpvz5', ".
-" prpod1='$prpod1', prpod2='$prpod2', prpod3='$prpod3', prpod4='$prpod4', prpod5='$prpod5' ".
+" prpod1='$prpod1', prpod2='$prpod2', prpod3='$prpod3', prpod4='$prpod4', prpod5='$prpod5', prpodv1='$prpodv1', prpodv2='$prpodv2' ".
 " WHERE prcpl = $cislo_prcpl ";
 //echo $uprtxt;
 
@@ -433,6 +449,8 @@ $prpod5 = $fir_riadok->prpod5;
 $prpods = $fir_riadok->prpods;
 $prpodv = $fir_riadok->prpodv;
 $prptxt = $fir_riadok->prptxt;
+$prpodv1 = $fir_riadok->prpodv1;
+$prpodv2 = $fir_riadok->prpodv2;
 
 $copern=1201;
                       }
@@ -744,8 +762,12 @@ if ( $copern == 1201 )
 <input type="text" name="prpod5" id="prpod5" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:566px; left:604px;"/>
 
 <div class="input-echo right" style="width:290px; top:644px; left:604px;"><?php echo $prpods; ?>&nbsp;</div>
-<textarea name="prptxt" id="prptxt" style="width:838px; height:400px; top:700px; left:53px;"><?php echo $prptxt; ?></textarea>
-<div class="input-echo right" style="width:290px; top:1150px; left:604px;"><?php echo $prpodv; ?>&nbsp;</div>
+<textarea name="prptxt" id="prptxt" style="width:838px; height:309px; top:700px; left:53px;"><?php echo $prptxt; ?></textarea>
+
+<input type="text" name="prpodv1" id="prpodv1" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1034px; left:604px;"/>
+<input type="text" name="prpodv2" id="prpodv2" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1074px; left:604px;"/>
+
+<div class="input-echo right" style="width:290px; top:1176px; left:604px;"><?php echo $prpodv; ?>&nbsp;</div>
 <input type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-bottom-formsave">
 </form>
 <?php
@@ -1785,6 +1807,9 @@ $pdf->Output("../tmp/dppriloha.$kli_uzid.pdf");
    document.formv1.prpod3.value = '<?php echo $prpod3; ?>';
    document.formv1.prpod4.value = '<?php echo $prpod4; ?>';
    document.formv1.prpod5.value = '<?php echo $prpod5; ?>';
+
+   document.formv1.prpodv1.value = '<?php echo $prpodv1; ?>';
+   document.formv1.prpodv2.value = '<?php echo $prpodv2; ?>';
   }
 <?php
 //koniec uprava

@@ -1069,7 +1069,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD alla2017 DECIMAL(1,0) DEFA
 $vysledek = mysql_query("$sql");
 }
 //zmeny 2018
-$sql = "SELECT d9r01 FROM F".$kli_vxcf."_uctpriznanie_po";
+$sql = "SELECT vosspl FROM F".$kli_vxcf."_uctpriznanie_po";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -1081,6 +1081,18 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r308 DECIMAL(10,2) DEFAULT
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD d9r01 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
 $vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD vos13a DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD vos13b DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD pat13a TEXT NOT NULL AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD pat13b TEXT NOT NULL AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD vosspl DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+
 }
 //koniec pracovny def subor
 
@@ -2031,6 +2043,18 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
 " WHERE ico >= 0";
                      }
 
+if ( $strana == 14 ) {
+$vos13a = 1*$_REQUEST['vos13a'];
+$vos13b = 1*$_REQUEST['vos13b'];
+$vosspl = 1*$_REQUEST['vosspl'];
+$pat13a = strip_tags($_REQUEST['pat13a']);
+$pat13b = strip_tags($_REQUEST['pat13b']);
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
+" vos13a='$vos13a', vos13b='$vos13b', vosspl='$vosspl', pat13a='$pat13a', pat13b='$pat13b'  ".
+" WHERE ico >= 0";
+                     }
+
 $uprav="NO";
 //echo $uprtxt;
 
@@ -2963,6 +2987,15 @@ $vruc = $fir_riadok->vruc;
 $datuk = $fir_riadok->datuk;
 $datuk_sk = SkDatum($datuk);
                                       }
+
+if ( $strana == 14 OR $strana == 999 ) {
+$vos13a = $fir_riadok->vos13a;
+$vos13b = $fir_riadok->vos13b;
+$vosspl = $fir_riadok->vosspl;
+$pat13a = $fir_riadok->pat13a;
+$pat13b = $fir_riadok->pat13b;
+                                      }
+
 mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
@@ -3805,7 +3838,11 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <img src="<?php echo $jpg_source; ?>_str14.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
-
+<input type="text" name="vos13a" id="vos13a" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:150px; left:500px;"/>
+<textarea name="pat13a" id="pat13a" style="width:838px; height:160px; top:220px; left:53px;"><?php echo $pat13a; ?></textarea>
+<input type="text" name="vos13b" id="vos13b" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:404px; left:500px;"/>
+<textarea name="pat13b" id="pat13b" style="width:838px; height:160px; top:474px; left:53px;"><?php echo $pat13b; ?></textarea>
+<div class="input-echo right" style="width:290px; top:660px; left:500px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $vosspl; ?>&nbsp;</div>
 
 
 <?php                     } ?>
@@ -5896,6 +5933,13 @@ if ( $copern == 102 )
 <?php if ( $vruc == 1 ) { ?> document.formv1.vruc.checked = "checked"; <?php } ?>
    document.formv1.datuk.value = '<?php echo $datuk_sk; ?>';
 <?php                      } ?>
+
+<?php if ( $strana == 14 ) { ?>
+   document.formv1.vos13a.value = '<?php echo $vos13a; ?>';
+   document.formv1.vos13b.value = '<?php echo $vos13b; ?>';
+   //document.formv1.vosspl.value = '<?php echo $vosspl; ?>';
+<?php                      } ?>
+
   }
 <?php
 }
