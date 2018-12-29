@@ -1,0 +1,16 @@
+;;koniec
+A_text1;Úètovná jednotka nie je súèasou konsolidovaného celku.;koniec
+A_text2; ;koniec
+B_text1;Spoloènos nepretrite pokraèovala vo svojej èinnosti od 1.1.2019 do 31.12.2019.;koniec
+B_text2;Úètovná jednotka oceòovala majetok a záväzky###rn###        - ku dòu uskutoènenie úètovného prípadu###rn######rn###Ku dòu uskutoènenia úètovného prípadu oceòovala úètovná jednotka majetok a záväzky obstarávacou cenou###rn###        - dlhodobı nehmotnı majetok obstaranı kúpou###rn###        - dlhodobı hmotnı majetok obstaranı kúpou###rn###        - dlhodobı finanènı majetok###rn###        - zásoby obstarané kúpou###rn###        - poh¾adávky pri odplatnom nadobudnutí###rn###        - záväzky pri ich prevzatí###rn###        - krátkodobı finanènı majetok obstaranı kúpou###rn######rn###Obstarávacia cena je cena, za ktorú sa majetok obstaral a náklady súviace s jeho obstaraním. ###rn###Vyskytujúce sa náklady súvisiace s obstaraním v úètovnej jednotke:###rn###         - provízia###rn###         - dopravné###rn###         - poistné###rn###         - iné;koniec
+B_text3;Úètovná jednotka stanovila internım predpisom pravidlá pre úètovanie dlhodobého majetku.###rn######rn###Nehmotnı majetok, ktorého ocenenie sa rovná sume xy EUR, alebo nišie sa úètuje ###rn###na archu úètu 518 - Ostatné sluby. ###rn###Nehmotnı majetok, ktorého ocenenie je vyššie, zaradila úètovná jednotka do dlhodobého nehmotného majetku.###rn###Hmotnı majetok, ktorého ocenenie sa rovná sume xy EUR, alebo nišie úètuje ###rn###úètovná jednotka na archu úètu zásob. ###rn###Hmotnı majetok, ktorého ocenenie je vyššie, zaradila úètovná jednotka do dlhodobého hmotného majetku.###rn######rn###Úètovná jednotka zostavila pre bené úètovné obdobie odpisovı plán pre dlhodobı ###rn###majetok, ktorı obsahuje dobu odpisovania, sadzby odpisov a odpisové metódy.###rn######rn###Úètovná jednotka stanovila internım predpisom, e úètovné odpisy dlhodobého ###rn###majetku sa rovnajú daòovım odpisom.;koniec
+B_text4;Úètovná jednotka v benom úètovnom období nevykonala iadne zmeny úètovnıch zásad a úètovnıch metód.;koniec
+B_text5;Úètovná jednotka v benom úètovnom období neúètovala a nedostala iadne dotácie.;koniec
+B_text6;Úètovná jednotka v benom úètovnom období neúètovala iadne opravy chıb minulıch úètovnıch období.;koniec
+C_text1;Úètovná jednotka v benom úètovnom období neúètovala jednotlivé poloky nákladov alebo vınosov, ktoré majú vınimoènı rozsah.;koniec
+C_text2;  ;koniec
+C_text3;Úètovná jednotka v benom úètovnom období nevlastnila, neobstarávala ani nepredávala vlastné akcie.###rn###;koniec
+C_text4;Úètovná jednotka v benom úètovnom období neposkytovala ani navyplácala príjmy a vıhody###rn###èlenom štatutárnych orgánov, dozornıch orgánov a inıch orgánov.;koniec
+C_text5;Úètovná jednotka v benom úètovnom období nemá povinnosti, ktoré sa nevykazujú v súvahe.;koniec
+C_text6;Úètovná jednotka v benom úètovnom období nemá podmienené záväzky.;koniec
+C_text7;Úètovná jednotka v benom úètovnom období nemá podmienenı majetok.;koniec
