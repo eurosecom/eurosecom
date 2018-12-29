@@ -1375,7 +1375,8 @@ if ( $rokdppo == 2016 ) { $rokdppo="2015"; }
 <?php if ( $kli_vrok >= 2017 ) { ?>
 <?php
 $rokdppo=$kli_vrok;
-if ( $rokdppo >= 2017 ) { $rokdppo="2017"; }
+if ( $rokdppo == 2017 ) { $rokdppo="2017"; }
+if ( $rokdppo >= 2018 ) { $rokdppo="2018"; }
 ?>
   function TlacPriznanie()
   {
