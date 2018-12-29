@@ -2097,80 +2097,80 @@ $alertprepocet="";
 if ( $prepocitaj == 1 ) {
 $alertprepocet="!!! Prepoèítavam hodnoty v riadkoch !!!";
 
-//vsetky strany vypocty su upravene pre 2017
-//////////////////////strana 2 2017
+//vsetky strany vypocty su upravene pre 2018
+//////////////////////strana 2 2018
 
 if ( $rozdielodpisov == 1 )
   {
 //danove-uctovne prerobim na kliknutie na ikonku
-//upravene na rok 2017
+//upravene na rok 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r150=b1r01-b1r06, r250=0, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 //danove-uctovne prerobim na kliknutie na ikonku
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r250=-r150, r150=0, psys=0  WHERE r150 < 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
   }
 
 
 if ( $nedanovevydavky == 1 )
   {
 //danove-uctovne prerobim na kliknutie na ikonku
-//upravene na rok 2017
+//upravene na rok 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r130=a1r17, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r200=r110+r120+r130+r140+r150+r160+r170+r180, r300=r210+r220+r230+r240+r250+r260+r270+r280+r290, r301=r100+r200-r300+hr10, ".
+" r200=r110+r130+r140+r150+r170+r180, r300=r210+r220+r230+r240+r250+r260+r270+r280+r290, r301=r100+r200-r300+hr10, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
-/////////////////////strana 3 2017
+/////////////////////strana 3 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r310=r301+r302+r303+r304+r305+r306-r307, ".
+" r310=r301+r302+r303+r304+r305+r306-r307+r308, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r400=r310-r320-r330, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 if ( $odpocetstraty == 1 )
   {
-//upravene na rok 2017
+//upravene na rok 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r410=d9r02, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r400 > 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r410=r400, psys=0 WHERE ico >= 0 AND r410 > r400 AND r400 > 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r500=r400-r410, psys=0 WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r500=0 WHERE ico >= 0 AND r500 < 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 if ( $odpocetvyskum == 1 )
   {
-//upravene na rok 2017
+//upravene na rok 2018
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5 WHERE prcpl > 0 ";
 $sqldok = mysql_query("$sqlttt");
 
@@ -2185,64 +2185,63 @@ $sqldok = mysql_query("$sqlttt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r501='$prpodv' WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r510=r500-r501 WHERE ico >= 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r510=0 WHERE ico >= 0 AND r510 < 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r550=21, r600=(r550*r510), psys=0 WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r600=FLOOR(r600)  WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r600=r600/100  WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r600=0 WHERE r510 <= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
-//upravene na rok 2017
+//upravene na rok 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r700=r600-r610, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r700=0 WHERE r700 <= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 if ( $zapocetdane == 1 )
   {
 //upravene na rok 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r710=e1r06 WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r800=r700-r710, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r800=0 WHERE r800 <= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
-//danova licencia 2017
-//document.formv1.chpld.checked = 'true';  document.formv1.cho5k.checked = 'true';  document.formv1.chpdl.checked = 'true';  document.formv1.chndl.checked = 'true';
+//danova licencia 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r810=0      WHERE chndl = 1 ";
 //$upravene = mysql_query("$uprtxt");
 
@@ -2262,27 +2261,27 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r820=0, r830=0, r900=0, ".
 " psys=0 ".
 " WHERE ico >= 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r820=r810-r800, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r810 > 0 AND r810 > r800 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r900=r810+r830, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r810 > r800 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r900=r830, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r810 <= r800 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
-//////////////////strana 3,4 2017
+//////////////////strana 3,4 2018
 
 if ( $licenciatabk == 1 )
   {
@@ -2290,37 +2289,37 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r910=0, r920=0, r1000=0, ".
 " psys=0 ".
 " WHERE ico >= 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r920=k4r05, ".
 " psys=0 ".
 " WHERE ico >= 0 AND k4r05 > 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r910=r800-r810, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r800 > r810 AND r920 > 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r920=r910, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r920 > r910 AND r920 > 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1000=r800-r920, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r920 > 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1000=0, ".
 " psys=0 ".
 " WHERE r1000 <= 0 AND r920 > 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
   }
 
 
@@ -2328,113 +2327,108 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1040=r1010+r1020+r1030, ".
 " psys=0 ".
 " WHERE ico >= 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1050=r800, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r900 = 0 AND r1000 = 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1050=r900, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r810 > r800  ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1050=r800+r900, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r900 = r830 AND r1000 = 0  ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1050=r1000, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r1000 > 0  ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1080=r1050+r1060+r1070, ".
 " psys=0 ".
 " WHERE ico >= 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1100=r1080-r1090-r1040, r1101=0, ".
 " psys=0 ".
 " WHERE ico >= 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1101=-r1100, r1100=0, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r1100 < 0 ";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 if ( $preddavky == 1 )
   {
-//upravene na rok 2017
-
+//upravene na rok 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r1110=r510*21, psys=0 WHERE ico >= 0";
-if( $kli_vrok >= 2016 )
-         {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r1110=r510*21, psys=0 WHERE ico >= 0";
-         }
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1110=FLOOR(r1110)  WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1110=r1110/100  WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1110=r1110-r610-r710-r1030  WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1110=0 WHERE r1110 <= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
   }
 
 
-//////////////////strana 5 tabulky 2017
+//////////////////strana 5 tabulky 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " a1r17=a1r01+a1r02+a1r03+a1r04+a1r05+a1r06+a1r07+a1r08+a1r09+a1r10+a1r11+a1r12+a1r13+a1r14+a1r15+a1r16, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " b1r06=b1r02-b1r03-b1r04+b1r05, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 
-//////////////////strana 7 2017
+//////////////////strana 7 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET f1r03=f1r01-f1r02, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
-//////////////////strana 8 2017
+//////////////////strana 8 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET g3r04=g3r01+g3r02-g3r03, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET hr10=hr01+h1r02-h2r02+h1r03-h2r03+h1r04-h2r04+h1r05-h2r05+h1r06-h2r06+h1r07-h2r07+h1r08-h2r08+h1r09-h2r09, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
-//////////////////strana 9 2017
+//////////////////strana 9 2018
 if ( $nacitajdanlicencia == 1 )
   {
 $licencia2016 = 1*$_REQUEST['licencia2016'];
@@ -2483,19 +2477,19 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " psys=0  ".
 " WHERE ico >= 0";
 
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " k2r02='$k2r02', k3r02='$k3r02'+'$k4r02', k4r02=0, k2od='$k2od', k2do='$k2do', ".
 " psys=0  ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " k2r03='$r820', k3od='$obod', k3do='$obdo',  ".
 " psys=0  ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
     }
 
@@ -2504,48 +2498,53 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k5r01=k2r01-k3r01-k4r01, k5r02=k2r02-k3r02-k4r02, k5r03=k2r03-k3r03-k4r03, k5r04=k2r04-k3r04-k4r04, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k4r05=k4r01+k4r02+k4r03+k4r04, k5r05=k5r01+k5r02+k5r03+k5r04, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 
-//////////////////strana 10 2017
+//////////////////strana 10 2018
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ps1r06=ps1r01+ps1r02+ps1r03+ps1r04+ps1r05, ps2r06=ps2r01+ps2r02+ps2r03+ps2r04+ps2r05, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET psr12=psr07+psr08+psr09+psr10+psr11, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET psr13=ps1r06-ps2r06+psr12, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ps1r19=ps1r14+ps1r15+ps1r16+ps1r17+ps1r18, ps2r19=ps2r14+ps2r15+ps2r16+ps2r17+ps2r18, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
-//////////////////strana 11 2017
-
-
+//////////////////strana 11 2018
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET psr25=psr20+psr21+psr22+psr23+psr24, ".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ozd1r06=ozd1r01+ozd1r02+ozd1r03+ozd1r04+ozd1r05, ozd2r06=ozd2r04+ozd2r05,".
 " psys=0 ".
 " WHERE ico >= 0";
-//$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt");
+
+
+//////////////////strana 14 2018
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET vosspl=vos13a+vos13b, ".
+" psys=0 ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
 
 
 //koniec prepocitaj, len ak prepocitaj=1
