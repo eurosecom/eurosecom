@@ -965,7 +965,7 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 <td class="bmenu" width="28%"></td>
 
 <td class="bmenu" width="2%">
-<img src='../obr/export.png' onclick='FOAdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie priznania' >
+
 </td>
 
 <td class="bmenu" width="2%">
