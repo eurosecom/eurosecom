@@ -1447,7 +1447,8 @@ if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
 <?php if ( $kli_vrok >= 2017 ) { ?>
 <?php
 $rokfob=$kli_vrok;
-if ( $rokfob >= 2017 ) { $rokfob="2017";  }
+if ( $rokfob == 2017 ) { $rokfob="2017";  }
+if ( $rokfob >= 2018 ) { $rokfob="2018";  }
 ?>
   function TlacFOB()
   {
