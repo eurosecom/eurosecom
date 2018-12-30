@@ -946,13 +946,17 @@ $prpod2 = 1*$_REQUEST['prpod2'];
 $prpod3 = 1*$_REQUEST['prpod3'];
 $prpod4 = 1*$_REQUEST['prpod4'];
 $prpod5 = 1*$_REQUEST['prpod5'];
+
+$prpodv1 = 1*$_REQUEST['prpodv1'];
+$prpodv2 = 1*$_REQUEST['prpodv2'];
+
 $prptxt = trim(strip_tags($_REQUEST['prptxt']));
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
 " prpdzc='$prpdzcsql', prptxt='$prptxt', ".
 " prpzo1='$prpzo1sql', prpzo2='$prpzo2sql', prpzo3='$prpzo3sql', prpzo4='$prpzo4sql', prpzo5='$prpzo5sql', ".
 " prpzd1='$prpzd1sql', prpzd2='$prpzd2sql', prpzd3='$prpzd3sql', prpzd4='$prpzd4sql', prpzd5='$prpzd5sql', ".
 " prpvz1='$prpvz1', prpvz2='$prpvz2', prpvz3='$prpvz3', prpvz4='$prpvz4', prpvz5='$prpvz5', ".
-" prpod1='$prpod1', prpod2='$prpod2', prpod3='$prpod3', prpod4='$prpod4', prpod5='$prpod5' ".
+" prpod1='$prpod1', prpod2='$prpod2', prpod3='$prpod3', prpod4='$prpod4', prpod5='$prpod5', prpodv1='$prpodv1', prpodv2='$prpodv2' ".
 " WHERE oc = $cislo_oc";
                      }
 
@@ -2206,7 +2210,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD allb2017 DECIMAL(2,0) NOT
 $vysledek = mysql_query("$sql");
 }
 //zmeny pre rok 2018
-$sql = "SELECT uzhr FROM F".$kli_vxcf."_mzdpriznanie_fob";
+$sql = "SELECT prpodv2 FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if ( !$vysledok )
 {
@@ -2286,6 +2290,10 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD zurk DECIMAL(2,0) DEFAULT 0 AFTER new2018";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uzhr DECIMAL(2,0) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpodv1 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpodv2 DECIMAL(10,2) DEFAULT 0 AFTER new2018";
 $vysledek = mysql_query("$sql");
 }
 
@@ -3242,6 +3250,8 @@ $prpod5 = $fir_riadok->prpod5;
 
 $prpods = $fir_riadok->prpods;
 $prpodv = $fir_riadok->prpodv;
+$prpodv1 = $fir_riadok->prpodv1;
+$prpodv2 = $fir_riadok->prpodv2;
 $prptxt = $fir_riadok->prptxt;
                      }
 
@@ -4157,8 +4167,13 @@ class="btn-row-tool" style="top:614px; left:750px;">
 <input type="text" name="prpvz5" id="prpvz5" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:566px; left:293px;"/>
 <input type="text" name="prpod5" id="prpod5" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:566px; left:604px;"/>
 <div class="input-echo right" style="width:290px; top:644px; left:604px;"><?php echo $prpods; ?>&nbsp;</div>
-<textarea name="prptxt" id="prptxt" style="width:838px; height:400px; top:700px; left:53px;"><?php echo $prptxt; ?></textarea>
-<div class="input-echo right" style="width:290px; top:1150px; left:604px;"><?php echo $prpodv; ?>&nbsp;</div>
+<textarea name="prptxt" id="prptxt" style="width:838px; height:309px; top:700px; left:53px;"><?php echo $prptxt; ?></textarea>
+
+<input type="text" name="prpodv1" id="prpodv1" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1035px; left:604px;"/>
+<input type="text" name="prpodv2" id="prpodv2" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1075px; left:604px;"/>
+
+
+<div class="input-echo right" style="width:290px; top:1176px; left:604px;"><?php echo $prpodv; ?>&nbsp;</div>
 <?php                      } ?>
 
 
@@ -4229,14 +4244,18 @@ class="btn-row-tool" style="top:614px; left:750px;">
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:469px; left:830px;">
 <div class="input-echo right" style="width:242px; top:532px; left:518px;"><?php echo $sz7; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:532px; left:830px;">
-<input type="text" name="sz8" id="sz8" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:679px; left:532px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajSz9();" title="Naèíta zaplatené poistné z riadka è. 35 na 2. strane" class="btn-row-tool" style="top:680px; left:750px;">
-<input type="text" name="sz9" id="sz9" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:719px; left:532px;"/>
-<input type="text" name="sz10" id="sz10" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:758px; left:532px;"/>
-<input type="text" name="sz11" id="sz11" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:797px; left:532px;"/>
-<input type="text" name="sz12" id="sz12" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:838px; left:532px;"/>
-<input type="text" name="sz13" id="sz13" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:878px; left:532px;"/>
-<input type="text" name="sz14" id="sz14" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:921px; left:532px;"/>
+
+<input type="text" name="sz8" id="sz8" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:679px; left:520px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajSz9();" title="Naèíta zaplatené poistné z riadka è. 35 na 2. strane" 
+class="btn-row-tool" style="top:680px; left:830px;">
+<input type="text" name="sz9" id="sz9" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:719px; left:520px;"/>
+<input type="text" name="sz10" id="sz10" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:758px; left:520px;"/>
+<input type="text" name="sz11" id="sz11" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:797px; left:520px;"/>
+<input type="text" name="sz12" id="sz12" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:838px; left:520px;"/>
+<input type="text" name="sz13" id="sz13" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:878px; left:520px;"/>
+<input type="text" name="sz14" id="sz14" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:921px; left:520px;"/>
+
+
 <input type="checkbox" name="vpdu" value="1" style="top:1019px; left:60px;"/>
 <input type="text" name="sz15" id="sz15" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1051px; left:517px;"/>
 <input type="text" name="szdat" id="szdat" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:196px; top:1122px; left:116px;"/>
@@ -6671,6 +6690,9 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    document.formv1.prpod3.value = '<?php echo $prpod3; ?>';
    document.formv1.prpod4.value = '<?php echo $prpod4; ?>';
    document.formv1.prpod5.value = '<?php echo $prpod5; ?>';
+
+   document.formv1.prpodv1.value = '<?php echo $prpodv1; ?>';
+   document.formv1.prpodv2.value = '<?php echo $prpodv2; ?>';
 <?php                                         } ?>
 
 <?php if ( $strana == 15 OR $strana == 9999 ) { ?>
