@@ -59,7 +59,7 @@ $xml = 1*$_REQUEST['xml'];
 $prepocitaj = 1*$_REQUEST['prepocitaj'];
 
 //jpg source
-$jpg_source="../dokumenty/tlacivo2018/dan_z_prijmov_v18/dppo/dppo_v18";
+$jpg_source="../dokumenty/tlacivo2018/dppo/dppo_v18";
 $jpg_title="tlaèivo Daò z príjmov PO pre rok $kli_vrok $strana.strana";
 
 //nacitanie minuleho roka do PO
@@ -3174,9 +3174,11 @@ if ( $strana == 14 ) $clas14="active";
   <a href="#" onclick="editForm(14);" class="<?php echo $clas14; ?> toleft">14</a>
 <a href="#" onclick="window.open('priznanie_dppriloha2018.php?copern=1101&drupoh=1', '_self')" class="toleft">Vızkum</a>
 <a href="#" onclick="window.open('priznanie_dppriloha2018.php?copern=101&drupoh=1', '_self')" class="toleft">Príj2%</a>
+<!--
 <a href="#" onclick="window.open('priznanie_dppriloha2018.php?copern=11&drupoh=1', '_blank')" class="toright">Príj2%</a>
 <a href="#" onclick="window.open('priznanie_dppriloha2018.php?copern=1011&drupoh=1', '_blank')" class="toright">Vızkum</a>
-<!--   <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
+  <a href="#" onclick="FormPDF(14);" class="<?php echo $clas14; ?> toright">14</a>
+  <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
   <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
   <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
   <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
@@ -3189,7 +3191,7 @@ if ( $strana == 14 ) $clas14="active";
   <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">3</a>
   <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
   <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
-  <h6 class="toright">Tlaèi:</h6> -->
+  <h6 class="toright">Tlaèi:</h6>-->
   <input type="submit" id="uloz" name="uloz" value="Uloi zmeny" class="btn-top-formsave">
   <input type="checkbox" name="prepocitaj" value="1" class="btn-prepocet"/>
 <?php if ( $prepocitaj == 1 ) { ?>

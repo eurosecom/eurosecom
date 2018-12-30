@@ -22,7 +22,7 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
 $sDat = include("../funkcie/dat_sk_us.php");
 
 //.jpg podklad
-$jpg_source="../dokumenty/tlacivo2018/dan_z_prijmov_v18/dppo/dppo_v18";
+$jpg_source="../dokumenty/tlacivo2018/dppo/dppo_v18";
 $jpg_title="tlaèivo Daò z príjmov PO pre rok ".$kli_vrok;
 
 $citfir = include("../cis/citaj_fir.php");
@@ -704,7 +704,7 @@ if ( $copern == 201 )
 <img src="<?php echo $jpg_source; ?>_str16.jpg" class="form-background" alt="<?php echo $jpg_title; ?> 15.strana">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 <!-- PRILOHA k IV.casti -->
-<input type="text" name="p1cis" id="p1cis" style="width:86px; top:154px; left:169px;"/>
+<input type="text" name="p1cis" id="p1cis" style="width:86px; top:154px; left:219px;"/>
 <input type="text" name="pcsum" id="pcsum" onkeyup="CiarkaNaBodku(this);" style="width:266px; top:209px; left:161px;"/>
 <input type="text" name="p1ico" id="p1ico" maxlength="12" style="width:267px; top:265px; left:51px;"/>
 <input type="text" name="p1pfr" id="p1pfr" style="width:519px; top:265px; left:374px;"/>
@@ -865,20 +865,20 @@ $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$I","$rmc",0,"C");$pdf->Cell(1
 
 //suradnice Y 1., 2. a 3. polozky
 if ( $j == 0 ) { $pozy=30; }
-if ( $j == 1 ) { $pozy=116; }
+if ( $j == 1 ) { $pozy=115.5; }
 if ( $j == 2 ) { $pozy=201; }
 
 $pdf->SetY($pozy);
 
 //PRIJIMATEL
 //cislo
-$text=sprintf('% 2s',$hlavicka->p1cis);
+$text=sprintf('% 4s',$hlavicka->p1cis);
 if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
 $t04=substr($text,3,1);
-$pdf->Cell(28,7," ","$rmc1",0,"C");$pdf->Cell(4.5,6,"$t01","$rmc",0,"C");
+$pdf->Cell(38,7," ","$rmc1",0,"C");$pdf->Cell(4.5,6,"$t01","$rmc",0,"C");
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",1,"C");
@@ -1501,7 +1501,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t10","$rmc",0,"C");
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t11","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t12","$rmc",1,"C");
 //
-$pdf->Cell(195,3," ","$rmc1",1,"L");
+$pdf->Cell(195,2," ","$rmc1",1,"L");
 $text=SKDatum($hlavicka->prpzd3);
 if ( $text =='00.00.0000' ) $text="";
 $pole = explode(".", $text);
@@ -1597,7 +1597,7 @@ $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
 
 //riadok5
-$pdf->Cell(195,2," ","$rmc1",1,"L");
+$pdf->Cell(195,3," ","$rmc1",1,"L");
 $text=SKDatum($hlavicka->prpzo5);
 if ( $text =='00.00.0000' ) $text="";
 $pole = explode(".", $text);
@@ -1711,9 +1711,57 @@ $pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(186,8,"$hodnota","$rmc",1,"L");
 $ipole=$ipole+1;
                                  }
      }
+//odpocet_30c_ods1
+$pdf->SetY(231.5);
+$text="0123456789";
+$hodx=100*$hlavicka->prpodv1;
+if ( $hodx == 0 ) $hodx="";
+$text=sprintf("% 12s",$hodx);
+$t01=substr($text,0,1);
+$t02=substr($text,1,1);
+$t03=substr($text,2,1);
+$t04=substr($text,3,1);
+$t05=substr($text,4,1);
+$t06=substr($text,5,1);
+$t07=substr($text,6,1);
+$t08=substr($text,7,1);
+$t09=substr($text,8,1);
+$t10=substr($text,9,1);
+$t11=substr($text,10,1);
+$t12=substr($text,11,1);
+$pdf->Cell(124,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t08","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t10","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t11","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t12","$rmc",1,"C");
+//odpocet_30c_ods2
+$pdf->SetY(240);
+$text="0123456789";
+$hodx=100*$hlavicka->prpodv2;
+if ( $hodx == 0 ) $hodx="";
+$text=sprintf("% 12s",$hodx);
+$t01=substr($text,0,1);
+$t02=substr($text,1,1);
+$t03=substr($text,2,1);
+$t04=substr($text,3,1);
+$t05=substr($text,4,1);
+$t06=substr($text,5,1);
+$t07=substr($text,6,1);
+$t08=substr($text,7,1);
+$t09=substr($text,8,1);
+$t10=substr($text,9,1);
+$t11=substr($text,10,1);
+$t12=substr($text,11,1);
+$pdf->Cell(124,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t08","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t10","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t11","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t12","$rmc",1,"C");
 
 //spolu vsetky projekty
-$pdf->SetY(258);
+$pdf->SetY(263);
 $text="0123456789";
 $hodx=100*$hlavicka->prpodv;
 if ( $hodx == 0 ) $hodx="";
@@ -1736,7 +1784,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t08","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t10","$rmc",0,"C");
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t11","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t12","$rmc",1,"C");
-
   }
 $i=$i+1;
   }
