@@ -2171,17 +2171,22 @@ $upravene = mysql_query("$uprtxt");
 if ( $odpocetvyskum == 1 )
   {
 //upravene na rok 2018
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5 WHERE prcpl > 0 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5, prppp=1, prpodv=prpodv1+prpodv2 WHERE prcpl > 0 ";
 $sqldok = mysql_query("$sqlttt");
 
+
 $prpodv=0;
-$sqlttt = "SELECT SUM(prpods) AS sums FROM F$kli_vxcf"."_uctpriznanie_dpprilpro WHERE prcpl > 0 ";
+$sqlttt = "SELECT SUM(prpods) AS sums, SUM(prppp) AS sump, SUM(prpodv) AS sumv FROM F$kli_vxcf"."_uctpriznanie_dpprilpro WHERE prcpl > 0 ";
 $sqldok = mysql_query("$sqlttt");
  if (@$zaznam=mysql_data_seek($sqldok,0))
  {
  $riaddok=mysql_fetch_object($sqldok);
- $prpodv=$riaddok->sums;
+ $prpodv=$riaddok->sumv;
+ $prppp=$riaddok->sump;
  }
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpodv='$prpodv', prppp='$prppp' WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r501='$prpodv' WHERE ico >= 0";
@@ -3409,7 +3414,7 @@ $sn1c=substr($sknacec,0,1);
 <div class="input-echo right" style="width:290px; top:564px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r1080; ?>&nbsp;</div>
 <input type="text" name="r1090" id="r1090" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:603px; left:530px;"/>
 <div class="input-echo right" style="width:290px; top:642px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r1100; ?>&nbsp;</div>
-<div class="input-echo right" style="width:290px; top:681px; left:530px; background-color: #E8F4CE; " title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r1101; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:681px; left:530px;  title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r1101; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Spôsob výpoètu preddavku" onclick="InfoPreddDane();" class="btn-row-tool" style="top:817px; left:440px;">
 <input type="text" name="r1110" id="r1110" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:817px; left:529px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="Preddavky();" title="Vypoèíta výšku preddavku na daò" class="btn-row-tool" style="top:817px; left:833px;">
