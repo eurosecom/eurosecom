@@ -144,7 +144,7 @@ $namanzelku = 1*$_REQUEST['namanzelku'];
 $xml = 1*$_REQUEST['xml'];
 
 //.jpg podklad
-$jpg_source="../dokumenty/tlacivo2018/dan_z_prijmov_v18/dpfob/fob_v18";
+$jpg_source="../dokumenty/tlacivo2018/dpfob/fob_v18";
 $jpg_title="tlaèivo Daò z príjmov FO typ B pre rok $kli_vrok $strana.strana";
 
 $zablokovane=0;

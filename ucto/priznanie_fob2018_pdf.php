@@ -179,7 +179,7 @@ exit;
 //koniec ak neexistuje tabulka chod do upravy
 
 //.jpg podklad
-$jpg_source="../dokumenty/dan_z_prijmov2017/dpfob/dpfob_v17";
+$jpg_source="../dokumenty/tlacivo2018/dpfob/fob_v17";
 $jpg_title="tlaèivo Daò z príjmov FO typ B pre rok $kli_vrok $strana.strana";
 
 //ak z androidu nacitaj prijmy a vydavky z vykazu o prijmoch a vydavkoch
