@@ -260,11 +260,11 @@ $nacitajsz9=1;
 $copern=20;
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
-" sz8=r35 ".
+" sz8=r39 ".
 " WHERE oc >= 0 ";
 $upravene = mysql_query("$uprtxt");
 
-$strana=16;
+$strana=17;
 }
 //koniec copern=209 nastav sz9 = r35
 
@@ -2381,277 +2381,309 @@ if ( ( $copern == 10 OR $copern == 20 ) AND $prepocitaj == 1 )
 {
 $alertprepocet="!!! PrepoËÌtavam hodnoty v riadkoch !!!";
 
-//str 2 zaklady dane zo zav.cinnosti 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r36=r34-r35 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 3 zaklady dane zo zav.cinnosti 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r40=r38-r39 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 
-//str 3 prijmy,vydavky z tabulky 1. 2017
+//str 3 prijmy,vydavky z tabulky 1. 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1p10=t1p1+t1p2+t1p3+t1p4+t1p5+t1p6+t1p7+t1p8+t1p9 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1v10=t1v1+t1v2+t1v3+t1v4+t1v5+t1v6+t1v7+t1v8+t1v9 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1p13=t1p11+t1p12  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1v13=t1v11+t1v12  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//str 4 zaklad dane, danova strata z podnikania 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r37=t1p10, r38=t1v10, r39=0, r40=0, r43=0, r44=0  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r39=r37-r38+r39pu WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r40=-r39, r39=0 WHERE oc = $cislo_oc AND r39 < 0";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r40=r40pu WHERE oc = $cislo_oc AND r39 = 0 AND r40pu > 0 ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r43=r39-r40+r41-r42 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 4,5 zaklad dane, danova strata z podnikania 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r41=t1p10, r42=t1v10, r43=0, r44=0, r47=0, r48=0  WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r43=r41-r42+r43pu WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r44=-r43, r43=0 WHERE oc = $cislo_oc AND r43 < 0";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r44=r44pu WHERE oc = $cislo_oc AND r43 = 0 AND r44pu > 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r47=r43-r44+r45-r46 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r48=-r47, r47=0 WHERE oc = $cislo_oc AND r47 < 0";
+$oznac = mysql_query("$sqtoz");
 
-//str 5 2016
-//str 5 uplatnenie danovych strat 2016
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r53=r45+r46+r47+r48+r49+r50 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 5 uplatnenie danovych strat 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r53=r49+r50+r51+r52 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r54=r53/4 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r55=r43-r54 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r55=r47-r54 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r55=0 WHERE oc = $cislo_oc AND r55 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r56=prpodv WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r57=r55-r56 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r57=0 WHERE oc = $cislo_oc AND r57 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
+//zaklad dane prijmy z tab 1. r13 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r58=t1p13, r59=t1v13, r60=0, r65=0 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r60=r58-r59 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60+r61+r63-r64 WHERE oc = $cislo_oc AND r61 >= 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60 WHERE oc = $cislo_oc AND r65 < 0 AND r61 >= 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60+r62+r63-r64 WHERE oc = $cislo_oc AND r62 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60 WHERE oc = $cislo_oc AND r65 < 0 AND r62 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//str 5,6 prijmy,vydavky z tabulky 2. 2017
+//str 6,7 prijmy,vydavky z tabulky 2. 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t2p11=t2p1+t2p2+t2p3+t2p4+t2p5+t2p6+t2p7+t2p8+t2p9+t2p10 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t2v11=t2v1+t2v2+t2v3+t2v4+t2v5+t2v6+t2v7+t2v8+t2v9+t2v10 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r66=t2p11, r67=t2v11, r68=0 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r68=r66-r67 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r68=0 WHERE oc = $cislo_oc AND r68 < 0";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//str 6,7 vypocet zakladu dane z ostatnych prijmov tabulka 3. 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t3p17=t3p1+t3p2+t3p3+t3p4+t3p5+t3p6+t3p7+t3p8+t3p9+t3p10+t3p11+t3p12+t3p13+t3p14+t3p15+t3p16 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t3v17=t3v1+t3v2+t3v3+t3v4+t3v5+t3v6+t3v7+t3v8+t3v9+t3v10+t3v11+t3v12+t3v13+t3p14+t3p15 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r69=t3p17, r70=t3v17, r71=r69-r70 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 7,8 vypocet zakladu dane z ostatnych prijmov tabulka 3. 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
+" t3p19=t3p1+t3p2+t3p3+t3p4+t3p5+t3p6+t3p7+t3p8+t3p9+t3p10+t3p11+t3p12+t3p13+t3p14+t3p15+t3p16+t3p18 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
+" t3v19=t3v1+t3v2+t3v3+t3v4+t3v5+t3v6+t3v7+t3v8+t3v9+t3v10+t3v11+t3v12+t3v13+t3v14+t3v15+t3v16+t3v17 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r69=t3p19, r70=t3v19, r71=r69-r70 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 
 
-//str 8 vypocet zakladu dane 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r72=r36+r57 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 8 vypocet zakladu dane 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r72=r40+r57 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 
 
 if ( $miliondan == 1 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//max.nezdanitelna cast na danovnika za 2017
+//max.nezdanitelna cast na danovnika za 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=3803.33 WHERE oc = $cislo_oc  ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=3830.02 WHERE oc = $cislo_oc  ";
+$oznac = mysql_query("$sqtoz");
 
-//milionarska dan 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=8755.578-(r72/4) WHERE oc = $cislo_oc AND r72 > 19809.00 ";
-//$oznac = mysql_query("$sqtoz");
+//milionarska dan 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=8817.016-(r72/4) WHERE oc = $cislo_oc AND r72 > 19948.00 ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob".
-" SET des2=des6*100, des2=ceil(des2), r73=des2/100  WHERE oc = $cislo_oc AND r72 > 19809.00 ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=0 WHERE oc = $cislo_oc AND r74 < 0 ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=0 WHERE oc = $cislo_oc AND r72 >= 35022.32 ";
-//$oznac = mysql_query("$sqtoz");
+" SET des2=des6*100, des2=ceil(des2), r73=des2/100  WHERE oc = $cislo_oc AND r72 > 19948.00 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=0 WHERE oc = $cislo_oc AND r73 < 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=0 WHERE oc = $cislo_oc AND r72 >= 35268.06 ";
+$oznac = mysql_query("$sqtoz");
      }
-//koniec max.nezdanitelna cast na danovnika za 2017
+//koniec max.nezdanitelna cast na danovnika za 2018
 
 if ( $namanzelku == 1 )
      {
-//nezdanitelna cast na manzelku 2017
+//nezdanitelna cast na manzelku 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=mpom*(3803.33-mpri)/12 WHERE oc = $cislo_oc AND r72 < 35022.32 ";
-//$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob".
-" SET des2=des6*100, des2=ceil(des2), r74=des2/100  WHERE oc = $cislo_oc AND r72 < 35022.32 ";
-//$oznac = mysql_query("$sqtoz");
-
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=mpom*(12558.906-(r72/4))/12 WHERE oc = $cislo_oc AND r72 >= 35022.32 ";
-//$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=des6-mpri WHERE oc = $cislo_oc AND r72 >= 35022.32 ";
-//$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=mpom*(3830.02-mpri)/12 WHERE oc = $cislo_oc AND r72 < 35268.06 ";
+$oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob".
-" SET des2=des6*100, des2=ceil(des2), r74=des2/100  WHERE oc = $cislo_oc AND r72 >= 35022.32 ";
-//$oznac = mysql_query("$sqtoz");
+" SET des2=des6*100, des2=ceil(des2), r74=des2/100  WHERE oc = $cislo_oc AND r72 < 35268.06 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=mpom*(12647.032-(r72/4))/12 WHERE oc = $cislo_oc AND r72 >= 35268.06 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=des6-mpri WHERE oc = $cislo_oc AND r72 >= 35268.06 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob".
+" SET des2=des6*100, des2=ceil(des2), r74=des2/100  WHERE oc = $cislo_oc AND r72 >= 35268.06 ";
+$oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r74=0 WHERE oc = $cislo_oc AND r74 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r74=0 WHERE oc = $cislo_oc AND r72 >= 50588.13 ";
+$oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r74=0 WHERE oc = $cislo_oc AND r72 >= 50235.63 ";
-//$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r74=0 WHERE oc = $cislo_oc AND nzdm = 0 ";
+$oznac = mysql_query("$sqtoz");
      }
-//nezdanitelna na manzelku 2017
+//nezdanitelna na manzelku 2018
 
 
-//str 8 vypocet zakladu dane 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r77=r73+r74+r75  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 8 vypocet zakladu dane 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r76=r76a+r76b WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r77=r73+r74+r75+r76  WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r77=r72  WHERE oc = $cislo_oc AND r77 > r72 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r78=r72-r77 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r78=0 WHERE oc = $cislo_oc AND r78 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r80=0 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r80=r78+r65+r71+r79 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r80=0 WHERE oc = $cislo_oc AND r80 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
 
-//str 8 dan z prijmu 2017
+//str 8 dan z prijmu 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=r80*19/100 WHERE oc = $cislo_oc AND r80 <= 35022.31 ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=(35022.31*19/100)+((r80-35022.31)*25/100) WHERE oc = $cislo_oc AND r80 > 35022.31 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=r80*19/100 WHERE oc = $cislo_oc AND r80 <= 35268.06 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=(35268.06*19/100)+((r80-35268.06)*25/100) WHERE oc = $cislo_oc AND r80 > 35268.06 ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des2=des6*100, r81=floor(des2), r81=r81/100 WHERE oc = $cislo_oc";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r81=0 WHERE oc = $cislo_oc AND r81 < 0 ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r81 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//str 8 dan po vynati prijmov 2017 dan zo zakladu na r83 nepocitam
+//str 8 dan po vynati prijmov 2018 dan zo zakladu na r84 nepocitam
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r83=r80-r82 WHERE oc = $cislo_oc AND r82 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r83=0 WHERE oc = $cislo_oc AND r83 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r84=0 WHERE oc = $cislo_oc AND r84 < 0 ";
+$oznac = mysql_query("$sqtoz");
 
-//str 8 dan po zapocte 2017
+//str 9 dan po zapocte 2018 r89 nepocitam
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r84-r89 WHERE oc = $cislo_oc AND r83 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r81-r89 WHERE oc = $cislo_oc AND r83 = 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//str 8 dan z osobitneho zakladu dane na r68 2017
+//str 9 dan z osobitneho zakladu dane na r68 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=r68*19/100 WHERE oc = $cislo_oc AND r68 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=(35268.06*19/100)+((r68-35268.06)*25/100) WHERE oc = $cislo_oc AND r68 > 35268.06 ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des2=des6*100, r91=floor(des2), r91=r91/100 WHERE oc = $cislo_oc AND r68 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r91=0 WHERE oc = $cislo_oc AND r91 < 0 ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r93=r68-r92 WHERE oc = $cislo_oc AND r68 > 0 AND r92 > 0 ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r93=0 WHERE oc = $cislo_oc AND r68 > 0 AND r93 < 0 ";
+$oznac = mysql_query("$sqtoz");
 
-//str 9 dan z osobitneho zakladu dane podla par.7 2017
+//str 9 dan z osobitneho zakladu dane podla par.7 po vynati a zapocte r94 a r99 nepocitam 2018 
 //$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r100=r91-r99 WHERE oc = $cislo_oc AND r68 > 0 AND r91 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r100=r94-r99 WHERE oc = $cislo_oc AND r68 > 0 AND r94 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r104=r100-r103 WHERE oc = $cislo_oc AND r68 > 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-
-//str 9 dan celkom 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r105=r90+r104 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 9 dan celkom 2018 andrej
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r105=r90+r104+ozdr28 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r105=0 WHERE oc = $cislo_oc AND r105 < 0 ";
+$oznac = mysql_query("$sqtoz");
 
 //vynuluj zuctovanie bonusu
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0, r109=0, r110=0, r111=0, r100=0  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0, r109=0, r110=0, r111=0, r115=0, r116=0 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 
-//dan znizena o dan. bonusu 2017
+//dan znizena o dan. bonusu 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=r105-r106 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0 WHERE oc = $cislo_oc AND r107 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//vysporiadanie danoveho bonusu 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r109=r106-r108  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 10 vysporiadanie danoveho bonusu 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r109=r106-r108 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r109=0 WHERE oc = $cislo_oc AND r109 < 0 ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r110=r109-r105  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r110=r109-r105 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r110=0 WHERE oc = $cislo_oc AND r110 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r111=r108-r106  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r111=0 WHERE oc = $cislo_oc AND r111 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//zapl.dan z urok.prijmov 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r119=r102-r103  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+//str 10 vysporiadanie danoveho bonusu na uroky 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r113=r107-r112 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r113=0 WHERE oc = $cislo_oc AND r113 < 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r115=r112-r114 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r115=0 WHERE oc = $cislo_oc AND r115 < 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r116=r115-r107 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r116=0 WHERE oc = $cislo_oc AND r116 < 0 ";
+$oznac = mysql_query("$sqtoz");
 
-//str 10 dan na uhradu, preplatok 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r121=0, r120=r105-r106+r108+r110+r112-r113-r114-r115-r116-r117-r118-r119 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r121=-r120, r120=0 WHERE oc = $cislo_oc AND r120 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+//zapl.dan z urok.prijmov 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r124=r102-r103  WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+
+//dan na uhradu, preplatok 2018
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
+" r126=0, r125=r105-r106+r108+r110-r112+r114+r116+r117-r118-r119-r120-r121-r122-r123-r124 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r126=-r125, r125=0 WHERE oc = $cislo_oc AND r125 < 0 ";
+$oznac = mysql_query("$sqtoz");
 
 
-//Priloha 1 o projektoch 2017
+//Priloha 1 o projektoch 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpodv=prpods WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpodv=prpodv1+prpodv2 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpcp=0, prppp=0 WHERE prpods = 0 AND oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpcp=1, prppp=1 WHERE prpods > 0 AND oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//Priloha 2 dividendy 2017
+//Priloha 2 dividendy 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ozd1r06=ozd1r01+ozd1r02+ozd1r03+ozd1r04+ozd1r05, ozd2r06=ozd2r04+ozd2r05 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ozd1r24=ozd1r19+ozd1r20+ozd1r21+ozd1r22+ozd1r23, ozd2r24=ozd2r22+ozd2r23 WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
-//Priloha 3 socialne a zdravotne poistenie 2017
+//Priloha 3 socialne a zdravotne poistenie 2018
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET sz2=sz1p1-sz1v1, sz3=0  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET sz3=-sz2, sz2=0  WHERE oc = $cislo_oc AND sz2 < 0";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET sz6=sz2-sz3+sz4-sz5, sz7=0  WHERE oc = $cislo_oc ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET sz7=-sz6, sz6=0  WHERE oc = $cislo_oc AND sz6 < 0 ";
-//$oznac = mysql_query("$sqtoz");
+$oznac = mysql_query("$sqtoz");
 
 
 $estenie=1;
@@ -2919,6 +2951,8 @@ $r37 = $fir_riadok->r37;
 $r38 = $fir_riadok->r38;
 $r39 = $fir_riadok->r39;
 $r40 = $fir_riadok->r40;
+$r41 = $fir_riadok->r41;
+$r42 = $fir_riadok->r42;
 
                     }
 
@@ -2927,8 +2961,7 @@ if ( $strana == 5 ) {
 $r43pu = $fir_riadok->r43pu;
 $r44pu = $fir_riadok->r44pu;
 
-$r41 = $fir_riadok->r41;
-$r42 = $fir_riadok->r42;
+
 $r43 = $fir_riadok->r43;
 $r44 = $fir_riadok->r44;
 $r45 = $fir_riadok->r45;
@@ -3772,7 +3805,7 @@ title="NaËÌtaù prÌjmy, v˝davky a zaplatenÈ poistnÈ SP a ZP zo ûivnosti. Pred naË
 <input type="text" name="r54" id="r54" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:607px; left:507px;"/>
 
 <div class="input-echo right" style="width:242px; top:689px; left:510px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $r55; ?>&nbsp;</div>
-<input type="text" name="r56" id="r56" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:763px; left:507px;"/>
+<div class="input-echo right" style="width:242px; top:763px; left:504px; title="Hodnota sa prepoËÌta po uloûenÌ zmien""><?php echo $r56; ?>&nbsp;</div>
 <div class="input-echo right" style="width:242px; top:809px; left:510px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $r57; ?>&nbsp;</div>
 
 <div class="input-echo right" style="width:242px; top:860px; left:510px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $r58; ?>&nbsp;</div>
@@ -3919,7 +3952,7 @@ class="btn-row-tool" style="top:614px; left:750px;">
 <input type="text" name="r81" id="r81" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:987px; left:488px;"/>
 <input type="text" name="r82" id="r82" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1030px; left:488px;"/>
 <input type="text" name="r83" id="r83" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1087px; left:488px;"/>
-<div class="input-echo right" style="width:242px; top:1140px; left:489px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $r84; ?>&nbsp;</div>
+<input type="text" name="r84" id="r84" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1140px; left:488px;"/>
 
 <?php                     } ?>
 
@@ -3939,7 +3972,7 @@ class="btn-row-tool" style="top:614px; left:750px;">
 <input type="text" name="r91" id="r91" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:400px; left:500px;"/>
 <input type="text" name="r92" id="r92" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:440px; left:500px;"/>
 <input type="text" name="r93" id="r93" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:490px; left:500px;"/>
-<div class="input-echo right" style="width:242px; top:546px; left:500px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $r94; ?>&nbsp;</div>
+<input type="text" name="r94" id="r94" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:546px; left:500px;"/>
 
 <input type="text" name="r95" id="r95" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:596px; left:500px;"/>
 <input type="text" name="r96" id="r96" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:645px; left:500px;"/>
@@ -4188,8 +4221,8 @@ class="btn-row-tool" style="top:614px; left:750px;">
 <input type="text" name="ozd2r04" id="ozd2r04" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:468px; left:661px;"/>
 <input type="text" name="ozd1r05" id="ozd1r05" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:507px; left:410px;"/>
 <input type="text" name="ozd2r05" id="ozd2r05" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:507px; left:661px;"/>
-<div class="input-echo right" style="width:234px; top:546px; left:410px;"><?php echo $ozd1r06; ?>&nbsp;</div>
-<div class="input-echo right" style="width:234px; top:546px; left:661px;"><?php echo $ozd2r06; ?>&nbsp;</div>
+<div class="input-echo right" style="width:234px; top:546px; left:410px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $ozd1r06; ?>&nbsp;</div>
+<div class="input-echo right" style="width:234px; top:546px; left:661px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $ozd2r06; ?>&nbsp;</div>
 
 <input type="text" name="ozdr07" id="ozdr07" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:699px; left:557px;"/>
 
@@ -4220,8 +4253,8 @@ class="btn-row-tool" style="top:614px; left:750px;">
 <input type="text" name="ozd2r22" id="ozd2r22" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:384px; left:661px;"/>
 <input type="text" name="ozd1r23" id="ozd1r23" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:423px; left:410px;"/>
 <input type="text" name="ozd2r23" id="ozd2r23" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:423px; left:661px;"/>
-<div class="input-echo right" style="width:234px; top:463px; left:410px;"><?php echo $ozd1r24; ?>&nbsp;</div>
-<div class="input-echo right" style="width:234px; top:463px; left:661px;"><?php echo $ozd2r24; ?>&nbsp;</div>
+<div class="input-echo right" style="width:234px; top:463px; left:410px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $ozd1r24; ?>&nbsp;</div>
+<div class="input-echo right" style="width:234px; top:463px; left:661px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $ozd2r24; ?>&nbsp;</div>
 
 <input type="text" name="ozdr25" id="ozdr25" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:561px; left:558px;"/>
 <input type="text" name="ozdr27" id="ozdr27" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:645px; left:558px;"/>
@@ -4240,13 +4273,11 @@ class="btn-row-tool" style="top:614px; left:750px;">
 <input type="text" name="sz3" id="sz3" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:324px; left:517px;"/>
 <input type="text" name="sz4" id="sz4" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:368px; left:517px;"/>
 <input type="text" name="sz5" id="sz5" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:414px; left:517px;"/>
-<div class="input-echo right" style="width:242px; top:469px; left:518px;"><?php echo $sz6; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:469px; left:830px;">
-<div class="input-echo right" style="width:242px; top:532px; left:518px;"><?php echo $sz7; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:532px; left:830px;">
+<div class="input-echo right" style="width:242px; top:469px; left:518px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $sz6; ?>&nbsp;</div>
+<div class="input-echo right" style="width:242px; top:532px; left:518px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $sz7; ?>&nbsp;</div>
 
 <input type="text" name="sz8" id="sz8" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:679px; left:520px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajSz9();" title="NaËÌtaù zaplatenÈ poistnÈ z riadka Ë. 35 na 2. strane" 
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajSz9();" title="NaËÌtaù zaplatenÈ poistnÈ z riadka Ë. 39 na 3. strane" 
 class="btn-row-tool" style="top:680px; left:830px;">
 <input type="text" name="sz9" id="sz9" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:719px; left:520px;"/>
 <input type="text" name="sz10" id="sz10" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:758px; left:520px;"/>
@@ -5648,7 +5679,7 @@ if ( $datum =='00.00.0000' ) $datum="";
   $text = "  </danovyPreplatokBonus>"."\r\n"; fwrite($soubor, $text);
 
 
-//priloha nova v roku 2017 <prilPodielyNaZisku> Andrejko pridaj sem
+//priloha nova v roku 2017 <prilPodielyNaZisku> 
   $text = "  <prilPodielyNaZisku>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->ozd1r01; if ( $riadok == 0 ) { $riadok=""; }
   $text = "     <pr1><![CDATA[".$riadok."]]></pr1>"."\r\n"; fwrite($soubor, $text);
@@ -6413,7 +6444,7 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    document.formv1.r53.value = '<?php echo $r53; ?>';
    document.formv1.r54.value = '<?php echo $r54; ?>';
 //   document.formv1.r55.value = '<?php echo $r55; ?>';
-   document.formv1.r56.value = '<?php echo $r56; ?>';
+//   document.formv1.r56.value = '<?php echo $r56; ?>';
 //   document.formv1.r57.value = '<?php echo $r57; ?>';
 //   document.formv1.r58.value = '<?php echo $r58; ?>';
 //   document.formv1.r59.value = '<?php echo $r59; ?>';
@@ -6515,7 +6546,7 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    document.formv1.r81.value = '<?php echo $r81; ?>';
    document.formv1.r82.value = '<?php echo $r82; ?>';
    document.formv1.r83.value = '<?php echo $r83; ?>';
-//   document.formv1.r84.value = '<?php echo $r84; ?>';
+   document.formv1.r84.value = '<?php echo $r84; ?>';
 
 <?php                                        } ?>
 
@@ -6529,7 +6560,7 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    document.formv1.r91.value = '<?php echo $r91; ?>';
    document.formv1.r92.value = '<?php echo $r92; ?>';
    document.formv1.r93.value = '<?php echo $r93; ?>';
-//   document.formv1.r94.value = '<?php echo $r94; ?>';
+   document.formv1.r94.value = '<?php echo $r94; ?>';
    document.formv1.r95.value = '<?php echo $r95; ?>';
    document.formv1.r96.value = '<?php echo $r96; ?>';
    document.formv1.r97.value = '<?php echo $r97; ?>';
@@ -6806,7 +6837,6 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
   function NacitajSz9()
   {
    window.open('../ucto/priznanie_fob2018.php?strana=15&copern=209&drupoh=1&typ=PDF&dppo=1', '_self');
-   //dopyt, preveriù Ëi funguje
   }
   function UpravFO()
   {
