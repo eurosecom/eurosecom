@@ -171,7 +171,7 @@ if ( !$vysledok )
      {
 ?>
 <script type="text/javascript">
-  var okno = window.open("priznanie_fob2017.php?<?php echo $prmx; ?>&cislo_oc=9999&copern=20&drupoh=1&subor=0&prepocitaj=101", "_self");
+  var okno = window.open("priznanie_fob2018.php?<?php echo $prmx; ?>&cislo_oc=9999&copern=20&drupoh=1&subor=0&prepocitaj=101", "_self");
 </script>
 <?php
 exit;
@@ -179,7 +179,7 @@ exit;
 //koniec ak neexistuje tabulka chod do upravy
 
 //.jpg podklad
-$jpg_source="../dokumenty/tlacivo2018/dpfob/fob_v17";
+$jpg_source="../dokumenty/tlacivo2018/dpfob/fob_v18";
 $jpg_title="tlaèivo Daò z príjmov FO typ B pre rok $kli_vrok $strana.strana";
 
 //ak z androidu nacitaj prijmy a vydavky z vykazu o prijmoch a vydavkoch

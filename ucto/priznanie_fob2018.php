@@ -2372,7 +2372,7 @@ $miliondan = 1*$_REQUEST['miliondan'];
 if ( $miliondan == 1 ) { $prepocitaj=1; }
 if ( $namanzelku == 1 ) { $prepocitaj=1; }
 
-//vsetky vypocty su upravene na rok 2017
+//vsetky vypocty su upravene na rok 2018
 //vypocty
 //odstavene vypocty
 //$prepocitaj=0;
