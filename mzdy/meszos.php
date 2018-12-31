@@ -115,7 +115,12 @@ if( $rokmpreh <= 2012 ) { $rokmpreh="";  }
 if( $rokmpreh == 2013 ) { $rokmpreh="2013";  }
 if( $rokmpreh == 2014 ) { $rokmpreh="2013";  }
 if( $rokmpreh == 2015 ) { $rokmpreh="2013";  }
-if( $rokmpreh >= 2016 ) { $rokmpreh="2016";  }
+//od 2016 do 2018 rovnaky
+if( $rokmpreh == 2016 ) { $rokmpreh="2016";  }
+if( $rokmpreh == 2017 ) { $rokmpreh="2016";  }
+if( $rokmpreh == 2018 ) { $rokmpreh="2016";  }
+//od 2019 zmena
+if( $rokmpreh >= 2019 ) { $rokmpreh="2019";  }
 ?>
 
 function TlacPrehlad()
@@ -168,7 +173,16 @@ window.open('../mzdy/prehladdane_mesacny<?php echo $rokmpreh; ?>.php?h_drp=' + h
 
 function PotvrdPrehlad()
                 {
+<?php if( $kli_vrok <  2019 )           { ?>
   var okno = window.open("../tmp/potvrdmesprehdane<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', '<?php echo $tlcswin; ?>' );
+<?php                                   } ?>
+<?php if( $kli_vrok >= 2019 )           { ?>
+var h_drp = document.forms.formrh2.h_drp.value;
+var h_dap = document.forms.formrh2.h_dap.value;
+
+window.open('../mzdy/prehladdane_mesacny<?php echo $rokmpreh; ?>.php?h_drp=' + h_drp + '&h_dap=' + h_dap + '&copern=10&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>&strana=3',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                                   } ?>
                 }
 
 <?php if( $kli_vrok == 2012 )           { ?>
