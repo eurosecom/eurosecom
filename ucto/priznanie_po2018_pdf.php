@@ -594,7 +594,7 @@ $rmc=0;
 $rmc1=0;
 
 
-$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
  $outfilexdel="../tmp/priznaniepo_".$kli_uzid."_*.*";
  foreach (glob("$outfilexdel") as $filename) {
@@ -8574,20 +8574,8 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$G","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",0,"C");
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$K","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$L","$rmc",1,"C");
                                        } //koniec 14.strana
-  }
-$i = $i + 1;
-  }
-$pdf->Output("$outfilex");
-//koniec form PDF
 
-//potvrdenie
-if ( File_Exists("../tmp/potvrddpo.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrddpo.$kli_uzid.pdf"); }
-     $sirka_vyska="210,320";
-     $velkost_strany = explode(",", $sirka_vyska);
-     $pdf=new FPDF("P","mm", $velkost_strany );
-
-$pdf->Open();
-$pdf->AddFont('arial','','arial.php');
+if ( $strana == 20 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
@@ -8597,7 +8585,6 @@ if ( File_Exists($jpg_source.'_potvrdenie.jpg') )
 $pdf->Image($jpg_source.'_potvrdenie.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
-
 //za obdobie
 $pdf->Cell(190,25," ","$rmc1",1,"L");
 $pdf->Cell(100,6," ","$rmc1",0,"C");$pdf->Cell(34,7,"$kli_vrok","$rmc",1,"C");
@@ -8644,6 +8631,17 @@ $pdf->Cell(130,7," ","$rmc1",0,"L");$pdf->Cell(45,7,"$r510","$rmc",1,"R");
 $pdf->Cell(130,7," ","$rmc1",0,"L");$pdf->Cell(45,7,"$r1100","$rmc",1,"R");
 $pdf->Cell(130,8," ","$rmc1",0,"L");$pdf->Cell(45,8,"$r1101","$rmc",1,"R");
 $pdf->Cell(130,8," ","$rmc1",0,"L");$pdf->Cell(45,10,"$r1090","$rmc",1,"R");
+
+
+                                        } //koniec potvrdenia
+
+
+  }
+$i = $i + 1;
+  }
+$pdf->Output("$outfilex");
+//koniec form PDF
+
 
 $pdf->Output("../tmp/potvrddpo.$kli_uzid.pdf");
 //koniec potvrdenia o podani

@@ -1390,7 +1390,16 @@ if ( $rokdppo >= 2018 ) { $rokdppo="2018"; }
   }
   function TlacPotvrdDPO()
   {
+<?php if ( $kli_vrok <  2018 ) { ?>
    var okno = window.open("../tmp/potvrddpo.<?php echo $kli_uzid; ?>.pdf", '_blank', blank_param);
+<?php                          } ?>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+   var h_oc = 0;
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>_pdf.php?copern=11&drupoh=1&strana=20', '_blank', blank_param);
+<?php                          } ?>
+
+
+
   }
   function POdoXML()
   {
@@ -1462,8 +1471,13 @@ if ( $rokfob >= 2018 ) { $rokfob="2018";  }
   }
   function TlacPotvrdFOB()
   {
-   var okno = window.open("../tmp/potvrdfob<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf",
- '_blank', blank_param);
+<?php if ( $kli_vrok <  2018 ) { ?>
+   var okno = window.open("../tmp/potvrdfob<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', blank_param);
+<?php                          } ?>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+   var h_oc = 9999;
+   window.open('../ucto/priznanie_fob<?php echo $rokfob; ?>_pdf.php?cislo_oc=' + h_oc + '&copern=11&drupoh=1&subor=0&strana=20', '_blank', blank_param);
+<?php                          } ?>
   }
   function FOBdoXML()
   {

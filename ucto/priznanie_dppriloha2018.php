@@ -803,7 +803,16 @@ if ( $copern == 1201 )
 //PDF PRIJIMATELIA
 if ( $copern == 11 )
      {
-if ( File_Exists("../tmp/dppriloha.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/dppriloha.$kli_uzid.pdf"); }
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/dppril_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/dppril_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -1170,10 +1179,10 @@ $i = $i + 1;
 $j = $j + 1;
 if ( $j == 3 ) $j=0;
   }
-$pdf->Output("../tmp/dppriloha.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?>
 <script type="text/javascript">
-  var okno = window.open("../tmp/dppriloha.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
 //koniec tlac prijimatelov copern=11
@@ -1184,7 +1193,16 @@ $pdf->Output("../tmp/dppriloha.$kli_uzid.pdf");
 //PDF PROJEKTY
 if ( $copern == 1011 )
      {
-if ( File_Exists("../tmp/dppriloha.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/dppriloha.$kli_uzid.pdf"); }
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/dppril_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/dppril_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -1787,10 +1805,10 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t11","$rmc",0,"C");$pdf->Cell
   }
 $i=$i+1;
   }
-$pdf->Output("../tmp/dppriloha.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?>
 <script type="text/javascript">
-  var okno = window.open("../tmp/dppriloha.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
 //koniec tlac projektov copern=1011
