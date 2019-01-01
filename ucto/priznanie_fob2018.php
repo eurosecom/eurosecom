@@ -2593,7 +2593,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r93=r68-r92 WHERE oc = $cislo_oc AND r68 > 0 AND r92 > 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//str 9 dan z osobitneho zakladu dane podla par.7 po vynati a zapocte r94 a r99 nepocitam 2018 
+//str 9 dan z osobitneho zakladu dane podla par.7 po vynati a zapocte r94 a r99 nepocitam 2018
 //$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r100=r91-r99 WHERE oc = $cislo_oc AND r68 > 0 AND r91 > 0 ";
 $oznac = mysql_query("$sqtoz");
@@ -3504,6 +3504,27 @@ if ( $strana == 17 ) $clas17="active";
   <a href="#" onclick="editForm(15);" class="<?php echo $clas15; ?> toleft">15</a>
   <a href="#" onclick="editForm(16);" class="<?php echo $clas16; ?> toleft">16</a>
   <a href="#" onclick="editForm(17);" class="<?php echo $clas17; ?> toleft">17</a>
+<!--
+  <a href="#" onclick="FormPDF(17);" class="<?php echo $clas17; ?> toright">17</a>
+  <a href="#" onclick="FormPDF(16);" class="<?php echo $clas16; ?> toright">16</a>
+  <a href="#" onclick="FormPDF(15);" class="<?php echo $clas15; ?> toright">15</a>
+  <a href="#" onclick="FormPDF(14);" class="<?php echo $clas14; ?> toright">14</a>
+  <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
+  <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
+  <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
+  <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
+  <a href="#" onclick="FormPDF(9);" class="<?php echo $clas9; ?> toright">9</a>
+  <a href="#" onclick="FormPDF(8);" class="<?php echo $clas8; ?> toright">8</a>
+  <a href="#" onclick="FormPDF(7);" class="<?php echo $clas7; ?> toright">7</a>
+  <a href="#" onclick="FormPDF(6);" class="<?php echo $clas6; ?> toright">6</a>
+  <a href="#" onclick="FormPDF(5);" class="<?php echo $clas5; ?> toright">5</a>
+  <a href="#" onclick="FormPDF(4);" class="<?php echo $clas4; ?> toright">4</a>
+  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">3</a>
+  <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
+  <h6 class="toright">TlaËiù:</h6>
+ -->
+
 
   <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 <?php
@@ -3694,7 +3715,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:167px; left:501px;"/>
 <input type="text" name="r38a" id="r38a" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:206px; left:501px;"/>
 <input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:246px; left:501px;"/>
-<div class="input-echo right" style="width:242px; top:286px; left:501px;" 
+<div class="input-echo right" style="width:242px; top:286px; left:501px;"
 title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane"><?php echo $r40; ?>&nbsp;</div>
 
 <!-- VI.ODDIEL -->
@@ -3703,7 +3724,7 @@ title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane"><?php echo $
 <input type="text" name="t1v1" id="t1v1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:517px; left:661px;"/>
 <input type="text" name="t1p2" id="t1p2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:557px; left:410px;"/>
 <input type="text" name="t1v2" id="t1v2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:557px; left:661px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajVHpredDanou();" 
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajVHpredDanou();"
 title="NaËÌtaù prÌjmy, v˝davky a zaplatenÈ poistnÈ SP a ZP zo ûivnosti. Pred naËÌtanÌm spracujte V˝kaz o prÌjmoch a v˝davkoch za 12.<?php echo $kli_vrok; ?>"
  class="btn-row-tool" style="top:557px; left:910px;">
 <input type="text" name="t1p3" id="t1p3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:597px; left:410px;"/>
@@ -3929,11 +3950,11 @@ title="NaËÌtaù prÌjmy, v˝davky a zaplatenÈ poistnÈ SP a ZP zo ûivnosti. Pred naË
 <div class="input-echo right" style="width:242px; top:530px; left:489px;"><?php echo $r72; ?>&nbsp;</div>
 
 <input type="text" name="r73" id="r73" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:574px; left:580px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetOP();" title="VypoËÌtaù odpoËÌtateæn˙ poloûku na daÚovnÌka" 
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetOP();" title="VypoËÌtaù odpoËÌtateæn˙ poloûku na daÚovnÌka"
 class="btn-row-tool" style="top:574px; left:750px;">
 
 <input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:614px; left:580px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="namanzelku();" title="VypoËÌtaù odpoËÌtateæn˙ poloûku na manûelku" 
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="namanzelku();" title="VypoËÌtaù odpoËÌtateæn˙ poloûku na manûelku"
 class="btn-row-tool" style="top:614px; left:750px;">
 
 <input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:654px; left:488px;"/>
@@ -4277,7 +4298,7 @@ class="btn-row-tool" style="top:614px; left:750px;">
 <div class="input-echo right" style="width:242px; top:532px; left:518px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien"><?php echo $sz7; ?>&nbsp;</div>
 
 <input type="text" name="sz8" id="sz8" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:679px; left:520px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajSz9();" title="NaËÌtaù zaplatenÈ poistnÈ z riadka Ë. 39 na 3. strane" 
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajSz9();" title="NaËÌtaù zaplatenÈ poistnÈ z riadka Ë. 39 na 3. strane"
 class="btn-row-tool" style="top:680px; left:830px;">
 <input type="text" name="sz9" id="sz9" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:719px; left:520px;"/>
 <input type="text" name="sz10" id="sz10" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:758px; left:520px;"/>
@@ -5679,7 +5700,7 @@ if ( $datum =='00.00.0000' ) $datum="";
   $text = "  </danovyPreplatokBonus>"."\r\n"; fwrite($soubor, $text);
 
 
-//priloha nova v roku 2017 <prilPodielyNaZisku> 
+//priloha nova v roku 2017 <prilPodielyNaZisku>
   $text = "  <prilPodielyNaZisku>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->ozd1r01; if ( $riadok == 0 ) { $riadok=""; }
   $text = "     <pr1><![CDATA[".$riadok."]]></pr1>"."\r\n"; fwrite($soubor, $text);
