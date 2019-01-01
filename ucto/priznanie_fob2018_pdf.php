@@ -244,7 +244,7 @@ if ( $copern == 11 )
 $rmc=0;
 $rmc1=0;
 
-$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
  $outfilexdel="../tmp/priznaniefob_".$kli_uzid."_*.*";
  foreach (glob("$outfilexdel") as $filename) {
@@ -9126,51 +9126,17 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell
 
 
                                         } //koniec 17.strany
-  }
-$i = $i + 1;
-  }
-$pdf->Output("$outfilex");
-//koniec form PDF
-?>
 
-<?php if( $zandroidu == 1 ) { ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
-<link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>FOB</title>
-</HEAD>
-<BODY class="white">
-<br />
-<br />
-<table class="h2" width="100%" >
-<tr>
-<td>
-<?php if( $zandroidu == 1 ) { echo "Zostava PDF prebraná, tlačidlo Späť - do daňových zostáv"; } ?>
-</td>
-<td align="right"> </td>
-</tr>
-</table>
-<br />
-</BODY>
-<?php                       } ?>
-
-<?php
-//pdf potvrdenie
-if ( File_Exists("../tmp/potvrdfob$kli_vume.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrdfob$kli_vume.$kli_uzid.pdf"); }
-     $sirka_vyska="210,320";
-     $velkost_strany = explode(",", $sirka_vyska);
-     $pdf=new FPDF("P","mm", $velkost_strany );
-
-$pdf->Open();
-$pdf->AddFont('arial','','arial.php');
+if ( $strana == 20 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
 if ( File_Exists($jpg_source.'_potvrdenie.jpg') )
 {
 $pdf->Image($jpg_source.'_potvrdenie.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
-
 //za rok
 $pdf->Cell(190,25," ","$rmc1",1,"L");
 $pdf->Cell(84,6," ","$rmc1",0,"C");$pdf->Cell(35,6,"$kli_vrok","$rmc",1,"C");
@@ -9235,16 +9201,44 @@ $pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,6,"$r120","$rmc",1,"R");
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r121","$rmc",1,"R");
 
-$pdf->Output("../tmp/potvrdfob$kli_vxcf.$kli_uzid.pdf");
-//koniec pdf potvrdenie
-//exit;
+
+
+                                        } //koniec potvrdenia
+
+
+  }
+$i = $i + 1;
+  }
+$pdf->Output("$outfilex");
+//koniec form PDF
 ?>
+
+<?php if( $zandroidu == 1 ) { ?>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<link type="text/css" rel="stylesheet" href="../css/styl.css">
+<title>FOB</title>
+</HEAD>
+<BODY class="white">
+<br />
+<br />
+<table class="h2" width="100%" >
+<tr>
+<td>
+<?php if( $zandroidu == 1 ) { echo "Zostava PDF prebraná, tlačidlo Späť - do daňových zostáv"; } ?>
+</td>
+<td align="right"> </td>
+</tr>
+</table>
+<br />
+</BODY>
+<?php                       } ?>
+
+
 <script type="text/javascript">var okno = window.open("<?php echo $outfilex; ?>", "_self");</script>
 <?php
 }
 //koniec pdf
-
-
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid;
