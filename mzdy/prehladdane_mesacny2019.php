@@ -228,6 +228,9 @@ $sbon = strip_tags($_REQUEST['sbon']);
 $vbon = strip_tags($_REQUEST['vbon']);
 $zzpr = strip_tags($_REQUEST['zzpr']);
 
+$zurk = 1*$_REQUEST['zurk'];
+$zurke = 1*$_REQUEST['zurke'];
+
 $vbon=0;
 if( $kli_vmes == 3 ) { $vbon=1; }
 if( $kli_vmes == 6 ) { $vbon=2; }
@@ -289,7 +292,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET ".
 " ra1a='$ra1a', rb1a='$rb1a', rc1a='$rc1a', rd1a='$rd1a', re1a='$re1a', rf1a='$rf1a', ".
 " r00a='$r00a', r01a='$r01a', r02a='$r02a', r03a='$r03a', r04a='$r04a', ".
 " r05a='$r05a', r06a='$r06a', r07a='$r07a', r08a='$r08a', ".
-" zbon='$zbon', sbon='$sbon', vbon='$vbon', ".
+" zbon='$zbon', sbon='$sbon', vbon='$vbon', zurk='$zurk', zurke='$zurke', ".
 " zzpr='$zzpr', szpr='$szpr', rzpr='$rzpr', ".
 " post='$post', uce='$uce', dap='$dap_sql' ".
 " WHERE umex = $kli_vume";
@@ -305,10 +308,7 @@ $copern=20;
 //prac.subor a subor vytvorenych potvrdeni
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
+
 
 //Osoba podava mesacny prehlad MZDY
 $sql = "SELECT mprdk FROM F".$kli_vxcf."_ufirdalsie";
@@ -457,20 +457,34 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdmesacnyprehladdane ADD uce DECIMAL(2,0) DEFAULT 0 AFTER new2016";
 $vysledek = mysql_query("$sql");
 }
+//verzia 2019
+$sql = "SELECT zurke FROM F$vyb_xcf"."_mzdmesacnyprehladdane";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdmesacnyprehladdane ADD new2019 DECIMAL(2,0) DEFAULT 0 AFTER post";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdmesacnyprehladdane ADD zurk DECIMAL(2,0) DEFAULT 0 AFTER new2019";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdmesacnyprehladdane ADD zurke DECIMAL(10,2) DEFAULT 0 AFTER new2019";
+$vysledek = mysql_query("$sql");
+}
 //koniec vytvorenia
 
 
 $vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvypl".$kli_uzid." SELECT * FROM F".$kli_vxcf."_mzdmesacnyprehladdane";
 $vytvor = mysql_query("$vsql");
-$vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvyplx".$kli_uzid." SELECT * FROM F".$kli_vxcf."_mzdmesacnyprehladdane";
-$vytvor = mysql_query("$vsql");
+
 
 $vsql = 'TRUNCATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." ";
 $vytvor = mysql_query("$vsql");
-$vsql = 'TRUNCATE TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid." ";
-$vytvor = mysql_query("$vsql");
 
-
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl".$kli_uzid." DROP new2019 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl".$kli_uzid." DROP zurk ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl".$kli_uzid." DROP zurke ";
+$vysledek = mysql_query("$sql");
 
 
 $jepotvrd=0;
@@ -709,6 +723,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdmesacnyprehladdane".
 " 0,SUM(pzam),'0000-00-00', ".
 " 0, ".
 " 0,SUM(socp),SUM(zdrp),0,0,SUM(bona),SUM(bonb),SUM(zamp),0,'$datumx','$h_drp', ".
+" 0,0,0, ".
 " 0,0,0 ".
 " FROM F$kli_vxcf"."_mzdmesacnyprehladdaneoc WHERE umex = $kli_vume ".
 " GROUP BY konx".
@@ -728,7 +743,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r04a=0, r02a=-r01a, r03
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=r04a+r05a+r06a WHERE umex = $kli_vume";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=r04a+r05a+r06a+r08a WHERE umex = $kli_vume";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -798,7 +813,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r04a=0 WHERE umex = $kl
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=r04a+r05a+r06a WHERE umex = $kli_vume";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=r04a+r05a+r06a+r08a WHERE umex = $kli_vume";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -880,6 +895,8 @@ $rf1a = $fir_riadok->rf1a;
 
 $zbon = $fir_riadok->zbon;
 
+$zurk = $fir_riadok->zurk;
+$zurke = $fir_riadok->zurke;
 
 $sbon = $fir_riadok->sbon;
 $vbon = $fir_riadok->vbon;
@@ -1050,9 +1067,9 @@ div.content-xml > a:hover { text-decoration: underline; }
 //   document.formv1.r04a.value = '<?php echo "$r04a";?>';
    document.formv1.r05a.value = '<?php echo "$r05a";?>';
    document.formv1.r06a.value = '<?php echo "$r06a";?>';
-//   document.formv1.r07a.value = '<?php echo "$r07a";?>';
    document.formv1.r08a.value = '<?php echo "$r08a";?>';
-   document.formv1.r08ad.value = '<?php echo "$r08ad_sk";?>';
+//   document.formv1.r07a.value = '<?php echo "$r07a";?>';
+//   document.formv1.r08ad.value = '<?php echo "$r08ad_sk";?>';
    document.formv1.ra1a.value = '<?php echo "$ra1a";?>';
    document.formv1.rb1a.value = '<?php echo "$rb1a";?>';
    document.formv1.rc1a.value = '<?php echo "$rc1a";?>';
@@ -1070,6 +1087,9 @@ div.content-xml > a:hover { text-decoration: underline; }
 <?php if ( $post == 1 ) { ?> document.formv1.post.checked = "checked"; <?php } ?>
 <?php if ( $uce == 1 ) { ?> document.formv1.uce.checked = "checked"; <?php } ?>
    document.formv1.dap.value = '<?php echo "$dap_sk"; ?>';
+
+   document.formv1.zurke.value = '<?php echo "$zurke";?>';
+<?php if ( $zurk == 1 ) { ?> document.formv1.zurk.checked = "checked"; <?php } ?>
 <?php                                        } ?>
   }
 <?php
@@ -1258,10 +1278,10 @@ $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 <div class="input-echo right" style="width:233px; top:332px; left:661px;"><?php echo $r04a; ?>&nbsp;</div>
 <input type="text" name="r05a" id="r05a" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:388px; left:661px;"/>
 <input type="text" name="r06a" id="r06a" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:455px; left:661px;"/>
-<div class="input-echo right" style="width:233px; top:517px; left:661px;"><?php echo $r07a; ?>&nbsp;</div>
-<input type="text" name="r08ad" id="r08ad" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:567px; left:442px;"/>
-<input type="text" name="r08a" id="r08a" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:567px; left:661px; z-index:100;"/>
-<img src="../obr/ikony/downbox_blue_icon.png" title="Prenies z úètovníctva" onclick="odvedarea.style.display='block';" class="btn-row-tool" style="width:25px; height:25px; top:568px; right:13px;">
+
+<input type="text" name="r08a" id="r08a" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:517px; left:661px; z-index:100;"/>
+<div class="input-echo right" style="width:233px; top:567px; left:661px;"><?php echo $r07a; ?>&nbsp;</div>
+
 <!-- II.cast -->
 <input type="text" name="ra1a" id="ra1a" onkeyup="CiarkaNaBodku(this);" style="width:186px; top:665px; left:708px;"/>
 <input type="text" name="rb1a" id="rb1a" onkeyup="CiarkaNaBodku(this);" style="width:208px; top:705px; left:686px;"/>
@@ -2412,8 +2432,8 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");
 $pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$H","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",1,"C");
 
-//riadok 7
-$tlachod_c=100*$hlavicka->r07a;
+//riadok 7 prehodeny s r8
+$tlachod_c=100*$hlavicka->r08a;
 if ( $tlachod_c == 0 ) $tlachod_c="";
 if ( $tlachod_c < 10 AND $tlachod_c != 0 ) { $tlachod_c="0".$tlachod_c; }
 if ( $tlachod_c < 100 AND $tlachod_c != 0 ) { $tlachod_c="0".$tlachod_c; }
@@ -2440,9 +2460,8 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$I","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
 
-//riadok 8
-$tlachod=SkDatum($hlavicka->r08ad);
-if ( $tlachod == '00.00.0000' ) $tlachod="";
+//riadok 8 prehodeny s r7
+$tlachod="";
 $A=substr($tlachod,0,1);
 $B=substr($tlachod,1,1);
 $C=substr($tlachod,2,1);
@@ -2468,7 +2487,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$I","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",0,"C");
 //
-$tlachod_c=100*$hlavicka->r08a;
+$tlachod_c=100*$hlavicka->r07a;
 if ( $tlachod_c == 0 ) $tlachod_c="";
 if ( $tlachod_c < 10 AND $tlachod_c != 0 ) { $tlachod_c="0".$tlachod_c; }
 if ( $tlachod_c < 100 AND $tlachod_c != 0 ) { $tlachod_c="0".$tlachod_c; }
@@ -3366,10 +3385,7 @@ fclose($soubor);
 <?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
+
 
 //celkovy koniec dokumentu
 $cislista = include("mzd_lista_norm.php");
