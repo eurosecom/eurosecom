@@ -113,6 +113,18 @@ $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018c";
 $vysledek = mysql_query("$sql");
 }
 
+if( $kli_vrok == 2019 )
+{
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019c";
+$vysledek = mysql_query("$sql");
+}
+
 $sql = "SELECT * FROM F$kli_vxcf"."_vtvall";
 $vysledok = mysql_query($sql);
 if (!$vysledok):
@@ -1176,9 +1188,14 @@ $riadok=mysql_fetch_object($vysledok);
 <?php if( $kli_vrok >= 2015 AND $kli_vrok < 2018 ) { ?>
  + 25.00% z rozdielu (základ dane - 2918.53) ak Základ dane > 2918.53 
 <?php                         } ?>
-<?php if( $kli_vrok >= 2018 ) { ?>
+<?php if( $kli_vrok == 2018 ) { ?>
  + 25.00% z rozdielu (základ dane - 2939.01) ak Základ dane > 2939.01 
 <?php                         } ?>
+
+<?php if( $kli_vrok >= 2019 ) { ?>
+ + 25.00% z rozdielu (základ dane - 3021.36) ak Základ dane > 3021.36 
+<?php                         } ?>
+
 </td>
 <td></td>
 <td class="bmenu" colspan="4">

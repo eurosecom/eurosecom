@@ -151,7 +151,26 @@ $vysledek = mysql_query("$sql");
 
 if( $kli_vrok == 2018 )
 {
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018c";
+$vysledek = mysql_query("$sql");
+}
 
+if( $kli_vrok == 2019 )
+{
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019c";
+$vysledek = mysql_query("$sql");
 }
 
 $subor = fopen("$nazov", "r");
@@ -466,6 +485,11 @@ if( $kli_vrok == 2018 )
 $sqult = "DELETE FROM F$kli_vxcf"."_mzdpomer WHERE pm = 3 ";
 $uloz = mysql_query("$sqult");
   }
+if( $kli_vrok == 2019 )
+  {
+$sqult = "DELETE FROM F$kli_vxcf"."_mzdpomer WHERE pm = 3 ";
+$uloz = mysql_query("$sqult");
+  }
 }
 
 if( $kli_vrok == 2014 )
@@ -521,6 +545,17 @@ $vysledek = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018b";
 $vysledek = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018c";
+$vysledek = mysql_query("$sql");
+}
+if( $kli_vrok == 2019 )
+{
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019c";
 $vysledek = mysql_query("$sql");
 }
 

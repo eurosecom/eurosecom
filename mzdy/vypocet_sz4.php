@@ -433,6 +433,11 @@ if( $kli_vrok == 2018 )
 $sql = "UPDATE F$kli_vxcf"."_mzdkun SET znem=59.9672 WHERE znem > 59.9672 ";
 $vysledek = mysql_query("$sql");
   }
+if( $kli_vrok == 2019 )
+  {
+$sql = "UPDATE F$kli_vxcf"."_mzdkun SET znem=62.7288 WHERE znem > 62.7288 ";
+$vysledek = mysql_query("$sql");
+  }
 
 //koniec vypocet priemeru na nemocenske tento rok
 

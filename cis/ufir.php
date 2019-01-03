@@ -702,6 +702,11 @@ if ( $copern == 20191 )
     {
 //echo $ajprepocetnask;
 
+$ddir="../dokumenty/FIR".$kli_vxcf;
+mkdir ($ddir, 0777);
+$ddir="../import/FIR".$kli_vxcf;
+mkdir ($ddir, 0777);
+
 $ajprepocetnaskx=$ajprepocetnask;
 if( $ajprepocetnaskx == 0 ) 
   {
