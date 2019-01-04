@@ -147,13 +147,13 @@ $xml = 1*$_REQUEST['xml'];
 $jpg_source="../dokumenty/tlacivo2018/dpfob/fob_v18";
 $jpg_title="tlaèivo Daò z príjmov FO typ B pre rok $kli_vrok $strana.strana";
 
-$zablokovane=0;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
+$zablokovane=1;
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
 if ( $zablokovane == 1 )
      {
 ?>
 <script type="text/javascript">
-alert ("Daòové priznanie bude pripravené v priebehu januára 2018. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
+alert ("Daòové priznanie bude pripravené v priebehu januára 2019. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
 window.close();
 </script>
 <?php
