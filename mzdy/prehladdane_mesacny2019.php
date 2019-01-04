@@ -747,7 +747,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=r04a+r05a+r06a+r08
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET ra1a=-r05a, rd1a=-r06a WHERE umex = $kli_vume";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET ra1a=-r05a WHERE umex = $kli_vume";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -760,27 +760,9 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET rb1a=r04a, rc1a=ra1a-rb
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//rozdelenie zam.premie
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET socp=r04a-rb1a  WHERE umex = $kli_vume";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET socp=0  WHERE socp < 0 AND umex = $kli_vume";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET re1a=rd1a, rf1a=0  WHERE rd1a <= socp AND umex = $kli_vume ";
-//echo $sqtoz;
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET re1a=socp, rf1a=rd1a-re1a  WHERE rd1a > socp AND umex = $kli_vume";
-//echo $sqtoz;
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET socp=0  WHERE umex = $kli_vume";
-$oznac = mysql_query("$sqtoz");
 
 //ak je zaporna odvodova vynuluj
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=0, r05a=-rb1a, r06a=-re1a WHERE r07a < 0 AND umex = $kli_vume";
-//echo $sqtoz;
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=0, r05a=-rb1a WHERE r07a < 0 AND umex = $kli_vume";
 $oznac = mysql_query("$sqtoz");
 
 $vbon=0;
@@ -818,7 +800,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=r04a+r05a+r06a+r08
 $oznac = mysql_query("$sqtoz");
 
 //ak je zaporna odvodova vynuluj
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=0, r05a=-rb1a, r06a=-re1a WHERE r07a < 0 AND umex = $kli_vume";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=0, r05a=-rb1a WHERE r07a < 0 AND umex = $kli_vume";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -2435,9 +2417,9 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",1,"C");
 //riadok 7 prehodeny s r8
 $tlachod_c=100*$hlavicka->r08a;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-if ( $tlachod_c < 10 AND $tlachod_c != 0 ) { $tlachod_c="0".$tlachod_c; }
-if ( $tlachod_c < 100 AND $tlachod_c != 0 ) { $tlachod_c="0".$tlachod_c; }
-$tlachod_c=sprintf("% 10s",$tlachod_c);
+$znamienko="";
+if ( $tlachod_c < 0 ) { $tlachod_c=str_replace("-","",$tlachod_c); $znamienko="-"; }
+$tlachod_c=sprintf("% 9s",$tlachod_c);
 $A=substr($tlachod_c,0,1);
 $B=substr($tlachod_c,1,1);
 $C=substr($tlachod_c,2,1);
@@ -2447,18 +2429,17 @@ $F=substr($tlachod_c,5,1);
 $G=substr($tlachod_c,6,1);
 $H=substr($tlachod_c,7,1);
 $I=substr($tlachod_c,8,1);
-$J=substr($tlachod_c,9,1);
-$pdf->Cell(190,8,"","$rmc1",1,"L");
-$pdf->Cell(136,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$C","$rmc",0,"C");
+$pdf->Cell(190,7.5,"","$rmc1",1,"L");
+$pdf->Cell(136,6," ","$rmc1",0,"R");$pdf->Cell(4,7,"$znamienko","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
-$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$I","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
+$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$H","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",1,"C");
 
 //riadok 8 prehodeny s r7
 $tlachod="";
@@ -2980,114 +2961,6 @@ $nazsub="PREHLAD_mesiac_".$kli_vmes."_id".$idx.".xml";
 if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
      $soubor = fopen("../tmp/$nazsub", "a+");
 
-//prehlad v2016
-$sqlt = <<<mzdprc
-(
-<?xml version="1.0" encoding="utf-8"?>
-<dokument>
-	<hlavicka>
-		<dic></dic>
-		<danovyUrad></danovyUrad>
-		<druhPrehladu>
-			<riadny>0</riadny>
-			<opravny>0</opravny>
-		</druhPrehladu>
-		<zdanovacieObdobie>
-			<mesiac></mesiac>
-			<rok>2016</rok>
-		</zdanovacieObdobie>
-		<datumZisteniaOP></datumZisteniaOP>
-		<fo>
-			<priezvisko></priezvisko>
-			<meno></meno>
-			<titul></titul>
-			<titulZa></titulZa>
-		</fo>
-		<po>
-			<obchodneMeno></obchodneMeno>
-			<pravnaForma></pravnaForma>
-		</po>
-		<sidlo>
-			<ulica></ulica>
-			<cislo></cislo>
-			<psc></psc>
-			<obec></obec>
-			<stat></stat>
-		</sidlo>
-		<podava>
-			<priezvisko></priezvisko>
-			<meno></meno>
-			<titul></titul>
-			<titulZa></titulZa>
-			<rodneCislo></rodneCislo>
-			<datumNarodenia></datumNarodenia>
-			<dic></dic>
-			<obchodneMeno></obchodneMeno>
-			<pravnaForma></pravnaForma>
-			<ulica></ulica>
-			<cislo></cislo>
-			<psc></psc>
-			<obec></obec>
-			<stat></stat>
-		</podava>
-		<tel></tel>
-		<email></email>
-	</hlavicka>
-	<telo>
-		<cast1>
-			<r00></r00>
-			<r01>
-				<datum></datum>
-				<suma></suma>
-			</r01>
-			<r02></r02>
-			<r03></r03>
-			<r04></r04>
-			<r05></r05>
-			<r06></r06>
-			<r07></r07>
-			<r08>
-				<datum></datum>
-				<suma></suma>
-			</r08>
-		</cast1>
-		<cast2>
-			<rA></rA>
-			<rB></rB>
-			<rC></rC>
-			<rD></rD>
-			<rE></rE>
-			<rF></rF>
-		</cast2>
-		<cast3>
-			<poukazatBonus>
-				<ziadam>0</ziadam>
-				<suma></suma>
-			</poukazatBonus>
-			<poukazatPremiu>
-				<ziadam>0</ziadam>
-				<suma></suma>
-			</poukazatPremiu>
-			<sposobPlatby>
-				<poukazka>0</poukazka>
-				<ucet>0</ucet>
-			</sposobPlatby>
-			<bankovyUcet>
-				<predcislieUctu></predcislieUctu>
-				<cisloUctu></cisloUctu>
-				<kodBanky></kodBanky>
-				<IBAN></IBAN>
-			</bankovyUcet>
-		</cast3>
-	</telo>
-	<vyhotovil>
-		<meno></meno>
-		<tel></tel>
-		<datumVyhotovenia>29.12.2015</datumVyhotovenia>
-	</vyhotovil>
-</dokument>
-);
-mzdprc;
 
 //hlavicka
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdmesacnyprehladdane".
@@ -3106,11 +2979,11 @@ if ( $j == 0 )
    {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
   $text = "<dokument xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"universal.xsd\">"."\r\n"; fwrite($soubor, $text);
+
+
   $text = "<hlavicka>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <dic><![CDATA[".$fir_fdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
-$fir_uctt01 = iconv("CP1250", "UTF-8", $fir_uctt01);
-  $text = " <danovyUrad><![CDATA[".$fir_uctt01."]]></danovyUrad>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <druhPrehladu>"."\r\n"; fwrite($soubor, $text);
 $h_drp = 1*$hlavicka->druh;
@@ -3229,6 +3102,7 @@ $mpstat = iconv("CP1250", "UTF-8", $mpstat);
   $text = " <email><![CDATA[".$mpfax."]]></email>"."\r\n"; fwrite($soubor, $text);
   $text = "</hlavicka>"."\r\n"; fwrite($soubor, $text);
 
+
   $text = "<telo>"."\r\n"; fwrite($soubor, $text);
   $text = " <cast1>"."\r\n"; fwrite($soubor, $text);
 
@@ -3260,20 +3134,16 @@ if ( $tlachod_c == 0 ) $tlachod_c="";
 $tlachod_c=$hlavicka->r06a;
 if ( $tlachod_c == 0 ) $tlachod_c="";
   $text = "  <r06><![CDATA[".$tlachod_c."]]></r06>"."\r\n"; fwrite($soubor, $text);
-$tlachod_c=$hlavicka->r07a;
-if ( $tlachod_c == 0 ) $tlachod_c="";
-  $text = "  <r07><![CDATA[".$tlachod_c."]]></r07>"."\r\n"; fwrite($soubor, $text);
-
-  $text = "  <r08>"."\r\n"; fwrite($soubor, $text);
-$tlachod=SkDatum($hlavicka->r08ad);
-if ( $tlachod == '00.00.0000' ) $tlachod="";
-  $text = "   <datum><![CDATA[".$tlachod."]]></datum>"."\r\n"; fwrite($soubor, $text);
 $tlachod_c=$hlavicka->r08a;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-  $text = "   <suma><![CDATA[".$tlachod_c."]]></suma>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </r08>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <r07><![CDATA[".$tlachod_c."]]></r07>"."\r\n"; fwrite($soubor, $text);
+$tlachod_c=$hlavicka->r07a;
+if ( $tlachod_c == 0 ) $tlachod_c="";
+  $text = "  <r08><![CDATA[".$tlachod_c."]]></r08>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </cast1>"."\r\n"; fwrite($soubor, $text);
+
+
   $text = " <cast2>"."\r\n"; fwrite($soubor, $text);
 
 $tlachod_c=$hlavicka->ra1a;
@@ -3296,6 +3166,8 @@ if ( $tlachod_c == 0 ) $tlachod_c="";
   $text = "  <rF><![CDATA[".$tlachod_c."]]></rF>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </cast2>"."\r\n"; fwrite($soubor, $text);
+
+
   $text = " <cast3>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <poukazatBonus>"."\r\n"; fwrite($soubor, $text);
@@ -3314,6 +3186,14 @@ if ( $szpr == 0 ) $szpr="";
   $text = "   <suma><![CDATA[".$szpr."]]></suma>"."\r\n"; fwrite($soubor, $text);
   $text = "  </poukazatPremiu>"."\r\n"; fwrite($soubor, $text);
 
+  $text = "  <poukazatBonusNaUroky>"."\r\n"; fwrite($soubor, $text);
+$zurk=1*$hlavicka->zurk;
+  $text = "   <ziadam><![CDATA[".$zurk."]]></ziadam>"."\r\n"; fwrite($soubor, $text);
+$zurke=$hlavicka->zurke;
+if ( $zurke == 0 ) $zurke="";
+  $text = "   <suma><![CDATA[".$zurke."]]></suma>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </poukazatBonusNaUroky>"."\r\n"; fwrite($soubor, $text);
+
   $text = "  <sposobPlatby>"."\r\n"; fwrite($soubor, $text);
 $post=1*$hlavicka->post;
   $text = "   <poukazka><![CDATA[".$post."]]></poukazka>"."\r\n"; fwrite($soubor, $text);
@@ -3321,23 +3201,7 @@ $ucet=1*$hlavicka->uce;
   $text = "   <ucet><![CDATA[".$ucet."]]></ucet>"."\r\n"; fwrite($soubor, $text);
   $text = "  </sposobPlatby>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <bankovyUcet>"."\r\n"; fwrite($soubor, $text);
-$pole = explode("-", $fir_fuc1);
-$predcislieUctu=$pole[0];
-$cisloUctu=$pole[1];
-if ( $pole[1] == '' ) { $cisloUctu=$pole[0]; $predcislieUctu=""; }
-if ( $ucet == 0 ) $predcislieUctu="";
-  $text = "   <predcislieUctu><![CDATA[".$predcislieUctu."]]></predcislieUctu>"."\r\n"; fwrite($soubor, $text);
-$ucet="";
-if ( $hlavicka->uce == 1 ) { $ucet=$cisloUctu; }
-  $text = "   <cisloUctu><![CDATA[".$ucet."]]></cisloUctu>"."\r\n"; fwrite($soubor, $text);
-$kodBanky="";
-if ( $hlavicka->uce == 1 ) { $kodBanky=$fir_fnm1; }
-  $text = "   <kodBanky><![CDATA[".$kodBanky."]]></kodBanky>"."\r\n"; fwrite($soubor, $text);
-$iban="";
-if ( $hlavicka->uce == 1 ) { $iban=$fir_fib1; }
-  $text = "   <IBAN><![CDATA[".$iban."]]></IBAN>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </bankovyUcet>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <IBAN><![CDATA[".$fir_fib1."]]></IBAN>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </cast3>"."\r\n"; fwrite($soubor, $text);
   $text = "</telo>"."\r\n"; fwrite($soubor, $text);
