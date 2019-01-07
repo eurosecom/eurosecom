@@ -4344,13 +4344,13 @@ class="btn-row-tool" style="top:680px; left:830px;">
 if ( $copern == 10 )
      {
 
-$zablokovane=0;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
+$zablokovane=1;
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
 if ( $zablokovane == 1 )
      {
 ?>
 <script type="text/javascript">
-alert ("Export do XML Daòového priznania FOB 2017 bude pripravený hneï po zverejnení nového formulára na portále DRSR. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
+alert ("Export do XML Daòového priznania FOB 2018 bude pripravený hneï po zverejnení nového formulára na portále DRSR. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
 window.close();
 </script>
 <?php
@@ -4524,21 +4524,34 @@ $priezvisko=iconv("CP1250", "UTF-8", $hlavicka->mprie);
   $text = "   <priezviskoMeno><![CDATA[".$priezvisko."]]></priezviskoMeno>"."\r\n"; fwrite($soubor, $text);
 $rodneCislo=$hlavicka->mrod;
   $text = "   <rodneCislo><![CDATA[".$rodneCislo."]]></rodneCislo>"."\r\n"; fwrite($soubor, $text);
-$vlastnePrijmy=$hlavicka->mpri;
-if ( $hlavicka->mpri == 0 ) $vlastnePrijmy="";
-  $text = "   <vlastnePrijmy><![CDATA[".$vlastnePrijmy."]]></vlastnePrijmy>"."\r\n"; fwrite($soubor, $text);
-$pocetMesiacov=$hlavicka->mpom;
-if ( $hlavicka->mpom == 0 ) $pocetMesiacov="";
-  $text = "   <pocetMesiacov><![CDATA[".$pocetMesiacov."]]></pocetMesiacov>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r31>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <r32>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->nzdm;
+  $text = "  <uplatnujemNCZDNaManzela><![CDATA[".$riadok."]]></uplatnujemNCZDNaManzela>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->mpri;
+  $text = "  <vlastnePrijmy><![CDATA[".$riadok."]]></vlastnePrijmy>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->mpom;
+  $text = "  <pocetMesiacov><![CDATA[".$riadok."]]></pocetMesiacov>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </r32>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "  <r33>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->kupm;
+  $text = "  <uplatNCZDNaKupelStarostlivost><![CDATA[".$riadok."]]></uplatNCZDNaKupelStarostlivost>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->kupme;
+  $text = "  <preukazZaplatUhrady><![CDATA[".$riadok."]]></preukazZaplatUhrady>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </r33>"."\r\n"; fwrite($soubor, $text);
+
+
+  $text = "  <r34>"."\r\n"; fwrite($soubor, $text);
   $text = "   <dieta>"."\r\n"; fwrite($soubor, $text);
 $priezvisko= iconv("CP1250", "UTF-8", $hlavicka->d1prie);
   $text = "    <priezviskoMeno><![CDATA[".$priezvisko."]]></priezviskoMeno>"."\r\n"; fwrite($soubor, $text);
 $rodneCislo=$hlavicka->d1rod;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <rodneCislo><![CDATA[".$rodneCislo."]]></rodneCislo>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->kupd1;
+  $text = "    <kupelnaStarostlivost><![CDATA[".$riadok."]]></kupelnaStarostlivost>"."\r\n"; fwrite($soubor, $text);
 $m00=$hlavicka->d1pomc;
   $text = "    <m00><![CDATA[".$m00."]]></m00>"."\r\n"; fwrite($soubor, $text);
 $m01=$hlavicka->d1pom1;
@@ -4573,6 +4586,8 @@ $priezvisko= iconv("CP1250", "UTF-8", $hlavicka->d2prie);
 $rodneCislo=$hlavicka->d2rod;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <rodneCislo><![CDATA[".$rodneCislo."]]></rodneCislo>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->kupd2;
+  $text = "    <kupelnaStarostlivost><![CDATA[".$riadok."]]></kupelnaStarostlivost>"."\r\n"; fwrite($soubor, $text);
 $m00=$hlavicka->d2pomc;
   $text = "    <m00><![CDATA[".$m00."]]></m00>"."\r\n"; fwrite($soubor, $text);
 $m01=$hlavicka->d2pom1;
@@ -4607,6 +4622,8 @@ $priezvisko= iconv("CP1250", "UTF-8", $hlavicka->d3prie);
 $rodneCislo=$hlavicka->d3rod;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <rodneCislo><![CDATA[".$rodneCislo."]]></rodneCislo>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->kupd3;
+  $text = "    <kupelnaStarostlivost><![CDATA[".$riadok."]]></kupelnaStarostlivost>"."\r\n"; fwrite($soubor, $text);
 $m00=1*$hlavicka->d3pomc;
   $text = "    <m00><![CDATA[".$m00."]]></m00>"."\r\n"; fwrite($soubor, $text);
 $m01=1*$hlavicka->d3pom1;
@@ -4641,6 +4658,8 @@ $priezvisko= iconv("CP1250", "UTF-8", $hlavicka->d4prie);
 $rodneCislo=$hlavicka->d4rod;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <rodneCislo><![CDATA[".$rodneCislo."]]></rodneCislo>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->kupd4;
+  $text = "    <kupelnaStarostlivost><![CDATA[".$riadok."]]></kupelnaStarostlivost>"."\r\n"; fwrite($soubor, $text);
 $m00=1*$hlavicka->d4pomc;
   $text = "    <m00><![CDATA[".$m00."]]></m00>"."\r\n"; fwrite($soubor, $text);
 $m01=1*$hlavicka->d4pom1;
@@ -4668,22 +4687,25 @@ $m11=1*$hlavicka->d4pom11;
 $m12=1*$hlavicka->d4pom12;
   $text = "    <m12><![CDATA[".$m12."]]></m12>"."\r\n"; fwrite($soubor, $text);
   $text = "   </dieta>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </r32>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </r34>"."\r\n"; fwrite($soubor, $text);
 
-$riadok=$hlavicka->r33;
-  $text = "  <r33viacAko4><![CDATA[".$riadok."]]></r33viacAko4>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r34;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r34><![CDATA[".$riadok."]]></r34>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r34a;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r34a><![CDATA[".$riadok."]]></r34a>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r35;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r35><![CDATA[".$riadok."]]></r35>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r36;
+$riadok=1*$hlavicka->det4;
+  $text = "    <r35udajeDalsieDeti><![CDATA[".$riadok."]]></r35udajeDalsieDeti>"."\r\n"; fwrite($soubor, $text);
+
+$riadok=$hlavicka->kupde;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r36><![CDATA[".$riadok."]]></r36>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "  <r37>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->dbur;
+  $text = "  <uplatDanBonusZaplatUroky><![CDATA[".$riadok."]]></uplatDanBonusZaplatUroky>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->dbure;
+  $text = "  <zaplateneUroky><![CDATA[".$riadok."]]></zaplateneUroky>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->dburm;
+  $text = "  <pocetMesiacov><![CDATA[".$riadok."]]></pocetMesiacov>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </r37>"."\r\n"; fwrite($soubor, $text);
+
+//po tadeto je xml 2018 ok
 
   $text = "  <tabulka1>"."\r\n"; fwrite($soubor, $text);
   $text = "   <t1r1>"."\r\n"; fwrite($soubor, $text);
