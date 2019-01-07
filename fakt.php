@@ -122,10 +122,11 @@ $cit_nas = include("cis/citaj_nas.php");
   if (File_Exists ("secomnajom/najom.php")) { $ajnajom=1; }
   if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf != 914 ) { $ajnajom=0; }
   if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf == 914 ) { $ajnajom=1; }
-  if( $vyb_xcf != 2686 AND $vyb_xcf != 2687 AND $vyb_xcf != 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=0; }
+  if( $vyb_xcf != 2686 AND $vyb_xcf != 2687 AND $vyb_xcf != 2688 AND $vyb_xcf != 2689 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=0; }
   if( $vyb_xcf == 2686 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
   if( $vyb_xcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
   if( $vyb_xcf == 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
+  if( $vyb_xcf == 2689 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
 
 $cook=0;
 if( $cook == 1 )
@@ -640,6 +641,7 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/vstf_u.php?pocstav=
   if (File_Exists ("dokumenty/FIR$vyb_xcf/ajregistracka.ano")) { $ajregistracka=1; }
 if( $vyb_xcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
 if( $vyb_xcf == 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
+if( $vyb_xcf == 2689 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
   if( $ajregistracka == 1 ) {
   $sql = mysql_query("SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_dpok WHERE drpk = 9");
   if (@$zaznam=mysql_data_seek($sql,0))
@@ -736,7 +738,7 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/fakt_kontrol.php?co
 "Chcete skontrolovaù doklady v Odbyte ?</a>";
     htmlmenu += "</td></tr>";
 
-<?php if( $_SERVER['SERVER_NAME'] == "localhost" ) { ?>
+<?php if( $_SERVER['SERVER_NAME'] == "localhost" OR $_SERVER['SERVER_NAME'] == "www.eshoptest.sk" ) { ?>
     htmlmenu += "<tr style='height:48px;'><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"window.open('../odbobj/odbobj.php?copern=1', '_blank')\">" +
 "Prejsù do odberateæsk˝ch objedn·vok</a>";

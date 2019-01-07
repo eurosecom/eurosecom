@@ -1951,7 +1951,8 @@ if( $dodaci == 1 ) { $podpis=0;}
 if( $podpis == 1 )
   {
 $pdf->SetY(230);
-$pdf->Cell(90,5,"","0",0,"L");$pdf->Cell(53,5,"Ing.Alena Kovaèièová, riadite¾ka","T",1,"L");
+if( $kli_vrok <  2019 ) { $pdf->Cell(90,5,"","0",0,"L");$pdf->Cell(53,5,"Ing.Alena Kovaèièová, riadite¾ka","T",1,"L"); }
+if( $kli_vrok >= 2019 ) { $pdf->Cell(90,5,"","0",0,"L");$pdf->Cell(53,5,"Mgr. Eva Volková, riadite¾ka","T",1,"L"); }
   }
 
 $pdf->SetY($koniec);

@@ -155,6 +155,7 @@ if( $vyb_xcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregis
 if( $kli_vxcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
 if( $vyb_xcf == 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
 if( $kli_vxcf == 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
+if( $kli_vxcf == 2689 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
   if( $ajregistracka == 1 ) { ?>
 <td width="8%">
 <center>
