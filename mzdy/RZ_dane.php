@@ -375,11 +375,12 @@ window.open('../mzdy/hlasenie_danexml.php?h_drp=' + h_drp + '&h_dap=' + h_dap + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-//Rocne hlasenie dane 2012,2013,2014
+//Rocne hlasenie dane 2012,2013,2014,2018
 <?php
 $rocnehlasenier="2012";
 if( $kli_vrok == 2013 ) { $rocnehlasenier="2013"; }
 if( $kli_vrok >= 2014 ) { $rocnehlasenier="2014"; }
+if( $kli_vrok >= 2018 ) { $rocnehlasenier="2018"; }
 ?>
 
 function TlacRocHlasenie<?php echo $rocnehlasenier; ?>()
@@ -888,10 +889,10 @@ if( $kli_vrok >= 2012 ) {
 <input type="hidden" name="h_drp" id="h_drp" />
 <input type="hidden" name="h_dap" id="h_dap" />
 <?php                         } ?>
-
+<?php if( $kli_vrok <  2018 ) { ?>
 <a href="#" onClick="TlacPotvrdRocHlasenie<?php echo $rocnehlasenier; ?>();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní Hlásenia" ></a>
-
+<?php                         } ?>
 </td>
 <td class="bmenu" width="10%">Príloha
 <a href="#" onClick="TlacPrilohuHlasenia<?php echo $rocnehlasenier; ?>();">
