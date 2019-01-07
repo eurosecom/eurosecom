@@ -147,8 +147,8 @@ $xml = 1*$_REQUEST['xml'];
 $jpg_source="../dokumenty/tlacivo2018/dpfob/fob_v18";
 $jpg_title="tlaèivo Daò z príjmov FO typ B pre rok $kli_vrok $strana.strana";
 
-$zablokovane=1;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
+$zablokovane=0;
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
      {
 ?>

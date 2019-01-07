@@ -9186,8 +9186,8 @@ $pdf->Cell(190,13," ","$rmc1",1,"L");
 $r68=$hlavicka->r68; if ( $r68 == 0 ) $r68="";
 $r80=$hlavicka->r80; if ( $r80 == 0 ) $r80="";
 $r105=$hlavicka->r105; if ( $r105 == 0 ) $r105="";
-$r120=$hlavicka->r120; if ( $r120 == 0 ) { $r120=""; }
-$r121=$hlavicka->r121; if ( $r121 == 0 ) { $r121=""; }
+$r125=$hlavicka->r125; if ( $r125 == 0 ) { $r125=""; }
+$r126=$hlavicka->r126; if ( $r126 == 0 ) { $r126=""; }
 $pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,6,"$r68","$rmc",1,"R");
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r80","$rmc",1,"R");
@@ -9197,9 +9197,9 @@ $pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,10,"$osobit","$rmc",1,"R");
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r105","$rmc",1,"R");
 $pdf->Cell(190,0," ","$rmc1",1,"L");
-$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,6,"$r120","$rmc",1,"R");
+$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,6,"$r125","$rmc",1,"R");
 $pdf->Cell(190,0," ","$rmc1",1,"L");
-$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r121","$rmc",1,"R");
+$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r126","$rmc",1,"R");
 
 
 
