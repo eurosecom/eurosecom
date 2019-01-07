@@ -4025,8 +4025,8 @@ if ( $copern == 10 )
      {
 
 
-$zablokovane=0;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
+$zablokovane=1;
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
 if ( $zablokovane == 1 )
      {
 ?>
