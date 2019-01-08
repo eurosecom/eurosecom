@@ -1280,6 +1280,17 @@ $i=$i+1;
 
 if( $predpoklad == 1 )
   {
+//ak predpokladana tak od 2018 pouzi 1.stlpec na cely rok
+if( $kli_vrok >= 2018 )
+    {
+//andrejko
+//exit;
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r13s2zni25=0, r13s2zni20=0, r13s2zni15=0, r13s2zvy10=0, r13s2zvy20=0, ".
+" r14s2=0, r16s2=0, r18s2=0, r19s1mes=12, r19s2mes=0, r20s1=r18s1, r20s2=0, r21=r20s1  WHERE oc = 1 ";
+$upravene = mysql_query("$uprtxt");
+
+    }
+//koniec ak predpokladana tak od 2018 pouzi 1.stlpec na cely rok
 
 $danpredpok=0;
 $sqlttt = "SELECT SUM(r21) AS sumr21 FROM F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 ";
