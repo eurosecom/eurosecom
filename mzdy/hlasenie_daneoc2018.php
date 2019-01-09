@@ -32,6 +32,10 @@ window.close();
 exit;
      }
 
+//.jpg podklad
+$jpg_source="../dokumenty/tlacivo2018/hlasenie_dane/hlasenie_v18";
+$jpg_title="tlaèivo Roèné hlásenie o vyúètovaní dane a o úhrne príjmov zo závislej èinnosti $strana.strana";
+
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
@@ -281,9 +285,14 @@ $ddsnzc = strip_tags($_REQUEST['ddsnzc']);
 
 $prvypj = strip_tags($_REQUEST['prvypj']);
 $dds2nc = strip_tags($_REQUEST['dds2nc']);
+
+$zurke = 1*strip_tags($_REQUEST['zurke']);
+$kupze = 1*strip_tags($_REQUEST['kupze']);
+$kupme = 1*strip_tags($_REQUEST['kupme']);
+
 $uprav="NO";
 
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdrocnehlaseniedaneoc SET ".
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdrocnehlaseniedaneoc SET zurke='$zurke', kupze='$kupze', kupme='$kupme', ".
 " ddssum='$ddssum', ddsnzc='$ddsnzc', dds2nc='$dds2nc', prvypj='$prvypj',".
 " mzc='$mzc', mz01='$mz01', mz02='$mz02', mz03='$mz03', mz04='$mz04', mz05='$mz05', ".
 " mz06='$mz06', mz07='$mz07', mz08='$mz08', mz09='$mz09', mz10='$mz10', mz11='$mz11', mz12='$mz12', ".
@@ -364,6 +373,11 @@ $ddsnzc = strip_tags($fir_riadok->ddsnzc);
 
 $prvypj = strip_tags($fir_riadok->prvypj);
 $dds2nc = strip_tags($fir_riadok->dds2nc);
+
+$zurke = strip_tags($fir_riadok->zurke);
+$kupze = strip_tags($fir_riadok->kupze);
+$kupme = strip_tags($fir_riadok->kupme);
+
 mysql_free_result($fir_vysledok);
 
 //Slovak a cudzinec
@@ -571,11 +585,14 @@ if ( $copern == 102 )
    document.formv1.zmpm.value = '<?php echo "$zmpm";?>';
    document.formv1.rocz.value = '<?php echo "$rocz";?>';
    document.formv1.ddssum.value = '<?php echo "$ddssum";?>';
-   document.formv1.ddsnzc.value = '<?php echo "$ddsnzc";?>';
+//   document.formv1.ddsnzc.value = '<?php echo "$ddsnzc";?>';
 
    document.formv1.prvypj.value = '<?php echo "$prvypj";?>';
    document.formv1.dds2nc.value = '<?php echo "$dds2nc";?>';
 
+   document.formv1.zurke.value = '<?php echo "$zurke";?>';
+   document.formv1.kupze.value = '<?php echo "$kupze";?>';
+   document.formv1.kupme.value = '<?php echo "$kupme";?>';
   }
 <?php
 //koniec uprava
@@ -823,15 +840,15 @@ if ( $ulozenezmeny == 1 ) { $akedisplay="display"; }
  <div id="alertdiv" class="alert-pocitam" style="display:<?php echo $akedisplay; ?>;"><?php echo "$alertuloz";?></div>
 
 <?php
-//cast IV. nevykonal RZ
+//strana 3. cast IV. nevykonal RZ
 if ( $tz1 != 1 ) {
 ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str3.jpg"
-     alt="III.èas Hlásenia o vyúètovaní dane pre rok 2014, 230kB" class="form-background">
+<img src="<?php echo $jpg_source; ?>_str3.jpg"
+     alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:75px; left:457px;"><?php echo $fir_fdic; ?></span>
-<select size="1" name="tz1" id="tz1" class="btn-rzstav" style="top:142px; left:557px;">
- <option value="0">&nbsp;Nevykonal&nbsp;&nbsp;</option>
- <option value="1">&nbsp;Vykonal</option>
+<select size="1" name="tz1" id="tz1" class="btn-rzstav" style="top:147px; left:559px; height:20px;">
+ <option value="0">&nbsp;Nevykonal roèné zúètovanie&nbsp;&nbsp;</option>
+ <option value="1">&nbsp;Vykonal roèné zúètovanie</option>
 </select>
 <div class="leg-osc" style="top:174px;" title="Osobné èíslo"><?php echo $oc; ?></div>
 
@@ -869,19 +886,22 @@ if ( $tz1 != 1 ) {
 <input type="checkbox" name="mz10" value="1" style="top:582px; left:466px;"/>
 <input type="checkbox" name="mz11" value="1" style="top:582px; left:492px;"/>
 <input type="checkbox" name="mz12" value="1" style="top:582px; left:517px;"/>
-<!-- riadok 5 -->
-<input type="text" name="socp" id="socp" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:610px; left:195px;"/>
-<input type="text" name="zdrp" id="zdrp" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:610px; left:374px;"/>
-<!-- riadok 6 -->
-<input type="text" name="r01b" id="r01b" onkeyup="CiarkaNaBodku(this);" style="width:221px; top:649px; left:195px;"/>
-<!-- riadok 7 -->
-<input type="text" name="dnbh" id="dnbh" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:688px; left:195px;"/>
-<input type="text" name="tz3" id="tz3" style="width:36px; top:688px; left:489px;"/>
+
+<!-- riadok 5 sp-->
+<input type="text" name="socp" id="socp" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:610px; left:195px;"/>
+<!-- riadok 5 zp-->
+<input type="text" name="zdrp" id="zdrp" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:650px; left:195px;"/>
+
+<!-- riadok 6 preddavky -->
+<input type="text" name="r01b" id="r01b" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:689px; left:195px;"/>
+
+<!-- riadok 7 db -->
+<input type="text" name="dnbh" id="dnbh" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:728px; left:195px;"/>
+<input type="text" name="tz3" id="tz3" style="width:36px; top:728px; left:489px;"/>
+
 <!-- riadok 8 -->
-<input type="checkbox" name="pred" value="1" style="top:731px; left:277px;"/>
-<input type="text" name="pdan" id="pdan" style="width:36px; top:727px; left:489px;"/>
-<!-- riadok 9 -->
-<input type="text" name="ddssum" id="ddssum" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:769px; left:195px;"/>
+<input type="checkbox" name="pred" value="1" style="top:770px; left:277px;"/>
+<input type="text" name="pdan" id="pdan" style="width:36px; top:766px; left:489px;"/>
 
 <!-- inputy nepouzite v IV.casti = musia byt hidden -->
 <input type="hidden" name="oc" id="oc" value="<?php echo $oc;?>"/>
@@ -892,22 +912,26 @@ if ( $tz1 != 1 ) {
 <input type="hidden" name="zmpm" id="zmpm" value="<?php echo $zmpm;?>"/>
 <input type="hidden" name="dnbm" id="dnbm" value="<?php echo $dnbm;?>"/>
 <input type="hidden" name="rocz" id="rocz" value="<?php echo $rocz;?>"/>
-
 <input type="hidden" name="prvypj" id="prvypj" value="<?php echo $prvypj;?>"/>
 <input type="hidden" name="dds2nc" id="dds2nc" value="<?php echo $dds2nc;?>"/>
+<input type="hidden" name="ddssum" id="ddssum" value="<?php echo $ddssum;?>"/>
+<input type="hidden" name="zurke" id="zurke" value="<?php echo $zurke; ?>"/>
+<input type="hidden" name="kupze" id="kupze" value="<?php echo $kupze; ?>"/>
+<input type="hidden" name="kupme" id="kupme" value="<?php echo $kupme; ?>"/>
+
 <?php            } ?>
 
 
 <?php
-//cast V. vykonal RZ
+//strana 4. cast V. vykonal RZ
 if ( $tz1 == 1 ) {
 ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str4.jpg"
-     alt="IV.èas Hlásenia o vyúètovaní dane pre rok 2014, 230kB" class="form-background">
+<img src="<?php echo $jpg_source; ?>_str4.jpg"
+     alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:75px; left:457px;"><?php echo $fir_fdic; ?></span>
-<select size="1" name="tz1" id="tz1" class="btn-rzstav" style="top:126px; left:683px;">
- <option value="0">&nbsp;Nevykonal&nbsp;&nbsp;</option>
- <option value="1">&nbsp;Vykonal</option>
+<select size="1" name="tz1" id="tz1" class="btn-rzstav" style="top:131px; left:700px; height:20px;">
+ <option value="0">&nbsp;Nevykonal roèné zúètovanie&nbsp;&nbsp;</option>
+ <option value="1">&nbsp;Vykonal roèné zúètovanie</option>
 </select>
 <div class="leg-osc" style="top:159px;" title="Osobné èíslo"><?php echo $oc; ?></div>
 <a href="#" onclick="upravRZ();" title="Upravi roèné zúètovanie zamestnanca"
@@ -932,30 +956,42 @@ if ( $tz1 == 1 ) {
 <input type="text" name="r01a" id="r01a" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:477px; left:196px;"/>
 <input type="text" name="doho" id="doho" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:515px; left:196px;"/>
 <input type="text" name="prvypj" id="dprvypj" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:557px; left:196px;"/>
-<!-- riadok 4 -->
-<input type="text" name="socp" id="socp" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:599px; left:196px;"/>
-<input type="text" name="zdrp" id="zdrp" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:599px; left:374px;"/>
-<!-- riadok 5 -->
-<input type="text" name="nzdh" id="nzdh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:639px; left:219px;"/>
+
+<!-- riadok 4 sp, zp-->
+<input type="text" name="socp" id="socp" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:599px; left:196px;"/>
+<input type="text" name="zdrp" id="zdrp" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:639px; left:196px;"/>
+
+<!-- riadok 5 na danovnika -->
+<input type="text" name="nzdh" id="nzdh" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:678px; left:196px;"/>
 <img src='../obr/ikony/download_blue_icon.png' onclick="nacitajRZ();"
-     title="Naèíta údaje z roèného zúètovania" class="btn-row-tool" style="top:640px; left:385px;">
-<!-- riadok 6 -->
-<input type="text" name="r01b" id="r01b" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:677px; left:196px;"/>
-<!-- riadok 7 -->
-<input type="text" name="nzmh" id="nzmh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:717px; left:219px;"/>
-<input type="text" name="tz3" id="tz3" style="width:36px; top:717px; left:500px;"/>
-<!-- riadok 8 -->
-<input type="text" name="ddsnzc" id="ddsnzc" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:760px; left:219px;"/>
-<!-- riadok 9 -->
-<input type="text" name="dds2nc" id="dds2nc" onkeyup="CiarkaNaBodku(this);" style="width:127px; top:806px; left:242px;"/>
-<!-- riadok 10 -->
-<input type="text" name="ra1b" id="ra1b" onkeyup="CiarkaNaBodku(this);" style="width:127px; top:844px; left:242px;"/>
-<input type="text" name="zmpm" id="zmpm" style="width:36px; top:844px; left:500px;"/>
-<!-- riadok 11 -->
-<input type="text" name="dnbh" id="dnbh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:883px; left:219px;"/>
-<input type="text" name="dnbm" id="dnbm" style="width:58px; top:883px; left:478px;"/>
-<!-- riadok 12 -->
-<input type="text" name="rocz" id="rocz" onkeyup="CiarkaNaBodku(this);" style="width:266px; top:927px; left:196px;"/>
+     title="Naèíta údaje z roèného zúètovania" class="btn-row-tool" style="top:680px; left:385px;">
+
+<!-- riadok 6 preddavky -->
+<input type="text" name="r01b" id="r01b" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:717px; left:196px;"/>
+
+<!-- riadok 7 na manzelku, pocet deti-->
+<input type="text" name="nzmh" id="nzmh" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:756px; left:196px;"/>
+<input type="text" name="tz3" id="tz3" style="width:36px; top:756px; left:500px;"/>
+
+<!-- riadok 8 kupele-->
+<input type="text" name="kupze" id="kupze" onkeyup="CiarkaNaBodku(this);" style="width:156px; top:810px; left:196px;"/>
+<input type="text" name="kupme" id="kupme" style="width:161px; top:810px; left:374px;"/>
+
+<!-- riadok 9 dds -->
+<input type="text" name="dds2nc" id="dds2nc" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:849px; left:196px;"/>
+
+<!-- riadok 10 zam.pr-->
+<input type="text" name="ra1b" id="ra1b" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:887px; left:196px;"/>
+
+<!-- riadok 11 db par.33 -->
+<input type="text" name="dnbh" id="dnbh" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:927px; left:196px;"/>
+<input type="text" name="dnbm" id="dnbm" style="width:58px; top:927px; left:478px;"/>
+
+<!-- riadok 12 db 33a-->
+<input type="text" name="zurke" id="zurke" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:967px; left:196px;"/>
+
+<!-- riadok 13 nedoplatok -->
+<input type="text" name="rocz" id="rocz" onkeyup="CiarkaNaBodku(this);" style="width:266px; top:1011px; left:196px;"/>
 
 <!-- inputy nepouzite v V.casti = musia byt hidden -->
 <input type="hidden" name="oc" id="oc" value="<?php echo $oc;?>"/>
@@ -975,6 +1011,8 @@ if ( $tz1 == 1 ) {
 <input type="hidden" name="pred" value="<?php echo $pred; ?>"/>
 <input type="hidden" name="pdan" id="pdan" value="<?php echo $pdan; ?>"/>
 <input type="hidden" name="ddssum" id="ddssum" value="<?php echo $ddssum; ?>"/>
+<input type="hidden" name="zmpm" id="zmpm" value="<?php echo $zmpm; ?>"/>
+<input type="hidden" name="ddsnzc" id="ddsnzc" value="<?php echo $ddsnzc; ?>"/>
 <?php            } ?>
 
 <div class="navbar">
