@@ -58,15 +58,16 @@ $databaza=$mysqldb2015.".";
 echo "db".$databaza;
   }
 
-//znovu prenos z 2016 do 2017 UCTO a MAJ ak nastavena firma minuleho roku 2016 a rok 2016 v udajoch o firme, a cislo firmy 2017 musi byt vacsie ako cislo firmy 2016
+//znovu prenos z 2017 do 2018 UCTO a MAJ ak nastavena firma minuleho roku 2017 a rok 2017 v udajoch o firme, a 
+//cislo firmy 2018 musi byt vacsie ako cislo firmy 2017
 $aj2013=0;
-if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2017 AND $fir_allx12 == 2016 )
+if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2018 AND $fir_allx12 == 2017 )
 {
 if( $copern == 2 OR $copern == 10   )  { $aj2013=1; }
 if( $copernx == 2 OR $copernx == 10 )  { $aj2013=1; }
 }
 
-//ak chcem dovolit natvrdo prenos z 2016 do 2017, inak dovoli v UCTO a MAJ ak nastavena firma roku 2016 a rok 2016 v udajoch o firme
+//ak chcem dovolit natvrdo prenos z 2017 do 2018, inak dovoli v UCTO a MAJ ak nastavena firma roku 2017 a rok 2017 v udajoch o firme
 if( $kli_vxcf == 0 )
   {
 $aj2013=1;
@@ -74,29 +75,29 @@ $aj2013=1;
 
 //echo $kli_vrok;
 
-if( $kli_vrok == 2017 AND $aj2013 == 0 )
+if( $kli_vrok == 2018 AND $aj2013 == 0 )
     {
 ?>
 <script type="text/javascript">
-alert ("                   POZOR ! \r MusÌte byù vo firme roku 2018 ! ");
+alert ("                   POZOR ! \r MusÌte byù vo firme roku 2019 ! ");
 window.close();
 </script>
 <?php
 exit;
     }
-//koniec ak nie je firma roku 2018
+//koniec ak nie je firma roku 2019
 
 
 
-if( $kli_vrok == 2017 AND $upozorni2013 == 1 )
+if( $kli_vrok == 2018 AND $upozorni2013 == 1 )
     {
 ?>
 <script type="text/javascript">
-alert ("           POZOR !!! Nie ste vo firme roku 2018 !  \r  Chcete znovu pren·öaù ˙daje do roku 2017 z roku 2016 ??? ");
+alert ("           POZOR !!! Nie ste vo firme roku 2019 !  \r  Chcete znovu pren·öaù ˙daje do roku 2018 z roku 2017 ??? ");
 </script>
 <?php
     }
-//koniec ak nie je firma roku 2018
+//koniec ak nie je firma roku 2019
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -299,28 +300,28 @@ window.open('../cis/prenos_poc.php?h_ycf=' + h_ycf + '&h_xcf=<?php echo $kli_vxc
 function HelpUcto()
                 {
 
-window.open('../cis/Prenos_UCTO_2018.pdf',
+window.open('../cis/Prenos_UCTO_2019.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpMaj()
                 {
 
-window.open('../cis/Prenos_MAJETOK_2018.pdf',
+window.open('../cis/Prenos_MAJETOK_2019.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpMzdy()
                 {
 
-window.open('../cis/Prenos_MZDY_2018.pdf',
+window.open('../cis/Prenos_MZDY_2019.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpSklad()
                 {
 
-window.open('../cis/Prenos_SKLAD_a_FAKTURY_2018.pdf',
+window.open('../cis/Prenos_SKLAD_a_FAKTURY_2019.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -1038,6 +1039,18 @@ $vysledek = mysql_query("$sql");
 }
 
 if( $kli_vrok == 2018 )
+{
+$sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha2new ";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha3new ";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha4new ";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha8new ";
+$vysledek = mysql_query("$sql");
+}
+
+if( $kli_vrok == 2019 )
 {
 $sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha2new ";
 $vysledek = mysql_query("$sql");
@@ -3620,6 +3633,52 @@ $dsql = mysql_query("$dsqlt");
 
 }
 
+
+if( $kli_vrok == 2019 )
+{
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019c";
+$vysledek = mysql_query("$sql");
+
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012019a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012019b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012019c";
+$vysledek = mysql_query("$sql");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdtrn,F$kli_vxcf"."_mzdkun ".
+" SET mn=9999 ".
+" WHERE F$kli_vxcf"."_mzdtrn.oc=F$kli_vxcf"."_mzdkun.oc ".
+" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '2018-01-01' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzddeti,F$kli_vxcf"."_mzdkun ".
+" SET p4=9 ".
+" WHERE F$kli_vxcf"."_mzddeti.oc=F$kli_vxcf"."_mzdkun.oc ".
+" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '2018-01-01' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdddp,F$kli_vxcf"."_mzdkun ".
+" SET pd4=9 ".
+" WHERE F$kli_vxcf"."_mzdddp.oc=F$kli_vxcf"."_mzdkun.oc ".
+" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '2018-01-01' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdtrn WHERE mn = 9999 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzddeti WHERE p4 = 9 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdddp WHERE pd4 = 9 "; $dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdkun WHERE pom = 9 AND dav < '2018-01-01' AND dav != '0000-00-00' ";
+$dsql = mysql_query("$dsqlt");
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 echo "MZDY prenesenÈ.<br />";
@@ -3740,6 +3799,16 @@ $vyb_xcfs=$kli_vxcf;
 $setprm = include("../mzdy/set2018parametre.php");
     }
 //uprava parametrov miezd na aktualny stav od 1.1.2018
+
+//uprava parametrov miezd na aktualny stav od 1.1.2019
+if( $kli_vrok == 2019 )
+    {
+$vyb_roks=2019;
+$mysqldbdatas=$mysqldb;
+$vyb_xcfs=$kli_vxcf;
+$setprm = include("../mzdy/set2019parametre.php");
+    }
+//uprava parametrov miezd na aktualny stav od 1.1.2019
 
 echo "Prenos Trexima.<br />";
 $dsqlt = "DROP TABLE F$kli_vxcf"."_treximafir ";
@@ -3973,6 +4042,39 @@ $vysledek = mysql_query("$sql");
 
 }
 
+if( $kli_vrok == 2019 )
+{
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019c";
+$vysledek = mysql_query("$sql");
+
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012019a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012019b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012019c";
+$vysledek = mysql_query("$sql");
+
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019pomer_a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019pomer_b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019pomer_c";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019pomer_d";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019pomer_e";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012019pomer_f";
+$vysledek = mysql_query("$sql");
+
+}
+
 $ajdban=0;
 $sudod=0; $suodb=0; $supok=0; $suban=0; 
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_uctdod WHERE dok > 0 "; $sqldok = mysql_query("$sqlttt");
@@ -4102,10 +4204,10 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "CREATE TABLE F$kli_vxcf"."_vyrzakpol SELECT * FROM ".$databaza."F$h_ycf"."_vyrzakpol ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 160000 AND zak <= 169999 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 170000 AND zak <= 179999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakdopln WHERE zak >= 160000 AND zak <= 169999 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakdopln WHERE zak >= 170000 AND zak <= 179999 ";
 $dsql = mysql_query("$dsqlt");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -19,8 +19,8 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   endif;
   mysql_select_db($mysqldb);
 
-$zablokovane=1;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
+$zablokovane=0;
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
      {
 ?>

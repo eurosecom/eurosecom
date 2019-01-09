@@ -26,8 +26,8 @@ require_once("../pswd/password.php");
 $rmc=0;
 $rmc1=0;
 
-$zablokovane=1;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
+$zablokovane=0;
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
      {
 ?>
@@ -250,10 +250,7 @@ $copern=20;
 //prac.subor a subor vytvorenych potvrdeni
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
+
 
 $sql = "SELECT zam5 FROM F$vyb_xcf"."_mzdrocnehlaseniedane";
 $vysledok = mysql_query("$sql");
@@ -443,6 +440,20 @@ $vysledek = mysql_query("$sql");
    }
 //koniec new2014 hlasenie
 
+//new2018 hlasenie
+$sql = "SELECT zurc FROM F$vyb_xcf"."_mzdrocnehlaseniedane";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+   {
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedane ADD new2018 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedane ADD zurp DECIMAL(4,0) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedane ADD zurc DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+   }
+//koniec new2018 hlasenie
+
 $sql = "SELECT pdan FROM F$vyb_xcf"."_mzdrocnehlaseniedaneoc";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
@@ -483,19 +494,31 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedaneoc ADD prvypj DECIMAL(10,2
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedaneoc ADD dds2nc DECIMAL(10,2) DEFAULT 0 AFTER new2014";
 $vysledek = mysql_query("$sql");
-
    }
 //koniec new2014 priloha
 
+//new2018 priloha
+$sql = "SELECT zurke FROM F$vyb_xcf"."_mzdrocnehlaseniedaneoc";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+   {
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedaneoc ADD new2018 DECIMAL(2,0) DEFAULT 0 AFTER prvypj";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedaneoc ADD kupze DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedaneoc ADD kupme DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdrocnehlaseniedaneoc ADD zurke DECIMAL(10,2) DEFAULT 0 AFTER new2018";
+$vysledek = mysql_query("$sql");
+   }
+//koniec new2018 priloha
+
 $vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvypl".$kli_uzid." SELECT * FROM F".$kli_vxcf."_mzdrocnehlaseniedane";
-$vytvor = mysql_query("$vsql");
-$vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvyplx".$kli_uzid." SELECT * FROM F".$kli_vxcf."_mzdrocnehlaseniedane";
 $vytvor = mysql_query("$vsql");
 
 $vsql = 'TRUNCATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." ";
 $vytvor = mysql_query("$vsql");
-$vsql = 'TRUNCATE TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid." ";
-$vytvor = mysql_query("$vsql");
+
 
 $jepotvrd=0;
 $sql = "SELECT * FROM F$kli_vxcf"."_mzdrocnehlaseniedane WHERE oc = $cislo_oc";
@@ -523,6 +546,12 @@ $sqldok = mysql_query("$sqlttt");
   }
 
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl".$kli_uzid." DROP new2014 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl".$kli_uzid." DROP new2018 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl".$kli_uzid." DROP zurp ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl".$kli_uzid." DROP zurc ";
 $vysledek = mysql_query("$sql");
 
 $ttvv = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid." ( oc,konx  ) VALUES ( '$oc1', '1' )";
@@ -821,7 +850,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdrocnehlaseniedaneoc".
 "0,0,0,2,".
 "0,0,0,0,0,SUM(socp),SUM(zdrp),SUM(pdan),SUM(nzdh),0,0,0,0,0,SUM(dnbh),SUM(dnbm),0,0,".
 "0,0,0, ".
-"0,0,0 ".
+"0,0,0, ".
+"0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
 "";
@@ -853,7 +883,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdrocnehlaseniedane".
 "0,0,0,2,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,'','','','','','','','','','','','','', ".
-"0 ".
+"0, ".
+"0,0,0 ".
 " FROM F$kli_vxcf"."_mzdrocnehlaseniedaneoc".
 " GROUP BY konx".
 "";
@@ -4387,10 +4418,7 @@ if ( $drupoh == 2 ) { ?>
 <?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
+
 ?>
 
 <?php
