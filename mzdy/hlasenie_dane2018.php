@@ -39,6 +39,11 @@ window.close();
 exit;
      }
 
+//.jpg podklad
+$jpg_source="../dokumenty/tlacivo2018/hlasenie_dane/hlasenie_v18";
+$jpg_title="tlaèivo Roèné hlásenie o vyúètovaní dane a o úhrne príjmov zo závislej èinnosti $strana.strana";
+
+
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 $pole = explode(".", $kli_vume);
@@ -221,12 +226,16 @@ $ra1b = strip_tags($_REQUEST['ra1b']);
 $rb1b = strip_tags($_REQUEST['rb1b']);
 $rc1b = strip_tags($_REQUEST['rc1b']);
 $mzc = 1*strip_tags($_REQUEST['mzc']);
+
+$zurp = 1*strip_tags($_REQUEST['zurp']);
+$zurc = 1*strip_tags($_REQUEST['zurc']);
+
 $uprav="NO";
 
 if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdrocnehlaseniedane SET ".
 " mz12='$mz12', r01bd='$r01bd', r01ad='$r01ad', r07ad='$r07ad', r07bd='$r07bd', ".
-" str4='$str4', str5='$str5', zam4='$zam4', zam5='$zam5' ".
+" str4='$str4', str5='$str5', zam4='$zam4', zam5='$zam5', zurp='$zurp', zurc='$zurc' ".
 " WHERE oc = $cislo_oc";
                     }
 
@@ -1265,6 +1274,10 @@ $ra1b = $fir_riadok->ra1b;
 $rb1b = $fir_riadok->rb1b;
 $rc1b = $fir_riadok->rc1b;
 $mzc = 1*$fir_riadok->mzc;
+
+$zurp = 1*$fir_riadok->zurp;
+$zurc = $fir_riadok->zurc;
+
 mysql_free_result($fir_vysledok);
 
 //priezvisko,meno,titul FO a nazov,forma PO
@@ -1331,6 +1344,10 @@ if ( $copern == 20 )
    document.formv1.r01ad.value = '<?php echo "$r01ad";?>';
    document.formv1.r07ad.value = '<?php echo "$r07ad";?>';
    document.formv1.r07bd.value = '<?php echo "$r07bd";?>';
+
+   document.formv1.zurp.value = '<?php echo "$zurp";?>';
+   document.formv1.zurc.value = '<?php echo "$zurc";?>';
+
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
@@ -1366,7 +1383,7 @@ if ( $copern == 20 )
    document.formv1.ra1b.value = '<?php echo "$ra1b";?>';
    document.formv1.rb1b.value = '<?php echo "$rb1b";?>';
    document.formv1.rc1b.value = '<?php echo "$rc1b";?>';
-<?php if ( $mzc == 1 ) { ?> document.formv1.mzc.checked = "checked"; <?php } ?>
+
 <?php                     } ?>
   }
 <?php
@@ -1453,61 +1470,69 @@ $source="../mzdy/hlasenie_dane2018.php?drupoh=1&page=1&subor=0";
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str1.jpg"
-     alt="tlaèivo Hlásenie o vyúètovaní dane pre rok 2014 1.strana 243kB" class="form-background">
-<span class="text-echo" style="top:335px; left:57px;"><?php echo $fir_fdic; ?></span>
-<span class="text-echo" style="top:387px; left:57px; letter-spacing:0;"><?php echo $fir_uctt01; ?></span>
+<img src="<?php echo $jpg_source; ?>_str1.jpg"
+     alt="<?php echo $jpg_title; ?>" class="form-background">
+
+<span class="text-echo" style="top:341px; left:57px;"><?php echo $fir_fdic; ?></span>
 
 <!-- Druh hlasenia a za rok -->
-<input type="radio" id="druh1" name="druh" value="1" style="top:329px; left:463px;"/>
-<input type="radio" id="druh2" name="druh" value="2" style="top:356px; left:463px;"/>
-<input type="radio" id="druh3" name="druh" value="3" style="top:383px; left:463px;"/>
+<input type="radio" id="druh1" name="druh" value="1" style="top:324px; left:463px;"/>
+<input type="radio" id="druh2" name="druh" value="2" style="top:351px; left:463px;"/>
+<input type="radio" id="druh3" name="druh" value="3" style="top:378px; left:463px;"/>
 <?php
 $rokp=$kli_vrok;
 $t01=substr($rokp,2,1);
 $t02=substr($rokp,3,1);
 ?>
-<span class="text-echo" style="top:311px; left:834px;"><?php echo "$t01$t02"; ?></span>
+<span class="text-echo" style="top:309px; left:834px;"><?php echo "$t01$t02"; ?></span>
 <input type="text" name="r01bd" id="r01bd" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:382px; left:691px;"/>
+       style="width:195px; top:373px; left:691px;"/>
 
 <!-- FO -->
-<div class="input-echo" style="width:357px; top:477px; left:53px;"><?php echo $dprie; ?></div>
-<div class="input-echo" style="width:243px; top:477px; left:433px;"><?php echo $dmeno; ?></div>
-<div class="input-echo" style="width:113px; top:477px; left:695px;"><?php echo $dtitl; ?></div>
-<div class="input-echo" style="width:66px; top:477px; left:828px;"><?php echo $dtitz; ?></div>
+<div class="input-echo" style="width:357px; top:455px; left:53px;"><?php echo $dprie; ?></div>
+<div class="input-echo" style="width:243px; top:455px; left:433px;"><?php echo $dmeno; ?></div>
+<div class="input-echo" style="width:113px; top:455px; left:695px;"><?php echo $dtitl; ?></div>
+<div class="input-echo" style="width:66px; top:455px; left:828px;"><?php echo $dtitz; ?></div>
 <!-- PO -->
-<div class="input-echo" style="width:726px; top:571px; left:53px;"><?php echo $fir_fnaz; ?></div>
-<div class="input-echo" style="width:60px; top:571px; left:822px;"><?php echo $fir_uctt03; ?></div>
+<div class="input-echo" style="width:726px; top:530px; left:53px;"><?php echo $fir_fnaz; ?></div>
+<div class="input-echo" style="width:60px; top:530px; left:822px;"><?php echo $fir_uctt03; ?></div>
 <!-- Sidlo PO alebo pobyt FO -->
-<div class="input-echo" style="width:634px; top:660px; left:53px;"><?php echo $duli; ?></div>
-<div class="input-echo" style="width:176px; top:660px; left:718px;"><?php echo $dcdm; ?></div>
-<div class="input-echo" style="width:105px; top:716px; left:53px;"><?php echo $dpsc; ?></div>
-<div class="input-echo" style="width:451px; top:716px; left:178px;"><?php echo $dmes; ?></div>
-<div class="input-echo" style="width:245px; top:716px; left:649px;"><?php echo $xstat; ?></div>
-<div class="input-echo" style="width:289px; top:778px; left:53px;"><?php echo $fir_ftel; ?></div>
-<div class="input-echo" style="width:520px; top:777px; left:374px;"><?php echo $fir_fem1; ?></div>
+<div class="input-echo" style="width:634px; top:605px; left:53px;"><?php echo $duli; ?></div>
+<div class="input-echo" style="width:176px; top:605px; left:718px;"><?php echo $dcdm; ?></div>
+<div class="input-echo" style="width:105px; top:659px; left:53px;"><?php echo $dpsc; ?></div>
+<div class="input-echo" style="width:451px; top:659px; left:178px;"><?php echo $dmes; ?></div>
+<div class="input-echo" style="width:245px; top:659px; left:649px;"><?php echo $xstat; ?></div>
+<div class="input-echo" style="width:289px; top:714px; left:53px;"><?php echo $fir_ftel; ?></div>
+<div class="input-echo" style="width:520px; top:714px; left:374px;"><?php echo $fir_fem1; ?></div>
 <!-- Vykonane -->
 <input type="text" name="r01ad" id="r01ad" onkeyup="CiarkaNaBodku(this);"
-       style="width:196px; top:825px; left:691px;"/>
+       style="width:196px; top:760px; left:691px;"/>
 <!-- Vypracoval -->
-<div class="input-echo" style="width:309px; top:887px; left:53px;"><?php echo $zrobil; ?></div>
+<div class="input-echo" style="width:309px; top:822px; left:53px;"><?php echo $zrobil; ?></div>
 <input type="text" name="r07ad" id="r07ad" onkeyup="CiarkaNaBodku(this);"
-       style="width:196px; top:885px; left:386px;"/>
-<div class="input-echo" style="width:291px; top:887px; left:603px;"><?php echo $fir_mzdt04; ?></div>
+       style="width:196px; top:821px; left:386px;"/>
+<div class="input-echo" style="width:291px; top:822px; left:603px;"><?php echo $fir_mzdt04; ?></div>
+
 <!-- Vyhlasujem -->
 <input type="text" name="r07bd" id="r07bd" onkeyup="CiarkaNaBodku(this);"
-       style="width:196px; top:930px; left:696px;"/>
-<div class="input-echo" style="width:84px; top:973px; left:213px; text-align:right;"><?php echo $str4; ?>&nbsp;</div>
-<div class="input-echo" style="width:84px; top:973px; left:339px; text-align:right;"><?php echo $str5; ?>&nbsp;</div>
-<div class="input-echo" style="width:106px; top:1014px; left:190px; text-align:right;"><?php echo $zam4; ?>&nbsp;</div>
-<div class="input-echo" style="width:106px; top:1014px; left:317px; text-align:right;"><?php echo $zam5; ?>&nbsp;</div>
+       style="width:196px; top:866px; left:696px;"/>
+<div class="input-echo" style="width:84px; top:885px; left:213px; text-align:right;"><?php echo $str4; ?>&nbsp;</div>
+<div class="input-echo" style="width:84px; top:885px; left:339px; text-align:right;"><?php echo $str5; ?>&nbsp;</div>
+<div class="input-echo" style="width:106px; top:924px; left:190px; text-align:right;"><?php echo $zam4; ?>&nbsp;</div>
+<div class="input-echo" style="width:106px; top:924px; left:317px; text-align:right;"><?php echo $zam5; ?>&nbsp;</div>
+
+<!-- Vyhlasujem -->
+<input type="text" name="zurp" id="zurp" onkeyup="CiarkaNaBodku(this);"
+       style="width:106px; top:969px; left:317px;"/>
+<input type="text" name="zurc" id="zurc" onkeyup="CiarkaNaBodku(this);"
+       style="width:220px; top:1013px; left:203px;"/>
+
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str2.jpg"
-     alt="tlaèivo Hlásenie o vyúètovaní dane pre rok 2014 2.strana 243kB" class="form-background">
+<img src="<?php echo $jpg_source; ?>_str2.jpg"
+     alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:76px; left:371px;"><?php echo $fir_fdic; ?></span>
 
 <!-- ZASTUPCA -->
@@ -1547,7 +1572,7 @@ $t02=substr($rokp,3,1);
 <input type="text" name="rb1b" id="rb1b" onkeyup="CiarkaNaBodku(this);" style="width:221px; top:1139px; left:669px;"/>
 <input type="text" name="rc1b" id="rc1b" onkeyup="CiarkaNaBodku(this);" style="width:221px; top:1203px; left:669px;"/>
 
-<input type="checkbox" name="mzc" value="1" style="top:1254px; left:360px;"/>
+
 <?php if ( $copern == 10 AND $drupoh == 3 ) { ?>
 <a href="../tmp/<?php echo $banka; ?>.txt" style="position:absolute; top:70px; left:100px;">../tmp/<?php echo $banka; ?>.txt</a>
 <?php                                       } ?> <!-- dopyt, médium nedokonèené -->
@@ -1615,9 +1640,9 @@ if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(7);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str1.jpg',0,0,210,297);
 }
 
 //dic
@@ -2068,9 +2093,9 @@ if ( $strana == 2 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(12);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str2.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
 }
 
 //dic
@@ -2868,9 +2893,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(6);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str3.jpg') AND $j == 0 )
+if ( File_Exists($jpg_source.'_str3.jpg') AND $j == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str3.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str3.jpg',0,0,210,297);
 }
 $strana=$strana+1;
 
@@ -3406,9 +3431,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(6);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str4.jpg') AND $j == 0 )
+if ( File_Exists($jpg_source.'_str4.jpg') AND $j == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str4.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str4.jpg',0,0,210,297);
 }
 $strana=$strana+1;
 
