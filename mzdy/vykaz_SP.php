@@ -680,6 +680,13 @@ if( $denvyplaty == '31.06.2018' ) { $denvyplaty="30.06.2018"; }
 if( $denvyplaty == '31.09.2018' ) { $denvyplaty="30.09.2018"; }
 if( $denvyplaty == '31.11.2018' ) { $denvyplaty="30.11.2018"; }
 
+if( $denvyplaty == '30.02.2019' ) { $denvyplaty="28.02.2019"; }
+if( $denvyplaty == '31.02.2019' ) { $denvyplaty="28.02.2019"; }
+if( $denvyplaty == '31.04.2019' ) { $denvyplaty="30.04.2019"; }
+if( $denvyplaty == '31.06.2019' ) { $denvyplaty="30.06.2019"; }
+if( $denvyplaty == '31.09.2019' ) { $denvyplaty="30.09.2019"; }
+if( $denvyplaty == '31.11.2019' ) { $denvyplaty="30.11.2019"; }
+
 $pdf->Cell(6,6," ","$rmc1",0,"L");$pdf->Cell(42,6,"$denvyplaty","$rmc",0,"C");
 
 //typ vykazu
@@ -1704,6 +1711,13 @@ if( $denvyplaty == '31.04.2018' ) { $denvyplaty="30.04.2018"; }
 if( $denvyplaty == '31.06.2018' ) { $denvyplaty="30.06.2018"; }
 if( $denvyplaty == '31.09.2018' ) { $denvyplaty="30.09.2018"; }
 if( $denvyplaty == '31.11.2018' ) { $denvyplaty="30.11.2018"; }
+
+if( $denvyplaty == '30.02.2019' ) { $denvyplaty="28.02.2019"; }
+if( $denvyplaty == '31.02.2019' ) { $denvyplaty="28.02.2019"; }
+if( $denvyplaty == '31.04.2019' ) { $denvyplaty="30.04.2019"; }
+if( $denvyplaty == '31.06.2019' ) { $denvyplaty="30.06.2019"; }
+if( $denvyplaty == '31.09.2019' ) { $denvyplaty="30.09.2019"; }
+if( $denvyplaty == '31.11.2019' ) { $denvyplaty="30.11.2019"; }
 
   $text = "<denVyplaty>".$denvyplaty."</denVyplaty>"."\r\n";
   fwrite($soubor, $text);
