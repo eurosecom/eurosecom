@@ -1421,6 +1421,11 @@ if ( $copern == 20 )
   {
    window.open('../mzdy/hlasenie_dane2018.php?h_drp=1&h_dap=<?php echo $dnessk; ?>&copern=10&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>&strana=9999', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+  function FormXML()
+  {
+   window.open('../mzdy/hlasenie_danexml2018.php?h_drp=0&h_dap=&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+
+  }
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI();">
@@ -1442,6 +1447,7 @@ if ( $copern == 20 )
     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="CitajPrehlad();" title="Naèíta údaje z mesaèných PREH¼ADOV" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="CitajMzlist();" title="Naèíta údaje z MZDOVÝCH LISTOV" class="btn-form-tool">
+    <img src="../obr/ikony/upbox_blue_icon.png" onclick="FormXML();" title="Export do XML" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRocHlasenie2018();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>

@@ -123,8 +123,6 @@ if ( $j == 0 )
   $text = " <hlavicka>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <dic><![CDATA[".$fir_fdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
-$fir_uctt01 = iconv("CP1250", "UTF-8", $fir_uctt01);
-  $text = "  <danovyUrad><![CDATA[".$fir_uctt01."]]></danovyUrad>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <druhHlasenia>"."\r\n"; fwrite($soubor, $text);
 $riadne="1"; $opravne="0"; $dodatocne="0";
@@ -140,8 +138,7 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
   $text = "   <rok><![CDATA[".$kli_vrok."]]></rok>"."\r\n"; fwrite($soubor, $text);
-$dat_ddp="";
-if ( $dodatocne == 1 ) $dat_ddp=SkDatum($hlavicka->r01bd);
+$dat_ddp=SkDatum($hlavicka->r01bd);
 if ( $dat_ddp == '00.00.0000' ) $dat_ddp="";
   $text = "   <datumDDP><![CDATA[".$dat_ddp."]]></datumDDP>"."\r\n"; fwrite($soubor, $text);
   $text = "  </zdanovacieObdobie>"."\r\n"; fwrite($soubor, $text);
@@ -217,6 +214,11 @@ $tlachod_c=$hlavicka->zam4;
   $text = "  <pocetZamC4><![CDATA[".$tlachod_c."]]></pocetZamC4>"."\r\n"; fwrite($soubor, $text);
 $tlachod_c=$hlavicka->zam5;
   $text = "  <pocetZamC5><![CDATA[".$tlachod_c."]]></pocetZamC5>"."\r\n"; fwrite($soubor, $text);
+
+$tlachod_c=1*$hlavicka->zurp;
+  $text = "  <pocetZamBonus33a><![CDATA[".$tlachod_c."]]></pocetZamBonus33a>"."\r\n"; fwrite($soubor, $text);
+$tlachod_c=$hlavicka->zurc;
+  $text = "  <suma33a><![CDATA[".$tlachod_c."]]></suma33a>"."\r\n"; fwrite($soubor, $text);
 
 $dat_vyhl=SkDatum($hlavicka->r07bd);
 if ( $dat_vyhl == '00.00.0000' ) $dat_vyhl="";
@@ -318,8 +320,6 @@ if ( $tlachod_c == 0 ) $tlachod_c="";
   $text = "   <rF><![CDATA[".$tlachod_c."]]></rF>"."\r\n"; fwrite($soubor, $text);
   $text = "  </cast3>"."\r\n"; fwrite($soubor, $text);
 
-$medium=$hlavicka->mzc;
-  $text = "  <medium5c><![CDATA[".$medium."]]></medium5c>"."\r\n"; fwrite($soubor, $text);
      }
 //koniec ak j=0
 
@@ -327,7 +327,7 @@ $medium=$hlavicka->mzc;
 $i = $i + 1;
 $j = $j + 1;
   }
-//koniec hlavicky
+//koniec po cast3 vratane
 
 //vytlac cast IV. prilohy nevykonalRZ
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdrocnehlaseniedaneoc".
@@ -505,10 +505,6 @@ $tlachod_c=1*$hlavicka->pdan;
 if ( $tlachod_c == 0 OR $hlavicka->pred == 0 ) $tlachod_c="";
   $text = "    <r8pm><![CDATA[".$tlachod_c."]]></r8pm>"."\r\n"; fwrite($soubor, $text);
 
-$tlachod_c=$hlavicka->ddssum;
-if ( $tlachod_c == 0 ) $tlachod_c="";
-  $text = "    <r9><![CDATA[".$tlachod_c."]]></r9>"."\r\n"; fwrite($soubor, $text);
-
 if ( $stlpec == 1 ) {  $text = "   </stlpec1>"."\r\n"; fwrite($soubor, $text); }
 if ( $stlpec == 2 ) {  $text = "   </stlpec2>"."\r\n"; fwrite($soubor, $text); }
 
@@ -522,7 +518,6 @@ $stlpec = $stlpec + 1;
 if( $stlpec == 3 ) $stlpec=1;
   }
 //koniec cast IV. prilohy
-
 
 //vytlac cast V. prilohy vykonalRZ
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdrocnehlaseniedaneoc".
@@ -623,7 +618,6 @@ if ( $tlachod_c == 0 ) $tlachod_c="";
 
 $tlachod_c=$hlavicka->nzdh;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-if ( $hlavicka->ra1b > 0 ) $tlachod_c="";
   $text = "    <c5r5><![CDATA[".$tlachod_c."]]></c5r5>"."\r\n"; fwrite($soubor, $text);
 
 $tlachod_c=$hlavicka->r01b;
@@ -632,15 +626,18 @@ if ( $tlachod_c == 0 ) $tlachod_c="";
 
 $tlachod_c=$hlavicka->nzmh;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-if ( $hlavicka->ra1b > 0 ) $tlachod_c="";
   $text = "    <c5r7suma><![CDATA[".$tlachod_c."]]></c5r7suma>"."\r\n"; fwrite($soubor, $text);
 $tlachod_c=$hlavicka->tz3;
 if ( $tlachod_c == 0 OR $hlavicka->dnbh == 0 ) $tlachod_c="";
   $text = "    <c5r7deti><![CDATA[".$tlachod_c."]]></c5r7deti>"."\r\n"; fwrite($soubor, $text);
 
-$tlachod_c=$hlavicka->ddsnzc;
+$tlachod_c=$hlavicka->kupze;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-  $text = "    <c5r8><![CDATA[".$tlachod_c."]]></c5r8>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <c5r8a><![CDATA[".$tlachod_c."]]></c5r8a>"."\r\n"; fwrite($soubor, $text);
+
+$tlachod_c=$hlavicka->kupme;
+if ( $tlachod_c == 0 ) $tlachod_c="";
+  $text = "    <c5r8b><![CDATA[".$tlachod_c."]]></c5r8b>"."\r\n"; fwrite($soubor, $text);
 
 $tlachod_c=$hlavicka->dds2nc;
 if ( $tlachod_c == 0 ) $tlachod_c="";
@@ -649,20 +646,22 @@ if ( $tlachod_c == 0 ) $tlachod_c="";
 $tlachod_c=$hlavicka->ra1b;
 if ( $tlachod_c == 0 ) $tlachod_c="";
   $text = "    <c5r10suma><![CDATA[".$tlachod_c."]]></c5r10suma>"."\r\n"; fwrite($soubor, $text);
-$tlachod_c=$hlavicka->zmpm;
-if ( $tlachod_c == 0 OR $hlavicka->ra1b == 0 ) $tlachod_c="";
-  $text = "    <c5r10pm><![CDATA[".$tlachod_c."]]></c5r10pm>"."\r\n"; fwrite($soubor, $text);
+
 
 $tlachod_c=$hlavicka->dnbh;
 if ( $tlachod_c == 0 ) $tlachod_c="";
   $text = "    <c5r11suma><![CDATA[".$tlachod_c."]]></c5r11suma>"."\r\n"; fwrite($soubor, $text);
 $tlachod_c=$hlavicka->dnbm;
-if ( $tlachod_c == 0 OR $hlavicka->dnbh == 0 ) $tlachod_c="";
+if ( $tlachod_c == 0 ) $tlachod_c="";
   $text = "    <c5r11pm><![CDATA[".$tlachod_c."]]></c5r11pm>"."\r\n"; fwrite($soubor, $text);
+
+$tlachod_c=$hlavicka->zurke;
+if ( $tlachod_c == 0 ) $tlachod_c="";
+  $text = "    <c5r12><![CDATA[".$tlachod_c."]]></c5r12>"."\r\n"; fwrite($soubor, $text);
 
 $tlachod_c=$hlavicka->rocz;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-  $text = "    <c5r12><![CDATA[".$tlachod_c."]]></c5r12>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <c5r13><![CDATA[".$tlachod_c."]]></c5r13>"."\r\n"; fwrite($soubor, $text);
 
 if ( $stlpec == 1 ) {  $text = "   </c5stlpec1>"."\r\n"; fwrite($soubor, $text); }
 if ( $stlpec == 2 ) {  $text = "   </c5stlpec2>"."\r\n"; fwrite($soubor, $text); }
@@ -687,7 +686,7 @@ fclose($soubor);
 <?php if ( $copern == 110 ) { ?>
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a naèítajte na www.drsr.sk alebo do aplikácie eDane:
+Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a naèítajte na www.financnasprava.sk alebo do aplikácie eDane:
 <br />
 <br />
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
