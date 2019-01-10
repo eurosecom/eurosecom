@@ -226,6 +226,11 @@ $cislo_oc = strip_tags($_REQUEST['cislo_oc']);
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnehlaseniedaneoc,F$kli_vxcf"."_mzdrocnedane SET ".
 " tz1=1, rocz=r15-r16,  ".
 
+" F$kli_vxcf"."_mzdrocnehlaseniedaneoc.kupze=F$kli_vxcf"."_mzdrocnedane.znikup, ".
+" F$kli_vxcf"."_mzdrocnehlaseniedaneoc.kupme=0, ".
+" F$kli_vxcf"."_mzdrocnehlaseniedaneoc.zurke=F$kli_vxcf"."_mzdrocnedane.uro01, ".
+" F$kli_vxcf"."_mzdrocnehlaseniedaneoc.dds2nc=F$kli_vxcf"."_mzdrocnedane.r04d, ".
+
 " F$kli_vxcf"."_mzdrocnehlaseniedaneoc.dnbh=F$kli_vxcf"."_mzdrocnedane.r10, ".
 " F$kli_vxcf"."_mzdrocnehlaseniedaneoc.zmpm=F$kli_vxcf"."_mzdrocnedane.r08, ".
 " F$kli_vxcf"."_mzdrocnehlaseniedaneoc.ra1b=F$kli_vxcf"."_mzdrocnedane.r09, ".
