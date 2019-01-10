@@ -1405,7 +1405,7 @@ if ( $copern == 20 )
 
   function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/tlacivo2018/hlasenie_dane/hlasenie_v18_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function CitajMzlist()
   { 
@@ -1417,7 +1417,7 @@ if ( $copern == 20 )
   }
 
 <?php $dnessk = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
-  function TlacRocHlasenie2014()
+  function TlacRocHlasenie2018()
   {
    window.open('../mzdy/hlasenie_dane2018.php?h_drp=1&h_dap=<?php echo $dnessk; ?>&copern=10&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>&strana=9999', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
@@ -1442,7 +1442,7 @@ if ( $copern == 20 )
     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="CitajPrehlad();" title="Naèíta údaje z mesaèných PREH¼ADOV" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="CitajMzlist();" title="Naèíta údaje z MZDOVÝCH LISTOV" class="btn-form-tool">
-    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRocHlasenie2014();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
+    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRocHlasenie2018();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
  </tr>
@@ -3309,12 +3309,13 @@ $D=substr($tlachod_c,3,1);
 $E=substr($tlachod_c,4,1);
 $F=substr($tlachod_c,5,1);
 $G=substr($tlachod_c,6,1);
-$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(15,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",1,"C");
 
 //r5 zdravotne poistenie
+$pdf->Cell(30,3," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->zdrp;
 if ( $tlachod == 0 ) $tlachod="";
@@ -3329,9 +3330,9 @@ $D=substr($tlachod_c,3,1);
 $E=substr($tlachod_c,4,1);
 $F=substr($tlachod_c,5,1);
 $G=substr($tlachod_c,6,1);
-$pdf->Cell(3,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$F","$rmc",0,"C");
+$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(15,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",1,"C");
 
 //r6 preddavky na dan
@@ -3352,7 +3353,7 @@ $F=substr($tlachod_c,5,1);
 $G=substr($tlachod_c,6,1);
 $H=substr($tlachod_c,7,1);
 $I=substr($tlachod_c,8,1);
-$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(5,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");

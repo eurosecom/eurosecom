@@ -623,7 +623,7 @@ if ( $copern != 2 AND $copern != 102 )
 
   function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/tlacivo2018/hlasenie_dane/hlasenie_v18_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function upravRZ()
   {
@@ -638,9 +638,9 @@ if ( $copern != 2 AND $copern != 102 )
    window.open('../mzdy/hlasenie_daneoc2018.php?cislo_oc='+ oc + '&copern=4402&oc='+ oc + '&uprav=1', '_self', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
   }
 <?php $dnessk = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
-  function TlacRocHlasenie2014priloha()
+  function TlacRocHlasenie2018priloha()
   {
-   window.open('../mzdy/hlasenie_dane2014.php?h_drp=1&h_dap=<?php echo $dnessk; ?>&copern=10&drupoh=2&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/hlasenie_dane2018.php?h_drp=1&h_dap=<?php echo $dnessk; ?>&copern=10&drupoh=2&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravZamestnanca()
   {
@@ -685,7 +685,7 @@ if ( $copern != 2 AND $copern != 102 )
    <a href="#" onclick="rozninewoc();" title="Pridaù zamestnanca do prÌlohy" class="addzam-btn">Pridaù os.Ë.</a>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
-    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRocHlasenie2014priloha();" title="Zobraziù IV. a V.Ëasù Hl·senia v PDF" class="btn-form-tool">
+    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRocHlasenie2018priloha();" title="Zobraziù IV. a V.Ëasù Hl·senia v PDF" class="btn-form-tool">
    </div>
   </td>
  </tr>
@@ -704,12 +704,12 @@ if ( $copern != 2 AND $copern != 102 )
 <div class="navbar">
 <?php
 $clas3="active";
-$source="../mzdy/hlasenie_dane2014.php?drupoh=1&page=1&subor=0";
+$source="../mzdy/hlasenie_dane2018.php?drupoh=1&page=1&subor=0";
 ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('../mzdy/hlasenie_daneoc2018.php?cislo_oc=9999&copern=101&drupoh=1&fmzdy=63&page=1&subor=0', '_self');" class="<?php echo $clas3; ?> toleft">prÌloha</a>
- <a href="#" onclick="window.open('../mzdy/hlasenie_dane2014.php?h_drp=&h_dap=&copern=10&drupoh=2&page=1&subor=0', '_blank');" class="<?php echo $clas3; ?> toright">prÌloha</a>
+ <a href="#" onclick="window.open('../mzdy/hlasenie_dane2018.php?h_drp=&h_dap=&copern=10&drupoh=2&page=1&subor=0', '_blank');" class="<?php echo $clas3; ?> toright">prÌloha</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
