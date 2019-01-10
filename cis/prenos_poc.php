@@ -4204,6 +4204,8 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "CREATE TABLE F$kli_vxcf"."_vyrzakpol SELECT * FROM ".$databaza."F$h_ycf"."_vyrzakpol ";
 $dsql = mysql_query("$dsqlt");
 
+//POZOR v eurosekov.sk prenes aj nevyfakturovane zakazky _vyrrcph kvoli prenosu DP pozri tvrde_upravy.php
+
 $dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 170000 AND zak <= 179999 ";
 $dsql = mysql_query("$dsqlt");
 
