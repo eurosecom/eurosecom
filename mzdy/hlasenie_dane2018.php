@@ -3796,7 +3796,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
 
-//r3 prijmy iny zamestnavatel
+//r3 prijmy zamestnavatel
 $pdf->Cell(30,4," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->prvypj;
@@ -3829,7 +3829,7 @@ if ( $tlachod == 0 ) $tlachod="";
 $pole = explode(".", $tlachod);
 $tlachod_c = $pole[0];
 $tlachod_d = substr($pole[1],0,2);
-$tlachod_c=sprintf("% 7s",$tlachod_c);
+$tlachod_c=sprintf("% 10s",$tlachod_c);
 $A=substr($tlachod_c,0,1);
 $B=substr($tlachod_c,1,1);
 $C=substr($tlachod_c,2,1);
@@ -3837,19 +3837,24 @@ $D=substr($tlachod_c,3,1);
 $E=substr($tlachod_c,4,1);
 $F=substr($tlachod_c,5,1);
 $G=substr($tlachod_c,6,1);
+$H=substr($tlachod_c,7,1);
+$I=substr($tlachod_c,8,1);
+$J=substr($tlachod_c,9,1);
 $pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
 
 //r4 zdravotne poistenie
+$pdf->Cell(30,3," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->zdrp;
 if ( $tlachod == 0 ) $tlachod="";
 $pole = explode(".", $tlachod);
 $tlachod_c = $pole[0];
 $tlachod_d = substr($pole[1],0,2);
-$tlachod_c=sprintf("% 7s",$tlachod_c);
+$tlachod_c=sprintf("% 10s",$tlachod_c);
 $A=substr($tlachod_c,0,1);
 $B=substr($tlachod_c,1,1);
 $C=substr($tlachod_c,2,1);
@@ -3857,17 +3862,20 @@ $D=substr($tlachod_c,3,1);
 $E=substr($tlachod_c,4,1);
 $F=substr($tlachod_c,5,1);
 $G=substr($tlachod_c,6,1);
-$pdf->Cell(3,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$F","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",1,"C");
+$H=substr($tlachod_c,7,1);
+$I=substr($tlachod_c,8,1);
+$J=substr($tlachod_c,9,1);
+$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
 
 //r5 nczd na danovnika
 $pdf->Cell(30,3," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->nzdh;
 if ( $tlachod == 0 ) $tlachod="";
-if ( $hlavicka->ra1b > 0 ) $tlachod="";
 $pole = explode(".", $tlachod);
 $tlachod_c = $pole[0];
 $tlachod_d = substr($pole[1],0,2);
@@ -3891,7 +3899,7 @@ if ( $tlachod == 0 ) $tlachod="";
 $pole = explode(".", $tlachod);
 $tlachod_c = $pole[0];
 $tlachod_d = substr($pole[1],0,2);
-$tlachod_c=sprintf("% 9s",$tlachod_c);
+$tlachod_c=sprintf("% 10s",$tlachod_c);
 $A=substr($tlachod_c,0,1);
 $B=substr($tlachod_c,1,1);
 $C=substr($tlachod_c,2,1);
@@ -3901,18 +3909,18 @@ $F=substr($tlachod_c,5,1);
 $G=substr($tlachod_c,6,1);
 $H=substr($tlachod_c,7,1);
 $I=substr($tlachod_c,8,1);
+$J=substr($tlachod_c,9,1);
 $pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",1,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
 
 //r7 nczd na manzelku
 $pdf->Cell(30,3," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->nzmh;
 if ( $tlachod == 0 ) $tlachod="";
-if ( $hlavicka->ra1b > 0 ) $tlachod="";
 $pole = explode(".", $tlachod);
 $tlachod_c = $pole[0];
 $tlachod_d = substr($pole[1],0,2);
@@ -3937,12 +3945,12 @@ $A=substr($tlachod,0,1);
 $B=substr($tlachod,1,1);
 $pdf->Cell(27,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",1,"C");
 
-//r8 nczd na SDS
-$pdf->Cell(30,4," ","$rmc1",1,"L");
+
+//r8 kupele
+$pdf->Cell(30,6," ","$rmc1",1,"L");
 $znamienko="";
-$tlachod=100*$hlavicka->ddsnzc;
+$tlachod=100*$hlavicka->kupze;
 if ( $tlachod == 0 ) $tlachod="";
-//if ( $hlavicka->ra1b > 0 ) $tlachod=""; dopyt, neviem, èi je
 $pole = explode(".", $tlachod);
 $tlachod_c = $pole[0];
 $tlachod_d = substr($pole[1],0,2);
@@ -3953,13 +3961,32 @@ $C=substr($tlachod_c,2,1);
 $D=substr($tlachod_c,3,1);
 $E=substr($tlachod_c,4,1);
 $F=substr($tlachod_c,5,1);
-$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(-5,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$B","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$D","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$F","$rmc",0,"C");
+
+$znamienko="";
+$tlachod=100*$hlavicka->kupme;
+if ( $tlachod == 0 ) $tlachod="";
+$pole = explode(".", $tlachod);
+$tlachod_c = $pole[0];
+$tlachod_d = substr($pole[1],0,2);
+$tlachod_c=sprintf("% 6s",$tlachod_c);
+$A=substr($tlachod_c,0,1);
+$B=substr($tlachod_c,1,1);
+$C=substr($tlachod_c,2,1);
+$D=substr($tlachod_c,3,1);
+$E=substr($tlachod_c,4,1);
+$F=substr($tlachod_c,5,1);
+$pdf->Cell(7,6," ","$rmc1",0,"R");$pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
 $pdf->Cell(4,6,"$B","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
 $pdf->Cell(4,6,"$D","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
 $pdf->Cell(4,6,"$F","$rmc",1,"C");
 
+
 //r9 nczd na DDS
-$pdf->Cell(30,4," ","$rmc1",1,"L");
+$pdf->Cell(30,3," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->dds2nc;
 if ( $tlachod == 0 ) $tlachod="";
@@ -4036,7 +4063,28 @@ $C=substr($tlachod,2,1);
 $pdf->Cell(22,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",1,"C");
 
-//r12 nedo/pre-platok RZ
+
+//r12 db33a
+$pdf->Cell(30,3," ","$rmc1",1,"L");
+$znamienko="";
+$tlachod=100*$hlavicka->zurke;
+if ( $tlachod == 0 ) $tlachod="";
+$pole = explode(".", $tlachod);
+$tlachod_c = $pole[0];
+$tlachod_d = substr($pole[1],0,2);
+$tlachod_c=sprintf("% 6s",$tlachod_c);
+$A=substr($tlachod_c,0,1);
+$B=substr($tlachod_c,1,1);
+$C=substr($tlachod_c,2,1);
+$D=substr($tlachod_c,3,1);
+$E=substr($tlachod_c,4,1);
+$F=substr($tlachod_c,5,1);
+$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$B","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$D","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$F","$rmc",1,"C");
+
+//r13 nedo/pre-platok RZ
 $pdf->Cell(30,4," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->rocz;
