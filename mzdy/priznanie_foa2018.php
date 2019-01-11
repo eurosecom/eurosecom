@@ -1893,7 +1893,7 @@ if ( $copern == 20 )
   }
   function FOAdoXML()
   {
-   //window.open('../mzdy/priznaniefoa_xml2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1', '_blank', param);
+   window.open('../mzdy/priznaniefoa_xml2018.php?cislo_oc=<?php echo $cislo_oc;?>&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1', '_blank', param);
   }
 
   function CisKrajin()
