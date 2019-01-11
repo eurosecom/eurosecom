@@ -2446,8 +2446,8 @@ $databaza="";
 $dtb2 = include("../cis/oddel_dtbz1.php");
 
 $dl2014=0; $dl2015=0; $k2r01=0; $k3r01=0; $k4r01=0; $k5r01=0;
-$sqlttt = "SELECT r830, r820, obdo, obod, k2r01, k3r01, k4r01, k5r01, k1od, k1do, k2r02, k3r02, k4r02, k5r02, k2od, k2do, k3od, k3do ".
-" FROM ".$databaza."F$h_ycf"."_uctpriznanie_po ";
+$sqlttt = "SELECT r830, r820, obdo, obod, k2r01, k3r01, k4r01, k5r01, k1od, k1do, k2r02, k3r02, k4r02, k5r02, k2od, k2do, k3od, k3do, ".
+" k2r03, k3r03, k4r03, k5r03 FROM ".$databaza."F$h_ycf"."_uctpriznanie_po ";
 $sqldok = mysql_query("$sqlttt");
 //echo $sqlttt;
  if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -2456,8 +2456,10 @@ $sqldok = mysql_query("$sqlttt");
  $r830=1*$riaddok->r830;
  $r820=1*$riaddok->r820;
 
- $obod=$riaddok->obod;
- $obdo=$riaddok->obdo;
+$klimrok=$kli_vrok-1;
+
+ $obod=$klimrok."-01-01";
+ $obdo=$klimrok."-12-31";
 
  $k1od=$riaddok->k1od;
  $k1do=$riaddok->k1do;
@@ -2472,6 +2474,13 @@ $sqldok = mysql_query("$sqlttt");
  $k3r02=1*$riaddok->k3r02;
  $k4r02=1*$riaddok->k4r02;
  $k5r02=1*$riaddok->k5r02;
+
+ $k3od=$riaddok->k3od;
+ $k3do=$riaddok->k3do;
+ $k2r03=1*$riaddok->k2r03;
+ $k3r03=1*$riaddok->k3r03;
+ $k4r03=1*$riaddok->k4r03;
+ $k5r03=1*$riaddok->k5r03;
  }
 
 
@@ -2491,10 +2500,17 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" k2r03='$r820', k3od='$obod', k3do='$obdo',  ".
+" k2r03='$k2r03', k3r03='$k3r03'+'$k4r03', k4r03=0, k3od='$k3od', k3do='$k3do', ".
 " psys=0  ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" k2r04='$r820', k4od='$obod', k4do='$obdo',  ".
+" psys=0  ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+//echo $uprtxt;
 
     }
 
@@ -3649,7 +3665,7 @@ font-weight:bold; font-size:14px;">Nastavi</span>
 <input type="text" name="k1od" id="k1od" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:736px; left:62px;"/>
 <input type="text" name="k1do" id="k1do" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:775px; left:62px;"/>
 <?php if ( $kli_vrok == 2015 ) { ?>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia();" title="Naèíta vıšku kladného rozdielu medzi daòovou licenciou a daòou, ktorú mono zapoèíta v roku 2017 z r.830 Priznania DPPO 2016" class="btn-row-tool" style="top:776px; left:280px;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia();" title="Naèíta tabu¾ku K z DPPO 2017 a vıšku kladného rozdielu medzi daòovou licenciou a daòou, ktorú mono zapoèíta v roku 2017 z r.830 Priznania DPPO 2017" class="btn-row-tool" style="top:776px; left:280px;">
 <?php                          } ?>
 <input type="text" name="k2r01" id="k2r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:736px; left:276px;"/>
 <input type="text" name="k3r01" id="k3r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:736px; left:436px;"/>
