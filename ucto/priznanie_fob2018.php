@@ -4345,7 +4345,6 @@ if ( $copern == 10 )
      {
 
 $zablokovane=1;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
 if ( $zablokovane == 1 )
      {
 ?>
@@ -6106,14 +6105,6 @@ echo "Vyplnená <strong>úhrnná suma dôchodku</strong> v bode 30, avšak nie je zaš
 <ul id="alertpage10" style="display:none;">
 <li class="header-section">STRANA 10</li>
 <li class="orange">
-<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r122 != 0 OR $hlavicka->r123 != 0 OR $hlavicka->r124 != 0 OR $hlavicka->r125 != 0 OR $hlavicka->r126 != 0 OR $hlavicka->r127 != 0 ) )
-{
-$upozorni10=1;
-echo "Vyplnené riadky <strong>X.oddielu</strong>, ale <strong>nie je</strong> vybraté dodatoèné daòové priznanie na 1.strane.";
-}
-?>
-</li>
-<li class="orange">
 <?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->sdnr != "" OR $hlavicka->r129 != 0 OR $hlavicka->r130 != 0 ) )
 {
 $upozorni10=1;
@@ -6125,6 +6116,15 @@ echo "V <strong>XI.oddiele</strong> vyplnené <strong>údaje nerezidenta</strong>,
 <ul id="alertpage11" style="display:none;">
 <li class="header-section">STRANA 11</li>
 <li class="orange">
+
+<li class="orange">
+<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r122 != 0 OR $hlavicka->r123 != 0 OR $hlavicka->r124 != 0 OR $hlavicka->r125 != 0 OR $hlavicka->r126 != 0 OR $hlavicka->r127 != 0 ) )
+{
+$upozorni11=1;
+echo "Vyplnené riadky <strong>X.oddielu</strong>, ale <strong>nie je</strong> vybraté dodatoèné daòové priznanie na 1.strane.";
+}
+?>
+</li>
 <?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->r131 != 0 OR $hlavicka->ldnr != 0 OR $hlavicka->nrzsprev != 0 ) )
 {
 $upozorni11=1;
@@ -6132,45 +6132,49 @@ echo "V <strong>XI.oddiele</strong> vyplnené <strong>údaje nerezidenta</strong>,
 }
 ?>
 </li>
-<li class="orange">
-<?php if ( $hlavicka->upl50 == 1 AND $hlavicka->r134 != 0 )
-{
-$upozorni11=1;
-echo "<strong>Neuplatòujem postup</strong> pod¾a § 50 zákona a zároveò poukazujem sumu v <strong>bode 134</strong>.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( $hlavicka->upl50 == 1 AND ( $hlavicka->pico != 0 OR $hlavicka->psid != 0 OR $hlavicka->pfor != "" OR $hlavicka->pmen != "" OR $hlavicka->puli != "" OR $hlavicka->pcdm != "" OR $hlavicka->ppsc != "" OR $hlavicka->pmes != "" ) )
-{
-$upozorni11=1;
-echo "<strong>Neuplatòujem postup</strong> pod¾a § 50 zákona a zároveò sú vyplnené <strong>údaje o prijímate¾ovi</strong> v bode 134.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( $hlavicka->r134 != 0 AND $hlavicka->upl50 == 0 AND ( $hlavicka->pico == 0 OR $hlavicka->psid == 0 OR $hlavicka->pfor == "" OR $hlavicka->pmen == "" ) )
-{
-$upozorni11=1;
-echo "Nie sú vyplnené <strong>údaje o príjimate¾ovi</strong> v bode 135.";
-}
-?>
-</li>
 </ul>
 <ul id="alertpage12" style="display:none;">
 <li class="header-section">STRANA 12</li>
 <li class="orange">
-<?php if ( $hlavicka->uoso == 0 AND $hlavicka->osob != "" )
+<?php if ( $hlavicka->upl50 == 1 AND $hlavicka->zpld != 0 )
 {
 $upozorni12=1;
-echo "Vyplnené <strong>osobitné záznamy</strong>, ale <strong>nie je vybraté uvádzam</strong> osobitné záznamy na strane 11.";
+echo "<strong>Neuplatòujem postup</strong> pod¾a § 50 zákona a zároveò poukazujem sumu v <strong>bode 141</strong>.";
 }
 ?>
 </li>
 <li class="orange">
-<?php if ( $hlavicka->dat == '0000-00-00' )
+<?php if ( $hlavicka->upl50 == 1 AND ( $hlavicka->pico != 0 OR $hlavicka->pfor != "" OR $hlavicka->pmen != "" OR $hlavicka->puli != "" OR $hlavicka->pcdm != "" OR $hlavicka->ppsc != "" OR $hlavicka->pmes != "" ) )
 {
 $upozorni12=1;
+echo "<strong>Neuplatòujem postup</strong> pod¾a § 50 zákona a zároveò sú vyplnené <strong>údaje o prijímate¾ovi</strong> v bode 142.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->zpld != 0 AND $hlavicka->upl50 == 0 AND ( $hlavicka->pico == 0 OR $hlavicka->pfor == "" OR $hlavicka->pmen == "" ) )
+{
+$upozorni12=1;
+echo "Nie sú vyplnené <strong>údaje o príjimate¾ovi</strong> v bode 142.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->uoso == 0 AND $hlavicka->osob != "" )
+{
+$upozorni12=1;
+echo "Vyplnené <strong>osobitné záznamy</strong>, ale <strong>nie je vybraté uvádzam</strong> osobitné záznamy na strane 12.";
+}
+?>
+</li>
+</ul>
+
+<ul id="alertpage13" style="display:none;">
+<li class="header-section">STRANA 13</li>
+<li class="orange">
+<?php if ( $hlavicka->dat == '0000-00-00' )
+{
+$upozorni13=1;
 echo "Nie je vyplnenı <strong>dátum vyhlásenia</strong> daòového priznania.";
 }
 ?>
@@ -6187,7 +6191,7 @@ $sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob WHERE dat <=
   }
 if ( $wrongdat == 1 )
 {
-$upozorni12=1;
+$upozorni13=1;
 echo "<strong>Dátum vyhlásenia</strong> nemôe by vyšší ako aktuálny dátum.";
 }
 ?>
@@ -6195,7 +6199,7 @@ echo "<strong>Dátum vyhlásenia</strong> nemôe by vyšší ako aktuálny dátum.";
 <li class="orange">
 <?php if ( ( $hlavicka->zdbo == 0 AND $hlavicka->zpre == 0 ) AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 OR $hlavicka->diban != "" OR $hlavicka->da2 != '0000-00-00' ) )
 {
-$upozorni12=1;
+$upozorni13=1;
 echo "V <strong>XIV.oddiele neiadam</strong> o vyplatenie / vrátenie, ale sú vyplnené hodnoty súvisiace s vyplatením / vrátením(napr. spôsob, iban alebo dátum).";
 }
 ?>
@@ -6203,7 +6207,7 @@ echo "V <strong>XIV.oddiele neiadam</strong> o vyplatenie / vrátenie, ale sú vy
 <li class="orange">
 <?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 ) AND $hlavicka->da2 == '0000-00-00' )
 {
-$upozorni12=1;
+$upozorni13=1;
 echo "V <strong>XIV.oddiele iadam</strong> o vyplatenie / vrátenie, ale nie je vyplnenı <strong>dátum</strong> vyplatenia / vrátenia.";
 }
 ?>
@@ -6220,7 +6224,7 @@ $sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob WHERE da2 <=
   }
 if ( $wrongdat == 1 )
 {
-$upozorni12=1;
+$upozorni13=1;
 echo "<strong>Dátum iadosti o vrátenie</strong> nemôe by vyšší ako aktuálny dátum.";
 }
 ?>
@@ -6237,21 +6241,21 @@ $sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob WHERE dat <=
   }
 if ( $wrongdat == 1 )
 {
-$upozorni12=1;
+$upozorni13=1;
 echo "<strong>Dátum iadosti o vrátenie</strong> nemôe by vyšší ako aktuálny dátum.";
 }
 ?>
 </li>
 <li class="orange">
 <?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 ) AND $hlavicka->ucet == 1 AND $hlavicka->diban == "" ) {
-$upozorni6=1;
+$upozorni13=1;
 echo "V <strong>XIV.oddiele iadam</strong> o vyplatenie / vrátenie na úèet, ale nie je vyplnenı <strong>IBAN</strong> úètu na vyplatenie / vrátenie.";
 } ?>
 </li>
 </ul>
 
-<ul id="alertpage14" style="display:none;">
-<li class="header-section">STRANA 14 - PRÍLOHA 2</li>
+<ul id="alertpage15" style="display:none;">
+<li class="header-section">STRANA 15,16,17 - PRÍLOHY</li>
 <li class="orange">
 <?php
 $wrongdat=1;
@@ -6264,32 +6268,32 @@ $sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob WHERE szdat 
   }
 if ( $wrongdat == 1 )
 {
-$upozorni14=1;
-echo "<strong>Dátum v prílohe 2</strong> nemôe by vyšší ako aktuálny dátum.";
+$upozorni15=1;
+echo "<strong>Dátum v Prílohe SP a ZP strana 17</strong> nemôe by vyšší ako aktuálny dátum.";
 }
 ?>
 </li>
 <li class="orange">
 <?php if ( $hlavicka->sz9 != 0 AND $hlavicka->szdat == '0000-00-00' )
 {
-$upozorni14=1;
-echo "Je vyplnenı riadok 9, ale chıba vyplnenı <strong>dátum</strong>.";
+$upozorni15=1;
+echo "Je vyplnenı riadok 9 v Prílohe SP a ZP strana 17, ale chıba vyplnenı <strong>dátum v riadku 15</strong>.";
 }
 ?>
 </li>
 <li class="orange">
-<?php if ( $hlavicka->r35 != $hlavicka->sz8 )
+<?php if ( $hlavicka->r39 != $hlavicka->sz8 )
 {
-$upozorni14=1;
-echo "Riadok 35 zo strany 2 sa musí rovna <strong>riadku 8</strong> v Prílohe 3 priznania o SP a ZP.";
+$upozorni15=1;
+echo "Riadok 39 zo strany 3 sa musí rovna <strong>riadku 8</strong> v Prílohe SP a ZP strana 17.";
 }
 ?>
 </li>
 <li class="orange">
 <?php if ( $hlavicka->psp6 != ( $hlavicka->sz12 + $hlavicka->sz14 ) )
 {
-$upozorni14=1;
-echo "Hodnota v riadku \"preukázate¾né zaplatené poistné\" na strane 3 sa musí rovna <strong>riadok 12 + 14</strong> v Prílohe 2 priznania.";
+$upozorni15=1;
+echo "Hodnota v riadku \"preukázate¾né zaplatené poistné\" na strane 4 sa musí rovna <strong>riadok 12 + 14</strong> v Prílohe SP a ZP strana 17.";
 }
 ?>
 </li>
@@ -6299,14 +6303,16 @@ echo "Hodnota v riadku \"preukázate¾né zaplatené poistné\" na strane 3 sa musí r
 
 <script type="text/javascript">
 <?php
-if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni10 == 1 OR $upozorni11 == 1 OR $upozorni12 == 1 OR $upozorni14 == 1 )
+if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni10 == 1 OR $upozorni11 == 1 OR $upozorni12 == 1  OR $upozorni13 == 1 OR $upozorni14 == 1 )
      { echo "upozornenie.style.display='block';"; }
 if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; }
 if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; }
 if ( $upozorni10 == 1 ) { echo "alertpage10.style.display='block';"; }
 if ( $upozorni11 == 1 ) { echo "alertpage11.style.display='block';"; }
 if ( $upozorni12 == 1 ) { echo "alertpage12.style.display='block';"; }
+if ( $upozorni13 == 1 ) { echo "alertpage13.style.display='block';"; }
 if ( $upozorni14 == 1 ) { echo "alertpage14.style.display='block';"; }
+if ( $upozorni15 == 1 ) { echo "alertpage15.style.display='block';"; }
 ?>
 </script>
 <?php
