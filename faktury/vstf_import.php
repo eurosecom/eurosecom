@@ -44,7 +44,7 @@ $citfir = include("../cis/citaj_fir.php");
 <br />
 
 <?php 
-//ala.sk import fak2018
+//ala.sk import z fak2018
 if ( $_SERVER['SERVER_NAME'] == "www.ala.sk" OR $_SERVER['SERVER_NAME'] == "localhost"  )
                 { 
 $obj=0;
@@ -82,11 +82,11 @@ $sqlzak = mysql_query("$sqlttt");
 $sqult = "UPDATE F$kli_vxcf"."_fakodb SET zk2=$sumcep, sp2=$sumced WHERE dok = $cislo_dok ";
 $ulozene = mysql_query("$sqult");
 
-$sqult = "UPDATE F$kli_vxcf"."_fakodb SET dn2=sp2-zk2, hod=sp2 WHERE dok = $cislo_dok ";
+$sqult = "UPDATE F$kli_vxcf"."_fakodb SET dn2=sp2-zk2, hod=sp2, txp='Fakturujeme Vám' WHERE dok = $cislo_dok ";
 $ulozene = mysql_query("$sqult");
 
-$sqult = "UPDATE F$kli_vxcf"."_fakodb SET zk2u=zk2, dn2u=dn2, sp2u=sp2, hodu=hod, txp='Fakturujeme Vám' WHERE dok = $cislo_dok ";
-$ulozene = mysql_query("$sqult");
+$sqult = "UPDATE F$kli_vxcf"."_fakodb SET zk2u=zk2, dn2u=dn2, sp2u=sp2, hodu=hod WHERE dok = $cislo_dok ";
+//$ulozene = mysql_query("$sqult");
 
 ?>
 <script type="text/javascript" > 
@@ -97,7 +97,7 @@ window.open('vstf_u.php?vyroba=0&copern=8&drupoh=1&page=1&hladaj_uce=<?php echo 
 <?php
 
                 }
-//koniec ala.sk import fak2018
+//koniec ala.sk import z fak2018
 ?>
 
 <?php 
