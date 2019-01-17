@@ -1596,6 +1596,7 @@ $dovca=$hlavicka->dovca; if ( $hlavicka->dovca == 0 ) $dovca="";
 $chris=$hlavicka->chris; if ( $hlavicka->chris == 0 ) $chris="";
 $oslo1=$hlavicka->oslo1; if ( $hlavicka->oslo1 == 0 ) $oslo1="";
 $oslo2=$hlavicka->oslo2; if ( $hlavicka->oslo2 == 0 ) $oslo2="";
+$rekre=$hlavicka->rekre; if ( $hlavicka->rekre == 0 ) $rekre="";
 
 $prie1=$hlavicka->prie1; if ( $hlavicka->prie1 == 0 ) $prie1="";
 $prie2=$hlavicka->prie2; if ( $hlavicka->prie2 == 0 ) $prie2="";
@@ -1613,7 +1614,7 @@ $text="x"; if ( $hlavicka->konx1 == 0 ) $text=" ";
 $pdf->Cell(177,6," ","$rmc1",0,"L");$pdf->Cell(3,4,"$text","$rmc",1,"C");
 
 //I.ZAMESTNANEC
-$pdf->Cell(190,11," ","$rmc1",1,"L");
+$pdf->Cell(190,11.5," ","$rmc1",1,"L");
 $pdf->Cell(18,4," ","$rmc1",0,"L");$pdf->Cell(63,6,"$hlavicka->prie","$rmc",0,"L");
 $pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(38,6,"$hlavicka->meno","$rmc",0,"L");
 $dar=SkDatum($hlavicka->dar);
@@ -1634,18 +1635,17 @@ $pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(75,4,"$zstat","$rmc",1,"L");
 $pdf->Cell(190,2.5," ","$rmc1",1,"L");
 $text="x";
 if ( $hlavicka->obmedz == 0 ) $text=" ";
-$pdf->Cell(174,6," ","$rmc1",0,"L");$pdf->Cell(4,4,"$text","$rmc",1,"L");
+$pdf->Cell(174,6," ","$rmc1",0,"L");$pdf->Cell(4,3,"$text","$rmc",1,"L");
 
 //prijmy
-$pdf->Cell(190,12," ","$rmc1",1,"L");
-$pdf->Cell(169,25," ","$rmc1",0,"L");$pdf->Cell(16,8,"$r01","$rmc",1,"R");
-$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,6,"$r13","$rmc",1,"R");
-$pdf->Cell(169,1," ","$rmc1",1,"L");
-$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r12a","$rmc",1,"R");
-$pdf->Cell(169,6," ","$rmc1",0,"L");$pdf->Cell(16,6,"$r12b","$rmc",1,"R");
-$pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$dovca","$rmc",1,"R");
-$pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$chris","$rmc",1,"R");
+$pdf->Cell(190,14," ","$rmc1",1,"L");
+$pdf->Cell(169,25," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r01","$rmc",1,"R");
+$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r13","$rmc",1,"R");
 
+$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r12a","$rmc",1,"R");
+$pdf->Cell(169,6," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r12b","$rmc",1,"R");
+$pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$dovca","$rmc",1,"R");
+$pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,6,"$chris","$rmc",1,"R");
 
 //poistne
 $pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,6,"$r03a","$rmc",1,"R");
@@ -1657,20 +1657,21 @@ $pdf->Cell(169,6," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r05","$rmc",1,"R");
 
 //ine prijmy
 $pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r11","$rmc",1,"R");
-$pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r11m","$rmc",1,"R");
+$pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r11m","$rmc",1,"R");
 $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$oslo1","$rmc",1,"R");
 $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$oslo2","$rmc",1,"R");
+$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$rekre","$rmc",1,"R");
 
 //nczd
-$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r06sum","$rmc",1,"R");
+$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r06sum","$rmc",1,"R");
 $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r10dds","$rmc",1,"R");
 
 //v mesiacoch
-$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r02","$rmc",1,"R");
+$pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,5,"$r02","$rmc",1,"R");
 
 
 //priemer, poc.mes
-$pdf->Cell(169,4," ","$rmc1",1,"L");
+$pdf->Cell(169,3," ","$rmc1",1,"L");
 $pdf->Cell(55,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$prie1","$rmc",0,"R");$pdf->Cell(85,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$prie2","$rmc",1,"R");
 $pdf->Cell(86,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$pmes1","$rmc",0,"R");$pdf->Cell(44,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$pmes2","$rmc",1,"R");
 
@@ -1696,27 +1697,27 @@ $pdf->Cell(169,4," ","$rmc1",0,"L");$pdf->Cell(16,4,"$r08","$rmc",1,"R");
 $pdf->SetFont('arial','',10);
 
 //III.ZAMESTNAVATEL
-$pdf->Cell(190,12," ","$rmc1",1,"L");
+$pdf->Cell(190,11," ","$rmc1",1,"L");
 $pdf->Cell(19,4," ","$rmc1",0,"L");$pdf->Cell(165,5,"$zamestnavatel / $fir_fdic","$rmc",1,"L");
-$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(190,3," ","$rmc1",1,"L");
 $pdf->Cell(19,4," ","$rmc1",0,"L");$pdf->Cell(165,5,"$bydliskosidlo","$rmc",1,"L");
 
 //VYPRACOVAL
 //V a Dna
-$pdf->Cell(190,2.5," ","$rmc1",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
 $datvsk=SkDatum($hlavicka->datv);
 $dat_dat=$datvsk; if ( $dat_dat == '00.00.0000' ) $dat_dat="";
 $pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(45,5,"$fir_fmes","$rmc",0,"L");
 $pdf->Cell(7,5," ","$rmc1",0,"L");$pdf->Cell(20,5,"$dat_dat","$rmc",1,"C");
 //Osoba, tel.
-$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
 $pdf->SetFont('arial','',8);
 $pdf->Cell(34,5," ","$rmc1",0,"L");$pdf->Cell(32,4,"$fir_mzdt05","$rmc",0,"L");
 $pdf->Cell(24,5," ","$rmc1",0,"L");$pdf->Cell(25,4,"$fir_mzdt04","$rmc",1,"L");
 $pdf->SetFont('arial','',10);
 
 //poznamka
-$pdf->Cell(190,8," ","$rmc1",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
 if ( $copern == 10 ) $pozn=$hlavicka->pozn;
 $pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(170,5,"$pozn","$rmc",1,"L");
 
