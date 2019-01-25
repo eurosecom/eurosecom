@@ -1915,6 +1915,8 @@ $sqldok = mysql_query("$sqlttt");
 //exit;
 
 if( $sirka > 0 AND $vyska > 0 AND $zhora > 0 AND $zlava > 0 ) { $rozmerhlv1=$zlava+""; $rozmerhlv2=$zhora+""; $rozmerhlv3=$sirka+""; $rozmerhlv4=$vyska+""; }
+if( $sirka > 0 AND $vyska > 0 AND $zhora == 0 AND $zlava > 0 ) { $rozmerhlv1=$zlava+""; $rozmerhlv3=$sirka+""; $rozmerhlv4=$vyska+""; }
+if( $sirka > 0 AND $vyska > 0 AND $zhora == 0 AND $zlava == 0 ) { $rozmerhlv3=$sirka+""; $rozmerhlv4=$vyska+""; }
 
 $pdf->Image('../dokumenty/FIR'.$kli_vxcf.'/razitko'.$kli_uzid.'.jpg',$rozmerhlv1,$rozmerhlv2,$rozmerhlv3,$rozmerhlv4);
 }

@@ -31,9 +31,20 @@ $sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm SET ".
 $vysledek = mysql_query("$sql");
 //echo $sql;
 
+//echo $kli_nezis;
+if( $kli_nezi == 0 )
+          {
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=0.7473 WHERE dm = 202 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=1.4945 WHERE dm = 203 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=0.8967 WHERE dm = 223 ";
+$vysledek = mysql_query("$sql");
+          }
+
      }
 
-$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_new012019a".$sqlt;
+$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_new012019b".$sqlt;
 $vysledek = mysql_query("$sql");
 
 ?>

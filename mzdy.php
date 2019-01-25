@@ -1162,7 +1162,7 @@ $setprm = include("mzdy/sepa2018.php");
 //uprava sepa od 1.1.2018
 
 //uprava parametrov miezd na aktualny stav od 1.1.2019
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012019a";
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012019b";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {

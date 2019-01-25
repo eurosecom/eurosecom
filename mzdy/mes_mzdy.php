@@ -967,11 +967,17 @@ function vykonajDm(dm,dmtext,sa,ko,sax)
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 2 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz2.value/100; }
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 3 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz3.value/100; }
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 4 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz4.value/100; }
-<?php if( $fir_mzdx08 != 0 AND $kli_vrok > 2017 AND $kli_nezis == 1 ) { ?>
+<?php if( $fir_mzdx08 != 0 AND $kli_vrok == 2018 AND $kli_nezis == 1 ) { ?>
          if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.6898 ) { document.formv1.h_sa.value = 0.6898; }
          if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.3795 ) { document.formv1.h_sa.value = 1.3795; }
          if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < 2.7590 ) { document.formv1.h_sa.value = 2.7590; }
          if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8277 ) { document.formv1.h_sa.value = 0.8277; }
+<?php                                                                 } ?>
+<?php if( $fir_mzdx08 != 0 AND $kli_vrok >= 2019 AND $kli_nezis == 1 ) { ?>
+         if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.7473 ) { document.formv1.h_sa.value = 0.7473; }
+         if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.4945 ) { document.formv1.h_sa.value = 1.4945; }
+         if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < 2.9890 ) { document.formv1.h_sa.value = 2.9890; }
+         if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8967 ) { document.formv1.h_sa.value = 0.8967; }
 <?php                                                                 } ?>
          if ( document.formv1.dm_ko.value == 40 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value; }
          if ( document.formv1.dm_ko.value == 60 )
@@ -999,11 +1005,17 @@ function Len1Dm(dm,sa,ko,sax)
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 2 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz2.value/100; }
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 3 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz3.value/100; }
          if ( document.formv1.dm_ko.value == 30 && document.formv1.dm_sax.value == 4 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value*document.formv1.sz4.value/100; }
-<?php if( $fir_mzdx08 != 0 AND $kli_vrok > 2017 AND $kli_nezis == 1 ) { ?>
+<?php if( $fir_mzdx08 != 0 AND $kli_vrok == 2018 AND $kli_nezis == 1 ) { ?>
          if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.6898 ) { document.formv1.h_sa.value = 0.6898; }
          if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.3795 ) { document.formv1.h_sa.value = 1.3795; }
          if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < 2.7590 ) { document.formv1.h_sa.value = 2.7590; }
          if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8277 ) { document.formv1.h_sa.value = 0.8277; }
+<?php                                                                 } ?>
+<?php if( $fir_mzdx08 != 0 AND $kli_vrok >= 2019 AND $kli_nezis == 1 ) { ?>
+         if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.7473 ) { document.formv1.h_sa.value = 0.7473; }
+         if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.4945 ) { document.formv1.h_sa.value = 1.4945; }
+         if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < 2.9890 ) { document.formv1.h_sa.value = 2.9890; }
+         if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8967 ) { document.formv1.h_sa.value = 0.8967; }
 <?php                                                                 } ?>
          if ( document.formv1.dm_ko.value == 40 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value; }
          if ( document.formv1.dm_ko.value == 60 )
