@@ -32,11 +32,21 @@ $vysledek = mysql_query("$sql");
 //echo $sql;
 
 //echo $kli_nezis;
-if( $kli_nezi == 0 )
+if( $kli_nezi == 0 AND $_SERVER['SERVER_NAME'] != "www.euroalchem.sk" )
           {
 $sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=0.7473 WHERE dm = 202 ";
 $vysledek = mysql_query("$sql");
 $sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=1.4945 WHERE dm = 203 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=0.8967 WHERE dm = 223 ";
+$vysledek = mysql_query("$sql");
+          }
+
+if( $kli_nezi == 0 AND $_SERVER['SERVER_NAME'] == "www.euroalchem.sk" )
+          {
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=0.7473 WHERE dm = 205 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=1.4945 WHERE dm = 206 ";
 $vysledek = mysql_query("$sql");
 $sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=0.8967 WHERE dm = 223 ";
 $vysledek = mysql_query("$sql");
