@@ -428,9 +428,9 @@ if( $_SERVER['SERVER_NAME'] == "www.eshoptest.sk" ) { $prepoczk2=1; }
 if( $_SERVER['SERVER_NAME'] == "www.eshopp3service.sk" ) { $prepoczk2=1; } 
 if( $_SERVER['SERVER_NAME'] == "localhost" ) { $prepoczk2=1; } 
 if( $viacnaraz == 1 ) { $prepoczk2=0; } 
-if( $drupoh != 1 ) { $prepoczk2=0; } 
+if( $drupoh != 1 AND $drupoh != 11 ) { $prepoczk2=0; } 
 if( $sysx == 'UCT' ) { $prepoczk2=0; } 
-if( $viacnaraz == 0 AND $mini == 0 AND $sysx != 'UCT' AND $drupoh == 1 AND $prepoczk2 == 1 )
+if( $viacnaraz == 0 AND $mini == 0 AND $sysx != 'UCT' AND ( $drupoh == 1 OR $drupoh == 11 ) AND $prepoczk2 == 1 )
      {
 //echo "idem";
 $prepoc=1;
@@ -478,21 +478,49 @@ $sqldok = mysql_query("$sqlttt");
   $zk2=1*$riaddok->zk2;
   $zk0=1*$riaddok->zk0;
   }
-
-if( $kli_uzid == 383838838383838 )
+if( $drupoh == 11 )
 {
-//echo $zaklad0s." ".$zaklad0t." ".$zk0;
-//exit;
+$sqlttt = "SELECT zk0, zk2 FROM F$kli_vxcf"."_fakdol WHERE dok = $cislo_dok ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zk2=1*$riaddok->zk2;
+  $zk0=1*$riaddok->zk0;
+  }
+}
+
+if( $kli_uzid == 1717171717171717 )
+{
+echo $zaklad0s." ".$zaklad0t." ".$zk0;
+exit;
 }
 $rozdiel=$zk2-$zaklads2-$zakladt2;
 
+if( $drupoh == 1 )
+{
 $sqlttt = "UPDATE F$kli_vxcf"."_fakodb SET zk2=($zaklad2s+$zaklad2t)  WHERE dok = $cislo_dok ";
 if( $rozdiel != 0 ) { $sqldok = mysql_query("$sqlttt"); }
+}
+if( $drupoh == 11 )
+{
+$sqlttt = "UPDATE F$kli_vxcf"."_fakdol SET zk2=($zaklad2s+$zaklad2t)  WHERE dok = $cislo_dok ";
+if( $rozdiel != 0 ) { $sqldok = mysql_query("$sqlttt"); }
+}
 
 $rozdiel=$zk0-$zaklads0-$zakladt0;
 
+if( $drupoh == 1 )
+{
 $sqlttt = "UPDATE F$kli_vxcf"."_fakodb SET zk0=($zaklad0s+$zaklad0t)  WHERE dok = $cislo_dok ";
 if( $rozdiel != 0 ) { $sqldok = mysql_query("$sqlttt"); }
+}
+if( $drupoh == 11 )
+{
+$sqlttt = "UPDATE F$kli_vxcf"."_fakdol SET zk0=($zaklad0s+$zaklad0t)  WHERE dok = $cislo_dok ";
+if( $rozdiel != 0 ) { $sqldok = mysql_query("$sqlttt"); }
+}
+
      }
 
 if( $viacnaraz == 0 AND $mini == 0 AND $sysx != 'UCT' )
@@ -1437,6 +1465,12 @@ $i = $i + 1;
 //nova strana
 if( $js >= $h_pocpol AND $stranast == 1 ) { $novastrana=1; }
 if( $js >= 40 AND $stranast > 1 ) { $novastranna=1; }
+
+if( $kli_vxcf == 3214 AND $cislo_dok == 19011 AND $stranast > 1 ) { $novastrana=0; }
+
+//andrejko
+//if( $kli_uzid == 17 AND $stranast >= 1 ) { echo " cislo_dok ".$cislo_dok." strana ".$stranast." js ".$js; }
+
 if( $novastrana == 1 ) 
 {
 $stranast=$stranast+1;
@@ -1461,6 +1495,9 @@ $novastrana=0;
 
            }
 //koniec ak je tovar
+
+//andrejko
+//if( $kli_uzid == 17 ) { exit; }
 
 //zaciatok vypisu sluzieb
 $ajhodb="";
@@ -1565,6 +1602,9 @@ $i = $i + 1;
 //nova strana
 if( $js >= $h_pocpol AND $stranast == 1 ) { $novastrana=1; }
 if( $js >= 40 AND $stranast > 1 ) { $novastrana=1; }
+
+if( $kli_vxcf == 3214 AND $cislo_dok == 19011 AND $stranast > 1 ) { $novastrana=0; }
+
 if( $novastrana == 1 ) 
 {
 $stranast=$stranast+1;
