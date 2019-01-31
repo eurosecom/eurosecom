@@ -69,8 +69,17 @@ if( $stvrtrok == 4 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".
 
 $vsetkyprepocty=0;
 
+if( $kli_vrok < 2019 )
+  {
 include("vykaz_hlaodpad_nazovkomodity.php");
 include("vykaz_hlaodpad_nazovkomodityfull.php");
+  }
+
+if( $kli_vrok >= 2019 )
+  {
+include("vykaz_hlaodpad_nazovkomodity_2019.php");
+include("vykaz_hlaodpad_nazovkomodityfull_2019.php");
+  }
 
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
@@ -1623,6 +1632,7 @@ Mesto
 </td>
 <td class="fmenu" align="left" >
 <select size="1" name="komodita" id="komodita"  onKeyDown="return KomoditaEnter(event.which)" >
+<?php if ( $kli_vrok <  2019 ) { ?>
 <option value="1" >obaly z papiera "O"</option>
 <option value="101" >obaly z papiera "N"</option>
 <option value="2" >obaly z plastov "O"</option>
@@ -1654,8 +1664,37 @@ Mesto
 <option value="23" >papier neobal</option>
 <option value="24" >plast neobal</option>
 <option value="25" >elektroz. tr5 svietidlá</option>
+<?php                          } ?>
+<?php if ( $kli_vrok >= 2019 ) { ?>
+<option value="1" >obaly z papiera "O"</option>
+<option value="101" >obaly z papiera "N"</option>
+<option value="2" >obaly z plastov "O"</option>
+<option value="102" >obaly z plastov "N"</option>
+<option value="3" >obaly z kovu Al "O"</option>
+<option value="103" >obaly z kovu Al "N"</option>
+<option value="4" >obaly z kovu Fe "O"</option>
+<option value="104" >obaly z kovu Fe "N"</option>
+<option value="5" >obaly zo skla "O"</option>
+<option value="105" >obaly zo skla "N"</option>
+<option value="6" >viacvrstv.obaly "O"</option>
+<option value="106" >viacvrstv.obaly "N"</option>
+<option value="7" >elektroz. tr1</option>
+<option value="8" >elektroz. tr2</option>
+<option value="9" >elektroz. tr3</option>
+<option value="10" >elektroz. tr4</option>
+<option value="11" >elektroz. tr5</option>
+<option value="12" >elektroz. tr6</option>
+<option value="16" >batérie pren.</option>
+<option value="17" >batérie priem.</option>
+<option value="18" >batérie auto</option>
+<option value="19" >pneumatiky</option>
+<option value="20" >oleje</option>
+<option value="21" >sklo neobal</option>
+<option value="22" >viacvr.mat.neobal</option>
+<option value="23" >papier neobal</option>
+<option value="24" >plast neobal</option>
 
-
+<?php                          } ?>
 </select>
 </td>
 <td class="fmenu" align="right" >

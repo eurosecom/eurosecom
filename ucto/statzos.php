@@ -1406,6 +1406,7 @@ if( $dajhlaodpad == 1 ) {
 <div>
  <label for="h_kmd">Komodita:</label>
  <select size="1" name="h_kmd" id="h_kmd">
+<?php if ( $kli_vrok <  2019 ) { ?>
   <option value="0">všetky komodity</option>
   <option value="1">obaly z papiera</option>
   <option value="2">obaly z plastov</option>
@@ -1432,6 +1433,31 @@ if( $dajhlaodpad == 1 ) {
   <option value="23">papier neobal</option>
   <option value="24">plast neobal</option>
   <option value="25">elektroz. tr5 svietidlá</option>
+<?php                          } ?>
+<?php if ( $kli_vrok >= 2019 ) { ?>
+  <option value="0">všetky komodity</option>
+  <option value="1">obaly z papiera</option>
+  <option value="2">obaly z plastov</option>
+  <option value="3">obaly z kovu Al</option>
+  <option value="4">obaly z kovu Fe</option>
+  <option value="5">obaly zo skla</option>
+  <option value="6">viacvrstv.obaly</option>
+  <option value="7">elektroz. tr1</option>
+  <option value="8">elektroz. tr2</option>
+  <option value="9">elektroz. tr3</option>
+  <option value="10">elektroz. tr4</option>
+  <option value="11">elektroz. tr5</option>
+  <option value="12">elektroz. tr6</option>
+  <option value="16">batérie pren.</option>
+  <option value="17">batérie priem.</option>
+  <option value="18">batérie auto</option>
+  <option value="19">pneumatiky</option>
+  <option value="20">oleje</option>
+  <option value="21">sklo neobal</option>
+  <option value="22">viacvr.mat.neobal</option>
+  <option value="23">papier neobal</option>
+  <option value="24">plast neobal</option>
+<?php                          } ?>
  </select>
 </div>
 </div>
