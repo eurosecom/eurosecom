@@ -2954,6 +2954,19 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
+$zablokovane=1;
+if ( $zablokovane == 1 )
+     {
+?>
+<script type="text/javascript">
+alert ("Export do XML Mesaèného preh¾adu bude pripravený hneï po zverejnení nového formulára na portále DRSR. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
+window.close();
+</script>
+<?php
+exit;
+     }
+
+
 $hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $idx=$kli_uzid.$hhmm;
 $nazsub="PREHLAD_mesiac_".$kli_vmes."_id".$idx.".xml";
