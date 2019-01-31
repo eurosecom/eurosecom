@@ -33,17 +33,17 @@ $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
 $zablokovane=1;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
 if ( $zablokovane == 1 )
      {
 ?>
 <script type="text/javascript">
-alert ("Hlásenie bude pripravené v priebehu januára 2019. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
+alert ("Export do XML Hlásenia 2018 bude pripravený hneï po zverejnení nového formulára na portále DRSR. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
 window.close();
 </script>
 <?php
 exit;
      }
+
 
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
