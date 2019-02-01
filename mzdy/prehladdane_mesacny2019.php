@@ -2954,7 +2954,7 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
-$zablokovane=1;
+$zablokovane=0;
 if ( $zablokovane == 1 )
      {
 ?>
