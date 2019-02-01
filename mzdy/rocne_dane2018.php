@@ -897,7 +897,7 @@ $oznac = mysql_query("$sqtoz");
 
 
 //milionarska dan za 2018
-if ( $vsetkyprepocty == 1 )
+if ( $vsetkyprepocty >= 0 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET po6=8817.016-(r01/4) WHERE oc = $cislo_oc AND r01 > 19948.00 ";
