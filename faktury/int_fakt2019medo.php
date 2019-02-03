@@ -86,7 +86,7 @@ $uzk2="60217";
 $udn2="34350";
 $udn1="34310";
 $dzk2=55;
-if( $h_sys == 890 ) 
+if( $h_sys == 690 ) 
 {
 $uzk2="60217";
 $udn2="34350";
@@ -412,7 +412,7 @@ if( $copern == 56 AND $medo == 1 )
 $uceodb="31100";
 if( $h_sys == 649 ) $uceodb="31149";
 if( $h_sys == 658 ) $uceodb="31149";
-if( $h_sys == 890 ) $uceodb="31147";
+if( $h_sys == 690 ) $uceodb="31147";
 if( $h_sys == 609 ) $uceodb="31144";
 if( $h_sys == 679 ) $uceodb="31100";
 
