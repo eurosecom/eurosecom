@@ -1,6 +1,6 @@
 <HTML>
 <?php
-//zber dat 2019
+//zber dat 2018
 $sys = 'UCT';
 $urov = 1000;
 $cslm=100620;
@@ -1943,14 +1943,6 @@ window.open('../faktury/int_fakt2018medo.php?copern=55&page=1&h_sys=' + h_sys + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                                       } ?>
 
-<?php if( $medo == 1 AND $kli_vrok == 2019 ) { ?>
-var h_obdp = document.forms.formct2.h_obdp.value;
-var h_sys = document.forms.formct2.h_sys.value;
-
-window.open('../faktury/int_fakt2019medo.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-<?php                                       } ?>
-
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
 var h_obdp = document.forms.formct2.h_obdp.value;
 var h_sys = document.forms.formct2.h_sys.value;
@@ -1997,15 +1989,6 @@ var h_obdp = document.forms.formct2.h_obdp.value;
 var h_sys = document.forms.formct2.h_sys.value;
 
 window.open('../faktury/int_fakt2018pkse.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-<?php                                          } ?>
-
-
-<?php if( $berext == 1 AND $kli_vrok == 2019 ) { ?>
-var h_obdp = document.forms.formct2.h_obdp.value;
-var h_sys = document.forms.formct2.h_sys.value;
-
-window.open('../faktury/int_fakt2019pkse.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                                          } ?>
 
@@ -2429,36 +2412,6 @@ if($urob) { $blok689=" - BLOKOVAN…"; }
 <option value="689" >SYS 689 ZK VrbovÈ <?php echo $blok689;?></option>
 <?php                                         } ?>
 
-<?php if( $medo == 1 AND $kli_vrok == 2019 ) { ?>
-<?php
-$blok609="";
-$blok649="";
-$blok679="";
-$blok690="";
-
-$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak609_".$h_obdp." ";
-$urob = mysql_query("$sql");
-if($urob) { $blok609=" - BLOKOVAN…"; }
-
-$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak649_".$h_obdp." ";
-$urob = mysql_query("$sql");
-if($urob) { $blok649=" - BLOKOVAN…"; }
-
-$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak679_".$h_obdp." ";
-$urob = mysql_query("$sql");
-if($urob) { $blok679=" - BLOKOVAN…"; }
-
-$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak690_".$h_obdp." ";
-$urob = mysql_query("$sql");
-if($urob) { $blok690=" - BLOKOVAN…"; }
-?>
-
-<option value="609" >SYS 609 Ubytovanie <?php echo $blok609;?></option>
-<option value="649" >SYS 649 FastFood NM GastroBENE <?php echo $blok649;?></option>
-<option value="679" >SYS 679 GastroBENE VrbovÈ <?php echo $blok679;?></option>
-<option value="690" >SYS 690 ZK VrbovÈ <?php echo $blok690;?></option>
-<?php                                         } ?>
-
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
 <?php
 $blok411="";
@@ -2601,31 +2554,6 @@ if($urob) { $blok914=" - BLOKOVAN…"; }
 <option value="911" >SYS 911 Zdrav.starostlivosù <?php echo $blok911;?></option>
 <option value="912" >SYS 912 OstatnÈ <?php echo $blok912;?></option>
 <option value="914" >SYS 914 N·jomnÈ <?php echo $blok914;?></option>
-<?php                                         } ?>
-
-<?php if( $berext == 1 AND $kli_vrok == 2019 ) { ?>
-<?php
-$blok1011="";
-$blok1012="";
-$blok1014="";
-
-$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak1011_".$h_obdp." ";
-$urob = mysql_query("$sql");
-if($urob) { $blok1011=" - BLOKOVAN…"; }
-
-$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak1012_".$h_obdp." ";
-$urob = mysql_query("$sql");
-if($urob) { $blok1012=" - BLOKOVAN…"; }
-
-$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak1014_".$h_obdp." ";
-$urob = mysql_query("$sql");
-if($urob) { $blok1014=" - BLOKOVAN…"; }
-
-?>
-
-<option value="1011" >SYS 1011 Zdrav.starostlivosù <?php echo $blok1011;?></option>
-<option value="1012" >SYS 1012 OstatnÈ <?php echo $blok1012;?></option>
-<option value="1014" >SYS 1014 N·jomnÈ <?php echo $blok1014;?></option>
 <?php                                         } ?>
 
 </select>
