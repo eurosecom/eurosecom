@@ -699,6 +699,21 @@ if( $copern == 16 OR $copern == 10 ) {
   fwrite($soubor, $text);
   }
 
+ $text = "225;##########Tabulka uctpohyby"."\r\n";
+  fwrite($soubor, $text);
+  $text = "0;cpoh;pohp;ucto;druh;uzk0;dzk0;uzk1;dzk1;uzk2;dzk2;udn1;ddn1;udn2;ddn2;hfak;hico;hstr;hzak;id;datm"."\r\n";
+  fwrite($soubor, $text);
+  $vysledok = mysql_query("SELECT * FROM uctpohyby ORDER BY cpoh");
+  while ($riadok = mysql_fetch_object($vysledok))
+  {
+  $text = "1";
+
+  $text = $text.";".$riadok->cpoh.";".$riadok->pohp.";".$riadok->ucto.";".$riadok->druh.";".$riadok->uzk0.";".$riadok->dzk0.";".$riadok->uzk1.";".$riadok->dzk1.";".$riadok->uzk2.";".$riadok->dzk2.";".$riadok->udn1.";".$riadok->ddn1.";".$riadok->udn2.";".$riadok->ddn2.";".$riadok->hfak.";".$riadok->hico.";".$riadok->hstr.";".$riadok->hzak.";".$riadok->id.";".$riadok->datm;
+
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+  }
+
  $text = "217;##########Tabulka F$kli_vxcf"."_ddod"."\r\n";
   fwrite($soubor, $text);
   $text = "0;ddod;ndod;drdo;ucdo;cfak;datm"."\r\n";

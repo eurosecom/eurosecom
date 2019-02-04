@@ -248,36 +248,48 @@ if( file_exists("../import/FIR$kli_vxcf/DOD_ICO.CSV")) echo "Súbor ../import/FIR
 $subor = fopen("../import/FIR$kli_vxcf/DOD_ICO.CSV", "r");
 while (! feof($subor))
 {
+
+//0;ico;dic;icd;nai;na2;uli;psc;mes;tel;fax;em1;em2;em3;www;uc1;nm1;ib1;uc2;nm2;ib2;uc3;nm3;ib3;dns;datm
+
   $riadok = fgets($subor, 500);
   print "$riadok<br />";
   $pole = explode(";", $riadok);
-  $x_ico = $pole[0];
-  $x_icd = $pole[1];
-  $x_naz = $pole[2];
-  $x_uli = $pole[3];
-  $x_mes = $pole[4];
-  $x_psc = $pole[5];
-  $x_tel = $pole[6];
-  $x_fax = $pole[7];
-  $x_ema = $pole[8];
-  $x_www = $pole[9];
-  $x_num = $pole[10];
-  $x_ucb = $pole[11];
-  $x_num2 = $pole[12];
-  $x_ucb2 = $pole[13];
-  $x_num3 = $pole[14];
-  $x_ucb3 = $pole[15];
-  $x_dns = $pole[16];
-  $x_kon = $pole[17];
+  $x_ico = $pole[1];
+  $x_dic = $pole[2];
+  $x_icd = $pole[3];
+  $x_nai = $pole[4];
+  $x_na2 = $pole[5];
+  $x_uli = $pole[6];
+  $x_psc = $pole[7];
+  $x_mes = $pole[8];
+  $x_tel = $pole[9];
+  $x_fax = $pole[10];
+  $x_em1 = $pole[11];
+  $x_em2 = $pole[12];
+  $x_em3 = $pole[13];
+  $x_www = $pole[14];
 
-$x_dic=substr($x_icd,2,12);
+  $x_uc1 = $pole[15];
+  $x_nm1 = $pole[16];
+  $x_ib1 = $pole[17];
+
+  $x_uc2 = $pole[18];
+  $x_nm2 = $pole[19];
+  $x_ib2 = $pole[20];
+
+  $x_uc3 = $pole[21];
+  $x_nm3 = $pole[22];
+  $x_ib3 = $pole[23];
+
+  $x_dns = $pole[24];
+  $x_datm = $pole[25];
+
+
 $x_cico=1*$x_ico;
-$x_naz1=substr($x_naz,0,35);
-$x_naz2=substr($x_naz,35,35);
  
-$sqult = "INSERT INTO F$kli_vxcf"."_ico ( ico,icd,dic,nai,na2,uli,mes,psc,tel,fax,em1,www,nm1,uc1,nm2,uc2,nm3,uc3,dns)".
-" VALUES ( '$x_ico', '$x_icd', '$x_dic', '$x_naz1', '$x_naz2', '$x_uli', '$x_mes', '$x_psc', '$x_tel', '$x_fax', '$x_ema', '$x_www',".
-" '$x_num', '$x_ucb', '$x_num2', '$x_ucb2', '$x_num3', '$x_ucb3', '$x_dns'".
+$sqult = "INSERT INTO F$kli_vxcf"."_ico ( ico,dic,icd,nai,na2,uli,psc,mes,tel,fax,em1,em2,em3,www,uc1,nm1,ib1,uc2,nm2,ib2,uc3,nm3,ib3,dns)".
+" VALUES ( '$x_ico', '$x_dic', '$x_icd', '$x_nai', '$x_na2', '$x_uli', '$x_psc', '$x_mes', '$x_tel', '$x_fax', '$x_em1', '$x_em2', '$x_em3', '$x_www',".
+" '$x_uc1', '$x_nm1', '$x_ib1', '$x_uc2', '$x_nm2', '$x_ib2', '$x_uc3', '$x_nm3', '$x_ib3', '$x_dns'".
 "  );";
 if( $x_cico > 0 ) { $ulozene = mysql_query("$sqult"); }
 
@@ -285,27 +297,6 @@ if( $x_cico > 0 ) { $ulozene = mysql_query("$sqult"); }
 echo "Tabulka F$kli_vxcf"."_ico!"." naimportovaná <br />";
 fclose ($subor);
 
-if( file_exists("../import/FIR$kli_vxcf/POZ_ICO.CSV")) echo "Súbor ../import/FIR$kli_vxcf/POZ_ICO.CSV existuje<br />";
-
-$subor = fopen("../import/FIR$kli_vxcf/POZ_ICO.CSV", "r");
-while (! feof($subor))
-{
-  $riadok = fgets($subor, 500);
-  print "$riadok<br />";
-  $pole = explode(";", $riadok);
-  $x_ico = $pole[0];
-  $x_pozn = $pole[1];
-  $x_kon = $pole[2];
-
-$x_cico=1*$x_ico;
- 
-$sqult = "INSERT INTO F$kli_vxcf"."_icorozsirenie ( ico,pozn )".
-" VALUES ( '$x_ico', '$x_pozn' );";
-if( $x_cico > 0 ) { $ulozene = mysql_query("$sqult"); }
-
-}
-echo "Tabulka F$kli_vxcf"."_icorozsirenie!"." naimportovaná <br />";
-fclose ($subor);
 
     }
 //koniec importu z ICO
