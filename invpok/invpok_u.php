@@ -843,7 +843,7 @@ if ( $copern == 1 )
 <td class="pvstuz">
 <input type="text" name="invstav" id="invstav" class="fill" style="text-align:right; padding-right:3px;" size="15" onKeyDown="return invStavEnter(event.which);" onkeyup="CiarkaNaBodku(this, event.which);" />
 &nbsp;
-<img src="../obr/orig.png" onclick="NacitajStav();" title="Naèíta stav z úètovníctva" height="15" width="15">
+<img src="../obr/orig.png" onclick="NacitajStav();" title="Naèíta stav z úètovníctva - súèet dokladov na úète <?php echo $invucet; ?>, nie stav v obratovke" height="15" width="15">
 &nbsp;&nbsp;
 <img src="../obr/ziarovka.png" onclick="PrepocitajMince();" title="Prepoèíta skutoèný stav pokladne" height="15" width="15">
 &nbsp;&nbsp;
