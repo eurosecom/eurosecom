@@ -27,7 +27,7 @@ $sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm SET ".
 " zam_gf=0,    fir_gf=0.25, max_gf=6678.00, min_gf=0, ".
 " zam_up=0,    fir_up=0.8,  max_up=9999999, min_up=0, ".
 " zam_rf=0,    fir_rf=4.75, max_rf=6678.00, min_rf=0, ".
-" min_mzda=520.00, dan_bonus=22.17, dan_danov=328.12  ";
+" min_mzda=520.00, dan_bonus=22.17, dan_danov=328.11  ";
 $vysledek = mysql_query("$sql");
 //echo $sql;
 
@@ -54,7 +54,12 @@ $vysledek = mysql_query("$sql");
 
      }
 
-$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_new012019b".$sqlt;
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018b";
+$vysledek = mysql_query("$sql");
+
+$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_new012019c".$sqlt;
 $vysledek = mysql_query("$sql");
 
 ?>
