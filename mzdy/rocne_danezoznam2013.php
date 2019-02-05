@@ -40,7 +40,8 @@ if ( $rokrocnezuc == 2013 ) { $rokrocnezuc="2013"; }
 if ( $rokrocnezuc == 2014 ) { $rokrocnezuc="2014"; }
 if ( $rokrocnezuc == 2015 ) { $rokrocnezuc="2015"; }
 if ( $rokrocnezuc == 2016 ) { $rokrocnezuc="2016"; }
-if ( $rokrocnezuc >= 2017 ) { $rokrocnezuc="2017"; }
+if ( $rokrocnezuc == 2017 ) { $rokrocnezuc="2017"; }
+if ( $rokrocnezuc >= 2018 ) { $rokrocnezuc="2018"; }
 
 $rokrocnezucz=$kli_vrok;
 if ( $rokrocnezucz < 2011 ) { $rokrocnezucz=""; }
@@ -536,7 +537,7 @@ $pdf->SetTopMargin(10);
 $strana=$strana+1;
 $pdf->SetFont('arial','',10);
 
-if ( $copern == 11 ) { $pdf->Cell(90,6,"Zoznam RZ $rokrocnezuc ","LTB",0,"L"); }
+if ( $copern == 11 ) { $pdf->Cell(90,6,"Zoznam RZ $kli_vrok ","LTB",0,"L"); }
 $pdf->Cell(0,6,"$kli_nxcf strana $strana","RTB",1,"R");
 $pdf->SetFont('arial','',7);
 
