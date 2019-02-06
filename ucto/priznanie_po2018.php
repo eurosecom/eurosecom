@@ -4041,7 +4041,7 @@ if ( $copern == 10 )
      {
 
 
-$zablokovane=1;
+$zablokovane=0;
 if ( $zablokovane == 1 )
      {
 ?>
