@@ -404,6 +404,7 @@ $hodnotatlac=$riadok->xhdd;
 if( $riadok->xhdd == 0 ) { $hodnotatlac=""; }
 if( $noprice == 1 ) { $hodnotatlac="_ . _"; }
 $vahatlac=$riadok->xpsk;
+$dajxid=$riadok->xid;
 
 $pdf->Cell(1,5,"","$rmc",0,"L");$pdf->Cell(105,5,"$xcistlac $nat","$rmc",0,"L");$pdf->Cell(20,5,"$cenatlac","0",0,"R");$pdf->Cell(16,5,"$mnotlac","0",0,"R");
 $pdf->Cell(4,5,"$riadok->mer","0",0,"R");$pdf->Cell(20,5,"$hodnotatlac","0",0,"R");$pdf->Cell(20,5,"$vahatlac","0",1,"R");
@@ -414,7 +415,15 @@ $pdf->Cell(185,1,"                          ","$rmc",1,"L");
 $pdf->Cell(185,2," ","T",1,"R");
 $pdf->SetFont('arial','',12);
 if ( $fir_fico == '36268399' ) {
+$jeskicd="";
+$skicd=trim($riadok->icd);
+$jeskicd=substr($icd,0,2);
+if( $jeskicd == "SK" )  {
 $pdf->Cell(120,7,"Celkom s dph","$rmc",0,"L");
+  }
+if( $jeskicd != "SK" )  {
+$pdf->Cell(120,7,"Celkom bez dph","$rmc",0,"L");
+  }
                                 }
 if ( $fir_fico != '36268399' ) {
 $pdf->Cell(120,7,"Celkom","$rmc",0,"L");
@@ -433,7 +442,14 @@ $pdf->SetFont('arial','B',12);
 $pdf->Cell(140,1," ","$rmc",0,"L");$pdf->Cell(45,1," ","T",1,"R");
 $pdf->Cell(140,1," ","$rmc",0,"L");$pdf->Cell(45,1," ","T",1,"R");
 
+if ( $kli_uzid == '17777' ) { echo $dajxid; exit; }
+
+if ( $fir_fico != '36268399' ) {
 $sqlfir = "SELECT * FROM ezak WHERE cuid = $kli_uzid ";
+   }
+if ( $fir_fico == '36268399' ) {
+$sqlfir = "SELECT * FROM ezak WHERE cuid = $dajxid ";
+   }
 $fir_vysledok = mysql_query($sqlfir);
  if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
