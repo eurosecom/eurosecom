@@ -26,8 +26,7 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
-$zablokovane=1;
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=1; }
+$zablokovane=0;
 if ( $zablokovane == 1 )
      {
 ?>
@@ -913,7 +912,7 @@ echo "Vyplnená <strong>úhrnná suma dôchodku</strong> v bode 28, avšak nie je zaš
 <ul id="alertpage4" style="display:none;">
 <li class="header-section">STRANA 4</li>
 <li class="orange">
-<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r67 != 0 OR $hlavicka->r68 != 0 OR $hlavicka->r69 != 0 OR $hlavicka->r70 != 0 OR $hlavicka->r71 != 0 OR $hlavicka->r72 != 0 OR $hlavicka->r73 != 0 OR $hlavicka->r74 != 0 ) )
+<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r73 != 0 OR $hlavicka->r74 != 0 OR $hlavicka->r75 != 0 OR $hlavicka->r76 != 0 OR $hlavicka->r77 != 0 OR $hlavicka->r78 != 0 OR $hlavicka->r79 != 0 OR $hlavicka->r80 != 0 OR $hlavicka->r81 != 0 OR $hlavicka->r82 != 0 ) )
 {
 $upozorni4=1;
 echo "Vyplnené riadky <strong>VII.oddielu</strong>, ale <strong>nie je</strong> vybraté dodatoèné daòové priznanie na 1.strane.";
