@@ -2252,7 +2252,8 @@ $sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_$mzdkun WHERE oc=$prev_oc ")
   $nasieloc=1;
   }
 if( $nasieloc == 0 ) $prev_oc=$prev_oc-1;
-if( $prev_oc <= 1 ) $nasieloc=1;
+//ak nebola 1ka skakal na nu aj tak
+if( $prev_oc <= 1 AND $nasieloc == 0 ) { $nasieloc=1; $prev_oc=$cislo_oc; }
 }
 $i=$i+1;
 
