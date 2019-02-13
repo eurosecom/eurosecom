@@ -4344,7 +4344,7 @@ class="btn-row-tool" style="top:680px; left:830px;">
 if ( $copern == 10 )
      {
 
-$zablokovane=1;
+$zablokovane=0;
 if ( $zablokovane == 1 )
      {
 ?>
@@ -6118,7 +6118,7 @@ echo "V <strong>XI.oddiele</strong> vyplnené <strong>údaje nerezidenta</strong>,
 <li class="orange">
 
 <li class="orange">
-<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r122 != 0 OR $hlavicka->r123 != 0 OR $hlavicka->r124 != 0 OR $hlavicka->r125 != 0 OR $hlavicka->r126 != 0 OR $hlavicka->r127 != 0 ) )
+<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r127 != 0 OR $hlavicka->r128 != 0 OR $hlavicka->r129 != 0 OR $hlavicka->r130 != 0 OR $hlavicka->r131 != 0 OR $hlavicka->r132 != 0 OR $hlavicka->r133 != 0 OR $hlavicka->r134 != 0 ) )
 {
 $upozorni11=1;
 echo "Vyplnené riadky <strong>X.oddielu</strong>, ale <strong>nie je</strong> vybraté dodatoèné daòové priznanie na 1.strane.";
