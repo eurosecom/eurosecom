@@ -45,9 +45,9 @@ if( $h_sys == 0 ) { echo "Podsystém SYS = ".$h_sys." ???"; exit; }
 $h_obdp = $_REQUEST['h_obdp'];
 
 
-//http://www.ekorobot.sk/ucto/ext_fakt.php?copern=55&page=1&h_sys=55&h_obdp=1&drupoh=1&uprav=1
-if( $fir_fico == 36276693 AND $kli_vrok != 2018 ) { echo $kli_vrok." ??"; exit; }
-if( $fir_fico == 36276693 AND $kli_vrok == 2018 ) 
+//ekorobot.sk enii
+if( $fir_fico == 36276693 AND $kli_vrok != 2019 ) { echo $kli_vrok." ??"; exit; }
+if( $fir_fico == 36276693 AND $kli_vrok == 2019 ) 
 {
 ?>
 <script type="text/javascript">
@@ -59,8 +59,9 @@ exit;
 
 //exit;
 
-if( $fir_fico == 31416853 AND $kli_vrok != 2018 ) { echo $kli_vrok." ??"; exit; }
-if( $fir_fico == 31416853 AND $kli_vrok == 2018 AND $h_sys == 59 ) 
+//euroramex
+if( $fir_fico == 31416853 AND $kli_vrok != 2019 ) { echo $kli_vrok." ??"; exit; }
+if( $fir_fico == 31416853 AND $kli_vrok == 2019 AND $h_sys == 59 ) 
 {
 ?>
 <script type="text/javascript">
@@ -534,7 +535,7 @@ else
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Import faktúr</title>
   <style type="text/css">

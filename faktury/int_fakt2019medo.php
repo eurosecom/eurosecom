@@ -83,9 +83,11 @@ if( $copern == 56 AND $medo == 1 )
 //echo "uctujem";
 
 $uzk2="60217";
+$uzk1="60217";
 $udn2="34350";
-$udn1="34310";
+$udn1="34340";
 $dzk2=55;
+$dzk1=60;
 if( $h_sys == 690 ) 
 {
 $uzk2="60217";
@@ -110,9 +112,11 @@ $dzk2=55;
 if( $h_sys == 609 ) 
 {
 $uzk2="60230";
+$uzk1="60230";
 $udn2="34350";
-$udn1="34310";
+$udn1="34340";
 $dzk2=55;
+$dzk1=60;
 }
 if( $h_sys == 679 ) 
 {
@@ -224,7 +228,7 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET ucd=$uzk2, rdp=$dzk2 WHERE dph=$fir_dph2 OR dph=19 ";
 $dsql = mysql_query("$dsqlt");
-$dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET ucd=$uzk1, rdp=$dzk1 WHERE dph=$fir_dph1 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET ucd=$uzk1, rdp=$dzk1 WHERE dph=$fir_dph1 OR dph=10 ";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET ucd=$uzk0, rdp=$dzk0 WHERE dph=0 ";
 $dsql = mysql_query("$dsqlt");

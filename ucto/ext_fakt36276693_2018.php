@@ -7,7 +7,7 @@ if( !$uziv ) exit;
 
 if(!isset($kli_vxcf)) $kli_vxcf = 1;
 
-//toto je import ext_faktur z pohody fy ENII rok 2019
+//toto je import ext_faktur z pohody fy ENII rok 2018
 
        do
        {
@@ -177,13 +177,13 @@ $x_uce=31110; $x_ucm=31110; $x_ucd1=60400; $x_ucd2=34300; $x_rdp=55;
 //vs 3901400002 31139/60420 vystavene faktury do talianska
 //vs 140200001 
 
-if( $x_fak >= 190100001  AND $x_fak <= 190199999  ) { $x_uce=31110; $x_ucm=31110; $x_ucd1=60410; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3491900001 AND $x_fak <= 3491999999 ) { $x_uce=31134; $x_ucm=31134; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3591900001 AND $x_fak <= 3591999999 ) { $x_uce=31135; $x_ucm=31135; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3691900001 AND $x_fak <= 3691999999 ) { $x_uce=31136; $x_ucm=31136; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3901900001 AND $x_fak <= 3901999999 ) { $x_uce=31139; $x_ucm=31139; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3911900001 AND $x_fak <= 3911999999 ) { $x_uce=31139; $x_ucm=31139; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 4301900001 AND $x_fak <= 4301999999 ) { $x_uce=31143; $x_ucm=31143; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 180100001  AND $x_fak <= 180199999  ) { $x_uce=31110; $x_ucm=31110; $x_ucd1=60410; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 3491800001 AND $x_fak <= 3491899999 ) { $x_uce=31134; $x_ucm=31134; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 3591800001 AND $x_fak <= 3591899999 ) { $x_uce=31135; $x_ucm=31135; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 3691800001 AND $x_fak <= 3691899999 ) { $x_uce=31136; $x_ucm=31136; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 3901800001 AND $x_fak <= 3901899999 ) { $x_uce=31139; $x_ucm=31139; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 3911800001 AND $x_fak <= 3911899999 ) { $x_uce=31139; $x_ucm=31139; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 4301800001 AND $x_fak <= 4301899999 ) { $x_uce=31143; $x_ucm=31143; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
 
 
 

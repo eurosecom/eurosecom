@@ -146,7 +146,7 @@ $dsql = mysql_query("$dsqlt");
 
 }
 
-if( $kli_vxcf == 909 AND $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) 
+if( ( $kli_vxcf == 909 OR $kli_vxcf == 1009 OR $kli_vxcf == 1109 ) AND $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) 
 {
 $dsqlt = "UPDATE F$kli_vxcf"."_zozprc$kli_uzid SET opseu=53514.53 WHERE inv=156 ";
 $dsql = mysql_query("$dsqlt");

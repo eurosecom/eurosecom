@@ -161,7 +161,7 @@ $pole = explode(".", $kli_vume);
 $kli_vmesx=$pole[0];
 $kli_vrokx=$pole[1];
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprc".$kli_uzid." SELECT 0,oc,kc,0 FROM F$kli_vxcf"."_mzdtrn WHERE ( dm = 101 OR dm = 118 OR dm = 119 OR dm = 217 OR dm = 218 ) ";
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprc".$kli_uzid." SELECT 0,oc,kc,0 FROM F$kli_vxcf"."_mzdtrn WHERE ( dm = 101 OR dm = 118 OR dm = 119 OR dm = 129 OR dm = 217 OR dm = 218 ) ";
 $dsql = mysql_query("$dsqlt");
 
 if( $kli_vrokx > 2009 )
