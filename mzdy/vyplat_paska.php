@@ -245,11 +245,12 @@ $sDat = include("../funkcie/dat_sk_us.php");
 $vyb_osc=0;
 $all_oc=1;
 $data_zal=1;
+$zmzdoveho=0;
 if( $copern == 101 ) { $vyb_osc = 1*$_SESSION['vyb_osc']; $all_oc=0; $copern=1; $data_zal=0; }
 
 if( $copern == 501 ) { $vyb_osc = 1*$_REQUEST['vyb_osc']; $all_oc=0; $copern=1; $data_zal=0; }
 
-if( $copern == 511 ) { $vyb_osc = 1*$_REQUEST['cislo_oc']; $all_oc=0; $data_zal=1; }
+if( $copern == 511 ) { $vyb_osc = 1*$_REQUEST['cislo_oc']; $all_oc=0; $data_zal=1; $zmzdoveho=1;}
 
 $podm_oc="oc > 0";
 $mzdmes="mzdzalmesx".$kli_uzid;
@@ -2633,7 +2634,7 @@ $sqldok = mysql_query("SELECT SUM(dni) AS cerlek, dm, oc, ume FROM F$kli_vxcf"."
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  if( $copern != 11 ) { $lek_cerp=$lek_cerp+$riaddok->cerlek; }
+  if( $copern != 11 AND $zmzdoveho == 0 ) { $lek_cerp=$lek_cerp+$riaddok->cerlek; }
   }
 //precitaj cerpane doprovod
 $dop_cerp=0; $dop_nrk=7;
@@ -2647,7 +2648,7 @@ $sqldok = mysql_query("SELECT SUM(dni) AS cerdop, dm, oc, ume FROM F$kli_vxcf"."
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  if( $copern != 11 ) { $dop_cerp=$dop_cerp+$riaddok->cerdop; }
+  if( $copern != 11 AND $zmzdoveho == 0 ) { $dop_cerp=$dop_cerp+$riaddok->cerdop; }
   }
 
 $textlekdop="Lekár dni - nárok $lek_nrk èerpané $lek_cerp, Doprovod dni - nárok $dop_nrk èerpané $dop_cerp";
