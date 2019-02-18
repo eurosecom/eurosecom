@@ -32,7 +32,7 @@ $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
-$zablokovane=1;
+$zablokovane=0;
 if ( $zablokovane == 1 )
      {
 ?>
