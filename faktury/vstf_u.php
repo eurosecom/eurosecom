@@ -765,6 +765,7 @@ $h_cprf = $h_prf;
 //echo "d".$h_cdol;
 //echo "p".$h_cprf;
 
+$ulozcis0=1;
 if( $h_tlsl == 1 )
 {
 $h_pon = strip_tags($_REQUEST['h_pon']);
@@ -793,11 +794,21 @@ $sqty = "INSERT INTO F$kli_vxcfskl"."_$tabltovar ( dok,fak,dol,prf,skl,poh,ico,s
 " VALUES ('$cislo_dok', '$h_cfak', '$h_cdol', '$h_cprf', '$h_skl', '$h_poh', '$h_ico', '$h_str', '$h_zak', '$h_dat', '$h_ume', '$h_slu', '$h_nsl',".
 " '$h_pop', '$h_poz', '$h_dph', '$h_cen', '$h_cep', '$h_ced',".
 " '$h_mno', '$h_mer', '$kli_uzid' );";
+
+//andrejko
+if( $plotyskala == 1 AND $h_slu == 0 )
+  {
+$ulozcis0=0;
+$h_cep=0;
+$h_ced=0;
+$h_mno=0;
+  }
  
 }
+//koniec tltv
 
 //echo $sqty;
-$ulozene = mysql_query("$sqty"); 
+if( $ulozcis0 == 1 ) { $ulozene = mysql_query("$sqty"); }
 
 if( $zmen == 1 AND $kli_vrok < 2009 )
 {
@@ -6433,7 +6444,6 @@ if ( $copern != 6 AND $copern != 87 AND $copern != 8 )
 <?php 
 //echo "sysx ".$sysx;
 if( $drupoh == 1 AND $sysx != 'UCT' AND $plotyskala == 1 )  { 
-//andrejko
 $jeskicd="";
 $skicd=trim($riadok->icd);
 $jeskicd=substr($skicd,0,2);
@@ -6704,10 +6714,20 @@ if ( $copern == 7 AND $drupoh == 1 )
      }
 ?>
 <?php
-if ( $copern == 7 AND $drupoh != 42 )
+if ( $copern == 7 AND $drupoh != 42 AND $_SERVER['SERVER_NAME'] != "www.ala.sk" )
      {
 ?>
 <a href="#" onClick="window.open('obalka.php?copern=10&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $riadok->dok;?>',
+ '_blank', '<?php echo $tlcuwin; ?>' )">
+<img src='../obr/obalka.jpg' width=20 height=12 border=0 alt="Vytlaèi obálku" title="Vytlaèi obálku" ></a>
+<?php
+     }
+?>
+<?php
+if ( $copern == 7 AND $drupoh != 42 AND $_SERVER['SERVER_NAME'] == "www.ala.sk" )
+     {
+?>
+<a href="#" onClick="window.open('obalka.php?copern=11&drupoh=101&page=1&cislo_ico=<?php echo $riadok->ico;?>',
  '_blank', '<?php echo $tlcuwin; ?>' )">
 <img src='../obr/obalka.jpg' width=20 height=12 border=0 alt="Vytlaèi obálku" title="Vytlaèi obálku" ></a>
 <?php
@@ -7996,6 +8016,7 @@ $robot=1;
 if( $sys != 'DOP' ) $cislista = include("fak_lista.php");
 if( $sys == 'DOP' ) $cislista = include("../doprava/dop_lista.php");
 // celkovy koniec dokumentu
+mysql_close();
        } while (false);
 ?>
 </BODY>
