@@ -22,6 +22,34 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
+//spoj mzdkun a mzdkunnewzam
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc < 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkunnewzam WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_prcmzdkun$kli_uzid WHERE oc > 0 GROUP BY oc";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+
+$cislo_oc = $_REQUEST['cislo_oc'];
+
+$sqldttt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ";
+$sqldt = mysql_query("$sqldttt");
+$poldt = 1*mysql_num_rows($sqldt);
+
+$neaktzam=0;
+if( $poldt == 0 ) { $neaktzam=1; }
+
+$mzdkun="prcmzdkuns".$kli_uzid;
+
 //ramcek fpdf 1=zap,0=vyp
 $rmc=0;
 $rmc1=0;
@@ -38,7 +66,6 @@ $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
 
-$cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
 
 //priezvisko,meno,titul FO
@@ -483,8 +510,8 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
 if ( $copern == 20 )
      {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_vyhlaseniedane".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_vyhlaseniedane.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_vyhlaseniedane.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE F$kli_vxcf"."_vyhlaseniedane.oc = $cislo_oc ORDER BY konx,prie,meno";
 
 $fir_vysledok = mysql_query($sqlfir);
@@ -574,7 +601,7 @@ $nasieloc=0;
 $i=0;
 while ($i <= 9999 AND $nasieloc == 0 )
 {
-$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$prev_oc ");
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_$mzdkun WHERE oc=$prev_oc ");
   if (@$zaznam=mysql_data_seek($sqlico,$i))
   {
   $riadico=mysql_fetch_object($sqlico);
@@ -586,7 +613,7 @@ if ( $prev_oc <= 1 ) $nasieloc=1;
 $i=$i+1;
 
 $maxoc=9999;
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun ORDER BY oc DESC LIMIT 1");
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun ORDER BY oc DESC LIMIT 1");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
@@ -598,7 +625,7 @@ $nasieloc=0;
 $i=0;
 while ($i <= 9999 AND $nasieloc == 0 AND $next_oc <= $maxoc )
 {
-$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$next_oc ");
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_$mzdkun WHERE oc=$next_oc ");
   if (@$zaznam=mysql_data_seek($sqlico,$i))
   {
   $riadico=mysql_fetch_object($sqlico);
@@ -742,9 +769,11 @@ $source="../mzdy/vyhlasenie_dane2016.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&
      alt="<?php echo $jpg_popis; ?> 1.strana 264kB" class="form-background">
 
 <!-- ZAMESTNANEC -->
+<?php if( $neaktzam == 0 ) { ?>
 <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
      title="Upravi údaje o zamestnancovi" class="btn-row-tool"
      style="top:248px; left:330px; width:16px; height:16px;">
+<?php                      } ?>
 <span class="text-echo" style="top:310px; left:122px;"><?php echo $prie; ?></span>
 <span class="text-echo" style="top:310px; left:410px;"><?php echo $meno; ?></span>
 <span class="text-echo" style="top:310px; left:590px;"><?php echo $rodne; ?></span>
@@ -835,8 +864,8 @@ $pdf->AddFont('arial','','arial.php');
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_vyhlaseniedane".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_vyhlaseniedane.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_vyhlaseniedane.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE F$kli_vxcf"."_vyhlaseniedane.oc = $cislo_oc ORDER BY konx,prie,meno";
 //echo $sqltt;
 //exit;

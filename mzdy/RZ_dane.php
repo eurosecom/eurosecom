@@ -684,7 +684,23 @@ if( $kli_vrok < 2014 ) { $nazovzos = "Vyhlásenie na zdanenie príjmov fyzických o
 ?>
 <td class="bmenu" width="98%"><?php echo $nazovzos; ?>
 <?php
-$sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY prie,meno");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc < 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkunnewzam WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_prcmzdkun$kli_uzid WHERE oc > 0 GROUP BY oc";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+
+$sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_prcmzdkuns$kli_uzid WHERE oc > 0 ORDER BY prie,meno");
 ?>
 <select size="1" name="h_oc" id="h_oc" >
 <?php while($zaznam=mysql_fetch_array($sql)):?>
