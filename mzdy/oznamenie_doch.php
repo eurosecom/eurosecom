@@ -41,9 +41,35 @@ $subor = $_REQUEST['subor'];
 $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 ) $strana=1;
 
-
 $prepoc = 1*$_REQUEST['prepoc'];
 $vsetkyprepocty=0;
+
+//spoj mzdkun a mzdkunnewzam
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc < 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkunnewzam WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_prcmzdkun$kli_uzid WHERE oc > 0 GROUP BY oc";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+
+$cislo_oc = $_REQUEST['cislo_oc'];
+
+$sqldttt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ";
+$sqldt = mysql_query("$sqldttt");
+$poldt = 1*mysql_num_rows($sqldt);
+
+$neaktzam=0;
+if( $poldt == 0 ) { $neaktzam=1; }
+$mzdkun="prcmzdkuns".$kli_uzid;
 
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
@@ -163,8 +189,8 @@ $prepoc=1;
 if ( $copern == 10 OR $copern == 20 )
     {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznam_doch".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_mzdoznam_doch.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_mzdoznam_doch.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE F$kli_vxcf"."_mzdoznam_doch.oc = $cislo_oc AND konx1 = 0 ORDER BY F$kli_vxcf"."_mzdoznam_doch.oc";
 
 $fir_vysledok = mysql_query($sqlfir);
@@ -328,7 +354,7 @@ $nasieloc=0;
 $i=0;
 while ( $i <= 9999 AND $nasieloc == 0 )
 {
-$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$prev_oc ");
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_$mzdkun WHERE oc=$prev_oc ");
   if (@$zaznam=mysql_data_seek($sqlico,$i))
   {
   $riadico=mysql_fetch_object($sqlico);
@@ -340,7 +366,7 @@ if ( $prev_oc <= 1 ) $nasieloc=1;
 $i=$i+1;
 
 $maxoc=9999;
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun ORDER BY oc DESC LIMIT 1");
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun ORDER BY oc DESC LIMIT 1");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
@@ -352,7 +378,7 @@ $nasieloc=0;
 $i=0;
 while ($i <= 9999 AND $nasieloc == 0 AND $next_oc <= $maxoc )
 {
-$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$next_oc ");
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_$mzdkun WHERE oc=$next_oc ");
   if (@$zaznam=mysql_data_seek($sqlico,$i))
   {
   $riadico=mysql_fetch_object($sqlico);
@@ -388,7 +414,9 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
+<?php if( $neaktzam == 0 ) { ?>
      <img src="../obr/ikony/user_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-form-tool">
+<?php                      } ?>
      <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);" title="Zobrazi v PDF" class="btn-form-tool">
     </div>
    </td>
@@ -468,8 +496,8 @@ $pdf->AddFont('arial','','arial.php');
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznam_doch".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_mzdoznam_doch.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_mzdoznam_doch.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE F$kli_vxcf"."_mzdoznam_doch.oc = $cislo_oc AND konx1 = 0 ORDER BY F$kli_vxcf"."_mzdoznam_doch.oc";
 
 $sql = mysql_query("$sqltt");

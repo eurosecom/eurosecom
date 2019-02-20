@@ -46,6 +46,24 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
+//spoj mzdkun a mzdkunnewzam pre niektore potvrdenia
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc < 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkunnewzam WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_prcmzdkun$kli_uzid WHERE oc > 0 GROUP BY oc";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+
+
 $podmoc=" = ".$cislo_oc;
 if( $cislo_oc == 999999 ) $podmoc=" >= 0 ";
 
@@ -1623,7 +1641,7 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 
 <td class="bmenu" width="96%">
 <?php
-$sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY prie,meno");
+$sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_prcmzdkuns$kli_uzid WHERE oc > 0 ORDER BY prie,meno");
 ?>
 <select size="1" name="h_oc" id="h_oc" >
 <?php while($zaznam=mysql_fetch_array($sql)):?>
@@ -1653,7 +1671,7 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 
 <td class="bmenu" width="96%">
 <?php
-$sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY prie,meno");
+$sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_prcmzdkuns$kli_uzid WHERE oc > 0 ORDER BY prie,meno");
 ?>
 <select size="1" name="h_oc" id="h_oc" >
 <?php while($zaznam=mysql_fetch_array($sql)):?>
