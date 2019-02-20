@@ -40,6 +40,33 @@ $cislo_koc = 1*$_REQUEST['cislo_koc'];
 $cislo_kcpl = 1*$_REQUEST['cislo_kcpl'];
 $subor = $_REQUEST['subor'];
 
+//spoj mzdkun a mzdkunnewzam
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc < 0 ";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkun$kli_uzid SELECT * FROM F$kli_vxcf"."_mzdkunnewzam WHERE oc > 0 ";
+$sql = mysql_query("$sqlttt");
+
+$sqlttt = "INSERT INTO F$kli_vxcf"."_prcmzdkuns$kli_uzid SELECT * FROM F$kli_vxcf"."_prcmzdkun$kli_uzid WHERE oc > 0 GROUP BY oc";
+$sql = mysql_query("$sqlttt");
+$sqlttt = "DROP TABLE F$kli_vxcf"."_prcmzdkun$kli_uzid ";
+$sql = mysql_query("$sqlttt");
+
+$cislo_oc = $_REQUEST['cislo_oc'];
+
+$sqldttt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ";
+$sqldt = mysql_query("$sqldttt");
+$poldt = 1*mysql_num_rows($sqldt);
+
+$neaktzam=0;
+if( $poldt == 0 ) { $neaktzam=1; }
+$mzdkun="prcmzdkuns".$kli_uzid;
+
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
@@ -94,16 +121,16 @@ if ( $copern == 27 )
 if( $cislo_koc > 0 )
 {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_personal_dok".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_personal_dok.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_personal_dok.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE F$kli_vxcf"."_personal_dok.oc = $cislo_koc AND cpl = $cislo_kcpl ORDER BY cpl";
 }
 
 if( $cislo_koc == 0 )
 {
 $sqlfir = "SELECT * FROM personal_dok".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON personal_dok.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON personal_dok.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE personal_dok.oc = $cislo_koc AND cpl = $cislo_kcpl ORDER BY cpl";
 }
 
@@ -219,16 +246,16 @@ $pdf->AddFont('arialb','','arialb.php');
 if( $cislo_oc > 0 )
 {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_personal_dok".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_personal_dok.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_personal_dok.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE F$kli_vxcf"."_personal_dok.oc = $cislo_oc AND cpl = $cislo_cpl ORDER BY cpl";
 }
 
 if( $cislo_oc == 0 )
 {
 $sqlfir = "SELECT * FROM personal_dok".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON personal_dok.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON personal_dok.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE personal_dok.oc = $cislo_oc AND cpl = $cislo_cpl ORDER BY cpl";
 }
 
@@ -676,16 +703,16 @@ if ( $copern == 20 )
 if( $cislo_oc > 0 )
 {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_personal_dok".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_personal_dok.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_personal_dok.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE F$kli_vxcf"."_personal_dok.oc = $cislo_oc AND cpl = $cislo_cpl ORDER BY cpl";
 }
 
 if( $cislo_oc == 0 )
 {
 $sqlfir = "SELECT * FROM personal_dok".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON personal_dok.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON personal_dok.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE personal_dok.oc = $cislo_oc AND cpl = $cislo_cpl ORDER BY cpl";
 }
 
@@ -1029,8 +1056,8 @@ $i=$i+1;
 
 <?php
 $sqltt = "SELECT * FROM F$kli_vxcf"."_personal_dok ".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_personal_dok.oc=F$kli_vxcf"."_mzdkun.oc".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_personal_dok.oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE cpl >= 0  ORDER BY prie,cpl";
 $sql = mysql_query("$sqltt");
 
