@@ -5029,6 +5029,7 @@ $ipole=$ipole+1;
 
 //X. ODDIEL
 //stat danovej rezidencie
+$pdf->SetY(94);
 $pdf->Cell(190,53.5," ","$rmc1",1,"L");
 $text=$hlavicka->sdnr;
 $t01=substr($text,0,1);
