@@ -6105,7 +6105,7 @@ $pdf->Cell(49,4," ","$rmc1",0,"C");$pdf->Cell(3,3,"$text3","$rmc",1,"C");
 //polozka141
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="01234567";
-$hodx=100*$hlavicka->r141;
+$hodx=100*$hlavicka->zpld;
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 8s",$hodx);
 $t01=substr($text,0,1);
