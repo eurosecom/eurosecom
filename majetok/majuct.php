@@ -185,6 +185,7 @@ $dsqlt = "UPDATE F$kli_vxcf"."_majprc,F$kli_vxcf"."_majdruvyr".
 $dsql = mysql_query("$dsqlt");
 
 $anatri=1;
+if( $_SERVER['SERVER_NAME'] == "www.lipovecsro.sk" ) { $anatri=0; }
 if( $_SERVER['SERVER_NAME'] == "www.kamenecsro.sk" ) { $anatri=0; }
 if( ( $slovakiaplay == 1 OR $polno == 1 ) AND $anatri == 1 )
 {
