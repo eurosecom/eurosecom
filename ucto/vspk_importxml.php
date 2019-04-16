@@ -230,6 +230,12 @@ fclose($subor);
  
 //echo $riadok."<br />";
 
+//$riadok=str_replace("\n","",$riadok);
+//$riadok=str_replace("\r","",$riadok);
+//$riadok=str_replace("\rn","",$riadok);
+
+$riadok = preg_replace('/\s+/', '', $riadok);
+
 $pole = explode("<Ntry>", $riadok);
 
 $i=0;
@@ -238,8 +244,9 @@ foreach ($pole as &$value) {
 $p1dat = explode("<ValDt><Dt>", $value);
 $p2dat = explode("</Dt>", $p1dat[1]);
 $dat=$p2dat[0];
+//echo "dat ".$dat."<br />";
 
-$p1suma = explode("<Amt Ccy=\"EUR\">", $value);
+$p1suma = explode("<AmtCcy=\"EUR\">", $value);
 $p2suma = explode("</Amt>", $p1suma[1]);
 $suma=$p2suma[0];
 
@@ -276,6 +283,7 @@ if( $i > 0 )
 
 $vsql = "INSERT INTO F".$kli_vxcf."_importbanky$kli_uzid ( riadok, dat, suma, pohyb, iban, name, pops, info, vsy, ksy ) VALUES ".
 " ( '$text', '$dat', '$suma', '$pohyb', '$iban', '$name', '$pops', '$info', '$vsy', '$ksy' ) ";
+//echo $vsql."<br />";
 $vytvor = mysql_query("$vsql");
 
     }
@@ -286,7 +294,7 @@ $i=$i+1;
 
 fclose($soubox);
 
-
+//exit;
 
 
           $vyslettt = "SELECT * FROM F$kli_vxcf"."_importbanky$kli_uzid WHERE porc > 0 ORDER BY porc ";
@@ -417,10 +425,13 @@ $nasieluce=1;
 }
   }
 
-if( $nasieluce >= 0 AND $riadok->iban != '' AND $riadok->ksy == '0038' ) 
+$ksymzdy="0038";
+if( $fir_fico == 44219342 ) { $ksymzdy="0138"; }
+
+if( $nasieluce >= 0 AND $riadok->iban != '' AND $riadok->ksy == $ksymzdy ) 
   {
 
-$sqlfir7 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' AND popx LIKE 'ksy 0038 mzdy' ";
+$sqlfir7 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' AND popx LIKE 'ksy $ksymzdy mzdy' ";
 //echo $sqlfir7;
 $fir_vysledok7 = mysql_query($sqlfir7);
 $polico7 = 1*mysql_num_rows($fir_vysledok7);
@@ -439,7 +450,7 @@ $nasielico=1;
 
 if( $nasieluce == 0 AND trim($riadok->iban) == '' ) 
   {
-$sqlfir6 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' AND popx != 'ksy 0038 mzdy' ";
+$sqlfir6 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' AND popx != 'ksy $ksymzdy mzdy' ";
 $fir_vysledok6 = mysql_query($sqlfir6);
 $polico6 = 1*mysql_num_rows($fir_vysledok6);
 if( $polico6 > 0 ) 

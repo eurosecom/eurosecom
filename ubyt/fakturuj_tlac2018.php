@@ -433,7 +433,7 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=8.00 WHERE izba < 1
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET ico=51413002 WHERE izba > 100 AND ico = 51413001 "; $dsql = mysql_query("$dsqlt");
     }
 
-if( $kli_vrok == 2018 )
+if( $kli_vrok >= 2018 )
     {
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=13.50 WHERE dnm > 0 "; $dsql = mysql_query("$dsqlt");
@@ -456,39 +456,10 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET ico=51413002 WHERE izba 
 
     }
 
-if( $kli_vrok >= 2019 )
-    {
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=12.73 WHERE dnm > 0 "; $dsql = mysql_query("$dsqlt");
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=12.73 WHERE dnm > 1 "; $dsql = mysql_query("$dsqlt");
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=11.80 WHERE dnm > 7 "; $dsql = mysql_query("$dsqlt");
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=10.90 WHERE dnm > 14 "; $dsql = mysql_query("$dsqlt");
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=10.90 WHERE dnm >= $pocetdni "; $dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=30.00 WHERE izba = 108 OR izba = 109 OR izba = 110 OR izba = 104 "; $dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=30.00 WHERE izba = 101 OR izba = 107 "; $dsql = mysql_query("$dsqlt");
-
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=9.10 WHERE izba < 100 AND dnm > 0  "; $dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=8.64 WHERE izba < 100 AND dnm > 7  "; $dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=8.18 WHERE izba < 100 AND dnm > 14 "; $dsql = mysql_query("$dsqlt");
-
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=8.18 WHERE izba < 100 AND ico = 2147483647"; $dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET cena=8.18 WHERE izba < 100 AND ico = 51413001 "; $dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET ico=51413002 WHERE izba > 100 AND ico = 51413001 "; $dsql = mysql_query("$dsqlt");
-
-    }
-
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=dnm*cena  WHERE dnm > 0 "; $dsql = mysql_query("$dsqlt");
 
-if( $kli_vrok == 2018 )
+if( $kli_vrok > 2018 OR ( $kli_vrok == 2018 AND $kli_vmes >= 11 ) )
           {
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=183.33, cena=0  WHERE dnm > 16 AND ico = 36428001 AND izba < 100 "; 
@@ -504,25 +475,9 @@ $dsql = mysql_query("$dsqlt");
 //exit;
           }
 
-if( $kli_vrok >= 2019 )
-          {
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=188.20, cena=0  WHERE dnm > 16 AND ico = 36428001 AND izba < 100 "; 
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=188.20, cena=0  WHERE dnm > 16 AND ico = 50911082 AND izba < 100 "; 
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid." SET spolu=188.20, cena=0  WHERE dnm > 16 AND ico = 46872078 AND izba < 100 "; 
-$dsql = mysql_query("$dsqlt");
-
-//echo $dsqlt;
-//exit;
-          }
-
 
   }
-//koniec medo
+//koniec 2018
 
 //group ico
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcx".$kli_uzid." WHERE dnm = 0 ";

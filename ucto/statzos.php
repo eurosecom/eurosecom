@@ -309,7 +309,7 @@ if ( $kli_vrok < 2016 ) $rokodpad="_2015";
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
-//vykaz E(MZSR)1-04
+//vykaz E(MZSR)1-04 a 2-01
 <?php
 $roke104="";
 if ( $kli_vrok < 2017 ) $roke104="_2016";
@@ -317,6 +317,15 @@ if ( $kli_vrok < 2017 ) $roke104="_2016";
   function Emzsr104Uprav()
   {
    window.open('../ucto/statistika_e104<?php echo $roke104; ?>.php?copern=1&drupoh=1&page=1', '_blank');
+  }
+
+//vykaz E(MZSR)2-01
+<?php
+$roke201="";
+?>
+  function Emzsr201Uprav()
+  {
+   window.open('../ucto/statistika_e201<?php echo $roke104; ?>.php?copern=1&drupoh=1&page=1', '_blank');
   }
 
 //statistika 1304
@@ -1017,7 +1026,7 @@ if ( $dajstatvyk == 1 )
 </div>
 <img src='../obr/zoznam.png' onclick="statOPU112();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
-
+<?php if( $kli_vrok <  2018 ) { ?>
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
@@ -1027,8 +1036,19 @@ if ( $dajstatvyk == 1 )
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="Emzsr104Uprav();" title="Upravi hodnoty" class="toleft line-box box-green">
+<?php                         } ?>
+<?php if( $kli_vrok >= 2018 ) { ?>
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>E (MZSR) 2-01<span>Roèný výkaz o ekonomike organizácií v zdravotníctve pre NO</span></strong>
+ <img src="../obr/info.png" title="E(MZSR) 2-01">
+</div>
+</div>
+<img src='../obr/zoznam.png' onclick="Emzsr201Uprav();" title="Upravi hodnoty" class="toleft line-box box-green">
+<?php                         } ?>
 </div> <!-- .line-area -->
-
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">

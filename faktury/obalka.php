@@ -1,7 +1,7 @@
 <HTML>
 <?php
 $sys = 'FAK';
-$urov = 1000;
+$urov = 1;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 

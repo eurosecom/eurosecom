@@ -174,8 +174,9 @@ if( $drupoh == 91 )
 $dsqlt = "TRUNCATE F$kli_vxcf"."_genfin204pod ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin204pod SELECT * FROM ".$databaza."F$h_ycf"."_genfin204pod ";
+$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin204pod SELECT cpl, uce, crs, cpl01, 0 FROM ".$databaza."F$h_ycf"."_genfin204pod ";
 $dsql = mysql_query("$dsqlt");
+//echo $dsqlt;
   }
 
 if( $drupoh == 92 )
@@ -192,7 +193,7 @@ if( $drupoh == 93 )
 $dsqlt = "TRUNCATE F$kli_vxcf"."_genfin304 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin304 SELECT * FROM ".$databaza."F$h_ycf"."_genfin304 ";
+$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin304 SELECT cpl, uce, crs FROM ".$databaza."F$h_ycf"."_genfin304 ";
 $dsql = mysql_query("$dsqlt");
 //echo $dsqlt;
   }
