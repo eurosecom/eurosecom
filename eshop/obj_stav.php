@@ -480,6 +480,13 @@ window.open('obj_stav.php?copern=6001&drupoh=1&page=1&plux='+ plux + '&cislo_dok
  '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function MontZoznam()
+                {
+
+window.open('../eshop/obj_tlac.php?copern=1&drupoh=1&page=1&zmtz=1&html=1&mont=1',
+ '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function SpatZoznam()
                 {
 
@@ -918,6 +925,8 @@ window.open('obj_stav.php?copern=44401&h_ncsl=' + h_ncsl + '&cislo_dok=' + dokla
 <?php if( $vseobj == 1 AND $vsezaico == 1 ) { ?><td class="bmenu" colspan="4">Stav všetkých objednávok pre odberate¾a ièo <?php echo $icox; ?> <?php echo $naixx." ".$mesxx; ?></td><?php } ?>
 
 <td class="bmenu" colspan="4" align="right">
+<a href="#" onClick="MontZoznam();">
+Montáže<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Naspä do zoznamu nevybavených Montáží' ></a>
 <a href="#" onClick="SpatZoznam();">
 Nevybavené OBJ<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Naspä do zoznamu objednávok' ></a>
 

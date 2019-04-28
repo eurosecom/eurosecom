@@ -138,7 +138,7 @@ $cszp = strip_tags($_REQUEST['cszp']);
 $eobj = 1*strip_tags($_REQUEST['eobj']);
 $akod = 1*strip_tags($_REQUEST['akod']);
 $datd_sql = SqlDatum($_REQUEST['datd']);
-$nas1 = 1*strip_tags($_REQUEST['nas1']);
+$nas1 = 1*$_REQUEST['nas1'];
 
 $ulozene = mysql_query("INSERT INTO F$kli_vxcf"."_kosiktext ( invt, itxt, zdro ) VALUES ('$h_cvz', '$itxt', '$zdro' ); "); 
 
@@ -195,7 +195,9 @@ mysql_free_result($fir_vysledok);
 
     document.forms.formv1.eobj.value="<?php echo $eobj;?>";
     document.forms.formv1.datd.value="<?php echo $datd_sk;?>";
-    document.forms.formv1.nas1.value="<?php echo $nas1;?>";
+<?php if ( $nas1 == 1 ) { ?>
+    document.forms.formv1.nas1.checked = "checked";
+<?php                   } ?>
     document.forms.formv1.zdro.value="<?php echo $zdro;?>";
     document.forms.formv1.akod.value="<?php echo $akod;?>";
     document.forms.formv1.eobj.focus();
@@ -240,11 +242,11 @@ if ( $copern == 1  )
 </tr>
 
 <tr><td class="bmenu" colspan="10">
-eshop OBJ: <input type='text' name='eobj' id='eobj' size='10' maxlenght='10' value="" > 
-platba: <input type='text' name='nas1' id='nas1' size='10' maxlenght='10' value="" > 
-stav: <input type='text' name='zdro' id='zdro' size='10' maxlenght='10' value="" > 
-doprava: <input type='text' name='akod' id='akod' size='10' maxlenght='10' value="" > 
-dodaù: <input type='text' name='datd' id='datd' size='10' maxlenght='10' value="" > 
+eshop OBJ: <input type='text' name='eobj' id='eobj' size='10' maxlenght='10' value="" > | 
+mont·û: <input type="checkbox" name="nas1" value="1" />| 
+stav: <input type='text' name='zdro' id='zdro' size='10' maxlenght='10' value="" > | 
+doprava: <input type='text' name='akod' id='akod' size='10' maxlenght='10' value="" > | 
+dodaù: <input type='text' name='datd' id='datd' size='10' maxlenght='10' value="" > | 
 </td></tr>
 
 <tr><td class="bmenu" colspan="10">

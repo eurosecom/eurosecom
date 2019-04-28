@@ -30,6 +30,7 @@ $html = 1*$_REQUEST['html'];
 $xyid = 1*$_REQUEST['xyid'];
 $xyico = 1*$_REQUEST['xyico'];
 $vybavene = 1*$_REQUEST['vybavene'];
+$mont = 1*$_REQUEST['mont'];
 
 $hladaj_uce = 1*strip_tags($_REQUEST['hladaj_uce']);
 if( $hladaj_uce == 0 ) $hladaj_uce=31100;
@@ -498,6 +499,13 @@ window.open('../eshop/obj_tlac.php?copern=1&drupoh=1&xyico=' + xyico + '&page=1&
  '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function MontZoznam()
+                {
+
+window.open('../eshop/obj_tlac.php?copern=1&drupoh=1&page=1&zmtz=1&html=1&mont=1',
+ '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function SpatZoznam()
                 {
 
@@ -543,6 +551,7 @@ $tnadpis=" - nevybavené";
 if( $xyid  > 0 )  { $tnadpis=" "; }
 if( $xyico > 0 )  { $tnadpis=" - všetky pre iÈO ".$xyico; }
 if( $vybavene == 1 )  { $tnadpis=" - vybavené "; }
+if( $mont == 1 )  { $tnadpis=" - nevybavené Montáže"; }
 ?>
 <td>EuroSecom  -  Objednávky <?php echo $tnadpis; ?> 
 
@@ -609,6 +618,7 @@ $podmfak="xfak = 0 ";
 if( $xyid  > 0 )  { $podmfak="xfak >= 0 "; }
 if( $xyico > 0 )  { $podmfak="xfak >= 0 "; }
 if( $vybavene == 1 )  { $podmfak="xfak > 0 "; }
+
 
 if( $zmtz == 1 ) {
 //zober objednavky vsetky
@@ -686,6 +696,8 @@ Vybavené OBJ<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobr
 </td>
 
 <td class="bmenu" colspan="3" align="right">
+<a href="#" onClick="MontZoznam();">
+Montáže<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazi nevybavené montáže' ></a>
 <a href="#" onClick="SpatZoznam();">
 Nevybavené OBJ<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazi nevybavené objednávky' ></a>
 </tr>
@@ -694,13 +706,23 @@ Nevybavené OBJ<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zo
 
 if ( $drupoh == 1 )
   {
+
+//montaze
+if( $mont == 1 )
+  {
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid.",F$kli_vxcf"."_kosiktext SET xsx2=1 ".
+" WHERE F$kli_vxcf"."_mzdprcx".$kli_uzid.".xdok=F$kli_vxcf"."_kosiktext.invt AND F$kli_vxcf"."_kosiktext.nas1 = 1 ";
+$tovx = mysql_query("$sqlttx");
+
+$podmfak="xfak = 0 AND xsx2 = 1 "; 
+  }
+
 $sqltt = "SELECT * ".
 " FROM F$kli_vxcf"."_mzdprcx".$kli_uzid.
 " LEFT JOIN F$kli_vxcf"."_sklcis".
 " ON F$kli_vxcf"."_mzdprcx".$kli_uzid.".xcis=F$kli_vxcf"."_sklcis.cis".
 " WHERE xdok > 0 AND $podmfak ORDER BY xdok ";
   }
-
 
 
 //echo $sqltt;
@@ -950,7 +972,7 @@ if( $html == 1 )
 
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
+//$vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcu'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
