@@ -227,8 +227,16 @@ endif;
 if( $copern == 10 )
 {
 
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-if (File_Exists ("../tmp/dokument.$kli_uzid.pdf")) { $soubor = unlink("../tmp/dokument.$kli_uzid.pdf"); }
+ $outfilexdel="../tmp/dokument_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/dokument_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -305,6 +313,7 @@ $kedysk=SkDatum($hlavicka->kedy);
 $A=1*substr($hlavicka->rdc,2,2);
 $muz=1;
 if( $A > 50 ) $muz=0;
+if( $_SERVER['SERVER_NAME'] == "www.ekorobot.sk" AND $kli_vxcf == 1732 AND $hlavicka->oc == 41 ) { $muz=1; }
 
 $pdf->Cell(180,5," ","T",1,"C");
 
@@ -681,13 +690,13 @@ $i = $i + 1;
   }
 
 
-$pdf->Output("../tmp/dokument.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/dokument.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 

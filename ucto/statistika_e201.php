@@ -2004,6 +2004,9 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_statistika_e104prac WHERE LEFT(ucm,1) != 5 AND LEFT(ucm,1) != 6 AND LEFT(ucd,1) != 5 AND LEFT(ucd,1) != 6 ";
 $dsql = mysql_query("$dsqlt");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET zakx=098601 WHERE zakx = 099801 "; 
+$oznac = mysql_query("$sqtoz");
+
 //vypocitaj nstr
 if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) 
 { 
@@ -3276,8 +3279,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
 
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
@@ -3286,6 +3287,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r02s1."</BODY>"."\r\n";
@@ -3330,8 +3334,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
 
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
@@ -3340,6 +3342,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r03s1."</BODY>"."\r\n";
@@ -3383,8 +3388,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
 
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
@@ -3393,6 +3396,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r04s1."</BODY>"."\r\n";
@@ -3437,9 +3443,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3447,6 +3450,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r05s1."</BODY>"."\r\n";
@@ -3490,8 +3496,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
 
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
@@ -3500,6 +3504,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r06s1."</BODY>"."\r\n";
@@ -3543,8 +3550,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
 
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
@@ -3553,6 +3558,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r07s1."</BODY>"."\r\n";
@@ -3597,9 +3605,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3607,6 +3612,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r08s1."</BODY>"."\r\n";
@@ -3650,9 +3658,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3660,6 +3665,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r09s1."</BODY>"."\r\n";
@@ -3703,9 +3711,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3713,6 +3718,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r10s1."</BODY>"."\r\n";
@@ -3756,9 +3764,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3766,6 +3771,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r11s1."</BODY>"."\r\n";
@@ -3809,9 +3817,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3819,6 +3824,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r12s1."</BODY>"."\r\n";
@@ -3862,9 +3870,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3872,6 +3877,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r13s1."</BODY>"."\r\n";
@@ -3915,9 +3923,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3925,6 +3930,10 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r14s1."</BODY>"."\r\n";
@@ -3968,9 +3977,6 @@ if( $cnstr > 0 )
   $text = "<OE2_4103>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
-  fwrite($soubor, $text);
-
 $druhstr=substr($cnstr,0,1);
 if( $druhstr == 9 ) $druhstr="0";
 
@@ -3978,6 +3984,9 @@ if( $druhstr == 9 ) $druhstr="0";
   fwrite($soubor, $text);
 
   $text = "<CISR_NAKL_STREDISKA3>".$cnstr."</CISR_NAKL_STREDISKA3>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<POR_CIS3>01</POR_CIS3>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<BODY>".$hlavicka->mod4103r15s1."</BODY>"."\r\n";

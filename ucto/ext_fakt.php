@@ -278,7 +278,10 @@ $oprvx = mysql_query("$squlop");
     }
 if( $kli_vume == 3.2019 )
     {
-$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 629004 ";
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 629004 OR dok = 629010 ";
+$oprvx = mysql_query("$squlop");
+
+$squlop = "UPDATE F$kli_vxcf"."_uctodb SET rdp=62 WHERE dok = 629004 ";
 $oprvx = mysql_query("$squlop");
     }
   }

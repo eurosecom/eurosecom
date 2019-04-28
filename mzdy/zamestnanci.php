@@ -2827,7 +2827,7 @@ document.formv1.h_roh.checked = "checked";
 <tr></tr>
 
 <tr>
-<td class="fmenu" width="10%">Poèet detí daò.bonus:</td>
+<td class="fmenu" width="10%">Poèet daòových bonusov:</td>
 <td class="fmenu" width="15%">
 <input class="fmenu" type="text" name="h_deti_dn" id="h_deti_dn" size="2" maxlength="2" 
  onclick="UrobOnClick()"
