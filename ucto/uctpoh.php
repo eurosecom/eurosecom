@@ -668,8 +668,8 @@ width=20 height=15 border=0 title="Vymaza èíselník Úètovných pohybov" >
 <td class="hmenu" width="6%" >Dzk2,1,0
 <td class="hmenu" width="7%" >Uzk2,1,0
 <td class="hmenu" width="7%" >Udn2,1
-<td class="hmenu" width="10%" >HFK/STR
-<td class="hmenu" width="10%" >HIÈ/ZAK
+<td class="hmenu" width="10%" >HFK(smzd1)/STR
+<td class="hmenu" width="10%" >HIÈ(smzd2)/ZAK
 <td class="hmenu" width="5%" >Uprav
 <th class="hmenu" width="10%" >Zmaž
 </tr>

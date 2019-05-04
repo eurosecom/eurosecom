@@ -2584,6 +2584,8 @@ $trdvm="";
 if( $merkfood == 1 OR $emotrans == 1 OR $medo == 1 ) $trdvm="F$kli_vxcf"."_".$mzdkun.".wms,";
 if( $fir_mzdx07 == 1 ) { $trdvm="F$kli_vxcf"."_".$mzdkun.".wms,"; }
 
+$fisit=0;
+if( $fir_fico == 44219342 ) { $fisit=1; } 
 
 $neparne=1;
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcsum".$kli_uzid.
@@ -2652,9 +2654,18 @@ $sqldok = mysql_query("SELECT SUM(dni) AS cerdop, dm, oc, ume FROM F$kli_vxcf"."
   }
 
 $textlekdop="Lekár dni - nárok $lek_nrk èerpané $lek_cerp, Doprovod dni - nárok $dop_nrk èerpané $dop_cerp";
+$popispomer="";
+if( $fisit == 1 )
+{
+$sqldok = mysql_query("SELECT pm, nzpm FROM F$kli_vxcf"."_mzdpomer WHERE pm=$hlavicka->pom ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $popispomer=$riaddok->nzpm;
+  }
+}
 
-$pdf->Cell(80,3," ","0",0,"L");
-$pdf->Cell(100,3,"$textlekdop","0",1,"R");
+$pdf->Cell(90,3,"$popispomer","0",0,"L");$pdf->Cell(90,3,"$textlekdop","0",1,"R");
 
 $texthl2x="Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah";
 if( $fir_fico == 37986830 ) { $texthl2x="Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah FP: $hlavicka->sz4"; }
@@ -2816,6 +2827,21 @@ $pdf->Cell(100,6,"OSÈ: $hlavicka->oc $hlavicka->titl $hlavicka->meno $hlavicka->
 
 }
 
+if( $fisit == 1 )
+{
+$pdf->Cell(60,1,"","0",1,"R");
+$pdf->SetFont('arial','',7);
+$pdf->Cell(40,4,"Zdravotné poistenie","0",0,"L");$pdf->Cell(40,4,"percento za prac. $zam_zp","0",0,"R");$pdf->Cell(20,4,"$hlavicka->ozam_zp","0",1,"R");
+$pdf->Cell(40,4,"Nemocenské poistenie","0",0,"L");$pdf->Cell(40,4," $zam_np","0",0,"R");$pdf->Cell(20,4,"$hlavicka->ozam_np","0",1,"R");
+$pdf->Cell(40,4,"Starobné poistenie","0",0,"L");$pdf->Cell(40,4," $zam_sp","0",0,"R");$pdf->Cell(20,4,"$hlavicka->ozam_sp","0",1,"R");
+$pdf->Cell(40,4,"Invalidné poistenie","0",0,"L");$pdf->Cell(40,4," $zam_ip","0",0,"R");$pdf->Cell(20,4,"$hlavicka->ozam_ip","0",1,"R");
+$pdf->Cell(40,4,"Poistenie v nezamestnanosti","0",0,"L");$pdf->Cell(40,4," $zam_pn","0",0,"R");$pdf->Cell(20,4,"$hlavicka->ozam_pn","0",1,"R");
+$pdf->Cell(20,2," ","0",1,"R");
+$pdf->Cell(40,4,"Nezdanite¾ná èas ZD na zamestnanca","0",0,"L");$pdf->Cell(40,4,"  ","0",0,"R");$pdf->Cell(20,4,"$hlavicka->pdan_dnv","0",1,"R");
+
+}
+
+
 //koniec hlavicky
 if( $neparne > 0 ) $patka=105;
 if( $neparne < 0 ) $patka=240;
@@ -2864,9 +2890,12 @@ $pdf->Cell(55,4,"OdvodyZamtel $hlavicka->ofir_spolu €","0",0,"L");
 $textsk="/$hlavicka->sum_cccpsk Sk";
 if( $fir_mzdx04 == 1 ) { $textsk="";  }
 
-$pdf->Cell(55,4,"Celkova cena práce $hlavicka->sum_cccp €$textsk","0",0,"L");
+$pdf->Cell(55,4,"Celková cena práce $hlavicka->sum_cccp €$textsk","0",0,"L");
 $pdf->Cell(10,4,"","0",1,"L");
 
+
+if( $fisit == 0 )
+{
 $pdf->Cell(60,1,"","0",1,"R");
 $pdf->SetFont('arial','',7);
 $pdf->Cell(20,3,"Základ odvodov","0",0,"L");
@@ -2887,6 +2916,13 @@ $pdf->Cell(20,3,"$hlavicka->ozam_pn/$hlavicka->ofir_pn","0",0,"L");
 $pdf->Cell(20,3,"$hlavicka->ozam_up/$hlavicka->ofir_up","0",0,"L");
 $pdf->Cell(20,3,"$hlavicka->ozam_gf/$hlavicka->ofir_gf","0",0,"L");
 $pdf->Cell(20,3,"$hlavicka->ozam_rf/$hlavicka->ofir_rf","0",1,"L");
+}
+if( $fisit == 1 )
+{
+$pdf->Cell(60,1,"","0",1,"R");
+$pdf->SetFont('arial','',7);
+$pdf->Cell(20,3,"Cena práce $hlavicka->sum_cccp € (HM $hlavicka->sum_hru, ZP $hlavicka->ofir_zp, NP $hlavicka->ofir_np, SP $hlavicka->ofir_sp,  IP $hlavicka->ofir_ip, PvN $hlavicka->ofir_pn, UP $hlavicka->ofir_up, GP $hlavicka->ofir_gf, RF $hlavicka->ofir_rf)","0",1,"L");
+}
 
 $pdf->Cell(20,2,"","0",1,"L");
 

@@ -3627,6 +3627,7 @@ window.open('../faktury/vstf_t.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php ec
   function zobraz_robotmenu()
   { 
   myRobotmenu.style.width = widthrobotmenu;
+  myRobotmenu.style.top = 200;
   myRobotmenu.innerHTML = htmlmenu;
   robotmenu.style.display='';
   }
@@ -3646,7 +3647,8 @@ window.open('../faktury/vstf_t.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php ec
     var toprobothlas = 350;
     var leftrobothlas = 60;
 
-    var htmlmenu = "<table  class='ponuka' width='100%'><tr><td width='90%'>Menu EkoRobot</td>";
+    var htmlmenu = "<div style='height:400px;overflow:auto;'>";
+    htmlmenu += "<table  class='ponuka' width='100%'><tr><td width='90%'>Menu EkoRobot</td>";
     htmlmenu += "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;'";
     htmlmenu += "onClick='zhasni_menurobot();' alt='Zhasni menu' title='Zhasni menu' ></td></tr>";  
 
@@ -3677,6 +3679,7 @@ $riadok=mysql_fetch_object($sql);
 
     if( toprobot < 100 ) { toprobot=100; }
 
+
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
 htmlmenu += "<a href=\"#\" onClick=\"volajAutoUCT(<?php echo $duj_vfor; ?>,<?php echo $dru_vfor; ?>,<?php echo $riadok->cpoh; ?>); window.name = 'zoznam';\">" +
 "Chcete za˙Ëtovaù <?php echo $riadok->pohp; ?> ?</a>";
@@ -3692,6 +3695,7 @@ $i=$i+1;
 
 
     htmlmenu += "</table>";  
+    htmlmenu += "</div>";
     
 </script>
 
