@@ -1161,8 +1161,8 @@ $setprm = include("mzdy/sepa2018.php");
 }
 //uprava sepa od 1.1.2018
 
-//uprava parametrov miezd na aktualny stav od 1.1.2019
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012019c";
+//uprava parametrov miezd na aktualny stav od 1.1.2019 a potom 1.5.2019
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new052019a";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {

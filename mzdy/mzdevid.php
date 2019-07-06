@@ -1345,6 +1345,14 @@ window.open('../mzdy/vyplat_paska.php?&copern=511&page=1&cislo_oc=' + h_oc + '&o
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function TlacPaskaOscDe()
+                {
+var h_oc = document.forms.formp1.h_oc.value;
+
+window.open('../mzdy/vyplat_paska_de.php?&copern=511&page=1&cislo_oc=' + h_oc + '&ostre=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function MailPaskaOscXX()
                 {
 var h_oc = document.forms.formp1.h_oc.value;
@@ -1457,6 +1465,10 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 <img src='../obr/banky/euro.jpg' onClick="TlacPaskaOsc();" width=20 height=15 border=0 title='Vytlaèi výplatnú pásku pre vybrané osè a <?php echo $kli_vume;?> vo formáte PDF' >
 
 <img src='../obr/obalka.jpg' onClick="MailPaskaOsc();" width=20 height=15 border=0 title='Odmailova výplatnú pásku pre vybrané osè a <?php echo $kli_vume;?>' >
+
+<?php if( $alchem == 1 ) { ?>
+<img src='../obr/flag_de.png' onClick="TlacPaskaOscDe();" width=20 height=20 border=0 title='Vytlaèi výplatnú pásku v nemeckom jazyku pre vybrané osè a <?php echo $kli_vume;?> vo formáte PDF' >
+<?php                    } ?>
 
 </td>
 

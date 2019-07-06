@@ -97,7 +97,7 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
 
-$sqltt = "SELECT * FROM $mysqldb2018.kalendar ORDER BY dat DESC ";
+$sqltt = "SELECT * FROM $mysqldb2019.kalendar ORDER BY dat DESC ";
 
 //dat  ume  akyden  svt  rok2012  rok2011  rok2010  nedo  neod  sodo  sood  m012012  
 

@@ -1425,7 +1425,7 @@ if( $dajhlaodpad == 1 ) {
 </div>
 <div>
  <label for="h_kmd">Komodita:</label>
- <select size="1" name="h_kmd" id="h_kmd">
+ <select size="1" name="h_kmd" id="h_kmd" style="width:160px">
 <?php if ( $kli_vrok <  2019 ) { ?>
   <option value="0">všetky komodity</option>
   <option value="1">obaly z papiera</option>
@@ -1434,12 +1434,12 @@ if( $dajhlaodpad == 1 ) {
   <option value="4">obaly z kovu Fe</option>
   <option value="5">obaly zo skla</option>
   <option value="6">viacvrstv.obaly</option>
-  <option value="7">elektroz. tr1</option>
-  <option value="8">elektroz. tr2</option>
-  <option value="9">elektroz. tr3</option>
-  <option value="10">elektroz. tr4</option>
-  <option value="11">elektroz. tr5 sv.zdroje</option>
-  <option value="12">elektroz. tr6</option>
+  <option value="7" >elektroz. tr1 a. Chladiaca technika chladnièky,mraznièky, klimatizácie, vinotéky a.i.</option>
+  <option value="8" >elektroz. tr2 a. Televízory,Monitory,obrazovky a.i.</option>
+  <option value="9" >elektroz. tr3 a. Svetelné zdroje s obsahom ortuti iarivky,vıbojky</option>
+  <option value="10" >elektroz. tr4 a. Ve¾ké zariadenia s vınimkou ve¾kıch svietidiel a fotovoltaickıch panelov</option>
+  <option value="11" >elektroz. tr5 a. Maké zariadenia s akımko¾vek  vonkajším rozmerom menej ako 50cm</option>
+  <option value="12" >elektroz. tr6 a. Malé IT a telekomunikaèné zariadenia s akımko¾vek rozmerom menej ako 50 cm</option>
   <option value="13">elektroz. tr7</option>
   <option value="14">elektroz. tr8</option>
   <option value="15">elektroz. tr9</option>
@@ -1462,19 +1462,33 @@ if( $dajhlaodpad == 1 ) {
   <option value="4">obaly z kovu Fe</option>
   <option value="5">obaly zo skla</option>
   <option value="6">viacvrstv.obaly</option>
-  <option value="7">elektroz. tr1</option>
-  <option value="8">elektroz. tr2</option>
-  <option value="9">elektroz. tr3</option>
-  <option value="10">elektroz. tr4</option>
-  <option value="11">elektroz. tr5</option>
-  <option value="12">elektroz. tr6</option>
+
+
+  <option value="7" >elektroz. tr1 a. Chladiaca technika chladnièky,mraznièky, klimatizácie, vinotéky a.i.</option>
+  <option value="31" >elektroz. tr1 b. Ostatné zariadenia na tepelnú vımenu olejové radiátory,zvhlèovaèe,odvlhèovaèe, a.i.</option>
+
+  <option value="8" >elektroz. tr2 a. Televízory,Monitory,obrazovky a.i.</option>
+  <option value="32" >elektroz. tr2 b. Notebooky a tablety a ïa¾šie zobrazovacie zariadenia ktoré ,obsahujú obrazovky väèšie ako 100 cm2</option>
+
+  <option value="9" >elektroz. tr3 a. Svetelné zdroje s obsahom ortuti iarivky,vıbojky</option>
+  <option value="33" >elektroz. tr3 b. Svetelné zdroje LED a iné</option>
+
+  <option value="10" >elektroz. tr4 a. Ve¾ké zariadenia s vınimkou ve¾kıch svietidiel a fotovoltaickıch panelov</option>
+  <option value="34" >elektroz. tr4 b. Ve¾ké svietidlá s vonkajším rozmerom viac ako 50 cm</option>
+  <option value="35" >elektroz. tr4 c. Fotovoltaické panely</option>
+
+  <option value="11" >elektroz. tr5 a. Malé zariadenia s akımko¾vek  vonkajším rozmerom menej ako 50cm</option>
+  <option value="36" >elektroz. tr5 b. Malé svietidlá s vonkajším rozmerom menej ako 50 cm do hmotnosti 3 kg vrátane</option>
+  <option value="37" >elektroz. tr5 c. Malé svietidlá s vonkajším rozmerom menej ako 50 cm nad hmotnos 3kg</option>
+
+  <option value="12" >elektroz. tr6 a. Malé IT a telekomunikaèné zariadenia s akımko¾vek rozmerom menej ako 50 cm</option>
+
+
   <option value="16">batérie pren.</option>
   <option value="17">batérie priem.</option>
   <option value="18">batérie auto</option>
   <option value="19">pneumatiky</option>
-  <option value="20">oleje</option>
   <option value="21">sklo neobal</option>
-  <option value="22">viacvr.mat.neobal</option>
   <option value="23">papier neobal</option>
   <option value="24">plast neobal</option>
 <?php                          } ?>

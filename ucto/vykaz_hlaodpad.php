@@ -639,7 +639,9 @@ $pdf->Cell(4,4,"$t09","$rmc",0,"C");$pdf->Cell(4,4,"$t10","$rmc",1,"C");
 //KOMODITY
 //nazov vyrobku
 $pdf->Cell(190,27," ","$rmc1",1,"L");
+$pdf->SetFont('arial','',8);
 $pdf->Cell(47,5," ","$rmc1",0,"C");$pdf->Cell(140,4,"$text_komodita","$rmc",1,"L");
+$pdf->SetFont('arial','',10);
 $pdf->Cell(190,27," ","$rmc1",1,"L");
 
 ////////////////////////////////////////KONIEC 1.STRANA hlavicka prx=1
@@ -708,7 +710,9 @@ $pdf->SetY(10);
 //KOMODITY
 //nazov vyrobku
 $pdf->Cell(190,16," ","$rmc1",1,"L");
+$pdf->SetFont('arial','',8);
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita ","$rmc",0,"L");
+$pdf->SetFont('arial','',10);
 $pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
 $pdf->Cell(190,27," ","$rmc1",1,"L");
 
@@ -740,7 +744,9 @@ $pdf->SetY(10);
 //KOMODITY
 //nazov vyrobku
 $pdf->Cell(190,16," ","$rmc1",1,"L");
+$pdf->SetFont('arial','',8);
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita ","$rmc",0,"L");
+$pdf->SetFont('arial','',10);
 $pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
 $pdf->Cell(190,27," ","$rmc1",1,"L");
 
@@ -798,7 +804,9 @@ $pdf->SetY(10);
 //KOMODITY
 //nazov vyrobku
 $pdf->Cell(190,16," ","$rmc1",1,"L");
+$pdf->SetFont('arial','',8);
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
+$pdf->SetFont('arial','',10);
 $pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
 $pdf->Cell(190,14," ","$rmc1",1,"L");
 
@@ -1631,7 +1639,8 @@ Mesto
  onclick="myIcoElement.style.display='none'; Ico.style.display='none';" />
 </td>
 <td class="fmenu" align="left" >
-<select size="1" name="komodita" id="komodita"  onKeyDown="return KomoditaEnter(event.which)" >
+
+<select size="1" name="komodita" id="komodita"  onKeyDown="return KomoditaEnter(event.which)" style="width:150px" >
 <?php if ( $kli_vrok <  2019 ) { ?>
 <option value="1" >obaly z papiera "O"</option>
 <option value="101" >obaly z papiera "N"</option>
@@ -1678,24 +1687,39 @@ Mesto
 <option value="105" >obaly zo skla "N"</option>
 <option value="6" >viacvrstv.obaly "O"</option>
 <option value="106" >viacvrstv.obaly "N"</option>
-<option value="7" >elektroz. tr1</option>
-<option value="8" >elektroz. tr2</option>
-<option value="9" >elektroz. tr3</option>
-<option value="10" >elektroz. tr4</option>
-<option value="11" >elektroz. tr5</option>
-<option value="12" >elektroz. tr6</option>
+
+
+  <option value="7" >elektroz. tr1 a. Chladiaca technika chladnièky,mraznièky, klimatizácie, vinotéky a.i.</option>
+  <option value="31" >elektroz. tr1 b. Ostatné zariadenia na tepelnú vımenu olejové radiátory,zvhlèovaèe,odvlhèovaèe, a.i.</option>
+
+  <option value="8" >elektroz. tr2 a. Televízory,Monitory,obrazovky a.i.</option>
+  <option value="32" >elektroz. tr2 b. Notebooky a tablety a ïa¾šie zobrazovacie zariadenia ktoré ,obsahujú obrazovky väèšie ako 100 cm2</option>
+
+  <option value="9" >elektroz. tr3 a. Svetelné zdroje s obsahom ortuti iarivky,vıbojky</option>
+  <option value="33" >elektroz. tr3 b. Svetelné zdroje LED a iné</option>
+
+  <option value="10" >elektroz. tr4 a. Ve¾ké zariadenia s vınimkou ve¾kıch svietidiel a fotovoltaickıch panelov</option>
+  <option value="34" >elektroz. tr4 b. Ve¾ké svietidlá s vonkajším rozmerom viac ako 50 cm</option>
+  <option value="35" >elektroz. tr4 c. Fotovoltaické panely</option>
+
+  <option value="11" >elektroz. tr5 a. Malé zariadenia s akımko¾vek  vonkajším rozmerom menej ako 50cm</option>
+  <option value="36" >elektroz. tr5 b. Malé svietidlá s vonkajším rozmerom menej ako 50 cm do hmotnosti 3 kg vrátane</option>
+  <option value="37" >elektroz. tr5 c. Malé svietidlá s vonkajším rozmerom menej ako 50 cm nad hmotnos 3kg</option>
+
+  <option value="12" >elektroz. tr6 a. Malé IT a telekomunikaèné zariadenia s akımko¾vek rozmerom menej ako 50 cm</option>
+
+
 <option value="16" >batérie pren.</option>
 <option value="17" >batérie priem.</option>
 <option value="18" >batérie auto</option>
 <option value="19" >pneumatiky</option>
-<option value="20" >oleje</option>
 <option value="21" >sklo neobal</option>
-<option value="22" >viacvr.mat.neobal</option>
 <option value="23" >papier neobal</option>
 <option value="24" >plast neobal</option>
 
 <?php                          } ?>
 </select>
+
 </td>
 <td class="fmenu" align="right" >
 <input class="hvstup" type="text" name="dox" id="dox" size="10" maxlength="10" onKeyDown="return DoxEnter(event.which)" />

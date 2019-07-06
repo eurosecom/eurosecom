@@ -62,4 +62,33 @@ $vysledek = mysql_query("$sql");
 $sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_new012019c".$sqlt;
 $vysledek = mysql_query("$sql");
 
+if( $vyb_roks == 2019 )
+     {
+
+//priplatky od 1.5.2019
+if( $kli_nezis == 0 AND $_SERVER['SERVER_NAME'] != "www.euroalchem.sk" )
+          {
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=1.4945 WHERE dm = 202 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=2.989 WHERE dm = 203 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=1.1956 WHERE dm = 223 ";
+$vysledek = mysql_query("$sql");
+          }
+
+if( $kli_nezis == 0 AND $_SERVER['SERVER_NAME'] == "www.euroalchem.sk" )
+          {
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=1.4945 WHERE dm = 205 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=2.989 WHERE dm = 206 ";
+$vysledek = mysql_query("$sql");
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzddmn SET sa=1.1956 WHERE dm = 223 ";
+$vysledek = mysql_query("$sql");
+          }
+
+$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_new052019a".$sqlt;
+$vysledek = mysql_query("$sql");
+
+     }
+
 ?>

@@ -13,12 +13,28 @@ if( $cislokomodity == 5 ) $text_komodita="obaly zo skla \"O\"";
 if( $cislokomodity == 105 ) $text_komodita="obaly zo skla \"N\"";
 if( $cislokomodity == 6 ) $text_komodita="viacvrstv.obaly \"O\"";
 if( $cislokomodity == 106 ) $text_komodita="viacvrstv.obaly \"N\"";
-if( $cislokomodity == 7 ) $text_komodita="elektroz. tr1";
-if( $cislokomodity == 8 ) $text_komodita="elektroz. tr2";
-if( $cislokomodity == 9 ) $text_komodita="elektroz. tr3";
-if( $cislokomodity == 10 ) $text_komodita="elektroz. tr4";
-if( $cislokomodity == 11 ) $text_komodita="elektroz. tr5";
-if( $cislokomodity == 12 ) $text_komodita="elektroz. tr6";
+
+
+if( $cislokomodity == 7 ) $text_komodita="elektroz. tr1 a.";
+if( $cislokomodity == 31 ) $text_komodita="elektroz. tr1 b.";
+
+if( $cislokomodity == 8 ) $text_komodita="elektroz. tr2 a.";
+if( $cislokomodity == 32 ) $text_komodita="elektroz. tr2 b.";
+
+if( $cislokomodity == 9 ) $text_komodita="elektroz. tr3 a.";
+if( $cislokomodity == 33 ) $text_komodita="elektroz. tr3 b.";
+
+if( $cislokomodity == 10 ) $text_komodita="elektroz. tr4 a.";
+if( $cislokomodity == 34 ) $text_komodita="elektroz. tr4 b.";
+if( $cislokomodity == 35 ) $text_komodita="elektroz. tr4 c.";
+
+if( $cislokomodity == 11 ) $text_komodita="elektroz. tr5 a.";
+if( $cislokomodity == 36 ) $text_komodita="elektroz. tr5 b.";
+if( $cislokomodity == 37 ) $text_komodita="elektroz. tr5 c.";
+
+if( $cislokomodity == 12 ) $text_komodita="elektroz. tr6 a.";
+
+
 if( $cislokomodity == 16 ) $text_komodita="batérie pren.";
 if( $cislokomodity == 17 ) $text_komodita="batérie priem.";
 if( $cislokomodity == 18 ) $text_komodita="batérie auto";
@@ -31,4 +47,7 @@ if( $cislokomodity == 24 ) $text_komodita="plast neobal";
 
 return $text_komodita;
                 }
+
+
+
 ?>

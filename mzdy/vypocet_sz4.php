@@ -100,10 +100,13 @@ $ulozene = mysql_query("$sql");
 //dps gbely 36084514
 //dssbrodske 37986830
 //nezabudkano 37986708
+//nezabudkano Pata 37986899
 
+if( $fir_fico == 37986899 ) { $fir_fico=37986708; }
 $fir_ficoorig=$fir_fico;
 if( $fir_fico == 45741093 ) { $fir_fico=37986830; }
 if( $fir_fico == 37986708 ) { $fir_fico=37986830; }
+
 
 //priplatky NUJ 2018
 if( $fir_mzdx08 != 0 AND $kli_vrok > 2017 AND $kli_nezis == 1 ) 

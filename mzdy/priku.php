@@ -280,6 +280,8 @@ $oznac = mysql_query("$sqtoz");
 
 $textoc=0;
 if( $_SERVER['SERVER_NAME'] == "www.medosro.sk" ) { $textoc=1; }
+if( $_SERVER['SERVER_NAME'] == "www.edcom.sk" AND $fir_fico == 44219342 ) { $textoc=1; }
+if( $_SERVER['SERVER_NAME'] == "edcom.sk" AND $fir_fico == 44219342 ) { $textoc=1; }
 if( $textoc == 1 )
      {
 

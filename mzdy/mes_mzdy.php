@@ -974,10 +974,10 @@ function vykonajDm(dm,dmtext,sa,ko,sax)
          if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8277 ) { document.formv1.h_sa.value = 0.8277; }
 <?php                                                                 } ?>
 <?php if( $fir_mzdx08 != 0 AND $kli_vrok >= 2019 AND $kli_nezis == 1 ) { ?>
-         if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.7473 ) { document.formv1.h_sa.value = 0.7473; }
-         if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.4945 ) { document.formv1.h_sa.value = 1.4945; }
+         if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 1.4945 ) { document.formv1.h_sa.value = 1.4945; }
+         if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 2.9890 ) { document.formv1.h_sa.value = 2.9890; }
          if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < 2.9890 ) { document.formv1.h_sa.value = 2.9890; }
-         if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8967 ) { document.formv1.h_sa.value = 0.8967; }
+         if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 1.1956 ) { document.formv1.h_sa.value = 1.1956; }
 <?php                                                                 } ?>
          if ( document.formv1.dm_ko.value == 40 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value; }
          if ( document.formv1.dm_ko.value == 60 )
@@ -1012,10 +1012,10 @@ function Len1Dm(dm,sa,ko,sax)
          if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8277 ) { document.formv1.h_sa.value = 0.8277; }
 <?php                                                                 } ?>
 <?php if( $fir_mzdx08 != 0 AND $kli_vrok >= 2019 AND $kli_nezis == 1 ) { ?>
-         if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 0.7473 ) { document.formv1.h_sa.value = 0.7473; }
-         if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 1.4945 ) { document.formv1.h_sa.value = 1.4945; }
+         if ( document.formv1.h_dm.value == 202 && document.formv1.h_sa.value < 1.4945 ) { document.formv1.h_sa.value = 1.4945; }
+         if ( document.formv1.h_dm.value == 203 && document.formv1.h_sa.value < 2.9890 ) { document.formv1.h_sa.value = 2.9890; }
          if ( document.formv1.h_dm.value == 204 && document.formv1.h_sa.value < 2.9890 ) { document.formv1.h_sa.value = 2.9890; }
-         if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 0.8967 ) { document.formv1.h_sa.value = 0.8967; }
+         if ( document.formv1.h_dm.value == 223 && document.formv1.h_sa.value < 1.1956 ) { document.formv1.h_sa.value = 1.1956; }
 <?php                                                                 } ?>
          if ( document.formv1.dm_ko.value == 40 ) { document.formv1.h_sa.value = document.formv1.dm_sa.value; }
          if ( document.formv1.dm_ko.value == 60 )
