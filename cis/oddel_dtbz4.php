@@ -13,6 +13,11 @@ if( $kli_vrok == 2016 ) { $databaza=$mysqldb2016."."; }
 if( $kli_vrok == 2017 ) { $databaza=$mysqldb2017."."; }
 if( $kli_vrok == 2018 ) { $databaza=$mysqldb2018."."; }
 if( $kli_vrok == 2019 ) { $databaza=$mysqldb2019."."; }
+if( $kli_vrok == 2020 ) { $databaza=$mysqldb2020."."; }
+if( $kli_vrok == 2021 ) { $databaza=$mysqldb2021."."; }
+if( $kli_vrok == 2022 ) { $databaza=$mysqldb2022."."; }
+if( $kli_vrok == 2023 ) { $databaza=$mysqldb2023."."; }
+if( $kli_vrok == 2024 ) { $databaza=$mysqldb2024."."; }
 
           }
 

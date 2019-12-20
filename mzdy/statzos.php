@@ -290,6 +290,22 @@ window.open('../mzdy/stat_unp101<?php echo $rokunp101; ?>.php?copern=1&drupoh=1&
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function rozpisSp()
+                {
+var h_obdp = document.forms.formsp1.h_obdp.value;
+var h_obdk = document.forms.formsp1.h_obdk.value;
+
+window.open('../mzdy/rozpis_spsum.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=1&drupoh=1&page=1&statsum=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+                }
+
+function rozpisZp()
+                {
+var h_obdp = document.forms.formzp1.h_obdp.value;
+var h_obdk = document.forms.formzp1.h_obdk.value;
+
+window.open('../mzdy/rozpis_zpsum.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=1&drupoh=1&page=1&statsum=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+                }
+
 </script>
 </HEAD>
 <BODY class="white" onload="VyberVstup();">
@@ -778,6 +794,55 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzducty WHERE ucty = 1");
 
 <td class="bmenu" width="68%">
 
+<select size="1" name="h_obdk" id="h_obdk" >
+<option value="1" >do 01.<?php echo $kli_vrok;?></option>
+<option value="2" >do 02.<?php echo $kli_vrok;?></option>
+<option value="3" >do 03.<?php echo $kli_vrok;?></option>
+<option value="4" >do 04.<?php echo $kli_vrok;?></option>
+<option value="5" >do 05.<?php echo $kli_vrok;?></option>
+<option value="6" >do 06.<?php echo $kli_vrok;?></option>
+<option value="7" >do 07.<?php echo $kli_vrok;?></option>
+<option value="8" >do 08.<?php echo $kli_vrok;?></option>
+<option value="9" >do 09.<?php echo $kli_vrok;?></option>
+<option value="10" >do 10.<?php echo $kli_vrok;?></option>
+<option value="11" >do 11.<?php echo $kli_vrok;?></option>
+<option value="12" >do 12.<?php echo $kli_vrok;?></option>
+</select>
+</td>
+
+<td class="bmenu" width="2%">
+
+</td>
+</tr>
+</FORM>
+</table>
+
+<table class="vstup" width="100%" >
+<FORM name="formsp1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="rozpisSp();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù zostavu za obdobie vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="28%">Rozpis odvodov do Soci·lnej poisùovne
+
+</td>
+
+<td class="bmenu" width="68%">
+<select size="1" name="h_obdp" id="h_obdp" >
+<option value="1" >od 01.<?php echo $kli_vrok;?></option>
+<option value="2" >od 02.<?php echo $kli_vrok;?></option>
+<option value="3" >od 03.<?php echo $kli_vrok;?></option>
+<option value="4" >od 04.<?php echo $kli_vrok;?></option>
+<option value="5" >od 05.<?php echo $kli_vrok;?></option>
+<option value="6" >od 06.<?php echo $kli_vrok;?></option>
+<option value="7" >od 07.<?php echo $kli_vrok;?></option>
+<option value="8" >od 08.<?php echo $kli_vrok;?></option>
+<option value="9" >od 09.<?php echo $kli_vrok;?></option>
+<option value="10" >od 10.<?php echo $kli_vrok;?></option>
+<option value="11" >od 11.<?php echo $kli_vrok;?></option>
+<option value="12" >od 12.<?php echo $kli_vrok;?></option>
+</select>
 
 <select size="1" name="h_obdk" id="h_obdk" >
 <option value="1" >do 01.<?php echo $kli_vrok;?></option>
@@ -802,7 +867,55 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzducty WHERE ucty = 1");
 </FORM>
 </table>
 
+<table class="vstup" width="100%" >
+<FORM name="formzp1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="rozpisZp();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù zostavu za obdobie vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="28%">Rozpis odvodov do Zdravotn˝ch poisùovnÌ
 
+</td>
+
+<td class="bmenu" width="68%">
+<select size="1" name="h_obdp" id="h_obdp" >
+<option value="1" >od 01.<?php echo $kli_vrok;?></option>
+<option value="2" >od 02.<?php echo $kli_vrok;?></option>
+<option value="3" >od 03.<?php echo $kli_vrok;?></option>
+<option value="4" >od 04.<?php echo $kli_vrok;?></option>
+<option value="5" >od 05.<?php echo $kli_vrok;?></option>
+<option value="6" >od 06.<?php echo $kli_vrok;?></option>
+<option value="7" >od 07.<?php echo $kli_vrok;?></option>
+<option value="8" >od 08.<?php echo $kli_vrok;?></option>
+<option value="9" >od 09.<?php echo $kli_vrok;?></option>
+<option value="10" >od 10.<?php echo $kli_vrok;?></option>
+<option value="11" >od 11.<?php echo $kli_vrok;?></option>
+<option value="12" >od 12.<?php echo $kli_vrok;?></option>
+</select>
+
+<select size="1" name="h_obdk" id="h_obdk" >
+<option value="1" >do 01.<?php echo $kli_vrok;?></option>
+<option value="2" >do 02.<?php echo $kli_vrok;?></option>
+<option value="3" >do 03.<?php echo $kli_vrok;?></option>
+<option value="4" >do 04.<?php echo $kli_vrok;?></option>
+<option value="5" >do 05.<?php echo $kli_vrok;?></option>
+<option value="6" >do 06.<?php echo $kli_vrok;?></option>
+<option value="7" >do 07.<?php echo $kli_vrok;?></option>
+<option value="8" >do 08.<?php echo $kli_vrok;?></option>
+<option value="9" >do 09.<?php echo $kli_vrok;?></option>
+<option value="10" >do 10.<?php echo $kli_vrok;?></option>
+<option value="11" >do 11.<?php echo $kli_vrok;?></option>
+<option value="12" >do 12.<?php echo $kli_vrok;?></option>
+</select>
+</td>
+
+<td class="bmenu" width="2%">
+
+</td>
+</tr>
+</FORM>
+</table>
 
 <br /><br />
 <?php

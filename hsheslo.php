@@ -133,7 +133,7 @@ if( !$uziv ) exit;
   $verzia = $_SESSION['verzia'];
 
 
-$sql = "SELECT m122019 FROM $mysqldb2019.kalendar";
+$sql = "SELECT m062020 FROM $mysqldb2019.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok):
 $kalend = include("cis/kalendar.php");

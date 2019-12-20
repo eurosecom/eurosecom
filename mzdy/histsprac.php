@@ -1,7 +1,7 @@
 <HTML>
 <?php
 
-// celkovy zaciatok dokumentu
+// celkovy zaciatok dokumentu VOLANE ZO ZOZNAMU NOVYCH ZAMESTNANCOV PDF ikonka 3. zlava
        do
        {
 $sys = 'MZD';

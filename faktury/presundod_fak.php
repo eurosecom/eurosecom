@@ -135,7 +135,7 @@ $textp="Faktúrujeme Vám dodacie listy ".$txdod;
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_fakodb SELECT ".
 " $uce,$ume,'$dnes_sql','','$dnes_sql',dat,$cislo_dok,$cislo_dok,0,0,ico,$cislo_dok,$kopia_dok,'','','','','','','',0,0,'','$textp', ".
-" 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, ".
+" 0,0,0,0,0,0,0,0,0,0,0,0,0,$cislo_dok,0,0,0,0,0,0,0,0,0,0,0, ".
 " 0,0,'',0,0,0,0,0,0, ".
 " $kli_uzid,now()  ".
 " FROM F$kli_vxcf"."_fakdol ".

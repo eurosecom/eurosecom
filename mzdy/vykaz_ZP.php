@@ -508,6 +508,43 @@ $sqlx = mysql_query("$sqlttx");
 $i=$i+1;
   }
 
+//Andrejko dnipocitane zoberie pri pom 2,7 z mzdzalmes dm 131
+if( $_SERVER['SERVER_NAME'] == "www.ekorobot.sk" AND $cislo_zdrv >= 2500 AND $cislo_zdrv <= 2599 ) 
+{
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdzalkun WHERE ume = $kli_vume AND ( pom = 2 OR pom = 7 ) AND zdrv >= 2500 AND zdrv <= 2599 ORDER BY oc";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i=0;
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+
+$dnimesdav=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdzalmes WHERE oc = $hlavicka->oc AND dm = 131 AND ume = $kli_vume ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $dnimesdav=1*$riaddok->dni;
+  }
+if( $dnimesdav > 0 ) 
+  { 
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET pdni_zp=$dnimesdav WHERE oc = $hlavicka->oc ";
+//echo $sqtoz."<br />";
+$oznac = mysql_query("$sqtoz");
+
+  }
+
+}
+$i=$i+1;
+  }
+
+}
+//koniec Andrejko dnipocitane zoberie pri pom 2,7 z mzdzalmes dm 131
+
 
 //ak zdravotne postihnutie znizp presun do .._np
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
@@ -2276,7 +2313,19 @@ if( $cislozp > 0 ) { $cislopoistenca=$cislozp; }
 //12. 	Celková výška ïalších príjmov zamestnanca	P	DEC	12, 2
 //13.	Odpoèítate¾ná položka	P	DEC	12, 2
 
-
+//Andrejko dnipocitane zoberie pri pom 2,7 z mzdzalmes dm 131
+if( $_SERVER['SERVER_NAME'] == "www.ekorobot.sk" AND $cislo_zdrv >= 2500 AND $cislo_zdrv <= 2599 AND ( $hlavicka->pom == 2 OR $hlavicka->pom == 7 ) ) 
+{
+$dnimesdav=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdzalmes WHERE oc = $hlavicka->oc AND dm = 131 AND ume = $kli_vume ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $dnimesdav=1*$riaddok->dni;
+  }
+if( $dnimesdav > 0 ) { $dnipocitane=$dnimesdav; }
+}
+//koniec Andrejko dnipocitane zoberie pri pom 2,7 z mzdzalmes dm 131
 
 if( $hlavicka->znizp == 0 )
 {

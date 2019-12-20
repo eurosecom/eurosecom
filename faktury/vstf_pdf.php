@@ -512,7 +512,7 @@ $rozdiel=$zk0-$zaklads0-$zakladt0;
 
 if( $drupoh == 1 )
 {
-$sqlttt = "UPDATE F$kli_vxcf"."_fakodb SET zk0=($zaklad0s+$zaklad0t)  WHERE dok = $cislo_dok ";
+$sqlttt = "UPDATE F$kli_vxcf"."_fakodb SET zk0=($zaklad0s+$zaklad0t)  WHERE dok = $cislo_dok AND zmen != 1 ";
 if( $rozdiel != 0 ) { $sqldok = mysql_query("$sqlttt"); }
 }
 if( $drupoh == 11 )
@@ -1994,7 +1994,8 @@ if( $podpis == 1 )
   {
 $pdf->SetY(230);
 if( $kli_vrok <  2019 ) { $pdf->Cell(90,5,"","0",0,"L");$pdf->Cell(53,5,"Ing.Alena Kovaèièová, riadite¾ka","T",1,"L"); }
-if( $kli_vrok >= 2019 ) { $pdf->Cell(90,5,"","0",0,"L");$pdf->Cell(53,5,"Mgr. Eva Volková, riadite¾ka","T",1,"L"); }
+if( $kli_vrok >= 2019 AND $kli_vxcf != 1053 ) { $pdf->Cell(90,5,"","0",0,"L");$pdf->Cell(53,5,"Mgr. Eva Volková, riadite¾ka","T",1,"L"); }
+if( $kli_vrok >= 2019 AND $kli_vxcf == 1053 ) { $pdf->Cell(90,5,"","0",0,"L");$pdf->Cell(53,5,"Ivan Tobiáš, riadite¾","T",1,"L"); }
   }
 
 $pdf->SetY($koniec);
@@ -2110,6 +2111,7 @@ $dsql = mysql_query("$dsqlt");
 
 
 <?php
+mysql_close();
 // celkovy koniec dokumentu
        } while (false);
 ?>

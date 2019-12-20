@@ -114,6 +114,11 @@ $ulozttt = "UPDATE $mysqldb2016.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid ";
 $ulozttt = "UPDATE $mysqldb2017.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
 $ulozttt = "UPDATE $mysqldb2018.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
 $ulozttt = "UPDATE $mysqldb2019.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2020.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2021.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2022.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2023.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2024.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
           }
 
 session_start();    

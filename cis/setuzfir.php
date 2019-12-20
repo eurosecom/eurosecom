@@ -155,6 +155,61 @@ $vysledek = mysql_query("$sql");
 
                                    }
 
+if( $mysqldb2016 != $mysqldb2020 AND $mysqldb2020 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2020."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2020."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2020.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2021 AND $mysqldb2021 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2021."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2021."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2021.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2022 AND $mysqldb2022 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2022."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2022."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2022.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2023 AND $mysqldb2023 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2023."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2023."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2023.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2024 AND $mysqldb2024 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2024."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2024."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2024.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+                                   }
+
 
           }
 //if( $newdelenie == 1 )

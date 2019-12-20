@@ -1,6 +1,6 @@
 <HTML>
 <?php
-//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "CHEMIA" rok 2019
+//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "PHM" rok 2019
 $sys = 'UCT';
 $urov = 1000;
 $analyzy = 1*$_REQUEST['analyzy']; 
@@ -174,7 +174,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prsaldoicofakp$kli_uzid".
 " SELECT drupoh,31100,0,ume,dat,das,daz,dok,ico,fak,".
 "poz,ksy,ssy,SUM(hdp),SUM(hdu),SUM(hod),SUM(uhr),SUM(zos),dau".
 " FROM F$kli_vxcf"."_prsaldoicofak$kli_uzid".
-" WHERE uce = $h_uce  ".
+" WHERE uce = $h_uce OR uce = 31500 ".
 " GROUP BY uce,ico,fak";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
@@ -188,7 +188,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prsaldoicofakp$kli_uzid".
 " SELECT drupoh,31100,0,ume,dat,das,daz,dok,ico,fak,".
 "poz,ksy,ssy,SUM(hdp),SUM(hdu),SUM(hod),SUM(uhr),SUM(zos),dau".
 " FROM F$kli_vxcf"."_prsaldo$kli_uzid".
-" WHERE uce = $h_uce ".$datpod." ".
+" WHERE ( uce = $h_uce OR uce = 31500 ) ".$datpod." ".
 " GROUP BY uce,ico,fak";
 //echo $dsqlt;
 //exit;
@@ -222,62 +222,22 @@ $uctpol="prsaldoicofaknesp".$kli_uzid;
 }
 //koniec zober vsetky
 
-//ikona CHEM  1. polrok 2019 agrochemikálie, osivá
-//platia èísla faktúr 3295..., 3297..., 3294..., 3290.... a 429...
+//ikona PHM len 315 ucet
+//platia èísla faktúr 5119000001 AND fak <= 5119999999
 
 
 $dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=99 ";
 $dsql = mysql_query("$dsqlt");
 
-//rok 2018
+//rok 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET puc=TO_DAYS(das)-TO_DAYS(dat) WHERE fak >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 32800001 AND fak <= 32809999 AND puc >= 180 ";
-//$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3289001 AND fak <= 3289999 AND puc >= 180 ";
-//$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3284001 AND fak <= 3284999 AND puc >= 180 ";
-//$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3287001 AND fak <= 3287999 AND puc >= 180 ";
-//$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3285001 AND fak <= 3285999 AND puc >= 180 ";
-//$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 428001 AND fak <= 428999 AND puc >= 180 ";
-//$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 828001 AND fak <= 828999 AND puc >= 180 ";
-//$dsql = mysql_query("$dsqlt");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET puc=0 WHERE fak >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
 //rok 2019
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 32900001 AND fak <= 32909999 ";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3299001 AND fak <= 3299999 ";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3294001 AND fak <= 3294999 ";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3297001 AND fak <= 3297999 ";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3295001 AND fak <= 3295999 ";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 429001 AND fak <= 429999 ";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 829001 AND fak <= 829999 ";
-$dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 5119000001 AND fak <= 5119999999 ";
 $dsql = mysql_query("$dsqlt");
@@ -285,7 +245,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE pox1 != 0 ";
 $dsql = mysql_query("$dsqlt");
 
-$datvymaz="2019-07-01";
+$datvymaz="2018-07-01";
 if( $h_obd ==  9 ) { $datvymaz="2019-10-01"; }
 if( $h_obd == 12 ) { $datvymaz="2020-01-01"; }
 
@@ -390,7 +350,7 @@ if( $psys <= 14 )
 $dsqlt = "INSERT INTO F$kli_vxcf"."_pruhrady$kli_uzid".
 " SELECT 0,31100,ucm,dat,F$kli_vxcf"."_$uctovanie.dok,F$kli_vxcf"."_$uctovanie.ico,fak,F$kli_vxcf"."_$uctovanie.hod,'0000-00-00',0,0 ".
 " ,0,0,0,0,0,0,0,0,0,0,0,'0000-00-00' FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
-" WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ucd = $h_uce ";
+" WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ( ucd = $h_uce OR ucd = 31500 ) ";
 $dsql = mysql_query("$dsqlt");
 
 }
@@ -402,13 +362,13 @@ $psys=$psys+1;
 $dsqlt = "INSERT INTO F$kli_vxcf"."_pruhrady$kli_uzid".
 " SELECT 0,31100,ucm,dat,dok,ico,fak,hod,'0000-00-00',0,0 ".
 " ,0,0,0,0,0,0,0,0,0,0,0,'0000-00-00' FROM F$kli_vxcf"."_uctsklsaldo".
-" WHERE ucd = $h_uce  ";
+" WHERE ucd = $h_uce OR ucd = 31500 ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_pruhrady$kli_uzid".
 " SELECT 0,31100,ucm,dat,dok,ico,fak,hod,'0000-00-00',0,0 ".
 " ,0,0,0,0,0,0,0,0,0,0,0,'0000-00-00' FROM F$kli_vxcf"."_uctuhradpoc".
-" WHERE ucd = $h_uce  ";
+" WHERE ucd = $h_uce OR ucd = 31500 ";
 $dsql = mysql_query("$dsqlt");
 
 
@@ -623,7 +583,7 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 $pdf->SetRightMargin(10);
 
-$pdf->Cell(90,5,"Vyhodnotenie úhrad faktúr CHÉMIA za dealerov","0",0,"L");
+$pdf->Cell(90,5,"Vyhodnotenie úhrad faktúr PHM za dealerov","0",0,"L");
 $pdf->Cell(0,5,"FIR$kli_vxcf $kli_nxcf strana $strana","0",1,"R");
 
 $pdf->Cell(180,2," ","0",1,"R");
@@ -758,8 +718,19 @@ $pdf->Cell(20,4,"$rtov->hod","T",0,"R");$pdf->Cell(20,4,"$rtov->uhr","T",0,"R");
 $pdf->Cell(90,1,"","0",1,"L");
 }
 
+$stlp2=$stlp1+$stlp2+$stlp3+$stlp4+$stlp5+$stlp6+$stlp7+$stlp8+$stlp9+$stlp10;
+$stlp1=0;
+$stlp3=0;
+$stlp4=0;
+$stlp5=0;
+$stlp6=0;
+$stlp7=0;
+$stlp8=0;
+$stlp9=0;
+$stlp10=0;
+
 $prem1=2*$stlp1/100;
-$prem2=1*$stlp2/100;
+$prem2=0.5*$stlp2/100;
 $prem3=0.25*$stlp3/100;
 $prem4=0.5*$stlp4/100;
 $prem5=-1*$stlp5/100;
@@ -824,7 +795,7 @@ $pdf->Cell(100,4," ","0",1,"L");
 $pdf->Cell(60,4,"Druh","B",0,"L");$pdf->Cell(15,4,"%prem","B",0,"R");$pdf->Cell(40,4,"Uhradené","B",0,"R");$pdf->Cell(40,4,"Prémia","B",1,"R");
 
 $pdf->Cell(60,4,"01 Predfaktúry, hotovos","T",0,"L");$pdf->Cell(15,4,"2.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp1","0",0,"R");$pdf->Cell(40,4,"$Sprem1","0",1,"R");
-$pdf->Cell(60,4,"02 Zaplatená celé","T",0,"L");$pdf->Cell(15,4,"1.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp2","T",0,"R");$pdf->Cell(40,4,"$Sprem2","T",1,"R");
+$pdf->Cell(60,4,"02 Zaplatená celé","T",0,"L");$pdf->Cell(15,4,"0.50","B",0,"R");$pdf->Cell(40,4,"$Sstlp2","T",0,"R");$pdf->Cell(40,4,"$Sprem2","T",1,"R");
 $pdf->Cell(60,4,"03 Zaplatená len DPH","T",0,"L");$pdf->Cell(15,4,"0.25","B",0,"R");$pdf->Cell(40,4,"$Sstlp3","T",0,"R");$pdf->Cell(40,4,"$Sprem3","T",1,"R");
 $pdf->Cell(60,4,"04 Zaplatená odkladová celá","T",0,"L");$pdf->Cell(15,4,"0.50","B",0,"R");$pdf->Cell(40,4,"$Sstlp4","T",0,"R");$pdf->Cell(40,4,"$Sprem4","T",1,"R");
 $pdf->Cell(60,4,"05 Zaplatená do 30dní","T",0,"L");$pdf->Cell(15,4,"-1.00","B",0,"R");$pdf->Cell(40,4,"$Sstlp5","T",0,"R");$pdf->Cell(40,4,"$Sprem5","T",1,"R");

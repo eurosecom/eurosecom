@@ -649,6 +649,17 @@ window.open('../ucto/saldo_alch02.php?h_deal=' + h_deal + '&h_uce=' + h_uce + '&
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function VyhodPhm()
+                {
+var h_deal = document.forms.formdeal.h_deal.value;
+var h_uce = document.forms.forms1.h_uce.value;
+var h_ico = document.forms.forms1.h_ico.value;
+var h_obd = document.forms.forms1.h_obd.value;
+
+window.open('../ucto/saldo_alchphm.php?h_deal=' + h_deal + '&h_uce=' + h_uce + '&h_ico=' + h_ico + '&h_obd=' + h_obd + '&copern=11&drupoh=1&page=1&analyzy=<?php echo $analyzy; ?>',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function VyhodHnoj(jar)
                 {
 var h_deal = document.forms.formdeal.h_deal.value;
@@ -826,6 +837,8 @@ UHR<img src='../obr/tlac.png' onClick="RozdelUhrad();" width=15 height=15 border
 <?php if( $analyzy == 1 AND $alchem_orig == 1 ) { ?>
 <td class="hmenu" colspan="3" align="left">
 CHEM<img src='../obr/tlac.png' onClick="VyhodUhrad();" width=15 height=15 border=0 title='Vyhodnotenie úhrad odberate¾ských faktúr CHÉMIA za DEALEROV'  >
+
+PHM<img src='../obr/tlac.png' onClick="VyhodPhm();" width=15 height=15 border=0 title='Vyhodnotenie úhrad odberate¾ských faktúr PHM za DEALEROV'  >
 
 JARH<img src='../obr/tlac.png' onClick="VyhodHnoj(1);" width=15 height=15 border=0 title='Vyhodnotenie úhrad odberate¾ských faktúr JAR HNOJIVÁ za DEALEROV'  >
 

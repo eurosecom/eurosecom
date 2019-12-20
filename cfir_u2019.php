@@ -14,7 +14,7 @@ $copern = $_REQUEST['copern'];
 $cislo_xcf = $_REQUEST['cislo_xcf'];
 $naz_xcf = $_REQUEST['naz_xcf'];
 $naz_rok = 1*($_REQUEST['naz_rok']);
-if( $naz_rok == 0 ) { $naz_rok=2020;  }
+if( $naz_rok == 0 ) { $naz_rok=2019;  }
 $naz_duj = 1*($_REQUEST['naz_duj']);
 $naz_dtb = $_REQUEST['naz_dtb'];
 $naz_prav = $_REQUEST['naz_prav'];
@@ -66,7 +66,7 @@ $copern=8;
 $page=1;
 $cislo_xcf=$cislonew;
 $naz_xcf="";
-$naz_rok="2020";
+$naz_rok="2019";
 $naz_prav="";
 $naz_duj="9";
 $naz_dtb="";
@@ -280,9 +280,6 @@ if ( $copern == 5 || $copern == 8 )
 
 <TD class="fmenu">
          <SELECT name="h_rok" id="h_rok">
-         <OPTION value="2020">
-         2020
-         </OPTION>
          <OPTION value="2019">
          2019
          </OPTION>

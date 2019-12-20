@@ -112,6 +112,16 @@ $zmazane = mysql_query("DELETE FROM $mysqldb2018.nas_id WHERE id='$kli_uzid'");
 $ulozene = mysql_query("INSERT INTO $mysqldb2018.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
 $zmazane = mysql_query("DELETE FROM $mysqldb2019.nas_id WHERE id='$kli_uzid'");
 $ulozene = mysql_query("INSERT INTO $mysqldb2019.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2020.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2020.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2021.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2021.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2022.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2022.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2023.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2023.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2024.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2024.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
   }
 
      }
@@ -623,7 +633,7 @@ var vyskawin = screen.height-90;
     "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick='zhasni_menurobot();' alt='Zhasni menu' ></td></tr>";
 
   <?php
-  $sql = mysql_query("SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_dodb WHERE drod = 1");
+  $sql = mysql_query("SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_dodb WHERE drod = 1 ORDER BY dodb");
   if (@$zaznam=mysql_data_seek($sql,0))
   {
   $riadok=mysql_fetch_object($sql);

@@ -2511,12 +2511,21 @@ $dsql = mysql_query("$dsqlt");
 
 $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
+if( $_SERVER['SERVER_NAME'] != "www.euroautovalas.sk" OR $cislo_oc == 0 ) 
+{
  $outfilexdel="../tmp/mzdpasky_".$kli_uzid."_*.*";
  foreach (glob("$outfilexdel") as $filename) {
     unlink($filename);
  }
+}
 
 $outfilex="../tmp/mzdpasky_".$kli_uzid."_".$hhmmss.".pdf";
+if( $_SERVER['SERVER_NAME'] == "www.euroautovalas.sk" AND $cislo_oc > 0 ) 
+{
+$cislo_ocxxm=$cislo_oc;
+if( $cislo_ocxxm < 100 ) { $cislo_ocxxm="0".$cislo_oc; }
+$outfilex="../tmp/mzdpasky_".$kli_uzid."_osc".$cislo_ocxxm."_".$hhmmss.".pdf";
+}
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');

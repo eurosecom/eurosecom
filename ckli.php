@@ -672,6 +672,128 @@ $sqlttt=" CREATE TABLE `".$mysqldb2010."`.`menp` SELECT * FROM `".$mysqldb2016."
                                    }
 
 
+if( $mysqldb2016 != $mysqldb2020 AND $mysqldb2020 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2020."`.`klienti` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2020."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2020.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2020.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2020."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2020."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2020.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2020."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2020."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2021 AND $mysqldb2021 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2021."`.`klienti` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2021."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2021.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2021.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2021."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2021."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2021.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2021."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2021."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2022 AND $mysqldb2022 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2022."`.`klienti` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2022."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2022.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2022.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2022."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2022."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2022.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2022."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2022."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2023 AND $mysqldb2023 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2023."`.`klienti` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2023."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2023.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2023.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2023."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2023."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2023.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2023."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2023."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2024 AND $mysqldb2024 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2024."`.`klienti` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2024."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2024.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2024.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2024."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2024."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2024.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sqlttt=" DROP TABLE `".$mysqldb2024."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2024."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+
+
           }
 //if( $newdelenie == 1 )
 ?>

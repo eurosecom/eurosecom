@@ -1,6 +1,6 @@
 <HTML>
 <?php
-//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "HNOJIVA" 2018
+//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "HNOJIVA" 2019
 $sys = 'UCT';
 $urov = 1000;
 $analyzy = 1*$_REQUEST['analyzy']; 
@@ -231,9 +231,9 @@ $uctpol="prsaldoicofaknesp".$kli_uzid;
 }
 //koniec zober vsetky
 
-//ikony JARH,JESH  hnojivá 2018
-//platia èísla faktúr 3288...
-//ikona JSOH – hnojivá odklad 2017, platia èísla 3278...
+//ikony JARH,JESH  hnojivá 2019
+//platia èísla faktúr 3298...
+//ikona JSOH – hnojivá odklad 2018, platia èísla 3288...
 
 
 //zober len faktury
@@ -245,14 +245,14 @@ $oznac = mysql_query("$sqtoz");
 
 if( $h_jar != 3 )
 {
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3288001 AND fak <= 3288999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3298001 AND fak <= 3298999 ";
 $dsql = mysql_query("$dsqlt");
 
 }
 
 if( $h_jar == 3 )
 {
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3278001 AND fak <= 3278999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3288001 AND fak <= 3288999 ";
 $dsql = mysql_query("$dsqlt");
 
 }
@@ -269,18 +269,18 @@ $dsql = mysql_query("$dsqlt");
 
 if( $h_jar == 1 )
 {
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2018-01-01' OR dat > '2018-06-30'";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2019-01-01' OR dat > '2019-06-30'";
 $dsql = mysql_query("$dsqlt");
 }
 if( $h_jar == 2 )
 {
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2018-07-01' OR dat > '2018-12-31' OR das > '2019-03-31' ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2019-07-01' OR dat > '2019-12-31' OR das > '2020-03-31' ";
 $dsql = mysql_query("$dsqlt");
 }
 if( $h_jar == 3 )
 {
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2017-01-01' OR dat > '2017-12-31' OR das <= '2018-01-31' ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2018-01-01' OR dat > '2018-12-31' OR das <= '2019-01-31' ";
 $dsql = mysql_query("$dsqlt");
 }
 
@@ -523,9 +523,9 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 $pdf->SetRightMargin(10);
 
-if( $h_jar == 1 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JAR 2018","0",0,"L"); }
-if( $h_jar == 2 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2018","0",0,"L"); }
-if( $h_jar == 3 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2017 odkladové","0",0,"L"); }
+if( $h_jar == 1 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JAR 2019","0",0,"L"); }
+if( $h_jar == 2 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2019","0",0,"L"); }
+if( $h_jar == 3 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2018 odkladové","0",0,"L"); }
 
 $pdf->Cell(0,5,"FIR$kli_vxcf $kli_nxcf strana $strana","0",1,"R");
 

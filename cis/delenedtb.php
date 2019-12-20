@@ -1,6 +1,7 @@
 <HTML>
 <?php
 
+// //POZOR NEZABUDNI !!! ALTER DATABASE do1720900db CHARACTER SET cp1250 COLLATE cp1250_general_ci
 // celkovy zaciatok dokumentu
        do
        {
@@ -79,6 +80,22 @@ $sql = "ALTER TABLE ".$mysqldb2016.".dtbset ADD dbmain VARCHAR(30) DEFAULT '2016
 $vysledek = mysql_query("$sql");
 }
 
+$sql = "SELECT db2024 FROM $mysqldb2016.dtbset ";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE ".$mysqldb2016.".dtbset ADD db2020 VARCHAR(30) DEFAULT '".$mysqldb2019."' AFTER dbmain";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldb2016.".dtbset ADD db2021 VARCHAR(30) DEFAULT '".$mysqldb2019."' AFTER db2020";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldb2016.".dtbset ADD db2022 VARCHAR(30) DEFAULT '".$mysqldb2019."' AFTER db2021";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldb2016.".dtbset ADD db2023 VARCHAR(30) DEFAULT '".$mysqldb2019."' AFTER db2022";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldb2016.".dtbset ADD db2024 VARCHAR(30) DEFAULT '".$mysqldb2019."' AFTER db2023";
+$vysledek = mysql_query("$sql");
+}
+
 // cislo operacie
 $copern = 1*$_REQUEST['copern'];
 if( $copern == 1 ) { $copern=2; }
@@ -104,13 +121,13 @@ else
     {
 $h_dbmain = strip_tags($_REQUEST['h_dbmain']);
 
-if( $h_dbmain <= 2017 ) 
+if( $h_dbmain <= 2019 ) 
  {
 echo "Databáza pre rok ".$h_dbmain." ???";
 exit;
  }
 
-if( $h_dbmain >  2019 ) 
+if( $h_dbmain >  2020 ) 
  {
 echo "Databáza pre rok ".$h_dbmain." ???";
 exit;
@@ -119,7 +136,8 @@ exit;
 if( $h_dbmain <= 2016 ) { $databazakam=$mysqldb2016; $databazaodkial=$mysqldb2015; }
 if( $h_dbmain == 2017 ) { $databazakam=$mysqldb2017; $databazaodkial=$mysqldb2016; }
 if( $h_dbmain == 2018 ) { $databazakam=$mysqldb2018; $databazaodkial=$mysqldb2017; }
-if( $h_dbmain >= 2019 ) { $databazakam=$mysqldb2019; $databazaodkial=$mysqldb2018; }
+if( $h_dbmain == 2019 ) { $databazakam=$mysqldb2019; $databazaodkial=$mysqldb2018; }
+if( $h_dbmain == 2020 ) { $databazakam=$mysqldb2020; $databazaodkial=$mysqldb2019; }
 
 $pocp=0;
 $poslhh = "SELECT * FROM ".$databazakam.".klienti ";
@@ -132,6 +150,10 @@ exit;
   }
 
 //zacni vytvarat
+
+$sqlttt=" ALTER DATABASE ".$mysqldbkam." CHARACTER SET cp1250 COLLATE cp1250_general_ci "; 
+$sql = mysql_query("$sqlttt");
+echo $sqlttt."<br />";
 
 $mysqldbkam=$databazakam;
 $mysqldbodkial=$databazaodkial;
@@ -266,7 +288,7 @@ $sql = "ALTER TABLE ".$mysqldbkam.".uctpohyby MODIFY datm timestamp ON UPDATE CU
 $vysledek = mysql_query("$sql");
 
 
-echo "Databaza 2018 zalozena.<br />";
+echo "Databaza 2020 zalozena.<br />";
 
 
 $copern=2;
@@ -286,13 +308,19 @@ $db2016 = strip_tags($_REQUEST['db2016']);
 $db2017 = strip_tags($_REQUEST['db2017']);
 $db2018 = strip_tags($_REQUEST['db2018']);
 $db2019 = strip_tags($_REQUEST['db2019']);
+$db2020 = strip_tags($_REQUEST['db2020']);
+$db2021 = strip_tags($_REQUEST['db2021']);
+$db2022 = strip_tags($_REQUEST['db2022']);
+$db2023 = strip_tags($_REQUEST['db2023']);
+$db2024 = strip_tags($_REQUEST['db2024']);
 $dbmain = strip_tags($_REQUEST['dbmain']);
 //dbmain musi byt 2016, tam je original fir a klienti
 $dbmain = "2016";
 
 $upravttt = "UPDATE ".$mysqldb2016.".dtbset SET ".
 " db2010='$db2010', db2011='$db2011', db2012='$db2012', db2013='$db2013', db2014='$db2014', db2015='$db2015', ".
-" db2016='$db2016', db2017='$db2017', db2018='$db2018', db2019='$db2019', dbmain='$dbmain' ";  
+" db2016='$db2016', db2017='$db2017', db2018='$db2018', db2019='$db2019', dbmain='$dbmain', db2020='$db2020', ". 
+" db2021='$db2021', db2022='$db2022', db2023='$db2023', db2024='$db2024' ";
 //echo $upravttt;
 $upravene = mysql_query("$upravttt"); 
 $copern=2;
@@ -326,6 +354,11 @@ $db2016 = $riadok->db2016;
 $db2017 = $riadok->db2017;
 $db2018 = $riadok->db2018;
 $db2019 = $riadok->db2019;
+$db2020 = $riadok->db2020;
+$db2021 = $riadok->db2021;
+$db2022 = $riadok->db2022;
+$db2023 = $riadok->db2023;
+$db2024 = $riadok->db2024;
 $dbmain = $riadok->dbmain;
 
 //koniec nacitania
@@ -360,6 +393,11 @@ $dbmain = $riadok->dbmain;
     document.formv1.db2017.value = '<?php echo "$db2017";?>';
     document.formv1.db2018.value = '<?php echo "$db2018";?>';
     document.formv1.db2019.value = '<?php echo "$db2019";?>';
+    document.formv1.db2020.value = '<?php echo "$db2020";?>';
+    document.formv1.db2021.value = '<?php echo "$db2021";?>';
+    document.formv1.db2022.value = '<?php echo "$db2022";?>';
+    document.formv1.db2023.value = '<?php echo "$db2023";?>';
+    document.formv1.db2024.value = '<?php echo "$db2024";?>';
     document.formv1.dbmain.value = '<?php echo "$dbmain";?>';
 
 
@@ -460,6 +498,28 @@ if ( $copern == 2 )
 <td class="bmenu" colspan="1">DB 2019</td>
 <td class="fmenu" colspan="2"><input type="text" name="db2019" id="db2019" size="20"/> </td>
 </tr>
+
+<tr>
+<td class="bmenu" colspan="1">DB 2020</td>
+<td class="fmenu" colspan="2"><input type="text" name="db2020" id="db2020" size="20"/> </td>
+</tr>
+<tr>
+<td class="bmenu" colspan="1">DB 2021</td>
+<td class="fmenu" colspan="2"><input type="text" name="db2021" id="db2021" size="20"/> </td>
+</tr>
+<tr>
+<td class="bmenu" colspan="1">DB 2022</td>
+<td class="fmenu" colspan="2"><input type="text" name="db2022" id="db2022" size="20"/> </td>
+</tr>
+<tr>
+<td class="bmenu" colspan="1">DB 2023</td>
+<td class="fmenu" colspan="2"><input type="text" name="db2023" id="db2023" size="20"/> </td>
+</tr>
+<tr>
+<td class="bmenu" colspan="1">DB 2024</td>
+<td class="fmenu" colspan="2"><input type="text" name="db2024" id="db2024" size="20"/> </td>
+</tr>
+
 <tr>
 <td></td>
 <td class="obyc"><INPUT type="submit" id="uloz" name="uloz" value="Uloži úpravy"></td>

@@ -240,7 +240,17 @@ $ziv_min70z25=35.88;
 
 }
 
+if( $kli_vrok > 2019 OR ( $kli_vrok == 2019 AND $kli_vume >= 7 ))
+{
 
+$ziv_min=210.20;
+$ziv_min25=52.55;
+$ziv_min50=105.10;
+$ziv_min150=315.30;
+$ziv_min70z60=88.28;
+$ziv_min70z25=36.79;
+
+}
 
 $ulozttt = "UPDATE F$kli_vxcf"."_$uctsys SET druh=1 WHERE druh = 0 ";
 $ulozene = mysql_query("$ulozttt");

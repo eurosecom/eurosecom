@@ -111,6 +111,52 @@ endif;
     }
 //koniec ulozenia 
 
+
+//ulozenie noveho 
+if ( $copern == 2315 )
+    {
+$idxx = strip_tags($_REQUEST['idxx']);
+$kliuzid = 1*strip_tags($_REQUEST['kliuzid']);
+
+
+$ulozttt = "INSERT INTO $mysqldbfir.idxklizuid ( idxx, kliuzid ) VALUES ( '$idxx', '$kliuzid'  ); "; 
+
+//echo $ulozttt;
+
+$ulozene = mysql_query("$ulozttt"); 
+$copern=2001;
+$kopiruj=1;
+$uprav=0;
+
+if (!$ulozene):
+?>
+<script type="text/javascript"> alert( " POLOŽKA NEBOLA SPRÁVNE ULOŽENÁ " ) </script>
+<?php
+endif;
+if ($ulozene):
+$uloz="OK";
+endif;
+    }
+//koniec ulozenia 
+
+//vymazanie login
+if ( $copern == 2316 )
+    {
+$cpl = 1*strip_tags($_REQUEST['cpl']);
+$zmazane = mysql_query("DELETE FROM $mysqldbfir.idxklizuid WHERE cpl='$cpl' "); 
+
+$copern=2001;
+if (!$zmazane):
+?>
+<script type="text/javascript"> alert( " POLOŽKA NEBOLA VYMAZANÁ " ) </script>
+<?php
+endif;
+if ($zmazane):
+$zmaz="OK";
+endif;
+     }
+//koniec vymazania login
+
 ?> 
 
 
@@ -146,6 +192,46 @@ if( $mysqldb2016 != $mysqldb2019 AND $mysqldb2019 != '' ) {
 
 $sqlttt=" DROP TABLE `".$mysqldb2019."`.`menp` "; $sql = mysql_query("$sqlttt");
 $sqlttt=" CREATE TABLE `".$mysqldb2019."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2020 AND $mysqldb2020 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2020."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2020."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2021 AND $mysqldb2021 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2021."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2021."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2022 AND $mysqldb2022 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2022."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2022."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2023 AND $mysqldb2023 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2023."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2023."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2024 AND $mysqldb2024 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2024."`.`menp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2024."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
 //echo $sqlttt;
 
                                    }
@@ -197,6 +283,16 @@ function JedenID(cslm)
 window.open('setmenp.php?copern=1&page=1&sysx=UCT&jedenid=' + cslm + '&drupoh=1', '_self' );
                 }
 
+function fblogin()
+                {
+window.open('setmenp.php?copern=2001&drupoh=1', '_self' );
+                }
+
+function ZmazFbLogin(cpl)
+                {
+window.open('setmenp.php?copern=2316&page=1&sysx=UCT&cpl=' + cpl + '&drupoh=1', '_self' );
+                }
+
 </script>
 </HEAD>
 <BODY class="white" >
@@ -206,10 +302,12 @@ window.open('setmenp.php?copern=1&page=1&sysx=UCT&jedenid=' + cslm + '&drupoh=1'
 <table class="h2" width="100%" >
 <tr>
 <?php if ( $copern < 1000 ) { echo "<td>EuroSecom  -  MENP - užívate¾ské prístupy</td>"; } ?>
-<?php if ( $copern > 1000 ) { echo "<td>EuroSecom  -  DLOGIN - logovací súbor</td>"; } ?>
+<?php if ( $copern > 1000 AND $copern < 1999 ) { echo "<td>EuroSecom  -  DLOGIN - logovací súbor</td>"; } ?>
+<?php if ( $copern > 2000 ) { echo "<td>EuroSecom  -  idxklizuid - FireBase login</td>"; } ?>
 <td>
 menp <img src='../obr/klienti.png' onclick="setmenp();" width=15 height=15 border=0 title=''Prístupy k skriptom pod¾a CSLM/ID' >
 &nbsp;&nbsp;&nbsp;&nbsp;dlogin <img src='../obr/zoznam.png' onclick="dlogin();" width=15 height=15 border=0 title='Logovací súbor' >
+&nbsp;&nbsp;&nbsp;&nbsp;FBlogin <img src='../obr/orig.png' onclick="fblogin();" width=15 height=15 border=0 title='Firebase login' >
 </td>
 </tr>
 </table>
@@ -288,7 +386,7 @@ $i = $i + 1;
 //konec copern < 1000
                      }
 
-if( $copern > 1000 ) {
+if( $copern > 1000 AND $copern < 2000 ) {
 
 $sqltt = "SELECT * FROM $mysqldbfir.dlogin WHERE id >= 0 ORDER BY datm DESC LIMIT 400";
 $sql = mysql_query("$sqltt");
@@ -351,9 +449,76 @@ $i = $i + 1;
 </table>
 
 <?php
-//konec copern > 1000
+//konec copern > 1000 AND copern < 2000 
                      }
+?>
 
+
+<?php
+if( $copern > 2000 AND $copern < 3000 ) {
+
+$sqltt = "SELECT * FROM $mysqldbfir.idxklizuid WHERE cpl >= 0 ORDER BY cpl ";
+$sql = mysql_query("$sqltt");
+
+// celkom poloziek
+$cpol = mysql_num_rows($sql);
+$i = 0;
+
+?>
+<table class="vstup" width="100%" >
+<tr>
+<td class="hmenu" width="10%" align="left" >cpl
+<td class="hmenu" width="10%" align="left" >kliuzid
+<td class="hmenu" width="30%" align="right" >idxx
+<th class="hmenu" width="5%" >Del
+<td class="hmenu" width="45%" align="right" > 
+</tr>
+<?php
+   while ($i <= $cpol )
+   {
+?>
+<?php
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+<tr>
+
+<td class="fmenu" ><?php echo $riadok->cpl;?></td>
+<td class="fmenu" ><?php echo $riadok->kliuzid;?></td>
+<td class="fmenu" align="right" ><?php echo $riadok->idxx;?></td>
+<td class="fmenu" width="5%" >
+
+<a href="#" onClick="ZmazFbLogin('<?php echo $riadok->cpl;?>');">
+<img src='../obr/zmaz.png' width=15 height=10 border=0 title='Vymaza riadok' ></a>
+
+</td>
+</tr>
+<?php
+  }
+$i = $i + 1;
+   }
+?>
+
+<FORM name="formv1" class="obyc" method="post" action="setmenp.php?copern=2315" >
+<tr>
+<td class="hmenu">
+<td class="hmenu"><input type="text" name="kliuzid" id="kliuzid" size="7"  />
+<td class="hmenu"><input type="text" name="idxx" id="idxx" size="45"  />
+
+</tr>
+
+<tr>
+<td class="obyc" colspan="2"><INPUT type="submit" id="uloz" name="uloz" value="Uloži" ></td>
+</tr>
+</table>
+
+<?php
+//konec copern > 2000 AND copern < 3000  
+                     }
+?>
+
+<?php
 // celkovy koniec dokumentu
 
        } while (false);

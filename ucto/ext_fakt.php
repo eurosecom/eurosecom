@@ -284,6 +284,31 @@ $oprvx = mysql_query("$squlop");
 $squlop = "UPDATE F$kli_vxcf"."_uctodb SET rdp=62 WHERE dok = 629004 ";
 $oprvx = mysql_query("$squlop");
     }
+if( $kli_vume == 7.2019 )
+    {
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 629021 OR dok = 629022 ";
+$oprvx = mysql_query("$squlop");
+    }
+if( $kli_vume == 8.2019 )
+    {
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 629027 OR dok = 629032 OR dok = 629034 ";
+$oprvx = mysql_query("$squlop");
+    }
+if( $kli_vume == 9.2019 )
+    {
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 629044 ";
+$oprvx = mysql_query("$squlop");
+    }
+if( $kli_vume == 10.2019 )
+    {
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 629063 ";
+$oprvx = mysql_query("$squlop");
+    }
+if( $kli_vume == 11.2019 )
+    {
+$squlop = "UPDATE F$kli_vxcf"."_fakodb SET odbm=1 WHERE dok = 629069 OR dok = 629079 ";
+$oprvx = mysql_query("$squlop");
+    }
   }
 //koniec tvrde upravy odb.miesta pre alchem
 

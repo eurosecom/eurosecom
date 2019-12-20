@@ -118,7 +118,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $ico ORDER BY
   }
 
 
-$dsqlt = "UPDATE F$kli_vxcf"."_fakdol SET odbm='$odbx', sz3='$kopia_dok', ".
+$dsqlt = "UPDATE F$kli_vxcf"."_fakdol SET odbm='$odbx', sz3='$kopia_dok', id='$kli_uzid', ".
 " hodm='$hodm', kurz='$kurz', mena='$mena', zmen='$zmen', str='$str', zak='$zak', ksy='0308', obj='$cislo_obj', dol='$kopia_dok', prf='', ".
 " zk0='$zk0', zk1='$zk1', zk2='$zk2', dn1='$dn1', dn2='$dn2', sp1='$sp1', sp2='$sp2', hod='$hod', skl=0, poh=0, fak='$kopia_dok', ".
 " txp='$txp', fak=0, unk='$unk', dat='$dnes_sql', das=DATE_ADD(dat,INTERVAL $dns DAY), daz='$dnes_sql', ico='$ico',  ume='$ume' WHERE dok=$kopia_dok ";

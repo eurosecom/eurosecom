@@ -987,6 +987,77 @@ $vysledek = mysql_query("$sql");
                                    }
 
 
+if( $mysqldb2016 != $mysqldb2020 AND $mysqldb2020 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2020."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2020."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2020.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2020.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2021 AND $mysqldb2021 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2021."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2021."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2021.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2021.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2022 AND $mysqldb2022 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2022."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2022."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2022.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2022.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2023 AND $mysqldb2023 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2023."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2023."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2023.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2023.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2024 AND $mysqldb2024 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2024."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2024."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2024.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2024.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+
           }
 //if( $newdelenie == 1 )
 ?>

@@ -578,6 +578,43 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prccashs$kli_uzid,F$kli_vxcf"."_crcash_flow2011".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
+//rdk = 0 pre 211200 europkse.sk
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_prccashs$kli_uzid SET rdk=1 WHERE rdk = 0 AND uce = 211200 ";
+$oznac = mysql_query("$sqtoz");
+  }
+
+//Vypis kde nie je rdk
+if( $kli_uzid == 17677667 )
+{
+
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prccashs$kli_uzid WHERE rdk = 0 ";
+
+$tov = mysql_query("$sqltt");
+$tvpol = mysql_num_rows($tov);
+echo $sqltt.$tvpol."<br />";
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+ {
+$rtov=mysql_fetch_object($tov);
+
+$zisk=$rtov->fakt-$rtov->spot;
+
+echo "uce ".$rtov->uce." rdk".$rtov->rdk." hod".$rtov->hod."<br />";
+
+ }
+
+$i=$i+1;
+   }
+
+exit;
+}
+
 $sqtoz = "UPDATE F$kli_vxcf"."_prccashs$kli_uzid SET rdk=77 WHERE prx=1 ";
 $oznac = mysql_query("$sqtoz");
 
