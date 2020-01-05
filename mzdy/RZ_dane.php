@@ -68,7 +68,8 @@ if( $rokvyhlasenia == 2012 ) { $rokvyhlasenia="2012";  }
 if( $rokvyhlasenia == 2013 ) { $rokvyhlasenia="2013";  }
 if( $rokvyhlasenia == 2014 ) { $rokvyhlasenia="2014";  }
 if( $rokvyhlasenia == 2015 ) { $rokvyhlasenia="2014";  }
-if( $rokvyhlasenia >= 2016 ) { $rokvyhlasenia="2016";  }
+if( $rokvyhlasenia >= 2016 AND $rokvyhlasenia <= 2019 ) { $rokvyhlasenia="2016";  }
+if( $rokvyhlasenia >= 2020 ) { $rokvyhlasenia="2020";  }
 ?>
 
 function TlacVyhlasenie()

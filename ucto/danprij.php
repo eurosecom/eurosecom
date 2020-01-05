@@ -1526,6 +1526,7 @@ if ( $rokfob >= 2018 ) { $rokfob="2018";  }
 $rokdmv="";
 if ( $kli_vrok >= 2013 ) { $rokdmv=2013; }
 if ( $kli_vrok >= 2015 ) { $rokdmv=2015; }
+if ( $kli_vrok >= 2019 ) { $rokdmv=2019; }
 ?>
   function TlacDMV()
   {
@@ -1540,7 +1541,7 @@ if ( $kli_vrok >= 2015 ) { $rokdmv=2015; }
   }
   function TlacPotvrdDMV()
   {
-   var okno = window.open("../tmp/potvrddmv<?php echo $kli_uzid; ?>.pdf",
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0&potvrd=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function DMVdoXML()
